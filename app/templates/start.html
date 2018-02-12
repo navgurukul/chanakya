@@ -1,0 +1,71 @@
+{% extends "master.html" %}
+{% block title %}
+Road to Navgurukul
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    body{
+        background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
+        background-size: cover;
+    }
+    .enrollment_number{
+        padding:0.5rem;
+    }
+    .form-container{
+        padding:2rem;
+        background-color: rgba(255,255,255,0.5);
+    }
+    form>*{
+        margin-top:1rem;
+    }
+    form input[type="text"]{
+        text-transform:uppercase;
+    }
+    main{
+        margin-top:18%;
+    }
+    h2{
+        font-size:1.5rem;
+    }
+</style>
+<script type="text/javascript">
+$(function(){
+    $(".submit-btn").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/recv-answer",
+            data: $('input[name=answer]:checked').val(),
+            success:function(resp){
+                alert(resp);
+            },
+        });
+    });
+});
+
+</script>
+{% endblock %}
+
+{% block header %}
+<nav></nav>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+            <div class="row border border-warning rounded form-container">
+                <h2 class="question col-xs-12 col-sm-12">Enter your Enrollment number Below</h2>
+                <div class="col-xs-12 col-sm-12">
+                <form class="row" method="post">
+                    <input type="text"
+                        class="enrollment_number col-xs-12 col-sm-12 border border-warning rounded"
+                        placeholder="Enrollment Number" pattern="[a-zA-Z]{3}\d{2}" required/>
+                    <button type="submit" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start My Test</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
