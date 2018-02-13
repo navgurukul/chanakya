@@ -1,0 +1,111 @@
+{% extends "master.html" %}
+{% block title %}
+Road to Navgurukul
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    body{
+        background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
+        background-size: cover;
+    }
+    .m-row{
+        margin:0.5rem;
+    }
+    .m-row textarea{
+        height:8rem;
+    }
+    .form-container{
+        padding:2rem;
+        background-color: rgba(255,255,255,0.5);
+    }
+    form>*{
+        margin-top:1rem;
+    }
+    form input[type="text"]{
+        text-transform:uppercase;
+    }
+    main{
+        margin-top:9%;
+    }
+    h2{
+        font-size:1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<nav></nav>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
+            <div class="row border border-warning rounded form-container">
+                <h2 class="question col-xs-12 col-sm-12">Create Question</h2>
+                <div class="col-xs-12 col-sm-12">
+                <form class="row" method="post"><div class="col-sm-12 col-xs-12">
+                    <div class="row m-row">
+                        <textarea name="question_text"
+                            class="col-xs-12 col-sm-12 border border-warning rounded"
+                            required></textarea>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Difficulty</div>
+                        <select name="difficulty"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"
+                            required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Question Type</div>
+                        <select name="question_type"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"
+                            required>
+                            <option value="MCQ">MCQ</option>
+                            <option value="short_answer">Short Answer</option>
+                            <option value="view">View</option>
+                        </select>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Question Category</div>
+                        <input type="text" name="category" placeholder="Category"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"
+                            required/>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Option 1 (answer)</div>
+                        <input type="text" name="option_1" placeholder="option 1"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Option 2</div>
+                        <input type="text" name="option_2" placeholder="option 2"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Option 3</div>
+                        <input type="text" name="option_3" placeholder="option 3"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                    </div>
+                    <div class="row m-row">
+                        <div class="col-xs-12 col-sm-6">Option 4</div>
+                        <input type="text" name="option_4" placeholder="option 4"
+                            class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                    </div>
+                    <div class="row m-row">
+                        <button type="submit" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                            Start My Test
+                        </button>
+                    </div>
+                </div></form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
