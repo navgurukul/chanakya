@@ -1,48 +1,51 @@
 from app import app
 from flask import render_template, request, session, flash, redirect, url_for
-import random
 import string
 from app import repos
+from helper_methods import get_random_string
 
 global_q_set = None
 
 ################### VIEWS #######################
+def go_to_page():
+    return redirect(url_for(session.get('page')))
+
+@app.before_request():
+def go_to_page():
+    if not session.get("page"):
+        session["page"] = "enter_enrolment"
+        return go_to_page()
+
 @app.route('/')
 @app.route('/enter-enrolment')
 def enter_enrolment():
-    if session.get("test_started") == "yes":
-        return redirect(url_for('test'))
-    if session.get("test_started") == "no":
-        return redirect(url_for('before_test'))
-    else:
+    if session.get("page") == "enter_enrolment"
         enrolment_key = request.args.get("enrolment_key")
         if enrolment_key and repos.is_valid_enrolment(enrolment_key):
             session["enrolment_key"]   = enrolment_key
             session["q_no"] = 1
-            session["test_started"] = "no"
-            return redirect(url_for('before_test'))
+            session["page"] = "before_test"
         else:
-            return render_template("enter_enrolment.html")
+            pass
+            #flash - error about enrolment
+    return go_to_page()
+        
 
 @app.route('/before-test', methods=["GET", "POST"])
 def before_test():
-    if session.get("test_started") == "yes":
-        return redirect(url_for('test'))
-    if session.get("test_started") == "no":
+    if session.get("page") == "before_test":
         if request.method == "GET":
             return render_template("before_test.html")
         elif request.method == "POST":
             if repos.can_start_test(session["enrolment_key"]):
-                session["test_started"] = "yes"
-                return redirect(url_for('test'))
+                session["page"] = "test"
             else:
                 return "Unable to Start your Test, Contact Navgurukul", 400
-    else:
-        return redirect(url_for('/enter-enrolment'))
+    return go_to_page()
 
-@app.route('/test', methods=["GET", "POST"])
+@app.route('/test')
 def test():
-    if session.get("test_started") == "yes":
+    if session.get("page") == "test":
         if not session.get("questions"):
             global global_q_set
             if not global_q_set:
@@ -51,15 +54,21 @@ def test():
             questions = repos.get_all_questions(q_set)
             session["questions"] = questions
         return render_template("test.html", questions=session.get("questions"))
-    elif session.get("test_started") == "no":
-        return redirect(url_for('before_test'))
-    else:
-        return redirect(url_for('enter_enrolment'))
+    return go_to_page()
 
-@app.route("/end")
+@app.route("/end", methods=["GET", "POST"])
 def show_test_end():
-    #pop all session keys
-    return render_template("end.html")
+    if session.get("page") == "test" and request.method == "POST":
+        questions = session.get("questions")
+        if questions:
+            data_for_analytics = calculate_marks_and_dump_data(questions, request.form)
+            repos.save_test_result(session.get("enrollment_key"), data_for_analytics)
+            session["page"] = "end"
+        return render_template("ask_details.html")
+    elif session.get("page") == "end" and request.method == "POST":
+        return render_template("thanks.html")
+    return go_to_page()
+
 
 @app.route("/create-question", methods=["GET", "POST"])
 def create_question():
@@ -131,8 +140,3 @@ def exotel_enroll_for_test():
     print('------------------')
 
     return "SUCCESS", 200
-
-#helper methods
-def get_random_string():
-    ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits 
-    return "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(2)])

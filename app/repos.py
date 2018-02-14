@@ -3,29 +3,7 @@ from app.models import Options, Question
 from app.models import Difficulty, QuestionType
 from app import db
 import random
-
-config ={
-            "category-1":{
-                "easy":1,
-                "medium":2,
-                "hard":2
-            },
-            "category-2":{
-                "easy":1,
-                "medium":1,
-                "hard":1
-            },
-            "category-3":{
-                "easy":0,
-                "medium":1,
-                "hard":2
-            },
-            "category-4":{
-                "easy":1,
-                "medium":1,
-                "hard":2
-            }
-}
+from exam_config import question_config as config
 
 def add_enrollment_key(enrollment_key, phone_number):
     try:
