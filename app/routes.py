@@ -90,6 +90,7 @@ def create_question():
 
 ######## APIS can be configured as another microservice ?? ########
 ############ REST APIS ##############
+#TODO: @Shanu: Isko nikaal dena in case you don't need it. It is redundant after `exotel_enroll_for_test()`
 @app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
 def create_enrolment_key(phone_number):
     enrolment_key =  get_random_string()
@@ -98,6 +99,32 @@ def create_enrolment_key(phone_number):
         return enrolment_key, 201
     else:
         return  "Unable to register", 400
+
+@app.route("/exotel_enroll_for_test")
+def exotel_enroll_for_test():
+    # get the student mobile number
+    student_mobile = request.args.get("CallFrom")
+    if not student_mobile:
+        return "ERROR", 500
+    if student_mobile[0] == "0":
+        student_mobile = student_mobile[1:]
+
+    # generate an enrolment number for the student
+    enrolment_key =  get_random_string()
+    enrolment_key = repos.add_enrollment_key(enrolment_key, student_mobile)
+    if not enrolment_key:
+        return "ERROR", 500
+    
+    # send an SMS with the enrolment number
+    #TODO: Implement exotel API when we purchase plan. Trial plan doesn't support sending SMS.
+    message = app.config.get("TEST_ENROLL_MSG").format(enrolment_num=enrolment_key)
+    print('------------------')
+    print('TODO')
+    print(message)
+    print('This message will be sent on {number}'.format(number=student_mobile))
+    print('------------------')
+
+    return "SUCCESS", 200
 
 #helper methods
 def get_random_string():
