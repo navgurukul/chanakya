@@ -18,7 +18,8 @@ def create_question(question_details):
         options   = question_details["options"] 
         q_options = Options(option_1=options[0], option_2=options[1], option_3=options[2], option_4=options[3])
         question  = Question(
-                                question_text = question_details["question_text"],
+                                en_question_text = question_details["en_question_text"],
+                                hi_question_text = question_details["hi_question_text"],
                                 question_type = getattr(QuestionType, question_details["question_type"]),
                                 difficulty    = getattr(Difficulty, question_details["difficulty"]),
                                 category      = question_details["category"],
@@ -32,3 +33,9 @@ def create_question(question_details):
     else:
         
         return True, None
+
+def is_valid_enrolment(phone_number):
+    return True
+
+def can_start_test(enrolment_key):
+    return True

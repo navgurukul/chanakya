@@ -1,38 +1,58 @@
 from app import app
 from flask import render_template, request, session, flash, redirect, url_for
 import random
-import logging
 import string
 from app import repos
 
 
 ################### VIEWS #######################
-@app.route('/', methods=["GET", "POST"])
-def start():
-    if session.get("en"):
-        return redirect(url_for('render_test'))
+@app.route('/')
+@app.route('/enter-enrolment')
+def enter_enrolment():
+    if session.get("test_started") == "yes":
+        return redirect(url_for('test'))
+    if session.get("test_started") == "no":
+        return redirect(url_for('before_test'))
     else:
+        enrolment_key = request.args.get("enrolment_key")
+        if enrolment_key and repos.is_valid_enrolment(enrolment_key):
+            session["enrolment_key"]   = enrolment_key
+            session["q_no"] = 1
+            session["test_started"] = "no"
+            return redirect(url_for('before_test'))
+        else:
+            return render_template("enter_enrolment.html")
+
+@app.route('/before-test', methods=["GET", "POST"])
+def before_test():
+    if session.get("test_started") == "yes":
+        return redirect(url_for('test'))
+    if session.get("test_started") == "no":
         if request.method == "GET":
-            return render_template("start.html")
+            return render_template("before_test.html")
         elif request.method == "POST":
-            enrollment_number = request.form.get("enrollment_number")
-            if enrollment_number == "ABC12": #ToDo DB Logic
-                session["en"]   = enrollment_number
-                session["q_no"] = 1
-                return redirect(url_for('render_test'))
+            if repos.can_start_test(session["enrolment_key"]):
+                session["test_started"] = "yes"
+                return redirect(url_for('test'))
             else:
-                #flash("Error")
-                return redirect(url_for('start'))
+                "Unable to Start your Test, Contact Navgurukul", 400
+    else:
+        return redirect(url_for('/enter-enrolment'))
 
 @app.route('/test', methods=["GET", "POST"])
-def render_test():
-    print(session.get("en"))
-    if session.get("en"):
-        return render_template("test.html")
-    return redirect(url_for('start'))
+def test():
+    if session.get("test_started") == "yes":
+        #q_set = repos.get_q_set()
+        #question = repos.get_next_question(q_set, session["q_no"])
+        return render_template("test.html")#, question=question)
+    elif session.get("test_started") == "no":
+        return redirect(url_for('before_test'))
+    else:
+        return redirect(url_for('enter_enrolment'))
 
 @app.route("/end")
 def show_test_end():
+    #pop all session keys
     return render_template("end.html")
 
 @app.route("/create-question", methods=["GET", "POST"])
@@ -41,7 +61,8 @@ def create_question():
     if request.method == "GET":
         return render_template("create_question.html")
     elif request.method == "POST":
-        question_text = request.form.get("question_text") 
+        en_question_text = request.form.get("en_question_text") 
+        hi_question_text = request.form.get("hi_question_text") 
         question_type = request.form.get("question_type") 
         difficulty = request.form.get("difficulty") 
         category = request.form.get("category") 
@@ -52,7 +73,8 @@ def create_question():
             option_3 = request.form.get("option_3") 
             option_4 = request.form.get("option_4") 
         question_details =      {
-                                    "question_text":question_text,
+                                    "en_question_text":en_question_text,
+                                    "hi_question_text":hi_question_text,
                                     "question_type":question_type,
                                     "difficulty":difficulty,
                                     "category":category,
@@ -68,12 +90,12 @@ def create_question():
 
 ######## APIS can be configured as another microservice ?? ########
 ############ REST APIS ##############
-@app.route("/create-enrollment-key/<phone_number>", methods=["PUT"])
-def create_enrollment_key(phone_number):
-    enrollment_key =  get_random_string()
-    enrollment_key = repos.add_enrollment_key(enrollment_key, phone_number)
-    if enrollment_key:
-        return enrollment_key, 201
+@app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
+def create_enrolment_key(phone_number):
+    enrolment_key =  get_random_string()
+    enrolment_key = repos.add_enrolment_key(enrolment_key, phone_number)
+    if enrolment_key:
+        return enrolment_key, 201
     else:
         return  "Unable to register", 400
 

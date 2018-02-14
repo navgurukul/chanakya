@@ -31,14 +31,15 @@ class Options(db.Model):
     option_4         = db.Column(db.String(128))
 
 class Question(db.Model):
-    __tablename__   = "question"
-    id              = db.Column(db.Integer, primary_key=True)
-    question_text   = db.Column(db.String(1024), nullable=False)
-    difficulty      = db.Column(db.Enum(Difficulty), nullable=False)
-    category        = db.Column(db.String(32), nullable=False)
-    question_type   = db.Column(db.Enum(QuestionType), nullable=False)
-    options_id      = db.Column(db.Integer, db.ForeignKey("options.id"))
-    options         = db.relationship("Options", backref=db.backref("options", uselist=False))
+    __tablename__      = "question"
+    id                 = db.Column(db.Integer, primary_key=True)
+    en_question_text   = db.Column(db.String(1024), nullable=False)
+    hi_question_text   = db.Column(db.String(1024), nullable=False)
+    difficulty         = db.Column(db.Enum(Difficulty), nullable=False)
+    category           = db.Column(db.String(32), nullable=False)
+    question_type      = db.Column(db.Enum(QuestionType), nullable=False)
+    options_id         = db.Column(db.Integer, db.ForeignKey("options.id"))
+    options            = db.relationship("Options", backref=db.backref("options", uselist=False))
 
     def __repr__(self):
         return '<Question: %s>' %(self.question_text) 
