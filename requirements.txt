@@ -1,5 +1,5 @@
- pip install flask
- pip install flask-migrate
- pip install flask-sqlalchemy
- pip install requests
- pip install mysqlclient
+ flask
+ flask-migrate
+ flask-sqlalchemy
+ requests
+ mysqlclient
