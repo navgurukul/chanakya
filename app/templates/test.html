@@ -59,32 +59,30 @@ $(function(){
 </div>
 {% endblock %}
 
+{% set en_question_text = question["en_question_text"] %}
+{% set hi_question_text = question["hi_question_text"] %}
+{% set random_options   = question["random_options"] %}
+{% set question_type    = question["question_type"] %}
+
 {% block main %}
     <div class="row">
-        <h2 class="question col-xs-12 col-sm-12">
-Ram is rich but Sita is richer. Laxman is poorer than Ram. Who is richest?</h2>
-        <h2 class="question question-small col-xs-12 col-sm-12">
-राम अमीर है लेकिन सीता राम से ज्यादा अमीर है। लक्ष्मण राम की तुलना में गरीब है। कौन सबसे अमीर है?
-        </h2>
+        <h2 class="question col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
+        <h2 class="question question-small col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
         <div class="col-xs-12 col-sm-12 options">
+            {% if question_type=="MCQ" %}
             <ol class="row">
+                {% for x in range(4) %}
                 <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                    <input type="radio" value="abc" name="answer" id="answer_1"/>
-                    <label class="answer-label" for="answer_1">Ram / राम</label>
+                    <input type="radio" value="abc" name="answer" id="answer_{{x+1}}"/>
+                    <label class="answer-label" for="answer_1">{{random_options[x]}}</label>
                 </li>
-                <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                    <input type="radio" value="def" name="answer" id="answer_2"/>
-                    <label class="answer-label" for="answer_2">Sita / सीता</label>
-                </li>
-                <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                    <input type="radio" value="ghi" name="answer" id="answer_3"/>
-                    <label class="answer-label" for="answer_3">Laxman / लक्ष्मण</label>
-                </li>
-                <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                    <input type="radio" value="jkl" name="answer" id="answer_4"/>
-                    <label class="answer-label" for="answer_4">All are equally rich / सभी समान रूप से अमीर हैं</label>
-                </li>
+                {% endfor %}
             </ol>
+            {% elif question_type=="short_answer" %}
+            <div class="row">
+                <input type="text" placeholder="enter your answer here" name="answer" class="col-xs-12 col-sm-12">
+            </div> 
+            {% endif %}
         </div>
         <div class="col-xs-12 col-sm-12">
             <button type="button" class="btn btn-lg btn-primary submit-btn">
