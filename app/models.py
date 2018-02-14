@@ -16,7 +16,7 @@ class Enrollment(db.Model):
     __tableame__ = "enrollment"
     id             = db.Column(db.Integer, primary_key=True)
     enrollment_key = db.Column(db.String(5), index=True, unique=True)
-    phone_number   = db.Column(db.String(10), unique=True, index=True)
+    phone_number   = db.Column(db.String(10), index=True)
     created_on     = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
