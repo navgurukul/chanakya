@@ -42,4 +42,4 @@ class Question(db.Model):
     options            = db.relationship("Options", backref=db.backref("options", uselist=False))
 
     def __repr__(self):
-        return '<Question: %s>' %(self.question_text) 
+        return '<Question: %s>' %(self.en_question_text) 
