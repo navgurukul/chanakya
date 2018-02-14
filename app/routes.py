@@ -4,6 +4,7 @@ import random
 import string
 from app import repos
 
+global_q_set = None
 
 ################### VIEWS #######################
 @app.route('/')
@@ -35,16 +36,21 @@ def before_test():
                 session["test_started"] = "yes"
                 return redirect(url_for('test'))
             else:
-                "Unable to Start your Test, Contact Navgurukul", 400
+                return "Unable to Start your Test, Contact Navgurukul", 400
     else:
         return redirect(url_for('/enter-enrolment'))
 
 @app.route('/test', methods=["GET", "POST"])
 def test():
     if session.get("test_started") == "yes":
-        #q_set = repos.get_q_set()
-        #question = repos.get_next_question(q_set, session["q_no"])
-        return render_template("test.html")#, question=question)
+        if not session.get("questions"):
+            global global_q_set
+            if not global_q_set:
+                global_q_set = repos.get_global_q_set()
+            q_set = repos.get_q_set(global_q_set)
+            questions = repos.get_all_questions(q_set)
+            session["questions"] = questions
+        return render_template("test.html", questions=session.get("questions"))
     elif session.get("test_started") == "no":
         return redirect(url_for('before_test'))
     else:
@@ -66,12 +72,12 @@ def create_question():
         question_type = request.form.get("question_type") 
         difficulty = request.form.get("difficulty") 
         category = request.form.get("category") 
-        if question_type in ("MCQ", "short_answer"):
-            option_1 = request.form.get("option_1") 
-        if question_type == "MCQ":
-            option_2 = request.form.get("option_2") 
-            option_3 = request.form.get("option_3") 
-            option_4 = request.form.get("option_4") 
+        #if question_type in ("MCQ", "short_answer"):
+        option_1 = request.form.get("option_1") 
+        #if question_type == "MCQ":
+        option_2 = request.form.get("option_2") 
+        option_3 = request.form.get("option_3") 
+        option_4 = request.form.get("option_4") 
         question_details =      {
                                     "en_question_text":en_question_text,
                                     "hi_question_text":hi_question_text,
