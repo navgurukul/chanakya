@@ -6,7 +6,7 @@ student_details = {
     'stage': 'Lightbot Activity',
     'source': 'Helpline',
 
-    'potential_name': 'Yoda Toda',
+    'potential_name': 'Dr. Manhatan',
     'student_or_partner': 'Student',
     'student_mobile': '8130378953',
     'dob': '1995-05-02',
@@ -71,16 +71,17 @@ if not potential_id:
 # creating the task related to the potential
 task_details = {
     'owner_id': '2821772000000169007',
-    'text': 'Text of the task.',
+    'text': 'Some text of the task.',
     'due_date': '2018-02-05',
     'se_module': 'Potentials',
-    'seid': potential_id
+    'se_id': potential_id
 }
 querystring = {
     "newFormat":"1",
     "authtoken":"dff429d03714ecd774b7706e358e907b",
     "scope":"crmapi",
-    "xmlData": render("../app/templates/zoho/new_task.xml", new_task)
+    "xmlData": render("../app/templates/zoho/new_task.xml", task_details)
 }
+print(querystring)
 url = "https://crm.zoho.com/crm/private/json/Tasks/insertRecords"
 response = requests.request("GET", url, params=querystring)
