@@ -82,6 +82,6 @@ querystring = {
     "scope":"crmapi",
     "xmlData": render("../app/templates/zoho/new_task.xml", task_details)
 }
-print(querystring)
 url = "https://crm.zoho.com/crm/private/json/Tasks/insertRecords"
 response = requests.request("GET", url, params=querystring)
+# check if response code is 200
