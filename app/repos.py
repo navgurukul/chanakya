@@ -114,9 +114,8 @@ def can_add_student(enrolment_key, student_data):
     #try:
         student_details = {
                             "name": student_data.get("name"),
-                            "address": student_data.get("address"),
                             "gender": getattr(Gender, student_data.get("gender")),
-                            "owns_phone": getattr(Boolean, student_data.get("owns_phone"))
+                            "owns_android": getattr(Boolean, student_data.get("owns_phone"))
         }
 
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()

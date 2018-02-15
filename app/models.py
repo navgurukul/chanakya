@@ -21,6 +21,12 @@ class Gender(Enum):
     female = 2
     others = 3
 
+class Caste(Enum):
+    SC = 1
+    ST = 2
+    OBC = 3
+    General = 4
+
 class Enrolment(db.Model):
     __tablename__  = "enrolment"
     id             = db.Column(db.Integer, primary_key=True)
@@ -67,9 +73,14 @@ class Student(db.Model):
     __tablename__      = "student"
     id                 = db.Column(db.Integer, primary_key=True)
     name               = db.Column(db.String(64), nullable=False)
-    address            = db.Column(db.String(2048), nullable=False)
+    phone_number       = db.Column(db.String(10), nullable=False)
+    dob                = db.Column(db.Date, nullable=False)
     gender             = db.Column(db.Enum(Gender), nullable=False)
-    owns_phone         = db.Column(db.Enum(Boolean), nullable=False)
+    city               = db.Column(db.String(64), nullable=False)
+    state              = db.Column(db.String(64), nullable=False)
+    caste_tribe        = db.Column(db.Enum(Caste), nullable=False)
+
+    owns_android       = db.Column(db.Enum(Boolean), nullable=False)
     created_on         = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
     enrolment          = db.relationship("Enrolment", backref=db.backref("s_enrolment", uselist=False))
