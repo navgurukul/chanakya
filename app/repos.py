@@ -7,14 +7,14 @@ import exam_config
 config = exam_config.config["question_config"]
 
 def add_enrolment_key(enrolment_key, phone_number):
-    #try:
+    try:
         en = Enrolment(enrolment_key=enrolment_key, phone_number=phone_number)
         db.session.add(en)
         db.session.commit()
-#    except Exception as e:
-#        #log error
-#        print(e)
-#    else:
+    except Exception as e:
+        #log error
+        print(e)
+    else:
         return enrolment_key
 
 def create_question(question_details):
@@ -111,16 +111,14 @@ def save_test_result_and_analytics(data_dump, other_details):
     #create_dump_zip(data_dump, other_details)
 
 def can_add_student(enrolment_key, student_data):
-
-    try:
+    #try:
         student_details = {
                             "name": student_data.get("name"),
                             "address": student_data.get("address"),
                             "gender": getattr(Gender, student_data.get("gender")),
-                            "owns_mobile": getattr(Boolean, student_data("owns_mobile"))
+                            "owns_phone": getattr(Boolean, student_data.get("owns_phone"))
         }
 
-        enrolment_key     = other_details['enrolment_key']
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
         student   = Student(**student_details)
@@ -128,8 +126,9 @@ def can_add_student(enrolment_key, student_data):
         student.test_data = test_data
         db.session.add(student)
         db.session.commit()
-    except Exception as e:
-        #log e
-        return False
-    else:
         return True
+    #except Exception as e:
+    #    #log e
+    #    return False
+    #else:
+    #    return True
