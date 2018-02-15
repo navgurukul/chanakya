@@ -2,47 +2,53 @@ import random, string
 
 from app import app, exotel
 from flask import render_template, request, session, flash, redirect, url_for
+from datetime import datetime
 from app import repos
+from app.helper_methods import ( get_random_string,
+                                 calculate_marks_and_dump_data,
+                                 get_time_remaining
+                                )
 
 global_q_set = None
 
 ################### VIEWS #######################
+def go_to_page():
+    return redirect(url_for(session.get('page')))
+
+@app.before_request
+def before_request():
+    if request.endpoint not in ("create_enrolment_key", "create_question"):
+        if not session.get("page"):
+            session["page"] = "enter_enrolment"
+            return go_to_page()
+
 @app.route('/')
 @app.route('/enter-enrolment')
 def enter_enrolment():
-    if session.get("test_started") == "yes":
-        return redirect(url_for('test'))
-    if session.get("test_started") == "no":
-        return redirect(url_for('before_test'))
-    else:
+    if session.get("page") == "enter_enrolment":
         enrolment_key = request.args.get("enrolment_key")
         if enrolment_key and repos.is_valid_enrolment(enrolment_key):
             session["enrolment_key"]   = enrolment_key
-            session["q_no"] = 1
-            session["test_started"] = "no"
-            return redirect(url_for('before_test'))
+            session["page"] = "before_test"
         else:
             return render_template("enter_enrolment.html")
+    return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])
 def before_test():
-    if session.get("test_started") == "yes":
-        return redirect(url_for('test'))
-    if session.get("test_started") == "no":
+    if session.get("page") == "before_test":
         if request.method == "GET":
             return render_template("before_test.html")
         elif request.method == "POST":
             if repos.can_start_test(session["enrolment_key"]):
-                session["test_started"] = "yes"
-                return redirect(url_for('test'))
+                session["page"] = "test"
             else:
                 return "Unable to Start your Test, Contact Navgurukul", 400
-    else:
-        return redirect(url_for('/enter-enrolment'))
+    return go_to_page()
 
-@app.route('/test', methods=["GET", "POST"])
+@app.route('/test')
 def test():
-    if session.get("test_started") == "yes":
+    if session.get("page") == "test":
         if not session.get("questions"):
             global global_q_set
             if not global_q_set:
@@ -50,20 +56,36 @@ def test():
             q_set = repos.get_q_set(global_q_set)
             questions = repos.get_all_questions(q_set)
             session["questions"] = questions
-        return render_template("test.html", questions=session.get("questions"))
-    elif session.get("test_started") == "no":
-        return redirect(url_for('before_test'))
-    else:
-        return redirect(url_for('enter_enrolment'))
+            session["test_start_time"] = datetime.utcnow()
+        time_remaining = get_time_remaining(session.get("test_start_time"))
+        if time_remaining > 0:
+            return render_template("test.html", questions=session.get("questions"), time_remaining=time_remaining)
+        else:
+            return "timer has expired"
+    return go_to_page()
 
-@app.route("/end")
-def show_test_end():
-    #pop all session keys
-    return render_template("end.html")
+@app.route("/end", methods=["GET", "POST"])
+def end():
+    if session.get("page") == "test" and request.method == "POST":
+        session["page"] = "end"
+        questions = session.get("questions")
+        other_details = {
+            "start_time":session.get("test_start_time"),
+            "submit_time":datetime.utcnow(),
+            "enrolment_key":session.get("enrolment_key")
+        }
+        data_dump = calculate_marks_and_dump_data(questions, request.form)
+        repos.save_test_result_and_analytics(data_dump, other_details)
+        return render_template("ask_details.html")
+    elif session.get("page") == "end":
+        session.clear()
+        return render_template("thanks.html")
+    return go_to_page()
 
 @app.route("/create-question", methods=["GET", "POST"])
 def create_question():
     #no-authentication: dangerous ??
+    t1 = datetime.now()
     if request.method == "GET":
         return render_template("create_question.html")
     elif request.method == "POST":
@@ -72,9 +94,8 @@ def create_question():
         question_type = request.form.get("question_type") 
         difficulty = request.form.get("difficulty") 
         category = request.form.get("category") 
-        #if question_type in ("MCQ", "short_answer"):
+
         option_1 = request.form.get("option_1") 
-        #if question_type == "MCQ":
         option_2 = request.form.get("option_2") 
         option_3 = request.form.get("option_3") 
         option_4 = request.form.get("option_4") 
@@ -89,6 +110,7 @@ def create_question():
         is_question_created, error = repos.create_question(question_details)
         if is_question_created:
             flash("question is created, successfully")
+            print(datetime.now()-t1)
             return redirect(url_for("create_question"))
         else:
             flash("question not created: %s" %error)
@@ -129,8 +151,3 @@ def exotel_enroll_for_test():
     exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
 
     return "SUCCESS", 200
-
-#helper methods
-def get_random_string():
-    ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits 
-    return "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(2)])

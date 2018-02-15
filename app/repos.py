@@ -1,42 +1,22 @@
-from app.models import Enrollment
-from app.models import Options, Question
+from app.models import Options, Question, TestData, Enrolment
 from app.models import Difficulty, QuestionType
 from app import db
 import random
+import exam_config
 
-config ={
-            "category-1":{
-                "easy":1,
-                "medium":2,
-                "hard":2
-            },
-            "category-2":{
-                "easy":1,
-                "medium":1,
-                "hard":1
-            },
-            "category-3":{
-                "easy":0,
-                "medium":1,
-                "hard":2
-            },
-            "category-4":{
-                "easy":1,
-                "medium":1,
-                "hard":2
-            }
-}
+config = exam_config.config["question_config"]
 
-def add_enrollment_key(enrollment_key, phone_number):
+def add_enrolment_key(enrolment_key, phone_number):
     try:
-        en = Enrollment(enrollment_key=enrollment_key, phone_number=phone_number)
+        en = Enrolment(enrolment_key=enrolment_key, phone_number=phone_number)
         db.session.add(en)
         db.session.commit()
     except Exception as e:
         #log error
         print(e)
     else:
-        return enrollment_key
+        return enrolment_key
+
 def create_question(question_details):
     try:
         options   = question_details["options"] 
@@ -58,11 +38,16 @@ def create_question(question_details):
         
         return True, None
 
-def is_valid_enrolment(phone_number):
-    return True
+def is_valid_enrolment(enrolment_key):
+    if enrolment_key.isalnum():
+        if Enrolment.query.filter_by(enrolment_key=enrolment_key).first():
+            return True
+    return False
 
 def can_start_test(enrolment_key):
-    return True
+    en_id = Enrolment.query.filter_by(enrolment_key=enrolment_key).first().id
+    test_data = TestData.query.filter_by(enrolment_id=en_id).first()
+    return True if test_data is None else False
 
 def get_global_q_set():
     global config
@@ -108,3 +93,19 @@ def get_all_questions(q_set):
         }
         questions.append(question)
     return questions
+
+def add_test_data_to_db(data_dump, other_details):
+    enrolment_key     = other_details['enrolment_key']
+    test_data_details = dict(       started_on          = other_details['start_time'],
+                                    submitted_on        = other_details['submit_time'],
+                                    received_marks      = data_dump['total_marks'],
+                                    max_possible_marks  = data_dump['max_possible_marks'])
+    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+    test_data = TestData(**test_data_details)
+    test_data.enrolment = en
+    db.session.add(test_data)
+    db.session.commit()
+
+def save_test_result_and_analytics(data_dump, other_details):
+    add_test_data_to_db(data_dump, other_details)
+    #create_dump_zip(data_dump, other_details)

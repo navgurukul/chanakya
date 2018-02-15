@@ -12,19 +12,29 @@ class QuestionType(Enum):
     short_answer = 2
     view         = 3
 
-class Enrollment(db.Model):
-    __tableame__ = "enrollment"
+class Enrolment(db.Model):
+    __tablename__  = "enrolment"
     id             = db.Column(db.Integer, primary_key=True)
-    enrollment_key = db.Column(db.String(5), index=True, unique=True)
+    enrolment_key  = db.Column(db.String(5), index=True, unique=True)
     phone_number   = db.Column(db.String(10), index=True)
     created_on     = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return '<Enrollment: %s, Phone number: %d>' %(self.enrollment_key, self.phone_number) 
+        return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 
+
+class TestData(db.Model):
+    __tablename__      = "test_data"
+    id                 = db.Column(db.Integer, primary_key=True)
+    started_on         = db.Column(db.DateTime, nullable=False)
+    submitted_on       = db.Column(db.DateTime, nullable=False)
+    received_marks     = db.Column(db.Integer, nullable=False)
+    max_possible_marks = db.Column(db.Integer, nullable=False)
+    enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
+    enrolment          = db.relationship("Enrolment", backref=db.backref("enrolment", uselist=False))
 
 class Options(db.Model):
-    __tablename__     = "options"
-    id                = db.Column(db.Integer, primary_key=True)
+    __tablename__    = "options"
+    id               = db.Column(db.Integer, primary_key=True)
     option_1         = db.Column(db.String(128)) #this is the answer
     option_2         = db.Column(db.String(128))
     option_3         = db.Column(db.String(128))
