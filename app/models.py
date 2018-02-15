@@ -12,6 +12,15 @@ class QuestionType(Enum):
     short_answer = 2
     view         = 3
 
+class Boolean(Enum):
+    yes = 1
+    no  = 0
+
+class Gender(Enum):
+    male   = 1
+    female = 2
+    others = 3
+
 class Enrolment(db.Model):
     __tablename__  = "enrolment"
     id             = db.Column(db.Integer, primary_key=True)
@@ -53,3 +62,16 @@ class Question(db.Model):
 
     def __repr__(self):
         return '<Question: %s>' %(self.en_question_text) 
+
+class Student(db.Model):
+    __tablename__      = "student"
+    id                 = db.Column(db.Integer, primary_key=True)
+    name               = db.Column(db.String(64), nullable=False)
+    address            = db.Column(db.String(2048), nullable=False)
+    gender             = db.Column(db.Enum(Gender), nullable=False)
+    owns_phone         = db.Column(db.Enum(Boolean), nullable=False)
+    created_on         = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
+    enrolment          = db.relationship("Enrolment", backref=db.backref("s_enrolment", uselist=False))
+    test_data_id       = db.Column(db.Integer, db.ForeignKey("test_data.id"))
+    test_data          = db.relationship("TestData", backref=db.backref("test_data", uselist=False))

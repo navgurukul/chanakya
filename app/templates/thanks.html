@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+{% block title %}
+Road to Navgurukul
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    body{
+        background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
+        background-size: cover;
+    }
+    .form-container{
+        padding:2rem;
+        background-color: rgba(255,255,255,0.5);
+    }
+    main{
+        margin-top:18%;
+    }
+    h2{
+        font-size:1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+            <div class="row border border-warning rounded form-container">
+                <h2 class="question col-xs-12 col-sm-12">Thanks!</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
