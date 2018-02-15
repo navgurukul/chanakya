@@ -65,7 +65,6 @@ def test():
 @app.route("/end", methods=["GET", "POST"])
 def end():
     if session.get("page") == "test" and request.method == "POST":
-        session["page"] = "end"
         questions = session.get("questions")
         other_details = {
             "start_time":session.get("test_start_time"),
@@ -74,10 +73,16 @@ def end():
         }
         data_dump = calculate_marks_and_dump_data(questions, request.form)
         repos.save_test_result_and_analytics(data_dump, other_details)
-        return render_template("ask_details.html")
+        session["page"] = "end"
     elif session.get("page") == "end":
-        session.clear()
-        return render_template("thanks.html")
+        if request.method == "GET":
+            return render_template("ask_details.html")
+        elif request.method == "POST":
+            if repos.can_add_student(session.get("enrolment_key"), request.form):
+                session.clear()
+                return render_template("thanks.html")
+            else:
+                flash("Unable to Save Your Details, Contact Navgurukul.")
     return go_to_page()
 
 @app.route("/create-question", methods=["GET", "POST"])
