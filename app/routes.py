@@ -1,4 +1,6 @@
-from app import app
+import random, string
+
+from app import app, exotel
 from flask import render_template, request, session, flash, redirect, url_for
 from datetime import datetime
 from app import repos
@@ -147,12 +149,10 @@ def exotel_enroll_for_test():
         return "ERROR", 500
     
     # send an SMS with the enrolment number
-    #TODO: Implement exotel API when we purchase plan. Trial plan doesn't support sending SMS.
+    #TODO: Implement the real message when we buy exotel.
     message = app.config.get("TEST_ENROLL_MSG").format(enrolment_num=enrolment_key)
-    print('------------------')
-    print('TODO')
+    test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
     print(message)
-    print('This message will be sent on {number}'.format(number=student_mobile))
-    print('------------------')
+    exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
 
     return "SUCCESS", 200

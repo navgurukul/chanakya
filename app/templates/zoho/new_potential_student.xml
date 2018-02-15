@@ -1,0 +1,47 @@
+<Potentials>
+    <row no="1">
+
+        <!-- essentials -->
+        <FL val="Layout">2821772000000172275</FL>
+        <FL val="Stage"><![CDATA[{{ stage }}]]></FL>    
+        <FL val="Source"><![CDATA[{{ source }}]]></FL>
+
+        <!-- Basic Details -->
+        <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
+        <FL val="Student or Partner"><![CDATA[{{ student_or_partner }}]]></FL>
+        <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
+        <FL val="Date of Birth"><![CDATA[{{ dob }}]]></FL>
+        <FL val="Gender"><![CDATA[{{ gender }}]]></FL>
+        <FL val="Caste &amp; Tribe"><![CDATA[{{ caste_tribe }}]]></FL>
+        <FL val="City"><![CDATA[{{ city }}]]></FL>
+        <FL val="State"><![CDATA[{{ state }}]]></FL>    
+
+        <!-- Economic Background -->
+        <FL val="Owns Android Phone?"><![CDATA[{{ owns_android }}]]></FL>
+        <FL val="Owns Laptop/Desktop?"><![CDATA[{{ owns_computer }}]]></FL>
+        <FL val="Works?"><![CDATA[{{ is_works }}]]></FL>        
+        <FL val="Where do they work?"><![CDATA[{{ works_where }}]]></FL>
+        <FL val="Number of Family Members"><![CDATA[{{ num_fam_members }}]]></FL>
+        <FL val="Number of Earning Family Members"><![CDATA[{{ num_earning_fam_members }}]]></FL>
+        <FL val="Monthly Family Income"><![CDATA[{{ monthly_fam_income }}]]></FL>
+        <FL val="Father's Profession"><![CDATA[{{ father_prof }}]]></FL>
+        <FL val="Mother's Profession"><![CDATA[{{ mother_prof }}]]></FL>
+
+        <!-- Academic Information -->
+        <FL val="Last Class Passed"><![CDATA[{{ last_class_passed }}]]></FL>
+        <FL val="Passed Class 10th?"><![CDATA[{{ is_10_pass }}]]></FL>
+        <FL val="10th Percentage"><![CDATA[{{ percentage_10 }}]]></FL>
+        <FL val="Passed Class 12th?"><![CDATA[{{ is_12_pass }}]]></FL>
+        <FL val="12th Percentage"><![CDATA[{{ percentage_12 }}]]></FL>
+        <FL val="Class 11/12 Stream"><![CDATA[{{ stream_11_12 }}]]></FL>
+        <FL val="Enrolled in College?"><![CDATA[{{ is_college_enrolled }}]]></FL>
+        <FL val="Which College?"><![CDATA[{{ college_which }}]]></FL>
+        <FL val="College Type"><![CDATA[{{ college_type }}]]></FL>
+
+        <!-- Test Results -->
+        <FL val="Results URL"><![CDATA[{{ results_url }}]]></FL>
+        <FL val="Test Version Answered"><![CDATA[{{ test_version }}]]></FL>
+        <FL val="Test Score"><![CDATA[{{ test_score }}]]></FL>
+
+    </row>
+</Potentials>
