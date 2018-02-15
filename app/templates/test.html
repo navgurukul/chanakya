@@ -6,12 +6,12 @@ Road to Navgurukul
 {% block head_extra %}
 <style>
     .question{
-        padding:0.45rem 1.25rem;
-        font-size:1.85rem;
+        //padding:0.45rem 1.25rem;
+        font-size:1.4rem;
         color:#222;
     }
     .question-small{
-        font-size:1.45rem;
+        font-size:1.2rem;
         color:#676767;
     }
     .question-small:before{ content:"( "; }
@@ -19,18 +19,17 @@ Road to Navgurukul
     .answer-label{
         display:block;
         width:100%;
-        border:3px solid #444;         
+        border:1px solid #444;         
         background-color:#e2e2e2;
-        padding:0.5rem;
+        padding:0.35rem;
         cursor:pointer;
+        text-transform:uppercase;
     }
+    .options input[type="radio"]:hover+label,
     .options input[type="radio"]:checked+label {
         background-color: #00A43A;
         color:white;
-        border:3px solid white;
-    }
-    .options input[type="radio"]:hover+label {
-        border:3px solid #00A43A;
+        border:1px solid white;
     }
     .options input[type="radio"]{
         display:none;
@@ -39,18 +38,30 @@ Road to Navgurukul
         margin-bottom:1rem;
         padding:0.5rem;
     }
+    #time_remaining{
+        padding:1.6rem;
+    }
+    .red{
+        color:red;
+    }
+    .b{
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {  
+      50% { opacity: 0; }
+    }
 </style>
 {% endblock %}
 
 {% block header %}
 <div class="row">
-    <div class="col-sm-4 time"></div>
+    <div class="col-sm-12 col-xs-12 col-md-6" id="time_remaining"></div>
 </div>
 {% endblock %}
 
 
 {% block main %}
-    <div class="row"><form class="col-xs-12" method="post" action="end">
+    <form class="row" method="post" action="end">
         {% for question in questions %}
         {% set en_question_text = question["en_question_text"] %}
         {% set hi_question_text = question["hi_question_text"] %}
@@ -58,9 +69,9 @@ Road to Navgurukul
         {% set question_type    = question["question_type"] %}
         
         {% set q_no = questions.index(question)+1 %}
-        <div class="row hide hide-all" id="question_{{q_no}}">
+        <div class="col-xs-12 hide hide-all" id="question_{{q_no}}">
             <h2 class="question col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
-            <h2 class="question question-small col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
+            <h2 class="question question-small col-xs-12 col-sm-12">{{hi_question_text | safe}}</h2>
             <div class="col-xs-12 col-sm-12 options">
                 {% if question_type=="MCQ" %}
                 <ol class="row">
@@ -73,9 +84,7 @@ Road to Navgurukul
                     {% endfor %}
                 </ol>
                 {% elif question_type=="short_answer" %}
-                <div class="row">
-                    <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="col-xs-10 col-sm-10 col-md-4 offset-xs-2 offset-sm-2 offset-md-2 border border-info">
-                </div> 
+                <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
                 {% endif %}
             </div>
         </div>
@@ -86,16 +95,15 @@ Road to Navgurukul
 </script>
     {% endfor %}
             <div class="col-xs-12 col-sm-12">
-                <button type="button" class="btn btn-lg btn-primary" id="next_btn">
+                <button type="button" class="btn btn-md btn-primary" id="next_btn">
                     Next Question / अगला प्रश्न
                     <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                 </button>
                 <button type="submit" class="hide btn btn-lg btn-primary" id="submit_btn">
                     Submit Test / अगला प्रश्न
-                    <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                 </button>
             </div>
-    </form></div>
+    </form>
 {% endblock %}
 
 {% block footer %}
@@ -108,6 +116,7 @@ Road to Navgurukul
 <script>
     $(function(){
         present_question = 1;
+        time_remaining = {{time_remaining}};
         $("#question_1").removeClass("hide");
         $("#next_btn").click(function(){
             present_question += 1;
@@ -119,7 +128,24 @@ Road to Navgurukul
                     $("#next_btn").addClass("hide");
                 }
             }
-        })
-    })
+        });
+        setInterval(function(){
+            time_remaining -= 1;
+            minutes = Math.floor(time_remaining/60);
+            seconds = time_remaining%60;
+            if(minutes<5){
+                $("#time_remaining").html("<b class='b red'>Time Remaining: "+minutes+" minutes "+seconds+" seconds</b>");
+            }
+            else{
+                $("#time_remaining").html("Time Remaining: " + minutes + " minutes "+ seconds + " seconds");
+            }
+            if(time_remaining==3){
+                alert("Time Over Submitting Your Test Now.");
+            }
+            if(time_remaining<=0){
+                $("form").submit();
+            }
+        }, 1000); 
+    });
 </script>
 {% endblock %}
