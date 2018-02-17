@@ -13,19 +13,29 @@ class QuestionType(Enum):
     view         = 3
 
 class Boolean(Enum):
-    yes = 1
-    no  = 0
+    yes = "Yes"
+    no  = "No"
 
 class Gender(Enum):
-    male   = 1
-    female = 2
-    others = 3
+    male   = "Male"
+    female = "Female"
+    others = "Others"
 
 class Caste(Enum):
-    SC = 1
-    ST = 2
-    OBC = 3
-    General = 4
+    SC = "(SC) Scheduled Caste"
+    ST = "(ST) Scheduled Tribe"
+    OBC = "(OBC) Other Backward Classes"
+    General = "General"
+
+class CollegeType(Enum):
+    Normal = "Normal"
+    Distant = "Distant Education"
+
+class Stream_11_12(Enum):
+    medical           = "Medical"
+    non_medical       = "Non Medical"
+    commerce_maths    = "Commerce (With Maths)"
+    commerce_no_maths = "Commerce (Without Maths)"
 
 class Enrolment(db.Model):
     __tablename__  = "enrolment"
@@ -70,19 +80,39 @@ class Question(db.Model):
         return '<Question: %s>' %(self.en_question_text) 
 
 class Student(db.Model):
-    __tablename__      = "student"
-    id                 = db.Column(db.Integer, primary_key=True)
-    name               = db.Column(db.String(64), nullable=False)
-    phone_number       = db.Column(db.String(10), nullable=False)
-    dob                = db.Column(db.Date, nullable=False)
-    gender             = db.Column(db.Enum(Gender), nullable=False)
-    city               = db.Column(db.String(64), nullable=False)
-    state              = db.Column(db.String(64), nullable=False)
-    caste_tribe        = db.Column(db.Enum(Caste), nullable=False)
+    __tablename__   = "student"
+    id              = db.Column(db.Integer, primary_key=True)
+    potential_name  = db.Column(db.String(64), nullable=False)
+    student_mobile  = db.Column(db.String(10), nullable=False)
+    dob             = db.Column(db.Date, nullable=False)
+    gender          = db.Column(db.Enum(Gender), nullable=False)
+    city            = db.Column(db.String(64), nullable=False)
+    state           = db.Column(db.String(64), nullable=False)
+    caste_tribe     = db.Column(db.Enum(Caste), nullable=False)
 
-    owns_android       = db.Column(db.Enum(Boolean), nullable=False)
-    created_on         = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
-    enrolment          = db.relationship("Enrolment", backref=db.backref("s_enrolment", uselist=False))
-    test_data_id       = db.Column(db.Integer, db.ForeignKey("test_data.id"))
-    test_data          = db.relationship("TestData", backref=db.backref("test_data", uselist=False))
+    owns_android            = db.Column(db.Enum(Boolean), nullable=False)
+    owns_computer           = db.Column(db.Enum(Boolean), nullable=False)
+    is_works                = db.Column(db.Enum(Boolean), nullable=False)
+    works_where             = db.Column(db.String(64), nullable=False)
+    num_fam_members         = db.Column(db.Integer, nullable=False)
+    num_earning_fam_members = db.Column(db.Integer, nullable=False)
+    monthly_fam_income      = db.Column(db.Integer, nullable=False)
+    father_prof             = db.Column(db.String(64), nullable=False)
+    mother_prof             = db.Column(db.String(64), nullable=False)
+
+    monthly_fam_income  = db.Column(db.Integer, nullable=False)
+    last_class_passed   = db.Column(db.Integer, nullable=False)
+    is_10_pass          = db.Column(db.Enum(Boolean), nullable=False)
+    percentage_10       = db.Column(db.Integer, nullable=False)
+    is_12_pass          = db.Column(db.Enum(Boolean), nullable=False)
+    percentage_12       = db.Column(db.Integer, nullable=False)
+    stream_11_12        = db.Column(db.Enum(Stream_11_12), nullable=False)
+    is_college_enrolled = db.Column(db.Enum(Boolean), nullable=False)
+    college_which       = db.Column(db.String(256), nullable=False)
+    college_type        = db.Column(db.Enum(CollegeType), nullable=False)
+
+    created_on   = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    enrolment_id = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
+    enrolment    = db.relationship("Enrolment", backref=db.backref("s_enrolment", uselist=False))
+    test_data_id = db.Column(db.Integer, db.ForeignKey("test_data.id"))
+    test_data    = db.relationship("TestData", backref=db.backref("test_data", uselist=False))
