@@ -48,18 +48,18 @@ Road to Navgurukul
                     <div class="col-sm-12 col-xs-12 hide-all" id="block_1">
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Full Name</div>
-                            <input type="text" name="name" placeholder="Your Name"
+                            <input type="text" name="potential_name" placeholder="Your Name" required
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Mobile Number</div>
-                            <input type="number" name="mobile_number" placeholder="Your Mobile Number"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                            <input type="number" name="student_mobile" placeholder="Your Mobile Number"
+                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Date of Birth</div>
                             <input type="date" name="dob" placeholder="Your Date of Birth"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Gender/ लिंग</div>
@@ -73,7 +73,7 @@ Road to Navgurukul
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your City</div>
-                            <input type="text" name="city" placeholder="Your City"
+                            <input type="text" name="city" placeholder="Your City" required
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
@@ -88,8 +88,8 @@ Road to Navgurukul
                                 required>
                                 <option value="SC">(SC) Scheduled Caste</option>
                                 <option value="ST">(ST) Scheduled Tribe</option>
-                                <option value="OBC">(OBC) Other Backward Caste</option>
-                                <option value="general">General</option>
+                                <option value="OBC">(OBC) Other Backward Classes</option>
+                                <option value="General">General</option>
                             </select>
                         </div>
                         <div class="row m-row">
@@ -101,7 +101,7 @@ Road to Navgurukul
                     <div class="col-sm-12 col-xs-12 hide hide-all" id="block_2">
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Do you own a Mobile Phone?</div>
-                            <select name="owns_phone"
+                            <select name="owns_android"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
                                 required>
                                 <option value="yes">Yes</option>
@@ -119,7 +119,7 @@ Road to Navgurukul
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Works?</div>
-                            <select name="owns_computer"
+                            <select name="is_works"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
                                 required>
                                 <option value="yes">Yes</option>
@@ -128,37 +128,37 @@ Road to Navgurukul
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Where do you work?</div>
-                            <input type="number" name="num_earning_fam_members" 
+                            <input type="number" name="works_where" required
                                 placeholder="Number of Earning Family Members"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Number of Family Members</div>
-                            <input type="number" name="num_fam_members" 
+                            <input type="number" name="num_fam_members" required
                                 placeholder="Number of Family Members"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Number of Earning Family Members</div>
-                            <input type="number" name="num_earning_fam_members" 
+                            <input type="number" name="num_earning_fam_members" required
                                 placeholder="Number of Earning Family Members"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Monthly Family Income</div>
-                            <input type="number" name="monthly_fam_income" 
+                            <input type="number" name="monthly_fam_income" required
                                 placeholder="Monthly Family Income"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Father's Profession</div>
-                            <input type="text" name="father_prof" 
+                            <input type="text" name="father_prof" required
                                 placeholder="Father's Profession"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Mother's Profession</div>
-                            <input type="text" name="mother_prof" 
+                            <input type="text" name="mother_prof" required
                                 placeholder="Mother's Profession"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
@@ -176,7 +176,7 @@ Road to Navgurukul
                     <div class="col-sm-12 col-xs-12 hide hide-all" id="block_3">
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Last Class Passed</div>
-                            <input type="number" name="last_class_passed" 
+                            <input type="number" name="last_class_passed" required
                                 placeholder="Last Class Passed"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
@@ -192,7 +192,7 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Percentage in 10th</div>
                             <input type="number" name="percentage_10" 
-                                placeholder="Percentage in 10th"
+                                placeholder="Percentage in 10th" required
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
@@ -207,7 +207,7 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Percentage in 12th</div>
                             <input type="number" name="percentage_12" 
-                                placeholder="Percentage in 12th"
+                                placeholder="Percentage in 12th" required
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
@@ -215,10 +215,10 @@ Road to Navgurukul
                             <select name="stream_11_12"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
                                 required>
-                                <option value="Medical">Medical</option>
-                                <option value="Non Medical">Non Medical</option>
-                                <option value="Commerce (With Maths)">Commerce (With Maths)</option>
-                                <option value="Commerce (Without Maths)">Commerce (Without Maths)</option>
+                                <option value="medical">Medical</option>
+                                <option value="mon-medical">Non Medical</option>
+                                <option value="commerce_maths">Commerce (With Maths)</option>
+                                <option value="commerce_no_maths)">Commerce (Without Maths)</option>
                             </select>
                         </div>
                         <div class="row m-row">
@@ -233,7 +233,7 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">College Name</div>
                             <input type="text" name="college_which" 
-                                placeholder="Your College's Name"
+                                placeholder="Your College's Name" required
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
@@ -242,7 +242,7 @@ Road to Navgurukul
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
                                 required>
                                 <option value="Normal">Normal</option>
-                                <option value="Distance Education">Distance Education</option>
+                                <option value="Distant">Distance Education</option>
                             </select>
                         </div>
                         <div class="row m-row">

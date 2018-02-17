@@ -1,8 +1,11 @@
 from app.models import Options, Question, TestData, Enrolment, Student
-from app.models import Difficulty, QuestionType, Boolean, Gender
+from app.models import Difficulty, QuestionType, Boolean, Gender, Stream_11_12, CollegeType, Caste
 from app import db
 import random
 import exam_config
+from datetime import datetime
+from app import crm_api
+import enum
 
 config = exam_config.config["question_config"]
 
@@ -111,13 +114,17 @@ def save_test_result_and_analytics(data_dump, other_details):
     #create_dump_zip(data_dump, other_details)
 
 def can_add_student(enrolment_key, student_data):
-    #try:
-        student_details = {
-                            "name": student_data.get("name"),
-                            "gender": getattr(Gender, student_data.get("gender")),
-                            "owns_android": getattr(Boolean, student_data.get("owns_phone"))
-        }
+    try:
+        non_enum_fields = ("works_where","num_fam_members","num_earning_fam_members","monthly_fam_income","father_prof","mother_prof","monthly_fam_income","last_class_passed","percentage_10","percentage_12","college_which","potential_name","student_mobile","dob","city","state")
 
+        enum_fields = ("owns_android","owns_computer","is_works","is_10_pass","is_12_pass","stream_11_12","is_college_enrolled","college_type","gender","caste_tribe")
+
+        enums = (Boolean, Boolean, Boolean, Boolean, Boolean, Stream_11_12, Boolean, CollegeType, Gender, Caste)
+
+        student_details = {key: student_data.get(key) for key in non_enum_fields}
+        student_details.update({enum_fields[index]: getattr(enums[index], student_data.get(enum_fields[index])) for index in range(len(enums))})
+
+        student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
         student   = Student(**student_details)
@@ -125,9 +132,27 @@ def can_add_student(enrolment_key, student_data):
         student.test_data = test_data
         db.session.add(student)
         db.session.commit()
-        return True
-    #except Exception as e:
-    #    #log e
-    #    return False
-    #else:
-    #    return True
+        return student_details
+    except Exception as e:
+        #log e
+        return False
+
+def get_stage_for_student():
+    return 'Lightbot Activity'
+
+def add_to_crm(student_details, other_details):
+    student_details = { k:student_details[k].value if isinstance(student_details[k], enum.Enum) else student_details[k] for k in student_details}
+    all_student_details = {
+        'stage': get_stage_for_student(),
+        'source': 'Helpline',
+        'student_or_partner': 'Student',
+            
+        'results_url': "admissions.navgurukul.org/view-result/%s" %other_details.get("enrolment_key"),
+        'test_version': 'New Version XYZ',
+        'test_score': other_details.get("test_score"),
+    }
+    all_student_details.update(student_details)
+    import pdb; pdb.set_trace()
+    potential_id = crm_api.create_potential(all_student_details)
+    if potential_id:
+        crm_api.create_task_for_potential(potential_id)
