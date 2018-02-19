@@ -1,3 +1,0 @@
-student states implementation
-data validations
-data-zipping
