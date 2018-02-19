@@ -28,6 +28,9 @@ Road to Navgurukul
     h2{
         font-size:1.5rem;
     }
+    .hide{
+        display:none;
+    }
 </style>
 {% endblock %}
 
@@ -39,48 +42,240 @@ Road to Navgurukul
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
             <div class="row border border-warning rounded form-container">
-                <h2 class="question col-xs-12 col-sm-12">Enter Details</h2>
+                <h2 class="question col-xs-12 col-sm-12">Enter Your Details</h2>
                 <div class="col-xs-12 col-sm-12">
-                <form class="row" method="post"><div class="col-sm-12 col-xs-12">
-                    <div class="row m-row">
-                        <div class="col-xs-12 col-sm-6">Your Full Name</div>
-                        <input type="text" name="name" placeholder="Your Name"
-                            class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                <form class="row" method="post">
+                    <div class="col-sm-12 col-xs-12 hide-all" id="block_1">
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Your Full Name</div>
+                            <input type="text" name="potential_name" placeholder="Your Name" required
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Your Mobile Number</div>
+                            <input type="number" name="student_mobile" placeholder="Your Mobile Number"
+                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Date of Birth</div>
+                            <input type="date" name="dob" placeholder="Your Date of Birth"
+                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Gender/ लिंग</div>
+                            <select name="gender"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Your City</div>
+                            <input type="text" name="city" placeholder="Your City" required
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Your State</div>
+                            <input type="text" name="state" placeholder="Your State"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Your Caste and Tribe</div>
+                            <select name="caste_tribe"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="SC">(SC) Scheduled Caste</option>
+                                <option value="ST">(ST) Scheduled Tribe</option>
+                                <option value="OBC">(OBC) Other Backward Classes</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <button type="button" class="btn btn-lg next-btn btn-warning col-xs-12 col-sm-12">
+                                Continue My Application
+                            </button>
+                        </div>
                     </div>
-                    <div class="row m-row">
-                        <div class="col-xs-12 col-sm-6">Gender/ लिंग</div>
-                        <select name="gender"
-                            class="col-xs-12 col-sm-6 border border-warning rounded"
-                            required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                    <div class="col-sm-12 col-xs-12 hide hide-all" id="block_2">
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Do you own a Mobile Phone?</div>
+                            <select name="owns_android"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Do you own a Computer/Laptop?</div>
+                            <select name="owns_computer"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Works?</div>
+                            <select name="is_works"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Where do you work?</div>
+                            <input type="number" name="works_where" required
+                                placeholder="Number of Earning Family Members"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Number of Family Members</div>
+                            <input type="number" name="num_fam_members" required
+                                placeholder="Number of Family Members"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Number of Earning Family Members</div>
+                            <input type="number" name="num_earning_fam_members" required
+                                placeholder="Number of Earning Family Members"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Monthly Family Income</div>
+                            <input type="number" name="monthly_fam_income" required
+                                placeholder="Monthly Family Income"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Father's Profession</div>
+                            <input type="text" name="father_prof" required
+                                placeholder="Father's Profession"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Mother's Profession</div>
+                            <input type="text" name="mother_prof" required
+                                placeholder="Mother's Profession"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <button type="button" class="btn btn-lg btn-warning col-xs-12 
+                                                        prev-btn col-sm-12 col-md-6">
+                                Get Back in Application
+                            </button>
+                            <button  type="button" class="btn btn-lg btn-warning col-xs-12 next-btn
+                                col-sm-12 col-md-5 offset-md-1">
+                                Continue Application
+                            </button>
+                        </div>
                     </div>
-                    <div class="row m-row">
-                        <div class="col-xs-12 col-sm-6">Do you own a Mobile Phone?</div>
-                        <select name="owns_mobile"
-                            class="col-xs-12 col-sm-6 border border-warning rounded"
-                            required>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
+                    <div class="col-sm-12 col-xs-12 hide hide-all" id="block_3">
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Last Class Passed</div>
+                            <input type="number" name="last_class_passed" required
+                                placeholder="Last Class Passed"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Are you 10th Pass?</div>
+                            <select name="is_10_pass"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Percentage in 10th</div>
+                            <input type="number" name="percentage_10" 
+                                placeholder="Percentage in 10th" required
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Are you 12th Pass?</div>
+                            <select name="is_12_pass"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Percentage in 12th</div>
+                            <input type="number" name="percentage_12" 
+                                placeholder="Percentage in 12th" required
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Stream in 11th/12th</div>
+                            <select name="stream_11_12"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="medical">Medical</option>
+                                <option value="mon-medical">Non Medical</option>
+                                <option value="commerce_maths">Commerce (With Maths)</option>
+                                <option value="commerce_no_maths)">Commerce (Without Maths)</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Are you enrolled in College?</div>
+                            <select name="is_college_enrolled"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">College Name</div>
+                            <input type="text" name="college_which" 
+                                placeholder="Your College's Name" required
+                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">College Type</div>
+                            <select name="college_type"
+                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                required>
+                                <option value="Normal">Normal</option>
+                                <option value="Distant">Distance Education</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <button type="button" class="btn btn-lg btn-warning col-xs-12 
+                                                        prev-btn col-sm-12 col-md-6">
+                                Get Back in Application
+                            </button>
+                            <button class="btn btn-lg btn-danger col-xs-12 
+                                col-sm-12 col-md-5 offset-md-1" type="submit">
+                                Submit Application
+                            </button>
+                        </div>
                     </div>
-                    <div class="row m-row">
-                        <textarea name="address"
-                            class="col-xs-12 col-sm-12 border border-warning rounded"
-                            required placeholder="Address"></textarea>
-                    </div>
-                    <div class="row m-row">
-                        <button type="submit" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-                            Submit My Application
-                        </button>
-                    </div>
-                </div></form>
+                </form>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block footer %}
+<script>
+$(function(){
+    present_block = 1
+     $(".next-btn").click(function(){
+                present_block += 1;
+                $(".hide-all").addClass("hide");
+                $("#block_"+ present_block).removeClass("hide");
+            });
+     $(".prev-btn").click(function(){
+                present_block -= 1;
+                $(".hide-all").addClass("hide");
+                $("#block_"+ present_block).removeClass("hide");
+            });
+});
+</script>
 {% endblock %}

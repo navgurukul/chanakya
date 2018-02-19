@@ -1,44 +1,10 @@
 import os
 import requests, jinja2
 
-student_details = {
-    'stage': 'Lightbot Activity',
-    'source': 'Helpline',
-
-    'potential_name': 'Dr. Manhatan',
-    'student_or_partner': 'Student',
-    'student_mobile': '8130378953',
-    'dob': '1995-05-02',
-    'gender': 'Male',
-    'caste_tribe': 'SC (Scheduled Caste)',
-    'city': 'Panchkula',
-    'state': 'Haryana',
-
-    'owns_android': 'Yes',
-    'owns_computer': 'Yes',
-    'is_works': 'Yes',
-    'works_where': 'NavGurukul',
-    'num_fam_members': '4',
-    'num_earning_fam_members': '2',
-    'monthly_fam_income': '20000',
-    'father_prof': 'Housekeeper',
-    'mother_prof': 'Housemaid',
-
-    'last_class_passed': 'Class 10th',
-    'is_10_pass': 'Yes',
-    'percentage_10': '10',
-    'is_12_pass': 'Yes',
-    'percentage_12': '10',
-    'stream_11_12': 'Non Medical',
-    'is_college_enrolled': 'Yes',
-    'college_which': 'Delhi Uni',
-    'college_type': 'Distance Education',
-        
-    'results_url': 'http://admissions.navgurukul.org/result/1234',    
-    'test_version': 'New Version XYZ',
-    'test_score': '100',
-}
-
+def get_abs_path(path):
+    abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
+    print(abs_path)
+    return abs_path
 
 def render(tpl_path, context):
     path, filename = os.path.split(tpl_path)
@@ -51,7 +17,7 @@ def create_potential(student_details):
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
-        "xmlData": render("../app/templates/zoho/new_potential_student.xml", student_details)
+        "xmlData": render(get_abs_path("templates/zoho/new_potential_student.xml"), student_details)
     }
     url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
     response = requests.request("GET", url, params=querystring)
@@ -87,13 +53,9 @@ def create_task_for_potential(potential_id):
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
-        "xmlData": render("../app/templates/zoho/new_task.xml", task_details)
+        "xmlData": render(get_abs_path("templates/zoho/new_task.xml"), task_details)
     }
     url = "https://crm.zoho.com/crm/private/json/Tasks/insertRecords"
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         pass #log_error and email
-
-if __name__=='__main__':
-    potential_id = create_potential(student_details)
-    create_task_for_potential(potential_id)
