@@ -75,12 +75,15 @@ def end():
         }
         data_dump = calculate_marks_and_dump_data(questions, request.form)
         repos.save_test_result_and_analytics(data_dump, other_details)
+        session["test_score"] = data_dump.get("total_marks")
         session["page"] = "end"
     elif session.get("page") == "end":
         if request.method == "GET":
             return render_template("ask_details.html")
         elif request.method == "POST":
-            if repos.can_add_student(session.get("enrolment_key"), request.form):
+            student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
+            if student_details:
+                repos.add_to_crm(student_details, session)
                 session.clear()
                 return render_template("thanks.html")
             else:
