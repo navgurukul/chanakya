@@ -17,7 +17,8 @@ def go_to_page():
 
 @app.before_request
 def before_request():
-    if request.endpoint not in ("create_enrolment_key", "create_question"):
+    print(request.endpoint)
+    if request.endpoint not in ("create_enrolment_key", "create_question", "on_crm_potential_stage_edit"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
@@ -159,3 +160,45 @@ def exotel_enroll_for_test():
     exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
 
     return "SUCCESS", 200
+
+
+####################
+## Zoho Web Hooks ##
+####################
+
+@app.route("/zoho_crm/on_potential_stage_change")
+def on_crm_potential_stage_edit():
+    
+    # get the student details
+    enrolment_key = request.args.get("enrolment_key")
+    student_mobile = request.args.get("mobile")
+    stage = request.args.get("stage")
+    print(student_mobile)
+    print("hello")
+    print(enrolment_key, student_mobile, stage)
+
+    # figure out the next actions that need to be taken
+    stage_actions = app.config['POTENTIAL_STUDENT_STAGE_NOTIFS']
+    actions = stage_actions.get(stage)
+    print(actions)
+    if actions is None:
+        return "No action needs to be taken", 200
+    
+    # trigger the sms
+    if actions.get("sms"):
+        #TODO: Implement the real message when we buy exotel.
+        message = app.config.get("TEST_ENROLL_MSG")
+        test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
+        exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
+
+    # trigger the outbound call
+    if actions.get("exotel_obd_id"):
+        #TODO: Need to integrate this when we add the outbound flows in exotel.
+        pass
+
+    # trigger an email
+    if actions.get("referral_email_template"):
+        #TODO: Need to integrate this when we add this support in the platform.
+        pass
+
+    return "All the required actions are already taken.", 200
