@@ -17,7 +17,6 @@ def go_to_page():
 
 @app.before_request
 def before_request():
-    print(request.endpoint)
     if request.endpoint not in ("create_enrolment_key", "create_question", "on_crm_potential_stage_edit"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
