@@ -1,5 +1,5 @@
 # Database
-SQLALCHEMY_DATABASE_URI = 'mysql://xxx:xxx!@localhost/chanakya'
+SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123!@35.189.19.99/chanakya'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Flask level config
