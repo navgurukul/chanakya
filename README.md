@@ -3,16 +3,18 @@ Testing Platform of NavGurukul
 
 ## Setup
 
-- python3 -m venv venv
-- pip install -r requirements.txt
+Run the following steps to setup the project.
 
-- export FLASK_APP=/Users/lawliet/chanakya/chanakya.py
-- export FLASK_DEBUG=1
+```sh
+python3 -m venv venv
+pip install -r requirements.txt
+export FLASK_APP=/Users/lawliet/chanakya/chanakya.py
+export FLASK_DEBUG=1
+flask run # this command runs th eapplication
+```
 
 flask db migrate
 flask db upgrade
-
-flask run
 
 ###change db details in config.py
 
