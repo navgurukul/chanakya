@@ -52,29 +52,30 @@ def can_start_test(enrolment_key):
     test_data = TestData.query.filter_by(enrolment_id=en_id).first()
     return True if test_data is None else False
 
-def get_global_q_set():
-    global config
-    difficulties = ("easy", "medium", "hard")
+def get_global_q_set(config):
+    '''
+    optimization possible, shouldn't be called again and again!
+    '''
     q_set = {}
-    for category in config:
+    for category in config['categories']:
         q_set[category] = {}
-        for difficulty in difficulties:
+        for difficulty in config['categories'][category]:
             q_set[category][difficulty] = [q.id for q in Question.query.filter_by(category=category).filter_by(difficulty=difficulty).all()]
     return q_set
 
 def get_list_of_q_ids(global_q_set, category, difficulty, num):
+    #move shuffle logic to get_global_q_set later
     random.shuffle(global_q_set[category][difficulty])
     return global_q_set[category][difficulty][:num]
 
-def get_q_set(global_q_set):
-    global config
+def get_q_set(global_q_set, config):
     q_set = []
     for category in config:
         for difficulty in config[category]:
             q_set += get_list_of_q_ids(global_q_set, category, difficulty, config[category][difficulty])
     return q_set
  
-def get_all_questions(q_set):
+def get_questions_for_q_set(q_set):
     questions = []
     for q_id in q_set:
         question_obj = Question.query.get(q_id)
@@ -97,12 +98,26 @@ def get_all_questions(q_set):
         questions.append(question)
     return questions
 
+def get_all_questions():
+    question_details = {}
+    for question_set in config:
+        question_details[question_set] = {}
+        question_details[question_set]["info_before"] = config[question_set]["info_before"]
+        question_details[question_set]["info_after"]  = config[question_set]["info_after"]
+        question_details[question_set]["marks_config"]  = config[question_set]["questions"]["marks_config"]
+        question_details[question_set]["time_per_question"]  = config[question_set]["questions"]["time_per_question"]
+        global_q_set = get_global_q_set(config[question_set]["questions"])
+        q_set        = get_q_set(global_q_set, config[question_set]['questions']['categories'])
+        question_details[question_set]["questions"] = get_questions_for_q_set(q_set)
+    return question_details
+
 def add_test_data_to_db(data_dump, other_details):
     enrolment_key     = other_details['enrolment_key']
     test_data_details = dict(       started_on          = other_details['start_time'],
                                     submitted_on        = other_details['submit_time'],
                                     received_marks      = data_dump['total_marks'],
-                                    max_possible_marks  = data_dump['max_possible_marks'])
+                                    max_possible_marks  = data_dump['max_possible_marks'],
+                                    set_name            = other_details['set_name'])
     en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
     test_data = TestData(**test_data_details)
     test_data.enrolment = en
@@ -152,7 +167,6 @@ def add_to_crm(student_details, other_details):
         'test_score': other_details.get("test_score"),
     }
     all_student_details.update(student_details)
-    import pdb; pdb.set_trace()
     potential_id = crm_api.create_potential(all_student_details)
     if potential_id:
         crm_api.create_task_for_potential(potential_id)
