@@ -6,10 +6,8 @@ from datetime import datetime
 from app import repos
 from app.helper_methods import ( get_random_string,
                                  calculate_marks_and_dump_data,
-                                 get_time_remaining
+                                 get_time_remaining, get_question_set
                                 )
-
-global_q_set = None
 
 ################### VIEWS #######################
 def go_to_page():
@@ -50,33 +48,37 @@ def before_test():
 def test():
     if session.get("page") == "test":
         if not session.get("questions"):
-            global global_q_set
-            if not global_q_set:
-                global_q_set = repos.get_global_q_set()
-            q_set = repos.get_q_set(global_q_set)
-            questions = repos.get_all_questions(q_set)
+            questions = repos.get_all_questions()
             session["questions"] = questions
-            session["test_start_time"] = datetime.utcnow()
-        time_remaining = get_time_remaining(session.get("test_start_time"))
+            session["test_start_time"]  = datetime.utcnow()
+            session['total_time_shown'] = 0
+            session["test_score"]       = 0
+        time_remaining = get_time_remaining(session.get("test_start_time")) - session['total_time_shown']
         if time_remaining > 0:
-            return render_template("test.html", questions=session.get("questions"), time_remaining=time_remaining)
+            session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(session.get('questions'), time_remaining)
+            session['last_time_shown']  = time_to_show 
+            session['question_set']     = question_set
+            return render_template("test.html", question_set=question_set, time_remaining=time_to_show)
         else:
-            return "timer has expired"
+            return "timer has expired, call Navgurukul for more details."
     return go_to_page()
 
 @app.route("/end", methods=["GET", "POST"])
 def end():
     if session.get("page") == "test" and request.method == "POST":
-        questions = session.get("questions")
+        question_set = session.get("question_set")
         other_details = {
             "start_time":session.get("test_start_time"),
             "submit_time":datetime.utcnow(),
-            "enrolment_key":session.get("enrolment_key")
+            "enrolment_key":session.get("enrolment_key"),
+            "set_name": session.get("set_name")
         }
-        data_dump = calculate_marks_and_dump_data(questions, request.form)
+        session['total_time_shown'] += session['last_time_shown']
+        data_dump = calculate_marks_and_dump_data(question_set, request.form)
         repos.save_test_result_and_analytics(data_dump, other_details)
-        session["test_score"] = data_dump.get("total_marks")
-        session["page"] = "end"
+        session["test_score"] += data_dump.get("total_marks")
+        if session.get('is_last_set'):
+            session["page"] = "end"
     elif session.get("page") == "end":
         if request.method == "GET":
             return render_template("ask_details.html")
@@ -118,7 +120,6 @@ def create_question():
         is_question_created, error = repos.create_question(question_details)
         if is_question_created:
             flash("question is created, successfully")
-            print(datetime.now()-t1)
             return redirect(url_for("create_question"))
         else:
             flash("question not created: %s" %error)
