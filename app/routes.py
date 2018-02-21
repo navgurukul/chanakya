@@ -17,7 +17,7 @@ def go_to_page():
 
 @app.before_request
 def before_request():
-    if request.endpoint not in ("create_enrolment_key", "create_question", "on_crm_potential_stage_edit"):
+    if request.endpoint not in ("create_enrolment_key", "create_question", "exotel_enroll_for_test"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
