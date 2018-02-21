@@ -8,8 +8,13 @@ DEBUG = True
 
 # Exotel Related Config
 TEST_ENROLL_MSG = """
-Thanks for enrolling for the admission test.\
-Your enrolment number is {enrolment_num}. You can answer the test on http://test.navgurukul.org/?enrollment_key={enrolment_num}"
+NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
+
+Iss test ko dene ke liye aap jald hi, yeh website - {test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
+
+NavGurukul ke baarein mei aur jaanne ke liye, youtube par yeh video - http://bit.ly/navgurukul-intro dekhein.
+
+Test ke liye best of luck :) Test ke baad hum aap ko call kar kar, aage ke steps batayenge.
 """
 EXOTEL_AUTH  = {
     'username': 'navgurukul',
