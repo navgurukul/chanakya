@@ -157,7 +157,7 @@ def exotel_enroll_for_test():
     message = app.config.get("TEST_ENROLL_MSG").format(test_url=enrolment_key)
     # test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
     # print(message)
-    exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
+    exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, message)
 
     return "SUCCESS", 200
 
