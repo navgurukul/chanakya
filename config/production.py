@@ -5,7 +5,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 # Flask level config
 SECRET_KEY = "abcdef212131"
 DEBUG = True
-APPLICATION_ROOT = "testing"
+APPLICATION_ROOT = "join_ng"
 SERVER_NAME = "http://35.185.189.61/"
 
 # Exotel Related Config
@@ -29,7 +29,7 @@ CRM_AUTH_TOKEN = "dff429d03714ecd774b7706e358e907b"
 POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Interested & Called": None,
     "Entrance Test": None,
-    "Test Scheduled": {
+    "Lightbot Activity": {
         "sms": "Some SMS text",
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template"
