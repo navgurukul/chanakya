@@ -54,6 +54,7 @@ class TestData(db.Model):
     submitted_on       = db.Column(db.DateTime, nullable=False)
     received_marks     = db.Column(db.Integer, nullable=False)
     max_possible_marks = db.Column(db.Integer, nullable=False)
+    set_name           = db.Column(db.String(32), nullable=False)
     enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
     enrolment          = db.relationship("Enrolment", backref=db.backref("enrolment", uselist=False))
 

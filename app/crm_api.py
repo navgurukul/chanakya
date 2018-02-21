@@ -3,7 +3,6 @@ import requests, jinja2
 
 def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
-    print(abs_path)
     return abs_path
 
 def render(tpl_path, context):

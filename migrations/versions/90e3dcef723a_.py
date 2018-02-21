@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 34aa1e0aac8a
+Revision ID: 90e3dcef723a
 Revises: 
-Create Date: 2018-02-16 21:21:46.725570
+Create Date: 2018-02-21 14:51:50.284330
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '34aa1e0aac8a'
+revision = '90e3dcef723a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -52,20 +52,38 @@ def upgrade():
     sa.Column('submitted_on', sa.DateTime(), nullable=False),
     sa.Column('received_marks', sa.Integer(), nullable=False),
     sa.Column('max_possible_marks', sa.Integer(), nullable=False),
+    sa.Column('set_name', sa.String(length=32), nullable=False),
     sa.Column('enrolment_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['enrolment_id'], ['enrolment.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('student',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=64), nullable=False),
-    sa.Column('phone_number', sa.String(length=10), nullable=False),
+    sa.Column('potential_name', sa.String(length=64), nullable=False),
+    sa.Column('student_mobile', sa.String(length=10), nullable=False),
     sa.Column('dob', sa.Date(), nullable=False),
     sa.Column('gender', sa.Enum('male', 'female', 'others', name='gender'), nullable=False),
     sa.Column('city', sa.String(length=64), nullable=False),
     sa.Column('state', sa.String(length=64), nullable=False),
     sa.Column('caste_tribe', sa.Enum('SC', 'ST', 'OBC', 'General', name='caste'), nullable=False),
     sa.Column('owns_android', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('owns_computer', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('is_works', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('works_where', sa.String(length=64), nullable=False),
+    sa.Column('num_fam_members', sa.Integer(), nullable=False),
+    sa.Column('num_earning_fam_members', sa.Integer(), nullable=False),
+    sa.Column('father_prof', sa.String(length=64), nullable=False),
+    sa.Column('mother_prof', sa.String(length=64), nullable=False),
+    sa.Column('monthly_fam_income', sa.Integer(), nullable=False),
+    sa.Column('last_class_passed', sa.Integer(), nullable=False),
+    sa.Column('is_10_pass', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('percentage_10', sa.Integer(), nullable=False),
+    sa.Column('is_12_pass', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('percentage_12', sa.Integer(), nullable=False),
+    sa.Column('stream_11_12', sa.Enum('medical', 'non_medical', 'commerce_maths', 'commerce_no_maths', name='stream_11_12'), nullable=False),
+    sa.Column('is_college_enrolled', sa.Enum('yes', 'no', name='boolean'), nullable=False),
+    sa.Column('college_which', sa.String(length=256), nullable=False),
+    sa.Column('college_type', sa.Enum('Normal', 'Distant', name='collegetype'), nullable=False),
     sa.Column('created_on', sa.DateTime(), nullable=True),
     sa.Column('enrolment_id', sa.Integer(), nullable=True),
     sa.Column('test_data_id', sa.Integer(), nullable=True),
