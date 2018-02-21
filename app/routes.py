@@ -148,15 +148,15 @@ def exotel_enroll_for_test():
 
     # generate an enrolment number for the student
     enrolment_key =  get_random_string()
-    enrolment_key = repos.add_enrollment_key(enrolment_key, student_mobile)
+    enrolment_key = repos.add_enrolment_key(enrolment_key, student_mobile)
     if not enrolment_key:
         return "ERROR", 500
     
     # send an SMS with the enrolment number
     #TODO: Implement the real message when we buy exotel.
-    message = app.config.get("TEST_ENROLL_MSG").format(enrolment_num=enrolment_key)
-    test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
-    print(message)
+    message = app.config.get("TEST_ENROLL_MSG").format(test_url=enrolment_key)
+    # test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
+    # print(message)
     exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
 
     return "SUCCESS", 200
