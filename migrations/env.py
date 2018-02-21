@@ -34,8 +34,15 @@ def run_migrations_offline():
     and not an Engine, though an Engine is acceptable
     here as well.  By skipping the Engine creation
     we don't even need a DBAPI to be available.
+<<<<<<< HEAD
     Calls to context.execute() here emit the given string to the
     script output.
+=======
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+>>>>>>> remotes/origin/memory_test
     """
     url = config.get_main_option("sqlalchemy.url")
     context.configure(url=url)
@@ -46,8 +53,15 @@ def run_migrations_offline():
 
 def run_migrations_online():
     """Run migrations in 'online' mode.
+<<<<<<< HEAD
     In this scenario we need to create an Engine
     and associate a connection with the context.
+=======
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+>>>>>>> remotes/origin/memory_test
     """
 
     # this callback is used to prevent an auto-migration from being generated
@@ -79,4 +93,8 @@ def run_migrations_online():
 if context.is_offline_mode():
     run_migrations_offline()
 else:
+<<<<<<< HEAD
     run_migrations_online()
+=======
+    run_migrations_online()
+>>>>>>> remotes/origin/memory_test

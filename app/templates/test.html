@@ -55,45 +55,49 @@ Road to Navgurukul
 
 {% block header %}
 <div class="row">
-    <div class="col-sm-12 col-xs-12 col-md-6" id="time_remaining"></div>
+    <div class="b red col-sm-12 col-xs-12 col-md-6" id="time_to_show"></div>
+    <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div>
 </div>
 {% endblock %}
 
 
 {% block main %}
-    <form class="row" method="post" action="end">
+    <div class="row hide" id="info_before">
+        {{ question_set['info_before']['html'] | safe }}
+    </div>
+    <form class="row hide" method="post" action="end" id="questions">
+        {% set questions = question_set['questions'] %}
+        <script>
+            $(function(){
+                total_questions = {{questions | length}};
+            })
+        </script>
         {% for question in questions %}
-        {% set en_question_text = question["en_question_text"] %}
-        {% set hi_question_text = question["hi_question_text"] %}
-        {% set random_options   = question["random_options"] %}
-        {% set question_type    = question["question_type"] %}
-        
-        {% set q_no = questions.index(question)+1 %}
-        <div class="col-xs-12 hide hide-all" id="question_{{q_no}}">
-            <h2 class="question col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
-            <h2 class="question question-small col-xs-12 col-sm-12">{{hi_question_text | safe}}</h2>
-            <div class="col-xs-12 col-sm-12 options">
-                {% if question_type=="MCQ" %}
-                <ol class="row">
-                    {% for x in range(4) %}
-                        {% set _id = q_no|string + x|string %}
-                        <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                            <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
-                            <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
-                        </li>
-                    {% endfor %}
-                </ol>
-                {% elif question_type=="short_answer" %}
-                <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
-                {% endif %}
+            {% set en_question_text = question["en_question_text"] %}
+            {% set hi_question_text = question["hi_question_text"] %}
+            {% set random_options   = question["random_options"] %}
+            {% set question_type    = question["question_type"] %}
+            {% set q_no = questions.index(question)+1 %}
+            <div class="col-xs-12 hide hide-all" id="question_{{q_no}}">
+                <h2 class="question col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
+                <h2 class="question question-small col-xs-12 col-sm-12">{{hi_question_text | safe}}</h2>
+                <div class="col-xs-12 col-sm-12 options">
+                    {% if question_type=="MCQ" %}
+                    <ol class="row">
+                        {% for x in range(4) %}
+                            {% set _id = q_no|string + x|string %}
+                            <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
+                                <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
+                                <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                    {% elif question_type=="short_answer" %}
+                    <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
+                    {% endif %}
+                </div>
             </div>
-        </div>
-<script>
-    $(function(){
-        total_questions = {{q_no}};
-    })
-</script>
-    {% endfor %}
+        {% endfor %}
             <div class="col-xs-12 col-sm-12">
                 <button type="button" class="btn btn-md btn-primary" id="next_btn">
                     Next Question / अगला प्रश्न
@@ -104,17 +108,25 @@ Road to Navgurukul
                 </button>
             </div>
     </form>
+    <div class="row hide" id="info_after">
+        {{ question_set['info_after']['html'] | safe }}
+    </div>
 {% endblock %}
 
 {% block footer %}
+        {{question_set}}
 <style>
-    .hide{
+    .hide {
         display:none;
     }
-    .show
 </style>
 <script>
     $(function(){
+        last_recorded_time   = new Date().getTime()
+        time_before = {{question_set['info_before']['time_in_seconds'] }};
+        time_after =  {{question_set['info_after']['time_in_seconds'] }};
+        time_questions =  {{question_set['time_per_question'] }} * total_questions;
+
         present_question = 1;
         time_remaining = {{time_remaining}};
         $("#question_1").removeClass("hide");
@@ -130,17 +142,31 @@ Road to Navgurukul
             }
         });
         setInterval(function(){
-            time_remaining -= 1;
-            minutes = Math.floor(time_remaining/60);
-            seconds = time_remaining%60;
-            if(minutes<5){
-                $("#time_remaining").html("<b class='b red'>Time Remaining: "+minutes+" minutes "+seconds+" seconds</b>");
+            new_time   = new Date().getTime()
+            time_spent = (new_time - last_recorded_time)/1000;
+            last_recorded_time = new_time;
+            time_remaining -= time_spent;
+
+            if(time_remaining >= time_after+time_questions){
+                $("#info_before").removeClass("hide");
+                time_to_show = time_remaining - (time_after+time_questions);
+            }
+            else if(time_remaining <= time_after){
+                $("#questions").addClass("hide");
+                $("#info_after").removeClass("hide");
+                time_to_show = time_remaining;
             }
             else{
-                $("#time_remaining").html("Time Remaining: " + minutes + " minutes "+ seconds + " seconds");
+                $("#info_after").addClass("hide");
+                $("#questions").removeClass("hide");
+                time_to_show = time_remaining - time_after;
             }
+
+            minutes = Math.floor(time_to_show/60);
+            seconds = Math.round(time_to_show%60);
+            $("#time_to_show").html("Time Remaining: "+minutes+" minutes "+seconds+" seconds.");
             if(time_remaining==3){
-                alert("Time Over Submitting Your Test Now.");
+                $("#alert_text").html("<h2>Time Over Submitting Your Test Now.</h2>");
             }
             if(time_remaining<=0){
                 $("form").submit();
