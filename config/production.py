@@ -5,8 +5,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 # Flask level config
 SECRET_KEY = "abcdef212131"
 DEBUG = True
-APPLICATION_ROOT = "join_ng"
-SERVER_NAME = "http://35.185.189.61/"
+SERVER_NAME = "join.navgurukul.org"
 
 # Exotel Related Config
 TEST_ENROLL_MSG = """
