@@ -5,6 +5,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 # Flask level config
 SECRET_KEY = "abcdef212131"
 DEBUG = True
+APPLICATION_ROOT = "testing"
+SERVER_NAME = "http://35.185.189.61/"
 
 # Exotel Related Config
 TEST_ENROLL_MSG = """
