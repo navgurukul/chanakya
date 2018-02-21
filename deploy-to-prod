@@ -1,0 +1,4 @@
+gcloud compute ssh saral-app-1 --zone=asia-southeast1-a # ssh into the sever
+sudo su rishmunk
+cd /home/rishmunk/chanakya
+git pull
