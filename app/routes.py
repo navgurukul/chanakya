@@ -48,7 +48,7 @@ def before_test():
 def test():
     if session.get("page") == "test":
         if not session.get("questions"):
-            questions = repos.get_all_questions()
+            questions = repos.get_all_questions() #very slow
             session["questions"] = questions
             session["test_start_time"]  = datetime.utcnow()
             session['total_time_shown'] = 0
