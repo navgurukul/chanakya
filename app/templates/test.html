@@ -87,13 +87,13 @@ Road to Navgurukul
                         {% for x in range(4) %}
                             {% set _id = q_no|string + x|string %}
                             <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                                <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
+                                <input required type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
                                 <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
                             </li>
                         {% endfor %}
                     </ol>
                     {% elif question_type=="short_answer" %}
-                    <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
+                    <input type="text" required placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
                     {% endif %}
                 </div>
             </div>
@@ -156,7 +156,7 @@ Road to Navgurukul
                 time_to_show = time_remaining;
             }
             else{
-                $("#info_after").addClass("hide");
+                $("#info_before").addClass("hide");
                 $("#questions").removeClass("hide");
                 time_to_show = time_remaining - time_after;
             }
