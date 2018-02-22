@@ -15,7 +15,7 @@ def go_to_page():
 
 @app.before_request
 def before_request():
-    if request.endpoint not in ("create_enrolment_key", "create_question", "exotel_enroll_for_test"):
+    if request.endpoint not in ("create_question", "exotel_enroll_for_test"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
@@ -127,15 +127,6 @@ def create_question():
 
 ######## APIS can be configured as another microservice ?? ########
 ############ REST APIS ##############
-#TODO: @Shanu: Isko nikaal dena in case you don't need it. It is redundant after `exotel_enroll_for_test()`
-@app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
-def create_enrolment_key(phone_number):
-    enrolment_key =  get_random_string()
-    enrolment_key = repos.add_enrolment_key(enrolment_key, phone_number)
-    if enrolment_key:
-        return enrolment_key, 201
-    else:
-        return  "Unable to register", 400
 
 @app.route("/exotel_enroll_for_test")
 def exotel_enroll_for_test():
