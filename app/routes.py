@@ -9,8 +9,9 @@ from app.helper_methods import ( get_random_string,
                                  get_time_remaining, get_question_set
                                 )
 
+global_questions = False
 ################### VIEWS #######################
-def go_to_page():
+def go_to_page(code=None):
     return redirect(url_for(session.get('page')))
 
 @app.before_request
@@ -44,11 +45,15 @@ def before_test():
                 return "Unable to Start your Test, Contact Navgurukul", 400
     return go_to_page()
 
-@app.route('/test')
+@app.route('/test', methods=['GET', 'POST'])
 def test():
+    print("test was called")
     if session.get("page") == "test":
         if not session.get("questions"):
-            questions = repos.get_all_questions() #very slow
+            global global_questions
+            if not global_questions:
+                global_questions = repos.get_all_questions() #very slow
+            questions = global_questions
             session["questions"] = questions
             session["test_start_time"]  = datetime.utcnow()
             session['total_time_shown'] = 0
@@ -57,10 +62,12 @@ def test():
         if time_remaining > 0:
             session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(session.get('questions'), time_remaining)
             session['last_time_shown']  = time_to_show 
+            print(session['set_name'], time_to_show)
             session['question_set']     = question_set
             return render_template("test.html", question_set=question_set, time_remaining=time_to_show)
         else:
-            return "timer has expired, call Navgurukul for more details."
+            t = str(time_remaining)
+            return "timer has expired, call Navgurukul for more details.%s" %t
     return go_to_page()
 
 @app.route("/end", methods=["GET", "POST"])
@@ -77,12 +84,20 @@ def end():
         data_dump = calculate_marks_and_dump_data(question_set, request.form)
         repos.save_test_result_and_analytics(data_dump, other_details)
         session["test_score"] += data_dump.get("total_marks")
+        print(session['is_last_set'], session["page"])
         if session.get('is_last_set'):
-            session["page"] = "end"
-    elif session.get("page") == "end":
-        if request.method == "GET":
-            return render_template("ask_details.html")
-        elif request.method == "POST":
+            session["page"] = "ask"
+    return redirect(url_for('test'), code=303)
+
+@app.route("/ask", methods=['GET', 'POST'])
+def ask():
+    if session.get("page") == "ask":
+        return render_template("ask_details.html")
+    return go_to_page()
+
+@app.route("/send-details", methods=['GET', 'POST'])
+def send_details():
+    if session.get("page") == "ask" and request.method=="POST":
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
             if student_details:
                 repos.add_to_crm(student_details, session)
@@ -91,6 +106,8 @@ def end():
             else:
                 flash("Unable to Save Your Details, Contact Navgurukul.")
     return go_to_page()
+
+@app.route("/ask", methods=['GET', 'POST'])
 
 @app.route("/create-question", methods=["GET", "POST"])
 def create_question():
@@ -147,7 +164,6 @@ def exotel_enroll_for_test():
     #TODO: Implement the real message when we buy exotel.
     message = app.config.get("TEST_ENROLL_MSG").format(test_url=enrolment_key)
     # test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
-    # print(message)
     exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, message)
 
     return "SUCCESS", 200
@@ -164,14 +180,10 @@ def on_crm_potential_stage_edit():
     enrolment_key = request.args.get("enrolment_key")
     student_mobile = request.args.get("mobile")
     stage = request.args.get("stage")
-    print(student_mobile)
-    print("hello")
-    print(enrolment_key, student_mobile, stage)
 
     # figure out the next actions that need to be taken
     stage_actions = app.config['POTENTIAL_STUDENT_STAGE_NOTIFS']
     actions = stage_actions.get(stage)
-    print(actions)
     if actions is None:
         return "No action needs to be taken", 200
     

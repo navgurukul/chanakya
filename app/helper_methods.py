@@ -28,6 +28,7 @@ def get_question_set(questions, time_remaining):
         time_end_boundary = get_time_boundary(questions[set_name], time_start_boundary)
         if time_remaining >= time_start_boundary and time_remaining < time_end_boundary:
             is_last = True if index==0 else False
+            print(is_last, index, set_name)
             return set_name, is_last, questions[set_name], time_remaining - time_start_boundary
         time_start_boundary += time_end_boundary
         index += 1
@@ -45,7 +46,6 @@ def calculate_marks(marks_config, question, user_answer):
 
 def dump_data_in_dict(dump_dict, question, user_answer):
     dump_dict["questions"].append({"question_details":question, "user_answer":user_answer})
-
 
 def calculate_marks_and_dump_data(question_set, form):
     """

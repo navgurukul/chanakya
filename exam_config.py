@@ -2,7 +2,7 @@ config = {
 "question_config" :{
     "set 1":{
                 "info_before":{
-                    "html": "<h1>hello world</h1>",
+                    "html": "<h1>Info before set 1 for 60 sec</h1>",
                     "time_in_seconds": 60
                 },
                 "questions":{ 
@@ -18,13 +18,13 @@ config = {
                     "time_per_question":10,
                 },
                 "info_after":{
-                    "html": "<h1>hello world</h1>",
+                    "html": "<h1>info after set 1 for 60 sec</h1>",
                     "time_in_seconds": 60
                 }
             },
     "set 2":{
                 "info_before":{
-                    "html": "<h1>hello world</h1>",
+                    "html": "<h1>info before set 2 for 15 sec</h1>",
                     "time_in_seconds": 15
                 },
                 "questions":{ 
@@ -40,7 +40,7 @@ config = {
                     "time_per_question":10,
                 },
                 "info_after":{
-                    "html": "<h1>hello world</h1>",
+                    "html": "<h1>info after set 2 for 15 sec</h1>",
                     "time_in_seconds": 15
                 }
             }
