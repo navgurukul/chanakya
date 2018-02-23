@@ -24,7 +24,7 @@ except:
                             'option_4':'OPTION_4_%s' %category
                         }
                     t1 =datetime.now()
-                    r = requests.post("http://127.0.0.1:8000/create-question", data=d)
+                    r = requests.post("http://join.navgurukul.org/create-question", data=d)
                     print(r.status_code)
                     print(d['en_question_text'])
                     print(datetime.now()-t1)

@@ -129,9 +129,7 @@ def create_question():
             flash("question not created: %s" %error)
             return redirect(url_for("create_question"))
 
-######## APIS can be configured as another microservice ?? ########
 ############ REST APIS ##############
-#TODO: @Shanu: Isko nikaal dena in case you don't need it. It is redundant after `exotel_enroll_for_test()`
 @app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
 def create_enrolment_key(phone_number):
     enrolment_key =  get_random_string()
@@ -152,15 +150,52 @@ def exotel_enroll_for_test():
 
     # generate an enrolment number for the student
     enrolment_key =  get_random_string()
-    enrolment_key = repos.add_enrollment_key(enrolment_key, student_mobile)
+    enrolment_key = repos.add_enrolment_key(enrolment_key, student_mobile)
     if not enrolment_key:
         return "ERROR", 500
     
     # send an SMS with the enrolment number
     #TODO: Implement the real message when we buy exotel.
-    message = app.config.get("TEST_ENROLL_MSG").format(enrolment_num=enrolment_key)
-    test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
-    print(message)
-    exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
+    message = app.config.get("TEST_ENROLL_MSG").format(test_url=enrolment_key)
+    # test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
+    exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, message)
 
     return "SUCCESS", 200
+
+
+####################
+## Zoho Web Hooks ##
+####################
+
+@app.route("/zoho_crm/on_potential_stage_change")
+def on_crm_potential_stage_edit():
+    
+    # get the student details
+    enrolment_key = request.args.get("enrolment_key")
+    student_mobile = request.args.get("mobile")
+    stage = request.args.get("stage")
+
+    # figure out the next actions that need to be taken
+    stage_actions = app.config['POTENTIAL_STUDENT_STAGE_NOTIFS']
+    actions = stage_actions.get(stage)
+    if actions is None:
+        return "No action needs to be taken", 200
+    
+    # trigger the sms
+    if actions.get("sms"):
+        #TODO: Implement the real message when we buy exotel.
+        message = app.config.get("TEST_ENROLL_MSG")
+        test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
+        exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
+
+    # trigger the outbound call
+    if actions.get("exotel_obd_id"):
+        #TODO: Need to integrate this when we add the outbound flows in exotel.
+        pass
+
+    # trigger an email
+    if actions.get("referral_email_template"):
+        #TODO: Need to integrate this when we add this support in the platform.
+        pass
+
+    return "All the required actions are already taken.", 200
