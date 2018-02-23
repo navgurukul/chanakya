@@ -41,6 +41,11 @@ Road to Navgurukul
     #time_remaining{
         padding:1.6rem;
     }
+    .qsn-img{
+        display: block;
+        width: 250px;
+        margin: 3rem auto;
+    }
     .red{
         color:red;
         padding: 20px 0px;
@@ -51,6 +56,9 @@ Road to Navgurukul
     }
     @keyframes blinker {  
       50% { opacity: 0; }
+    }
+    .answer-label img{
+        max-height:250px;
     }
 </style>
 {% endblock %}
@@ -90,7 +98,11 @@ Road to Navgurukul
                             {% set _id = q_no|string + x|string %}
                             <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
                                 <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
-                                <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
+                                {% if "https://" in random_options[x] %}
+                                    <label class="answer-label" for="id_{{_id}}"><img src="{{random_options[x]}}"></label>
+                                {% else %}
+                                    <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ol>
@@ -100,7 +112,7 @@ Road to Navgurukul
                 </div>
             </div>
         {% endfor %}
-            <div class="col-xs-12 col-sm-12">
+            <div class="col-xs-12 col-sm-12" style="margin-bottom: 5rem;">
                 <button type="button" class="btn btn-md btn-primary" id="next_btn">
                     Next Question / अगला प्रश्न
                     <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
@@ -123,6 +135,7 @@ Road to Navgurukul
 </style>
 <script>
     $(function(){
+
         last_recorded_time   = new Date().getTime()
         time_before = {{question_set['info_before']['time_in_seconds'] }};
         time_after =  {{question_set['info_after']['time_in_seconds'] }};

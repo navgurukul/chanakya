@@ -265,6 +265,15 @@ Road to Navgurukul
 {% block footer %}
 <script>
 $(function(){
+    $(".next-btn").on("click", function(){
+        if($("form")[0].checkValidity()) {
+            alert('validated');
+        }
+        else {
+            $("form")[0].reportValidity();
+        }
+    });
+
     present_block = 1
      $(".next-btn").click(function(){
                 present_block += 1;

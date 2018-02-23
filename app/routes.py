@@ -12,15 +12,21 @@ from app.helper_methods import ( get_random_string,
 global_questions = False
 
 ################### VIEWS #######################
-def go_to_page():
+def go_to_page(check=None):
+    if check:
+        print("\nI was called\n")
+        return redirect('/test')
     return redirect(url_for(session.get('page')))
 
 @app.before_request
 def before_request():
     if request.endpoint not in ("create_enrolment_key", "create_question", "exotel_enroll_for_test"):
+        print( "I got into the if statement of before request handler.")
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
+    else:
+        print("I didn't get in the if statement of before_request` handler.")
 
 @app.route('/')
 @app.route('/enter-enrolment')
@@ -62,6 +68,7 @@ def test():
             session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(session.get('questions'), time_remaining)
             session['last_time_shown']  = time_to_show 
             session['question_set']     = question_set
+            print("In test, is last set:", session['is_last_set'])
             return render_template("test.html", question_set=question_set, time_remaining=time_to_show)
         else:
             return "timer has expired, call Navgurukul for more details."
@@ -70,6 +77,8 @@ def test():
 @app.route("/end", methods=["GET", "POST"])
 def end():
     if session.get("page") == "test" and request.method == "POST":
+        print("I got in the first if statement", session['page'])
+        print("In end, is last set:", session['is_last_set'])
         question_set = session.get("question_set")
         other_details = {
             "start_time":session.get("test_start_time"),
@@ -84,6 +93,7 @@ def end():
         if session.get('is_last_set'):
             session["page"] = "end"
     elif session.get("page") == "end":
+        print("I got in the second if statement")
         if request.method == "GET":
             return render_template("ask_details.html")
         elif request.method == "POST":
@@ -95,6 +105,7 @@ def end():
             else:
                 flash("Unable to Save Your Details, Contact Navgurukul.")
     return go_to_page()
+    #go_to_page(check=True)
 
 @app.route("/create-question", methods=["GET", "POST"])
 def create_question():
