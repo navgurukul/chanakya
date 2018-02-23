@@ -1,9 +1,11 @@
+import html_strings
+
 config = {
 "question_config" :{
     "set 1":{
                 "info_before":{
-                    "html": "<h1>hello world</h1>",
-                    "time_in_seconds": 60
+                    "html": html_strings.set_1.before,
+                    "time_in_seconds": 50
                 },
                 "questions":{ 
                     "categories":{
@@ -18,14 +20,14 @@ config = {
                     "time_per_question":10,
                 },
                 "info_after":{
-                    "html": "<h1>hello world</h1>",
-                    "time_in_seconds": 60
+                    "html": html_strings.set_1.after,
+                    "time_in_seconds": 30
                 }
             },
     "set 2":{
                 "info_before":{
-                    "html": "<h1>hello world</h1>",
-                    "time_in_seconds": 15
+                    "html": html_strings.set_2.before,
+                    "time_in_seconds": 45
                 },
                 "questions":{ 
                     "categories":{
@@ -40,13 +42,12 @@ config = {
                     "time_per_question":10,
                 },
                 "info_after":{
-                    "html": "<h1>hello world</h1>",
-                    "time_in_seconds": 15
+                    "html": html_strings.set_2.after,
+                    "time_in_seconds": 30
                 }
             }
     },
     "test_config":{
-                    #"test_time":60*60 + 5 #1 hour + 5 (for N/W delay and all)
-                    "test_time":310 #1 hour + 5 (for N/W delay and all)
+                    "test_time":160 + 155
     }
 }

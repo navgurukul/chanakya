@@ -43,6 +43,8 @@ Road to Navgurukul
     }
     .red{
         color:red;
+        padding: 20px 0px;
+        font-size: 1.2rem;
     }
     .b{
       animation: blinker 1s linear infinite;
@@ -55,7 +57,7 @@ Road to Navgurukul
 
 {% block header %}
 <div class="row">
-    <div class="b red col-sm-12 col-xs-12 col-md-6" id="time_to_show"></div>
+    <div class="red b col-sm-12 col-xs-12 col-md-6" id="time_to_show"></div>
     <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div>
 </div>
 {% endblock %}
@@ -114,7 +116,6 @@ Road to Navgurukul
 {% endblock %}
 
 {% block footer %}
-        {{question_set}}
 <style>
     .hide {
         display:none;
@@ -157,7 +158,7 @@ Road to Navgurukul
                 time_to_show = time_remaining;
             }
             else{
-                $("#info_after").addClass("hide");
+                $("#info_before").addClass("hide");
                 $("#questions").removeClass("hide");
                 time_to_show = time_remaining - time_after;
             }
@@ -171,7 +172,7 @@ Road to Navgurukul
             if(time_remaining<=0){
                 $("form").submit();
             }
-        }, 1000); 
+        }, 100); 
     });
 </script>
 {% endblock %}

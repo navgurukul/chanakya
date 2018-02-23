@@ -9,6 +9,8 @@ from app.helper_methods import ( get_random_string,
                                  get_time_remaining, get_question_set
                                 )
 
+global_questions = False
+
 ################### VIEWS #######################
 def go_to_page():
     return redirect(url_for(session.get('page')))
@@ -48,7 +50,9 @@ def before_test():
 def test():
     if session.get("page") == "test":
         if not session.get("questions"):
-            questions = repos.get_all_questions()
+            global global_questions
+            if not global_questions: global_questions = repos.get_all_questions()
+            questions = global_questions
             session["questions"] = questions
             session["test_start_time"]  = datetime.utcnow()
             session['total_time_shown'] = 0
