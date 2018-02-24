@@ -97,7 +97,8 @@ Road to Navgurukul
                         {% for x in range(4) %}
                             {% set _id = q_no|string + x|string %}
                             <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                                <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" id="id_{{_id}}"/>
+                                <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" 
+                                id="id_{{_id}}" class="cls_{{q_no}}"/>
                                 {% if "https://" in random_options[x] %}
                                     <label class="answer-label" for="id_{{_id}}"><img src="{{random_options[x]}}"></label>
                                 {% else %}
@@ -107,13 +108,14 @@ Road to Navgurukul
                         {% endfor %}
                     </ol>
                     {% elif question_type=="short_answer" %}
-                    <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" class="border border-info col-xs-12 col-sm-12">
+                        <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" 
+                        class="border border-info col-xs-12 col-sm-12 cls_{{q_no}}">
                     {% endif %}
                 </div>
             </div>
         {% endfor %}
             <div class="col-xs-12 col-sm-12" style="margin-bottom: 5rem;">
-                <button type="button" class="btn btn-md btn-primary" id="next_btn">
+                <button type="button" class="btn btn-md btn-primary cls_{{q_no}}" id="next_btn">
                     Next Question / अगला प्रश्न
                     <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                 </button>
@@ -135,6 +137,15 @@ Road to Navgurukul
 </style>
 <script>
     $(function(){
+
+        $("button.cls_1").on("click", function(){
+            if($("input.cls_1").checkValidity()) {
+                alert('validated');
+            }
+            else {
+                alert("invalid");
+            }
+        });
 
         last_recorded_time   = new Date().getTime()
         time_before = {{question_set['info_before']['time_in_seconds'] }};
