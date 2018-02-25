@@ -29,11 +29,15 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Interested & Called": None,
     "Entrance Test": None,
     "Lightbot Activity": {
-        "sms": "Some SMS text",
+        "sms": "Congrats! Aapne NavGurukul ki Scholarship paane ka first step clear kar liya hai. Hum aap ko kuch hi samay mei call karke agle steps ki jaan kaari denge. \n Kaafi kam log iss tarah se test mei itna accha perform kar paate hai. Aap helpline number ( 011-3959-5141) par bhi call kar sakte hai, adheek jaankaari ke liye.",
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template"
     },
-    "Privilege Check": None,
+    "Privilege Check": {
+        "sms": "Congrats! Aapne NavGurukul ki scholarship ke test ka dusra test bhi clear kar liya hai. Yeh test bahot kam log hi clear kar pate hain. Hum aap ko call kar kar aage ke steps jaldi hi batayenge. Aap helpline number ( 011-3959-5141) par bhi call kar sakte hai, adheek jaankaari ke liye.",
+        "exotel_obd_id": None,
+        "referral_email_template": "Here is a template."
+    },
     "Personal Interview": None,
     "Parent Conversation": None,
     "Confirmed Joining": None,
@@ -42,8 +46,16 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Failed Probation": None,
     "Graduated": None,
     "Became Disinterested": None,
-    "Entrance Test Failed": None,
-    "Lightbot Activity Failed": None,
+    "Entrance Test Failed": {
+        "sms: "NavGurukul ki scholarship ka test kaafi mushkil hai aur kaafi kam log isse clear kar paate hai. Hume yeh batate hue kaafi dukh ho raha hai, ki aapka test clear nahi hua hai. Par humein poora bharosa hai ki aap ke paas aisi aur kaafi opportuntiies aayengi, jinke saath aap apne sapnei poore kar paaoge. Good luck.",
+        "exotel_obd_id": None,
+        "referral_email_template": "Here is a template."
+    },
+    "Lightbot Activity Failed": {
+        "sms": "NavGurukul ki scholarship ka dusra test kaafi mushkil hota hai aur isse kaafi kam log hi clear kar pate hain. Humein yeh batae hue kaafi dukh hai, ki aapke test ka dusra round clear nahi hua hai. Par humein poora bharosa hai ki aap ke paas aisi aur kaafi opportuntiies aayengi, jinke saath aap apne sapnei poore kar paaoge. Good luck.",
+        "exotel_obd_id": None,
+        "referral_email_template": "Here is the a tempalate."
+    },
     "Privilege Check Failed": None,
     "Personal Interview Failed": None,
     "Parent Conversation Failed": None,
