@@ -11,12 +11,19 @@ def render(tpl_path, context):
         loader=jinja2.FileSystemLoader(path or './')
     ).get_template(filename).render(context)
 
-def create_potential(student_details):
+def add_interested_to_crm(student_details):
+    return create_potential(student_details, interested_potential=True)
+    
+def create_potential(student_details, interested_potential=False):
+    if interested_potential:
+        xml_file = "templates/zoho/interested.xml"
+    else:
+        xml_file = "templates/zoho/enrolled.xml"
     querystring = {
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
-        "xmlData": render(get_abs_path("templates/zoho/new_potential_student.xml"), student_details)
+        "xmlData": render(get_abs_path(xml_file), student_details)
     }
     url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
     response = requests.request("GET", url, params=querystring)
@@ -58,3 +65,7 @@ def create_task_for_potential(potential_id):
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         pass #log_error and email
+
+def exists_in_crm(**search_criteria):
+    search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
+    url = "https://crm.zoho.com/crm/private/json/Leads/searchRecords?authtoken=Auth Token&scope=crmapi&criteria=%s" %search_string

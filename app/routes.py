@@ -147,6 +147,15 @@ def create_enrolment_key(phone_number):
     else:
         return  "Unable to register", 400
 
+@app.route("/exotel_talk_to_ng")
+def exotel_talk_to_ng():
+    student_mobile = request.args.get("CallFrom")
+    if not student_mobile:
+        return "ERROR", 500 #log
+    if student_mobile[0] == "0":
+        student_mobile = student_mobile[1:]
+    add_interested_to_crm(student_mobile)
+
 @app.route("/exotel_enroll_for_test")
 def exotel_enroll_for_test():
     # get the student mobile number
