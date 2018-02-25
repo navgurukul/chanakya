@@ -12,12 +12,18 @@ from app.helper_methods import ( get_random_string,
 global_questions = False
 
 ################### VIEWS #######################
-def go_to_page():
+def go_to_page(check=None):
+    if check:
+        return redirect('/test')
     return redirect(url_for(session.get('page')))
 
 @app.before_request
 def before_request():
-    if request.endpoint not in ("create_enrolment_key", "create_question", "exotel_enroll_for_test"):
+    if request.endpoint not in ("create_enrolment_key", 
+                                "create_question",
+                                "exotel_talk_to_ng",
+                                "exotel_enroll_for_test",
+                                "enter_enrolment"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
@@ -25,6 +31,8 @@ def before_request():
 @app.route('/')
 @app.route('/enter-enrolment')
 def enter_enrolment():
+    if not session.get("page"):
+        session["page"] = "enter_enrolment"
     if session.get("page") == "enter_enrolment":
         enrolment_key = request.args.get("enrolment_key")
         if enrolment_key and repos.is_valid_enrolment(enrolment_key):
@@ -95,6 +103,7 @@ def end():
             else:
                 flash("Unable to Save Your Details, Contact Navgurukul.")
     return go_to_page()
+    #go_to_page(check=True)
 
 @app.route("/create-question", methods=["GET", "POST"])
 def create_question():
@@ -138,6 +147,16 @@ def create_enrolment_key(phone_number):
         return enrolment_key, 201
     else:
         return  "Unable to register", 400
+
+@app.route("/exotel_talk_to_ng")
+def exotel_talk_to_ng():
+    student_mobile = request.args.get("CallFrom")
+    if not student_mobile:
+        return "ERROR", 500 #log
+    if student_mobile[0] == "0":
+        student_mobile = student_mobile[1:]
+    repos.add_interested_to_crm(student_mobile)
+    return "SUCCESS", 200
 
 @app.route("/exotel_enroll_for_test")
 def exotel_enroll_for_test():

@@ -46,7 +46,6 @@ def calculate_marks(marks_config, question, user_answer):
 def dump_data_in_dict(dump_dict, question, user_answer):
     dump_dict["questions"].append({"question_details":question, "user_answer":user_answer})
 
-
 def calculate_marks_and_dump_data(question_set, form):
     """
         Typical question:

@@ -170,3 +170,24 @@ def add_to_crm(student_details, other_details):
     potential_id = crm_api.create_potential(all_student_details)
     if potential_id:
         crm_api.create_task_for_potential(potential_id)
+
+def get_student_details_from_phone_number(phone_number):
+    student_details = {
+        'stage': 'Interested and Called',
+        'source': 'Helpline',
+        'potential_name': phone_number,
+        'student_or_partner': 'Student',
+        'student_mobile': phone_number
+    }
+    return student_details
+
+def add_interested_to_crm(phone_number):
+    phone_exists = crm_api.exists_in_crm({'Potential Name':phone_number})
+    print(phone_exists)
+    if not phone_exists:
+        student_details = get_student_details_from_phone_number(phone_number)
+        potential_id    = crm_api.add_interested_to_crm(student_details)
+        if potential_id:
+            crm_api.create_task_for_potential(potential_id)
+    else:
+        pass #data-analytics

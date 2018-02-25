@@ -49,22 +49,22 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Full Name</div>
                             <input type="text" name="potential_name" placeholder="Your Name" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Mobile Number</div>
                             <input type="number" name="student_mobile" placeholder="Your Mobile Number"
-                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                required class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Date of Birth</div>
                             <input type="date" name="dob" placeholder="Your Date of Birth"
-                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                required class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Gender/ लिंग</div>
                             <select name="gender"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"
                                 required>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -74,17 +74,17 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your City</div>
                             <input type="text" name="city" placeholder="Your City" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your State</div>
                             <input type="text" name="state" placeholder="Your State"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Caste and Tribe</div>
                             <select name="caste_tribe"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"
                                 required>
                                 <option value="SC">(SC) Scheduled Caste</option>
                                 <option value="ST">(ST) Scheduled Tribe</option>
@@ -93,7 +93,7 @@ Road to Navgurukul
                             </select>
                         </div>
                         <div class="row m-row">
-                            <button type="button" class="btn btn-lg next-btn btn-warning col-xs-12 col-sm-12">
+                            <button type="button" class="btn btn-lg next-btn btn-warning col-xs-12 col-sm-12 section-1">
                                 Continue My Application
                             </button>
                         </div>
@@ -265,6 +265,15 @@ Road to Navgurukul
 {% block footer %}
 <script>
 $(function(){
+    $("button.secion-1").on("click", function(){
+        if($(".section-1").checkValidity()) {
+            alert('validated');
+        }
+        else {
+            alert("invalid");
+        }
+    });
+
     present_block = 1
      $(".next-btn").click(function(){
                 present_block += 1;
