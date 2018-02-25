@@ -36,14 +36,12 @@ def create_potential(student_details, interested_potential=False):
             if detail['val'] == 'Id':
                 potential_id = detail['content']
                 break
-        return potential_id
     except NameError:
         #log 
         pass
     except Exception as e:
         print(e) #log and email ?
-    finally:
-        return None
+        raise Exception("Something went wrong.")
     
 
 # creating the task related to the potential
@@ -64,7 +62,8 @@ def create_task_for_potential(potential_id):
     url = "https://crm.zoho.com/crm/private/json/Tasks/insertRecords"
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
-        pass #log_error and email
+        raise Exception("Something went wrong.")
+    return True
 
 def exists_in_crm(search_criteria):
     #search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
