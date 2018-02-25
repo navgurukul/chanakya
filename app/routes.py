@@ -21,6 +21,7 @@ def go_to_page(check=None):
 def before_request():
     if request.endpoint not in ("create_enrolment_key", 
                                 "create_question",
+                                "exotel_talk_to_ng",
                                 "exotel_enroll_for_test",
                                 "enter_enrolment"):
         if not session.get("page"):
@@ -154,7 +155,8 @@ def exotel_talk_to_ng():
         return "ERROR", 500 #log
     if student_mobile[0] == "0":
         student_mobile = student_mobile[1:]
-    add_interested_to_crm(student_mobile)
+    repos.add_interested_to_crm(student_mobile)
+    return "SUCCESS", 200
 
 @app.route("/exotel_enroll_for_test")
 def exotel_enroll_for_test():

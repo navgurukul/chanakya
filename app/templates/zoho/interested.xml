@@ -1,0 +1,14 @@
+<Potentials>
+    <row no="1">
+
+        <!-- essentials -->
+        <FL val="Layout">2821772000000172275</FL>
+        <FL val="Stage"><![CDATA[{{ stage }}]]></FL>    
+        <FL val="Source"><![CDATA[{{ source }}]]></FL>
+
+        <!-- Basic Details -->
+        <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
+        <FL val="Student or Partner"><![CDATA[{{ student_or_partner }}]]></FL>
+        <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
+    </row>
+</Potentials>

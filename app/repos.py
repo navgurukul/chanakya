@@ -182,7 +182,9 @@ def get_student_details_from_phone_number(phone_number):
     return student_details
 
 def add_interested_to_crm(phone_number):
-    if not crm_api.exists_in_crm({'Mobile':phone_number}):
+    phone_exists = crm_api.exists_in_crm({'Potential Name':phone_number})
+    print(phone_exists)
+    if not phone_exists:
         student_details = get_student_details_from_phone_number(phone_number)
         potential_id    = crm_api.add_interested_to_crm(student_details)
         if potential_id:

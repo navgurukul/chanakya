@@ -66,6 +66,11 @@ def create_task_for_potential(potential_id):
     if response.status_code != 200:
         pass #log_error and email
 
-def exists_in_crm(**search_criteria):
-    search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
-    url = "https://crm.zoho.com/crm/private/json/Leads/searchRecords?authtoken=Auth Token&scope=crmapi&criteria=%s" %search_string
+def exists_in_crm(search_criteria):
+    #search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
+    search_string = "(%s:%s)" %list(search_criteria.items())[0]
+    url = "https://crm.zoho.com/crm/private/json/Potentials/searchRecords?authtoken=dff429d03714ecd774b7706e358e907b&scope=crmapi&criteria=%s" %search_string
+    response = requests.get(url)
+    if response.status_code == 200 and 'result' in response.json()['response']:
+        return True
+    return False
