@@ -9,9 +9,13 @@ import enum
 
 config = exam_config.config["question_config"]
 
-def add_enrolment_key(enrolment_key, phone_number):
+def get_crm_id_from_phone(enrolment_key):
+    pass
+
+def add_enrolment_key(enrolment_key, phone_number, crm_potential_id):
     try:
-        en = Enrolment(enrolment_key=enrolment_key, phone_number=phone_number)
+        en = Enrolment( enrolment_key=enrolment_key, phone_number=phone_number, 
+                        crm_potential_id=crm_potential_id)
         db.session.add(en)
         db.session.commit()
     except Exception as e:
@@ -152,13 +156,11 @@ def can_add_student(enrolment_key, student_data):
         #log e
         return False
 
-def get_stage_for_student():
-    return 'Lightbot Activity'
-
 def add_to_crm(student_details, other_details):
+    stage = "Entrance Test"
     student_details = { k:student_details[k].value if isinstance(student_details[k], enum.Enum) else student_details[k] for k in student_details}
     all_student_details = {
-        'stage': get_stage_for_student(),
+        'stage': stage,
         'source': 'Helpline',
         'student_or_partner': 'Student',
             
@@ -167,13 +169,16 @@ def add_to_crm(student_details, other_details):
         'test_score': other_details.get("test_score"),
     }
     all_student_details.update(student_details)
-    potential_id = crm_api.create_potential(all_student_details)
+    all_student_details['student_name']   = all_student_details['potential_name']
+    all_student_details['potential_name'] = all_student_details['student_mobile']
+
+    potential_id = crm_api.create_potential(all_student_details, stage=stage)
     if potential_id:
         crm_api.create_task_for_potential(potential_id)
 
-def get_student_details_from_phone_number(phone_number):
+def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
-        'stage': 'Interested and Called',
+        'stage': stage,#'Requested Callback',
         'source': 'Helpline',
         'potential_name': phone_number,
         'student_or_partner': 'Student',
@@ -181,13 +186,29 @@ def get_student_details_from_phone_number(phone_number):
     }
     return student_details
 
-def add_interested_to_crm(phone_number):
-    phone_exists = crm_api.exists_in_crm({'Potential Name':phone_number})
-    print(phone_exists)
-    if not phone_exists:
-        student_details = get_student_details_from_phone_number(phone_number)
-        potential_id    = crm_api.add_interested_to_crm(student_details)
-        if potential_id:
-            crm_api.create_task_for_potential(potential_id)
-    else:
-        pass #data-analytics
+def add_to_crm_if_needed(phone_number, stage):
+    should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)
+    print(should_add_to_crm, action)
+    print(stage, phone_number)
+    if should_add_to_crm:
+        student_details = get_student_details_from_phone_number(phone_number, stage)
+        if action == "create_new":
+            potential_id    = crm_api.create_potential(student_details)
+            if potential_id:
+                crm_api.create_task_for_potential(potential_id)
+            else:
+                pass #data-analytics
+        elif action == "update_enrolment_to_test":
+            crm_id = get_crm_id_from_phone(enrolment_key)
+            if crm_id:
+                potential_id    = crm_api.create_potential(student_details)
+                if potential_id:
+                    crm_api.create_task_for_potential(potential_id)
+                else:
+                    pass #data-analytics
+            
+
+def add_enrolment_to_crm(phone_number, enrolment_key):
+    student_details = get_student_details_from_phone_number(phone_number, "Enrolment Key Generated")
+    student_details['Enrolment Key'] = enrolment_key
+    return crm_api.create_potential(student_details)

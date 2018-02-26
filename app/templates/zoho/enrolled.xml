@@ -7,9 +7,8 @@
         <FL val="Source"><![CDATA[{{ source }}]]></FL>
 
         <!-- Basic Details -->
-        <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
         <FL val="Student or Partner"><![CDATA[{{ student_or_partner }}]]></FL>
-        <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
+        <FL val="Student Name"><![CDATA[{{ student_name }}]]></FL>
         <FL val="Date of Birth"><![CDATA[{{ dob }}]]></FL>
         <FL val="Gender"><![CDATA[{{ gender }}]]></FL>
         <FL val="Caste &amp; Tribe"><![CDATA[{{ caste_tribe }}]]></FL>

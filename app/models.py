@@ -38,11 +38,12 @@ class Stream_11_12(Enum):
     commerce_no_maths = "Commerce (Without Maths)"
 
 class Enrolment(db.Model):
-    __tablename__  = "enrolment"
-    id             = db.Column(db.Integer, primary_key=True)
-    enrolment_key  = db.Column(db.String(5), index=True, unique=True)
-    phone_number   = db.Column(db.String(10), index=True)
-    created_on     = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    __tablename__    = "enrolment"
+    id               = db.Column(db.Integer, primary_key=True)
+    enrolment_key    = db.Column(db.String(5), index=True, unique=True)
+    phone_number     = db.Column(db.String(10), index=True)
+    crm_potential_id = db.Column(db.String(20))
+    created_on       = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 

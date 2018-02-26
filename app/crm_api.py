@@ -11,21 +11,22 @@ def render(tpl_path, context):
         loader=jinja2.FileSystemLoader(path or './')
     ).get_template(filename).render(context)
 
-def add_interested_to_crm(student_details):
-    return create_potential(student_details, interested_potential=True)
-    
-def create_potential(student_details, interested_potential=False):
-    if interested_potential:
-        xml_file = "templates/zoho/interested.xml"
-    else:
-        xml_file = "templates/zoho/enrolled.xml"
+def create_potential(student_details, crm_id=None):
+    stage = student_details['stage']
     querystring = {
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
-        "xmlData": render(get_abs_path(xml_file), student_details)
     }
-    url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
+    if stage == "Entrance Test":
+        xml_file = "templates/zoho/enrolled.xml"
+        url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
+        querystring["id"] = crm_id
+    else:
+        xml_file = "templates/zoho/interested.xml"
+        url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
+    }
+    querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
@@ -42,9 +43,6 @@ def create_potential(student_details, interested_potential=False):
         pass
     except Exception as e:
         print(e) #log and email ?
-    finally:
-        return None
-    
 
 # creating the task related to the potential
 def create_task_for_potential(potential_id):
@@ -66,11 +64,32 @@ def create_task_for_potential(potential_id):
     if response.status_code != 200:
         pass #log_error and email
 
-def exists_in_crm(search_criteria):
+def get_stage_from_response(response):
+    d = response.json()
+    print(d)
+    lst = []
+    if isinstance(d['response']['result']['Potentials']['row'], dict):
+        for d_item in d['response']['result']['Potentials']['row']['FL']:
+            if d_item['val'] == 'stage':
+                lst = [d_item['content']]
+    else:
+        for fl_dict in d['response']['result']['Potentials']['row']:
+            for dct in fl_dict['FL']:
+                if dct['val'] == 'Stage':
+                    lst.append(dct['content'])
+    return lst
+
+def should_add_to_crm(search_criteria, stage):
     #search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
     search_string = "(%s:%s)" %list(search_criteria.items())[0]
     url = "https://crm.zoho.com/crm/private/json/Potentials/searchRecords?authtoken=dff429d03714ecd774b7706e358e907b&scope=crmapi&criteria=%s" %search_string
+    print(url)
     response = requests.get(url)
     if response.status_code == 200 and 'result' in response.json()['response']:
-        return True
-    return False
+        old_stages = get_stage_from_response(response)
+        if stage in old_stages and stage == "Requested Callback":
+            return False, None, None
+        elif 'Enrolment Key Generated' in old_stages and stage=='Entrance Test':
+            return True, 'update_enrolment_to_test', response.json()
+        return True, "create_new", None
+    return False, "error",response
