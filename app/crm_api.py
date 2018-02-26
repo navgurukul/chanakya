@@ -1,6 +1,8 @@
-import os
+import os, random
 import requests, jinja2
 import datetime
+
+from flask import app
 
 def get_next_day():
     return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%y-%m-%d')
@@ -29,6 +31,10 @@ def create_potential(student_details, crm_id=None):
     else:
         xml_file = "templates/zoho/interested.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
+
+    owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
+    student_details['owner_id'] = owner_id
+
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:

@@ -6,7 +6,8 @@
         <FL val="Stage"><![CDATA[{{ stage }}]]></FL>    
         <FL val="Source"><![CDATA[{{ source }}]]></FL>
 
-        <FL val="SMOWNERID">2821772000000131409</FL>
+        <!-- owner -->
+        <FL val="SMOWNERID">{{ owner_id }}</FL>
 
         <!-- Basic Details -->
         <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
