@@ -175,6 +175,7 @@ def exotel_enroll_for_test():
     crm_potential_id  = repos.add_enrolment_to_crm(student_mobile, enrolment_key)
     enrolment_key     = repos.add_enrolment_key(enrolment_key, student_mobile, crm_potential_id)
     print("potential id", crm_potential_id)
+    print("enrolment key", enrolment_key)
     if not enrolment_key:
         return "ERROR", 500
     

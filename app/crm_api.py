@@ -1,5 +1,9 @@
 import os
 import requests, jinja2
+import datetime
+
+def get_next_day():
+    return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%y-%m-%d')
 
 def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
@@ -51,7 +55,7 @@ def create_task_for_potential(potential_id):
     task_details = {
         'owner_id': '2821772000000169007',
         'text': 'Some text of the task.',
-        'due_date': '2018-02-05',
+        'due_date': get_next_day(),
         'se_module': 'Potentials',
         'se_id': potential_id
     }
@@ -87,11 +91,15 @@ def should_add_to_crm(search_criteria, stage):
     url = "https://crm.zoho.com/crm/private/json/Potentials/searchRecords?authtoken=dff429d03714ecd774b7706e358e907b&scope=crmapi&criteria=%s" %search_string
     print(url)
     response = requests.get(url)
-    if response.status_code == 200 and 'result' in response.json()['response']:
-        old_stages = get_stage_from_response(response)
-        if stage in old_stages and stage == "Requested Callback":
-            return False, None, None
-        elif 'Enrolment Key Generated' in old_stages and stage=='Entrance Test':
-            return True, 'update_enrolment_to_test', response.json()
-        return True, "create_new", None
+    response_json = response.json()
+    if response.status_code == 200:
+        if 'result' in response_json['response']:
+            old_stages = get_stage_from_response(response)
+            if stage in old_stages and stage == "Requested Callback":
+                return False, None, response
+            elif 'Enrolment Key Generated' in old_stages and stage=='Entrance Test':
+                return True, 'update_enrolment_to_test', response.json()
+            return True, "create_new", response
+        elif 'nodata' in response_json['response']:
+            return True, "create_new", response
     return False, "error",response
