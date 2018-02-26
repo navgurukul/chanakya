@@ -50,7 +50,7 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Graduated": None,
     "Became Disinterested": None,
     "Entrance Test Failed": {
-        "sms: "NavGurukul ki scholarship ka test kaafi mushkil hai aur kaafi kam log isse clear kar paate hai. Hume yeh batate hue kaafi dukh ho raha hai, ki aapka test clear nahi hua hai. Par humein poora bharosa hai ki aap ke paas aisi aur kaafi opportuntiies aayengi, jinke saath aap apne sapnei poore kar paaoge. Good luck.",
+        "sms": "NavGurukul ki scholarship ka test kaafi mushkil hai aur kaafi kam log isse clear kar paate hai. Hume yeh batate hue kaafi dukh ho raha hai, ki aapka test clear nahi hua hai. Par humein poora bharosa hai ki aap ke paas aisi aur kaafi opportuntiies aayengi, jinke saath aap apne sapnei poore kar paaoge. Good luck.",
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template."
     },
