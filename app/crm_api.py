@@ -63,6 +63,9 @@ def create_task_for_potential(potential_id, owner_id):
         'se_module': 'Potentials',
         'se_id': potential_id
     }
+    print('--------')
+    print(task_details)
+    print('--------')
     querystring = {
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
