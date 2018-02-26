@@ -2,7 +2,7 @@ import os, random
 import requests, jinja2
 import datetime
 
-from flask import app
+from app import app
 
 def get_next_day():
     return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%y-%m-%d')
