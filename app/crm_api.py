@@ -83,7 +83,7 @@ def get_stage_from_response(response):
     lst = []
     if isinstance(d['response']['result']['Potentials']['row'], dict):
         for d_item in d['response']['result']['Potentials']['row']['FL']:
-            if d_item['val'] == 'stage':
+            if d_item['val'] == 'Stage':
                 lst = [d_item['content']]
     else:
         for fl_dict in d['response']['result']['Potentials']['row']:
