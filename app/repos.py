@@ -166,7 +166,7 @@ def add_to_crm(student_details, other_details):
         'source': 'Helpline',
         'student_or_partner': 'Student',
             
-        'results_url': "admissions.navgurukul.org/view-result/%s" %enrolment_key,
+        'results_url': "http://join.navgurukul.org/view-result/%s" %enrolment_key,
         'test_version': 'New Version XYZ',
         'test_score': other_details.get("test_score"),
     }

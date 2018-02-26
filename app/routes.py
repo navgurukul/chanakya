@@ -141,15 +141,15 @@ def create_question():
             return redirect(url_for("create_question"))
 
 ############ REST APIS ##############
-@app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
-def create_enrolment_key(phone_number):
-    enrolment_key =  get_random_string()
-    crm_potential_id  = repos.add_enrolment_to_crm(phone_number, enrolment_key)
-    enrolment_key = repos.add_enrolment_key(enrolment_key, phone_number, crm_potential_id)
-    if enrolment_key:
-        return enrolment_key, 201
-    else:
-        return  "Unable to register", 400
+#@app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
+#def create_enrolment_key(phone_number):
+#    enrolment_key =  get_random_string()
+#    crm_potential_id  = repos.add_enrolment_to_crm(phone_number, enrolment_key)
+#    enrolment_key = repos.add_enrolment_key(enrolment_key, phone_number, crm_potential_id)
+#    if enrolment_key:
+#        return enrolment_key, 201
+#    else:
+#        return  "Unable to register", 400
 
 @app.route("/exotel_talk_to_ng")
 def exotel_talk_to_ng():
@@ -178,8 +178,6 @@ def exotel_enroll_for_test():
     print("enrolment key", enrolment_key)
     if not enrolment_key:
         return "ERROR", 500
-    
-    repos.add_to_crm_if_needed(student_mobile, stage="Enrolment Key Generated")
     
     # send an SMS with the enrolment number
     #TODO: Implement the real message when we buy exotel.
