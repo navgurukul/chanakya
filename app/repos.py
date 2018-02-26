@@ -1,6 +1,6 @@
 from app.models import Options, Question, TestData, Enrolment, Student
 from app.models import Difficulty, QuestionType, Boolean, Gender, Stream_11_12, CollegeType, Caste
-from app import db
+from app import db, app
 import random
 import exam_config
 from datetime import datetime
