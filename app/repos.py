@@ -177,7 +177,7 @@ def add_to_crm(student_details, other_details):
     crm_id = get_crm_id_from_enrolment(enrolment_key)
     potential_id, owner_id = crm_api.create_potential(all_student_details, crm_id=crm_id)
     if potential_id:
-        crm_api.create_task_for_potential(potential_id, owner_id)
+        crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
 
 def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
@@ -198,7 +198,7 @@ def add_to_crm_if_needed(phone_number, stage):
         if action == "create_new":
             potential_id, owner_id = crm_api.create_potential(student_details)
             if potential_id:
-                crm_api.create_task_for_potential(potential_id, owner_id)
+                crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
             else:
                 pass #data-analytics
 

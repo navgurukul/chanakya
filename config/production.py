@@ -66,6 +66,14 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Left before Completion": None,
     "Kicked Out": None
 }
+CRM_NEW_STUDENT_TASKS = {
+    "Requested Callback": {
+        "task_message": "Call back and take next steps."
+    },
+    "Entrance Test": {
+        "task_message": "Evaluate the answers and decide next steps."
+    }
+}
 POTENTIAL_OWNERS = [
     "2821772000000131011", # Rishabh Verma
     "2821772000000131409", # Abishek Gupta

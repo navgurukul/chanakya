@@ -99,7 +99,7 @@ def end():
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
             if student_details:
                 repos.add_to_crm(student_details, session)
-                repos.add_to_crm_if_needed(student_details['potential_name'], stage="Entrance Test")
+                # repos.add_to_crm_if_needed(student_details['potential_name'], stage="Entrance Test")
                 session.clear()
                 return render_template("thanks.html")
             else:

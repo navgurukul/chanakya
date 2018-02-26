@@ -54,11 +54,11 @@ def create_potential(student_details, crm_id=None):
     
 
 # creating the task related to the potential
-def create_task_for_potential(potential_id, owner_id):
+def create_task_for_potential(potential_id, owner_id, task_text):
 
     task_details = {
         'owner_id': owner_id,
-        'text': 'Some text of the task.',
+        'text': task_text,
         'due_date': get_next_day(),
         'se_module': 'Potentials',
         'se_id': potential_id
