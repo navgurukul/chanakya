@@ -23,7 +23,8 @@ def before_request():
                                 "create_question",
                                 "exotel_talk_to_ng",
                                 "exotel_enroll_for_test",
-                                "enter_enrolment"):
+                                "enter_enrolment",
+                                "on_crm_potential_stage_edit"):
         if not session.get("page"):
             session["page"] = "enter_enrolment"
             return go_to_page()
