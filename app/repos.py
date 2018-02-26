@@ -191,7 +191,7 @@ def get_student_details_from_phone_number(phone_number, stage):
 
 def add_to_crm_if_needed(phone_number, stage):
     should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)
-    print(should_add_to_crm, action)
+    print(should_add_to_crm, action, response.json())
     print(stage, phone_number)
     if should_add_to_crm:
         student_details = get_student_details_from_phone_number(phone_number, stage)
