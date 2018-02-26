@@ -47,19 +47,17 @@ def create_potential(student_details, crm_id=None):
     try:
         for detail in potential_details:
             if detail['val'] == 'Id':
-                return detail['content']
-    except NameError:
-        #log 
-        pass
+                return detail['content'], owner_id:
     except Exception as e:
-        print(e) #log and email ?
-        raise Exception("Something went wrong.")
+        print(e)
+        raise e
     
 
 # creating the task related to the potential
-def create_task_for_potential(potential_id):
+def create_task_for_potential(potential_id, owner_id):
+
     task_details = {
-        'owner_id': '2821772000000169007',
+        'owner_id': owner_id,
         'text': 'Some text of the task.',
         'due_date': get_next_day(),
         'se_module': 'Potentials',
