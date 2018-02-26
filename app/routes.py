@@ -98,7 +98,7 @@ def end():
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
             if student_details:
                 repos.add_to_crm(student_details, session)
-                repos.add_to_crm_if_needed(student_mobile, stage="Entrance Test")
+                repos.add_to_crm_if_needed(student_details['potential_name'], stage="Entrance Test")
                 session.clear()
                 return render_template("thanks.html")
             else:
@@ -173,6 +173,7 @@ def exotel_enroll_for_test():
     enrolment_key     =  get_random_string()
     crm_potential_id  = repos.add_enrolment_to_crm(student_mobile, enrolment_key)
     enrolment_key     = repos.add_enrolment_key(enrolment_key, student_mobile, crm_potential_id)
+    print("potential id", crm_potential_id)
     if not enrolment_key:
         return "ERROR", 500
     

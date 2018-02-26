@@ -25,24 +25,26 @@ def create_potential(student_details, crm_id=None):
     else:
         xml_file = "templates/zoho/interested.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
-    }
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
     response = response.json()
+    print(crm_id)
+    print(student_details)
+    print(response)
     potential_details = response['response']['result']['recorddetail']['FL']
     try:
         for detail in potential_details:
             if detail['val'] == 'Id':
-                potential_id = detail['content']
-                break
-        return potential_id
+                return detail['content']
     except NameError:
         #log 
         pass
     except Exception as e:
         print(e) #log and email ?
+        raise Exception("Something went wrong.")
+    
 
 # creating the task related to the potential
 def create_task_for_potential(potential_id):
@@ -62,11 +64,11 @@ def create_task_for_potential(potential_id):
     url = "https://crm.zoho.com/crm/private/json/Tasks/insertRecords"
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
-        pass #log_error and email
+        raise Exception("Something went wrong.")
+    return True
 
 def get_stage_from_response(response):
     d = response.json()
-    print(d)
     lst = []
     if isinstance(d['response']['result']['Potentials']['row'], dict):
         for d_item in d['response']['result']['Potentials']['row']['FL']:

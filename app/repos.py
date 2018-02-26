@@ -9,8 +9,9 @@ import enum
 
 config = exam_config.config["question_config"]
 
-def get_crm_id_from_phone(enrolment_key):
-    pass
+def get_crm_id_from_enrolment(enrolment_key):
+    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+    return en.crm_potential_id
 
 def add_enrolment_key(enrolment_key, phone_number, crm_potential_id):
     try:
@@ -157,6 +158,7 @@ def can_add_student(enrolment_key, student_data):
         return False
 
 def add_to_crm(student_details, other_details):
+    enrolment_key = other_details.get("enrolment_key")
     stage = "Entrance Test"
     student_details = { k:student_details[k].value if isinstance(student_details[k], enum.Enum) else student_details[k] for k in student_details}
     all_student_details = {
@@ -164,7 +166,7 @@ def add_to_crm(student_details, other_details):
         'source': 'Helpline',
         'student_or_partner': 'Student',
             
-        'results_url': "admissions.navgurukul.org/view-result/%s" %other_details.get("enrolment_key"),
+        'results_url': "admissions.navgurukul.org/view-result/%s" %enrolment_key,
         'test_version': 'New Version XYZ',
         'test_score': other_details.get("test_score"),
     }
@@ -172,7 +174,8 @@ def add_to_crm(student_details, other_details):
     all_student_details['student_name']   = all_student_details['potential_name']
     all_student_details['potential_name'] = all_student_details['student_mobile']
 
-    potential_id = crm_api.create_potential(all_student_details, stage=stage)
+    crm_id = get_crm_id_from_enrolment(enrolment_key)
+    potential_id = crm_api.create_potential(all_student_details, crm_id=crm_id)
     if potential_id:
         crm_api.create_task_for_potential(potential_id)
 
@@ -198,15 +201,6 @@ def add_to_crm_if_needed(phone_number, stage):
                 crm_api.create_task_for_potential(potential_id)
             else:
                 pass #data-analytics
-        elif action == "update_enrolment_to_test":
-            crm_id = get_crm_id_from_phone(enrolment_key)
-            if crm_id:
-                potential_id    = crm_api.create_potential(student_details)
-                if potential_id:
-                    crm_api.create_task_for_potential(potential_id)
-                else:
-                    pass #data-analytics
-            
 
 def add_enrolment_to_crm(phone_number, enrolment_key):
     student_details = get_student_details_from_phone_number(phone_number, "Enrolment Key Generated")
