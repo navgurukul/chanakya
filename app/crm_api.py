@@ -47,7 +47,7 @@ def create_potential(student_details, crm_id=None):
     try:
         for detail in potential_details:
             if detail['val'] == 'Id':
-                return detail['content'], owner_id:
+                return detail['content'], owner_id
     except Exception as e:
         print(e)
         raise e
