@@ -32,7 +32,7 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
     "Interested & Called": None,
     "Entrance Test": None,
     "Lightbot Activity": {
-        "sms": "Congrats! Aapne NavGurukul ki Scholarship paane ka first step clear kar liya hai. Hum aap ko kuch hi samay mei call karke agle steps ki jaan kaari denge. \n Kaafi kam log iss tarah se test mei itna accha perform kar paate hai. Aap helpline number ( 011-3959-5141) par bhi call kar sakte hai, adheek jaankaari ke liye.",
+        "sms": "Congrats! Aapne NavGurukul ki Scholarship paane ka first step clear kar liya hai. Hum aap ko kuch hi samay mei call karke agle steps ki jaan kaari denge. Kaafi kam log iss tarah se test mei itna accha perform kar paate hai. Aap helpline number ( 011-3959-5141) par bhi call kar sakte hai, adheek jaankaari ke liye.",
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template"
     },
