@@ -203,6 +203,7 @@ def on_crm_potential_stage_edit():
     # figure out the next actions that need to be taken
     stage_actions = app.config['POTENTIAL_STUDENT_STAGE_NOTIFS']
     actions = stage_actions.get(stage)
+    print(actions)
     if actions is None:
         return "No action needs to be taken", 200
     
