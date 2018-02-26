@@ -1,5 +1,9 @@
 import os
 import requests, jinja2
+import datetime
+
+def get_next_day():
+    return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%y-%m-%d')
 
 def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
@@ -51,7 +55,7 @@ def create_task_for_potential(potential_id):
     task_details = {
         'owner_id': '2821772000000169007',
         'text': 'Some text of the task.',
-        'due_date': '2018-02-05',
+        'due_date': get_next_day(),
         'se_module': 'Potentials',
         'se_id': potential_id
     }

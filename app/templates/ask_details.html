@@ -6,7 +6,7 @@ Road to Navgurukul
 {% block head_extra %}
 <style>
     body{
-        background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
+        //background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
         background-size: cover;
     }
     .m-row{
@@ -17,7 +17,7 @@ Road to Navgurukul
     }
     .form-container{
         padding:2rem;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.8);
     }
     form>*{
         margin-top:1rem;
@@ -29,7 +29,7 @@ Road to Navgurukul
         font-size:1.5rem;
     }
     .hide{
-        display:none;
+        //display:none;
     }
 </style>
 {% endblock %}
@@ -54,7 +54,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Your Mobile Number</div>
                             <input type="number" name="student_mobile" placeholder="Your Mobile Number"
-                                required class="col-xs-12 col-sm-6 border border-warning rounded section-1"/>
+                                required class="col-xs-12 col-sm-6 border border-warning rounded section-1"
+                            min="7777777777" max="9999999999"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Date of Birth</div>
@@ -92,11 +93,13 @@ Road to Navgurukul
                                 <option value="General">General</option>
                             </select>
                         </div>
+                                <!--
                         <div class="row m-row">
                             <button type="button" class="btn btn-lg next-btn btn-warning col-xs-12 col-sm-12 section-1">
                                 Continue My Application
                             </button>
                         </div>
+                            -->
                     </div>
                     <div class="col-sm-12 col-xs-12 hide hide-all" id="block_2">
                         <div class="row m-row">
@@ -121,14 +124,14 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6">Works?</div>
                             <select name="is_works"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
+                                >
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Where do you work?</div>
-                            <input type="number" name="works_where" required
+                            <input type="number" name="works_where" 
                                 placeholder="Number of Earning Family Members"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
@@ -146,7 +149,7 @@ Road to Navgurukul
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Monthly Family Income</div>
-                            <input type="number" name="monthly_fam_income" required
+                            <input type="number" name="monthly_fam_income" 
                                 placeholder="Monthly Family Income"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
@@ -162,6 +165,7 @@ Road to Navgurukul
                                 placeholder="Mother's Profession"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
+                                <!--
                         <div class="row m-row">
                             <button type="button" class="btn btn-lg btn-warning col-xs-12 
                                                         prev-btn col-sm-12 col-md-6">
@@ -172,6 +176,7 @@ Road to Navgurukul
                                 Continue Application
                             </button>
                         </div>
+                            -->
                     </div>
                     <div class="col-sm-12 col-xs-12 hide hide-all" id="block_3">
                         <div class="row m-row">
@@ -192,7 +197,7 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Percentage in 10th</div>
                             <input type="number" name="percentage_10" 
-                                placeholder="Percentage in 10th" required
+                                placeholder="Percentage in 10th"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
@@ -207,14 +212,14 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Percentage in 12th</div>
                             <input type="number" name="percentage_12" 
-                                placeholder="Percentage in 12th" required
+                                placeholder="Percentage in 12th" 
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Stream in 11th/12th</div>
                             <select name="stream_11_12"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
+                                >
                                 <option value="medical">Medical</option>
                                 <option value="mon-medical">Non Medical</option>
                                 <option value="commerce_maths">Commerce (With Maths)</option>
@@ -233,25 +238,27 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">College Name</div>
                             <input type="text" name="college_which" 
-                                placeholder="Your College's Name" required
+                                placeholder="Your College's Name" 
                                 class="col-xs-12 col-sm-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">College Type</div>
                             <select name="college_type"
                                 class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
+                                >
                                 <option value="Normal">Normal</option>
                                 <option value="Distant">Distance Education</option>
                             </select>
                         </div>
                         <div class="row m-row">
+                                <!--
                             <button type="button" class="btn btn-lg btn-warning col-xs-12 
                                                         prev-btn col-sm-12 col-md-6">
                                 Get Back in Application
                             </button>
+                            -->
                             <button class="btn btn-lg btn-danger col-xs-12 
-                                col-sm-12 col-md-5 offset-md-1" type="submit">
+                                col-sm-12 col-md-4 offset-md-6" type="submit">
                                 Submit Application
                             </button>
                         </div>
@@ -264,6 +271,7 @@ Road to Navgurukul
 
 {% block footer %}
 <script>
+/*
 $(function(){
     $("button.secion-1").on("click", function(){
         if($(".section-1").checkValidity()) {
@@ -286,5 +294,6 @@ $(function(){
                 $("#block_"+ present_block).removeClass("hide");
             });
 });
+*/
 </script>
 {% endblock %}
