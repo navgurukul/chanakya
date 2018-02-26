@@ -211,9 +211,8 @@ def on_crm_potential_stage_edit():
     # trigger the sms
     if actions.get("sms"):
         #TODO: Implement the real message when we buy exotel.
-        message = app.config.get("TEST_ENROLL_MSG")
-        test_message = "This is a test message being sent using Exotel with a (hello) and (123456789). If this is being abused, report to 08088919888"
-        exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, test_message)
+        message = actions['sms']
+        exotel.sms(app.config.get("EXOTEL_NUM_SMS"), student_mobile, message)
 
     # trigger the outbound call
     if actions.get("exotel_obd_id"):
