@@ -5,7 +5,7 @@ import datetime
 from app import app
 
 def get_next_day():
-    return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%y-%m-%d')
+    return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
 
 def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
