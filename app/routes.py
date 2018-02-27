@@ -35,7 +35,7 @@ def enter_enrolment():
     if not session.get("page"):
         session["page"] = "enter_enrolment"
     if session.get("page") == "enter_enrolment":
-        enrolment_key = request.args.get("enrolment_key")
+        enrolment_key = request.args.get("key")
         if enrolment_key and repos.is_valid_enrolment(enrolment_key):
             session["enrolment_key"]   = enrolment_key
             session["page"] = "before_test"
