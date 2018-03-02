@@ -96,15 +96,17 @@ Road to Navgurukul
                     <ol class="row">
                         {% for x in range(4) %}
                             {% set _id = q_no|string + x|string %}
-                            <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
-                                <input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" 
-                                id="id_{{_id}}" class="cls_{{q_no}}"/>
-                                {% if "https://" in random_options[x] %}
-                                    <label class="answer-label" for="id_{{_id}}"><img src="{{random_options[x]}}"></label>
-                                {% else %}
-                                    <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
-                                {% endif %}
-                            </li>
+			    {% if random_options[x]|length > 0 %}
+				    <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
+					<input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" 
+					id="id_{{_id}}" class="cls_{{q_no}}"/>
+					{% if "https://" in random_options[x] %}
+					    <label class="answer-label" for="id_{{_id}}"><img src="{{random_options[x]}}"></label>
+					{% else %}
+					    <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
+					{% endif %}
+				    </li>
+			    {% endif %}
                         {% endfor %}
                     </ol>
                     {% elif question_type=="short_answer" %}
@@ -137,6 +139,26 @@ Road to Navgurukul
 </style>
 <script>
     $(function(){
+
+    	var frm = $('form');
+    	frm.submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+		location.reload();
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        	});
+    	});
 
         $("button.cls_1").on("click", function(){
             if($("input.cls_1").checkValidity()) {
@@ -193,7 +215,7 @@ Road to Navgurukul
             if(time_remaining==3){
                 $("#alert_text").html("<h2>Time Over Submitting Your Test Now.</h2>");
             }
-            if(time_remaining<=0){
+            if(time_remaining<=3){
                 $("form").submit();
             }
         }, 100); 

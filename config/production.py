@@ -1,11 +1,12 @@
 import random, string
 
 # Database
-SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123@35.189.19.99/chanakya'
+#SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123@35.189.19.99/chanakya'
+SQLALCHEMY_DATABASE_URI = "mysql://chanakya:chanakya@localhost/chanakya"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Flask level config
-SECRET_KEY = "abcdef212131daddaasfaefedawdedsafefhalnhfuy8rgkb"
+SECRET_KEY = "abcdef212131daddaasfaefedawdedsafefhalnhfuy8rgkbdasfasfafewqrffd"
 #SECRET_KEY = "".join([random.choice(string.ascii_uppercase) for x in range(10)])
 DEBUG = True
 #SERVER_NAME = "join.navgurukul.org"
@@ -14,7 +15,7 @@ DEBUG = True
 TEST_ENROLL_MSG = """
 NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
 
-Iss test ko dene ke liye aap jald hi, yeh website - http://join.navgurukul.org/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
+Iss test ko dene ke liye aap jald hi, yeh website - http://35.231.28.4/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
 
 NavGurukul ke baarein mei aur jaanne ke liye, youtube par yeh video - http://bit.ly/navgurukul-intro dekhein.
 

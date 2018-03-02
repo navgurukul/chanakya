@@ -1,102 +1,47 @@
-class set_1_class():
+class processing_html():
     before = '''
-<h1 class="col-xs-12 col-sm-12"> I Come before the questions of Set 1 Starts</h1>
-<h2 class="col-xs-12 border border-info">And I support Bootstrap</h2>
-<p  class="col-xs-12 col-sm-12"> I am configured to run for 50 sec </p>
-<br/>
-<button class="show-off btn btn-md btn-danger"> I support JS/Jquery also </button>
-<b class="show-style">And Custom CSS</b>
-<br/>
-<hr/>
-<script>
-    $(function(){
-        $(".show-off").click(function(){
-            alert("yo!");
-        });
-    });
-</script>
-<style>
-    .show-style{
-        font-size:2rem;
-        text-shadow: 3px 3px red, 4px 5px green, 6px 6px 10px orange;
-        color:skyblue;
-    }
-</style>
+<h1 class="col-xs-12 col-sm-12">
+Iss test me aapko jaldi jaldi uttar dena hai.
+</h1>
+<h2 class="col-xs-12 col-sm-12">
+Koshish karo sahi uttar jyada se jyada ho!
+</h2>
 '''
-    after = '''
-<h1 class="col-xs-12 col-sm-12"> I Come after the questions of Set 1(if not submitted)</h1>
-<h2 class="col-xs-12 border border-info">And I support Bootstrap</h2>
-<p  class="col-xs-12 col-sm-12"> I am configured to run for 30 sec </p>
+
+class memory_html():
+    before = '''
+    <div class="col-xs-12 col-sm-12">
+Niche di gyi image ko dhyaan se dekho aur isska ache se ratta maarlo. - <b>1 Marks</b><br/>
+<img src="https://image.ibb.co/bNUTQx/19M.png" class="img img-responsive">
 <br/>
-<button class="show-off btn btn-md btn-danger"> I support JS/Jquery also </button>
-<b class="show-style">And Custom CSS</b>
+Niche di gyi image me dhyaan se dekho kaun kaun se alphabets hai! - <b>2 Marks</b><br/>
+<img src="https://image.ibb.co/cRqPyH/20M.png" class="img img-responsive">
 <br/>
-<hr/>
-<script>
-    $(function(){
-        $(".show-off").click(function(){
-            alert("yo!");
-        });
-    });
-</script>
+Niche di gyi image me dhyaan se dekho kaun kaun se color kis kis shabd se likhe hai. <b>3 Marks</b><br/>
+<img src="https://image.ibb.co/iUGxJH/21M.png" class="img img-responsive">
+</div>
 <style>
-    .show-style{
-        font-size:2rem;
-        text-shadow: 3px 3px red, 4px 5px green, 6px 6px 10px orange;
-        color:skyblue;
+    .img{
+        min-width:360px;
     }
 </style>
 '''
 
-class set_2_class():
+class mix_MCQ_html():
     before = '''
-<h1 class="col-xs-12 col-sm-12"> I Come before the questions of Set 2 Starts</h1>
-<h2 class="col-xs-12 border border-info">And I support Bootstrap</h2>
-<p  class="col-xs-12 col-sm-12"> I am configured to run for 45 sec </p>
-<br/>
-<button class="show-off btn btn-md btn-danger"> I support JS/Jquery also </button>
-<b class="show-style">And Custom CSS</b>
-<br/>
-<hr/>
-<script>
-    $(function(){
-        $(".show-off").click(function(){
-            alert("yo!");
-        });
-    });
-</script>
-<style>
-    .show-style{
-        font-size:2rem;
-        text-shadow: 3px 3px red, 4px 5px green, 6px 6px 10px orange;
-        color:skyblue;
-    }
-</style>
-'''
-    after = '''
-<h1 class="col-xs-12 col-sm-12"> I Come after the questions of Set 2(if not submitted)</h1>
-<h2 class="col-xs-12 border border-info">And I support Bootstrap</h2>
-<p  class="col-xs-12 col-sm-12"> I am configured to run for 30 sec </p>
-<br/>
-<button class="show-off btn btn-md btn-danger"> I support JS/Jquery also </button>
-<b class="show-style">And Custom CSS</b>
-<br/>
-<hr/>
-<script>
-    $(function(){
-        $(".show-off").click(function(){
-            alert("yo!");
-        });
-    });
-</script>
-<style>
-    .show-style{
-        font-size:2rem;
-        text-shadow: 3px 3px red, 4px 5px green, 6px 6px 10px orange;
-        color:skyblue;
-    }
-</style>
+<h1 class="col-xs-12 col-sm-12">
+Aapse agle test me kuch questions pooche jaenge, apna uttar aram se soch samajh k de.
+</h1>
+<h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
 '''
 
-set_1 = set_1_class()
-set_2 = set_2_class()
+class generic_html():
+    after = '''
+<h1 class="col-xs-12 col-sm-12">Aapne apna Test submit nahi kiya!</h1>
+<h2 class="col-xs-12 col-sm-12">Koi baat nahi thori der me apne aap ye test submit ho jaega</h2>
+'''
+
+generic    = generic_html()
+mix_mcqs   = mix_MCQ_html()
+memory     = memory_html()
+processing = processing_html()

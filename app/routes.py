@@ -9,7 +9,18 @@ from app.helper_methods import ( get_random_string,
                                  get_time_remaining, get_question_set
                                 )
 
-global_questions = False
+import redis
+import json
+redis_obj = redis.Redis()
+
+def get_all_questions():
+    all_questions = redis_obj.get('all_question')
+    if not all_questions:
+        all_questions = repos.get_all_questions()
+        redis_obj.set('all_questions', json.dumps(all_questions))
+        return all_questions
+    else:          
+        return json.loads(all_question)
 
 ################### VIEWS #######################
 def go_to_page(check=None):
@@ -58,22 +69,20 @@ def before_test():
 @app.route('/test')
 def test():
     if session.get("page") == "test":
-        if not session.get("questions"):
-            global global_questions
-            if not global_questions: global_questions = repos.get_all_questions()
-            questions = global_questions
-            session["questions"] = questions
-            session["test_start_time"]  = datetime.utcnow()
-            session['total_time_shown'] = 0
-            session["test_score"]       = 0
-        time_remaining = get_time_remaining(session.get("test_start_time")) - session['total_time_shown']
+        global_questions = get_all_questions()
+        if not session.get("test_start_time"):
+            session["test_start_time"]   = datetime.utcnow()
+            session["last_submit_time"]  = session["test_start_time"]
+            session["test_score"]        = 0
+            session["submitted_set"]     = None
+        time_remaining = get_time_remaining(session.get("last_submit_time"), session['submitted_set'])
         if time_remaining > 0:
-            session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(session.get('questions'), time_remaining)
-            session['last_time_shown']  = time_to_show 
+            session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(global_questions, time_remaining)
             session['question_set']     = question_set
             return render_template("test.html", question_set=question_set, time_remaining=time_to_show)
         else:
-            return "timer has expired, call Navgurukul for more details."
+            flash("timer has expired, call Navgurukul for more details.")
+            session['page'] = 'end'
     return go_to_page()
 
 @app.route("/end", methods=["GET", "POST"])
@@ -86,12 +95,14 @@ def end():
             "enrolment_key":session.get("enrolment_key"),
             "set_name": session.get("set_name")
         }
-        session['total_time_shown'] += session['last_time_shown']
+        session["last_submit_time"]  = datetime.utcnow()
         data_dump = calculate_marks_and_dump_data(question_set, request.form)
         repos.save_test_result_and_analytics(data_dump, other_details)
         session["test_score"] += data_dump.get("total_marks")
+        session['submitted_set'] = session.get('set_name')
         if session.get('is_last_set'):
             session["page"] = "end"
+        return ""
     elif session.get("page") == "end":
         if request.method == "GET":
             return render_template("ask_details.html")
