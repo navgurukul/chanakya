@@ -32,6 +32,9 @@ class mix_MCQ_html():
 <h1 class="col-xs-12 col-sm-12">
 Aapse agle test me kuch questions pooche jaenge, apna uttar aram se soch samajh k de.
 </h1>
+<h1 class="col-xs-12 col-sm-12">
+aapko next 18 questions, 18 minutes me karne hai
+</h1>
 <h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
 '''
 

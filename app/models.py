@@ -44,6 +44,7 @@ class Enrolment(db.Model):
     phone_number     = db.Column(db.String(10), index=True)
     crm_potential_id = db.Column(db.String(20))
     created_on       = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    test_data        = db.relationship("TestData")
 
     def __repr__(self):
         return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 
@@ -57,7 +58,7 @@ class TestData(db.Model):
     max_possible_marks = db.Column(db.Integer, nullable=False)
     set_name           = db.Column(db.String(32), nullable=False)
     enrolment_id       = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
-    enrolment          = db.relationship("Enrolment", backref=db.backref("enrolment", uselist=False))
+    #enrolment          = db.relationship("Enrolment")
 
 class Options(db.Model):
     __tablename__    = "options"

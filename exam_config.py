@@ -2,7 +2,7 @@ import html_strings
 
 config = {
 "question_config" :{
-    "set 1":{
+    "set_1":{
                 "info_before":{
                     "html": html_strings.memory.before,
                     "time_in_seconds": 90
@@ -23,7 +23,7 @@ config = {
                     "time_in_seconds": 10
                 }
             },
-    "set 2":{
+    "set_2":{
                 "info_before":{
                     "html": html_strings.processing.before,
                     "time_in_seconds": 30
@@ -44,7 +44,7 @@ config = {
                     "time_in_seconds": 10
                 }
             },
-    "set 3":{
+    "set_3":{
                 "info_before":{
                     "html": html_strings.mix_mcqs.before,
                     "time_in_seconds": 30
@@ -60,7 +60,7 @@ config = {
                         "medium":(2,0),
                         "hard":(3,0)
                     },
-                    "time_per_question":20,
+                    "time_per_question":60,
                 },
                 "info_after":{
                     "html": html_strings.generic.after,
@@ -69,11 +69,9 @@ config = {
             },
     },
     "test_config":{
-            #100 + 220 + 310 = 630
-            #(0, 100), (100, 320), (320, 630)
-            "test_time": 90+30*3   +   30+10*36   +  30+20*18 + 30,
-            "set 1": 990,
-            "set 2": 800,
-            "set 3": 400,
+            "test_time": 1710,
+            "set_1": 1520 + 190, #1710
+            "set_2": 1120 + 36*10 + 30 +10, #1120 + 400 =  1520
+            "set_3": 1120, #18*60 +30 +10
     }
 }

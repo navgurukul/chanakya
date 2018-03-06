@@ -2,9 +2,10 @@ import random, string
 
 from app import app, exotel
 from flask import render_template, request, session, flash, redirect, url_for
-from datetime import datetime
+from datetime import datetime, timedelta
 from app import repos
 from app.helper_methods import ( get_random_string,
+                                 get_data_from_enrolment_file,
                                  calculate_marks_and_dump_data,
                                  get_time_remaining, get_question_set
                                 )
@@ -30,8 +31,11 @@ def go_to_page(check=None):
 
 @app.before_request
 def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(days=7)
     if request.endpoint not in ("create_enrolment_key", 
                                 "create_question",
+                                "view-result",
                                 "exotel_talk_to_ng",
                                 "exotel_enroll_for_test",
                                 "enter_enrolment",
@@ -40,6 +44,11 @@ def before_request():
             session["page"] = "enter_enrolment"
             return go_to_page()
 
+@app.route('/view-result/<enrolment_key>')
+def view_result(enrolment_key):
+    data, error = get_data_from_enrolment_file(enrolment_key)
+    return render_template("view_result.html", data=data, error=error)
+
 @app.route('/')
 @app.route('/enter-enrolment')
 def enter_enrolment():
@@ -47,11 +56,17 @@ def enter_enrolment():
         session["page"] = "enter_enrolment"
     if session.get("page") == "enter_enrolment":
         enrolment_key = request.args.get("key")
-        if enrolment_key and repos.is_valid_enrolment(enrolment_key):
-            session["enrolment_key"]   = enrolment_key
-            session["page"] = "before_test"
-        else:
-            return render_template("enter_enrolment.html")
+        if enrolment_key:
+            if repos.is_valid_enrolment(enrolment_key):
+                session["enrolment_key"]   = enrolment_key
+                if repos.can_start_test(session["enrolment_key"]):
+                    session["page"] = "before_test"
+                    return go_to_page()
+                else:
+                    flash("Aapka test use ho chuka hai, jyada details k liye Navgurukul ko call krre")
+            else:
+                flash("Niche diye gye box me valid Enrolment key likhe")
+        return render_template("enter_enrolment.html")
     return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])
@@ -60,10 +75,7 @@ def before_test():
         if request.method == "GET":
             return render_template("before_test.html")
         elif request.method == "POST":
-            if repos.can_start_test(session["enrolment_key"]):
-                session["page"] = "test"
-            else:
-                return "Unable to Start your Test, Contact Navgurukul", 400
+            session["page"] = "test"
     return go_to_page()
 
 @app.route('/test')
@@ -97,6 +109,16 @@ def end():
         }
         session["last_submit_time"]  = datetime.utcnow()
         data_dump = calculate_marks_and_dump_data(question_set, request.form)
+
+        stuff_to_add ='''
+qa_%s = {
+'questions':%s,
+'answers':%s
+}
+
+        '''%( other_details.get('set_name'), str(question_set), str(dict(request.form)))
+        repos.create_dump_file(session['enrolment_key'], stuff_to_add)
+
         repos.save_test_result_and_analytics(data_dump, other_details)
         session["test_score"] += data_dump.get("total_marks")
         session['submitted_set'] = session.get('set_name')
@@ -107,10 +129,11 @@ def end():
         if request.method == "GET":
             return render_template("ask_details.html")
         elif request.method == "POST":
-            student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
+            #student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
             if student_details:
                 repos.add_to_crm(student_details, session)
                 # repos.add_to_crm_if_needed(student_details['potential_name'], stage="Entrance Test")
+                repos.create_dump_file(session.get('enrolment_key'), "\nuser_details=" +str(student_details))
                 session.clear()
                 return render_template("thanks.html")
             else:
@@ -152,15 +175,6 @@ def create_question():
             return redirect(url_for("create_question"))
 
 ############ REST APIS ##############
-#@app.route("/create-enrolment-key/<phone_number>", methods=["PUT"])
-#def create_enrolment_key(phone_number):
-#    enrolment_key =  get_random_string()
-#    crm_potential_id  = repos.add_enrolment_to_crm(phone_number, enrolment_key)
-#    enrolment_key = repos.add_enrolment_key(enrolment_key, phone_number, crm_potential_id)
-#    if enrolment_key:
-#        return enrolment_key, 201
-#    else:
-#        return  "Unable to register", 400
 
 @app.route("/exotel_talk_to_ng")
 def exotel_talk_to_ng():
@@ -185,7 +199,6 @@ def exotel_enroll_for_test():
     enrolment_key     =  get_random_string()
     crm_potential_id  = repos.add_enrolment_to_crm(student_mobile, enrolment_key)
     enrolment_key     = repos.add_enrolment_key(enrolment_key, student_mobile, crm_potential_id)
-    print("potential id", crm_potential_id)
     print("enrolment key", enrolment_key)
     if not enrolment_key:
         return "ERROR", 500
@@ -214,7 +227,6 @@ def on_crm_potential_stage_edit():
     # figure out the next actions that need to be taken
     stage_actions = app.config['POTENTIAL_STUDENT_STAGE_NOTIFS']
     actions = stage_actions.get(stage)
-    print(actions)
     if actions is None:
         return "No action needs to be taken", 200
     

@@ -6,6 +6,7 @@ import exam_config
 from datetime import datetime
 from app import crm_api
 import enum
+import os
 
 config = exam_config.config["question_config"]
 
@@ -116,22 +117,26 @@ def get_all_questions():
         question_details[question_set]["questions"] = get_questions_for_q_set(q_set)
     return question_details
 
-def add_test_data_to_db(data_dump, other_details):
+def add_test_data_to_db(enrolment_key, test_data_details):
+    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+    test_data = TestData(**test_data_details)
+    test_data.enrolment_id = en.id
+    db.session.add(test_data)
+    db.session.commit()
+
+def create_dump_file(enrolment_key, stuff_to_save):
+    f_path = os.path.join("/home/lawliet/student_files", "%s.py"%enrolment_key)
+    with open(f_path, "a") as fp:
+        fp.write(stuff_to_save)
+
+def save_test_result_and_analytics(data_dump, other_details):
     enrolment_key     = other_details['enrolment_key']
     test_data_details = dict(       started_on          = other_details['start_time'],
                                     submitted_on        = other_details['submit_time'],
                                     received_marks      = data_dump['total_marks'],
                                     max_possible_marks  = data_dump['max_possible_marks'],
                                     set_name            = other_details['set_name'])
-    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
-    test_data = TestData(**test_data_details)
-    test_data.enrolment = en
-    db.session.add(test_data)
-    db.session.commit()
-
-def save_test_result_and_analytics(data_dump, other_details):
-    add_test_data_to_db(data_dump, other_details)
-    #create_dump_zip(data_dump, other_details)
+    add_test_data_to_db(enrolment_key, test_data_details)
 
 def can_add_student(enrolment_key, student_data):
     try:
@@ -191,8 +196,6 @@ def get_student_details_from_phone_number(phone_number, stage):
 
 def add_to_crm_if_needed(phone_number, stage):
     should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)
-    print(should_add_to_crm, action, response.json())
-    print(stage, phone_number)
     if should_add_to_crm:
         student_details = get_student_details_from_phone_number(phone_number, stage)
         if action == "create_new":

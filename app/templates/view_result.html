@@ -1,0 +1,35 @@
+{% extends "master.html" %}
+{% block title %}
+NG Result
+{% endblock %}
+
+{% block head_extra %}
+<style>
+	img{width:100%!important}
+	.btn{margin-top:8px;}
+</style>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+  {% for set_name in data %}
+    {% for question in data[set_name]['questions']['questions'] %}
+            <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+        <h1>{{ question['en_question_text'] | safe }}</h1>
+        <button class="btn btn-warning">Category: {{question['category']}}</button>
+        <button class="btn btn-danger">Difficulty: {{question['difficulty']}}</button>
+	{% for option in question['random_options'] %}
+		{% if option!= '' %}
+			{% if option == question['answer'] %}
+				<button class=" btn btn-lg btn-success col-xs-12 col-md-6">{{ option }}</button>
+			{%else%}
+				<button class=" btn btn-lg btn-info col-xs-12 col-md-6">{{ option }}</button>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+            </div>
+    {% endfor %}
+  {% endfor %}
+  {{error}}
+    </div>
+{% endblock %}
