@@ -2,12 +2,25 @@ import random
 from exam_config import config
 import string
 from datetime import datetime, timedelta
+import os, sys
+sys.path.insert(0, '/home/lawliet/student_files/')
 
 test_config = config["test_config"]
 
 def get_random_string():
     ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits 
     return "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(2)])
+
+def get_data_from_enrolment_file(enrolment_key):
+    try:
+        set_names = tuple(config.get('question_config').keys())
+        en = __import__(enrolment_key)
+        qa = {}
+        for set_name in set_names:
+            qa[set_name] = getattr(en, "qa_"+set_name)
+        return qa, None
+    except Exception as e:
+        return None, str(e)
 
 def get_time_remaining(submit_time, submitted_set):
     set_deduction = test_config[submitted_set] if submitted_set else 0

@@ -60,6 +60,10 @@ Road to Navgurukul
     .answer-label img{
         max-height:250px;
     }
+    .custom.progress{
+	height:2rem;
+	margin-bottom:15px;
+    }
 </style>
 {% endblock %}
 
@@ -67,6 +71,14 @@ Road to Navgurukul
 <div class="row">
     <div class="red b col-sm-12 col-xs-12 col-md-6" id="time_to_show"></div>
     <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div>
+    <div class="col-sm-12 col-xs-12 col-md-6">
+	<div class="progress custom">
+		<div class="progress-bar progress-bar-success progress-bar-striped active" 
+			    role="progressbar"  aria-valuemin="0" 
+			    aria-valuemax="100">
+		</div> 
+	</div>
+    </div>
 </div>
 {% endblock %}
 
@@ -82,6 +94,12 @@ Road to Navgurukul
                 total_questions = {{questions | length}};
             })
         </script>
+	<div class="col-xs-12 col-sm-12">
+                <button type="button" class="btn btn-md btn-warning cls_{{q_no}} hide" id="prev_btn">
+                    Previous Question / पिछला प्रश्न
+                    <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+		</button>
+	</div>
         {% for question in questions %}
             {% set en_question_text = question["en_question_text"] %}
             {% set hi_question_text = question["hi_question_text"] %}
@@ -121,8 +139,8 @@ Road to Navgurukul
                     Next Question / अगला प्रश्न
                     <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                 </button>
-                <button type="submit" class="hide btn btn-lg btn-primary" id="submit_btn">
-                    Submit Test / अगला प्रश्न
+                <button type="submit" class="hide btn btn-lg btn-danger" id="submit_btn">
+                    Submit Test!
                 </button>
             </div>
     </form>
@@ -138,26 +156,32 @@ Road to Navgurukul
     }
 </style>
 <script>
+    var do_it;
     $(function(){
 
+	is_submitted = false;
     	var frm = $('form');
     	frm.submit(function (e) {
         e.preventDefault();
 
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                console.log('Submission was successful.');
-                console.log(data);
-		location.reload();
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-            },
-        	});
+	if(!is_submitted){
+		clearInterval(do_it);
+		$.ajax({
+		    type: frm.attr('method'),
+		    url: frm.attr('action'),
+		    data: frm.serialize(),
+		    success: function (data) {
+			console.log('Submission was successful.');
+			console.log(data);
+			window.location = window.location.href;
+			is_submitted = true;
+		    },
+		    error: function (data) {
+			console.log('An error occurred.');
+			console.log(data);
+		    },
+			});
+		}
     	});
 
         $("button.cls_1").on("click", function(){
@@ -179,6 +203,15 @@ Road to Navgurukul
         $("#question_1").removeClass("hide");
         $("#next_btn").click(function(){
             present_question += 1;
+
+	    width = present_question/total_questions;
+	    $(".progress-bar").html("Progress: "+ present_question + " / " + total_questions);
+	    $(".progress-bar").css({"width": 100*width+"%"});
+	    $(".progress-bar").attr("aria-valuenow",width);
+
+	    if(present_question == 2){
+	   	$("#prev_btn").removeClass("hide");
+	    }
             if(present_question <= total_questions){
                 $(".hide-all").addClass("hide");
                 $("#question_"+ present_question.toString() ).removeClass("hide");
@@ -188,7 +221,32 @@ Road to Navgurukul
                 }
             }
         });
-        setInterval(function(){
+        $("#prev_btn").click(function(){
+            present_question -= 1;
+
+	    width = present_question/total_questions;
+	    $(".progress-bar").html("Progress: "+ present_question + " / " + total_questions);
+	    $(".progress-bar").css({"width": 100*width+"%"});
+	    $(".progress-bar").attr("aria-valuenow",width);
+
+            $("#next_btn").removeClass("hide");
+            $("#submit_btn").addClass("hide");
+	    if(present_question == 1){
+	   	$("#prev_btn").addClass("hide");
+	    }
+	    else if(present_question >= 2){
+                $(".hide-all").addClass("hide");
+                $("#question_"+ present_question.toString() ).removeClass("hide");
+                if(present_question == total_questions){
+                    $("#submit_btn").removeClass("hide");
+                    $("#next_btn").addClass("hide");
+                }
+            }
+        });
+	function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+	}
+        do_it = setInterval(function(){
             new_time   = new Date().getTime()
             time_spent = (new_time - last_recorded_time)/1000;
             last_recorded_time = new_time;
@@ -215,8 +273,9 @@ Road to Navgurukul
             if(time_remaining==3){
                 $("#alert_text").html("<h2>Time Over Submitting Your Test Now.</h2>");
             }
-            if(time_remaining<=3){
-                $("form").submit();
+            if(time_remaining<=1){
+		$("#submit_btn").click();
+		clearInterval(do_it);
             }
         }, 100); 
     });
