@@ -236,6 +236,7 @@ class Student(db.Model):
     family_land_holding = db.Column(db.Integer)
     family_draught_animals = db.Column(db.Integer)
     housing_type = db.Column(db.Enum(HousingType))
+    #TODO: What items do you own?
 
     # caste / jaati etc.
     caste_parent_category = db.Column(db.Enum(Caste), nullable=False)
