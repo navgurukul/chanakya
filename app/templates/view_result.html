@@ -11,11 +11,16 @@ NG Result
 {% endblock %}
 
 {% block main %}
-    <div class="row">
+	{{data}}
   {% for set_name in data %}
-    {% for question in data[set_name]['questions']['questions'] %}
-            <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <h1>{{ question['en_question_text'] | safe }}</h1>
+    <div class="row">
+    <h1 class="col-sm-12"> {{set_name}} </h1>
+    {% set questions = data[set_name]['questions']['questions'] %}
+    {% for question in questions %}
+        {% set q_no = questions.index(question) %}
+	{{q_no}}
+        <div class="col-sm-12 col-xs-12 col-md-5 offset-md-1">
+        <h3>{{ question['en_question_text'] | safe }}</h3>
         <button class="btn btn-warning">Category: {{question['category']}}</button>
         <button class="btn btn-danger">Difficulty: {{question['difficulty']}}</button>
 	{% for option in question['random_options'] %}
@@ -27,9 +32,10 @@ NG Result
 			{% endif %}
 		{% endif %}
 	{% endfor %}
-            </div>
+	<button type="button" class="btn btn-outline-dark">{{data[set_name]['answers']['answer_'+q_no|string]}}</button>
+        </div>
     {% endfor %}
+  </div>
   {% endfor %}
   {{error}}
-    </div>
 {% endblock %}
