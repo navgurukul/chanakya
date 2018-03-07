@@ -210,3 +210,6 @@ def add_enrolment_to_crm(phone_number, enrolment_key):
     student_details['Enrolment Key'] = enrolment_key
     potential_id, owner_id = crm_api.create_potential(student_details)
     return potential_id
+
+def add_student_to_crm(student):
+    pass

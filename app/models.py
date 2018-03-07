@@ -52,72 +52,72 @@ ITEMS_OWNED_MAPPING = {
 }
 
 class Qualification(Enum):
-    no_reading_writing = 1 # Don't know how to read or write
-    reading_writing = 2 # Know how to read or write
-    class_5_pass = 3 # Class 5 pass
-    class_8_pass = 4 # Class 8 pass
-    class_10_pass = 5 # Class 10 pass
-    class_12_pass = 6 # Class 12 pass
-    graduate = 7 # Graduation completed
-    post_graduation = 8 # Post graduation
-    prof_degree = 9 # Professional degree
+    no_reading_writing = "No Reading/Writing" # Don't know how to read or write
+    reading_writing = "Reading/Writing" # Know how to read or write
+    class_5_pass = "Class 5" # Class 5 pass
+    class_8_pass = "Class 8" # Class 8 pass
+    class_10_pass = "Class 10" # Class 10 pass
+    class_12_pass = "Class 12" # Class 12 pass
+    graduate = "Graduate" # Graduation completed
+    post_graduation = "Post Graduate" # Post graduation
+    prof_degree = "Professional Degree" # Professional degree
 
 class SchoolInstructionMedium(Enum):
-    english = 1 # "English"
-    other = 2 # "Non English"
+    english = "English" # "English"
+    vernacular = "Vernacular" # "Non English"
 
 class Class12Stream(Enum):
-    pcm = 1 # "Non Medical (Phy, Chem, Maths)"
-    pcb = 2 # "Medical (Phy, Chem, Biiteo)"
-    pcmb = 3 # "Combined (Phy, Chem, Bio, Maths)"
-    commerce_with_maths = 4 # "Commerce (with maths)"
-    commerce_without_maths = 5 # "Commerce (without maths)"
-    arts = 6 # "Arts"
-    others = 7 # "Others"
+    pcm = "PCM" # "Non Medical (Phy, Chem, Maths)"
+    pcb = "PCB" # "Medical (Phy, Chem, Biiteo)"
+    pcmb = "PCMB" # "Combined (Phy, Chem, Bio, Maths)"
+    commerce_with_maths = "Commerce (with Maths)" # "Commerce (with maths)"
+    commerce_without_maths = "Commerce (without Maths)" # "Commerce (without maths)"
+    arts = "Arts" # "Arts"
+    others = "Others" # "Others"
 
 class UrbanOrRural(Enum):
-    urban = 1 # "Sheher"
-    rural = 2 # "Gaon"
+    urban = "Urban" # "Sheher"
+    rural = "Rural" # "Gaon"
 
 class FamilyHead(Enum):
-    father = 1 # "Papa"
-    mother = 2 # "Mummy"
-    other = 3 # "Others"
+    father = "Father" # "Papa"
+    mother = "Mother" # "Mummy"
+    other = "Other" # "Others"
 
 class UrbanProfessions(Enum):
-    unemployed = 1 # Unemployed
-    no_training_jobs = 2 # Servant / Peon etc. (jobs without training)
-    jobs_with_training = 3 # Factory worker etc. (jobs requiring some training)
-    high_training = 4 # Driver etc. which require higher training
-    read_write_jobs = 5 # Clerk etc which require how to read or write
-    routine_work = 6 # Lecturers , High School teachers etc.
-    prof_degree_work = 7 # doctors etc.
+    unemployed = "Unemployed" # Unemployed
+    no_training_jobs = "Job without Training" # Servant / Peon etc. (jobs without training)
+    jobs_with_training = "Job requiring Training" # Factory worker etc. (jobs requiring some training)
+    high_training = "Job requiring High Training" # Driver etc. which require higher training
+    read_write_jobs = "Read / Writing Jobs" # Clerk etc which require how to read or write
+    routine_work = "Routine Work" # Lecturers , High School teachers etc.
+    prof_degree_work = "Professional Degree Work" # doctors etc.
 
 class RuralProfessions(Enum):
-    unemployed = 1 # Unemployed
-    labourer = 2 # Labourer
-    caste_related_work = 3
-    business = 4
-    independent_work = 5 
-    work_on_own_land = 6
-    service = 7
+    unemployed = "Unemployed" # Unemployed
+    labourer = "Labourer" # Labourer
+    caste_related_work = "Caste Related Work"
+    business = "Business"
+    independent_work = "Independent Work" 
+    work_on_own_land = "Works on own Land"
+    service = "Service"
 
 class RuralOrgMembership(Enum):
-    nothing = 1
-    member_1_org = 2 # member of only one org
-    member_1plus_org = 3 # member of 1 or more orgs
-    office_holder = 4 # office holde of an org
-    pub_leader = 5 # public leader 
+    nothing = "Nothing"
+    member_1_org = "Member of 1 Organisation" # member of only one org
+    member_1plus_org = "Member of more than 1 Organisation" # member of 1 or more orgs
+    office_holder = "Office Holder" # office holde of an org
+    pub_leader = "Public Leader" # public leader 
 
 class FamilyType(Enum):
-    single = 1
-    joint = 2
+    single = "Single"
+    joint = "Joint"
 
 class HousingType(Enum):
-    hut = 1 # hut / jhopri
-    kacha_house = 2
-    pucca_house = 3 
-    kothi = 4
+    hut = "Hut" # hut / jhopri
+    kacha_house = "Kacha House"
+    pucca_house = "Pucca House"
+    kothi = "Kothi"
 
 class Difficulty(Enum):
     easy   = 1
@@ -144,6 +144,7 @@ class Caste(Enum):
     obc = "(OBC) Other Backward Classes"
     general = "General"
     other = "Others"
+
 
 class Enrolment(db.Model):
     __tablename__    = "enrolment"
@@ -203,7 +204,7 @@ class Student(db.Model):
     dob = db.Column(db.Date, nullable=False)
 
     # academic details
-    school_medium = db.Column(db.String(10), nullable=True)
+    school_medium = db.Column(db.Enum(SchoolInstructionMedium), nullable=True)
     qualification = db.Column(db.Enum(Qualification), nullable=False)
     class_10_marks = db.Column(db.String(10), nullable=True) # should at least be a 10th pass
     class_12_marks = db.Column(db.String(10), nullable=True) # should at least be a 12th pass
@@ -262,7 +263,7 @@ class Student(db.Model):
     def items_owned(self, value):
         if type(value) is not list:
             raise Exception("The type of items is not a list.")
-        for item in items:
+        for item in value:
             if not ITEMS_OWNED_MAPPING.get(item):
                 raise Exception("The list of owned items being set has an unreconized item.")
             else:
