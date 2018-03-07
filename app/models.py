@@ -219,14 +219,14 @@ class Student(db.Model):
 
     # caste / jaati etc.
     caste_parent_category = db.Column(db.Enum(Caste), nullable=False)
-    caste = db.Column(db.String(100))
+    caste = db.Column(db.String(100), nullable=True)
 
     # urban or rural
     urban_rural = db.Column(db.Enum(UrbanOrRural), nullable=False)
 
     # common fields (to both urban & rural) for privilege check
-    family_head = db.Column(db.Enum(FamilyHead))
-    family_head_other = db.Column(db.String(100)) # only when `family_head` value is other
+    family_head = db.Column(db.Enum(FamilyHead), nullable=True)
+    family_head_other = db.Column(db.String(100), nullable=True) # only when `family_head` value is other
     family_head_qualification = db.Column(db.Enum(Qualification))    
     fam_members = db.Column(db.Integer)
     earning_fam_members = db.Column(db.Integer)
