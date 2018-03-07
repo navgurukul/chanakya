@@ -1,6 +1,6 @@
 import datetime
 from app.models import Student, Qualification, SchoolInstructionMedium, FamilyType, Class12Stream, UrbanOrRural, FamilyHead, UrbanProfessions, RuralProfessions, RuralOrgMembership, HousingType, Caste
-from app import db
+from app import db, app
 
 student = Student()
 
@@ -45,7 +45,7 @@ student.family_type = FamilyType.single
 student.family_land_holding = 10
 student.family_draught_animals = 10
 student.housing_type = HousingType.hut
-student.items_owned = ['bullock_cart', 'cycle']
+student.items_owned = []
 
 # other
 student.enrolment_id = 1
