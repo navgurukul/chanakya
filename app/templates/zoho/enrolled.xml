@@ -48,15 +48,15 @@
         <FL val="Rural Family Head Profession"><![CDATA[{{ student.rural_family_head_prof.value }}]]></FL>
         <FL val="Family Type"><![CDATA[{{ student.family_type.value }}]]></FL>
         <FL val="Draught Animals"><![CDATA[{{ student.family_draught_animals }}]]></FL>
-        <FL val="Items Owned"><![CDATA[{{ student.items_owned }}]]></FL>
+        <FL val="Items Owned"><![CDATA[{{ ';'.join(student.items_owned) }}]]></FL>
         <FL val="Family Head Org Membership"><![CDATA[{{ student.family_head_org_membership.value }}]]></FL>
         <FL val="Family Land Holding (in acres)"><![CDATA[{{ student.family_land_holding }}]]></FL>
         <FL val="Housing Type"><![CDATA[{{ student.housing_type.value }}]]></FL>
 
         <!-- Testing Results -->
-        <FL val="Results URL"><![CDATA[{{ results_url }}]]></FL>
+        <FL val="Results URL"><![CDATA[{{ student.results_url }}]]></FL>
         <FL val="Test Version Answered"><![CDATA[{{ test_version }}]]></FL>
-        <FL val="Test Score"><![CDATA[{{ test_score }}]]></FL>
+        <FL val="Test Score"><![CDATA[{{ student.test_data.received_marks }}]]></FL>
 
         <!-- Other Information -->
         <FL val="Student or Partner"><![CDATA[ Student ]]></FL>
