@@ -11,10 +11,14 @@ def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
     return abs_path
 
+def jinja2_finalize(thing):
+    return thing if thing is not None else ''
+
 def render(tpl_path, context):
     path, filename = os.path.split(tpl_path)
     return jinja2.Environment(
-        loader=jinja2.FileSystemLoader(path or './')
+        loader=jinja2.FileSystemLoader(path or './'),
+        finalize=jinja2_finalize
     ).get_template(filename).render(context)
 
 def create_potential(student_details, crm_id=None):

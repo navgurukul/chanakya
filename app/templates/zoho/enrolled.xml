@@ -6,52 +6,52 @@
 
         <!-- Basic Details -->
         <FL val="Name"><![CDATA[{{ student.name }}]]></FL>
-        <FL val="Gender"><![CDATA[{{ student.gender }}]]></FL>
-        <FL val="Date of Birth"><![CDATA[{{ student.dob.strptime('%Y-%m-%d') }}]]></FL>
+        <FL val="Gender"><![CDATA[{{ student.gender.value }}]]></FL>
+        <FL val="Date of Birth"><![CDATA[{{ student.dob.strftime('%Y-%m-%d') }}]]></FL>
         <FL val="Stage"><![CDATA[{{ stage }}]]></FL>
         <FL val="Potential Name"><![CDATA[{{ student.name }}]]></FL>
         <FL val="Mobile"><![CDATA[{{ student.mobile }}]]></FL>
         <FL val="Enrollment Key"><![CDATA[{{ student.enrolment.enrolment_key }}]]></FL>
 
         <!-- Academic Details -->
-        <FL val="School Medium"><![CDATA[{{ student.school_medium }}]]></FL>
-        <FL val="Qualification"><![CDATA[{{ student.qualification }}]]></FL>
+        <FL val="School Medium"><![CDATA[{{ student.school_medium.value }}]]></FL>
+        <FL val="Qualification"><![CDATA[{{ student.qualification.value }}]]></FL>
         <FL val="Class 10 Marks (if 10th pass)"><![CDATA[{{ student.class_10_marks }}]]></FL>
         <FL val="Class 12 Marks (if 12th Pass)"><![CDATA[{{ student.class_12_marks }}]]></FL>
-        <FL val="Class 12 Stream"><![CDATA[{{ student.class_12_stream }}]]></FL>
+        <FL val="Class 12 Stream"><![CDATA[{{ student.class_12_stream.value }}]]></FL>
 
         <!-- Location -->
         <FL val="Pin Code"><![CDATA[{{ student.pin_code }}]]></FL>
         <FL val="District"><![CDATA[{{ student.district }}]]></FL>
-        <FL val="City / Village"><![CDATA[{{ student.city_village }}]]></FL>
+        <FL val="City / Village"><![CDATA[{{ student.city_or_village }}]]></FL>
         <FL val="State"><![CDATA[{{ student.state }}]]></FL>
         <FL val="Tehsil"><![CDATA[{{ student.tehsil }}]]></FL>
-        <FL val="Urban / Rural"><![CDATA[{{ student.urban_rural }}]]></FL>
+        <FL val="Urban / Rural"><![CDATA[{{ student.urban_rural.value }}]]></FL>
 
         <!-- Caste Details -->
-        <FL val="Caste"><![CDATA[{{ student.caste }}]]></FL>
+        <FL val="Caste"><![CDATA[{{ student.caste_parent_category.value }}]]></FL>
         <FL val="Jaati"><![CDATA[{{ student.jaati }}]]></FL>
 
         <!-- Privilege Check (Common) -->
-        <FL val="Family Head"><![CDATA[{{ student.family_head }}]]></FL>
+        <FL val="Family Head"><![CDATA[{{ student.family_head.value }}]]></FL>
         <FL val="Family Head (if other)"><![CDATA[{{ student.family_head_other }}]]></FL>
-        <FL val="Family Head Qualification"><![CDATA[{{ student.family_head_qualification }}]]></FL>      
+        <FL val="Family Head Qualification"><![CDATA[{{ student.family_head_qualification.value }}]]></FL>      
         <FL val="Family Members"><![CDATA[{{ student.fam_members }}]]></FL>
         <FL val="Earning Family Members"><![CDATA[{{ student.earning_fam_members }}]]></FL>
         <FL val="Monthly Family Income"><![CDATA[{{ student.monthly_family_income }}]]></FL>
 
         <!-- Urban Privilege Check -->
-        <FL val="Urban Family Head Profession"><![CDATA[{{ student.urban_family_head_prof }}]]></FL>
+        <FL val="Urban Family Head Profession"><![CDATA[{{ student.urban_family_head_prof.value }}]]></FL>
         <FL val="Family Head Income"><![CDATA[{{ student.family_head_income }}]]></FL>
 
         <!-- Rural Privilege Check -->
-        <FL val="Rural Family Head Profession"><![CDATA[{{ student.rural_family_head_prof }}]]></FL>
-        <FL val="Family Type"><![CDATA[{{ student.family_type }}]]></FL>
+        <FL val="Rural Family Head Profession"><![CDATA[{{ student.rural_family_head_prof.value }}]]></FL>
+        <FL val="Family Type"><![CDATA[{{ student.family_type.value }}]]></FL>
         <FL val="Draught Animals"><![CDATA[{{ student.family_draught_animals }}]]></FL>
         <FL val="Items Owned"><![CDATA[{{ student.items_owned }}]]></FL>
-        <FL val="Family Head Org Membership"><![CDATA[{{ student.family_head_org_membership }}]]></FL>
+        <FL val="Family Head Org Membership"><![CDATA[{{ student.family_head_org_membership.value }}]]></FL>
         <FL val="Family Land Holding (in acres)"><![CDATA[{{ student.family_land_holding }}]]></FL>
-        <FL val="Housing Type"><![CDATA[{{ student.caste }}]]></FL>
+        <FL val="Housing Type"><![CDATA[{{ student.housing_type.value }}]]></FL>
 
         <!-- Testing Results -->
         <FL val="Results URL"><![CDATA[{{ results_url }}]]></FL>
@@ -59,7 +59,7 @@
         <FL val="Test Score"><![CDATA[{{ test_score }}]]></FL>
 
         <!-- Other Information -->
-        <FL val="Student or Partner"><![CDATA[{{ Student }}]]></FL>
+        <FL val="Student or Partner"><![CDATA[ Student ]]></FL>
         <FL val="Layout">2821772000000172275</FL>
 
     </row>
