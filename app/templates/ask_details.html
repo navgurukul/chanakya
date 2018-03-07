@@ -48,12 +48,12 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Mobile Number</div>
                             <input type="number" name="mobile" placeholder="Your Mobile Number"
-                                required class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
                             min="7777777777" max="9999999999"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Date of Birth</div>
-                            <input type="date" name="dob" placeholder="Your Date of Birth"
+                            <input type="date" name="dob" placeholder="Your Date of Birth" min='1950-01-01' max='2018-01-01'
                                 required class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
@@ -61,6 +61,7 @@ Road to Navgurukul
                             <select name="gender"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
                                 required>
+                                <option value="NONE">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
@@ -92,8 +93,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aap kis State me rehte hai</div>
                             <select name="state"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select State</option>
                                     <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
                                     <option value='Andhra Pradesh'>Andhra Pradesh</option>
                                     <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
@@ -135,8 +136,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar kaha hai</div>
                             <select name="urban_rural" id="urban_rural"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='urban'>Shehar mein</option>
                                     <option value='rural'>Gao mein</option>
                             </select>
@@ -147,8 +148,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Maximum Qualification</div>
                             <select name="qualification" id="qualification" 
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='no_reading_writing'>Padna aur likhna nahi aata</option>
                                     <option value='reading_writing'>Padna ya likhna aata hai</option>
                                     <option value='class_5_pass'>Class 5 Pass</option>
@@ -176,6 +177,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Stream in Class 12th</div>
                             <select name="stream_12_stream"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
+                                <option value="NONE">Select Option</option>
                                 <option value="pcm">Non Medical (Physics, Chemistry, Maths)</option>
                                 <option value="pcb">Medical (Physics, Chemistry, Biology)</option>
                                 <option value="pcmb">Combined (Physics, Chemistry, Biology, Maths)</option>
@@ -189,6 +191,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">School Medium</div>
                             <select name="school_medium"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
+                                <option value="NONE">Select Option</option>
                                 <option value="english">English</option>
                                 <option value="others">Non English</option>
                             </select>
@@ -199,8 +202,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Family Head</div>
                             <select name="family_head" id="family_head"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='father'>Father</option>
                                     <option value='mother'>Mother</option>
                                     <option value='other'>Other</option>
@@ -215,8 +218,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Family Head's Qualification</div>
                             <select name="family_head_qualification"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='no_reading_writing'>Padna aur likhna nahi aata</option>
                                     <option value='reading_writing'>Padna ya likhna aata hai</option>
                                     <option value='class_5_pass'>Class 5 Pass</option>
@@ -231,19 +234,19 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Number of Family Members</div>
                             <input type="number" name="fam_members" 
-                                placeholder="Aapki Family me kitne log hai" required
+                                placeholder="Aapki Family me kitne log hai"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Number of Earning Family Members</div>
                             <input type="number" name="earning_fam_members" 
-                                placeholder="Aapki Family me kitne log kamate hai" required
+                                placeholder="Aapki Family me kitne log kamate hai" 
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">Number of Family Members</div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">Monthly Family Income</div>
                             <input type="number" name="monthly_family_income" 
-                                placeholder="Aapki Family ki Montly Income kya hai" required
+                                placeholder="Aapki Family ki Montly Income kya hai" 
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                 </div>
@@ -254,6 +257,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
                             <select name="urban_family_head_prof"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='unemployed'>Unemployed</option>
                                     <option value='no_training_jobs'>Jobs without training (Servent, Peon etc)</option>
                                     <option value='jobs_with_training'>Jobs with training (Factory Worker, Waiter etc)</option>
@@ -274,6 +278,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
                             <select name="rural_family_head_prof"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='unemployed'>Unemployed</option>
                                     <option value='labourer'>Labourer</option>
                                     <option value='caste_related_work'>Caste Related Work</option>
@@ -287,6 +292,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Organization Membership</div>
                             <select name="family_head_org_membership"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='nothing'>None</option>
                                     <option value='member_1_org'>Member of 1 organization</option>
                                     <option value='member_1plus_org'>Member of more than 1 organization</option>
@@ -298,6 +304,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Family Type</div>
                             <select name="family_type"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='single'>Single</option>
                                     <option value='joint'>Joint</option>
                             </select>
@@ -324,6 +331,7 @@ Road to Navgurukul
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar Kaisa hai</div>
                             <select name="housing_type"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
                                     <option value='hut'>Hut</option>
                                     <option value='kacha_ghar'>Kacha Ghar</option>
                                     <option value='pucca_ghar'>Pakka Ghar</option>
@@ -364,8 +372,8 @@ Road to Navgurukul
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6">Parents Caste/Tribe</div>
                             <select name="caste_parent_category" id="caste_parent_category"
-                                class="col-xs-12 col-sm-6 border border-warning rounded section-1"
-                                required>
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1">
+                                <option value="NONE">Select Option</option>
                                 <option value="sc">(SC) Scheduled Caste</option>
                                 <option value="st">(ST) Scheduled Tribe</option>
                                 <option value="obc">(OBC) Other Backward Classes</option>

@@ -155,6 +155,10 @@ class Enrolment(db.Model):
     created_on       = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     test_data        = db.relationship("TestData")
 
+    @property
+    def total_marks(self):
+        return sum([x.received_marks for x in self.test_data])
+
     def __repr__(self):
         return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 
 
@@ -200,33 +204,33 @@ class Student(db.Model):
     # basic details of the student
     name = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.Enum(Gender), nullable=False)
-    mobile  = db.Column(db.String(10), nullable=False)
+    mobile  = db.Column(db.String(10))
     dob = db.Column(db.Date, nullable=False)
 
     # academic details
-    school_medium = db.Column(db.Enum(SchoolInstructionMedium), nullable=True)
-    qualification = db.Column(db.Enum(Qualification), nullable=False)
-    class_10_marks = db.Column(db.String(10), nullable=True) # should at least be a 10th pass
-    class_12_marks = db.Column(db.String(10), nullable=True) # should at least be a 12th pass
-    class_12_stream = db.Column(db.Enum(Class12Stream), nullable=True) # should at least be a 12th pass
+    school_medium = db.Column(db.Enum(SchoolInstructionMedium))
+    qualification = db.Column(db.Enum(Qualification))
+    class_10_marks = db.Column(db.String(10)) # should at least be a 10th pass
+    class_12_marks = db.Column(db.String(10)) # should at least be a 12th pass
+    class_12_stream = db.Column(db.Enum(Class12Stream)) # should at least be a 12th pass
     
     # location details
-    pin_code = db.Column(db.String(6), nullable=True)
-    state = db.Column(db.Enum(*INDIAN_STATES), nullable=False)
-    district = db.Column(db.String(100), nullable=True)
-    tehsil = db.Column(db.String(100), nullable=True)
-    city_or_village = db.Column(db.String(100), nullable=True)
+    pin_code = db.Column(db.String(6))
+    state = db.Column(db.Enum(*INDIAN_STATES))
+    district = db.Column(db.String(100))
+    tehsil = db.Column(db.String(100))
+    city_or_village = db.Column(db.String(100))
 
     # caste / jaati etc.
-    caste_parent_category = db.Column(db.Enum(Caste), nullable=False)
-    caste = db.Column(db.String(100), nullable=True)
+    caste_parent_category = db.Column(db.Enum(Caste))
+    caste = db.Column(db.String(100))
 
     # urban or rural
-    urban_rural = db.Column(db.Enum(UrbanOrRural), nullable=False)
+    urban_rural = db.Column(db.Enum(UrbanOrRural))
 
     # common fields (to both urban & rural) for privilege check
-    family_head = db.Column(db.Enum(FamilyHead), nullable=True)
-    family_head_other = db.Column(db.String(100), nullable=True) # only when `family_head` value is other
+    family_head = db.Column(db.Enum(FamilyHead))
+    family_head_other = db.Column(db.String(100)) # only when `family_head` value is other
     family_head_qualification = db.Column(db.Enum(Qualification))    
     fam_members = db.Column(db.Integer)
     earning_fam_members = db.Column(db.Integer)
@@ -254,9 +258,7 @@ class Student(db.Model):
 
     @property
     def results_url(self):
-        url = 'http://join.navgurukul.org/?results_id={id}'.format(id=self.test_data.id if self.test_data else '12')
-        #TODO: Fix the right URL.
-        return url
+        return 'http://join.navgurukul.org/view-result/{key}'.format(key=self.enrolment.enrolment_key)
 
     @property
     def items_owned(self):
@@ -280,4 +282,3 @@ class Student(db.Model):
         items = ','.join(value)
         self._items_owned = items
         self.owned_items = items
-        

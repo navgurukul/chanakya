@@ -155,43 +155,28 @@ def can_add_student(enrolment_key, student_data):
         student_details = {key: student_data.get(key) for key in non_enum_fields}
         for index in range(len(enums)):
             enum_data = student_data.get(enum_fields[index])
-            if enum_data:
+            if enum_data and enum_data!='NONE':
                 student_details[enum_fields[index]] =  getattr(enums[index], enum_data)
 
-        student_details["owned_items"] = None
-        #student_details["owned_items"] = student_data.getlist('owned_items')
         student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
         student   = Student(**student_details)
+        student.items_owned  = student_data.getlist('owned_items')
         student.enrolment = enrolment
         student.test_data = test_data
         db.session.add(student)
         db.session.commit()
-        return student_details
+        return student
     #except Exception as e:
-        #log e
+    #    #log e
     #    return False
 
-def add_to_crm(student_details, other_details):
+def add_to_crm(student_object, other_details):
     enrolment_key = other_details.get("enrolment_key")
     stage = "Entrance Test"
-    student_details = { k:student_details[k].value if isinstance(student_details[k], enum.Enum) else student_details[k] for k in student_details}
-    all_student_details = {
-        'stage': stage,
-        'source': 'Helpline',
-        'student_or_partner': 'Student',
-            
-        'results_url': "http://join.navgurukul.org/view-result/%s" %enrolment_key,
-        'test_version': 'New Version XYZ',
-        'test_score': other_details.get("test_score"),
-    }
-    all_student_details.update(student_details)
-    all_student_details['student_name']   = all_student_details['potential_name']
-    all_student_details['potential_name'] = all_student_details['student_mobile']
-
     crm_id = get_crm_id_from_enrolment(enrolment_key)
-    potential_id, owner_id = crm_api.create_potential(all_student_details, crm_id=crm_id)
+    potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
     if potential_id:
         crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
 
