@@ -1,6 +1,4 @@
-from app.models import Options, Question, TestData, Enrolment, Student
-#from app.models import Difficulty, QuestionType, Boolean, Gender, Stream_11_12, CollegeType, Caste
-from app.models import Difficulty, QuestionType
+from app.models import *
 from app import db, app
 import random
 import exam_config
@@ -140,16 +138,28 @@ def save_test_result_and_analytics(data_dump, other_details):
     add_test_data_to_db(enrolment_key, test_data_details)
 
 def can_add_student(enrolment_key, student_data):
-    try:
-        non_enum_fields = ("works_where","num_fam_members","num_earning_fam_members","monthly_fam_income","father_prof","mother_prof","monthly_fam_income","last_class_passed","percentage_10","percentage_12","college_which","potential_name","student_mobile","dob","city","state")
 
-        enum_fields = ("owns_android","owns_computer","is_works","is_10_pass","is_12_pass","stream_11_12","is_college_enrolled","college_type","gender","caste_tribe")
+    #try:
+        non_enum_fields = ("name", "gender", "mobile", "dob", "class_10_marks", "class_12_marks", "pin_code", "district",
+        "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members", "state",
+        "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
-        enums = (Boolean, Boolean, Boolean, Boolean, Boolean, Stream_11_12, Boolean, CollegeType, Gender, Caste)
+        enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
+                        "family_head", "family_head_qualification", "urban_family_head_prof",
+                        "rural_family_head_prof", "family_head_org_membership", "family_type", "house_typing")
+
+        enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
+        FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
+        HousingType)
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
-        student_details.update({enum_fields[index]: getattr(enums[index], student_data.get(enum_fields[index])) for index in range(len(enums))})
+        for index in range(len(enums)):
+            enum_data = student_data.get(enum_fields[index])
+            if enum_data:
+                student_details[enum_fields[index]] =  getattr(enums[index], enum_data)
 
+        student_details["owned_items"] = None
+        #student_details["owned_items"] = student_data.getlist('owned_items')
         student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
@@ -159,9 +169,9 @@ def can_add_student(enrolment_key, student_data):
         db.session.add(student)
         db.session.commit()
         return student_details
-    except Exception as e:
+    #except Exception as e:
         #log e
-        return False
+    #    return False
 
 def add_to_crm(student_details, other_details):
     enrolment_key = other_details.get("enrolment_key")

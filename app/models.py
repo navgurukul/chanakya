@@ -48,7 +48,7 @@ ITEMS_OWNED_MAPPING = {
     'chairs': 'Chairs',
     'mobile': 'Mobile Phones',
     'television': 'Television',
-    'refirgerator': 'Refrigerator'
+    'refrigerator': 'Refrigerator'
 }
 
 class Qualification(Enum):
