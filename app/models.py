@@ -41,6 +41,16 @@ INDIAN_STATES = [
     'West Bengal'
 ]
 
+ITEMS_OWNED_MAPPING = {
+    'bullock_cart': 'Bullock Cart',
+    'cycle': 'Cycle',
+    'radio': 'Radio',
+    'chairs': 'Chairs',
+    'mobile': 'Mobile Phones',
+    'television': 'Television',
+    'refirgerator': 'Refrigerator'
+}
+
 class Qualification(Enum):
     no_reading_writing = 1 # Don't know how to read or write
     reading_writing = 2 # Know how to read or write
@@ -74,7 +84,7 @@ class FamilyHead(Enum):
     mother = 2 # "Mummy"
     other = 3 # "Others"
 
-class Professions(Enum):
+class UrbanProfessions(Enum):
     unemployed = 1 # Unemployed
     no_training_jobs = 2 # Servant / Peon etc. (jobs without training)
     jobs_with_training = 3 # Factory worker etc. (jobs requiring some training)
@@ -129,20 +139,11 @@ class Gender(Enum):
     others = "Transgender"
 
 class Caste(Enum):
-    SC = "(SC) Scheduled Caste"
-    ST = "(ST) Scheduled Tribe"
-    OBC = "(OBC) Other Backward Classes"
-    General = "General"
-
-class CollegeType(Enum):
-    Normal = "Normal"
-    Distant = "Distant Education"
-
-class Stream_11_12(Enum):
-    medical           = "Medical"
-    non_medical       = "Non Medical"
-    commerce_maths    = "Commerce (With Maths)"
-    commerce_no_maths = "Commerce (Without Maths)"
+    sc = "(SC) Scheduled Caste"
+    st = "(ST) Scheduled Tribe"
+    obc = "(OBC) Other Backward Classes"
+    general = "General"
+    other = "Others"
 
 class Enrolment(db.Model):
     __tablename__    = "enrolment"
@@ -201,19 +202,23 @@ class Student(db.Model):
     mobile  = db.Column(db.String(10), nullable=False)
     dob = db.Column(db.Date, nullable=False)
 
-    # location details
-    pin_code = db.Column(db.String(6), nullable=True)
-    state = db.Column(Enum(*INDIAN_STATES), nullable=False)
-    district = db.Column(db.String(100), nullable=True)
-    tehsil = db.Column(db.String(100), nullable=True)
-    city_or_village = db.Column(db.String(100), nullable=True)
-
     # academic details
+    school_medium = db.Column(db.String(10), nullable=True)
     qualification = db.Column(db.Enum(Qualification), nullable=False)
     class_10_marks = db.Column(db.String(10), nullable=True) # should at least be a 10th pass
     class_12_marks = db.Column(db.String(10), nullable=True) # should at least be a 12th pass
     class_12_stream = db.Column(db.Enum(Class12Stream), nullable=True) # should at least be a 12th pass
-    school_medium = db.Column(db.String(10), nullable=True)
+    
+    # location details
+    pin_code = db.Column(db.String(6), nullable=True)
+    state = db.Column(db.Enum(*INDIAN_STATES), nullable=False)
+    district = db.Column(db.String(100), nullable=True)
+    tehsil = db.Column(db.String(100), nullable=True)
+    city_or_village = db.Column(db.String(100), nullable=True)
+
+    # caste / jaati etc.
+    caste_parent_category = db.Column(db.Enum(Caste), nullable=False)
+    caste = db.Column(db.String(100))
 
     # urban or rural
     urban_rural = db.Column(db.Enum(UrbanOrRural), nullable=False)
@@ -229,7 +234,7 @@ class Student(db.Model):
     # urban privilege check
     urban_family_head_prof = db.Column(db.Enum(UrbanProfessions))
     family_head_income = db.Column(db.Integer)
-    
+
     # rural privilege check 
     rural_family_head_prof = db.Column(db.Enum(RuralProfessions))
     family_head_org_membership = db.Column(db.Enum(RuralOrgMembership))
@@ -237,11 +242,7 @@ class Student(db.Model):
     family_land_holding = db.Column(db.Integer)
     family_draught_animals = db.Column(db.Integer)
     housing_type = db.Column(db.Enum(HousingType))
-    #TODO: What items do you own?
-
-    # caste / jaati etc.
-    caste_parent_category = db.Column(db.Enum(Caste), nullable=False)
-    caste = db.Column(db.String(100))
+    owned_items = db.Column(db.String(1000))
 
     # system related stuff
     created_on   = db.Column(db.DateTime, default=datetime.datetime.utcnow)
@@ -249,3 +250,24 @@ class Student(db.Model):
     enrolment    = db.relationship("Enrolment", backref=db.backref("s_enrolment", uselist=False))
     test_data_id = db.Column(db.Integer, db.ForeignKey("test_data.id"))
     test_data    = db.relationship("TestData", backref=db.backref("test_data", uselist=False))
+
+    @property
+    def items_owned(self):
+        items = self.owned_items.split(',')
+        items = [item.strip() for item in items]
+        items = [ITEMS_OWNED_MAPPING[item] for item in items]
+        return items
+    
+    @items_owned.setter
+    def items_owned(self, value):
+        if type(value) is not list:
+            raise Exception("The type of items is not a list.")
+        for item in items:
+            if not ITEMS_OWNED_MAPPING.get(item):
+                raise Exception("The list of owned items being set has an unreconized item.")
+            else:
+                pass
+        items = ','.join(value)
+        self._items_owned = items
+        self.owned_items = items
+        
