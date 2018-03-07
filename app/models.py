@@ -155,6 +155,10 @@ class Enrolment(db.Model):
     created_on       = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     test_data        = db.relationship("TestData")
 
+    @property
+    def get_total_marks(self):
+        return self.test_data
+
     def __repr__(self):
         return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 
 
@@ -254,9 +258,7 @@ class Student(db.Model):
 
     @property
     def results_url(self):
-        url = 'http://join.navgurukul.org/?results_id={id}'.format(id=self.test_data.id if self.test_data else '12')
-        #TODO: Fix the right URL.
-        return url
+        return 'http://join.navgurukul.org/view-result/{key}'.format(key=self.enrolment.enrolment_key)
 
     @property
     def items_owned(self):
@@ -277,4 +279,3 @@ class Student(db.Model):
         items = ','.join(value)
         self._items_owned = items
         self.owned_items = items
-        
