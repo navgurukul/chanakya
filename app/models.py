@@ -253,6 +253,12 @@ class Student(db.Model):
     test_data    = db.relationship("TestData", backref=db.backref("test_data", uselist=False))
 
     @property
+    def results_url(self):
+        url = 'http://join.navgurukul.org/?results_id={id}'.format(id=self.test_data.id if self.test_data else '12')
+        #TODO: Fix the right URL.
+        return url
+
+    @property
     def items_owned(self):
         items = self.owned_items.split(',')
         items = [item.strip() for item in items]

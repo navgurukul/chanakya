@@ -52,3 +52,14 @@ student.enrolment_id = 1
 
 db.session.add(student)
 db.session.commit()
+
+# rendering the template
+template = "app/templates/zoho/enrolled.xml"
+rendered = render(template, {
+    'student': student,
+    'stage': 'Entrance Test',
+    'results_}url': 'Results URL',
+    'test_version': app.config['TEST_VERSION'],
+    'test_score': 12
+})
+print(rendered)

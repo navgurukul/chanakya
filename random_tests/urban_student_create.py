@@ -6,7 +6,7 @@ from app.crm_api import render
 student = Student()
 
 # basics
-student.name = "Rishabh Verma"
+student.name = "Pratik Agarwal"
 student.gender = "Male"
 student.mobile = "8130378953"
 student.dob = datetime.date(1995,2,5)
@@ -54,7 +54,7 @@ template = "app/templates/zoho/enrolled.xml"
 rendered = render(template, {
     'student': student,
     'stage': 'Entrance Test',
-    'results_url': 'Results URL',
+    'results_}url': 'Results URL',
     'test_version': app.config['TEST_VERSION'],
     'test_score': 12
 })

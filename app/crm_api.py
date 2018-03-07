@@ -22,6 +22,13 @@ def render(tpl_path, context):
     ).get_template(filename).render(context)
 
 def create_potential(student_details, crm_id=None):
+    """
+    `student_details` would look something like this:
+    {
+        "student": student # student model,
+        "stage": "string of stage value",
+    }
+    """
     stage = student_details['stage']
     querystring = {
         "newFormat":"1",
