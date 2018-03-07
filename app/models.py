@@ -263,6 +263,7 @@ class Student(db.Model):
     @property
     def items_owned(self):
         items = self.owned_items.split(',')
+        print(items)
         items = [item.strip() for item in items]
         items = [ITEMS_OWNED_MAPPING[item] for item in items]
         return items
@@ -276,6 +277,8 @@ class Student(db.Model):
                 raise Exception("The list of owned items being set has an unreconized item.")
             else:
                 pass
+        if len(value) < 1:
+            return None
         items = ','.join(value)
         self._items_owned = items
         self.owned_items = items
