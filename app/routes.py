@@ -169,9 +169,11 @@ def create_question():
         is_question_created, error = repos.create_question(question_details)
         if is_question_created:
             flash("question is created, successfully")
+            print("question is created, successfully")
             return redirect(url_for("create_question"))
         else:
             flash("question not created: %s" %error)
+            print("question not created: %s" %error)
             return redirect(url_for("create_question"))
 
 ############ REST APIS ##############
