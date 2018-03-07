@@ -56,7 +56,7 @@
         <!-- Testing Results -->
         <FL val="Results URL"><![CDATA[{{ student.results_url }}]]></FL>
         <FL val="Test Version Answered"><![CDATA[{{ test_version }}]]></FL>
-        <FL val="Test Score"><![CDATA[{{ student.test_data.received_marks }}]]></FL>
+        <FL val="Test Score"><![CDATA[{{ student.enrolment.total_marks }}]]></FL>
 
         <!-- Other Information -->
         <FL val="Student or Partner"><![CDATA[ Student ]]></FL>

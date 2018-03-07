@@ -155,7 +155,7 @@ def can_add_student(enrolment_key, student_data):
         student_details = {key: student_data.get(key) for key in non_enum_fields}
         for index in range(len(enums)):
             enum_data = student_data.get(enum_fields[index])
-            if enum_data:
+            if enum_data and enum_data!='NONE':
                 student_details[enum_fields[index]] =  getattr(enums[index], enum_data)
 
         student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()

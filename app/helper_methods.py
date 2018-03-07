@@ -13,6 +13,7 @@ def get_random_string():
 
 def get_data_from_enrolment_file(enrolment_key):
     try:
+        import pdb;pdb.set_trace()
         set_names = tuple(config.get('question_config').keys())
         en = __import__(enrolment_key)
         qa = {}
