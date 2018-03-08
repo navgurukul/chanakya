@@ -4,7 +4,7 @@ config = {
 "question_config" :{
     "set_1":{
                 "info_before":{
-                    "html": html_strings.old_test.before,
+                    "html": html_strings.old_set_1.before,
                     "time_in_seconds": 60
                 },
                 "questions":{ 
@@ -22,7 +22,7 @@ config = {
                     "time_per_question":60,
                 },
                 "info_after":{
-                    "html": html_strings.generic.after,
+                    "html": html_strings.old_set_1.after,
                     "time_in_seconds": 60
                 }
             }

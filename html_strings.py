@@ -32,10 +32,10 @@ class mix_MCQ_html():
 <h1 class="col-xs-12 col-sm-12">
 Aapse agle test me kuch questions pooche jaenge, apna uttar aram se soch samajh k de.
 </h1>
+<h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
 <h1 class="col-xs-12 col-sm-12">
 aapko next 18 questions, 18 minutes me karne hai
 </h1>
-<h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
 '''
 
 class generic_html():
@@ -44,7 +44,19 @@ class generic_html():
 <h2 class="col-xs-12 col-sm-12">Koi baat nahi thori der me apne aap ye test submit ho jaega</h2>
 '''
 
+class old_test_html():
+    before = '''
+<h1 class="col-xs-12 col-sm-12">
+Aapse test me kuch questions pooche jaenge, apna uttar aram se soch samajh k de.
+</h1>
+<h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
+<h1 class="col-xs-12 col-sm-12">
+aapko next 15 questions, 15 minutes me karne hai
+</h1>
+'''
+
 generic    = generic_html()
 mix_mcqs   = mix_MCQ_html()
 memory     = memory_html()
 processing = processing_html()
+old_test   = old_test_html()
