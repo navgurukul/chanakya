@@ -51,7 +51,7 @@ Aapse test me kuch questions pooche jaenge, apna uttar aram se soch samajh k de.
 </h1>
 <h2 class="col-xs-12 col-sm-12">Par time ka bhi khyaal rakhe!</h2>
 <h1 class="col-xs-12 col-sm-12">
-aapko next 15 questions, 15 minutes me karne hai
+aapko next 10 questions, 10 minutes me karne hai
 </h1>
 '''
 

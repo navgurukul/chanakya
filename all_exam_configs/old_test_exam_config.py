@@ -4,15 +4,15 @@ config = {
 "question_config" :{
     "set_1":{
                 "info_before":{
-                    "html": html_strings.old_set_1.before,
+                    "html": html_strings.old_test.before,
                     "time_in_seconds": 60
                 },
                 "questions":{ 
                     "categories":{
                         "pattern matching":{ "easy":4, "medium":0, "hard":0 },
                         "simple logic":{ "easy":3, "medium":0, "hard":0 },
-                        "dependency maths":{ "easy":2, "medium":0, "hard":0 },
-                        "numerical prophicency":{ "easy":1, "medium":0, "hard":0 },
+                        "dependency maths":{ "easy":1, "medium":0, "hard":0 },
+                        "numerical prophicency":{ "easy":2, "medium":0, "hard":0 },
                     },
                     "marks_config" :{
                         "easy":(1,0),
@@ -22,13 +22,13 @@ config = {
                     "time_per_question":60,
                 },
                 "info_after":{
-                    "html": html_strings.old_set_1.after,
+                    "html": html_strings.generic.after,
                     "time_in_seconds": 60
                 }
             }
     },
     "test_config":{
-                    "test_time":17*60,
-                    "set_1":17*60
+                    "test_time":12*60,
+                    "set_1":12*60
     }
 }

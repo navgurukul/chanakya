@@ -11,8 +11,8 @@ config = {
                     "categories":{
                         "pattern matching":{ "easy":4, "medium":0, "hard":0 },
                         "simple logic":{ "easy":3, "medium":0, "hard":0 },
-                        "dependency maths":{ "easy":2, "medium":0, "hard":0 },
-                        "numerical prophicency":{ "easy":1, "medium":0, "hard":0 },
+                        "dependency maths":{ "easy":1, "medium":0, "hard":0 },
+                        "numerical prophicency":{ "easy":2, "medium":0, "hard":0 },
                     },
                     "marks_config" :{
                         "easy":(1,0),
@@ -28,7 +28,7 @@ config = {
             }
     },
     "test_config":{
-                    "test_time":17*60,
-                    "set_1":17*60
+                    "test_time":12*60,
+                    "set_1":12*60
     }
 }
