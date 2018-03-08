@@ -146,7 +146,7 @@ def can_add_student(enrolment_key, student_data):
 
         enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
                         "family_head", "family_head_qualification", "urban_family_head_prof",
-                        "rural_family_head_prof", "family_head_org_membership", "family_type", "house_typing")
+                        "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
 
         enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
         FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
@@ -162,7 +162,7 @@ def can_add_student(enrolment_key, student_data):
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
         student   = Student(**student_details)
-        student.items_owned  = student_data.getlist('owned_items')
+        student.items_owned  = student_data.getlist('items_owned')
         student.enrolment = enrolment
         student.test_data = test_data
         db.session.add(student)

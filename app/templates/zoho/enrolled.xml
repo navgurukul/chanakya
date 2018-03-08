@@ -11,7 +11,7 @@
         <FL val="Stage"><![CDATA[{{ stage }}]]></FL>
         <FL val="Potential Name"><![CDATA[{{ student.name }}]]></FL>
         <FL val="Mobile"><![CDATA[{{ student.mobile }}]]></FL>
-        <FL val="Enrollment Key"><![CDATA[{{ student.enrolment.enrolment_key }}]]></FL>
+        <FL val="Enrolment Key"><![CDATA[{{ student.enrolment.enrolment_key }}]]></FL>
 
         <!-- Academic Details -->
         <FL val="School Medium"><![CDATA[{{ student.school_medium.value }}]]></FL>
@@ -30,7 +30,7 @@
 
         <!-- Caste Details -->
         <FL val="Caste"><![CDATA[{{ student.caste_parent_category.value }}]]></FL>
-        <FL val="Jaati"><![CDATA[{{ student.jaati }}]]></FL>
+        <FL val="Jaati"><![CDATA[{{ student.caste }}]]></FL>
 
         <!-- Privilege Check (Common) -->
         <FL val="Family Head"><![CDATA[{{ student.family_head.value }}]]></FL>

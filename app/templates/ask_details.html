@@ -64,7 +64,7 @@ Road to Navgurukul
                                 <option value="NONE">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="others">Other</option>
                             </select>
                         </div>
                 </div>
@@ -72,7 +72,7 @@ Road to Navgurukul
                     <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Address Details</h2>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Pincode</div>
-                            <input type="number" name="pincode" placeholder="Pincode"
+                            <input type="number" name="pin_code" placeholder="Pincode"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
@@ -164,13 +164,13 @@ Road to Navgurukul
                         <div class="row m-row min-10 hide">
                             <div class="col-xs-12 col-sm-6 col-md-6">Percentage in 10th</div>
                             <input type="number" name="class_10_marks" 
-                                placeholder="Percentage in 10th"
+                                placeholder="Percentage in 10th" min='0' step='any'
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row min-12 hide">
                             <div class="col-xs-12 col-sm-6 col-md-6">Percentage in 12th</div>
                             <input type="number" name="class_12_marks" 
-                                placeholder="Percentage in 12th" 
+                                placeholder="Percentage in 12th"  min='0' step='any'
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row min-12 hide">
@@ -193,7 +193,7 @@ Road to Navgurukul
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
                                 <option value="NONE">Select Option</option>
                                 <option value="english">English</option>
-                                <option value="others">Non English</option>
+                                <option value="vernacular">Non English</option>
                             </select>
                         </div>
                 </div>
@@ -322,19 +322,13 @@ Road to Navgurukul
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                         <div class="row m-row rural hide">
-                            <div class="col-xs-12 col-sm-6 col-md-6">Family Land Holding(in Acres)</div>
-                            <input type="number" name="family_land_holding" 
-                                placeholder="Aapki Family k paas kitni Jameen hai"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row rural hide">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar Kaisa hai</div>
                             <select name="housing_type"
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                                     <option value="NONE">Select Option</option>
                                     <option value='hut'>Hut</option>
-                                    <option value='kacha_ghar'>Kacha Ghar</option>
-                                    <option value='pucca_ghar'>Pakka Ghar</option>
+                                    <option value='kacha_house'>Kacha Ghar</option>
+                                    <option value='pucca_house'>Pakka Ghar</option>
                                     <option value='kothi'>Kothi</option>
                             </select>
                         </div>
@@ -378,7 +372,7 @@ Road to Navgurukul
                                 <option value="st">(ST) Scheduled Tribe</option>
                                 <option value="obc">(OBC) Other Backward Classes</option>
                                 <option value="general">General</option>
-                                <option value="others">Others</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="row m-row caste-other">
