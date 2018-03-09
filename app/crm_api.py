@@ -45,6 +45,7 @@ def create_potential(student_details, crm_id=None):
 
     owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
     student_details['owner_id'] = owner_id
+    student_details['test_version'] = app.config['TEST_VERSION']
 
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
     response = requests.request("GET", url, params=querystring)
