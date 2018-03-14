@@ -9,7 +9,9 @@
         <FL val="Gender"><![CDATA[{{ student.gender.value }}]]></FL>
         <FL val="Date of Birth"><![CDATA[{{ student.dob.strftime('%Y-%m-%d') }}]]></FL>
         <FL val="Stage"><![CDATA[{{ stage }}]]></FL>
+        <!--
         <FL val="Potential Name"><![CDATA[{{ student.name }}]]></FL>
+        -->
         <FL val="Mobile"><![CDATA[{{ student.mobile }}]]></FL>
         <FL val="Enrolment Key"><![CDATA[{{ student.enrolment.enrolment_key }}]]></FL>
 

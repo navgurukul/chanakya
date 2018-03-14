@@ -1,9 +1,8 @@
 from app.models import *
-from app import db, app
+from app import db, app, crm_api#, logger
 import random
 import exam_config
 from datetime import datetime
-from app import crm_api
 import enum
 import os
 
@@ -138,8 +137,7 @@ def save_test_result_and_analytics(data_dump, other_details):
     add_test_data_to_db(enrolment_key, test_data_details)
 
 def can_add_student(enrolment_key, student_data):
-
-    #try:
+    try:
         non_enum_fields = ("name", "gender", "mobile", "dob", "class_10_marks", "class_12_marks", "pin_code", "district",
         "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members", "state",
         "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
@@ -168,9 +166,11 @@ def can_add_student(enrolment_key, student_data):
         db.session.add(student)
         db.session.commit()
         return student
-    #except Exception as e:
-    #    #log e
-    #    return False
+    except Exception as e:
+        print("logger was hit")
+        #logger.error('''unable to add student in DB(and CRM),
+        #                student_data:\n%s'''%st(student_data))
+        return False
 
 def add_to_crm(student_object, other_details):
     enrolment_key = other_details.get("enrolment_key")

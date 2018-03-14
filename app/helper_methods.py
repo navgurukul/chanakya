@@ -34,7 +34,6 @@ def is_same_str_value(text_1, text_2):
 
 def get_time_boundary(q_set, time_start_boundary):
     time_delta = q_set['info_before']['time_in_seconds'] + q_set['info_after']['time_in_seconds'] + q_set['time_per_question'] * len(q_set['questions'])
-    print(q_set['questions'])
     return time_start_boundary + time_delta
 
 def get_question_set(questions, time_remaining):
