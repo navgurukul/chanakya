@@ -1,10 +1,13 @@
 from app.models import *
-from app import db, app, crm_api#, logger
+from app import db, app, crm_api
 import random
 import exam_config
 from datetime import datetime
 import enum
 import os
+
+from app import app
+STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
 
 config = exam_config.config["question_config"]
 
@@ -123,7 +126,7 @@ def add_test_data_to_db(enrolment_key, test_data_details):
     db.session.commit()
 
 def create_dump_file(enrolment_key, stuff_to_save):
-    f_path = os.path.join("/home/lawliet/student_files", "%s.py"%enrolment_key)
+    f_path = os.path.join(STUDENT_DIRECTORY, "%s.py"%enrolment_key)
     with open(f_path, "a") as fp:
         fp.write(stuff_to_save)
 
@@ -136,11 +139,14 @@ def save_test_result_and_analytics(data_dump, other_details):
                                     set_name            = other_details['set_name'])
     add_test_data_to_db(enrolment_key, test_data_details)
 
-def can_add_student(enrolment_key, student_data):
-    try:
-        non_enum_fields = ("name", "gender", "mobile", "dob", "class_10_marks", "class_12_marks", "pin_code", "district",
-        "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members", "state",
-        "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
+def can_add_student(enrolment_key, student_data, action=None):
+    #try:
+        if action == 'create':
+            non_enum_fields = ("name", "gender", "mobile", "dob")
+        elif action == 'update':
+            non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
+            "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
+            "state","monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
         enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
                         "family_head", "family_head_qualification", "urban_family_head_prof",
@@ -156,33 +162,39 @@ def can_add_student(enrolment_key, student_data):
             if enum_data and enum_data!='NONE':
                 student_details[enum_fields[index]] =  getattr(enums[index], enum_data)
 
-        student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
+        if student_details.get("dob") is not None:
+            student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
-        student   = Student(**student_details)
+        if action =='create':
+            student   = Student(**student_details)
+        elif action == 'update':
+            student = Student.query.filter_by(enrolment_id=enrolment.id).first()
+            for key,value in student_details.items():
+                setattr(student, key, value)
         student.items_owned  = student_data.getlist('items_owned')
         student.enrolment = enrolment
         student.test_data = test_data
         db.session.add(student)
         db.session.commit()
         return student
-    except Exception as e:
-        print("logger was hit")
-        #logger.error('''unable to add student in DB(and CRM),
-        #                student_data:\n%s'''%st(student_data))
-        return False
+    #except Exception as e:
+    #    print("logger was hit")
+    #    #logger.error('''unable to add student in DB(and CRM),
+    #    #                student_data:\n%s'''%st(student_data))
+    #    return False
 
-def add_to_crm(student_object, other_details):
+def add_to_crm(student_object, other_details, stage):
     enrolment_key = other_details.get("enrolment_key")
-    stage = "Entrance Test"
     crm_id = get_crm_id_from_enrolment(enrolment_key)
     potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
     if potential_id:
-        crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+        if stage in app.config['CRM_NEW_STUDENT_TASKS']:
+            crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
 
 def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
-        'stage': stage,#'Requested Callback',
+        'stage': stage,
         'source': 'Helpline',
         'potential_name': phone_number,
         'student_or_partner': 'Student',

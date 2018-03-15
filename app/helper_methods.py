@@ -3,7 +3,11 @@ from exam_config import config
 import string
 from datetime import datetime, timedelta
 import os, sys
-sys.path.insert(0, '/home/lawliet/student_files/')
+
+from app import app
+STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
+
+sys.path.insert(0, STUDENT_DIRECTORY)
 
 test_config = config["test_config"]
 

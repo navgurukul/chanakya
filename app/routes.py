@@ -25,8 +25,8 @@ def get_all_questions():
 
 ################### VIEWS #######################
 def go_to_page(check=None):
-    if check:
-        return redirect('/test')
+    #if check:
+    #    return redirect('/test')
     return redirect(url_for(session.get('page')))
 
 @app.before_request
@@ -35,7 +35,7 @@ def before_request():
     app.permanent_session_lifetime = timedelta(days=7)
     if request.endpoint not in ("create_enrolment_key", 
                                 "create_question",
-                                "view-result",
+                                "view_result",
                                 "exotel_talk_to_ng",
                                 "exotel_enroll_for_test",
                                 "enter_enrolment",
@@ -60,13 +60,26 @@ def enter_enrolment():
             if repos.is_valid_enrolment(enrolment_key):
                 session["enrolment_key"]   = enrolment_key
                 if repos.can_start_test(session["enrolment_key"]):
-                    session["page"] = "before_test"
+                    session["page"] = "ask_personal_details"
                     return go_to_page()
                 else:
                     flash("Aapka test use ho chuka hai, jyada details k liye Navgurukul ko call krre")
             else:
                 flash("Niche diye gye box me valid Enrolment key likhe")
         return render_template("enter_enrolment.html")
+    return go_to_page()
+
+@app.route('/ask-personal-details', methods=["GET", "POST"])
+def ask_personal_details():
+    if session.get("page") == "ask_personal_details":
+        if request.method == "GET":
+            return render_template("ask_personal_details.html")
+        elif request.method == "POST":
+            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
+            if student_details:
+                repos.add_to_crm(student_details, session, 'Personal Details Submitted')
+                repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
+            session["page"] = "before_test"
     return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])
@@ -119,9 +132,15 @@ qa_%s = {
         '''%( other_details.get('set_name'), str(question_set), str(dict(request.form)))
         repos.create_dump_file(session['enrolment_key'], stuff_to_add)
 
+
         repos.save_test_result_and_analytics(data_dump, other_details)
         session["test_score"] += data_dump.get("total_marks")
         session['submitted_set'] = session.get('set_name')
+
+        student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
+        if student_details:
+            repos.add_to_crm(student_details, session, 'Entrance Test')
+
         if session.get('is_last_set'):
             session["page"] = "end"
         return ""
@@ -129,10 +148,9 @@ qa_%s = {
         if request.method == "GET":
             return render_template("ask_details.html")
         elif request.method == "POST":
-            student_details = repos.can_add_student(session.get("enrolment_key"), request.form)
+            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
             if student_details:
-                repos.add_to_crm(student_details, session)
-                # repos.add_to_crm_if_needed(student_details['potential_name'], stage="Entrance Test")
+                repos.add_to_crm(student_details, session, 'All Details Submitted')
                 repos.create_dump_file(session.get('enrolment_key'), "\nuser_details=" +str(student_details))
                 session.clear()
                 return render_template("thanks.html")
@@ -202,6 +220,7 @@ def exotel_enroll_for_test():
     crm_potential_id  = repos.add_enrolment_to_crm(student_mobile, enrolment_key)
     enrolment_key     = repos.add_enrolment_key(enrolment_key, student_mobile, crm_potential_id)
     print("enrolment key", enrolment_key)
+    print("crm_potential_id", crm_potential_id)
     if not enrolment_key:
         return "ERROR", 500
     

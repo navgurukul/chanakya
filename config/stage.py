@@ -1,7 +1,7 @@
 import random, string
 import os
 
-STUDENT_DIRECTORY = os.path.expanduser('/home/lawliet/student_files')
+STUDENT_DIRECTORY = os.path.expanduser('/home/rishmunk/student_files')
 TEST_VERSION = "Original Assessment"
 
 # Database
@@ -13,7 +13,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = "abcdef212131daddaasfaefedawdedsafefhalnhfuy8rgkbdasfasfafewqrffd"
 #SECRET_KEY = "".join([random.choice(string.ascii_uppercase) for x in range(10)])
 DEBUG = True
-#SERVER_NAME = "join.navgurukul.org"
+#SERVER_NAME = "35.185.189.61:8080"
 
 # Exotel Related Config
 TEST_ENROLL_MSG = """

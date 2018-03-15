@@ -35,13 +35,13 @@ def create_potential(student_details, crm_id=None):
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
     }
-    if stage == "Entrance Test":
+    if stage == "Enrolment Key Generated":
+        xml_file = "templates/zoho/interested.xml"
+        url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
+    else:
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
-    else:
-        xml_file = "templates/zoho/interested.xml"
-        url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
 
     owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
     student_details['owner_id'] = owner_id
@@ -52,9 +52,6 @@ def create_potential(student_details, crm_id=None):
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
     response = response.json()
-    print(crm_id)
-    print(student_details)
-    print(response)
     potential_details = response['response']['result']['recorddetail']['FL']
     try:
         for detail in potential_details:

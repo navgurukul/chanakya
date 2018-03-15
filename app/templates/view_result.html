@@ -11,7 +11,6 @@ NG Result
 {% endblock %}
 
 {% block main %}
-	{{data}}
   {% for set_name in data %}
     <div class="row">
     <h1 class="col-sm-12"> {{set_name}} </h1>
@@ -37,5 +36,6 @@ NG Result
     {% endfor %}
   </div>
   {% endfor %}
+  {{data}}
   {{error}}
 {% endblock %}

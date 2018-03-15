@@ -36,6 +36,6 @@ except:
             d = question
         t1 =datetime.now()
         print(d)
-        r = requests.post("http://join.navgurukul.org/create-question", data=d)
+        r = requests.post("http://127.0.0.1:8000/create-question", data=d)
         print(r.status_code)
         print(datetime.now()-t1)
