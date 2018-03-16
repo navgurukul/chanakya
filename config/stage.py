@@ -3,6 +3,7 @@ import os
 
 STUDENT_DIRECTORY = os.path.expanduser('/home/rishmunk/student_files')
 TEST_VERSION = "Original Assessment"
+SYSTEM_ENVIRONMENT="Stage"
 
 # Database
 #SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123@35.189.19.99/chanakya'
@@ -19,7 +20,7 @@ DEBUG = True
 TEST_ENROLL_MSG = """
 NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
 
-Iss test ko dene ke liye aap jald hi, yeh website - http://join.navgurukul.org/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
+Iss test ko dene ke liye aap jald hi, yeh website - http://35.185.189.61:8080/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
 
 NavGurukul ke baarein mei aur jaanne ke liye, youtube par yeh video - http://bit.ly/navgurukul-intro dekhein.
 

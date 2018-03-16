@@ -3,6 +3,7 @@ import os
 
 STUDENT_DIRECTORY = os.path.expanduser('/home/lawliet/student_files')
 TEST_VERSION = "Rajeev's Aptitude Assessment"
+SYSTEM_ENVIRONMENT="Production"
 
 # Database
 #SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123@35.189.19.99/chanakya'
