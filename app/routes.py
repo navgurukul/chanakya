@@ -1,17 +1,17 @@
 import random, string
-
 from app import app, exotel
 from flask import render_template, request, session, flash, redirect, url_for
 from datetime import datetime, timedelta
 from app import repos
+from app.logger import loggly
 from app.helper_methods import ( get_random_string,
                                  get_data_from_enrolment_file,
                                  calculate_marks_and_dump_data,
                                  get_time_remaining, get_question_set
                                 )
-
 import redis
 import json
+
 redis_obj = redis.Redis()
 
 def get_all_questions():
@@ -23,11 +23,20 @@ def get_all_questions():
     else:          
         return json.loads(all_question)
 
-################### VIEWS #######################
-def go_to_page(check=None):
-    #if check:
-    #    return redirect('/test')
-    return redirect(url_for(session.get('page')))
+def go_to_page(check=None): return redirect(url_for(session.get('page')))
+
+@app.errorhandler(Exception)
+def handle_all_exceptions(e):
+    exception_details = {
+        "Exception":e,
+        "client_details":{
+            "enrolment_key":session.get('enrolment_key'),
+            "page":session.get("page")
+        }
+    }
+
+    loggly.error(str(exception_details), exc_info=True)
+    return render_template("error.html")
 
 @app.before_request
 def before_request():
@@ -44,6 +53,7 @@ def before_request():
             session["page"] = "enter_enrolment"
             return go_to_page()
 
+################### VIEWS #######################
 @app.route('/view-result/<enrolment_key>')
 def view_result(enrolment_key):
     data, error = get_data_from_enrolment_file(enrolment_key)
