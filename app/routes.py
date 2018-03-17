@@ -31,7 +31,9 @@ def handle_all_exceptions(e):
         "Exception":e,
         "client_details":{
             "enrolment_key":session.get('enrolment_key'),
-            "page":session.get("page")
+            "page":session.get("page"),
+            "form":dict(request.form),
+            "args":dict(request.args)
         }
     }
 

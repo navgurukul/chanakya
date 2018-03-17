@@ -10,8 +10,7 @@ loggly.setLevel(logging.INFO)
 handler = logging.handlers.SysLogHandler('/dev/log')
 
 #add formatter to the handler
-formatter = logging.Formatter('''Details: {
-"loggerName":"%(name)s",
+formatter = logging.Formatter('''%(name)s: {
 "timestamp":"%(asctime)s",
 "pathName":"%(pathname)s",
 "logRecordCreationTime":"%(created)f",
