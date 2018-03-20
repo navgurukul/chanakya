@@ -23,6 +23,8 @@ def get_data_from_enrolment_file(enrolment_key):
         for set_name in set_names:
             qa[set_name] = getattr(en, "qa_"+set_name)
         return qa, None
+    except ImportError as e:
+        return None, "Test Not Given or Wrong Enrolment Key"
     except Exception as e:
         return None, str(e)
 

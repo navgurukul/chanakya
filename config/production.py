@@ -47,6 +47,8 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template."
     },
+    "Personal Details Submitted":None,
+    "All Details Submitted":None,
     "Personal Interview": None,
     "Parent Conversation": None,
     "Confirmed Joining": None,

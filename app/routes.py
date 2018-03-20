@@ -90,7 +90,7 @@ def ask_personal_details():
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
             if student_details:
                 repos.add_to_crm(student_details, session, 'Personal Details Submitted')
-                repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
+                #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
             session["page"] = "before_test"
     return go_to_page()
 
@@ -163,7 +163,7 @@ qa_%s = {
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
             if student_details:
                 repos.add_to_crm(student_details, session, 'All Details Submitted')
-                repos.create_dump_file(session.get('enrolment_key'), "\nuser_details=" +str(student_details))
+                #repos.create_dump_file(session.get('enrolment_key'), "\nuser_details=" +str(student_details))
                 session.clear()
                 return render_template("thanks.html")
             else:

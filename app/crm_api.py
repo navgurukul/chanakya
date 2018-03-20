@@ -35,13 +35,14 @@ def create_potential(student_details, crm_id=None):
         "authtoken":"dff429d03714ecd774b7706e358e907b",
         "scope":"crmapi",
     }
-    if stage == "Enrolment Key Generated":
+    if stage in ("Enrolment Key Generated", "Requested Callback"):
         xml_file = "templates/zoho/interested.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/insertRecords"
     else:
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
+    print(xml_file)
 
     owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
     student_details['owner_id'] = owner_id
