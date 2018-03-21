@@ -4,7 +4,7 @@ import string
 from datetime import datetime, timedelta
 import os, sys
 
-from app import app
+from app import app, db
 STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
 
 sys.path.insert(0, STUDENT_DIRECTORY)

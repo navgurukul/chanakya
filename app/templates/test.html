@@ -34,7 +34,7 @@ Road to Navgurukul
     .options input[type="radio"]{
         display:none;
     }
-    input[type="text"]{
+    input[type="number"]{
         margin-bottom:1rem;
         padding:0.5rem;
     }
@@ -128,7 +128,7 @@ Road to Navgurukul
                         {% endfor %}
                     </ol>
                     {% elif question_type=="short_answer" %}
-                        <input type="text" placeholder="enter your answer here" name="answer_{{q_no}}" 
+                        <input type="number" step="any" placeholder="enter your answer here" name="answer_{{q_no}}" 
                         class="border border-info col-xs-12 col-sm-12 cls_{{q_no}}">
                     {% endif %}
                 </div>
@@ -183,6 +183,14 @@ Road to Navgurukul
 			});
 		}
     	});
+
+        $('form').on('keyup keypress', function(e) {
+          var keyCode = e.keyCode || e.which;
+          if (keyCode === 13) { 
+            e.preventDefault();
+            return false;
+          }
+        });
 
         $("button.cls_1").on("click", function(){
             if($("input.cls_1").checkValidity()) {
