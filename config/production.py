@@ -2,7 +2,7 @@ import random, string
 import os
 
 STUDENT_DIRECTORY = os.path.expanduser('/home/lawliet/student_files')
-TEST_VERSION = "Rajeev's Aptitude Assessment"
+TEST_VERSION = "New Assessment (v0.1)"
 SYSTEM_ENVIRONMENT="Production"
 
 # Database
