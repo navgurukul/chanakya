@@ -22,7 +22,6 @@ export CHANAKYA_ENV=../config/testing_and_dev.py
 ```
 now open a new terminal window and close this one
 
-flask db migrate
 
 flask db upgrade
 
