@@ -3,16 +3,26 @@ git clone this repository in your home directory
 # chanakya
 Testing Platform of NavGurukul
 
+## create chanakya database in mysql with user and password as chanakya too
+```bash
+mysql -u root -p
+
+mysql> create database chanakya;
+mysql> CREATE USER 'chanakya'@'localhost' IDENTIFIED BY 'chanakya';
+mysql> GRANT ALL PRIVILEGES ON chanakya.* TO 'chanakya'@'localhost';
+mysql> FLUSH PRIVILEGES;
+mysql> quit
+```
+
 ## Setup
 
+- sudo apt-get install redis-server
 - sudo apt-get install mysql-server
 - sudo apt-get install libmysqlclient-dev
 - sudo apt-get install libmariadbclient-dev
 - Make Sure you are in chanakya directory
 - python3 -m venv venv
 - pip install -r requirements.txt
-
-
 
 - append these lines to your ~/.bashrc file
 ```bash
@@ -21,7 +31,6 @@ export FLASK_DEBUG=1
 export CHANAKYA_ENV=../config/testing_and_dev.py 
 ```
 now open a new terminal window and close this one
-
 
 flask db upgrade
 
@@ -39,3 +48,7 @@ flask run -p 8000
 
 ## To create Question run client.py - make sure you know what you are doing
 
+- keep the server running and open a new terminal
+- go to chanakya folder
+- source venv/bin/activate
+- python client.py rajeev
