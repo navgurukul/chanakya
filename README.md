@@ -19,6 +19,7 @@ Testing Platform of NavGurukul
 export FLASK_APP=${HOME}/chanakya/chanakya.py
 export FLASK_DEBUG=1
 ```
+now open a new terminal window and close this one
 
 flask db migrate
 flask db upgrade
