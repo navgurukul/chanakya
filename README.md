@@ -22,6 +22,7 @@ export FLASK_DEBUG=1
 now open a new terminal window and close this one
 
 flask db migrate
+
 flask db upgrade
 
 flask run -p 8000
