@@ -1,3 +1,5 @@
+git clone this repository in your home directory
+
 # chanakya
 Testing Platform of NavGurukul
 
@@ -10,13 +12,18 @@ Testing Platform of NavGurukul
 - python3 -m venv venv
 - pip install -r requirements.txt
 
-- export FLASK_APP=/Users/lawliet/chanakya/chanakya.py
-- export FLASK_DEBUG=1
+
+
+- append these lines to your ~/.bashrc file
+```bash
+export FLASK_APP=${HOME}/chanakya/chanakya.py
+export FLASK_DEBUG=1
+```
 
 flask db migrate
 flask db upgrade
 
-flask run
+flask run -p 8000
 
 ###change db details in config.py
 
