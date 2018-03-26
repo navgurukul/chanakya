@@ -29,6 +29,7 @@ flask run -p 8000
 
 ###change db details in config.py
 
+## To create Question run client.py - make sure you know what you are doing
 
 ## Handling Config
 
