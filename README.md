@@ -52,3 +52,6 @@ flask run -p 8000
 - go to chanakya folder
 - source venv/bin/activate
 - python client.py rajeev
+
+### Useful links:
+Trello: https://trello.com/b/DJEYDHs1/chanakya
