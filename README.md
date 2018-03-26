@@ -3,6 +3,10 @@ Testing Platform of NavGurukul
 
 ## Setup
 
+- sudo apt-get install mysql-server
+- sudo apt-get install libmysqlclient-dev
+- sudo apt-get install libmariadbclient-dev
+- Make Sure you are in chanakya directory
 - python3 -m venv venv
 - pip install -r requirements.txt
 
