@@ -25,16 +25,17 @@ flask db migrate
 
 flask db upgrade
 
-flask run -p 8000
-
-###change db details in config.py
-
-## To create Question run client.py - make sure you know what you are doing
-
 ## Handling Config
 
 The environment variable `CHANAKYA_ENV` needs to be set pointing to the location of the config file relative to the `app/` directory.
 
-For example, your config file is stored in `config/local.py` the value of your `CHANAKYA_ENV` variable would be `../config/local.py`. Before running the app flask will automatically load the config from the given environment variable and set the relevant config values.
+For example, your config file is stored in `config/testing_and_dev.py` the value of your `CHANAKYA_ENV` variable would be `../config/testing_and_dev.py`. Before running the app flask will automatically load the config from the given environment variable and set the relevant config values.
 
 You can use `config/local.py` as your file name. It is also added in the `.gitignore`
+
+### Running app
+
+flask run -p 8000
+
+## To create Question run client.py - make sure you know what you are doing
+
