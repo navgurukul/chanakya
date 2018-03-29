@@ -1,9 +1,9 @@
 import random, string
 import os
 
-STUDENT_DIRECTORY = os.path.expanduser('/home/rishmunk/student_files')
+STUDENT_DIRECTORY = os.path.expanduser('~/student_files')
 TEST_VERSION = "DEV and Testing Environment"
-SYSTEM_ENVIRONMENT="DEV"
+SYSTEM_ENVIRONMENT="Development"
 
 # Database
 SQLALCHEMY_DATABASE_URI = "mysql://chanakya:chanakya@localhost/chanakya"
