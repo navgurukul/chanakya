@@ -14,6 +14,7 @@ SECRET_KEY = "abcdef"
 #SECRET_KEY = "".join([random.choice(string.ascii_uppercase) for x in range(10)])
 DEBUG = True
 
+
 # Exotel Related Config
 TEST_ENROLL_MSG = """
 NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
