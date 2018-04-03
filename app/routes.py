@@ -16,6 +16,7 @@ redis_obj = redis.Redis()
 
 def get_all_questions():
     all_questions = redis_obj.get('all_question')
+    print(all_questions)    
     if not all_questions:
         all_questions = repos.get_all_questions()
         redis_obj.set('all_questions', json.dumps(all_questions))
@@ -25,20 +26,20 @@ def get_all_questions():
 
 def go_to_page(check=None): return redirect(url_for(session.get('page')))
 
-@app.errorhandler(Exception)
-def handle_all_exceptions(e):
-    exception_details = {
-        "Exception":e,
-        "client_details":{
-            "enrolment_key":session.get('enrolment_key'),
-            "page":session.get("page"),
-            "form":dict(request.form),
-            "args":dict(request.args)
-        }
-    }
+# @app.errorhandler(Exception)
+# def handle_all_exceptions(e):
+#     exception_details = {
+#         "Exception":e,
+#         "client_details":{
+#             "enrolment_key":session.get('enrolment_key'),
+#             "page":session.get("page"),
+#             "form":dict(request.form),
+#             "args":dict(request.args)
+#         }
+#     }
 
-    loggly.error(str(exception_details), exc_info=True)
-    return render_template("error.html")
+#     loggly.error(str(exception_details), exc_info=True)
+#     return render_template("error.html")
 
 @app.before_request
 def before_request():
@@ -83,15 +84,15 @@ def enter_enrolment():
 
 @app.route('/ask-personal-details', methods=["GET", "POST"])
 def ask_personal_details():
-    if session.get("page") == "ask_personal_details":
-        if request.method == "GET":
-            return render_template("ask_personal_details.html")
-        elif request.method == "POST":
-            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
-            if student_details:
-                repos.add_to_crm(student_details, session, 'Personal Details Submitted')
-                #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
-            session["page"] = "before_test"
+    # if session.get("page") == "ask_personal_details":
+    if request.method == "GET":
+        return render_template("ask_personal_details.html")
+    elif request.method == "POST":
+        student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
+        if student_details:
+            repos.add_to_crm(student_details, session, 'Personal Details Submitted')
+            #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
+        # session["page"] = "before_test"
     return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])

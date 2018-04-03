@@ -53,5 +53,6 @@ flask run -p 8000
 - source venv/bin/activate
 - python client.py rajeev
 
+-create student_files folder in root dir of chanakya app
 ### Useful links:
 Trello: https://trello.com/b/DJEYDHs1/chanakya
