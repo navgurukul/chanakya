@@ -84,7 +84,7 @@ def enter_enrolment():
 
 @app.route('/ask-personal-details', methods=["GET", "POST"])
 def ask_personal_details():
-    # if session.get("page") == "ask_personal_details":
+    if session.get("page") == "ask_personal_details":
     if request.method == "GET":
         return render_template("ask_personal_details.html")
     elif request.method == "POST":
@@ -92,7 +92,7 @@ def ask_personal_details():
         if student_details:
             repos.add_to_crm(student_details, session, 'Personal Details Submitted')
             #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
-        # session["page"] = "before_test"
+        session["page"] = "before_test"
     return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])
