@@ -58,8 +58,8 @@ def before_request():
 ################### VIEWS #######################
 @app.route('/view-result/<enrolment_key>')
 def view_result(enrolment_key):
-    data, error = get_data_from_enrolment_file(enrolment_key)
-    return render_template("view_result.html", data=data, error=error)
+    data,marks_dict,error = get_data_from_enrolment_file(enrolment_key)
+    return render_template("view_result.html", data=data, marks_dict=marks_dict, error=error)
 
 @app.route('/')
 @app.route('/enter-enrolment')

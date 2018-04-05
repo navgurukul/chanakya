@@ -18,7 +18,7 @@ NG Result
 {%if not error %}
   {% for set_name in data %}
     <div class="row">
-    <h1 class="col-sm-12"> {{set_name}} </h1>
+    <h1 class="col-sm-12"> {{set_name}} | Marks: {{marks_dict[set_name].received_marks}} / {{marks_dict[set_name].max_possible_marks}}</h1>
     {% set questions = data[set_name]['questions']['questions'] %}
     {% for question in questions %}
         {% set q_no = questions.index(question) %}

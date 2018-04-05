@@ -4,6 +4,7 @@ import string
 from datetime import datetime, timedelta
 import os, sys
 
+from app.models import Enrolment, TestData
 from app import app, db
 STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
 
@@ -17,16 +18,22 @@ def get_random_string():
 
 def get_data_from_enrolment_file(enrolment_key):
     try:
-        set_names = tuple(config.get('question_config').keys())
+        #set_names = tuple(config.get('question_config').keys())
         en = __import__(enrolment_key)
+        set_names = [x.replace('qa_', '') for x in dir(en) if 'qa_' in x] 
         qa = {}
+        enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+        en_id = enrolment.id if en else None
+        marks_dict = {}
         for set_name in set_names:
             qa[set_name] = getattr(en, "qa_"+set_name)
-        return qa, None
+            if en_id:
+                marks_dict[set_name] = TestData.query.filter_by(enrolment_id=en_id).filter_by(set_name=set_name).first()
+        return qa, marks_dict, None
     except ImportError as e:
         return None, "Test Not Given or Wrong Enrolment Key"
     except Exception as e:
-        return None, str(e)
+        return None, None, str(e)
 
 def get_time_remaining(submit_time, submitted_set):
     set_deduction = test_config[submitted_set] if submitted_set else 0

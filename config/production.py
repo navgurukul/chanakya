@@ -82,8 +82,16 @@ CRM_NEW_STUDENT_TASKS = {
         "task_message": "Evaluate the answers and decide next steps."
     }
 }
+
 POTENTIAL_OWNERS = [
-    "2821772000000131011", # Rishabh Verma
-    "2821772000000131409", # Abishek Gupta
-    "2821772000000169007", # Aslam Desusa
+    "2821772000001067001", #Annu
+    "2821772000000970116", #Khushboo
+    "2821772000001108001", #shivnath
+    "2821772000001145029", #ranjan
+    "2821772000001145055", #rahul
+    "2821772000001145042", #diwakar
+    "2821772000001241469", #amar
+    "2821772000001241492", #monu
 ]
+#"2821772000000131011", #Rishabh Verma
+#"2821772000000503001", #Shanu
