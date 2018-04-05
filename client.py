@@ -23,7 +23,7 @@ except:
             options  = create_option_list(question['random_options'], question['answer'])
             d = {
                     'en_question_text':  question['en_question_text'],
-                    'hi_question_text':  question['hi_question_text'],
+                    'hi_question_text':  '',
                     'difficulty':        question['difficulty'],
                     'question_type':     question['question_type'],
                     'category':          question['category'],
