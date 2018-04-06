@@ -24,22 +24,7 @@ def get_all_questions():
     else:          
         return json.loads(all_question)
 
-def go_to_page(check=None): return redirect(url_for(session.get('page')))
 
-# @app.errorhandler(Exception)
-# def handle_all_exceptions(e):
-#     exception_details = {
-#         "Exception":e,
-#         "client_details":{
-#             "enrolment_key":session.get('enrolment_key'),
-#             "page":session.get("page"),
-#             "form":dict(request.form),
-#             "args":dict(request.args)
-#         }
-#     }
-
-#     loggly.error(str(exception_details), exc_info=True)
-#     return render_template("error.html")
 
 @app.before_request
 def before_request():
