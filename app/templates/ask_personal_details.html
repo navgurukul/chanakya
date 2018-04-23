@@ -119,13 +119,25 @@ Road to Navgurukul
             yearfield.append("<option value="+i+">"+i+"</option>");
         }
         var dob = document.createElement('input');
+        dob.type = 'text';
+        dob.name = 'dob';
+        var coords = document.createElement('input');
+        coords.type = 'text'
+        coords.name = 'coords'
+        var coordinates = null;
+        if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(positions){coordinates = positions.coords.latitude +','+ positions.coords.longitude});
+            }
+            else{
+                appending('Geolocation not supported!')
+            }
+
         var form = document.getElementById('ask_personal_details');
         var errors = document.getElementById('errors');
         function submiting() {
             // body...
             var su = document.getElementById('button')
-            dob.type = 'text';
-            dob.name = 'dob';
+
             var date = document.getElementById('date').value;
             var month = document.getElementById('month').value;
             var year = document.getElementById('year').value;
@@ -134,7 +146,9 @@ Road to Navgurukul
                 errors.innerHTML = ''
                 errors.append(message)
             }
-
+            
+            coords.value = coordinates;
+            
 
             // to check dtae field isn't empty
             if(date == ''){
@@ -153,6 +167,8 @@ Road to Navgurukul
             dob.value = year +'-'+ month +'-'+date
             console.log(dob.value);
             dob.style.display = 'none';
+            coords.style.display = 'none';
+            form.appendChild(coords)
             form.appendChild(dob);
             form.submit();
         }

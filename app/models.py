@@ -207,6 +207,7 @@ class Student(db.Model):
     mobile  = db.Column(db.String(10))
     dob = db.Column(db.Date, nullable=False)
 
+
     # academic details
     school_medium = db.Column(db.Enum(SchoolInstructionMedium))
     qualification = db.Column(db.Enum(Qualification))
@@ -220,6 +221,16 @@ class Student(db.Model):
     district = db.Column(db.String(100))
     tehsil = db.Column(db.String(100))
     city_or_village = db.Column(db.String(100))
+
+
+    #geo location details
+    gl_lat = db.Column(db.Float)
+    gl_long = db.Column(db.Float)
+    gl_pin_code = db.Column(db.String(6))
+    gl_state = db.Column(db.Enum(*INDIAN_STATES))
+    gl_district = db.Column(db.String(100))
+    gl_city_or_village = db.Column(db.String(100))
+
 
     # caste / jaati etc.
     caste_parent_category = db.Column(db.Enum(Caste))

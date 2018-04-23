@@ -14,6 +14,9 @@ import json
 
 redis_obj = redis.Redis()
 
+def go_to_page(code=None):
+    return redirect(url_for(session.get('page')))
+
 def get_all_questions():
     all_questions = redis_obj.get('all_question')
     print(all_questions)    
@@ -69,15 +72,18 @@ def enter_enrolment():
 
 @app.route('/ask-personal-details', methods=["GET", "POST"])
 def ask_personal_details():
+    # import pdb
+    # pdb.set_trace()
     if session.get("page") == "ask_personal_details":
-    if request.method == "GET":
-        return render_template("ask_personal_details.html")
-    elif request.method == "POST":
-        student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
-        if student_details:
-            repos.add_to_crm(student_details, session, 'Personal Details Submitted')
-            #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
-        session["page"] = "before_test"
+        if request.method == "GET":
+            return render_template("ask_personal_details.html")
+        elif request.method == "POST":
+            print(request.form)
+            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
+            if student_details:
+                repos.add_to_crm(student_details, session, 'Personal Details Submitted')
+                #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
+            session["page"] = "before_test"
     return go_to_page()
 
 @app.route('/before-test', methods=["GET", "POST"])
@@ -100,6 +106,7 @@ def test():
             session["submitted_set"]     = None
         time_remaining = get_time_remaining(session.get("last_submit_time"), session['submitted_set'])
         if time_remaining > 0:
+            print(time_remaining)
             session['set_name'], session['is_last_set'], question_set, time_to_show = get_question_set(global_questions, time_remaining)
             session['question_set']     = question_set
             return render_template("test.html", question_set=question_set, time_remaining=time_to_show)
@@ -135,6 +142,7 @@ qa_%s = {
         session["test_score"] += data_dump.get("total_marks")
         session['submitted_set'] = session.get('set_name')
 
+
         student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
         if student_details:
             repos.add_to_crm(student_details, session, 'Entrance Test')
@@ -146,6 +154,7 @@ qa_%s = {
         if request.method == "GET":
             return render_template("ask_details.html")
         elif request.method == "POST":
+            # return str(request.form)  
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
             if student_details:
                 repos.add_to_crm(student_details, session, 'All Details Submitted')
@@ -196,6 +205,7 @@ def create_question():
 
 @app.route("/exotel_talk_to_ng")
 def exotel_talk_to_ng():
+
     student_mobile = request.args.get("CallFrom")
     if not student_mobile:
         return "ERROR", 500 #log
@@ -264,5 +274,4 @@ def on_crm_potential_stage_edit():
     if actions.get("referral_email_template"):
         #TODO: Need to integrate this when we add this support in the platform.
         pass
-
     return "All the required actions are already taken.", 200

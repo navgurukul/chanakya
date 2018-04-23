@@ -13,5 +13,9 @@
         <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
         <FL val="Student or Partner"><![CDATA[{{ student_or_partner }}]]></FL>
         <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
+
+        <FL val="Enrolment Key"><![CDATA[{{ Enrolment_Key }}]]></FL>
+        <FL val="System Environment"><![CDATA[ {{system_environment}} ]]></FL>
+
     </row>
 </Potentials>

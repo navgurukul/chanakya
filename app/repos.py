@@ -5,6 +5,9 @@ import exam_config
 from datetime import datetime
 import enum
 import os
+import googlemaps
+gmaps = googlemaps.Client(key='AIzaSyB9B4rHwx5tnPr0UR5Xq31MADs4KbNgaPE')
+
 
 from app import app
 STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
@@ -141,22 +144,72 @@ def save_test_result_and_analytics(data_dump, other_details):
 
 def can_add_student(enrolment_key, student_data, action=None):
     #try:
+        coords = student_data.get('coords')
         if action == 'create':
-            non_enum_fields = ("name", "gender", "mobile", "dob")
+        #########################################################
+            non_enum_fields = ("name", "gender", "mobile", "dob",
+                "gl_lat", "gl_long", "gl_pin_code","gl_state", "gl_district", "gl_city_or_village",)
+
+                
+            pin_code, state, district, city_or_village,gl_lat, gl_long = None, None, None, None, None, None
+
+            if coords:    
+                coords = coords.split(',')
+
+                gl_lat = coords[0]
+                gl_long = coords[1]
+
+                response = gmaps.reverse_geocode(coords)
+                addresses = response[0]['address_components']
+                
+
+                for address in addresses:
+
+                    if 'postal_code' in address['types']:
+                        pin_code = address['long_name']
+
+                    if 'administrative_area_level_1' in address['types']:
+                        state = address['long_name']
+                    
+                    if 'administrative_area_level_2' in address['types']:
+                        district = address['long_name']
+                    
+                    if 'locality' in address['types']:
+                        city_or_village = address['long_name']
+
+            print('-------------------------------------------------------') 
+            print(coords, district, city_or_village, pin_code, state)
+            print('-------------------------------------------------------') 
+
+        #########################################################
         elif action == 'update':
             non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
             "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
-            "state","monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
+            "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
         enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
-                        "family_head", "family_head_qualification", "urban_family_head_prof",
+                        "family_head", "family_head_qualification", "urban_family_head_prof","state",
                         "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
 
         enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
-        FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
+        FamilyHead, Qualification, UrbanProfessions, INDIAN_STATES, RuralProfessions, RuralOrgMembership, FamilyType,
         HousingType)
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
+
+        if coords:
+            student_details.update({'gl_pin_code': pin_code})                                                   
+            student_details.update({'gl_state': state})                                                   
+            student_details.update({'gl_district': district})                                                   
+            student_details.update({'gl_city_or_village': city_or_village})
+            student_details.update({'gl_lat': gl_lat})
+            student_details.update({'gl_long':gl_long})
+            
+        for key in ("monthly_family_income", "family_head_income", "family_land_holding",
+                     "family_draught_animals", "fam_members", "earning_fam_members"):
+            if not student_details.get(key): #empty strings replaced by 0
+                student_details[key] = 0
+        
         for index in range(len(enums)):
             enum_data = student_data.get(enum_fields[index])
             if enum_data and enum_data!='NONE':
@@ -166,6 +219,7 @@ def can_add_student(enrolment_key, student_data, action=None):
             student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
+        
         if action =='create':
             student   = Student(**student_details)
         elif action == 'update':
@@ -187,10 +241,13 @@ def can_add_student(enrolment_key, student_data, action=None):
 def add_to_crm(student_object, other_details, stage):
     enrolment_key = other_details.get("enrolment_key")
     crm_id = get_crm_id_from_enrolment(enrolment_key)
-    potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
+    potential_id, owner_id, task_owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
+# #############################################################################
     if potential_id:
         if stage in app.config['CRM_NEW_STUDENT_TASKS']:
-            crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+          
+            crm_api.create_task_for_potential(potential_id, task_owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"],app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_description"])
+# #############################################################################
 
 def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
@@ -202,21 +259,38 @@ def get_student_details_from_phone_number(phone_number, stage):
     }
     return student_details
 
+def get_potential_with_maximum_delay(response):
+    results = response['response']['result']['Potentials']['row']
+    if len(results)<=2 and type(results)==type({}):
+        return results['FL']    
+    return results[-1]['FL']
+
 def add_to_crm_if_needed(phone_number, stage):
     should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)
     if should_add_to_crm:
         student_details = get_student_details_from_phone_number(phone_number, stage)
         if action == "create_new":
-            potential_id, owner_id = crm_api.create_potential(student_details)
+            potential_id, owner_id, task_owner_id = crm_api.create_potential(student_details)
+
             if app.config['CRM_NEW_STUDENT_TASKS'].get(stage):
-                crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+               
+                crm_api.create_task_for_potential(potential_id, task_owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"],app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_description"])
             else:
                 pass #data-analytics
+        elif action == "just_create_task":
+            result = get_potential_with_maximum_delay(response.json())
+            potential_id = result[0]['content']
+            task_stage = '_'.join((stage.upper()).split())+'_TASK_OWNERS'
+            task_owner_id = random.choice(app.config[task_stage])
+
+            if app.config['CRM_NEW_STUDENT_TASKS'].get(stage):
+                crm_api.create_task_for_potential(potential_id, task_owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"],app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_description"])
+
 
 def add_enrolment_to_crm(phone_number, enrolment_key):
     student_details = get_student_details_from_phone_number(phone_number, "Enrolment Key Generated")
-    student_details['Enrolment Key'] = enrolment_key
-    potential_id, owner_id = crm_api.create_potential(student_details)
+    student_details['Enrolment_Key'] = enrolment_key
+    potential_id, owner_id, task_owner_id = crm_api.create_potential(student_details)
     return potential_id
 
 def add_student_to_crm(student):

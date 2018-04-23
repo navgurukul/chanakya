@@ -5,5 +5,6 @@
         <FL val="Due Date"><![CDATA[{{ due_date }}]]></FL>
         <FL val="SEMODULE"><![CDATA[{{ se_module }}]]></FL>
         <FL val="SEID"><![CDATA[{{ se_id }}]]></FL>
+        <FL val="Description"><![CDATA[{{ description }}]]></FL>
     </row>
 </Tasks>

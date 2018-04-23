@@ -43,13 +43,16 @@ def create_potential(student_details, crm_id=None):
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
     print(xml_file)
+    
 
-    owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
+    owner_id = random.choice(app.config['POTENTIAL_OWNERS']) 
+
     student_details['owner_id'] = owner_id
     student_details['test_version'] = app.config['TEST_VERSION']
     student_details['system_environment'] = app.config['SYSTEM_ENVIRONMENT']
-
+    
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
+    print(querystring)
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
@@ -58,21 +61,34 @@ def create_potential(student_details, crm_id=None):
     try:
         for detail in potential_details:
             if detail['val'] == 'Id':
-                return detail['content'], owner_id
+                if stage in app.config['CRM_NEW_STUDENT_TASKS']:
+
+                    task_stage = '_'.join((stage.upper()).split())+'_TASK_OWNERS'
+                    task_owner_id = random.choice(app.config[task_stage])
+                    print(task_owner_id, task_stage)
+                    return detail['content'], owner_id, task_owner_id
+                
+                return detail['content'], owner_id, None
     except Exception as e:
         print(e)
         raise e
     
 
 # creating the task related to the potential
-def create_task_for_potential(potential_id, owner_id, task_text):
+def create_task_for_potential(potential_id, owner_id, task_text, task_description):
+    # if task_text == "Call back and take next steps.":
+    #     description = 'a'
+    # elif task_text == "Evaluate the answers and decide next steps.":
+    #     description = 'b'
+
 
     task_details = {
         'owner_id': owner_id,
         'text': task_text,
         'due_date': get_next_day(),
         'se_module': 'Potentials',
-        'se_id': potential_id
+        'se_id': potential_id,
+        'description': task_description,
     }
     print('--------')
     print(task_details)
@@ -107,7 +123,6 @@ def should_add_to_crm(search_criteria, stage):
     #search_string = "(%s)" %"And".join("(%s:%s)" %(str(x), str(y)) for x,y in search_criteria.items())
     search_string = "(%s:%s)" %list(search_criteria.items())[0]
     url = "https://crm.zoho.com/crm/private/json/Potentials/searchRecords?authtoken=dff429d03714ecd774b7706e358e907b&scope=crmapi&criteria=%s" %search_string
-    print(url)
     response = requests.get(url)
     response_json = response.json()
     if response.status_code == 200:
@@ -117,7 +132,8 @@ def should_add_to_crm(search_criteria, stage):
                 return False, None, response
             elif 'Enrolment Key Generated' in old_stages and stage=='Entrance Test':
                 return True, 'update_enrolment_to_test', response.json()
-            return True, "create_new", response
+            elif old_stages:
+                return True, 'just_create_task', response
         elif 'nodata' in response_json['response']:
             return True, "create_new", response
     return False, "error",response

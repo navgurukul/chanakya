@@ -43,9 +43,12 @@ def get_time_boundary(q_set, time_start_boundary):
     return time_start_boundary + time_delta
 
 def get_question_set(questions, time_remaining):
+    # import pdb
+    # pdb.set_trace()
     time_start_boundary = 0    
     index = 0
     set_names = sorted(list(questions.keys()))
+
     for set_name in set_names:
         time_end_boundary = get_time_boundary(questions[set_name], time_start_boundary)
         print("in loop:", set_name, time_remaining, time_start_boundary, time_end_boundary)

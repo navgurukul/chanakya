@@ -23,6 +23,15 @@
         <FL val="Class 12 Stream"><![CDATA[{{ student.class_12_stream.value }}]]></FL>
 
         <!-- Location -->
+<!--    <FL val="G Pin Code"><![CDATA[{{ student.gl_pin_code }}]]></FL>
+        <FL val="G District"><![CDATA[{{ student.gl_district }}]]></FL>
+        <FL val="G City / Village"><![CDATA[{{ student.gl_city_or_village }}]]></FL>
+        <FL val="G State"><![CDATA[{{ student.gl_state }}]]></FL>
+        <FL val="G Latitidue"><![CDATA[{{ student.gl_lat }}]]></FL>
+        <FL val="G Longitude"><![CDATA[{{ student.gl_long }}]]></FL>
+ -->
+
+        <!-- Location -->
         <FL val="Pin Code"><![CDATA[{{ student.pin_code }}]]></FL>
         <FL val="District"><![CDATA[{{ student.district }}]]></FL>
         <FL val="City / Village"><![CDATA[{{ student.city_or_village }}]]></FL>
