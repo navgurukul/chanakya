@@ -1,11 +1,12 @@
 from app.models import *
-from app import db, app, crm_api
+from app import db, app, crm_api, exotel
 import random
 import exam_config
 from datetime import datetime
 import enum
 import os
 import googlemaps
+
 gmaps = googlemaps.Client(key='AIzaSyB9B4rHwx5tnPr0UR5Xq31MADs4KbNgaPE')
 
 
@@ -150,7 +151,7 @@ def can_add_student(enrolment_key, student_data, action=None):
             non_enum_fields = ("name", "gender", "mobile", "dob",
                 "gl_lat", "gl_long", "gl_pin_code","gl_state", "gl_district", "gl_city_or_village",)
 
-                
+            
             pin_code, state, district, city_or_village,gl_lat, gl_long = None, None, None, None, None, None
 
             if coords:    
@@ -241,13 +242,18 @@ def can_add_student(enrolment_key, student_data, action=None):
 def add_to_crm(student_object, other_details, stage):
     enrolment_key = other_details.get("enrolment_key")
     crm_id = get_crm_id_from_enrolment(enrolment_key)
+    print(other_details)
+    if stage == 'Entrance Test' and other_details.get('test_score')<=17:
+        potential_id, owner_id, task_owner_id = crm_api.create_potential({'student':student_object,'stage':'Entrance Test Failed'}, crm_id=crm_id)
+        return
+    
     potential_id, owner_id, task_owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
-# #############################################################################
+
     if potential_id:
+
         if stage in app.config['CRM_NEW_STUDENT_TASKS']:
-          
-            crm_api.create_task_for_potential(potential_id, task_owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"],app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_description"])
-# #############################################################################
+                crm_api.create_task_for_potential(potential_id, task_owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"],app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_description"])
+
 
 def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
@@ -263,7 +269,7 @@ def get_potential_with_maximum_delay(response):
     results = response['response']['result']['Potentials']['row']
     if len(results)<=2 and type(results)==type({}):
         return results['FL']    
-    return results[-1]['FL']
+    return results[0]['FL']
 
 def add_to_crm_if_needed(phone_number, stage):
     should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)

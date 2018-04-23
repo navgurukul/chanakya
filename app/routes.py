@@ -79,7 +79,9 @@ def ask_personal_details():
             return render_template("ask_personal_details.html")
         elif request.method == "POST":
             print(request.form)
-            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')
+            student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='create')          
+            session['mobile'] = student_details.mobile
+            session['potential_name'] = student_details.enrolment.phone_number
             if student_details:
                 repos.add_to_crm(student_details, session, 'Personal Details Submitted')
                 #repos.create_dump_file(session.get('enrolment_key'), "\nuser_personal_details=" +str(student_details))
@@ -156,8 +158,13 @@ qa_%s = {
         elif request.method == "POST":
             # return str(request.form)  
             student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
+
             if student_details:
-                repos.add_to_crm(student_details, session, 'All Details Submitted')
+                if session.get('test_score')<=17:
+                    repos.add_to_crm(student_details, session, 'Entrance Test Failed')
+                else:
+                    repos.add_to_crm(student_details, session, 'All Details Submitted')
+
                 #repos.create_dump_file(session.get('enrolment_key'), "\nuser_details=" +str(student_details))
                 session.clear()
                 return render_template("thanks.html")

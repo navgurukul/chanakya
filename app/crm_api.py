@@ -52,7 +52,7 @@ def create_potential(student_details, crm_id=None):
     student_details['system_environment'] = app.config['SYSTEM_ENVIRONMENT']
     
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
-    print(querystring)
+    # print(querystring)
     response = requests.request("GET", url, params=querystring)
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
