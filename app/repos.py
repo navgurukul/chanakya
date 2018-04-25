@@ -147,65 +147,50 @@ def can_add_student(enrolment_key, student_data, action=None):
     #try:
         coords = student_data.get('coords')
         if action == 'create':
-        #########################################################
-            non_enum_fields = ("name", "gender", "mobile", "dob",
+            non_enum_fields = ("name", "mobile", "dob",
                 "gl_lat", "gl_long", "gl_pin_code","gl_state", "gl_district", "gl_city_or_village",)
-
-            
             pin_code, state, district, city_or_village,gl_lat, gl_long = None, None, None, None, None, None
-
             if coords:    
                 coords = coords.split(',')
-
                 gl_lat = coords[0]
                 gl_long = coords[1]
-
                 response = gmaps.reverse_geocode(coords)
-                addresses = response[0]['address_components']
-                
-
+                addresses = response[0]['address_components']                
                 for address in addresses:
-
                     if 'postal_code' in address['types']:
                         pin_code = address['long_name']
-
                     if 'administrative_area_level_1' in address['types']:
-                        state = address['long_name']
-                    
+                        state = address['long_name'].replace(" ", "_")
                     if 'administrative_area_level_2' in address['types']:
                         district = address['long_name']
-                    
                     if 'locality' in address['types']:
                         city_or_village = address['long_name']
-
-            print('-------------------------------------------------------') 
             print(coords, district, city_or_village, pin_code, state)
-            print('-------------------------------------------------------') 
-
-        #########################################################
         elif action == 'update':
             non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
             "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
             "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
-        enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
+        enum_fields = ( "gender", "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
                         "family_head", "family_head_qualification", "urban_family_head_prof","state",
                         "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
 
-        enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
+        enums = (Gender, SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
         FamilyHead, Qualification, UrbanProfessions, INDIAN_STATES, RuralProfessions, RuralOrgMembership, FamilyType,
         HousingType)
+        import pdb;pdb.set_trace()
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
 
         if coords:
-            student_details.update({'gl_pin_code': pin_code})                                                   
-            student_details.update({'gl_state': state})                                                   
-            student_details.update({'gl_district': district})                                                   
+            student_details.update({'gl_pin_code': pin_code})
+            print(state)
+            student_details.update({'gl_state': getattr(INDIAN_STATES,state)})
+            student_details.update({'gl_district': district}) 
             student_details.update({'gl_city_or_village': city_or_village})
             student_details.update({'gl_lat': gl_lat})
             student_details.update({'gl_long':gl_long})
-            
+            print(student_details)
         for key in ("monthly_family_income", "family_head_income", "family_land_holding",
                      "family_draught_animals", "fam_members", "earning_fam_members"):
             if not student_details.get(key): #empty strings replaced by 0
@@ -233,20 +218,14 @@ def can_add_student(enrolment_key, student_data, action=None):
         db.session.add(student)
         db.session.commit()
         return student
-    #except Exception as e:
-    #    print("logger was hit")
-    #    #logger.error('''unable to add student in DB(and CRM),
-    #    #                student_data:\n%s'''%st(student_data))
-    #    return False
 
 def add_to_crm(student_object, other_details, stage):
     enrolment_key = other_details.get("enrolment_key")
     crm_id = get_crm_id_from_enrolment(enrolment_key)
-    print(other_details)
     if stage == 'Entrance Test' and other_details.get('test_score')<=17:
         potential_id, owner_id, task_owner_id = crm_api.create_potential({'student':student_object,'stage':'Entrance Test Failed'}, crm_id=crm_id)
         return
-    
+
     potential_id, owner_id, task_owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
 
     if potential_id:
@@ -259,7 +238,8 @@ def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
         'stage': stage,
         'source': 'Helpline',
-        'potential_name': phone_number,
+        'potential_name':
+         phone_number,
         'student_or_partner': 'Student',
         'student_mobile': phone_number
     }

@@ -42,9 +42,14 @@ def create_potential(student_details, crm_id=None):
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
-    print(xml_file)
-    
 
+    #############################################################################
+    if stage == 'Entrance Test':    
+        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+        print(student_details['student'].test_data.received_marks)
+        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    #############################################################################
+    
     owner_id = random.choice(app.config['POTENTIAL_OWNERS']) 
 
     student_details['owner_id'] = owner_id

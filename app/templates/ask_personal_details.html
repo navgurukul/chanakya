@@ -40,16 +40,18 @@ Road to Navgurukul
             <form class="row" id="ask_personal_details" method="POST">
                 <div class="row border border-warning rounded form-container">
                     <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Personal Details</h2>
-                        <span id='errors' class='text text-center text-danger' ></span>
+
+                        <span style="margin-left: 3%;" id='errors' class='text text-center text-danger'></span>
+
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Naam</div>
-                            <input type="text" name="name" placeholder="Your Name" required
+                            <input type="text" id='name' name="name" placeholder="Your Name" required
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Aapka Mobile Number</div>
-                            <input type="number" name="mobile" placeholder="Your Mobile Number"
-                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                            <input type="number" id='mobile' name="mobile" placeholder="Your Mobile Number"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
                         </div>
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Date of Birth</div>   
@@ -69,7 +71,7 @@ Road to Navgurukul
 
                         <div class="row m-row">
                             <div class="col-xs-12 col-sm-6 col-md-6">Gender/ लिंग</div>
-                            <select name="gender"
+                            <select name="gender" id ='gender'
                                 class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
                                 required>
                                 <option value="NONE">Select Gender</option>
@@ -125,6 +127,8 @@ Road to Navgurukul
         coords.type = 'text'
         coords.name = 'coords'
         var coordinates = null;
+
+        // for getting lat and long
         if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(function(positions){coordinates = positions.coords.latitude +','+ positions.coords.longitude});
             }
@@ -133,29 +137,51 @@ Road to Navgurukul
             }
 
         var form = document.getElementById('ask_personal_details');
-        var errors = document.getElementById('errors');
+        var errors = $('#errors');
+
         function submiting() {
             // body...
-            var su = document.getElementById('button')
+            // var su = $('#button')
+            var name = $('#name').val();
+            var date = $('#date').val();
+            var month = $('#month').val();
+            var year = $('#year').val();
+            var mobile = $('#mobile').val();
+            var gender = $('#gender').val();
 
-            var date = document.getElementById('date').value;
-            var month = document.getElementById('month').value;
-            var year = document.getElementById('year').value;
             function appending(message) {
                 // body...
-                errors.innerHTML = ''
-                errors.append(message)
+                errors.html('');
+                errors.append(message);
             }
             
             coords.value = coordinates;
-            
-
+            if(!mobile){
+                appending('Kripaya mobile number dijye!');
+                return false;
+            }
+            if(mobile.length<10 || mobile.length>10){
+                appending('10 digit ka mobile number daliye!')
+                return false;
+            }
+            if(!name){
+                appending('Naam wali field ko khali na chore!');
+                return false;
+            }
+            if(gender=='NONE'){
+                appending('Apna gender select kijye!');
+                return false
+            }
+            if( /^[a-zA-Z]$/i.test(name)){
+                appending('Naam wale section me (1,.,!,#,@,") ka istamal na kare!');
+                return false;
+            }
             // to check dtae field isn't empty
             if(date == ''){
                 appending('Kripaya Apne Janam Ka Din Chuniye!');
                 return false;
             }
-            else if(month==''){
+            else if(month ==''){
                 appending('Kripaya Apne Janam Ka Mahina Chuniye!');
                 return false;
             }

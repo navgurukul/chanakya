@@ -141,11 +141,19 @@ qa_%s = {
 
 
         repos.save_test_result_and_analytics(data_dump, other_details)
-        session["test_score"] += data_dump.get("total_marks")
+        session["test_score"] = data_dump.get("total_marks")
+        
         session['submitted_set'] = session.get('set_name')
 
 
         student_details = repos.can_add_student(session.get("enrolment_key"), request.form, action='update')
+
+        #####################################################################
+        print('============================================================')
+        print(session["test_score"],student_details.test_data.received_marks)
+        print('============================================================')
+        #####################################################################
+
         if student_details:
             repos.add_to_crm(student_details, session, 'Entrance Test')
 
@@ -206,7 +214,7 @@ def create_question():
         else:
             flash("question not created: %s" %error)
             print("question not created: %s" %error)
-            return redirect(url_for("create_question"))
+            return redirect(url_for("create_question"), 400)
 
 ############ REST APIS ##############
 

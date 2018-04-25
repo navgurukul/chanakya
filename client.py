@@ -15,7 +15,7 @@ try:
     print(r.text)
 except:
     if sys.argv[1] == "rajeev":
-        from qsn_dump import questions
+        from qsn_dump2 import questions
     elif sys.argv[1] == "old":
         from old_test_questions import questions
     for question in questions:
@@ -36,6 +36,8 @@ except:
             d = question
         t1 =datetime.now()
         print(d)
-        r = requests.post("http://127.0.0.1:8000/create-question", data=d)
-        print(r.status_code)
+       	r = requests.post("http://127.0.0.1:8000/create-question", data=d)
+        if r.status_code == 400:
+            print("kuch fata hai")
+            sys.exit(1)
         print(datetime.now()-t1)

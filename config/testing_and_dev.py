@@ -73,7 +73,7 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
 }
 CRM_NEW_STUDENT_TASKS = {
     "Requested Callback": {
-        "task_message": "Call back and take next steps.",
+        "task_message": "[Requested Callback] Call back and take next steps.",
         "task_description":'''
 
 
@@ -129,7 +129,7 @@ Note: Agar inn cases me se koi case nahi hai toh shanu ya rishabh ko cliq par pi
                 '''
     },
     "Entrance Test": {
-        "task_message": "Evaluate the answers and decide next steps.",
+        "task_message": "[Entrance Test] Evaluate the answers and decide next steps.",
         "task_description":'''
 
 1. Open the potential in a new tab by clicking on <Potential Name>.

@@ -2,44 +2,43 @@ from app import db
 import datetime
 from enum import Enum
 
-INDIAN_STATES = [
-    'Andaman and Nicobar Islands',
-    'Andhra Pradesh',
-    'Arunachal Pradesh',
-    'Assam',
-    'Bihar',
-    'Chandigarh',
-    'Chhattisgarh',
-    'Dadra and Nagar Haveli',
-    'Daman and Diu',
-    'National Capital Territory of Delhi',
-    'Goa',
-    'Gujarat',
-    'Haryana',
-    'Himachal Pradesh',
-    'Jammu and Kashmir',
-    'Jharkhand',
-    'Karnataka',
-    'Kerala',
-    'Lakshadweep',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Manipur',
-    'Meghalaya',
-    'Mizoram',
-    'Nagaland',
-    'Odisha',
-    'Puducherry',
-    'Punjab',
-    'Rajasthan',
-    'Sikkim',
-    'Tamil Nadu',
-    'Telangana',
-    'Tripura',
-    'Uttar Pradesh',
-    'Uttarakhand',
-    'West Bengal'
-]
+class INDIAN_STATES(Enum):
+    Andaman_and_Nicobar_Islands="Andaman and Nicobar Islands"
+    Andhra_Pradesh="Andhra Pradesh"
+    Arunachal_Pradesh="Arunachal Pradesh"
+    Assam="Assam"
+    Bihar="Bihar"
+    Chandigarh="Chandigarh"
+    Chhattisgarh="Chhattisgarh"
+    Dadra_and_Nagar_Haveli="Dadra and Nagar Haveli"
+    Daman_and_Diu="Daman and Diu"
+    National_Capital_Territory_of_Delhi="National Capital Territory of Delhi"
+    Goa="Goa"
+    Gujarat="Gujarat"
+    Haryana="Haryana"
+    Himachal_Pradesh="Himachal Pradesh"
+    Jammu_and_Kashmir="Jammu and Kashmir"
+    Jharkhand="Jharkhand"
+    Karnataka="Karnataka"
+    Kerala="Kerala"
+    Lakshadweep="Lakshadweep"
+    Madhya_Pradesh="Madhya Pradesh"
+    Maharashtra="Maharashtra"
+    Manipur="Manipur"
+    Meghalaya="Meghalaya"
+    Mizoram="Mizoram"
+    Nagaland="Nagaland"
+    Odisha="Odisha"
+    Puducherry="Puducherry"
+    Punjab="Punjab"
+    Rajasthan="Rajasthan"
+    Sikkim="Sikkim"
+    Tamil_Nadu="Tamil Nadu"
+    Telangana="Telangana"
+    Tripura="Tripura"
+    Uttar_Pradesh="Uttar Pradesh"
+    Uttarakhand="Uttarakhand"
+    West_Bengal="West Bengal"
 
 ITEMS_OWNED_MAPPING = {
     'bullock_cart': 'Bullock Cart',
@@ -217,7 +216,7 @@ class Student(db.Model):
     
     # location details
     pin_code = db.Column(db.String(6))
-    state = db.Column(db.Enum(*INDIAN_STATES))
+    state = db.Column(db.Enum(INDIAN_STATES))
     district = db.Column(db.String(100))
     tehsil = db.Column(db.String(100))
     city_or_village = db.Column(db.String(100))
@@ -227,7 +226,7 @@ class Student(db.Model):
     gl_lat = db.Column(db.Float)
     gl_long = db.Column(db.Float)
     gl_pin_code = db.Column(db.String(6))
-    gl_state = db.Column(db.Enum(*INDIAN_STATES))
+    gl_state = db.Column(db.Enum(INDIAN_STATES))
     gl_district = db.Column(db.String(100))
     gl_city_or_village = db.Column(db.String(100))
 
