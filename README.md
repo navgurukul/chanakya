@@ -28,7 +28,7 @@ mysql> quit
 ```bash
 export FLASK_APP=${HOME}/chanakya/chanakya.py
 export FLASK_DEBUG=1
-export CHANAKYA_ENV=../config/testing_and_dev.py 
+export CHANAKYA_ENV=../config/developement.py 
 ```
 now open a new terminal window and close this one
 
