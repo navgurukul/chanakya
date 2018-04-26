@@ -1,17 +1,24 @@
-from app.models import Options, Question, TestData, Enrolment, Student
-from app.models import Difficulty, QuestionType, Boolean, Gender, Stream_11_12, CollegeType, Caste
-from app import db
+from app.models import *
+from app import db, app, crm_api
 import random
 import exam_config
 from datetime import datetime
-from app import crm_api
 import enum
+import os
+
+from app import app
+STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
 
 config = exam_config.config["question_config"]
 
-def add_enrolment_key(enrolment_key, phone_number):
+def get_crm_id_from_enrolment(enrolment_key):
+    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+    return en.crm_potential_id
+
+def add_enrolment_key(enrolment_key, phone_number, crm_potential_id):
     try:
-        en = Enrolment(enrolment_key=enrolment_key, phone_number=phone_number)
+        en = Enrolment( enrolment_key=enrolment_key, phone_number=phone_number, 
+                        crm_potential_id=crm_potential_id)
         db.session.add(en)
         db.session.commit()
     except Exception as e:
@@ -111,62 +118,108 @@ def get_all_questions():
         question_details[question_set]["questions"] = get_questions_for_q_set(q_set)
     return question_details
 
-def add_test_data_to_db(data_dump, other_details):
+def add_test_data_to_db(enrolment_key, test_data_details):
+    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+    td = TestData.query.filter_by(enrolment_id=en.id, set_name=test_data_details['set_name']).all()
+    if len(td) == 0:
+        test_data = TestData(**test_data_details)
+        test_data.enrolment_id = en.id
+        db.session.add(test_data)
+        db.session.commit()
+
+def create_dump_file(enrolment_key, stuff_to_save):
+    f_path = os.path.join(STUDENT_DIRECTORY, "%s.py"%enrolment_key)
+    with open(f_path, "a") as fp:
+        fp.write(stuff_to_save)
+
+def save_test_result_and_analytics(data_dump, other_details):
     enrolment_key     = other_details['enrolment_key']
     test_data_details = dict(       started_on          = other_details['start_time'],
                                     submitted_on        = other_details['submit_time'],
                                     received_marks      = data_dump['total_marks'],
                                     max_possible_marks  = data_dump['max_possible_marks'],
                                     set_name            = other_details['set_name'])
-    en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
-    test_data = TestData(**test_data_details)
-    test_data.enrolment = en
-    db.session.add(test_data)
-    db.session.commit()
+    add_test_data_to_db(enrolment_key, test_data_details)
 
-def save_test_result_and_analytics(data_dump, other_details):
-    add_test_data_to_db(data_dump, other_details)
-    #create_dump_zip(data_dump, other_details)
+def can_add_student(enrolment_key, student_data, action=None):
+    #try:
+        if action == 'create':
+            non_enum_fields = ("name", "gender", "mobile", "dob")
+        elif action == 'update':
+            non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
+            "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
+            "state","monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
-def can_add_student(enrolment_key, student_data):
-    try:
-        non_enum_fields = ("works_where","num_fam_members","num_earning_fam_members","monthly_fam_income","father_prof","mother_prof","monthly_fam_income","last_class_passed","percentage_10","percentage_12","college_which","potential_name","student_mobile","dob","city","state")
+        enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
+                        "family_head", "family_head_qualification", "urban_family_head_prof",
+                        "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
 
-        enum_fields = ("owns_android","owns_computer","is_works","is_10_pass","is_12_pass","stream_11_12","is_college_enrolled","college_type","gender","caste_tribe")
-
-        enums = (Boolean, Boolean, Boolean, Boolean, Boolean, Stream_11_12, Boolean, CollegeType, Gender, Caste)
+        enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
+        FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
+        HousingType)
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
-        student_details.update({enum_fields[index]: getattr(enums[index], student_data.get(enum_fields[index])) for index in range(len(enums))})
+        for index in range(len(enums)):
+            enum_data = student_data.get(enum_fields[index])
+            if enum_data and enum_data!='NONE':
+                student_details[enum_fields[index]] =  getattr(enums[index], enum_data)
 
-        student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
+        if student_details.get("dob") is not None:
+            student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
-        student   = Student(**student_details)
+        if action =='create':
+            student   = Student(**student_details)
+        elif action == 'update':
+            student = Student.query.filter_by(enrolment_id=enrolment.id).first()
+            for key,value in student_details.items():
+                setattr(student, key, value)
+        student.items_owned  = student_data.getlist('items_owned')
         student.enrolment = enrolment
         student.test_data = test_data
         db.session.add(student)
         db.session.commit()
-        return student_details
-    except Exception as e:
-        #log e
-        return False
+        return student
+    #except Exception as e:
+    #    print("logger was hit")
+    #    #logger.error('''unable to add student in DB(and CRM),
+    #    #                student_data:\n%s'''%st(student_data))
+    #    return False
 
-def get_stage_for_student():
-    return 'Lightbot Activity'
-
-def add_to_crm(student_details, other_details):
-    student_details = { k:student_details[k].value if isinstance(student_details[k], enum.Enum) else student_details[k] for k in student_details}
-    all_student_details = {
-        'stage': get_stage_for_student(),
-        'source': 'Helpline',
-        'student_or_partner': 'Student',
-            
-        'results_url': "admissions.navgurukul.org/view-result/%s" %other_details.get("enrolment_key"),
-        'test_version': 'New Version XYZ',
-        'test_score': other_details.get("test_score"),
-    }
-    all_student_details.update(student_details)
-    potential_id = crm_api.create_potential(all_student_details)
+def add_to_crm(student_object, other_details, stage):
+    enrolment_key = other_details.get("enrolment_key")
+    crm_id = get_crm_id_from_enrolment(enrolment_key)
+    potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
     if potential_id:
-        crm_api.create_task_for_potential(potential_id)
+        if stage in app.config['CRM_NEW_STUDENT_TASKS']:
+            crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+
+def get_student_details_from_phone_number(phone_number, stage):
+    student_details = {
+        'stage': stage,
+        'source': 'Helpline',
+        'potential_name': phone_number,
+        'student_or_partner': 'Student',
+        'student_mobile': phone_number
+    }
+    return student_details
+
+def add_to_crm_if_needed(phone_number, stage):
+    should_add_to_crm, action, response = crm_api.should_add_to_crm({'Potential Name':phone_number}, stage=stage)
+    if should_add_to_crm:
+        student_details = get_student_details_from_phone_number(phone_number, stage)
+        if action == "create_new":
+            potential_id, owner_id = crm_api.create_potential(student_details)
+            if app.config['CRM_NEW_STUDENT_TASKS'].get(stage):
+                crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+            else:
+                pass #data-analytics
+
+def add_enrolment_to_crm(phone_number, enrolment_key):
+    student_details = get_student_details_from_phone_number(phone_number, "Enrolment Key Generated")
+    student_details['Enrolment_Key'] = enrolment_key
+    potential_id, owner_id = crm_api.create_potential(student_details)
+    return potential_id
+
+def add_student_to_crm(student):
+    pass

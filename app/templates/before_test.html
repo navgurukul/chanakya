@@ -6,7 +6,7 @@ Road to Navgurukul
 {% block head_extra %}
 <style>
     body{
-       // background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
+        //background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
         background-size: cover;
     }
     .enrollment_number{
@@ -14,7 +14,10 @@ Road to Navgurukul
     }
     .form-container{
         padding:2rem;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.7);
+    }
+    .before-test-heading {
+        text-align: center;
     }
     form>*{
         margin-top:1rem;
@@ -27,6 +30,9 @@ Road to Navgurukul
     }
     h2{
         font-size:1.5rem;
+    }
+    .before-test-start-btn {
+        margin: 0 auto;
     }
 </style>
 <script type="text/javascript">
@@ -54,8 +60,18 @@ $(function(){
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
             <div class="row border border-warning rounded form-container">
-                <h2 class="question col-xs-12 col-sm-12">Are you Sure you want to start?</h2>
-                <form class="row" method="post">
+                <h2 class="col-xs-12 col-sm-12 before-test-heading">NavGurukul Scholarship Test</h2>
+                <br><br>
+                <p>
+                    Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot kaam aayengi.
+                </p>
+                <ol>
+                    <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.</li>
+                    <li>Test dete waqt <strong>apne paas ek notebook aur pen rakhein</strong>. Aap koi bhi rough work notebook mein kar sakte hain.</li>
+                    <li>Har question ka answer apne phone pe hi test dete hue daal dein.</li>
+                    <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)</li>
+                </ol>
+                <form class="row before-test-start-btn" method="post">
                     <button type="submit" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start My Test</button>
                 </form>
             </div>

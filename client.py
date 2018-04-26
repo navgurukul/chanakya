@@ -2,29 +2,40 @@ import requests
 import sys
 from datetime import datetime
 
+def create_option_list(r_l, opt):
+    for i in range(len(r_l)):
+        if r_l[i] == opt:
+            break
+    return [r_l[i]] + r_l[:i] + r_l[i+1:]
+
 try:
-    phone_number = sys.argv[1]
-    r = requests.put("http://127.0.0.1:8000/exotel_enroll_for_test", params={"CallFrom":phone_number})
+    phone_number = int(sys.argv[1])
+    r = requests.put("http://127.0.0.1:8000/create-enrolment-key/%s" %phone_number)
     print(r.status_code)
     print(r.text)
 except:
-    for category in ["category-1", "category-2", "category-3", "category-4"]:
-        for difficulty in ("easy", "hard", "medium"):
-            for question_type in ("MCQ", "short_answer"):
-                for num in range(1,51):
-                    d = {
-                            'en_question_text':'English %s - %s - %d' %(category, difficulty, num),
-                            'hi_question_text':'हिंदी %s - %s - %d' %(category, difficulty, num),
-                            'difficulty':difficulty,
-                            'question_type':question_type,
-                            'category':category,
-                            'option_1':'option_1_%s' %category,
-                            'option_2':'option_2_%s' %category,
-                            'option_3':'OPTION_3_%s' %category,
-                            'option_4':'OPTION_4_%s' %category
-                        }
-                    t1 =datetime.now()
-                    r = requests.post("http://join.navgurukul.org/create-question", data=d)
-                    print(r.status_code)
-                    print(d['en_question_text'])
-                    print(datetime.now()-t1)
+    if sys.argv[1] == "rajeev":
+        from qsn_dump import questions
+    elif sys.argv[1] == "old":
+        from old_test_questions import questions
+    for question in questions:
+        if sys.argv[1] == "rajeev":
+            options  = create_option_list(question['random_options'], question['answer'])
+            d = {
+                    'en_question_text':  question['en_question_text'],
+                    'hi_question_text':  '',
+                    'difficulty':        question['difficulty'],
+                    'question_type':     question['question_type'],
+                    'category':          question['category'],
+                    'option_1':          options[0], 
+                    'option_2':          options[1],
+                    'option_3':          options[2],
+                    'option_4':          options[3]
+            }
+        elif sys.argv[1] == "old":
+            d = question
+        t1 =datetime.now()
+        print(d)
+        r = requests.post("http://127.0.0.1:8000/create-question", data=d)
+        print(r.status_code)
+        print(datetime.now()-t1)

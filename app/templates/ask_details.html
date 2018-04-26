@@ -5,19 +5,12 @@ Road to Navgurukul
 
 {% block head_extra %}
 <style>
-    body{
-        background: url(http://www.snowcrest.in/images/suncopy.JPG) no-repeat center center fixed;
-        background-size: cover;
-    }
     .m-row{
         margin:0.5rem;
-    }
-    .m-row textarea{
-        height:8rem;
+        width:100%;
     }
     .form-container{
         padding:2rem;
-        background-color: rgba(255,255,255,0.5);
     }
     form>*{
         margin-top:1rem;
@@ -31,6 +24,8 @@ Road to Navgurukul
     .hide{
         display:none;
     }
+    *[required]{
+    }
 </style>
 {% endblock %}
 
@@ -41,241 +36,374 @@ Road to Navgurukul
 {% block main %}
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
-            <div class="row border border-warning rounded form-container">
-                <h2 class="question col-xs-12 col-sm-12">Enter Your Details</h2>
-                <div class="col-xs-12 col-sm-12">
-                <form class="row" method="post" action="send-details">
-                    <div class="col-sm-12 col-xs-12 hide-all" id="block_1">
+            <div class="col-xs-12 col-sm-12">
+            <form class="row" method="post">
+                <div class="row border border-warning rounded form-container">
+                    <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Address Details</h2>
                         <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Your Full Name</div>
-                            <input type="text" name="potential_name" placeholder="Your Name" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                            <div class="col-xs-12 col-sm-6 col-md-6">Pincode</div>
+                            <input type="number" name="pin_code" placeholder="Pincode"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Your Mobile Number</div>
-                            <input type="number" name="student_mobile" placeholder="Your Mobile Number"
-                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aapki City/Village ka Naame</div>
+                            <input type="text" name="city_or_village" placeholder="City ya Village ka naam"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Date of Birth</div>
-                            <input type="date" name="dob" placeholder="Your Date of Birth"
-                                required class="col-xs-12 col-sm-6 border border-warning rounded"/>
+                            <div class="col-xs-12 col-sm-6 col-md-6">Tehsil</div>
+                            <input type="text" name="tehsil" placeholder="Tehsil"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                         </div>
                         <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Gender/ लिंग</div>
-                            <select name="gender"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                            <div class="col-xs-12 col-sm-6 col-md-6">District</div>
+                            <input type="text" name="district" placeholder="District"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aap kis State me rehte hai</div>
+                            <select name="state"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select State</option>
+                                    <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+                                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                                    <option value='Assam'>Assam</option>
+                                    <option value='Bihar'>Bihar</option>
+                                    <option value='Chandigarh'>Chandigarh</option>
+                                    <option value='Chhattisgarh'>Chhattisgarh</option>
+                                    <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                                    <option value='Daman and Diu'>Daman and Diu</option>
+                                    <option value='National Capital Territory of Delhi'>National Capital Territory of Delhi</option>
+                                    <option value='Goa'>Goa</option>
+                                    <option value='Gujarat'>Gujarat</option>
+                                    <option value='Haryana'>Haryana</option>
+                                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                                    <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+                                    <option value='Jharkhand'>Jharkhand</option>
+                                    <option value='Karnataka'>Karnataka</option>
+                                    <option value='Kerala'>Kerala</option>
+                                    <option value='Lakshadweep'>Lakshadweep</option>
+                                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                                    <option value='Maharashtra'>Maharashtra</option>
+                                    <option value='Manipur'>Manipur</option>
+                                    <option value='Meghalaya'>Meghalaya</option>
+                                    <option value='Mizoram'>Mizoram</option>
+                                    <option value='Nagaland'>Nagaland</option>
+                                    <option value='Odisha'>Odisha</option>
+                                    <option value='Puducherry'>Puducherry</option>
+                                    <option value='Punjab'>Punjab</option>
+                                    <option value='Rajasthan'>Rajasthan</option>
+                                    <option value='Sikkim'>Sikkim</option>
+                                    <option value='Tamil Nadu'>Tamil Nadu</option>
+                                    <option value='Telangana'>Telangana</option>
+                                    <option value='Tripura'>Tripura</option>
+                                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                                    <option value='Uttarakhand'>Uttarakhand</option>
+                                    <option value='West Bengal'>West Bengal</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="row border border-warning rounded form-container">
+                    <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Education Details</h2>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Maximum Qualification</div>
+                            <select name="qualification" id="qualification" 
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='class_5_pass'>Class 5 Pass</option>
+                                    <option value='class_8_pass'>Class 8 Pass</option>
+                                    <option value='class_10_pass'>Class 10 Pass</option>
+                                    <option value='class_12_pass'>Class 12 Pass</option>
+                                    <option value='graduate'>Graduation Completed</option>
+                                    <option value='post_graduate'>Post Graduate</option>
+                                    <option value='prof_degree'>Professional Degree</option>
+                            </select>
+                        </div>
+                        <div class="row m-row min-10 hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Percentage in 10th</div>
+                            <input type="number" name="class_10_marks" 
+                                placeholder="Percentage in 10th" min='0' step='any'
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row min-12 hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Percentage in 12th</div>
+                            <input type="number" name="class_12_marks" 
+                                placeholder="Percentage in 12th"  min='0' step='any'
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row min-12 hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Stream in Class 12th</div>
+                            <select name="class_12_stream"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
+                                <option value="NONE">Select Option</option>
+                                <option value="pcm">Non Medical (Physics, Chemistry, Maths)</option>
+                                <option value="pcb">Medical (Physics, Chemistry, Biology)</option>
+                                <option value="pcmb">Combined (Physics, Chemistry, Biology, Maths)</option>
+                                <option value="commerce_with_maths">Commerce (With Maths)</option>
+                                <option value="commerce_without_maths">Commerce (Without Maths)</option>
+                                <option value="arts">Arts</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">School Medium</div>
+                            <select name="school_medium"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
+                                <option value="NONE">Select Option</option>
+                                <option value="english">English</option>
+                                <option value="vernacular">Non English</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="row border border-warning rounded form-container">
+                    <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Family Details</h2>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Head</div>
+                            <select name="family_head" id="family_head"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='father'>Father</option>
+                                    <option value='mother'>Mother</option>
+                                    <option value='other'>Other</option>
+                            </select>
+                        </div>
+                        <div class="row m-row family-other hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Head(other) Specify</div>
+                            <input type="text" name="family_head_other" 
+                                placeholder="Family Head(Other)"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Head's Qualification</div>
+                            <select name="family_head_qualification"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='no_reading_writing'>Padna aur likhna nahi aata</option>
+                                    <option value='reading_writing'>Padna ya likhna aata hai</option>
+                                    <option value='class_5_pass'>Class 5 Pass</option>
+                                    <option value='class_8_pass'>Class 8 Pass</option>
+                                    <option value='class_10_pass'>Class 10 Pass</option>
+                                    <option value='class_12_pass'>Class 12 Pass</option>
+                                    <option value='graduate'>Graduation Completed</option>
+                                    <option value='post_graduate'>Post Graduate</option>
+                                    <option value='prof_degree'>Professional Degree</option>
+                            </select>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Number of Family Members</div>
+                            <input type="number" name="fam_members" 
+                                placeholder="Aapki Family me kitne log hai"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Number of Earning Family Members</div>
+                            <input type="number" name="earning_fam_members" 
+                                placeholder="Aapki Family me kitne log kamate hai" 
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Monthly Family Income</div>
+                            <input type="number" name="monthly_family_income" 
+                                placeholder="Aapki Family ki Montly Income kya hai" 
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                </div>
+                <div class="row border border-warning rounded form-container">
+                    <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Other Family Details</h2>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar kaha hai</div>
+                            <select name="urban_rural" id="urban_rural"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='urban'>Shehar mein</option>
+                                    <option value='rural'>Gao mein</option>
+                            </select>
+                        </div>
+                        <!--  Urban -->
+                        <div class="row m-row urban">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
+                            <select name="urban_family_head_prof"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='unemployed'>Unemployed</option>
+                                    <option value='no_training_jobs'>Jobs without training (Servent, Peon etc)</option>
+                                    <option value='jobs_with_training'>Jobs with training (Factory Worker, Waiter etc)</option>
+                                    <option value='high_training'>Jobs with higher training (Driver, Chef etc)</option>
+                                    <option value='read_write_jobs'>Jobs that require you to Read/Write(Clerk etc)</option>
+                                    <option value='routine_work'>Routine Work (Lecturer, High School Techer etc)</option>
+                                    <option value='prof_degree_work'>Professional Degree (Doctor, Engineer etc)</option>
+                            </select>
+                        </div>
+                        <div class="row m-row urban">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Monthly Income of Family Head</div>
+                            <input type="number" name="family_head_income" 
+                                placeholder="Family Head ki Monthly Income kya hai"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <!--  Rural -->
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
+                            <select name="rural_family_head_prof"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='unemployed'>Unemployed</option>
+                                    <option value='labourer'>Labourer</option>
+                                    <option value='caste_related_work'>Caste Related Work</option>
+                                    <option value='business'>Business</option>
+                                    <option value='independent_work'>Independent Work</option>
+                                    <option value='work_on_own_land'>Work on Own Land</option>
+                                    <option value='service'>Service</option>
+                            </select>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Organization Membership</div>
+                            <select name="family_head_org_membership"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='nothing'>None</option>
+                                    <option value='member_1_org'>Member of 1 organization</option>
+                                    <option value='member_1plus_org'>Member of more than 1 organization</option>
+                                    <option value='office_holder'>Office Holder in an organization</option>
+                                    <option value='pub_leader'>Public Leader</option>
+                            </select>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Type</div>
+                            <select name="family_type"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='single'>Single</option>
+                                    <option value='joint'>Joint</option>
+                            </select>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Family Land Holding(in Acres)</div>
+                            <input type="number" name="family_land_holding" 
+                                placeholder="Aapki Family k paas kitni Jameen hai"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Number Draught animals your Family Owns.</div>
+                            <input type="number" name="family_draught_animals" 
+                                placeholder="jaise ki horse, cow, goat, hen etc."
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar Kaisa hai</div>
+                            <select name="housing_type"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                                    <option value="NONE">Select Option</option>
+                                    <option value='hut'>Hut</option>
+                                    <option value='kacha_house'>Kacha Ghar</option>
+                                    <option value='pucca_house'>Pakka Ghar</option>
+                                    <option value='kothi'>Kothi</option>
+                            </select>
+                        </div>
+                        <div class="row m-row rural hide">
+                            <h5 class="col-sm-12 text-center"> Inme se kaun kaun si vastu aapke ghar me hai ?</h5>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="bullock_cart">Bullock Cart</label>
+                                <input type="checkbox" name="items_owned" id="bullock_cart" value="bullock_cart"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="cycle">Cycle</label>
+                                <input type="checkbox" name="items_owned" id="cycle" value="cycle"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="radio">Radio</label>
+                                <input type="checkbox" name="items_owned" id="radio" value="radio"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="chairs">Chairs</label>
+                                <input type="checkbox" name="items_owned" id="chairs" value="chairs"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="mobile">Mobile Phone</label>
+                                <input type="checkbox" name="items_owned" id="mobile" value="mobile"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="television">Television</label>
+                                <input type="checkbox" name="items_owned" id="television" value="television"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label for="refrigerator">Refrigerator</label>
+                                <input type="checkbox" name="items_owned" id="refrigerator" value="refrigerator"/>
+                            </div>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6">Caste/Tribe</div>
+                            <select name="caste_parent_category" id="caste_parent_category"
+                                class="col-xs-12 col-sm-6 border border-warning rounded section-1">
+                                <option value="NONE">Select Option</option>
+                                <option value="sc">(SC) Scheduled Caste</option>
+                                <option value="st">(ST) Scheduled Tribe</option>
+                                <option value="obc">(OBC) Other Backward Classes</option>
+                                <option value="general">General</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Your City</div>
-                            <input type="text" name="city" placeholder="Your City" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Your State</div>
-                            <input type="text" name="state" placeholder="Your State"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Your Caste and Tribe</div>
-                            <select name="caste_tribe"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="SC">(SC) Scheduled Caste</option>
-                                <option value="ST">(ST) Scheduled Tribe</option>
-                                <option value="OBC">(OBC) Other Backward Classes</option>
-                                <option value="General">General</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <button type="button" class="btn btn-lg next-btn btn-warning col-xs-12 col-sm-12">
-                                Continue My Application
-                            </button>
+                        <div class="row m-row caste-other">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Jaati</div>
+                            <input type="text" name="caste" 
+                                placeholder="Aapki Caste Kya hai"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xs-12 hide hide-all" id="block_2">
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Do you own a Mobile Phone?</div>
-                            <select name="owns_android"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Do you own a Computer/Laptop?</div>
-                            <select name="owns_computer"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Works?</div>
-                            <select name="is_works"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Where do you work?</div>
-                            <input type="number" name="works_where" required
-                                placeholder="Number of Earning Family Members"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Number of Family Members</div>
-                            <input type="number" name="num_fam_members" required
-                                placeholder="Number of Family Members"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Number of Earning Family Members</div>
-                            <input type="number" name="num_earning_fam_members" required
-                                placeholder="Number of Earning Family Members"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Monthly Family Income</div>
-                            <input type="number" name="monthly_fam_income" required
-                                placeholder="Monthly Family Income"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Father's Profession</div>
-                            <input type="text" name="father_prof" required
-                                placeholder="Father's Profession"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Mother's Profession</div>
-                            <input type="text" name="mother_prof" required
-                                placeholder="Mother's Profession"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <button type="button" class="btn btn-lg btn-warning col-xs-12 
-                                                        prev-btn col-sm-12 col-md-6">
-                                Get Back in Application
-                            </button>
-                            <button  type="button" class="btn btn-lg btn-warning col-xs-12 next-btn
-                                col-sm-12 col-md-5 offset-md-1">
-                                Continue Application
-                            </button>
-                        </div>
+                    <div class="row m-row" style='margin-top:2rem;margin-bottom:4rem;'>
+                        <button class="btn btn-lg btn-danger col-xs-12 
+                            col-sm-12 col-md-6 offset-md-3" type="submit">
+                            Submit Application
+                        </button>
                     </div>
-                    <div class="col-sm-12 col-xs-12 hide hide-all" id="block_3">
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Last Class Passed</div>
-                            <input type="number" name="last_class_passed" required
-                                placeholder="Last Class Passed"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Are you 10th Pass?</div>
-                            <select name="is_10_pass"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Percentage in 10th</div>
-                            <input type="number" name="percentage_10" 
-                                placeholder="Percentage in 10th" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Are you 12th Pass?</div>
-                            <select name="is_12_pass"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Percentage in 12th</div>
-                            <input type="number" name="percentage_12" 
-                                placeholder="Percentage in 12th" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Stream in 11th/12th</div>
-                            <select name="stream_11_12"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="medical">Medical</option>
-                                <option value="mon-medical">Non Medical</option>
-                                <option value="commerce_maths">Commerce (With Maths)</option>
-                                <option value="commerce_no_maths)">Commerce (Without Maths)</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">Are you enrolled in College?</div>
-                            <select name="is_college_enrolled"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">College Name</div>
-                            <input type="text" name="college_which" 
-                                placeholder="Your College's Name" required
-                                class="col-xs-12 col-sm-6 border border-warning rounded"/>
-                        </div>
-                        <div class="row m-row">
-                            <div class="col-xs-12 col-sm-6">College Type</div>
-                            <select name="college_type"
-                                class="col-xs-12 col-sm-6 border border-warning rounded"
-                                required>
-                                <option value="Normal">Normal</option>
-                                <option value="Distant">Distance Education</option>
-                            </select>
-                        </div>
-                        <div class="row m-row">
-                            <button type="button" class="btn btn-lg btn-warning col-xs-12 
-                                                        prev-btn col-sm-12 col-md-6">
-                                Get Back in Application
-                            </button>
-                            <button class="btn btn-lg btn-danger col-xs-12 
-                                col-sm-12 col-md-5 offset-md-1" type="submit">
-                                Submit Application
-                            </button>
-                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
-
 {% block footer %}
 <script>
-$(function(){
-    present_block = 1
-     $(".next-btn").click(function(){
-                present_block += 1;
-                $(".hide-all").addClass("hide");
-                $("#block_"+ present_block).removeClass("hide");
-            });
-     $(".prev-btn").click(function(){
-                present_block -= 1;
-                $(".hide-all").addClass("hide");
-                $("#block_"+ present_block).removeClass("hide");
-            });
-});
+    $(function(){
+        $("#qualification").change(function(){
+            var value = $("#qualification option:selected").text();
+            var arr_vals_10 = ['Class 10 Pass', 'Class 12 Pass', 'Graduation Completed',
+                            'Post Graduate', 'Professional Degree'];
+            var arr_vals_12 = ['Class 12 Pass', 'Graduation Completed',
+                            'Post Graduate', 'Professional Degree'];
+            if(arr_vals_10.includes(value)){
+                $(".min-10").removeClass('hide');
+            }
+            else{
+                $(".min-10").addClass('hide');
+            }
+            if(arr_vals_12.includes(value)){
+                $(".min-12").removeClass('hide');
+            }
+            else{
+                $(".min-12").addClass('hide');
+            }
+        });
+        $("#urban_rural").change(function(){
+            var value = $("#urban_rural option:selected").val();
+            if(value == "urban"){
+                $(".urban").removeClass('hide');
+                $(".rural").addClass('hide');
+            }
+            else{
+                $(".rural").removeClass('hide');
+                $(".urban").addClass('hide');
+            }
+        });
+        $("#family_head").change(function(){
+            var value = $("#family_head option:selected").val();
+            if(value == "other"){
+                $(".family-other").removeClass('hide');
+            }
+            else{
+                $(".family-other").addClass('hide');
+            }
+        });
+    });
 </script>
 {% endblock %}

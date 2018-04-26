@@ -1,0 +1,205 @@
+
+{% extends "master.html" %}
+{% block title %}
+Road to Navgurukul
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    .m-row{
+        margin:0.5rem;
+        width:100%;
+    }
+    .form-container{
+        padding:2rem;
+    }
+    form>*{
+        margin-top:1rem;
+    }
+    main{
+        margin-top:9%;
+    }
+    h2{
+        font-size:1.5rem;
+    }
+    .hide{
+        display:none;
+    }
+    *[required]{
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<nav></nav>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
+            <div class="col-xs-12 col-sm-12">
+            <form class="row" id="ask_personal_details" method="POST">
+                <div class="row border border-warning rounded form-container">
+                    <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Personal Details</h2>
+
+                        <span style="margin-left: 3%;" id='errors' class='text text-center text-danger'></span>
+
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aapka Naam</div>
+                            <input type="text" id='name' name="name" placeholder="Your Name" required
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Aapka Mobile Number</div>
+                            <input type="number" id='mobile' name="mobile" placeholder="Your Mobile Number"
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
+                        </div>
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Date of Birth</div>   
+                            
+                            <select id='date' style="max-width: 32%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                <option value="">Date</option>
+                            </select>              
+
+                            <select id='month' style="max-width: 35%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                <option value="">Month</option>
+                            </select> 
+                            
+                            <select id='year' style="max-width: 32%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                <option value="">Year</option>
+                            </select>
+                        </div>
+
+                        <div class="row m-row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">Gender/ लिंग</div>
+                            <select name="gender" id ='gender'
+                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
+                                required>
+                                <option value="NONE">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Other</option>
+                            </select>
+                        </div>
+                    <div class="row m-row" style='margin-top:2rem;margin-bottom:4rem;'>
+                        <button class="btn btn-lg btn-danger col-xs-12 
+                            col-sm-12 col-md-6 offset-md-3" id="button" onclick="submiting();" type="button">
+                            Submit Application
+                        </button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .extra{
+            margin-left: 1%;
+        }
+    </style>
+    <script type="text/javascript">
+        monthdict ={
+            'Jan':"01",'Feb':"02",'Mar':'03','April':"04","May":"05",
+            'Jun':"06",'Jul':"07","Aug":"08",'Sep':"09",'Oct':'10',
+            'Nov':"11",'Dec':'12', 
+        }
+        // To get the year
+        var today = new Date();
+        var yyyy = today.getFullYear()-10;
+        minyyyy = yyyy-30;
+        
+        var datefield = $('#date');
+        for (var i = 1 ; i <= 31; i++) {
+            datefield.append("<option value="+i+">"+i+"</option>");
+        }
+
+        var monthfield = $('#month');
+        for (var key in monthdict) {
+            monthfield.append("<option value="+monthdict[key]+">"+key+"</option>");
+        }
+        var yearfield = $('#year');
+        for (var i = minyyyy ; i <= yyyy; i++) {
+            yearfield.append("<option value="+i+">"+i+"</option>");
+        }
+        var dob = document.createElement('input');
+        dob.type = 'text';
+        dob.name = 'dob';
+        var coords = document.createElement('input');
+        coords.type = 'text'
+        coords.name = 'coords'
+        var coordinates = null;
+
+        // for getting lat and long
+        if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(positions){coordinates = positions.coords.latitude +','+ positions.coords.longitude});
+            }
+            else{
+                appending('Geolocation not supported!')
+            }
+
+        var form = document.getElementById('ask_personal_details');
+        var errors = $('#errors');
+
+        function submiting() {
+            // body...
+            // var su = $('#button')
+            var name = $('#name').val();
+            var date = $('#date').val();
+            var month = $('#month').val();
+            var year = $('#year').val();
+            var mobile = $('#mobile').val();
+            var gender = $('#gender').val();
+
+            function appending(message) {
+                // body...
+                errors.html('');
+                errors.append(message);
+            }
+            
+            coords.value = coordinates;
+            if(!mobile){
+                appending('Kripaya mobile number dijye!');
+                return false;
+            }
+            if(mobile.length<10 || mobile.length>10){
+                appending('10 digit ka mobile number daliye!')
+                return false;
+            }
+            if(!name){
+                appending('Naam wali field ko khali na chore!');
+                return false;
+            }
+            if( /^[a-zA-Z]$/i.test(name)){
+                appending('Naam wale section me (1,.,!,#,@,") ka istamal na kare!');
+                return false;
+            }
+            // to check dtae field isn't empty
+            if(date == ''){
+                appending('Kripaya Apne Janam Ka Din Chuniye!');
+                return false;
+            }
+            else if(month ==''){
+                appending('Kripaya Apne Janam Ka Mahina Chuniye!');
+                return false;
+            }
+            else if(year ==''){
+                appending('Kripaya Apne Janam Ka Saal Chuniye!');
+                return false;
+            }
+            if(gender=='NONE'){
+                appending('Apna gender select kijye!');
+                return false
+            }
+
+            dob.value = year +'-'+ month +'-'+date
+            console.log(dob.value);
+            dob.style.display = 'none';
+            coords.style.display = 'none';
+            form.appendChild(coords)
+            form.appendChild(dob);
+            form.submit();
+        }
+        
+    </script>
+{% endblock %}
+
