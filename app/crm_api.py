@@ -42,9 +42,12 @@ def create_potential(student_details, crm_id=None):
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
-    print(xml_file)
 
-    owner_id = random.choice(app.config['POTENTIAL_OWNERS'])
+    if stage == "Requested Callback":
+        owner_id = random.choice(app.config['REQUESTED_CALLBACK_POTENTIAL_OWNERS'])
+    else:
+        owner_id = random.choice(app.config['TEST_RELATED_POTENTIAL_OWNERS'])
+
     student_details['owner_id'] = owner_id
     student_details['test_version'] = app.config['TEST_VERSION']
     student_details['system_environment'] = app.config['SYSTEM_ENVIRONMENT']

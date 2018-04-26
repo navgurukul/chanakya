@@ -120,10 +120,12 @@ def get_all_questions():
 
 def add_test_data_to_db(enrolment_key, test_data_details):
     en = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
-    test_data = TestData(**test_data_details)
-    test_data.enrolment_id = en.id
-    db.session.add(test_data)
-    db.session.commit()
+    td = TestData.query.filter_by(enrolment_id=en.id, set_name=test_data_details['set_name']).all()
+    if len(td) == 0:
+        test_data = TestData(**test_data_details)
+        test_data.enrolment_id = en.id
+        db.session.add(test_data)
+        db.session.commit()
 
 def create_dump_file(enrolment_key, stuff_to_save):
     f_path = os.path.join(STUDENT_DIRECTORY, "%s.py"%enrolment_key)
@@ -215,7 +217,7 @@ def add_to_crm_if_needed(phone_number, stage):
 
 def add_enrolment_to_crm(phone_number, enrolment_key):
     student_details = get_student_details_from_phone_number(phone_number, "Enrolment Key Generated")
-    student_details['Enrolment Key'] = enrolment_key
+    student_details['Enrolment_Key'] = enrolment_key
     potential_id, owner_id = crm_api.create_potential(student_details)
     return potential_id
 

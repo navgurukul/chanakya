@@ -66,7 +66,10 @@ def view_result(enrolment_key):
 def enter_enrolment():
     if not session.get("page"):
         session["page"] = "enter_enrolment"
-    if session.get("page") == "enter_enrolment":
+    if session.get("page") == "enter_enrolment" or (session.get("enrolment_key") != request.args.get("key") and request.args.get("key")):
+        print(session, request.args)
+        session.clear()
+        session["page"] = "enter_enrolment"
         enrolment_key = request.args.get("key")
         if enrolment_key:
             if repos.is_valid_enrolment(enrolment_key):

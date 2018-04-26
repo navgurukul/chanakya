@@ -1,8 +1,6 @@
 <Potentials>
     <row no="1">
 
-        <!-- Owner -->
-        <FL val="SMOWNERID">{{ owner_id }}</FL>
 
         <!-- Basic Details -->
         <FL val="Name"><![CDATA[{{ student.name }}]]></FL>

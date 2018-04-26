@@ -76,22 +76,20 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
 }
 CRM_NEW_STUDENT_TASKS = {
     "Requested Callback": {
-        "task_message": "Call back and take next steps."
+        "task_message": "[Requested Callback] Call back and take next steps."
     },
-    "Entrance Test": {
-        "task_message": "Evaluate the answers and decide next steps."
+    "All Details Submitted": {
+        "task_message": "[All Details Submitted] Evaluate the answers and decide next steps."
     }
 }
 
-POTENTIAL_OWNERS = [
-    "2821772000001067001", #Annu
-    "2821772000000970116", #Khushboo
+REQUESTED_CALLBACK_POTENTIAL_OWNERS = [
     "2821772000001108001", #shivnath
+]
+
+TEST_RELATED_POTENTIAL_OWNERS= [
     "2821772000001145029", #ranjan
-    "2821772000001145055", #rahul
-    "2821772000001145042", #diwakar
-    "2821772000001241469", #amar
-    "2821772000001241492", #monu
+    "2821772000001918016", #bobby
 ]
 #"2821772000000131011", #Rishabh Verma
 #"2821772000000503001", #Shanu
