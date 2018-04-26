@@ -1,0 +1,19 @@
+<Potentials>
+    <row no="1">
+
+        <!-- essentials -->
+        <FL val="Layout">2821772000000172275</FL>
+        <FL val="Stage"><![CDATA[{{ stage }}]]></FL>    
+        <FL val="Source"><![CDATA[{{ source }}]]></FL>
+
+        <!-- owner -->
+        <FL val="SMOWNERID">{{ owner_id }}</FL>
+
+        <!-- Basic Details -->
+        <FL val="Potential Name"><![CDATA[{{ potential_name }}]]></FL>
+        <FL val="Student or Partner"><![CDATA[{{ student_or_partner }}]]></FL>
+        <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
+        <FL val="Enrolment Key"><![CDATA[{{ Enrolment_Key }}]]></FL>
+        <FL val="System Environment"><![CDATA[ {{system_environment}} ]]></FL>
+    </row>
+</Potentials>

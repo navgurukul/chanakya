@@ -1,7 +1,14 @@
 import random
 from exam_config import config
 import string
-from datetime import datetime
+from datetime import datetime, timedelta
+import os, sys
+
+from app.models import Enrolment, TestData
+from app import app, db
+STUDENT_DIRECTORY = app.config['STUDENT_DIRECTORY']
+
+sys.path.insert(0, STUDENT_DIRECTORY)
 
 test_config = config["test_config"]
 
@@ -9,10 +16,31 @@ def get_random_string():
     ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits 
     return "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(2)])
 
-def get_time_remaining(start_time):
+def get_data_from_enrolment_file(enrolment_key):
+    try:
+        #set_names = tuple(config.get('question_config').keys())
+        en = __import__(enrolment_key)
+        set_names = [x.replace('qa_', '') for x in dir(en) if 'qa_' in x] 
+        qa = {}
+        enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
+        en_id = enrolment.id if en else None
+        marks_dict = {}
+        for set_name in set_names:
+            qa[set_name] = getattr(en, "qa_"+set_name)
+            if en_id:
+                marks_dict[set_name] = TestData.query.filter_by(enrolment_id=en_id).filter_by(set_name=set_name).first()
+        return qa, marks_dict, None
+    except ImportError as e:
+        return None, "Test Not Given or Wrong Enrolment Key"
+    except Exception as e:
+        return None, None, str(e)
+
+def get_time_remaining(submit_time, submitted_set):
+    set_deduction = test_config[submitted_set] if submitted_set else 0
     test_time  = test_config.get("test_time")
-    time_spent = datetime.utcnow() - start_time
-    return int(test_time - time_spent.total_seconds())
+    seconds_spent_in_set  = (datetime.utcnow() - submit_time).seconds
+    time_spent = set_deduction + seconds_spent_in_set
+    return test_time - time_spent
 
 def is_same_str_value(text_1, text_2):
     return str(text_1).strip().lower() == str(text_2).strip().lower()
@@ -24,13 +52,15 @@ def get_time_boundary(q_set, time_start_boundary):
 def get_question_set(questions, time_remaining):
     time_start_boundary = 0    
     index = 0
-    for set_name in questions:
+    set_names = sorted(list(questions.keys()))
+    for set_name in set_names:
         time_end_boundary = get_time_boundary(questions[set_name], time_start_boundary)
-        if time_remaining >= time_start_boundary and time_remaining < time_end_boundary:
+        print("in loop:", set_name, time_remaining, time_start_boundary, time_end_boundary)
+        if time_remaining > time_start_boundary and time_remaining <= time_end_boundary:
             is_last = True if index==0 else False
-            print(is_last, index, set_name)
+            print(time_remaining, time_start_boundary, time_end_boundary)
             return set_name, is_last, questions[set_name], time_remaining - time_start_boundary
-        time_start_boundary += time_end_boundary
+        time_start_boundary = time_end_boundary
         index += 1
 
 def calculate_marks(marks_config, question, user_answer):
