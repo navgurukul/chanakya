@@ -28,6 +28,7 @@ config = {
     },
     "test_config":{
             "test_time": 3600+70,
-            "set_3": 3600+70, #18*60 +30 +10
+            "set_3": 3600+70, #18*200 +60 +10
+            "passing_marks":17, # more than equal to 17 is pass
     }
 }
