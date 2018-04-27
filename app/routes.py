@@ -25,20 +25,20 @@ def get_all_questions():
 
 def go_to_page(check=None): return redirect(url_for(session.get('page')))
 
-@app.errorhandler(Exception)
-def handle_all_exceptions(e):
-    exception_details = {
-        "Exception":e,
-        "client_details":{
-            "enrolment_key":session.get('enrolment_key'),
-            "page":session.get("page"),
-            "form":dict(request.form),
-            "args":dict(request.args)
-        }
-    }
+# @app.errorhandler(Exception)
+# def handle_all_exceptions(e):
+#     exception_details = {
+#         "Exception":e,
+#         "client_details":{
+#             "enrolment_key":session.get('enrolment_key'),
+#             "page":session.get("page"),
+#             "form":dict(request.form),
+#             "args":dict(request.args)
+#         }
+#     }
 
-    loggly.error(str(exception_details), exc_info=True)
-    return render_template("error.html")
+#     loggly.error(str(exception_details), exc_info=True)
+#     return render_template("error.html")
 
 @app.before_request
 def before_request():
@@ -67,7 +67,6 @@ def enter_enrolment():
     if not session.get("page"):
         session["page"] = "enter_enrolment"
     if session.get("page") == "enter_enrolment" or (session.get("enrolment_key") != request.args.get("key") and request.args.get("key")):
-        print(session, request.args)
         session.clear()
         session["page"] = "enter_enrolment"
         enrolment_key = request.args.get("key")
