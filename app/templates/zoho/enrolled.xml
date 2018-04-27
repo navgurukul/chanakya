@@ -57,6 +57,7 @@
         <FL val="Results URL"><![CDATA[{{ student.results_url }}]]></FL>
         <FL val="Test Version Answered"><![CDATA[{{ test_version }}]]></FL>
         <FL val="Test Score"><![CDATA[{{ student.enrolment.total_marks }}]]></FL>
+        <FL val="Time Taken in Test"><![CDATA[{{ time }}]]></FL>
 
         <!-- Other Information -->
         <FL val="System Environment"><![CDATA[ {{system_environment}} ]]></FL>

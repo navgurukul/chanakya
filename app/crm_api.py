@@ -7,6 +7,14 @@ from app import app
 def get_next_day():
     return (datetime.datetime.now().date() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
 
+def get_total_time_taken(test_data):
+    time = (test_data.submitted_on - test_data.started_on).total_seconds()
+    minute = int(time/60) 
+    hour = int(minute/60)
+    seconds =  int(time%60)
+    time = '{0}h:{1}m:{2}s'.format(hour, minute, seconds) if hour else '{0}m:{1}s'.format(minute, seconds) 
+    return time
+
 def get_abs_path(path):
     abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
     return abs_path
@@ -30,6 +38,8 @@ def create_potential(student_details, crm_id=None):
     }
     """
     stage = student_details['stage']
+    print(stage)
+    
     querystring = {
         "newFormat":"1",
         "authtoken":"dff429d03714ecd774b7706e358e907b",
@@ -42,6 +52,10 @@ def create_potential(student_details, crm_id=None):
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
+        
+    if not stage in ("Personal Details Submitted","Enrolment Key Generated", "Requested Callback"):
+        test_data = student_details['student'].test_data
+        student_details['time'] = get_total_time_taken(test_data)
 
     if stage == "Requested Callback":
         owner_id = random.choice(app.config['REQUESTED_CALLBACK_POTENTIAL_OWNERS'])
@@ -54,6 +68,8 @@ def create_potential(student_details, crm_id=None):
 
     querystring["xmlData"] = render(get_abs_path(xml_file), student_details)
     response = requests.request("GET", url, params=querystring)
+    # import pdb 
+    # pdb.set_trace()
     if response.status_code != 200:
         raise Exception("The student potential was not created successfully.")
     response = response.json()
