@@ -186,7 +186,26 @@ def can_add_student(enrolment_key, student_data, action=None):
     #    #                student_data:\n%s'''%st(student_data))
     #    return False
 
+# def check_for_potential_on_stage(response, potential_id):
+#     # import pdb; pdb.set_trace()   
+#     all_responses = response['response']['result']['Potentials']['row']
+#     if type(all_responses) == type({}):
+#         return all_responses['FL'][4]['content']
+
+#     for res in all_responses:
+#         if res['FL'][0]['content'] == potential_id:
+#             return res['FL'][4]['content']
+
 def add_to_crm(student_object, other_details, stage):
+
+    if stage == 'All Details Submitted':
+        print("===================================")
+        on_all_details_submitted = crm_api.is_there_task_for_all_details_submitted(student_object.enrolment.crm_potential_id)
+        print(on_all_details_submitted)
+        print("===================================")
+        if on_all_details_submitted:
+            return
+
     enrolment_key = other_details.get("enrolment_key")
     crm_id = get_crm_id_from_enrolment(enrolment_key)
     potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
