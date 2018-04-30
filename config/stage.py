@@ -14,13 +14,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = "abcdef212131daddaasfaefedawdedsafefhalnhfuy8rgkbdasfasfafewqrffd"
 #SECRET_KEY = "".join([random.choice(string.ascii_uppercase) for x in range(10)])
 DEBUG = True
-#SERVER_NAME = "35.185.189.61:8080"
+#SERVER_NAME = "join.navgurukul.org"
 
 # Exotel Related Config
 TEST_ENROLL_MSG = """
 NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
 
-Iss test ko dene ke liye aap jald hi, yeh website - http://35.185.189.61:8080/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
+Iss test ko dene ke liye aap jald hi, yeh website - http://join.navgurukul.org/?key={test_url} kholein aur test ko de. Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
 
 NavGurukul ke baarein mei aur jaanne ke liye, youtube par yeh video - http://bit.ly/navgurukul-intro dekhein.
 
@@ -47,6 +47,8 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
         "exotel_obd_id": None,
         "referral_email_template": "Here is a template."
     },
+    "Personal Details Submitted":None,
+    "All Details Submitted":None,
     "Personal Interview": None,
     "Parent Conversation": None,
     "Confirmed Joining": None,
@@ -74,14 +76,20 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
 }
 CRM_NEW_STUDENT_TASKS = {
     "Requested Callback": {
-        "task_message": "Call back and take next steps."
+        "task_message": "[Requested Callback] Call back and take next steps."
     },
-    "Entrance Test": {
-        "task_message": "Evaluate the answers and decide next steps."
+    "All Details Submitted": {
+        "task_message": "[All Details Submitted] Evaluate the answers and decide next steps."
     }
 }
-POTENTIAL_OWNERS = [
-    "2821772000000131011", # Rishabh Verma
-    "2821772000000131409", # Abishek Gupta
-    "2821772000000169007", # Aslam Desusa
+
+REQUESTED_CALLBACK_POTENTIAL_OWNERS = [
+    "2821772000001108001", #shivnath
 ]
+
+TEST_RELATED_POTENTIAL_OWNERS= [
+    "2821772000001145029", #ranjan
+    "2821772000001918016", #bobby
+]
+#"2821772000000131011", #Rishabh Verma
+#"2821772000000503001", #Shanu
