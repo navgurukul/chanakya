@@ -52,7 +52,7 @@ def create_potential(student_details, crm_id=None):
         xml_file = "templates/zoho/enrolled.xml"
         url = "https://crm.zoho.com/crm/private/json/Potentials/updateRecords"
         querystring["id"] = crm_id
-        
+
     if not stage in ("Personal Details Submitted","Enrolment Key Generated", "Requested Callback"):
         test_data = student_details['student'].test_data
         student_details['time'] = get_total_time_taken(test_data)
@@ -129,14 +129,38 @@ def should_add_to_crm(search_criteria, stage):
     print(url)
     response = requests.get(url)
     response_json = response.json()
+    # print(response_json)
     if response.status_code == 200:
         if 'result' in response_json['response']:
             old_stages = get_stage_from_response(response)
+            print(old_stages)
             if stage in old_stages and stage == "Requested Callback":
                 return False, None, response
+            elif stage == 'All Details Submitted':
+                return True, 'already_at_all_detail', response.json()
             elif 'Enrolment Key Generated' in old_stages and stage=='Entrance Test':
                 return True, 'update_enrolment_to_test', response.json()
             return True, "create_new", response
         elif 'nodata' in response_json['response']:
             return True, "create_new", response
     return False, "error",response
+
+
+def is_there_task_for_all_details_submitted(potential_id):
+    url = "https://crm.zoho.com/crm/private/json/Tasks/getRelatedRecords?authtoken=dff429d03714ecd774b7706e358e907b&parentModule=Potentials&id=%s" %potential_id
+    print(url)
+    response = requests.get(url)
+    response_json = response.json()
+    if response.status_code == 200:
+        if 'result' in response_json['response']:
+            all_responses = response_json['response']['result']['Tasks']['row']
+            if type(all_responses) == type({}):
+                print(all_responses['FL'][3]['content'])
+                return all_responses['FL'][3]['content'] == "[All Details Submitted] Evaluate the answers and decide next steps."
+            # for res in all_responses:
+            #     print(res['FL'][3]['content'])
+            #     if res['FL'][3]['content'] == "[All Details Submitted] Evaluate the answers and decide next steps.":
+            #         return True
+            return False
+        elif 'nodata' in response_json['response']:
+            return False
