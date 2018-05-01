@@ -127,6 +127,7 @@ def test():
 @app.route("/end", methods=["GET", "POST"])
 def end():
     if session.get("page") == "test" and request.method == "POST":
+        print(request.headers.get('User-Agent'))
         question_set = session.get("question_set")
         other_details = {
             "start_time":session.get("test_start_time"),
