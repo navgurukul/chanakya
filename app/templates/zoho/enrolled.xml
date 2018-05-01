@@ -63,6 +63,8 @@
         <FL val="System Environment"><![CDATA[ {{system_environment}} ]]></FL>
         <FL val="Student or Partner"><![CDATA[ Student ]]></FL>
         <FL val="Layout">2821772000000172275</FL>
+        <FL val="Call Flow State"><![CDATA[ {{call_flow_state}} ]]></FL>
+
 
     </row>
 </Potentials>

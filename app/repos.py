@@ -143,8 +143,11 @@ def save_test_result_and_analytics(data_dump, other_details):
 
 def can_add_student(enrolment_key, student_data, action=None):
     #try:
+        user_agent = student_data.get("user_agent", None)
+        network_speed = student_data.get("network_speed", None)
         if action == 'create':
-            non_enum_fields = ("name", "gender", "mobile", "dob")
+            non_enum_fields = ("name", "gender", "mobile", "dob", "user_agent", "network_speed")
+
         elif action == 'update':
             non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
             "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
@@ -154,11 +157,22 @@ def can_add_student(enrolment_key, student_data, action=None):
                         "family_head", "family_head_qualification", "urban_family_head_prof",
                         "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
 
+
         enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
         FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
         HousingType)
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
+
+        if network_speed:
+            student_details.update({"user_agent": user_agent})
+            student_details.update({"network_speed": network_speed})
+
+        for key in ("monthly_family_income", "family_head_income", "family_land_holding",
+                     "family_draught_animals", "fam_members", "earning_fam_members"):
+            if not student_details.get(key): #empty strings replaced by 0
+                student_details[key] = 0
+
         for index in range(len(enums)):
             enum_data = student_data.get(enum_fields[index])
             if enum_data and enum_data!='NONE':
@@ -186,32 +200,21 @@ def can_add_student(enrolment_key, student_data, action=None):
     #    #                student_data:\n%s'''%st(student_data))
     #    return False
 
-# def check_for_potential_on_stage(response, potential_id):
-#     # import pdb; pdb.set_trace()   
-#     all_responses = response['response']['result']['Potentials']['row']
-#     if type(all_responses) == type({}):
-#         return all_responses['FL'][4]['content']
-
-#     for res in all_responses:
-#         if res['FL'][0]['content'] == potential_id:
-#             return res['FL'][4]['content']
-
 def add_to_crm(student_object, other_details, stage):
-
-    if stage == 'All Details Submitted':
-        print("===================================")
-        on_all_details_submitted = crm_api.is_there_task_for_all_details_submitted(student_object.enrolment.crm_potential_id)
-        print(on_all_details_submitted)
-        print("===================================")
-        if on_all_details_submitted:
-            return
-
     enrolment_key = other_details.get("enrolment_key")
     crm_id = get_crm_id_from_enrolment(enrolment_key)
+    if stage == 'All Details Submitted':
+        if other_details.get('test_score')<=app.config['MINIMUM_PASSING_SCORE']:
+            potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':'Entrance Test Failed'}, crm_id=crm_id)
+            return
+        on_all_detail_submitted_task = crm_api.is_there_task_for_all_details_submitted(student_object.enrolment.crm_potential_id)
+        if on_all_detail_submitted_task:
+            return
     potential_id, owner_id = crm_api.create_potential({'student':student_object,'stage':stage}, crm_id=crm_id)
     if potential_id:
         if stage in app.config['CRM_NEW_STUDENT_TASKS']:
             crm_api.create_task_for_potential(potential_id, owner_id, app.config['CRM_NEW_STUDENT_TASKS'][stage]["task_message"])
+
 
 def get_student_details_from_phone_number(phone_number, stage):
     student_details = {
