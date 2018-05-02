@@ -249,6 +249,10 @@ class Student(db.Model):
     housing_type = db.Column(db.Enum(HousingType))
     owned_items = db.Column(db.String(1000))
 
+    # user browser related stuff
+    user_agent = db.Column(db.String(150))
+    network_speed = db.Column(db.Float) # In Mbps
+    
     # system related stuff
     created_on   = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     enrolment_id = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
