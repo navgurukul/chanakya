@@ -15,5 +15,7 @@
         <FL val="Mobile"><![CDATA[{{ student_mobile }}]]></FL>
         <FL val="Enrolment Key"><![CDATA[{{ Enrolment_Key }}]]></FL>
         <FL val="System Environment"><![CDATA[ {{system_environment}} ]]></FL>
+        <FL val="Call Flow State"><![CDATA[ {{call_flow_state}} ]]></FL>
+        
     </row>
 </Potentials>
