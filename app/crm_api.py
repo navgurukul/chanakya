@@ -57,10 +57,15 @@ def create_potential(student_details, crm_id=None):
         test_data = student_details['student'].test_data
         student_details['time'] = get_total_time_taken(test_data)
 
+    if stage in ("All Details Submitted","Requested Callback"):
+        student_details['call_flow_state'] = app.config['CRM_NEW_STUDENT_TASKS'][stage]['Call Flow State']
+
+
     if stage == "Requested Callback":
         owner_id = random.choice(app.config['REQUESTED_CALLBACK_POTENTIAL_OWNERS'])
     else:
         owner_id = random.choice(app.config['TEST_RELATED_POTENTIAL_OWNERS'])
+
 
     student_details['owner_id'] = owner_id
     student_details['test_version'] = app.config['TEST_VERSION']
