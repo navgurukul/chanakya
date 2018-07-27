@@ -76,10 +76,14 @@ POTENTIAL_STUDENT_STAGE_NOTIFS = {
 }
 CRM_NEW_STUDENT_TASKS = {
     "Requested Callback": {
-        "task_message": "[Requested Callback] Call back and take next steps."
+        "task_message": "[Requested Callback] Call back and take next steps",        
+        "Call Flow State": "_RQC_ Calling",
     },
+
     "All Details Submitted": {
-        "task_message": "[All Details Submitted] Evaluate the answers and decide next steps."
+        "task_message": "[All Details Submitted] Evaluate the answers and decide next steps.",
+        "Call Flow State": "_ET_ Check Marks",
+
     }
 }
 
