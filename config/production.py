@@ -1,13 +1,13 @@
 import random, string
 import os
 
-STUDENT_DIRECTORY = os.path.expanduser('/home/lawliet/student_files')
+STUDENT_DIRECTORY = os.path.expanduser('/home/ubuntu/student_files')
 TEST_VERSION = "New Assessment (v0.1)"
 SYSTEM_ENVIRONMENT="Production"
 
 # Database
 #SQLALCHEMY_DATABASE_URI = 'mysql://root:hello123@35.189.19.99/chanakya'
-SQLALCHEMY_DATABASE_URI = "mysql://chanakya:chanakya@localhost/chanakya"
+SQLALCHEMY_DATABASE_URI = os.environ['SQLALCHEMY_DATABASE_URI']
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Flask level config
@@ -91,5 +91,7 @@ TEST_RELATED_POTENTIAL_OWNERS= [
     "2821772000001145029", #ranjan
     "2821772000001918016", #bobby
 ]
+
+MINIMUM_PASSING_SCORE=18
 #"2821772000000131011", #Rishabh Verma
 #"2821772000000503001", #Shanu
