@@ -83,6 +83,7 @@ def get_q_set(global_q_set, config):
     return q_set
  
 def get_questions_for_q_set(q_set):
+    print(q_set)
     questions = []
     for q_id in q_set:
         question_obj = Question.query.get(q_id)
@@ -129,6 +130,8 @@ def add_test_data_to_db(enrolment_key, test_data_details):
 
 def create_dump_file(enrolment_key, stuff_to_save):
     f_path = os.path.join(STUDENT_DIRECTORY, "%s.py"%enrolment_key)
+    if not os.path.exists(STUDENT_DIRECTORY):
+        os.mkdir(STUDENT_DIRECTORY)
     with open(f_path, "a") as fp:
         fp.write(stuff_to_save)
 
@@ -151,11 +154,11 @@ def can_add_student(enrolment_key, student_data, action=None):
         elif action == 'update':
             non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
             "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
-            "state","monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
+            "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
 
         enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
                         "family_head", "family_head_qualification", "urban_family_head_prof",
-                        "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type")
+                        "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type","state")
 
 
         enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
@@ -180,6 +183,7 @@ def can_add_student(enrolment_key, student_data, action=None):
 
         if student_details.get("dob") is not None:
             student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
+
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
         if action =='create':

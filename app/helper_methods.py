@@ -46,6 +46,7 @@ def is_same_str_value(text_1, text_2):
     return str(text_1).strip().lower() == str(text_2).strip().lower()
 
 def get_time_boundary(q_set, time_start_boundary):
+    print(len(q_set['questions']))
     time_delta = q_set['info_before']['time_in_seconds'] + q_set['info_after']['time_in_seconds'] + q_set['time_per_question'] * len(q_set['questions'])
     return time_start_boundary + time_delta
 
@@ -53,6 +54,7 @@ def get_question_set(questions, time_remaining):
     time_start_boundary = 0    
     index = 0
     set_names = sorted(list(questions.keys()))
+    # import pdb; pdb.set_trace()
     for set_name in set_names:
         time_end_boundary = get_time_boundary(questions[set_name], time_start_boundary)
         print("in loop:", set_name, time_remaining, time_start_boundary, time_end_boundary)

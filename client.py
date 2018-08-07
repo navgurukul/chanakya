@@ -6,6 +6,7 @@ def create_option_list(r_l, opt):
     for i in range(len(r_l)):
         if r_l[i] == opt:
             break
+    print(r_l[i])
     return [r_l[i]] + r_l[:i] + r_l[i+1:]
 
 try:
@@ -34,14 +35,11 @@ except:
                     'option_3':          options[2],
                     'option_4':          options[3]
             }
-            # print(questions.index(question))
         elif sys.argv[1] == "old":
             d = question
-            # print(questions.index(question))
 
         t1 =datetime.now()
-        # print(d)
+        print(d)
         r = requests.post("http://127.0.0.1:8000/create-question", data=d)
-        # time.sleep(1)
-        # print(r.status_code)
-        # print(datetime.now()-t1)
+        print(r.status_code)
+        print(datetime.now()-t1)

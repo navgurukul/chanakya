@@ -184,7 +184,7 @@ class Options(db.Model):
 class Question(db.Model):
     __tablename__      = "question"
     id                 = db.Column(db.Integer, primary_key=True)
-    en_question_text   = db.Column(db.String(1024), nullable=False)
+    en_question_text   = db.Column(db.String(1024, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=False)
     hi_question_text   = db.Column(db.String(1024, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=False)
     difficulty         = db.Column(db.Enum(Difficulty), nullable=False)
     category           = db.Column(db.String(32), nullable=False)
