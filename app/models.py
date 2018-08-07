@@ -176,16 +176,16 @@ class TestData(db.Model):
 class Options(db.Model):
     __tablename__    = "options"
     id               = db.Column(db.Integer, primary_key=True)
-    option_1         = db.Column(db.String(128)) #this is the answer
-    option_2         = db.Column(db.String(128))
-    option_3         = db.Column(db.String(128))
-    option_4         = db.Column(db.String(128))
+    option_1         = db.Column(db.String(128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True) #this is the answer
+    option_2         = db.Column(db.String(128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True)
+    option_3         = db.Column(db.String(128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True)
+    option_4         = db.Column(db.String(128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True)
 
 class Question(db.Model):
     __tablename__      = "question"
     id                 = db.Column(db.Integer, primary_key=True)
     en_question_text   = db.Column(db.String(1024), nullable=False)
-    hi_question_text   = db.Column(db.String(1024), nullable=False)
+    hi_question_text   = db.Column(db.String(1024, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=False)
     difficulty         = db.Column(db.Enum(Difficulty), nullable=False)
     category           = db.Column(db.String(32), nullable=False)
     question_type      = db.Column(db.Enum(QuestionType), nullable=False)

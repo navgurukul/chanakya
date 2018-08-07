@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0434493ef3bb
+Revision ID: b885226fbfbb
 Revises: 
-Create Date: 2018-07-13 07:41:34.604152
+Create Date: 2018-08-04 23:22:43.376794
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0434493ef3bb'
+revision = 'b885226fbfbb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,16 +30,16 @@ def upgrade():
     op.create_index(op.f('ix_enrolment_phone_number'), 'enrolment', ['phone_number'], unique=False)
     op.create_table('options',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('option_1', sa.String(length=128), nullable=True),
-    sa.Column('option_2', sa.String(length=128), nullable=True),
-    sa.Column('option_3', sa.String(length=128), nullable=True),
-    sa.Column('option_4', sa.String(length=128), nullable=True),
+    sa.Column('option_1', sa.String(length=128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True),
+    sa.Column('option_2', sa.String(length=128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True),
+    sa.Column('option_3', sa.String(length=128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True),
+    sa.Column('option_4', sa.String(length=128, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('question',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('en_question_text', sa.String(length=1024), nullable=False),
-    sa.Column('hi_question_text', sa.String(length=1024), nullable=False),
+    sa.Column('hi_question_text', sa.String(length=1024, collation='utf8mb4_unicode_ci', convert_unicode=True), nullable=False),
     sa.Column('difficulty', sa.Enum('easy', 'medium', 'hard', name='difficulty'), nullable=False),
     sa.Column('category', sa.String(length=32), nullable=False),
     sa.Column('question_type', sa.Enum('MCQ', 'short_answer', 'view', name='questiontype'), nullable=False),
