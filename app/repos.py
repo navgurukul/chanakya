@@ -152,18 +152,12 @@ def can_add_student(enrolment_key, student_data, action=None):
             non_enum_fields = ("name", "gender", "mobile", "dob", "user_agent", "network_speed")
 
         elif action == 'update':
-            non_enum_fields = ("class_10_marks", "class_12_marks", "pin_code", "district",
-            "tehsil", "city_or_village", "caste", "family_head_other", "fam_members", "earning_fam_members",
-            "monthly_family_income", "family_head_income", "family_land_holding", "family_draught_animals")
+            non_enum_fields = ("class_10_marks", "class_12_marks","caste", "fam_members", 
+                               "monthly_family_income","current_status","email_id",
+                               "whatsapp_number","religion")
+        enum_fields = ( "qualification","class_12_stream",'school_medium',"caste_parent_category" ,"state")
 
-        enum_fields = ( "school_medium", "qualification", "class_12_stream", "caste_parent_category", "urban_rural",
-                        "family_head", "family_head_qualification", "urban_family_head_prof",
-                        "rural_family_head_prof", "family_head_org_membership", "family_type", "housing_type","state")
-
-
-        enums = (SchoolInstructionMedium, Qualification, Class12Stream, Caste, UrbanOrRural,
-        FamilyHead, Qualification, UrbanProfessions, RuralProfessions, RuralOrgMembership, FamilyType,
-        HousingType)
+        enums = (Qualification, Class12Stream, SchoolInstructionMedium, Caste)
 
         student_details = {key: student_data.get(key) for key in non_enum_fields}
 
@@ -171,11 +165,10 @@ def can_add_student(enrolment_key, student_data, action=None):
             student_details.update({"user_agent": user_agent})
             student_details.update({"network_speed": network_speed})
 
-        for key in ("monthly_family_income", "family_head_income", "family_land_holding",
-                     "family_draught_animals", "fam_members", "earning_fam_members"):
+        for key in ("monthly_family_income", "fam_members"):    
             if not student_details.get(key): #empty strings replaced by 0
                 student_details[key] = 0
-
+                
         for index in range(len(enums)):
             enum_data = student_data.get(enum_fields[index])
             if enum_data and enum_data!='NONE':
@@ -183,9 +176,9 @@ def can_add_student(enrolment_key, student_data, action=None):
 
         if student_details.get("dob") is not None:
             student_details["dob"] = datetime.strptime(student_details["dob"],'%Y-%m-%d').date()
-
         enrolment = Enrolment.query.filter_by(enrolment_key=enrolment_key).first()
         test_data = TestData.query.filter_by(enrolment_id=enrolment.id).first()
+
         if action =='create':
             student   = Student(**student_details)
         elif action == 'update':

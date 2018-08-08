@@ -41,16 +41,6 @@ INDIAN_STATES = [
     'West Bengal'
 ]
 
-ITEMS_OWNED_MAPPING = {
-    'bullock_cart': 'Bullock Cart',
-    'cycle': 'Cycle',
-    'radio': 'Radio',
-    'chairs': 'Chairs',
-    'mobile': 'Mobile Phones',
-    'television': 'Television',
-    'refrigerator': 'Refrigerator'
-}
-
 class Qualification(Enum):
     no_reading_writing = "No Reading/Writing" # Don't know how to read or write
     reading_writing = "Reading/Writing" # Know how to read or write
@@ -74,50 +64,6 @@ class Class12Stream(Enum):
     commerce_without_maths = "Commerce (without Maths)" # "Commerce (without maths)"
     arts = "Arts" # "Arts"
     others = "Others" # "Others"
-
-class UrbanOrRural(Enum):
-    urban = "Urban" # "Sheher"
-    rural = "Rural" # "Gaon"
-
-class FamilyHead(Enum):
-    father = "Father" # "Papa"
-    mother = "Mother" # "Mummy"
-    other = "Other" # "Others"
-
-class UrbanProfessions(Enum):
-    unemployed = "Unemployed" # Unemployed
-    no_training_jobs = "Job without Training" # Servant / Peon etc. (jobs without training)
-    jobs_with_training = "Job requiring Training" # Factory worker etc. (jobs requiring some training)
-    high_training = "Job requiring High Training" # Driver etc. which require higher training
-    read_write_jobs = "Read / Writing Jobs" # Clerk etc which require how to read or write
-    routine_work = "Routine Work" # Lecturers , High School teachers etc.
-    prof_degree_work = "Professional Degree Work" # doctors etc.
-
-class RuralProfessions(Enum):
-    unemployed = "Unemployed" # Unemployed
-    labourer = "Labourer" # Labourer
-    caste_related_work = "Caste Related Work"
-    business = "Business"
-    independent_work = "Independent Work" 
-    work_on_own_land = "Works on own Land"
-    service = "Service"
-
-class RuralOrgMembership(Enum):
-    nothing = "Nothing"
-    member_1_org = "Member of 1 Organisation" # member of only one org
-    member_1plus_org = "Member of more than 1 Organisation" # member of 1 or more orgs
-    office_holder = "Office Holder" # office holde of an org
-    pub_leader = "Public Leader" # public leader 
-
-class FamilyType(Enum):
-    single = "Single"
-    joint = "Joint"
-
-class HousingType(Enum):
-    hut = "Hut" # hut / jhopri
-    kacha_house = "Kacha House"
-    pucca_house = "Pucca House"
-    kothi = "Kothi"
 
 class Difficulty(Enum):
     easy   = 1
@@ -215,39 +161,20 @@ class Student(db.Model):
     class_12_stream = db.Column(db.Enum(Class12Stream)) # should at least be a 12th pass
     
     # location details
-    pin_code = db.Column(db.String(6))
     state = db.Column(db.Enum(*INDIAN_STATES))
-    district = db.Column(db.String(100))
-    tehsil = db.Column(db.String(100))
-    city_or_village = db.Column(db.String(100))
 
     # caste / jaati etc.
     caste_parent_category = db.Column(db.Enum(Caste))
     caste = db.Column(db.String(100))
 
-    # urban or rural
-    urban_rural = db.Column(db.Enum(UrbanOrRural))
-
-    # common fields (to both urban & rural) for privilege check
-    family_head = db.Column(db.Enum(FamilyHead))
-    family_head_other = db.Column(db.String(100)) # only when `family_head` value is other
-    family_head_qualification = db.Column(db.Enum(Qualification))    
     fam_members = db.Column(db.Integer)
-    earning_fam_members = db.Column(db.Integer)
     monthly_family_income = db.Column(db.Integer)
 
-    # urban privilege check
-    urban_family_head_prof = db.Column(db.Enum(UrbanProfessions))
-    family_head_income = db.Column(db.Integer)
-
-    # rural privilege check 
-    rural_family_head_prof = db.Column(db.Enum(RuralProfessions))
-    family_head_org_membership = db.Column(db.Enum(RuralOrgMembership))
-    family_type = db.Column(db.Enum(FamilyType))
-    family_land_holding = db.Column(db.Integer)
-    family_draught_animals = db.Column(db.Integer)
-    housing_type = db.Column(db.Enum(HousingType))
-    owned_items = db.Column(db.String(1000))
+    # Newly added field
+    current_status = db.Column(db.String(50), nullable=True)
+    email_id = db.Column(db.String(50), nullable=True)
+    whatsapp_number = db.Column(db.String(13), nullable=True)
+    religion = db.Column(db.String(50), nullable=True)
 
     # user browser related stuff
     user_agent = db.Column(db.String(150))
