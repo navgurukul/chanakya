@@ -109,3 +109,9 @@ config/local.py
 
 #mac
 .DS_Store
+
+
+# ignoring chanakya configuration files
+config/development.py
+config/production.py
+config/staging.py
