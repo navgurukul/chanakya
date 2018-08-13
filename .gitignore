@@ -106,3 +106,6 @@ config/local.py
 
 #pyc
 *.pyc
+
+#mac
+.DS_Store
