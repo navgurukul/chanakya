@@ -1,8 +1,18 @@
 import os
 
+from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType)
+
 class ChanakyaConfig(object):
 
+    # SQLAlchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # All the Enums
+    QUESTION_DIFFICULTY = QuestionDifficulty
+    QUESTION_TOPIC = QuestionTopic
+    QUESTION_TYPE = QuestionType
+    INCOMING_CALL_TYPE = IncomingCallType
+    OUTGOING_SMS_TYPE = OutgoingSMSType
 
     @staticmethod
     def get_config():
