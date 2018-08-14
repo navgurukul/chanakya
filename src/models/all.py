@@ -7,8 +7,20 @@ class Student(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
+    stage = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+class StudentStageTransition(db.Model):
+
+    __tablename__ = 'stage_transitions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    from_stage = db.Column(db.String(100), nullable=False)
+    to_stage = db.Column(db.String(100), nullable=False)
+    notes = db.Column(db.String(1000))
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
 
 class EnrolmentKey(db.Model):
 
@@ -17,6 +29,7 @@ class EnrolmentKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(6), unique=True)
     test_start_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    test_end_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
