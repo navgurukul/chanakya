@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # Import all the possible EndPoints
-from chanakya.src.routes.sample import SampleRoute1,SampleRoute2
+from chanakya.src.routes import *
 
 # Import all the models
 from chanakya.src.models import *
