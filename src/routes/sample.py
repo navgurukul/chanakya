@@ -10,8 +10,9 @@ class SampleRoute1(Resource):
     def post(self):
         return {'data': 'here is some data from the post request'}
 
+
 @api.route('/hello2')
-@api.param(name="Whatever Hw", description="This is a test description.")
+@api.param(name="Whatever Hlw", description="This is a test description.")
 class SampleRoute2(Resource):
 
     def get(self):
