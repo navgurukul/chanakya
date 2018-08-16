@@ -7,12 +7,12 @@ class GenerateEnrollmentKey(Resource):
     # args_parser = reqparse.RequestParser()
     # args_parser.add_argument('PhoneNumber', type=int, help='Number to which the sms will be sent')
     # args_parser.add_argument('record_id')
-    def post(self):
+    def get(self):
         return {'data': 'here is some *more* data'}
 
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-    def post(self):
+    def get(self):
         return {
             'data':'Navgurukul se call ajayega apko'
         }
