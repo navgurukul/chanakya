@@ -17,7 +17,6 @@ from chanakya.src.helpers import (
 
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
-
     enrolment_parser = reqparse.RequestParser()
     enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
     enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
@@ -97,10 +96,9 @@ class GenerateEnrollmentKey(Resource):
             'generated':False
         }
 
-
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-    def post(self):
+    def get(self):
         return {
             'data':'Navgurukul se call ajayega apko'
         }
