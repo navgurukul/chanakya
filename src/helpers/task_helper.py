@@ -25,6 +25,13 @@ def enrollment_generator():
 
 # adding any model instance to database
 def add_to_db(model_instance):
+    '''
+    function that help to add models instance(tables) to the database
+    requires models class instance with already the value in it to add to database
+
+    EXAMPLE: add_to_db(student)
+    Return None
+    '''
     #adding data to the database
     db.session.add(model_instance)
     db.session.commit()
