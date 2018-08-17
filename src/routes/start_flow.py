@@ -57,6 +57,7 @@ class GenerateEnrollmentKey(Resource):
             add_to_db(enrollment)
 
             #TODO send the sms to the user
+
             return {
                 'sent':True,
                 'generated':True
@@ -69,7 +70,7 @@ class GenerateEnrollmentKey(Resource):
 
             #check if the student enrollment key is valid or not else create a new one
             if not enrollment_key.test_start_time:
-                #resend enrollment Key
+                #resending enrollment Key
 
                 # TODO send the sms to the user with the key
                 return {
@@ -77,7 +78,7 @@ class GenerateEnrollmentKey(Resource):
                     'generated':False
                 }
 
-            elif enrollment_key.test_end_time < datetime.now:
+            elif enrollment_key.test_end_time < datetime.now():
                 #create a new enrollment key
                 enrollment_key = enrollment_generator()
                 student = Student.query.filter_by(id = student_id).first()
