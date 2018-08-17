@@ -8,8 +8,8 @@ class EnrolmentKey(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(6), unique=True)
-    test_start_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    test_end_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    test_start_time = db.Column(db.DateTime, nullable=True)
+    test_end_time = db.Column(db.DateTime, nullable=True)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
