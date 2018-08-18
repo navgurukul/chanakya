@@ -33,6 +33,7 @@ class EnrollmentKeyValidtion(Resource):
             }
         # else not expire than start countdown and send it to them
         else:
+            
             #adding the start and end time of the test to ensure when to end the test
             enrollment.test_start_time = current_datetime
             enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
