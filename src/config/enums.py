@@ -18,6 +18,7 @@ class QuestionType(enum.Enum):
 class IncomingCallType(enum.Enum):
     rqc = 'RQC' # requested callback
     interested = 'INTERESTED' # interested calls (where the student has not clicked anything on the helpline)
+    ekg = 'EKG' #Enrollment Key Generated
 
 class OutgoingSMSType(enum.Enum):
     test_fail = 'Entrance Test Failed'

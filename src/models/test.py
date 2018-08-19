@@ -1,4 +1,4 @@
-import datetime
+import datetime, string, random
 
 from chanakya.src import db, app
 
@@ -8,10 +8,22 @@ class EnrolmentKey(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(6), unique=True)
-    test_start_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    test_end_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    test_start_time = db.Column(db.DateTime, nullable=True)
+    test_end_time = db.Column(db.DateTime, nullable=True)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    @staticmethod
+    def generate_key(student_id):
+        ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits
+        enrollment_key = "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(3)])
+        while EnrolmentKey.query.filter_by(key=enrollment_key).first():
+            enrollment_key = "".join([ random.choice(ALPHABETS) for x in range(3)]) + "".join([ random.choice(NUMBERS) for x in range(3)])
+        enrollment = EnrolmentKey(student_id=student_id, key=enrollment_key)
+        db.session.add(enrollment)
+        db.session.commit()
+        
+        return enrollment_key
 
 class Questions(db.Model):
 
