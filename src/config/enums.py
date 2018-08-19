@@ -20,6 +20,7 @@ class IncomingCallType(enum.Enum):
     interested = 'INTERESTED' # interested calls (where the student has not clicked anything on the helpline)
     ekg = 'EKG' # enrollment key generate calls (where the student has not clicked anything on the helpline)
 
+
 class OutgoingSMSType(enum.Enum):
     test_fail = 'Entrance Test Failed'
     test_pass = 'Entrance Test Passed'
