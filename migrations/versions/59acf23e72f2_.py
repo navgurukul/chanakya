@@ -49,7 +49,7 @@ def upgrade():
     op.create_table('incoming_calls',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('contact', sa.Integer(), nullable=True),
-    sa.Column('call_type', sa.Enum('rqc', 'interested', name='incomingcalltype'), nullable=False),
+    sa.Column('call_type', sa.Enum('rqc', 'interested', 'ekg' , name='incomingcalltype'), nullable=False),
     sa.ForeignKeyConstraint(['contact'], ['student_contacts.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
