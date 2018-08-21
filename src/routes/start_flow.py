@@ -1,152 +1,71 @@
 from flask_restplus import Resource, reqparse
-from chanakya.src import api, app
-from datetime import datetime
-from chanakya.src.models import (
-    Student,
-    EnrolmentKey,
-    IncomingCalls,
-    StudentContact
-    )
-from chanakya.src.config import IncomingCallType
+from chanakya.src import api, app, db
+from chanakya.src.models import Student, IncomingCalls, StudentContact
 from flask_restful.inputs import boolean
-from chanakya.src.helpers import (
-    generate_random_string,
-    enrollment_generator,
-    add_to_db
-    )
+
 
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
-    enrolment_parser = reqparse.RequestParser()
-    enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
-    enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
-    enrolment_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
+	enrolment_parser = reqparse.RequestParser()
+	enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
+	enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
+	enrolment_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
 
-    @api.doc(parser=enrolment_parser)
-    def get(self):
-        args =  self.enrolment_parser.parse_args()
-        student_id = args.get('student_id',None)
-        mobile = args.get('mobile', None)
-        from_helpline = args.get('from_helpline')
+	@api.doc(parser=enrolment_parser)
+	def get(self):
+		args =  self.enrolment_parser.parse_args()
+		student_id = args.get('student_id',None)
+		mobile = args.get('mobile', None)
+		from_helpline = args.get('from_helpline')
 
-        #check get the values of mobile or student_id which has been provided
-        if not student_id and not mobile:
-            return{'error':True,'message':'Either student_id or mobile is required!'}
-        elif not mobile and from_helpline:
-            return{'error':True,'message':'Need mobile number if the call is from helpline'}
-        elif not student_id and not from_helpline:
-            return{'error':True,'message': 'Need the student id to Generate Enrollment Key'}
+		# check if either student_id or mobile is provided
+		if not student_id and not mobile:
+			return {
+				'error':True,
+				'message':'Either student_id or mobile is required!'
+			}
 
-        # if the call is from the helpline number for creating a new key
-        if mobile and from_helpline:
-            # Creating new student when a call is from helpline for key generation
-            student = Student(stage=app.config['STAGES']['EKG'])
-            add_to_db(student)
+		# if the student exist in the database then just send him a valid enrollment key to his number
+		if student_id:
+			student = Student.query.filter_by(id=student_id).first()
 
-            # number from which the user called on helpline
-            student_contact = StudentContact(contact=mobile, main_contact=False, student_id = student.id)
-            add_to_db(student_contact)
+			if student:
+				message = student.send_enrolment_key(from_helpline)
+				return message
 
-            # creating a record for the incoming call type
-            incoming_call = IncomingCalls(call_type=IncomingCallType.ekg, contact=student_contact.id)
-            add_to_db(incoming_call)
+			# handle error if the student doesn't exist
+			else:
+				return {
+					'error':True,
+					'message':"Student doesn't exist for the given student_id"
+				}
+		# if the  api is called from the helpline then create a new student and send a newly
+		# generated enrollment key
+		elif mobile:
+			message = Student.generate_enrolment_key(mobile, from_helpline)
+			return message
 
-            #generating enrollment key
-            enrollment_key = enrollment_generator()
-            enrollment = EnrolmentKey(key=enrollment_key, student_id = student.id)
-            add_to_db(enrollment)
-
-            #TODO send the sms to the user
-
-            return {
-                'sent':True,
-                'generated':True
-            }
-
-        # if the call is not from the helping than check if the key is valid or not if it
-        # is not valid than generate a new key and send it to the on the phone_number.
-        elif student_id and not from_helpline:
-            enrollment_key = EnrolmentKey.query.filter_by(student_id = student_id).order_by(EnrolmentKey.created_at.desc()).first()
-
-            #when the student want to join give the  test on when they are on rkc or intrested
-            # but haven't generated any enrollment key and there already exist a student table for them
-            if not enrollment_key:
-                #generating enrollment key
-                enrollment_key = enrollment_generator()
-                enrollment = EnrolmentKey(key=enrollment_key, student_id = student_id)
-                add_to_db(enrollment)
-
-                # TODO: send the sms to the user
-
-                return {
-                    'sent':True,
-                    'generated':True
-                }
-            #check if the student enrollment key is valid or not else create a new one
-            elif not enrollment_key.test_start_time:
-                #resending enrollment Key
-
-                # TODO send the sms to the user with the key
-                return {
-                    'sent': True,
-                    'generated':False
-                }
-
-            elif enrollment_key.test_end_time < datetime.now():
-                # TODO  send the sms to user with the key
-                #create a new enrollment key
-                enrollment_key = enrollment_generator()
-                student = Student.query.filter_by(id = student_id).first()
-                if student:
-                    enrollment = EnrolmentKey(key=enrollment_key, student_id = student.id)
-                    add_to_db(enrollment)
-
-                    return {
-                        'sent':True,
-                        'generated':True
-                    }
-
-        return {
-            'sent':False,
-            'generated':False
-        }
 
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-    requested_callback_parser = reqparse.RequestParser()
-    requested_callback_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
+	requested_callback_parser = reqparse.RequestParser()
+	requested_callback_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
 
-    @api.doc(parser=requested_callback_parser)
-    def get(self):
-        args = self.requested_callback_parser.parse_args()
-        mobile = args.get('mobile', None)
+	@api.doc(parser=requested_callback_parser)
+	def get(self):
+		args = self.requested_callback_parser.parse_args()
+		mobile = args.get('mobile', None)
 
-        # getting the contact of the student who have called most recently with the given
-        # mobile number
-        student_contact = StudentContact.query.filter_by(contact=mobile).order_by(StudentContact.created_at.desc()).first()
+		# finding the contact of the student of have join the platform most recently
+		called_number = StudentContact.query.filter_by(contact=mobile).order_by(StudentContact.created_at.desc()).first()
 
-        #Create a record if the number is a new on helpline
-        if not student_contact:
-            # Adding the STAGES REQUESTED CALLBACK and adding the data to it
-            student = Student(stage=app.config['STAGES']['RQC'])
-            add_to_db(student)
-            student_contact = StudentContact(contact=mobile, student_id=student.id)
-            add_to_db(student_contact)
-            incoming_call = IncomingCalls(contact=student_contact.id, call_type=IncomingCallType.rqc)
-            add_to_db(incoming_call)
-            return{
-                'success':True
-            }
+		# if the caller number doesn't exist in the platform then create a new student
+		if not called_number:
+			student, called_number = Student.create(mobile = mobile)
+	
+		# record the incoming call of that number 
+		IncomingCalls.create(called_number, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
 
-        # Attaching a record of incoming to it when someone has called and is already there
-        # on our system
-        elif student_contact:
-            incoming_call = IncomingCalls(contact=student_contact.id, call_type=IncomingCallType.rqc)
-            add_to_db(incoming_call)
-            return{
-                'success': True
-            }
-
-        return{
-            'success':False
-        }
+		return{
+			'success': True
+		}

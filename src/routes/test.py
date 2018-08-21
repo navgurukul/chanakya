@@ -1,9 +1,7 @@
 from flask_restplus import Resource, reqparse
 from chanakya.src.models import EnrolmentKey
 from chanakya.src import api, db
-from datetime import datetime, timedelta
 from chanakya.src import app
-from chanakya.src.helpers import add_to_db
 
 #Validation for the enrollmelnt key
 @api.route('/test/validate_enrolment_key')
@@ -17,30 +15,36 @@ class EnrollmentKeyValidtion(Resource):
         args = self.enrolment_validation_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
         enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
-        current_datetime = datetime.now()
-
+       
         #if there is no such enrollment key
         if not enrollment:
             return {
                 "valid": False,
                 "reason": "DOES_NOT_EXIST"
             }
-        # if enrollment key is expired
-        elif enrollment.test_end_time and enrollment.test_end_time < current_datetime:
-            return {
-                "valid": False,
-                "reason": "EXPIRED"
-            }
+
         # else not expire than start countdown and send it to them
-        else:
-            
+        elif enrollment.is_valid() and not enrollment.in_use():
+         
             #adding the start and end time of the test to ensure when to end the test
-            enrollment.test_start_time = current_datetime
-            enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-            add_to_db(enrollment)
+            enrollment.start_test()
             return {
                 'valid':True,
                 'reason': None
+            }
+       
+        # checks if the enrollment key is not in use
+        elif enrollment.in_use():
+            return {
+                'valid':True,
+                'reason': 'ALREADY_IN_USED'
+            }
+        
+        # enrollment key is expired
+        else:
+            return {
+                "valid": False,
+                "reason": "EXPIRED"
             }
 
 
