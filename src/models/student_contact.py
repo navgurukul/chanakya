@@ -1,6 +1,6 @@
 import datetime, enum
-
-from chanakya.src import db, app
+# from .student import Student
+from chanakya.src import db, app, exotel
 
 class StudentContact(db.Model):
 
@@ -8,9 +8,23 @@ class StudentContact(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     contact = db.Column(db.String(10))
-    main_contact = db.Column(db.Boolean)
+    main_contact = db.Column(db.Boolean, default=False)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def send_sms(self, message):
+        '''
+            for sending the message to number associtated with this instance 
+            using exotel api
+
+            params: 
+                message str required
+
+            usage: student_contact.send_sms(message)
+            
+        '''
+        exotel.sms(app.config.get("EXOTEL_SMS_NUM"), self.contact, message)
+        
 
 class OutgoingCalls(db.Model):
 
@@ -28,6 +42,12 @@ class IncomingCalls(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contact = db.Column(db.Integer, db.ForeignKey('student_contacts.id'))
     call_type = db.Column(db.Enum(app.config['INCOMING_CALL_TYPE']), nullable=False)
+
+    @staticmethod
+    def create(student_contact, call_type):
+        incoming_call = IncomingCalls(contact=student_contact.id, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
+        db.session.add(incoming_call)
+        db.session.commit()
 
 class OutgoingSMS(db.Model):
 
