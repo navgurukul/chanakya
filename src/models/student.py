@@ -145,8 +145,7 @@ class Student(db.Model):
 
         #send enrollment message to all the contact linked to the student
         for contact in student_contacts:
-            # contact.send_sms(enrollment_message)
-            print(contact)
+            contact.send_sms(enrollment_message)
         
         return message
 
