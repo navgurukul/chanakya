@@ -27,7 +27,7 @@ class EnrollmentKeyValidtion(Resource):
         elif enrollment.is_valid() and not enrollment.in_use():
          
             #adding the start and end time of the test to ensure when to end the test
-            enrollment.start_test()
+            # enrollment.start_test()
             return {
                 'valid':True,
                 'reason': None
