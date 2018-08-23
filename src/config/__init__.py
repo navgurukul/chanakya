@@ -14,6 +14,12 @@ class ChanakyaConfig(object):
     INCOMING_CALL_TYPE = IncomingCallType
     OUTGOING_SMS_TYPE = OutgoingSMSType
 
+    # Stages
+    STAGES = {
+        'RQC': 'REQUESTED CALLBACK',
+        'EKG': 'ENROLLMENT KEY GENERATED'
+    }
+
     @staticmethod
     def get_config():
         """Gets the config on basis of the `CHANAKYA_ENVIRONMENT` environment variable.
