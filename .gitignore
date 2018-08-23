@@ -112,6 +112,6 @@ ENV/
 
 
 # ignoring chanakya configuration files
-# src/config/development.py
+src/config/development.py
 src/config/production.py
 src/config/staging.py
