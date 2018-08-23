@@ -6,6 +6,7 @@ from flask_restful.inputs import boolean
 
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
+
 	enrolment_parser = reqparse.RequestParser()
 	enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
 	enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
@@ -39,8 +40,7 @@ class GenerateEnrollmentKey(Resource):
 					'error':True,
 					'message':"Student doesn't exist for the given student_id"
 				}
-		# if the  api is called from the helpline then create a new student and send a newly
-		# generated enrollment key
+		# if mobile exists, it means that a new student needs to be created as we don't have access to the student record.
 		elif mobile:
 			message = Student.generate_enrolment_key(mobile, from_helpline)
 			return message
@@ -53,6 +53,7 @@ class RequestCallBack(Resource):
 
 	@api.doc(parser=requested_callback_parser)
 	def get(self):
+
 		args = self.requested_callback_parser.parse_args()
 		mobile = args.get('mobile', None)
 
@@ -61,9 +62,9 @@ class RequestCallBack(Resource):
 
 		# if the caller number doesn't exist in the platform then create a new student
 		if not called_number:
-			student, called_number = Student.create(mobile = mobile)
-	
-		# record the incoming call of that number 
+			student, called_number = Student.create(stage = 'RQC', mobile = mobile)
+
+		# record the incoming call of that number
 		IncomingCalls.create(called_number, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
 
 		return{
