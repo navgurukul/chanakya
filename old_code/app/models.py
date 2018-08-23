@@ -98,7 +98,7 @@ class RuralProfessions(Enum):
     labourer = "Labourer" # Labourer
     caste_related_work = "Caste Related Work"
     business = "Business"
-    independent_work = "Independent Work" 
+    independent_work = "Independent Work"
     work_on_own_land = "Works on own Land"
     service = "Service"
 
@@ -107,7 +107,7 @@ class RuralOrgMembership(Enum):
     member_1_org = "Member of 1 Organisation" # member of only one org
     member_1plus_org = "Member of more than 1 Organisation" # member of 1 or more orgs
     office_holder = "Office Holder" # office holde of an org
-    pub_leader = "Public Leader" # public leader 
+    pub_leader = "Public Leader" # public leader
 
 class FamilyType(Enum):
     single = "Single"
@@ -160,7 +160,7 @@ class Enrolment(db.Model):
         return sum([x.received_marks for x in self.test_data])
 
     def __repr__(self):
-        return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number) 
+        return '<Enrolment: %s, Phone number: %d>' %(self.enrolment_key, self.phone_number)
 
 class TestData(db.Model):
     __tablename__      = "test_data"
@@ -193,14 +193,14 @@ class Question(db.Model):
     options            = db.relationship("Options", backref=db.backref("options", uselist=False))
 
     def __repr__(self):
-        return '<Question: %s>' %(self.en_question_text) 
+        return '<Question: %s>' %(self.en_question_text)
 
 class Student(db.Model):
     __tablename__   = "student"
- 
+
     # id
     id = db.Column(db.Integer, primary_key=True)
-    
+
     # basic details of the student
     name = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.Enum(Gender), nullable=False)
@@ -213,7 +213,7 @@ class Student(db.Model):
     class_10_marks = db.Column(db.String(10)) # should at least be a 10th pass
     class_12_marks = db.Column(db.String(10)) # should at least be a 12th pass
     class_12_stream = db.Column(db.Enum(Class12Stream)) # should at least be a 12th pass
-    
+
     # location details
     pin_code = db.Column(db.String(6))
     state = db.Column(db.Enum(*INDIAN_STATES))
@@ -231,7 +231,7 @@ class Student(db.Model):
     # common fields (to both urban & rural) for privilege check
     family_head = db.Column(db.Enum(FamilyHead))
     family_head_other = db.Column(db.String(100)) # only when `family_head` value is other
-    family_head_qualification = db.Column(db.Enum(Qualification))    
+    family_head_qualification = db.Column(db.Enum(Qualification))
     fam_members = db.Column(db.Integer)
     earning_fam_members = db.Column(db.Integer)
     monthly_family_income = db.Column(db.Integer)
@@ -240,7 +240,7 @@ class Student(db.Model):
     urban_family_head_prof = db.Column(db.Enum(UrbanProfessions))
     family_head_income = db.Column(db.Integer)
 
-    # rural privilege check 
+    # rural privilege check
     rural_family_head_prof = db.Column(db.Enum(RuralProfessions))
     family_head_org_membership = db.Column(db.Enum(RuralOrgMembership))
     family_type = db.Column(db.Enum(FamilyType))
@@ -252,7 +252,7 @@ class Student(db.Model):
     # user browser related stuff
     user_agent = db.Column(db.String(150))
     network_speed = db.Column(db.Float) # In Mbps
-    
+
     # system related stuff
     created_on   = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     enrolment_id = db.Column(db.Integer, db.ForeignKey("enrolment.id"))
@@ -271,7 +271,7 @@ class Student(db.Model):
         items = [item.strip() for item in items]
         items = [ITEMS_OWNED_MAPPING[item] for item in items]
         return items
-    
+
     @items_owned.setter
     def items_owned(self, value):
         if type(value) is not list:
