@@ -102,7 +102,16 @@ ENV/
 .mypy_cache/
 
 # config
-config/local.py
+# old_code/config/
 
 #pyc
 *.pyc
+
+#mac
+.DS_Store
+
+
+# ignoring chanakya configuration files
+src/config/development.py
+src/config/production.py
+src/config/staging.py
