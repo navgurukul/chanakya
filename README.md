@@ -1,57 +1,36 @@
-git clone this repository in your home directory
+# Chanakya
 
-# chanakya
-Testing Platform of NavGurukul
+Chanakya is the platform we use to let the new students answer the NavGurukul assessment before they get into NavGurukul. The admission flow after answering the test will eventually also be handled inside Chanakya.
 
-## create chanakya database in mysql with user and password as chanakya too
-```bash
-mysql -u root -p
+"आदमी अपने जन्म से नहीं अपने कर्मों से महान होता है।"
 
-mysql> create database chanakya;
-mysql> CREATE USER 'chanakya'@'localhost' IDENTIFIED BY 'chanakya';
-mysql> GRANT ALL PRIVILEGES ON chanakya.* TO 'chanakya'@'localhost';
-mysql> FLUSH PRIVILEGES;
-mysql> quit
-```
+## How to Set up & Run?
+Here are the steps you need to follow to set up Chanakya.
 
-## Setup
+1. Install MySQL.
+2. Create a virtualenv. (`python -m venv /path/to/your/virtualenv`)
+3. Activate the virtualenv you just created. (`source /path/to/your/virtualenv/bin/activate`)
+4. Make sure that the current directory is the root of the project.
+5. Set the required environment variables. (`export FLASK_ENV=development; export CHANAKYA_ENVIRONMENT=development`)
+6. Run the development server using `FLASK_APP=src flask run`
 
-- sudo apt-get install redis-server
-- sudo apt-get install mysql-server
-- sudo apt-get install libmysqlclient-dev
-- sudo apt-get install libmariadbclient-dev
-- Make Sure you are in chanakya directory
-- python3 -m venv venv
-- pip install -r requirements.txt
+**Note: The value of `FLASK_ENV` and `CHANAKYA_ENVIRONMENT` should always be the same otherwise you will get an error. Also the possible values are `development`, `staging` and `production`. These values will decide the config file used from the `src/config` folder. The config files are in .gitginore. To get help please contact amar17@navgrukul.org.**
 
-- append these lines to your ~/.bashrc file
-```bash
-export FLASK_APP=${HOME}/chanakya/chanakya.py
-export FLASK_DEBUG=1
-export CHANAKYA_ENV=../config/developement.py 
-```
-now open a new terminal window and close this one
+## Git Flow
+Let's say you decide to work on issue `#34` from the list of our Github issues. Here's how the git flow would look like.
 
-flask db upgrade
+1. Pull out a branch from `master`. (Till the time we are working on v2 you can pull out a branch from `dev` as that has the most stable v2 code.)
+2. Make your changes.
+3. Do a pull request from your branch into `master` (or `dev` if you are working on v2)
+4. Mark `@rishabhverma` as the reviewer of your pull request.
+5. Remind the lazy `@rishabhverma` to approve your pull request.
 
-## Handling Config
+## How to Migrate the Database?
+We are using `flask-migrate` and `sqlalchemy` (through `flask-sqlalchemy`) to handle our MySQL DB. Migrations are stored in the `migrations` folder in the root of this project. We should never make any manual changes to the migrations folder of our projects. All the time the flow would be to make manual changes to the models lying in `models/` directory and then run the migrations script to go about the process of migrations. Here's what it would look like:
 
-The environment variable `CHANAKYA_ENV` needs to be set pointing to the location of the config file relative to the `app/` directory.
+1. Make sure your branch is up to date to ensure that any changes you make are the latest ones.
+2. Make changes in the model files.
+3. Run `flask db migrate`. This will generate migration scripts in the migrations folder.
+4. `flask db upgrade` this will upgrade the schema of your DB.
 
-For example, your config file is stored in `config/testing_and_dev.py` the value of your `CHANAKYA_ENV` variable would be `../config/testing_and_dev.py`. Before running the app flask will automatically load the config from the given environment variable and set the relevant config values.
-
-You can use `config/local.py` as your file name. It is also added in the `.gitignore`
-
-### Running app
-
-flask run -p 8000
-
-## To create Question run client.py - make sure you know what you are doing
-
-- keep the server running and open a new terminal
-- go to chanakya folder
-- source venv/bin/activate
-- python client.py rajeev
-
-### Useful links:
-Trello: https://trello.com/b/DJEYDHs1/chanakya
+You can read more about the `flask-migrate` documentation [here] (https://flask-migrate.readthedocs.io/en/latest/)
