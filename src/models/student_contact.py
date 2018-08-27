@@ -14,18 +14,23 @@ class StudentContact(db.Model):
 
     def send_sms(self, message):
         '''
-            for sending the message to number associtated with this instance 
+            for sending the message to number associtated with this instance
             using exotel api
 
-            params: 
+            params:
                 message str required
 
             usage: student_contact.send_sms(message)
-            
+
         '''
         exotel.sms(app.config.get("EXOTEL_SMS_NUM"), self.contact, message)
-        
 
+    @staticmethod
+    def create(contact,student_id,main_contact = False):
+        student_contact = StudentContact(contact=contact, student_id=student_id, main_contact=main_contact)
+        db.session.add(student_contact)
+        db.session.commit()
+        
 class OutgoingCalls(db.Model):
 
     __tablename__ = 'outgoing_calls'

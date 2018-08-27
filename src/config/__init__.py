@@ -1,6 +1,6 @@
 import os
 
-from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType)
+from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
 
 class ChanakyaConfig(object):
 
@@ -13,7 +13,7 @@ class ChanakyaConfig(object):
     QUESTION_TYPE = QuestionType
     INCOMING_CALL_TYPE = IncomingCallType
     OUTGOING_SMS_TYPE = OutgoingSMSType
-
+    GENDER = Gender
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',
