@@ -27,10 +27,19 @@ class StudentContact(db.Model):
 
     @staticmethod
     def create(contact,student_id,main_contact = False):
+        '''
+            function is used for creating a new student_contact record for the student_id
+
+            params:
+             contact : str ,required ,length=10
+             student_id: int, required
+             main_contact: bool, default=False
+             
+        '''
         student_contact = StudentContact(contact=contact, student_id=student_id, main_contact=main_contact)
         db.session.add(student_contact)
         db.session.commit()
-        
+
 class OutgoingCalls(db.Model):
 
     __tablename__ = 'outgoing_calls'

@@ -1,4 +1,12 @@
 def check_enrollment_key(enrollment):
+    '''
+    the helper method  to validate that if the enrollment key is valid or not
+    and return the response as per it's validation
+
+    params:
+        enollment : EnrolmentKey object required
+    '''
+
     #if there is no such enrollment key
     if not enrollment:
         return {
