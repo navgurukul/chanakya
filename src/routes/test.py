@@ -42,7 +42,6 @@ class PersonalDetailSubmit(Resource):
         # return the validaty of the key
         return check_enrollment_key(enrollment)
 
-
     @api.doc(parser=personal_detail_parser)
     def post(self):
         args = self.personal_detail_parser.parse_args()
