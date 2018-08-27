@@ -34,45 +34,58 @@ class PersonalDetailSubmit(Resource):
 
     @api.doc(parser=enrolment_validation_parser)
     def get(self):
+
         args = self.enrolment_validation_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
         enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
+
+        # return the validaty of the key
         return check_enrollment_key(enrollment)
+
 
     @api.doc(parser=personal_detail_parser)
     def post(self):
         args = self.personal_detail_parser.parse_args()
-        enrollment_key = args.get('enrollment_key', None)
 
+        # student data
         student_data = {}
-
         student_data['name'] = args.get('name' , None)
         student_data['dob'] = args.get('dob' , None)
-        gender = args.get('gender' ,None)
 
+        #enum
+        gender = args.get('gender' ,None)
         student_data['gender'] = app.config['GENDER'](gender)
 
+        # student_contact data
         mobile_number = args.get('mobile_number' , None)
 
+        # enrollmentkey
+        enrollment_key = args.get('enrollment_key', None)
         enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
 
-
+        # check the validity of enrollment key
         result = check_enrollment_key(enrollment)
 
+        # student record shall be updated only when the key is not used
         if result['valid'] and result['reason'] == 'NOT_USED':
+            # updating student data
             student_id = enrollment.student_id
             student = Student.query.filter_by(id=student_id).first()
             student.update_data(student_data)
+
+            # creating student contact record
             student_contact = StudentContact.create(contact=mobile_number, student_id=student_id)
             return {
                 'success':True,
                 'enrollment_key': result['reason']
             }
+        # when the key is used but somehow student went to the this route instead of test
         elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
             return {
-                'success':False,
+                'success':True,
                 'enrollment_key': result['reason']
             }
+        # when the key is not valid
         return {
             'success':False,
             'enrollment_key': result['reason'],
