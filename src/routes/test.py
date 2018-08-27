@@ -1,12 +1,13 @@
 from flask_restplus import Resource, reqparse
-from chanakya.src.models import EnrolmentKey
-from chanakya.src import api, db
-from chanakya.src import app
+from chanakya.src.models import EnrolmentKey, StudentContact, Student
+from chanakya.src import api, db, app
+from datetime import datetime
+from chanakya.src.helpers import check_enrollment_key
+
 
 #Validation for the enrollmelnt key
 @api.route('/test/validate_enrolment_key')
 class EnrollmentKeyValidtion(Resource):
-
     enrolment_validation_parser = reqparse.RequestParser()
     enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
 
@@ -15,42 +16,68 @@ class EnrollmentKeyValidtion(Resource):
         args = self.enrolment_validation_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
         enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
-
-        #if there is no such enrollment key
-        if not enrollment:
-            return {
-                "valid": False,
-                "reason": "DOES_NOT_EXIST"
-            }
-
-        # else not expire than start countdown and send it to them
-        elif enrollment.is_valid() and not enrollment.in_use():
-            return {
-                'valid':True,
-                'reason': None
-            }
-
-        # checks if the enrollment key is not in use
-        elif enrollment.in_use():
-            return {
-                'valid':True,
-                'reason': 'ALREADY_IN_USED'
-            }
-
-        # enrollment key is expired
-        else:
-            return {
-                "valid": False,
-                "reason": "EXPIRED"
-            }
+        return check_enrollment_key(enrollment)
 
 
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
+    enrolment_validation_parser = reqparse.RequestParser()
+    enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
+
+    personal_detail_parser = reqparse.RequestParser()
+    personal_detail_parser.add_argument('enrollment_key', type=str, required=True)
+    personal_detail_parser.add_argument('name', type=str, required=True)
+    personal_detail_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
+    personal_detail_parser.add_argument('mobile_number', type=str, required=True)
+    personal_detail_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
+
+
+    @api.doc(parser=enrolment_validation_parser)
+    def get(self):
+        args = self.enrolment_validation_parser.parse_args()
+        enrollment_key = args.get('enrollment_key', None)
+        enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
+        return check_enrollment_key(enrollment)
+
+    @api.doc(parser=personal_detail_parser)
     def post(self):
+        args = self.personal_detail_parser.parse_args()
+        enrollment_key = args.get('enrollment_key', None)
+
+        student_data = {}
+
+        student_data['name'] = args.get('name' , None)
+        student_data['dob'] = args.get('dob' , None)
+        gender = args.get('gender' ,None)
+
+        student_data['gender'] = app.config['GENDER'](gender)
+
+        mobile_number = args.get('mobile_number' , None)
+
+        enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
+
+
+        result = check_enrollment_key(enrollment)
+
+        if result['valid'] and result['reason'] == 'NOT_USED':
+            student_id = enrollment.student_id
+            student = Student.query.filter_by(id=student_id).first()
+            student.update_data(student_data)
+            student_contact = StudentContact.create(contact=mobile_number, student_id=student_id)
+            return {
+                'success':True,
+                'enrollment_key': result['reason']
+            }
+        elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
+            return {
+                'success':False,
+                'enrollment_key': result['reason']
+            }
         return {
-        'data':'Detail Submitted'
+            'success':False,
+            'enrollment_key': result['reason'],
         }
+
 @api.route('/test/start_test')
 class TestStart(Resource):
     def get(self):
