@@ -103,6 +103,7 @@ ENV/
 
 # config
 config/local.py
+src/config
 
 #pyc
 *.pyc
