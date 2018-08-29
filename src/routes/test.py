@@ -1,7 +1,7 @@
 from flask_restplus import Resource, reqparse, fields
 from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions
 from chanakya.src import api, db, app
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from chanakya.src.helpers.response_objects import (
                 enrollment_key_status,
@@ -17,7 +17,7 @@ from chanakya.src.helpers.routes_descriptions import (
 
 
 
-#Validation for the enrollmelnt key
+#Validation for the enrollment key
 @api.route('/test/validate_enrolment_key')
 class EnrollmentKeyValidtion(Resource):
     enrolment_validation_parser = reqparse.RequestParser()
@@ -29,7 +29,7 @@ class EnrollmentKeyValidtion(Resource):
         args = self.enrolment_validation_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
 
-        result = check_enrollment_key(enrollment_key)
+        result, enrollment = check_enrollment_key(enrollment_key)
         return result
 
 
@@ -66,7 +66,7 @@ class PersonalDetailSubmit(Resource):
         enrollment_key = args.get('enrollment_key', None)
 
         # check the validity of enrollment key
-        result = check_enrollment_key(enrollment_key)
+        result, enrollment = check_enrollment_key(enrollment_key)
 
         # student record shall be updated only when the key is not used
         if result['valid'] and result['reason'] == 'NOT_USED':
@@ -96,11 +96,40 @@ class PersonalDetailSubmit(Resource):
 
 @api.route('/test/start_test')
 class TestStart(Resource):
+    enrollment_key_parser = reqparse.RequestParser()
+    enrollment_key_parser.add_argument('enrollment_key', required=True, type=str)
+
+    start_test_response = api.model('start_test',{
+        'error':fields.Boolean(default=False),
+        'questions':fields.Nested(questions_list_obj),
+        'enrollment_key_validation': fields.Boolean(default=True)
+    })
 
     @api.marshal_with(questions_list_obj)
+    @api.doc(parser=enrollment_key_parser)
     def get(self):
+        args = self.enrollment_key_parser.parse_args()
+        # TODO: check the enrollment key
+        enrollment_key =  args.get('enrollment_key')
+        result, enrollment = check_enrollment_key(enrollment_key)
+
+        # TODO: what to do if it doesn't exist or expired
+        if not result['valid']:
+            return {
+                'error':True,
+                'enrollment_key_validation':False
+            }
+
+        # TODO: what to do if it is already in use
+
+        # TODO: start the test and send the questions generated randomly
+        current_datetime = datetime.now()
+        enrollment.test_start_time = current_datetime
+        enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
+        db.session.add(enrollment)
+        db.session.commit()
         questions = Questions.get_random_question_set()
-        print(questions)
+
         return {
             'questions':questions
         }
