@@ -48,19 +48,10 @@ class CreateQuestion(Resource):
 	create_question_parser.add_argument('difficulty',type=str, choices=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True)
 	create_question_parser.add_argument('topic',type=str, choices=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True)
 	create_question_parser.add_argument('type',type=str, choices=[attr.value for attr in app.config['QUESTION_TYPE']], required=True)
-	create_question_parser.add_argument('answer', type=str, required=True, help='For MCQ type the option For example: option1, option2')
 
-	create_question_parser.add_argument('option1_en_text', type=str, required=False)
-	create_question_parser.add_argument('option1_hi_text', type=str, required=False)
-
-	create_question_parser.add_argument('option2_en_text', type=str, required=False)
-	create_question_parser.add_argument('option2_hi_text', type=str, required=False)
-
-	create_question_parser.add_argument('option3_en_text', type=str, required=False)
-	create_question_parser.add_argument('option3_hi_text', type=str, required=False)
-
-	create_question_parser.add_argument('option4_en_text', type=str, required=False)
-	create_question_parser.add_argument('option4_hi_text', type=str, required=False)
+	create_question_parser.add_argument('option_en_text', type=str, action='append', required=True, help='options in ENGLISH')
+	create_question_parser.add_argument('option_hi_text', type=str, action='append', required=True, help='options in HINDI')
+	create_question_parser.add_argument('correct', type=str, action='split', required=True, help='Add option number for answer Example: 1 or 3 or 4')
 
 	@marshal_with(question_obj)
 	@api.doc(parser=create_question_parser)
@@ -68,12 +59,13 @@ class CreateQuestion(Resource):
 
 		#get the values out of the RequestParser
 		args = self.create_question_parser.parse_args()
-		question = parse_question_args_to_dict(args)
-		#create the question
-		questions = Questions.add_question(question)
+		print(args)
+		# question = parse_question_args_to_dict(args)
+		# #create the question
+		# questions = Questions.add_question(question)
 
 		return {
-			'question'.question
+			'question':'test'
 		}
 
 
