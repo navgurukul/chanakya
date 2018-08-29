@@ -16,8 +16,8 @@ reason:{
 PERSONAL_DETAILS_DESCRIPTION = '''
 responses
 'success': {
-        True : when we can is valid to be used,
-        False : when we can't use the key anymore or it doesn't exist
+        True : when the data is added,
+        False : when we can't data can't be added
 }
 'enrollment_key_status':{
         'NOT_USED' : The key is not used and but has been generated,
