@@ -2,7 +2,14 @@ from flask_restplus import Resource, reqparse
 from chanakya.src.models import EnrolmentKey, StudentContact, Student
 from chanakya.src import api, db, app
 from datetime import datetime
-from chanakya.src.helpers import check_enrollment_key
+
+from chanakya.src.helpers import (
+            check_enrollment_key,
+            enrollment_key_status,
+            enrollment_key_validation,
+            VALIDATE_ENROLMENT_KEY_DESCRIPTION,
+            PERSONAL_DETAILS_DESCRIPTION
+            )
 
 
 #Validation for the enrollmelnt key
@@ -11,12 +18,14 @@ class EnrollmentKeyValidtion(Resource):
     enrolment_validation_parser = reqparse.RequestParser()
     enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
 
-    @api.doc(parser=enrolment_validation_parser)
+    @api.marshal_with(enrollment_key_validation)
+    @api.doc(parser=enrolment_validation_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
     def get(self):
         args = self.enrolment_validation_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
-        enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
-        return check_enrollment_key(enrollment)
+
+        result = check_enrollment_key(enrollment_key)
+        return result
 
 
 @api.route('/test/personal_details')
@@ -31,18 +40,8 @@ class PersonalDetailSubmit(Resource):
     personal_detail_parser.add_argument('mobile_number', type=str, required=True)
     personal_detail_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
 
-
-    @api.doc(parser=enrolment_validation_parser)
-    def get(self):
-
-        args = self.enrolment_validation_parser.parse_args()
-        enrollment_key = args.get('enrollment_key', None)
-        enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
-
-        # return the validaty of the key
-        return check_enrollment_key(enrollment)
-
-    @api.doc(parser=personal_detail_parser)
+    @api.marshal_with(enrollment_key_status)
+    @api.doc(parser=personal_detail_parser, description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
         args = self.personal_detail_parser.parse_args()
 
@@ -60,10 +59,9 @@ class PersonalDetailSubmit(Resource):
 
         # enrollmentkey
         enrollment_key = args.get('enrollment_key', None)
-        enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
 
         # check the validity of enrollment key
-        result = check_enrollment_key(enrollment)
+        result = check_enrollment_key(enrollment_key)
 
         # student record shall be updated only when the key is not used
         if result['valid'] and result['reason'] == 'NOT_USED':
@@ -76,19 +74,20 @@ class PersonalDetailSubmit(Resource):
             student_contact = StudentContact.create(contact=mobile_number, student_id=student_id)
             return {
                 'success':True,
-                'enrollment_key': result['reason']
+                'enrollment_key_status': result['reason']
             }
         # when the key is used but somehow student went to the this route instead of test
         elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
             return {
                 'success':True,
-                'enrollment_key': result['reason']
+                'enrollment_key_status': result['reason']
             }
         # when the key is not valid
         return {
             'success':False,
-            'enrollment_key': result['reason'],
+            'enrollment_key_status': result['reason'],
         }
+
 
 @api.route('/test/start_test')
 class TestStart(Resource):

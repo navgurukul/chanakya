@@ -1,4 +1,6 @@
-def check_enrollment_key(enrollment):
+from chanakya.src.models import EnrolmentKey
+
+def check_enrollment_key(enrollment_key):
     '''
     the helper method  to validate that if the enrollment key is valid or not
     and return the response as per it's validation
@@ -6,6 +8,7 @@ def check_enrollment_key(enrollment):
     params:
         enollment : EnrolmentKey object required
     '''
+    enrollment = EnrolmentKey.query.filter_by(key=enrollment_key).first()
 
     #if there is no such enrollment key
     if not enrollment:
