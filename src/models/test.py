@@ -106,7 +106,60 @@ class Questions(db.Model):
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
     options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
 
+    @staticmethod
+    def create_question(question_dict):
+        '''
+            create a question object for the question_dict
+            question_dict = {
 
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+
+                'options':[
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        '''
+        en_text = question_dict.get('en_text')
+        hi_text = question_dict.get('hi_text')
+        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        options = question_dict.get('options')
+
+        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
+        db.session.add(question)
+        db.session.commit()
+
+        for option in options:
+            option['question_id'] = question.id
+            question_option = QuestionOptions.create_option(**option)
+
+        db.session.commit()
+
+        return question
 
 class QuestionOptions(db.Model):
 
@@ -131,7 +184,6 @@ class QuestionOptions(db.Model):
         '''
         question_option = QuestionOptions(**kwargs)
         db.session.add(question_option)
-        db.session.commit()
 
         return question_option
 
