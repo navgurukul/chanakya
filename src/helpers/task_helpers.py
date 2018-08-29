@@ -10,47 +10,48 @@ def parse_option_args_to_dict(args):
 
         params : args from the parse_args() method
 
-        return {
-            'option1':{
+        return [{
                 'en_text':'something',
                 'hi_text':'something'
             },
-            'option2':{
+            {
                 'en_text':'something',
                 'hi_text':'something'
             },
-            'option3':{
+            {
                 'en_text':'something',
                 'hi_text':'something'
             },
-            'option4':{
+            {
                 'en_text':'something',
                 'hi_text':'something'
-            }
-
-        }
+            }]
     '''
     option = {}
 
     option1_en_text = args.get('option1_en_text')
     option1_hi_text = args.get('option1_hi_text')
     if option1_en_text and option1_hi_text:
-        option.update({'option1':{'en_text': option1_en_text,'hi_text':option1_hi_text}})
+        option.append({'en_text': option1_en_text,'hi_text':option1_hi_text,'correct':False})
 
     option2_en_text = args.get('option2_en_text')
     option2_hi_text = args.get('option2_hi_text')
     if option2_en_text and option2_hi_text:
-        option.update({'option2':{'en_text': option2_en_text,'hi_text':option2_hi_text}})
+        option.append({'en_text': option2_en_text,'hi_text':option2_hi_text,'correct':False})
 
     option3_en_text = args.get('option3_en_text')
     option3_hi_text = args.get('option3_hi_text')
     if option3_en_text and option3_hi_text:
-        option.update({'option3':{'en_text': option3_en_text,'hi_text':option3_hi_text}})
+        option.append({'en_text': option3_en_text,'hi_text':option3_hi_text,'correct':False})
 
     option4_en_text = args.get('option4_en_text')
     option4_hi_text = args.get('option4_hi_text')
     if option4_en_text and option4_hi_text:
-        option.update({'option4':{'en_text': option4_en_text,'hi_text':option4_hi_text}})
+        option.append({'en_text': option4_en_text,'hi_text':option4_hi_text,'correct':False})
+
+    # TODO: answer Still need to work on it
+    correct_answer_index = int(args.get('answer')) - 1
+    option[correct_answer_index]['correct'] = True
 
     return option
 

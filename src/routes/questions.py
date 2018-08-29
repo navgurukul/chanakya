@@ -1,4 +1,4 @@
-from flask_restplus import Resource, reqparse, abort
+from flask_restplus import Resource, reqparse, abort, marshal_with
 from chanakya.src import app, api, db
 from io import BytesIO
 from chanakya.src.models import (
@@ -8,7 +8,7 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-
+from chanakya.src.helpers import question_obj
 from chanakya.src.helpers import (
 				parse_question_args_to_dict,
 	 			get_the_questions_as_list,
@@ -62,6 +62,7 @@ class CreateQuestion(Resource):
 	create_question_parser.add_argument('option4_en_text', type=str, required=False)
 	create_question_parser.add_argument('option4_hi_text', type=str, required=False)
 
+	@marshal_with(question_obj)
 	@api.doc(parser=create_question_parser)
 	def post(self):
 
@@ -71,7 +72,10 @@ class CreateQuestion(Resource):
 		#create the question
 		questions = Questions.add_question(question)
 
-		return questions
+		return {
+			'question'.question
+		}
+
 
 
 @api.route('/question/')

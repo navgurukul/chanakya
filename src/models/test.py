@@ -166,12 +166,14 @@ class Questions(db.Model):
 
         #creating options if it is a MCQ question
         if question_type == 'MQC':
-            for option_key in questions_data['option'].keys():
-                option_data = questions_data['option'][option_key]
+            for option_data in questions_data['option']:
                 question_option = QuestionOptions.create_option(**option_data, question_id=question.id)
                 #adding the id of the option which is answer to the question
+
+                # TODO: Create some better better and refactor it
                 if questions_data.get('answer') == option_key:
                     question.answer = question_option.id
+
         #Saving the Integer Answer
         else:
             question.answer = questions_data.get('answer')
@@ -179,7 +181,7 @@ class Questions(db.Model):
         db.session.add(question)
         db.session.commit()
 
-        return questions_data
+        return question
 
 class QuestionOptions(db.Model):
 
@@ -189,9 +191,10 @@ class QuestionOptions(db.Model):
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    correct = db.Column(db.Boolean, default=False)
 
     @staticmethod
-    def create_option(en_text, hi_text, question_id):
+    def create_option(en_text, hi_text, question_id, correct=False):
         '''
         Staticmethod to create option for a specific question_id in the database
         params:
@@ -200,7 +203,7 @@ class QuestionOptions(db.Model):
             question_id : id of the question of the options
 
         '''
-        question_option = QuestionOptions(en_text=en_text, hi_text=hi_text, question_id=question_id)
+        question_option = QuestionOptions(en_text=en_text, hi_text=hi_text, question_id=question_id, correct=correct)
         db.session.add(question_option)
         db.session.commit()
 
@@ -215,4 +218,3 @@ class QuestionAttempts(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     answer = db.Column(db.String(10), nullable=False)
     is_correct = db.Column(db.Boolean, nullable=False)
-    
