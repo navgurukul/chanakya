@@ -1,5 +1,5 @@
 from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions
+from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions, QuestionAttempts
 from chanakya.src import api, db, app
 from datetime import datetime, timedelta
 
@@ -7,7 +7,8 @@ from chanakya.src.helpers.response_objects import (
                 enrollment_key_status,
                 enrollment_key_validation,
                 question_obj,
-                questions_list_obj
+                questions_list_obj,
+                questions_attempts
             )
 from chanakya.src.helpers.validators import check_enrollment_key
 from chanakya.src.helpers.routes_descriptions import (
@@ -46,7 +47,8 @@ class PersonalDetailSubmit(Resource):
     personal_detail_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
 
     @api.marshal_with(enrollment_key_status)
-    @api.doc(parser=personal_detail_parser, description=PERSONAL_DETAILS_DESCRIPTION)
+    @api.expect(personal_detail_parser)
+    @api.doc(description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
         args = self.personal_detail_parser.parse_args()
 
@@ -109,11 +111,12 @@ class TestStart(Resource):
     @api.doc(parser=enrollment_key_parser)
     def get(self):
         args = self.enrollment_key_parser.parse_args()
-        # TODO: check the enrollment key
+
+        # check the enrollment key
         enrollment_key =  args.get('enrollment_key')
         result, enrollment = check_enrollment_key(enrollment_key)
 
-        # TODO: what to do if it doesn't exist or expired
+        # if enrollment doesn't exist or expired
         if not result['valid']:
             return {
                 'error':True,
@@ -122,7 +125,7 @@ class TestStart(Resource):
 
         # TODO: what to do if it is already in use
 
-        # TODO: start the test and send the questions generated randomly
+         # start the test and send the questions generated randomly
         current_datetime = datetime.now()
         enrollment.test_start_time = current_datetime
         enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
@@ -136,9 +139,33 @@ class TestStart(Resource):
 
 @api.route('/test/end_test')
 class TestEnd(Resource):
+    end_test_response =  api.model('end_test_response',{
+        'error': fields.Boolean(default=False),
+        'enrollment_key_validation': fields.Boolean(default=True),
+        'success': fields.Boolean(default=False)
+    })
+
+    @api.marshal_with(end_test_response)
+    @api.expect(questions_attempts)
     def post(self):
+        args = api.payload
+
+        # check the enrollment key
+        enrollment_key =  args.get('enrollment_key')
+        result, enrollment = check_enrollment_key(enrollment_key)
+
+        # if enrollment doesn't exist or expired
+        if not result['valid']:
+            return {
+                'error':True,
+                'enrollment_key_validation':False
+            }
+        #add questions to db
+        questions_attempts = args.get('question_attempted')
+        QuestionAttempts.create(questions_attempts, enrollment)
+
         return {
-        'data': 'Test end and question submitted'
+            'success': True
         }
 
 @api.route('/test/extra_details')

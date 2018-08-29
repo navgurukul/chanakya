@@ -212,7 +212,16 @@ class QuestionAttempts(db.Model):
     __tablename__ = 'attempts'
 
     id = db.Column(db.Integer, primary_key=True)
-    enrolment_key_id = db.Column(db.Integer, db.ForeignKey('enrolment_keys.id'))
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
-    answer = db.Column(db.String(10), nullable=False)
-    is_correct = db.Column(db.Boolean, nullable=False)
+    enrolment_key_id = db.Column(db.Integer, db.ForeignKey('enrolment_keys.id'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
+    selected_option_id = db.Column(db.Integer, db.ForeignKey('question_options.id'))
+
+    @staticmethod
+    def create(questions_attempts, enrollment):
+        # TODO:  needs to check question does exist or not with option
+        
+        for question_attempt in questions_attempts:
+            question_attempt['enrolment_key_id'] = enrollment.id
+            attempt = QuestionAttempts(**question_attempt)
+            db.session.add(attempt)
+        db.session.commit()
