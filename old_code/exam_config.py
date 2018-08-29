@@ -7,7 +7,7 @@ config = {
                     "html": html_strings.mix_mcqs.before,
                     "time_in_seconds": 60
                 },
-                "questions":{ 
+                "questions":{
                     "categories":{
                         "BASIC-MATH":{ "easy":3, "medium":3, "hard":3 },
                         "ABSTRACT-REASONING":{ "easy":2, "medium":2, "hard":2 },

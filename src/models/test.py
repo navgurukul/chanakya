@@ -111,34 +111,17 @@ class Questions(db.Model):
         '''
             create a question object for the question_dict
             question_dict = {
-
                 'hi_text':'some question',
                 'en_text':'some question',
                 'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
                 'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
                 'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
-
                 'options':[
                     {
                         'en_text':'something',
                         'hi_text':'something',
                         'correct': True
                     },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': False
-                    },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': False
-                    },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': True
-                    }
                 ]
             }
         '''
@@ -156,10 +139,47 @@ class Questions(db.Model):
         for option in options:
             option['question_id'] = question.id
             question_option = QuestionOptions.create_option(**option)
-
         db.session.commit()
-
         return question
+
+    @staticmethod
+    def get_random_question_set():
+        questions = Questions.query.all()
+        topics = app.config['QUESTION_CONFIG']['topic']
+
+        #arrange the question according to the topic and difficulty
+        questions_dict = {}
+        for question in questions:
+            topic = question.topic.value
+            difficulty = question.difficulty.value
+
+            if topic in topics.keys():
+                if not questions_dict.get(topic):
+                    questions_dict[topic]={}
+                    questions_dict[topic][difficulty] = []
+                    questions_dict[topic][difficulty].append(question)
+                elif not questions_dict[topic].get(difficulty):
+                    questions_dict[topic][difficulty] = []
+                    questions_dict[topic][difficulty].append(question)
+                else:
+                    questions_dict[topic][difficulty].append(question)
+
+        # Select the question randomly according to topic and difficulty
+        main_questions_list = []
+        for topic in topics:
+            for difficulty in topics[topic]:
+                question_topic = questions_dict.get(topic)
+
+                if not question_topic:
+                    continue
+                question_list = question_topic.get(difficulty)
+                if not question_list:
+                    continue
+                random.shuffle(question_list)
+                required_question_num = topics[topic][difficulty]
+                main_questions_list.append(question_list[:required_question_num])
+
+        return main_questions_list
 
 class QuestionOptions(db.Model):
 

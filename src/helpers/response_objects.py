@@ -7,12 +7,12 @@ from flask_restplus import fields
 from chanakya.src import app, api
 
 
-enrollment_key_status = api.model('EnrollmentKeyStatus', {
+enrollment_key_status = api.model('enrollment_key_status', {
     'success': fields.Boolean,
     'enrollment_key_status':fields.String
 })
 
-enrollment_key_validation = api.model('EnrollmentKeyValidtion',{
+enrollment_key_validation = api.model('enrollment_key_validation',{
     'valid': fields.Boolean,
     'reason': fields.String
 })
@@ -32,4 +32,8 @@ question_obj = api.model('questions',{
     'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']]),
     'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']]),
     'options': fields.List(fields.Nested(option_obj))
+})
+
+questions_list_obj = api.model('questions_list', {
+    'questions': fields.List(fields.Nested(question_obj))
 })

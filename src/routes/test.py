@@ -1,11 +1,19 @@
-from flask_restplus import Resource, reqparse
-from chanakya.src.models import EnrolmentKey, StudentContact, Student
+from flask_restplus import Resource, reqparse, fields
+from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions
 from chanakya.src import api, db, app
 from datetime import datetime
 
-from chanakya.src.helpers.response_objects import enrollment_key_status, enrollment_key_validation,
+from chanakya.src.helpers.response_objects import (
+                enrollment_key_status,
+                enrollment_key_validation,
+                question_obj,
+                questions_list_obj
+            )
 from chanakya.src.helpers.validators import check_enrollment_key
-from chanakya.src.helpers.routes_description import VALIDATE_ENROLMENT_KEY_DESCRIPTION,PERSONAL_DETAILS_DESCRIPTION
+from chanakya.src.helpers.routes_descriptions import (
+                VALIDATE_ENROLMENT_KEY_DESCRIPTION,
+                PERSONAL_DETAILS_DESCRIPTION
+            )
 
 
 
@@ -88,9 +96,13 @@ class PersonalDetailSubmit(Resource):
 
 @api.route('/test/start_test')
 class TestStart(Resource):
+
+    @api.marshal_with(questions_list_obj)
     def get(self):
+        questions = Questions.get_random_question_set()
+        print(questions)
         return {
-        'data':'Test Question Sent'
+            'questions':questions
         }
 
 @api.route('/test/end_test')

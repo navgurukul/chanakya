@@ -2,6 +2,8 @@ import os
 
 from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
 
+from .exam_config import question_config
+
 class ChanakyaConfig(object):
 
     # SQLAlchemy
@@ -14,6 +16,10 @@ class ChanakyaConfig(object):
     INCOMING_CALL_TYPE = IncomingCallType
     OUTGOING_SMS_TYPE = OutgoingSMSType
     GENDER = Gender
+
+    #exam_config
+    QUESTION_CONFIG = question_config
+
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',

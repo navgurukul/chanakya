@@ -8,7 +8,7 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.response_objects import question_obj
+from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
 from chanakya.src.helpers.task_helpers import parse_question_dict
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 
@@ -70,13 +70,12 @@ class CreateQuestion(Resource):
 
 @api.route('/question/')
 class AllQuestions(Resource):
-	questions_list_obj = api.model('questions_list', {
-		'questions_list' : fields.List(fields.Nested(question_obj))
-	})
 
 	@api.marshal_with(questions_list_obj)
 	def get(self):
+
 		questions_list = Questions.query.all()
+
 		return {
 				"questions_list":questions_list
 			}

@@ -21,16 +21,6 @@ def get_options_list(args):
                 'hi_text':'something',
                 'correct': False
             },
-            {
-                'en_text':'something',
-                'hi_text':'something',
-                'correct': False
-            },
-            {
-                'en_text':'something',
-                'hi_text':'something',
-                'correct': True
-            }
         ]
     '''
     options = []
@@ -76,16 +66,6 @@ def parse_question_dict(args):
                     'en_text':'something',
                     'hi_text':'something',
                     'correct': False
-                },
-                {
-                    'en_text':'something',
-                    'hi_text':'something',
-                    'correct': False
-                },
-                {
-                    'en_text':'something',
-                    'hi_text':'something',
-                    'correct': True
                 }
             ]
         }
