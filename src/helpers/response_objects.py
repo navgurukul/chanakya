@@ -20,6 +20,7 @@ enrollment_key_validation = api.model('enrollment_key_validation',{
 
 #question obbject
 option_obj = api.model('options',{
+    'id':fields.Integer,
     "hi_text": fields.String,
     "en_text": fields.String,
     "correct": fields.Boolean(default=False)
@@ -41,7 +42,8 @@ questions_list_obj = api.model('questions_list', {
 # questions attempted
 question_attempt = api.model('question_attempt',{
     'question_id': fields.Integer,
-    'selected_option_id': fields.Integer
+    'selected_option_id': fields.Integer,
+    'answer': fields.String
 })
 
 questions_attempts = api.model('questions_attempts', {

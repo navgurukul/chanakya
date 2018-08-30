@@ -1,4 +1,4 @@
-from chanakya.src.models import EnrolmentKey
+from chanakya.src.models import EnrolmentKey, Questions
 
 def check_enrollment_key(enrollment_key):
     '''
@@ -37,3 +37,32 @@ def check_enrollment_key(enrollment_key):
             "valid": False,
             "reason": "EXPIRED"
         } , enrollment
+
+def check_question_ids(questions_attempted):
+    # import pdb; pdb.set_trace()
+    question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempted if question_attempt.get('selected_option_id') ]
+
+    # check the question exist in the database
+    questions = Questions.query.filter(Questions.id.in_(question_ids)).all()
+
+    if not questions:
+        return question_ids
+
+    wrong_question_ids = [ question.id for question in questions if not question.id in question_ids ]
+    # create the a new dict of {id:question}
+    if wrong_question_ids:
+        return wrong_question_ids
+
+    questions_id_dict = { question.id: question for question in questions }
+    # check if the question has the option_id in it if option_id is provided
+
+    for question_attempt in questions_attempted:
+        question_id = question_attempt.get('question_id')
+        option_id = question_attempt.get('selected_option_id')
+        question = questions_id_dict[question_id]
+        option_id_list = [option.id for option in question.options.all()]
+        print(option_id_list)
+        if not option_id in option_id_list and option_id:
+            wrong_question_ids.append(question_id)
+
+    return wrong_question_ids

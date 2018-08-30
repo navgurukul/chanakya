@@ -10,7 +10,7 @@ from chanakya.src.helpers.response_objects import (
                 questions_list_obj,
                 questions_attempts
             )
-from chanakya.src.helpers.validators import check_enrollment_key
+from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids
 from chanakya.src.helpers.routes_descriptions import (
                 VALIDATE_ENROLMENT_KEY_DESCRIPTION,
                 PERSONAL_DETAILS_DESCRIPTION
@@ -123,7 +123,7 @@ class TestStart(Resource):
                 'enrollment_key_validation':False
             }
 
-        # TODO: what to do if it is already in use
+        # TODO: what to do if KEY is already in use
 
          # start the test and send the questions generated randomly
         current_datetime = datetime.now()
@@ -142,12 +142,14 @@ class TestEnd(Resource):
     end_test_response =  api.model('end_test_response',{
         'error': fields.Boolean(default=False),
         'enrollment_key_validation': fields.Boolean(default=True),
-        'success': fields.Boolean(default=False)
+        'success': fields.Boolean(default=False),
+        'invalid_question_id': fields.Boolean(default=False)
     })
 
     @api.marshal_with(end_test_response)
     @api.expect(questions_attempts)
     def post(self):
+        # import pdb; pdb.set_trace()
         args = api.payload
 
         # check the enrollment key
@@ -161,8 +163,16 @@ class TestEnd(Resource):
                 'enrollment_key_validation':False
             }
         #add questions to db
-        questions_attempts = args.get('question_attempted')
-        QuestionAttempts.create(questions_attempts, enrollment)
+        questions_attempted = args.get('question_attempted')
+        wrong_question_ids = check_question_ids(questions_attempted)
+
+        if wrong_question_ids:
+            return {
+                'error':True,
+                'enrollment_key_validation':False,
+                'invalid_question_id': True
+            }
+        QuestionAttempts.create_attempts(questions_attempted, enrollment)
 
         return {
             'success': True

@@ -75,9 +75,8 @@ class AllQuestions(Resource):
 	def get(self):
 
 		questions_list = Questions.query.all()
-
 		return {
-				"questions_list":questions_list
+				"questions":questions_list
 			}
 
 
