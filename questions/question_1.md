@@ -12,7 +12,6 @@ Correct Answer: 8
 
 ## Hindi
 8 + (−25) + 16 − (−25) −16
-Iska answer likho answers wale page pe.
 
 ## English
 PENDING
@@ -23,7 +22,6 @@ Correct Answer: 50
 
 ## Hindi
 33 - 8 + 17 + 10 - (-8) - 10
-Iska answer likho answers wale page pe.
 
 ## English
 PENDING
