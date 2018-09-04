@@ -39,8 +39,7 @@ def check_enrollment_key(enrollment_key):
         } , enrollment
 
 def check_question_ids(questions_attempted):
-    # import pdb; pdb.set_trace()
-    question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempted if question_attempt.get('selected_option_id') ]
+    question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempted ]
 
     # check the question exist in the database
     questions = Questions.query.filter(Questions.id.in_(question_ids)).all()
@@ -61,7 +60,6 @@ def check_question_ids(questions_attempted):
         option_id = question_attempt.get('selected_option_id')
         question = questions_id_dict[question_id]
         option_id_list = [option.id for option in question.options.all()]
-        print(option_id_list)
         if not option_id in option_id_list and option_id:
             wrong_question_ids.append(question_id)
 
