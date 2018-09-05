@@ -3,68 +3,75 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-
   </head>
 
-  <body>
-    <div  style="margin-top:80px;">
+  <body >
+    <div style="margin:40px;">
        <div>
         <center>
           <h2>
-            <b>NavGurukul Scholarship Test - Set {{ question_set }}</b>
+            <b>NavGurukul Scholarship Test - Set {{ set.id }}</b>
           </>
           <h5>Question Paper</h5>
         </center>
       </div>
 
-      <div style="margin-top:20px; margin-bottom: 20px;">
-        {% for question in questions %}
-            <table style="page-break-inside:avoid !important;width: 100%; display: block;">
-              {% if question.type.value == 'MQC' %}
-                    <tr style="display:block;">
-                      <td>
-                        {{ loop.index }}. <br>
-                        {{ question.en_text }} <br>
-                        {{ question.hi_text }}
-                      </td>
-                    </tr>
+      {% set strings = 'abcdefghijklmnopqrstuvwxyz' %}
 
-                    {% if question.options.all() %}
-                      <tr style="display:inline-block;">
-                          {% for option in question.options.all() %}
-                            {% if option.is_url() %}
+      <div style="margin-top:20px; margin-bottom: 20px;">
+        <ol>
+        {% for question in questions %}
+          <li style="page-break-inside:avoid !important; ">
+            <table style="page-break-inside:avoid !important; width:100% !important;">
+                {% if question.type.value == 'MQC' %}
+                      <tr>
+                        <td>
+                          {{ question.en_text | safe}}
+                          <br>
+                          {{ question.hi_text | safe}}
+                          <!-- tell rishabh here should be something for images also both in models and here -->
+                        </td>
+                      </tr>
+
+                      {% if question.options.all() %}
+                        <tr style="display:inline-block;">
+                            {% for option in question.options.all() %}
+                              {% if option.is_url() %}
+                                  {% if loop.index is divisibleby 2 %}
+                                    <td>
+                                  {% else %}
+                                    <td style="float: left; min-width: 400px;">
+                                  {% endif %}
+                                      <p>
+                                        {{ strings[loop.index0] }})
+                                        <img src="{{ option.en_text}}" height="100px" style="display:inline-block; vertical-align: text-top; margin:auto;">
+                                      </p>
+                                    </td>
+                              {% else %}
                                 {% if loop.index is divisibleby 2 %}
                                   <td>
                                 {% else %}
-                                  <td style="float: left; margin-right: 350px;">
+                                  <td style="float: left; min-width: 400px;">
                                 {% endif %}
-                                      <img src="{{ option.en_text}}" height="200px">
+                                      {{ strings[loop.index0] }}) {{ option.en_text }}
                                   </td>
-                            {% else %}
-                              {% if loop.index is divisibleby 2 %}
-                                <td>
-                              {% else %}
-                                <td style="float: left; margin-right: 350px;">
-                              {% endif %}
-                                    {{ loop.index }}. <br>
-                                    <p>{{ option.en_text }}</p>
-                                    <p>{{ option.hi_text }}</p>
-                                </td>
-                           {% endif %}
-                          {% endfor %}
-                      </tr>
-                    {% endif %}
-              {% else %}
-                      <tr style="display:block;">
-                          {{ loop.index }}.<br>
-                          <td>{{ question.en_text }}</td>
-                          <td>{{ question.hi_text }}</td>
-                          <td>Iska answer likho answers wale page pe.</td>
-                      </tr>
-              {% endif %}
+                             {% endif %}
+                            {% endfor %}
+                        </tr>
+                      {% endif %}
+                {% else %}
+                        <tr>
+                          <td>
+                            {{ question.en_text | safe}}</br>
+                            {{ question.hi_text | safe }}</p>
+                            <p>Iska answer likho answers wale page pe.</p>
+                          </td>
+                        </tr>
+                {% endif %}
             </table>
-            <br><br>
+          </li>
         {% endfor %}
+        </ol>
 
       </div>
     </div>

@@ -9,8 +9,8 @@ questions = [
   'topic': 'Topic 3',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/mOZHJH/19.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/mOZHJH/19.png' "
+             "height='350px'></center><br/>"
              'isme se kaunsi image aapne memorize ki thi ?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': 'B', 'hi_text': 'B'},
@@ -29,8 +29,8 @@ questions = [
   'topic': 'Topic 3',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/gqfk5x/p27.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/gqfk5x/p27.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -42,8 +42,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/gc5eXc/p10.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/gc5eXc/p10.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -55,8 +55,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/n4ppXc/p18.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/n4ppXc/p18.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -68,8 +68,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/h98GCc/p29.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/h98GCc/p29.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -81,8 +81,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/mFHnJH/p30.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/mFHnJH/p30.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -94,73 +94,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/jFW8Qx/p11.png' "
-             +"height='300px'>\r\n"+
-             'choose right or wrong',
-  'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': False,
-               'en_text': 'सही / CORRECT',
-               'hi_text': 'सही / CORRECT'},
-              {'correct': True,
-               'en_text': 'गलत / INCORRECT',
-               'hi_text': 'गलत / INCORRECT'}],
-  'topic': 'Topic 4',
-  'type': 'MQC'},
- {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/n9pHJH/p4.png' "
-             +"height='300px'>\r\n"+
-             'choose right or wrong',
-  'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': True,
-               'en_text': 'गलत / INCORRECT',
-               'hi_text': 'गलत / INCORRECT'},
-              {'correct': False,
-               'en_text': 'सही / CORRECT',
-               'hi_text': 'सही / CORRECT'}],
-  'topic': 'Topic 4',
-  'type': 'MQC'},
- {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/nfeHJH/p7.png' "
-             +"height='300px'>\r\n"+
-             'choose right or wrong',
-  'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': True,
-               'en_text': 'गलत / INCORRECT',
-               'hi_text': 'गलत / INCORRECT'},
-              {'correct': False,
-               'en_text': 'सही / CORRECT',
-               'hi_text': 'सही / CORRECT'}],
-  'topic': 'Topic 4',
-  'type': 'MQC'},
- {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/dEsXkx/p33.png' "
-             +"height='300px'>\r\n"+
-             'choose right or wrong',
-  'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': True,
-               'en_text': 'सही / CORRECT',
-               'hi_text': 'सही / CORRECT'},
-              {'correct': False,
-               'en_text': 'गलत / INCORRECT',
-               'hi_text': 'गलत / INCORRECT'}],
-  'topic': 'Topic 4',
-  'type': 'MQC'},
- {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/kiOuyH/p21.png' "
-             +"height='300px'>\r\n"+
-             'choose right or wrong',
-  'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': True,
-               'en_text': 'सही / CORRECT',
-               'hi_text': 'सही / CORRECT'},
-              {'correct': False,
-               'en_text': 'गलत / INCORRECT',
-               'hi_text': 'गलत / INCORRECT'}],
-  'topic': 'Topic 4',
-  'type': 'MQC'},
- {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/hL6gdH/p37.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/jFW8Qx/p11.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -172,8 +107,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/hsEOsc/p34.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/n9pHJH/p4.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -185,21 +120,47 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/cNFJQx/p38.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/nfeHJH/p7.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
-  'options': [{'correct': False,
+  'options': [{'correct': True,
                'en_text': 'गलत / INCORRECT',
                'hi_text': 'गलत / INCORRECT'},
-              {'correct': True,
+              {'correct': False,
                'en_text': 'सही / CORRECT',
                'hi_text': 'सही / CORRECT'}],
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/f8b8Qx/p3.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/dEsXkx/p33.png' "
+             "height='350px'></center><br/>"
+             'choose right or wrong',
+  'hi_text': 'सही या गलत चुनिए',
+  'options': [{'correct': True,
+               'en_text': 'सही / CORRECT',
+               'hi_text': 'सही / CORRECT'},
+              {'correct': False,
+               'en_text': 'गलत / INCORRECT',
+               'hi_text': 'गलत / INCORRECT'}],
+  'topic': 'Topic 4',
+  'type': 'MQC'},
+ {'difficulty': 'Easy',
+  'en_text': "<center><img src='https://image.ibb.co/kiOuyH/p21.png' "
+             "height='350px'></center><br/>"
+             'choose right or wrong',
+  'hi_text': 'सही या गलत चुनिए',
+  'options': [{'correct': True,
+               'en_text': 'सही / CORRECT',
+               'hi_text': 'सही / CORRECT'},
+              {'correct': False,
+               'en_text': 'गलत / INCORRECT',
+               'hi_text': 'गलत / INCORRECT'}],
+  'topic': 'Topic 4',
+  'type': 'MQC'},
+ {'difficulty': 'Easy',
+  'en_text': "<center><img src='https://image.ibb.co/hL6gdH/p37.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -211,8 +172,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/iUgQ5x/p31.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/hsEOsc/p34.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -224,8 +185,47 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/hCkDsc/p1.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/cNFJQx/p38.png' "
+             "height='350px'></center><br/>"
+             'choose right or wrong',
+  'hi_text': 'सही या गलत चुनिए',
+  'options': [{'correct': False,
+               'en_text': 'गलत / INCORRECT',
+               'hi_text': 'गलत / INCORRECT'},
+              {'correct': True,
+               'en_text': 'सही / CORRECT',
+               'hi_text': 'सही / CORRECT'}],
+  'topic': 'Topic 4',
+  'type': 'MQC'},
+ {'difficulty': 'Easy',
+  'en_text': "<center><img src='https://image.ibb.co/f8b8Qx/p3.png' "
+             "height='350px'></center><br/>"
+             'choose right or wrong',
+  'hi_text': 'सही या गलत चुनिए',
+  'options': [{'correct': False,
+               'en_text': 'सही / CORRECT',
+               'hi_text': 'सही / CORRECT'},
+              {'correct': True,
+               'en_text': 'गलत / INCORRECT',
+               'hi_text': 'गलत / INCORRECT'}],
+  'topic': 'Topic 4',
+  'type': 'MQC'},
+ {'difficulty': 'Easy',
+  'en_text': "<center><img src='https://image.ibb.co/iUgQ5x/p31.png' "
+             "height='350px'></center><br/>"
+             'choose right or wrong',
+  'hi_text': 'सही या गलत चुनिए',
+  'options': [{'correct': True,
+               'en_text': 'गलत / INCORRECT',
+               'hi_text': 'गलत / INCORRECT'},
+              {'correct': False,
+               'en_text': 'सही / CORRECT',
+               'hi_text': 'सही / CORRECT'}],
+  'topic': 'Topic 4',
+  'type': 'MQC'},
+ {'difficulty': 'Easy',
+  'en_text': "<center><img src='https://image.ibb.co/hCkDsc/p1.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -237,8 +237,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/eDWmCc/p2.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/eDWmCc/p2.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -250,8 +250,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/jOnnJH/p36.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/jOnnJH/p36.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -263,8 +263,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/gxbQ5x/p28.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/gxbQ5x/p28.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -276,8 +276,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/dxMKXc/p8.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/dxMKXc/p8.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -289,8 +289,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/exAk5x/p35.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/exAk5x/p35.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -302,8 +302,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/kPawCc/p24.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/kPawCc/p24.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -315,8 +315,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/dfrskx/p23.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/dfrskx/p23.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -328,8 +328,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/eL0eXc/p17.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/eL0eXc/p17.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -341,8 +341,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/b2rEyH/p25.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/b2rEyH/p25.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -354,8 +354,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/mUFk5x/p32.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/mUFk5x/p32.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -367,8 +367,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/enpv5x/p13.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/enpv5x/p13.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -380,8 +380,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/b7BgdH/p19.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/b7BgdH/p19.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -393,8 +393,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/cdiYsc/p6.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/cdiYsc/p6.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -406,8 +406,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/cRxXkx/p26.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/cRxXkx/p26.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -419,8 +419,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/j5izXc/p14.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/j5izXc/p14.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -432,8 +432,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/gEVUXc/p39.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/gEVUXc/p39.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -445,8 +445,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/kTyNkx/p9.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/kTyNkx/p9.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -458,8 +458,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/c7aUXc/p20.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/c7aUXc/p20.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -471,8 +471,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/coq2kx/p5.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/coq2kx/p5.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': True,
@@ -484,8 +484,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/mLkrdH/p12.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/mLkrdH/p12.png' "
+             "height='350px'></center><br/>"
              'choose right or wrong',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -497,8 +497,8 @@ questions = [
   'topic': 'Topic 4',
   'type': 'MQC'},
  {'difficulty': 'Medium',
-  'en_text': "<img src='https://image.ibb.co/g1tBdH/11.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/g1tBdH/11.png' "
+             "height='350px'></center><br/>"
              'Question mark ki jagah par sahi figure choose kijiye',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False,
@@ -516,8 +516,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Medium',
-  'en_text': "<img src='https://image.ibb.co/dGqPyH/14.png' height='300px'> "
-        +     'Di gyi image me total kitne boxes hai?',
+  'en_text': "<center><img src='https://image.ibb.co/dGqPyH/14.png' height='350px'></center> "
+             '<br> Di gyi image me total kitne boxes hai?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': 'B', 'hi_text': 'B'},
               {'correct': True, 'en_text': 'E', 'hi_text': 'E'},
@@ -526,8 +526,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/mGK6Cc/10.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/mGK6Cc/10.png' "
+             "height='350px'></center><br/>"
              'Question mark ki jagah par sahi figure choose kijiye',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False,
@@ -545,8 +545,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/nFBWdH/13.png' height='300px'> "
-        +     '<br/>Diye hue image ka reflection kaisa hoga?',
+  'en_text': "<center><img src='https://image.ibb.co/nFBWdH/13.png' height='350px'></center> "
+             '<br/>Diye hue image ka reflection kaisa hoga?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': 'E', 'hi_text': 'E'},
               {'correct': True, 'en_text': 'D', 'hi_text': 'D'},
@@ -555,8 +555,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Hard',
-  'en_text': "<img src='https://image.ibb.co/hGjv5x/12.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/hGjv5x/12.png' "
+             "height='350px'></center><br/>"
              'Question mark ki jagah par sahi figure choose kijiye',
   'hi_text': 'सही या गलत चुनिए',
   'options': [{'correct': False,
@@ -574,8 +574,8 @@ questions = [
   'topic': 'Topic 1',
   'type': 'MQC'},
  {'difficulty': 'Hard',
-  'en_text': "<img src='https://image.ibb.co/kM0eXc/15.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/kM0eXc/15.png' "
+             "height='350px'></center><br/>"
              'Fold karne ke baad, ye 2D image kis box ki tarah banega? ',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': 'A', 'hi_text': 'A'},
@@ -586,7 +586,7 @@ questions = [
   'type': 'MQC'},
  {'difficulty': 'Medium',
   'en_text': 'Cheerapunji ka temperature morning mein -14 degree celsius hota '
-             'hai.<br/>\r\n'
+             'hai.<br/>'
              'Agar wahan ka temperature 7 degrees aur drop hota hai, toh '
              'Cheerapunji ka temperature kitna hai?',
   'hi_text': 'नीचे उत्तर लिखिए',
@@ -594,7 +594,7 @@ questions = [
   'topic': 'Topic 2',
   'type': 'Integer Answer'},
  {'difficulty': 'Medium',
-  'en_text': "<img src='https://image.ibb.co/bSpjyH/8.png' height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/bSpjyH/8.png' height='350px'></center><br/>"
              'Shaded area poore area ka kitna percent hai?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': '35%', 'hi_text': '35%'},
@@ -604,30 +604,30 @@ questions = [
   'topic': 'Topic 2',
   'type': 'MQC'},
  {'difficulty': 'Medium',
-  'en_text': 'Neeche diye hue equations mein x ke liye solve karein:<br/>\r\n'
-             'x = y - 6<br/>\r\n'
-             'y = 10<br/>\r\n'
-             '<br/>\r\n'
+  'en_text': 'Neeche diye hue equations mein x ke liye solve karein: <br/>'
+             'x = y - 6 <br/>'
+             'y = 10 <br/>'
+             '<br/>'
              'x = ?',
   'hi_text': 'नीचे उत्तर लिखिए',
   'options': [{'correct': True, 'en_text': '4', 'hi_text': '4'}],
   'topic': 'Topic 2',
   'type': 'Integer Answer'},
  {'difficulty': 'Easy',
-  'en_text': '8+(−25)+16−(−25)−16\r\n<br/>\r\nwrite your answer below',
+  'en_text': '8(−25)16−(−25)−16<br/><br/>write your answer below',
   'hi_text': 'नीचे उत्तर लिखिए',
   'options': [{'correct': True, 'en_text': '8', 'hi_text': '8'}],
   'topic': 'Topic 2',
   'type': 'Integer Answer'},
  {'difficulty': 'Easy',
-  'en_text': 'Maan lein ki x = a/b  hai.<br/>\r\n'
+  'en_text': 'Maan lein ki x = a/b  hai.<br/>'
              'Agar a =6 aur b=2 toh x ki value kya hai?',
   'hi_text': 'नीचे उत्तर लिखिए',
   'options': [{'correct': True, 'en_text': '3', 'hi_text': '3'}],
   'topic': 'Topic 2',
   'type': 'Integer Answer'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/hXntsc/7.png' height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/hXntsc/7.png' height='350px'></center><br/>"
              'Shaded area poore area ka kitna percent hai?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': '80%', 'hi_text': '80%'},
@@ -637,8 +637,8 @@ questions = [
   'topic': 'Topic 2',
   'type': 'MQC'},
  {'difficulty': 'Hard',
-  'en_text': 'Aapke room ka temperature -17 degree Celsius hai.<br/>\r\n'
-             'Aapne apne room mein room heater on kiya.<br/>\r\n'
+  'en_text': 'Aapke room ka temperature -17 degree Celsius hai.<br/>'
+             'Aapne apne room mein room heater on kiya.<br/>'
              'Ab aapke kamre ka temperature every 5 minutes mein 3 degree '
              'celsius badh raha hai. 30 mins baad aapke room ka temperature '
              'kitna hoga?',
@@ -665,9 +665,9 @@ questions = [
   'topic': 'Topic 2',
   'type': 'MQC'},
  {'difficulty': 'Hard',
-  'en_text': 'x aur y ke liye solve karein:<br/>\r\n'
-             'y =    x + 4<br/>\r\n'
-             'y =  2x + 2<br/>',
+  'en_text': 'x aur y ke liye solve karein:<br/>'
+             'y =    x  4<br/>'
+             'y =  2x  2<br/>',
   'hi_text': 'नीचे उत्तर लिखिए',
   'options': [{'correct': False, 'en_text': '3,5', 'hi_text': '3,5'},
               {'correct': False, 'en_text': '4,2', 'hi_text': '4,2'},
@@ -676,15 +676,15 @@ questions = [
   'topic': 'Topic 2',
   'type': 'MQC'},
  {'difficulty': 'Medium',
-  'en_text': 'Inn numbers ko dekhiye aur agla number guess kijiye:<br/>\r\n'
+  'en_text': 'Inn numbers ko dekhiye aur agla number guess kijiye:<br/>'
              '1, 8. 27, 64, 125 , ?',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': True, 'en_text': '216', 'hi_text': '216'}],
   'topic': 'Topic 3',
   'type': 'Integer Answer'},
  {'difficulty': 'Easy',
-  'en_text': "<img src='https://image.ibb.co/bzGxJH/16.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/bzGxJH/16.png' "
+             "height='350px'></center><br/>"
              'Niche diye hue images mein agla image kaun sa aayega',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': False, 'en_text': 'D', 'hi_text': 'D'},
@@ -694,8 +694,8 @@ questions = [
   'topic': 'Topic 3',
   'type': 'MQC'},
  {'difficulty': 'Hard',
-  'en_text': "<img src='https://image.ibb.co/iUBKXc/18.png' "
-             +"height='300px'>\r\n"+
+  'en_text': "<center><img src='https://image.ibb.co/iUBKXc/18.png' "
+             "height='350px'></center><br/>"
              'Niche diye hue images mein agla image kaun sa aayega',
   'hi_text': 'नीचे उत्तर दीजिए',
   'options': [{'correct': True,

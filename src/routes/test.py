@@ -19,6 +19,15 @@ from chanakya.src.helpers.routes_descriptions import (
             )
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 
+#
+#
+# from flask import render_template, request
+#
+# @app.route('/generate')
+# def just():
+#     questions = Questions.get_random_question_set()
+#     questions_set = QuestionSet.create_new_set(questions, partner_name='PYDS')
+#     return render_template('question_pdf.html', **locals())
 
 #Validation for the enrollment key
 @api.route('/test/validate_enrolment_key')
@@ -202,13 +211,9 @@ class OfflinePaper(Resource):
         'partner_name':fields.String(required=True)
     })
 
-    sets = api.model('sets', {
-            'sets': fields.List(fields.Nested(question_set))
-        })
-
     offline_paper_response = api.model('offline_paper_response', {
         'error': fields.Boolean(default=False),
-        'sets':fields.Nested(sets)
+        'question_sets':fields.List(fields.Nested(question_set))
     })
 
     @api.marshal_with(offline_paper_response)
@@ -221,37 +226,38 @@ class OfflinePaper(Resource):
 
         set_list = []
 
-        for set in range(number_sets):
+        for i in range(number_sets):
             try:
                 # generate the random sets and get question
                 questions = Questions.get_random_question_set()
-                questions_set = QuestionSet.create_new_set(questions, partner_name)
+                set = QuestionSet.create_new_set(questions, partner_name)
 
                 # render pdf
                 pdf = render_pdf_phantomjs('question_pdf.html', **locals())
 
                 #s3 method that upload the binary file
                 url = upload_pdf_to_s3(string=pdf)
-
-                # update url of question_set
-                question_set.url = url
-                db.session.add(questions_set)
+                print(url)
+                # # update url of question_set
+                set.url = url
+                db.session.add(set)
                 db.session.commit()
 
-                set_list.append(question_set)
+                set_list.append(set)
             except Exception as e:
                 raise e
+        print(set_list)
         # return each and every question_set
         return {
-            'sets': set_list
+            'question_sets': set_list
         }
 
     @api.marshal_with(offline_paper_response)
     def get(self):
 
-        question_set = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
+        question_sets = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
         return {
-            'sets': question_set
+            'question_sets': question_sets
         }
 
 
@@ -260,6 +266,7 @@ class SingleOfflinePaper(Resource):
 
     single_set = api.model('single_set', {
         'error': fields.Boolean(default=False),
+        'message':fields.String,
         'set': fields.Nested(question_set)
     })
 
@@ -273,5 +280,6 @@ class SingleOfflinePaper(Resource):
             }
 
         return {
-            'error': True
+            'error': True,
+            'message': "id doesn't exist"
         }

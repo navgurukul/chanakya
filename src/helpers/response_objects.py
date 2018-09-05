@@ -73,7 +73,7 @@ questions_attempts = api.model('questions_attempts', {
 
 #offline paper
 question_set = api.model('question_set',{
-    'set_number': fields.Integer(attribute='id'),
-    'pdf_url': fields.String(attribute='url'),
+    'set_name': fields.Integer(attribute=lambda x: x.id if x else None),
+    'pdf_url': fields.String(attribute=lambda x: x.url if x else None),
     'partner_name': fields.String
 })

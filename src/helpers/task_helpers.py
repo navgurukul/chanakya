@@ -88,7 +88,12 @@ def parse_question_dict(args):
 
 def render_pdf_phantomjs(template_name , **kwargs):
     """mimerender helper to render a PDF from HTML using phantomjs."""
+    print(len(kwargs.get('questions')))
     # The 'makepdf.js' PhantomJS program takes HTML via stdin and returns PDF binary via stdout
     html = render_template(template_name, **kwargs)
-    p = Popen(['phantomjs', '%s/../scripts/pdf.js' % os.path.dirname(os.path.realpath(__file__))], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-    return p.communicate(input=html.encode('utf-8'))[0]
+    p = Popen(['phantomjs', '%s/scripts/pdf.js' % os.path.dirname(os.path.realpath(__file__))], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+    some = p.communicate(input=html.encode('utf-8'))[0]
+    f = open('wr.pdf', 'wb')
+    f.write(some)
+    f.close()
+    return some
