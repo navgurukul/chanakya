@@ -1,29 +1,11 @@
 from flask_restplus import Resource, reqparse
-<<<<<<< HEAD
-from chanakya.src import api
-=======
+
 from chanakya.src import api, app, db
 from chanakya.src.models import Student, IncomingCalls, StudentContact
 from flask_restful.inputs import boolean
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
-
 
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
-<<<<<<< HEAD
-    # args_parser = reqparse.RequestParser()
-    # args_parser.add_argument('PhoneNumber', type=int, help='Number to which the sms will be sent')
-    # args_parser.add_argument('record_id')
-    def post(self):
-        return {'data': 'here is some *more* data'}
-
-@api.route('/start/requested_callback')
-class RequestCallBack(Resource):
-    def post(self):
-        return {
-            'data':'Navgurukul se call ajayega apko'
-        }
-=======
 
 	enrolment_parser = reqparse.RequestParser()
 	enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
@@ -88,4 +70,3 @@ class RequestCallBack(Resource):
 		return{
 			'success': True
 		}
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268

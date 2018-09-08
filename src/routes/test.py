@@ -1,16 +1,5 @@
 from flask_restplus import Resource, reqparse
-<<<<<<< HEAD
 
-from chanakya.src import api
-
-#Api when which a student connecting with Navgurukul
-@api.route('/test/validate_enrolment_key')
-class EnrollmentKeyValidtion(Resource):
-    def get(self):
-        return {
-        'data': 'Enrollment key Verification'
-        }
-=======
 from chanakya.src.models import EnrolmentKey
 from chanakya.src import api, db
 from chanakya.src import app
@@ -56,7 +45,6 @@ class EnrollmentKeyValidtion(Resource):
                 "reason": "EXPIRED"
             }
 
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
 
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):

@@ -1,13 +1,8 @@
 import datetime, enum
-<<<<<<< HEAD
-
-from chanakya.src import db, app
-=======
 from chanakya.src import db, app
 from .student_contact import (StudentContact, IncomingCalls)
 
 from .test import EnrolmentKey
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
 
 class Student(db.Model):
 
@@ -17,9 +12,6 @@ class Student(db.Model):
     stage = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-
-<<<<<<< HEAD
-=======
 
     @staticmethod
     def create(stage, **kwargs):
@@ -157,7 +149,6 @@ class Student(db.Model):
         return message
 
 
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
 class StudentStageTransition(db.Model):
 
     __tablename__ = 'stage_transitions'
