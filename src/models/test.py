@@ -108,6 +108,61 @@ class Questions(db.Model):
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
     answer = db.Column(db.String(10), nullable=False)
 
+
+    @staticmethod
+    def create_question(question_dict):
+        '''
+            create a question object for the question_dict
+            question_dict = {
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        '''
+        en_text = question_dict.get('en_text')
+        hi_text = question_dict.get('hi_text')
+
+        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        options = question_dict.get('options')
+
+        # creating question
+        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
+        db.session.add(question)
+        db.session.commit()
+
+        # creating options for the above question
+        for option in options:
+            option['question_id'] = question.id
+            question_option = QuestionOptions.create_option(**option)
+        db.session.commit()
+        return question
+
 class QuestionOptions(db.Model):
 
     __tablename__ = 'question_options'
@@ -116,6 +171,21 @@ class QuestionOptions(db.Model):
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    @staticmethod
+    def create_option(**kwargs):
+        '''
+        Staticmethod to create option for a specific question_id in the database
+        params:
+            en_text : english text of the option, required, str
+            hi_text : hindi text of the option, required, str
+            question_id : id of the question of the options, required, int
+            correct = False, bool
+
+        '''
+        question_option = QuestionOptions(**kwargs)
+        db.session.add(question_option)
+
+        return question_option
 
 
 class QuestionAttempts(db.Model):

@@ -44,15 +44,13 @@ class IncomingCalls(db.Model):
     contact = db.Column(db.Integer, db.ForeignKey('student_contacts.id'))
     call_type = db.Column(db.Enum(app.config['INCOMING_CALL_TYPE']), nullable=False)
 
-<<<<<<< HEAD
-=======
+
     @staticmethod
     def create(student_contact, call_type):
         incoming_call = IncomingCalls(contact=student_contact.id, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
         db.session.add(incoming_call)
         db.session.commit()
 
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
 class OutgoingSMS(db.Model):
 
     __tablename__ = 'outgoing_sms'
