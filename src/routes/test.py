@@ -44,7 +44,6 @@ class EnrollmentKeyValidtion(Resource):
                 "reason": "EXPIRED"
             }
 
-
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
     def post(self):

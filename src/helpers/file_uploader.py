@@ -3,9 +3,9 @@ from werkzeug.datastructures import FileStorage
 from flask_restplus import reqparse
 from chanakya.src import app
 from werkzeug.utils import secure_filename
+import uuid
 
-
-def upload_file_to_s3(file, bucket_name = app.config['AWS_BUCKET'], acl="public-read"):
+def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'], acl="public-read"):
     '''
     The function helps to upload any file on AWS s3 which accesibile publicily to anyone using the
     key_id,secret key in config file and boto3
@@ -18,7 +18,9 @@ def upload_file_to_s3(file, bucket_name = app.config['AWS_BUCKET'], acl="public-
 
     url : http://<bucketname>.s3.amazonaws.com/<filename>
     '''
-    filename = secure_filename(file.filename)
+    #do check here is correct or wrong
+    filename = str(uuid.uuid4())
+
     #connecting with the s3 instance with upload the file
     s3 = boto3.client(
            "s3",
