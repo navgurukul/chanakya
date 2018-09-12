@@ -6,9 +6,13 @@
 }
 ```
 
-# Choice 1
-Question ID: NOT_ADDED
-Correct Answer: 8
+# Question Choice 1
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 8
+}
+```
 
 ## Hindi
 8 + (−25) + 16 − (−25) −16
@@ -16,9 +20,13 @@ Correct Answer: 8
 ## English
 PENDING
 
-# Choice 2
-Question ID: NOT_ADDED
-Correct Answer: 50
+# Question Choice 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 50
+}
+```
 
 ## Hindi
 33 - 8 + 17 + 10 - (-8) - 10

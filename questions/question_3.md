@@ -6,9 +6,13 @@
 }
 ```
 
-# Choice 1
-Question ID: NOT_ADDED
-Correct Answer: 1
+# Question Choice 1
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 1
+}
+```
 
 ## Hindi
 Aapke room ka temperature -17 degree celsius hai. Aapne apne room mein room heater on kiya. Ab aapke kamre ka temperature every 5 minutes mein 3 degree celsius badh raha hai. 30 mins baad aapke room ka temperature kitna hoga?
@@ -16,9 +20,13 @@ Aapke room ka temperature -17 degree celsius hai. Aapne apne room mein room heat
 ## English
 PENDING
 
-# Choice 2
-Question ID: NOT_ADDED
-Correct Answer: 200
+# Question Choice 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 200
+}
+```
 
 ## Hindi
 Ek machhli paani mein 300 metres neeche thi. Aapko woh macchli pakadni hai toh aapne paani ke upar chara dala. Ab woh machhli har 5 minute mein 25 metre upar aa rahi hai. 20 minute baad woh machhli paani mein kitne metre neeche hogi?

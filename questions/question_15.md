@@ -1,4 +1,4 @@
-```questionMetaData
+```json
 {
   "type": "mcq",
   "difficulty_level": "easy",
@@ -7,11 +7,12 @@
 ```
 
 # Question Choice 1
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
 ```
-
 ## Hindi
 Fold karne ke baad, ye 2D image kis box ki tarah banega?
 
@@ -30,11 +31,12 @@ Fold karne ke baad, ye 2D image kis box ki tarah banega?
 PENDING
 
 # Question Choice 2
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 2
+}
 ```
-
 ## Hindi
 Fold karne ke baad, ye 2D image kis house ki tarah banega?
 

@@ -1,4 +1,4 @@
-```questionMetaData
+```json
 {
   "type": "integer_answer",
   "difficulty_level": "easy",
@@ -7,9 +7,11 @@
 ```
 
 # Question Choice 1
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 216
+}
 ```
 
 ## Hindi
@@ -22,9 +24,11 @@ Inn numbers ko dekhiye aur agla number guess kijiye. Apna answer ko answers wale
 PENDING
 
 # Question Choice 2
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 60
+}
 ```
 
 ## Hindi

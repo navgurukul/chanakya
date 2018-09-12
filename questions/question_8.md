@@ -1,4 +1,4 @@
-```questionMetaData
+```json
 {
   "type": "mcq",
   "difficulty_level": "easy",
@@ -7,15 +7,17 @@
 ```
 
 # Question Choice 1
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
 ```
 
 ## Hindi
-![](images/question_8/choice1.png)
-
 Shaded area poore area ka kitna percent hai?
+
+![](images/question_8/choice1.png)
 
 ### Options
 | Option | Values                 |
@@ -29,15 +31,17 @@ Shaded area poore area ka kitna percent hai?
 PENDING
 
 # Question Choice 2
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
 ```
 
 ## Hindi
-![](images/question_8/choice2.png)
-
 Neeche di gayi picture mein dekh ke batao ki pure mein se kitna area shaded hai?
+
+![](images/question_8/choice2.png)
 
 ### Options
 | Option | Values                 |

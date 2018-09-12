@@ -6,9 +6,13 @@
 }
 ```
 
-# Choice 1
-Question ID: NOT_ADDED
-Correct Answer: 4
+# Question Choice 1
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 4
+}
+```
 
 ## Hindi
 Neeche diye hue equations mein x ke liye solve karein:
@@ -20,9 +24,13 @@ x = ?
 ## English
 PENDING
 
-# Choice 2
-Question ID: NOT_ADDED
-Correct Answer: 2
+# Question Choice 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 2
+}
+```
 
 ## Hindi
 Neeche diye hue equations mein x ke liye solve karein:

@@ -1,4 +1,4 @@
-```questionMetaData
+```json
 {
   "type": "mcq",
   "difficulty_level": "easy",
@@ -7,9 +7,11 @@
 ```
 
 # Question Choice 1
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
 ```
 
 ## Hindi
@@ -30,11 +32,12 @@ Niche diye hue image kitne blocks se bana hua hai?
 PENDING
 
 # Question Choice 2
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 2
+}
 ```
-
 ## Hindi
 Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape banaya jaa sakta hai? Apna option choose kijiye aur answer wale page par likhiye.
 

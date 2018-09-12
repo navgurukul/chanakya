@@ -7,8 +7,12 @@
 ```
 
 # Question Choice 1
-**Question ID:** NOT_ADDED
-**Correct Answer:** 4
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 4
+}
+```
 
 ## Hindi
 **x** aur **y** ke liye solve karein:
@@ -28,8 +32,12 @@ y = 2x + 2
 PENDING
 
 # Question Choice 2
-**Question ID:** NOT_ADDED
-**Correct Answer:** 3
+```questionChoiceMetaData
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
+```
 
 ## Hindi
 **x** aur **y** ke liye solve karein:

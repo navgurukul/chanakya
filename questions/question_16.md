@@ -1,4 +1,4 @@
-```questionMetaData
+```json
 {
   "type": "mcq",
   "difficulty_level": "easy",
@@ -7,9 +7,11 @@
 ```
 
 # Question Choice 1
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 3
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 3
+}
 ```
 
 ## Hindi
@@ -29,9 +31,11 @@ Niche diye hue images mein agla image kaun sa aayega
 PENDING
 
 # Question Choice 2
-```questionChoiceMetaData
-Question ID: NOT_ADDED
-Correct Answer: 2
+```json
+{
+  "Question ID": "NOT_ADDED",
+  "Correct Answer": 2
+}
 ```
 
 ## Hindi
