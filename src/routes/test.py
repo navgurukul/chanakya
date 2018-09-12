@@ -3,9 +3,9 @@ from chanakya.src.models import EnrolmentKey, StudentContact, Student
 from chanakya.src import api, db, app
 from datetime import datetime
 
-from chanakya.src.helpers.response_objects import enrollment_key_status, enrollment_key_validation,
+from chanakya.src.helpers.response_objects import enrollment_key_status, enrollment_key_validation
 from chanakya.src.helpers.validators import check_enrollment_key
-from chanakya.src.helpers.routes_description import VALIDATE_ENROLMENT_KEY_DESCRIPTION,PERSONAL_DETAILS_DESCRIPTION
+from chanakya.src.helpers.routes_descriptions import VALIDATE_ENROLMENT_KEY_DESCRIPTION,PERSONAL_DETAILS_DESCRIPTION
 
 
 
@@ -58,7 +58,7 @@ class PersonalDetailSubmit(Resource):
         enrollment_key = args.get('enrollment_key', None)
 
         # check the validity of enrollment key
-        result = check_enrollment_key(enrollment_key)
+        result, enrollment = check_enrollment_key(enrollment_key)
 
         # student record shall be updated only when the key is not used
         if result['valid'] and result['reason'] == 'NOT_USED':
