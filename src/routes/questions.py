@@ -25,7 +25,7 @@ class UploadQuestionImage(Resource):
 		args = self.image_parser.parse_args()
 		image = args['image']
 
-		# check logo extension
+		# check image file extension
 		extension = image.filename.rsplit('.', 1)[1].lower()
 		if '.' in image.filename and not extension in app.config['ALLOWED_EXTENSIONS']:
 			abort(400, message="File extension is not one of our supported types.")

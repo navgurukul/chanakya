@@ -29,21 +29,16 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
         )
 
     #file upload using the connection
-    try:
-        s3.upload_fileobj(
-            file,
-            bucket_name, #default in the config
-            filename,
-            ExtraArgs={
-                "ACL": acl, #Access Control List
-                "ContentType": file.content_type
-            }
-        )
+    s3.upload_fileobj(
+        file,
+        bucket_name, #default in the config
+        filename,
+        ExtraArgs={
+            "ACL": acl, #Access Control List
+            "ContentType": file.content_type
+        }
+    )
 
-    except Exception as e:
-        # This is a catch all exception, edit this part to fit your needs.
-        print("Something Happened: ", e)
-        return e
     return '{0}{1}'.format(app.config['AWS_LOCATION'], filename)
 
 class FileStorageArgument(reqparse.Argument):
