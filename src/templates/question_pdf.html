@@ -53,18 +53,6 @@
                       {% if question.options.all() %}
                         <tr class="inline-block">
                             {% for option in question.options.all() %}
-                              {% if option.is_url() %}
-                                  {% if loop.index is divisibleby 2 %}
-                                    <td>
-                                  {% else %}
-                                    <td class="odd-option">
-                                  {% endif %}
-                                      <p>
-                                        {{ strings[loop.index0] }})
-                                        <img src="{{ option.en_text}}" class="option-image">
-                                      </p>
-                                    </td>
-                              {% else %}
                                 {% if loop.index is divisibleby 2 %}
                                   <td>
                                 {% else %}
@@ -72,7 +60,6 @@
                                 {% endif %}
                                       {{ strings[loop.index0] }}) {{ option.en_text }}
                                   </td>
-                             {% endif %}
                             {% endfor %}
                         </tr>
                       {% endif %}
