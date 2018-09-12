@@ -3,24 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-  <style>
-      tr.inline-block{
-        display: inline-block;
-      }
-      table, li{
-          page-break-inside:avoid !important;
-          width:100% !important;
-      }
-      .option-image{
-        display:inline-block;
-        vertical-align: text-top;
-        margin:auto;
-        height: 100px;
-      }
-      .odd-option{
-        float: left; min-width: 400px;
-      }
-  </style>
   </head>
 
   <body >
@@ -39,36 +21,37 @@
       <div style="margin-top:20px; margin-bottom: 20px;">
         <ol>
         {% for question in questions %}
-          <li>
-            <table>
+          <li style="page-break-inside:avoid !important; ">
+            <table style="page-break-inside:avoid !important; width:100% !important;">
                 {% if question.type.value == 'MQC' %}
                       <tr>
                         <td>
                           {{ question.en_text | safe}}
                           <br>
                           {{ question.hi_text | safe}}
+                          <!-- tell rishabh here should be something for images also both in models and here -->
                         </td>
                       </tr>
 
                       {% if question.options.all() %}
-                        <tr class="inline-block">
+                        <tr style="display:inline-block;">
                             {% for option in question.options.all() %}
                               {% if option.is_url() %}
                                   {% if loop.index is divisibleby 2 %}
                                     <td>
                                   {% else %}
-                                    <td class="odd-option">
+                                    <td style="float: left; min-width: 400px;">
                                   {% endif %}
                                       <p>
                                         {{ strings[loop.index0] }})
-                                        <img src="{{ option.en_text}}" class="option-image">
+                                        <img src="{{ option.en_text}}" height="100px" style="display:inline-block; vertical-align: text-top; margin:auto;">
                                       </p>
                                     </td>
                               {% else %}
                                 {% if loop.index is divisibleby 2 %}
                                   <td>
                                 {% else %}
-                                  <td class="odd-option">
+                                  <td style="float: left; min-width: 400px;">
                                 {% endif %}
                                       {{ strings[loop.index0] }}) {{ option.en_text }}
                                   </td>
