@@ -1,4 +1,4 @@
-from flask_restplus import Resource, reqparse, abort
+from flask_restplus import Resource, reqparse, abort, marshal_with, fields
 from chanakya.src import app, api, db
 from io import BytesIO
 from chanakya.src.models import (
@@ -8,14 +8,10 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
+from chanakya.src.helpers.response_objects import question_obj
+from chanakya.src.helpers.task_helpers import parse_question_dict
+from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 
-from chanakya.src.helpers import (
-				parse_question_args_to_dict,
-	 			get_the_questions_as_list,
-				get_question_as_dict,
-				upload_file_to_s3,
-				FileStorageArgument
-			)
 
 
 
@@ -48,53 +44,64 @@ class CreateQuestion(Resource):
 	create_question_parser.add_argument('difficulty',type=str, choices=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True)
 	create_question_parser.add_argument('topic',type=str, choices=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True)
 	create_question_parser.add_argument('type',type=str, choices=[attr.value for attr in app.config['QUESTION_TYPE']], required=True)
-	create_question_parser.add_argument('answer', type=str, required=True, help='For MCQ type the option For example: option1, option2')
 
-	create_question_parser.add_argument('option1_en_text', type=str, required=False)
-	create_question_parser.add_argument('option1_hi_text', type=str, required=False)
+	create_question_parser.add_argument('option_en_text', type=str, action='append', required=True, help='options in ENGLISH')
+	create_question_parser.add_argument('option_hi_text', type=str, action='append', required=True, help='options in HINDI')
+	create_question_parser.add_argument('correct_answers', type=str, action='append', required=True, help='Add option number for answer Example: 1 for the first options and same for 2,3,4,...')
 
-	create_question_parser.add_argument('option2_en_text', type=str, required=False)
-	create_question_parser.add_argument('option2_hi_text', type=str, required=False)
-
-	create_question_parser.add_argument('option3_en_text', type=str, required=False)
-	create_question_parser.add_argument('option3_hi_text', type=str, required=False)
-
-	create_question_parser.add_argument('option4_en_text', type=str, required=False)
-	create_question_parser.add_argument('option4_hi_text', type=str, required=False)
-
+	@api.marshal_with(question_obj)
 	@api.doc(parser=create_question_parser)
 	def post(self):
 
 		#get the values out of the RequestParser
 		args = self.create_question_parser.parse_args()
-		question = parse_question_args_to_dict(args)
-		#create the question
-		questions = Questions.add_question(question)
 
-		return questions
+		options_in_en = args.get('option_en_text')
+		options_in_hi = args.get('option_hi_text')
+		question_dict = parse_question_dict(args)
+
+		#create the question
+		question = Questions.create_question(question_dict)
+
+		return question
+
+
 
 
 @api.route('/question/')
 class AllQuestions(Resource):
+	questions_list_obj = api.model('questions_list', {
+		'questions_list' : fields.List(fields.Nested(question_obj))
+	})
+
+	@api.marshal_with(questions_list_obj)
 	def get(self):
-		questions_list = get_the_questions_as_list()
+		questions_list = Questions.query.all()
 		return {
-				"question_list":questions_list
+				"questions_list":questions_list
 			}
 
 
 @api.route('/questions/<question_id>')
 class SingleQuestion(Resource):
+	single_question = api.model('single_question', {
+		'error': fields.Boolean(default=False),
+		'question_data': fields.Nested(question_obj),
+		'message': fields.String
+	})
+
+	@api.marshal_with(single_question)
 	def get(self, question_id):
 		# return a single question
 		question = Questions.query.filter_by(id = question_id).first()
+
+		# if question_id is wrong or doesn't exist
 		if not question:
 			return {
 				'error': True,
 				'message': "question_id doesn't exist!"
 			}
-		else:
-			question_data = get_question_as_dict(question)
-			return {
-				'question_data': question_data
-			}
+
+		return {
+			'question_data': question
+		}

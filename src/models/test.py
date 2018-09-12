@@ -104,82 +104,62 @@ class Questions(db.Model):
     difficulty = db.Column(db.Enum(app.config['QUESTION_DIFFICULTY']), nullable=False)
     topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
-    answer = db.Column(db.String(10))
     options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
 
     @staticmethod
-    def add_question(questions_data):
+    def create_question(question_dict):
         '''
-            function to create a new record for question.
-            params:
-                questions_data = {
-                    'text':{
-                        'hi_question_text':'some question',
-                        'en_question_text':'some question'
+            create a question object for the question_dict
+            question_dict = {
+
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+
+                'options':[
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
                     },
-                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
-                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
-                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
-                    'answer': answer, // answer for the question can contain both Interger Value or the Option Name
-
-                    // option will be only there when type == 'MQC'
-                    'option':{
-                        'option1':{
-                            'en_text':'something',
-                            'hi_text':'something'
-                        },
-                        'option2':{
-                            'en_text':'something',
-                            'hi_text':'something'
-                        },
-                        'option3':{
-                            'en_text':'something',
-                            'hi_text':'something'
-                        },
-                        'option4':{
-                            'en_text':'something',
-                            'hi_text':'something'
-                        }
-
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
                     }
-                }
-
-        return question_data
+                ]
+            }
         '''
-        data = {}
-        data['hi_text'] = questions_data['text'].get('hi_question_text')
-        data['en_text'] = questions_data['text'].get('en_question_text')
+        en_text = question_dict.get('en_text')
+        hi_text = question_dict.get('hi_text')
+        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        options = question_dict.get('options')
 
-        # Enums Value
-        question_difficulty = questions_data.get('difficulty')
-        question_topic = questions_data.get('topic')
-        question_type = questions_data.get('type')
-
-        #Enums
-        data['difficulty'] = app.config['QUESTION_DIFFICULTY'](question_difficulty)
-        data['topic'] = app.config['QUESTION_TOPIC'](question_topic)
-        data['type'] = app.config['QUESTION_TYPE'](question_type)
-
-        question = Questions(**data)
+        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
         db.session.add(question)
         db.session.commit()
 
-        #creating options if it is a MCQ question
-        if question_type == 'MQC':
-            for option_key in questions_data['option'].keys():
-                option_data = questions_data['option'][option_key]
-                question_option = QuestionOptions.create_option(**option_data, question_id=question.id)
-                #adding the id of the option which is answer to the question
-                if questions_data.get('answer') == option_key:
-                    question.answer = question_option.id
-        #Saving the Integer Answer
-        else:
-            question.answer = questions_data.get('answer')
+        for option in options:
+            option['question_id'] = question.id
+            question_option = QuestionOptions.create_option(**option)
 
-        db.session.add(question)
         db.session.commit()
 
-        return questions_data
+        return question
 
 class QuestionOptions(db.Model):
 
@@ -189,20 +169,21 @@ class QuestionOptions(db.Model):
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    correct = db.Column(db.Boolean, default=False)
 
     @staticmethod
-    def create_option(en_text, hi_text, question_id):
+    def create_option(**kwargs):
         '''
         Staticmethod to create option for a specific question_id in the database
         params:
-            en_text : english text of the option,
-            hi_text : hindi text of the option,
-            question_id : id of the question of the options
+            en_text : english text of the option, required, str
+            hi_text : hindi text of the option, required, str
+            question_id : id of the question of the options, required, int
+            correct = False, bool
 
         '''
-        question_option = QuestionOptions(en_text=en_text, hi_text=hi_text, question_id=question_id)
+        question_option = QuestionOptions(**kwargs)
         db.session.add(question_option)
-        db.session.commit()
 
         return question_option
 
@@ -215,4 +196,3 @@ class QuestionAttempts(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     answer = db.Column(db.String(10), nullable=False)
     is_correct = db.Column(db.Boolean, nullable=False)
-    
