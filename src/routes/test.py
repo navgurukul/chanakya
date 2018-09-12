@@ -1,5 +1,5 @@
 from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions, QuestionAttempts
+from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions, QuestionAttempts,QuestionSet
 from chanakya.src import api, db, app
 from datetime import datetime, timedelta
 
@@ -8,14 +8,16 @@ from chanakya.src.helpers.response_objects import (
                 enrollment_key_validation,
                 question_obj,
                 questions_list_obj,
-                questions_attempts
+                questions_attempts,
+                question_set
             )
+from chanakya.src.helpers.file_uploader import upload_pdf_to_s3
 from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids
 from chanakya.src.helpers.routes_descriptions import (
                 VALIDATE_ENROLMENT_KEY_DESCRIPTION,
                 PERSONAL_DETAILS_DESCRIPTION
             )
-
+from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 
 
 #Validation for the enrollment key
@@ -32,6 +34,7 @@ class EnrollmentKeyValidtion(Resource):
 
         result, enrollment = check_enrollment_key(enrollment_key)
         return result
+
 
 
 @api.route('/test/personal_details')
@@ -56,16 +59,11 @@ class PersonalDetailSubmit(Resource):
         student_data = {}
         student_data['name'] = args.get('name' , None)
         student_data['dob'] = args.get('dob' , None)
-
         #enum
         gender = args.get('gender' ,None)
         student_data['gender'] = app.config['GENDER'](gender)
-
-        # student_contact data
-        mobile_number = args.get('mobile_number' , None)
-
-        # enrollmentkey
-        enrollment_key = args.get('enrollment_key', None)
+        mobile_number = args.get('mobile_number' , None)  # student_contact data
+        enrollment_key = args.get('enrollment_key', None) # enrollmentkey
 
         # check the validity of enrollment key
         result, enrollment = check_enrollment_key(enrollment_key)
@@ -96,6 +94,7 @@ class PersonalDetailSubmit(Resource):
         }
 
 
+
 @api.route('/test/start_test')
 class TestStart(Resource):
     enrollment_key_parser = reqparse.RequestParser()
@@ -123,19 +122,24 @@ class TestStart(Resource):
                 'enrollment_key_validation':False
             }
 
-        # TODO: what to do if KEY is already in use
-
-         # start the test and send the questions generated randomly
-        current_datetime = datetime.now()
-        enrollment.test_start_time = current_datetime
-        enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-        db.session.add(enrollment)
-        db.session.commit()
-        questions = Questions.get_random_question_set()
+        elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
+            questions = enrollment.extract_question_set()
+        else:
+            # start the test and send the questions generated randomly
+            current_datetime = datetime.now()
+            enrollment.test_start_time = current_datetime
+            enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
+            questions = Questions.get_random_question_set()
+            question_set = QuestionSet.create_new_set(questions)
+            enrollment.question_set_id = question_set.id
+            db.session.add(enrollment)
+            db.session.commit()
 
         return {
             'questions':questions
         }
+
+
 
 @api.route('/test/end_test')
 class TestEnd(Resource):
@@ -172,15 +176,102 @@ class TestEnd(Resource):
                 'enrollment_key_validation':False,
                 'invalid_question_id': True
             }
+
         QuestionAttempts.create_attempts(questions_attempted, enrollment)
+
+        enrollment.end_test()
 
         return {
             'success': True
         }
+
 
 @api.route('/test/extra_details')
 class MoreDetail(Resource):
     def post(self):
         return {
         'data':'All Detail Submitted'
+        }
+
+
+
+@api.route('/test/offline_paper')
+class OfflinePaper(Resource):
+    offline_paper_post = api.model('offline_paper_post', {
+        'number_sets':fields.Integer(required=True),
+        'partner_name':fields.String(required=True)
+    })
+
+    sets = api.model('sets', {
+            'sets': fields.List(fields.Nested(question_set))
+        })
+
+    offline_paper_response = api.model('offline_paper_response', {
+        'error': fields.Boolean(default=False),
+        'sets':fields.Nested(sets)
+    })
+
+    @api.marshal_with(offline_paper_response)
+    @api.expect(offline_paper_post)
+    def post(self):
+        args = api.payload
+
+        number_sets = args.get('number_sets')
+        partner_name = args.get('partner_name')
+
+        set_list = []
+
+        for set in range(number_sets):
+            try:
+                # generate the random sets and get question
+                questions = Questions.get_random_question_set()
+                questions_set = QuestionSet.create_new_set(questions, partner_name)
+
+                # render pdf
+                pdf = render_pdf_phantomjs('question_pdf.html', **locals())
+
+                #s3 method that upload the binary file
+                url = upload_pdf_to_s3(string=pdf)
+
+                # update url of question_set
+                question_set.url = url
+                db.session.add(questions_set)
+                db.session.commit()
+
+                set_list.append(question_set)
+            except Exception as e:
+                raise e
+        # return each and every question_set
+        return {
+            'sets': set_list
+        }
+
+    @api.marshal_with(offline_paper_response)
+    def get(self):
+
+        question_set = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
+        return {
+            'sets': question_set
+        }
+
+
+@api.route('/test/offline_paper/<id>')
+class SingleOfflinePaper(Resource):
+
+    single_set = api.model('single_set', {
+        'error': fields.Boolean(default=False),
+        'set': fields.Nested(question_set)
+    })
+
+    @api.marshal_with(single_set)
+    def get(self, id):
+
+        question_set = QuestionSet.query.filter_by(id=id).first()
+        if question_set:
+            return {
+                'set': question_set
+            }
+
+        return {
+            'error': True
         }
