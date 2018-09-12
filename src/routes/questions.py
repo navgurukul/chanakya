@@ -39,17 +39,23 @@ class UploadQuestionImage(Resource):
 @api.route('/question/create')
 class CreateQuestion(Resource):
 	create_question_parser = reqparse.RequestParser()
-	create_question_parser.add_argument('hi_question_text', type=str, required=True)
-	create_question_parser.add_argument('en_question_text', type=str, required=True)
-	create_question_parser.add_argument('difficulty',type=str, choices=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True)
-	create_question_parser.add_argument('topic',type=str, choices=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True)
-	create_question_parser.add_argument('type',type=str, choices=[attr.value for attr in app.config['QUESTION_TYPE']], required=True)
+	create_question_parser.add_argument('hi_question_text', type=str, required=True, location='json')
+	create_question_parser.add_argument('en_question_text', type=str, required=True, location='json')
+	create_question_parser.add_argument('difficulty',type=str, choices=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True, location='json')
+	create_question_parser.add_argument('topic',type=str, choices=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True, location='json')
+	create_question_parser.add_argument('type',type=str, choices=[attr.value for attr in app.config['QUESTION_TYPE']], required=True, location='json')
 
-	create_question_parser.add_argument('option_en_text', type=str, action='append', required=True, help='options in ENGLISH')
-	create_question_parser.add_argument('option_hi_text', type=str, action='append', required=True, help='options in HINDI')
-	create_question_parser.add_argument('correct_answers', type=str, action='append', required=True, help='Add option number for answer Example: 1 for the first options and same for 2,3,4,...')
+	create_question_parser.add_argument('option_en_text', type=str, action='append', required=True, help='options in ENGLISH', location='json')
+	create_question_parser.add_argument('option_hi_text', type=str, action='append', required=True, help='options in HINDI', location='json')
+	create_question_parser.add_argument('correct_answers', type=str, action='append', required=True, help='Add option number for answer Example: 1 for the first options and same for 2,3,4,...', location='json')
 
-	@api.marshal_with(question_obj)
+	question_create = api.model('question_create', {
+		'error':fields.Boolean(default=False),
+		'question':fields.Nested(question_obj),
+		'message':fields.String
+	})
+
+	@api.marshal_with(question_create)
 	@api.doc(parser=create_question_parser)
 	def post(self):
 
@@ -58,12 +64,21 @@ class CreateQuestion(Resource):
 
 		options_in_en = args.get('option_en_text')
 		options_in_hi = args.get('option_hi_text')
+		question_type = args.get('type')
+		answers = args.get('correct_answers')
+		if question_type == 'MCQ':
+			for answer_index in answers:
+			if len(options_in_en) < int(answer):
+				return {
+					'error': True,
+					'message': 'Answer index in correct'
+				}
 		question_dict = parse_question_dict(args)
 
 		#create the question
 		question = Questions.create_question(question_dict)
 
-		return question
+		return {'question': question}
 
 
 
