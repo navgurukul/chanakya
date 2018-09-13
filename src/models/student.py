@@ -99,7 +99,8 @@ class Student(db.Model):
 
     def update_data(self, student_data):
         for key, value in student_data.items():
-            setattr(self, key, value)
+            if key in self.__dict__.keys():
+                setattr(self, key, value)
         db.session.add(self)
         db.session.commit()
 

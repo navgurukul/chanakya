@@ -12,54 +12,40 @@ from chanakya.src.helpers.routes_descriptions import VALIDATE_ENROLMENT_KEY_DESC
 #Validation for the enrollmelnt key
 @api.route('/test/validate_enrolment_key')
 class EnrollmentKeyValidtion(Resource):
-    enrolment_validation_parser = reqparse.RequestParser()
-    enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
+    get_parser = reqparse.RequestParser()
+    get_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
 
     @api.marshal_with(enrollment_key_validation)
-    @api.doc(parser=enrolment_validation_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
+    @api.doc(parser=get_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
     def get(self):
-        args = self.enrolment_validation_parser.parse_args()
+        args = self.get_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
 
-        result = check_enrollment_key(enrollment_key)
+        result, enrollment = check_enrollment_key(enrollment_key)
         return result
 
 
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
-    enrolment_validation_parser = reqparse.RequestParser()
-    enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
-
-    personal_detail_parser = reqparse.RequestParser()
-    personal_detail_parser.add_argument('enrollment_key', type=str, required=True)
-    personal_detail_parser.add_argument('name', type=str, required=True)
-    personal_detail_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
-    personal_detail_parser.add_argument('mobile_number', type=str, required=True)
-    personal_detail_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
+    post_parser = reqparse.RequestParser()
+    post_parser.add_argument('enrollment_key', type=str, required=True)
+    post_parser.add_argument('name', type=str, required=True)
+    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
+    post_parser.add_argument('mobile_number', type=str, required=True)
+    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
 
     @api.marshal_with(enrollment_key_status)
-    @api.doc(parser=personal_detail_parser, description=PERSONAL_DETAILS_DESCRIPTION)
+    @api.doc(parser=post_parser, description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
-        args = self.personal_detail_parser.parse_args()
 
-        # student data
-        student_data = {}
-        student_data['name'] = args.get('name' , None)
-        student_data['dob'] = args.get('dob' , None)
-
-        #enum
-        gender = args.get('gender' ,None)
-        student_data['gender'] = app.config['GENDER'](gender)
-
-        # student_contact data
-        mobile_number = args.get('mobile_number' , None)
-
-        # enrollmentkey
-        enrollment_key = args.get('enrollment_key', None)
+        args = self.post_parser.parse_args()
+        args['gender'] = app.config['GENDER'](args['gender'])
+        # Enrollment Key
+        mobile_number = args['mobile_number']
+        enrollment_key = args['enrollment_key']
 
         # check the validity of enrollment key
         result, enrollment = check_enrollment_key(enrollment_key)
-
         # student record shall be updated only when the key is not used
         if result['valid'] and result['reason'] == 'NOT_USED':
             # updating student data

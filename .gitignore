@@ -102,7 +102,7 @@ ENV/
 .mypy_cache/
 
 # config
-# old_code/config/
+old_code/config/
 
 #pyc
 *.pyc
