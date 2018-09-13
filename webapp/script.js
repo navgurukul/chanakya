@@ -246,6 +246,9 @@ function page3submit() {
 
     function dQuestions(data) {
         questions = data["questions"];
+        for (int i=0; i<questions.length; i++) {
+            answers.append(-1);
+        }
         $('#btns_next_submit').show("slow");
         displayQuestion(0);
     }
@@ -269,7 +272,12 @@ function previousQuestion() {
 }
 
 function displayQuestion(index) {
-    
+    if (index == 1) {
+        $('#btns_prev_submit').show("slow");
+    } else if (index == 0) {
+        $('#btns_prev_submit').hide("slow");
+    }
+
     if (index == questions.length - 1) {
         $('#next_btn').addClass("hide");
         $('#submit_btn').removeClass("hide");
@@ -308,6 +316,17 @@ function displayQuestion(index) {
 
 function page4submit() {
 
+}
+
+function submitTest() {
+    $.post("/test/end_test/"+enrolment_key,
+        {"answers": answers},
+        function(data, resp) {
+            $('#qmcq').slideUp(slide_up_time);
+            $('#qinteger_answer').slideUp(slide_up_time);
+            $("#end_page").slideDown(slide_down_time);
+        }
+    )
 }
 
 if (DEBUG) {
