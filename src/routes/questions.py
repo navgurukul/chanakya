@@ -8,21 +8,22 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.response_objects import question_obj
+from chanakya.src.helpers.response_objects import question_obj, create_question
 from chanakya.src.helpers.task_helpers import parse_question_dict
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
+from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 
 
 
 
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
-	image_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
-	image_parser.add_argument('image', required=True, type=FileStorage, location='files')
+	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
+	post_parser.add_argument('image', required=True, type=FileStorage, location='files')
 
-	@api.doc(parser=image_parser)
+	@api.doc(parser=post_parser)
 	def post(self):
-		args = self.image_parser.parse_args()
+		args = self.post_parser.parse_args()
 		image = args['image']
 
 		# check image file extension
@@ -38,47 +39,17 @@ class UploadQuestionImage(Resource):
 
 @api.route('/question/create')
 class CreateQuestion(Resource):
-	create_question_parser = reqparse.RequestParser()
-	create_question_parser.add_argument('hi_question_text', type=str, required=True, location='json')
-	create_question_parser.add_argument('en_question_text', type=str, required=True, location='json')
-	create_question_parser.add_argument('difficulty',type=str, choices=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True, location='json')
-	create_question_parser.add_argument('topic',type=str, choices=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True, location='json')
-	create_question_parser.add_argument('type',type=str, choices=[attr.value for attr in app.config['QUESTION_TYPE']], required=True, location='json')
 
-	create_question_parser.add_argument('option_en_text', type=str, action='append', required=True, help='options in ENGLISH', location='json')
-	create_question_parser.add_argument('option_hi_text', type=str, action='append', required=True, help='options in HINDI', location='json')
-	create_question_parser.add_argument('correct_answers', type=str, action='append', required=True, help='Add option number for answer Example: 1 for the first options and same for 2,3,4,...', location='json')
-
-	question_create = api.model('question_create', {
-		'error':fields.Boolean(default=False),
-		'question':fields.Nested(question_obj),
-		'message':fields.String
-	})
-
-	@api.marshal_with(question_create)
-	@api.doc(parser=create_question_parser)
+	@api.marshal_with(question_obj)
+	@api.expect(create_question, validate=True)
+	@api.doc(description=CREATE_QUESTION)
 	def post(self):
 
-		#get the values out of the RequestParser
-		args = self.create_question_parser.parse_args()
-
-		options_in_en = args.get('option_en_text')
-		options_in_hi = args.get('option_hi_text')
-		question_type = args.get('type')
-		answers = args.get('correct_answers')
-		if question_type == 'MCQ':
-			for answer_index in answers:
-			if len(options_in_en) < int(answer):
-				return {
-					'error': True,
-					'message': 'Answer index in correct'
-				}
-		question_dict = parse_question_dict(args)
+		args = api.payload
 
 		#create the question
-		question = Questions.create_question(question_dict)
-
-		return {'question': question}
+		question = Questions.create_question(args)
+		return question
 
 
 

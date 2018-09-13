@@ -40,7 +40,7 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
             bucket_name, #default in the config
             filename,
             ExtraArgs={
-                "ContentType": app.config['ALLOWED_EXTENSIONS'][filename_extension]
+                "ContentType": app.config['FILE_CONTENT_TYPES'][filename_extension]
             }
         )
 
