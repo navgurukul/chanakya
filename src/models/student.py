@@ -98,6 +98,13 @@ class Student(db.Model):
         return message
 
     def update_data(self, student_data):
+        '''
+         update the data of student Model
+         params: student_data should contain the fields of student instance which needs to be updated
+                 in dictionary format
+                 for example: {'name': 'Amar Kumar Sinha', 'gender': gender.male #enum}
+        return None
+        '''
         for key, value in student_data.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
