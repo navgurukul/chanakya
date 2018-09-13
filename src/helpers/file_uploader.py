@@ -22,7 +22,7 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
     #filename
     filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())
-    filename = random_string + filename_extension
+    filename = random_string + '.' + filename_extension
 
     #connecting with the s3 instance with upload the file
     s3 = boto3.client(

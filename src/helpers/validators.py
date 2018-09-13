@@ -38,24 +38,21 @@ def check_enrollment_key(enrollment_key):
             "reason": "EXPIRED"
         } , enrollment
 
-def check_question_ids(questions_attempted):
-    question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempted ]
+def check_question_ids(questions_attempt):
+    question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
 
     # check the question exist in the database
     questions = Questions.query.filter(Questions.id.in_(question_ids)).all()
 
-    if not questions:
-        return question_ids
+    if not questions or len(questions) != len(question_ids):
+        return False # wrong_question_ids
 
-    wrong_question_ids = [ question.id for question in questions if not question.id in question_ids ]
     # create the a new dict of {id:question}
-    if wrong_question_ids:
-        return wrong_question_ids
-
     questions_id_dict = { question.id: question for question in questions }
-    # check if the question has the option_id in it if option_id is provided
 
-    for question_attempt in questions_attempted:
+    wrong_question_ids = []
+    # check if the question has the option_id in it if option_id is provided
+    for question_attempt in questions_attempt:
         question_id = question_attempt.get('question_id')
         option_id = question_attempt.get('selected_option_id')
         question = questions_id_dict[question_id]
@@ -63,4 +60,11 @@ def check_question_ids(questions_attempted):
         if not option_id in option_id_list and option_id:
             wrong_question_ids.append(question_id)
 
+    return wrong_question_ids
+
+def check_question_is_in_set(enrollment, questions_attempt):
+    questions = enrollment.extract_question_set()
+    question_ids = [question.id for question in questions]
+    question_attempt_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
+    wrong_question_ids = [id for id in question_attempt_ids if not id in question_ids]
     return wrong_question_ids

@@ -15,12 +15,12 @@ from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArg
 
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
-	image_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
-	image_parser.add_argument('image', required=True, type=FileStorage, location='files')
+	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
+	post_parser.add_argument('image', required=True, type=FileStorage, location='files')
 
-	@api.doc(parser=image_parser)
+	@api.doc(parser=post_parser)
 	def post(self):
-		args = self.image_parser.parse_args()
+		args = self.post_parser.parse_args()
 		image = args['image']
 
 		# check logo extension
