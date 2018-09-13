@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-115187076-1');
+        </script>
+        <title>Road to Navgurukul</title>
+    </head>
+    <body>
+        <header class="container">    
+        <nav></nav>
+        </header>
+        <main class="container">		
+            <div class="row" id="page1">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="row border border-warning rounded form-container">
+                        <h2 class="col-xs-12 col-sm-12 before-test-heading">NavGurukul Scholarship Test</h2>
+                        <br><br>
+                        <p>
+                            Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot kaam aayengi.
+                        </p>
+                        <ol>
+                            <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.</li>
+                            <li>Test dete waqt <strong>apne paas ek notebook aur pen rakhein</strong>. Aap koi bhi rough work notebook mein kar sakte hain.</li>
+                            <li>Har question ka answer apne phone pe hi test dete hue daal dein.</li>
+                            <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)</li>
+                        </ol>
+                        <button onclick="page1submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start My Test</button>
+                    </div>
+                </div>
+            </div>	      
+            <div class="row" id="page2" style="display:none;">
+                <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
+                    <div class="col-xs-12 col-sm-12">
+                    <form class="row" id="ask_personal_details">
+                        <div class="row border border-warning rounded form-container">
+                            <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Personal Details</h2>
+        
+                                <span style="margin-left: 3%;" id='errors' class='text text-center text-danger'></span>
+        
+                                <div class="row m-row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">Aapka Naam</div>
+                                    <input type="text" id='name' name="name" placeholder="Your Name" required
+                                        class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                                </div>
+                                <div class="row m-row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">Aapka Mobile Number</div>
+                                    <input type="number" id='mobile' name="mobile" placeholder="Your Mobile Number"
+                                        class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
+                                </div>
+                                <div class="row m-row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">Date of Birth</div>   
+                                    
+                                    <select id='date' style="max-width: 32%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                        <option value="">Date</option>
+                                    </select>              
+        
+                                    <select id='month' style="max-width: 35%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                        <option value="">Month</option>
+                                    </select> 
+                                    
+                                    <select id='year' style="max-width: 32%;" class="col-xs-12 col-sm-2 col-md-2 border border-warning rounded section-1">
+                                        <option value="">Year</option>
+                                    </select>
+                                </div>
+        
+                                <div class="row m-row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">Gender/ लिंग</div>
+                                    <select name="gender" id ='gender'
+                                        class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"
+                                        required>
+                                        <option value="NONE">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="others">Other</option>
+                                    </select>
+                                </div>
+                            <div class="row m-row" style='margin-top:2rem;margin-bottom:4rem;'>
+                                <button class="btn btn-lg btn-danger col-xs-12 
+                                    col-sm-12 col-md-6 offset-md-3" id="button" onclick="page2submit();" type="button">
+                                    Submit Application
+                                </button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="page3">
+
+            </div>
+        </main>
+        <footer class="container"></footer>
+    </body>
+</html>
