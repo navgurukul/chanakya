@@ -72,10 +72,18 @@ class Questions(db.Model):
 
     @staticmethod
     def get_random_question_set():
+        '''
+            generates the question_set of 18 questions randomly according to the exam_config.py file in config module
+
+            Needs question to be in the database!
+
+            return list of 18 questions generated
+        '''
 
         questions = Questions.query.all()
         # category
         topics = app.config['QUESTION_CONFIG']['topic']
+
         #arrange the question according to the topic and difficulty
         questions_dict = {}
         for question in questions:
@@ -213,6 +221,10 @@ class EnrolmentKey(db.Model):
         return False
 
     def start_test(self):
+        '''
+            for starting the test for each enrollment key
+
+        '''
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
         self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
@@ -228,11 +240,6 @@ class QuestionOptions(db.Model):
     hi_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     correct = db.Column(db.Boolean, default=False)
-
-    def is_url(self):
-        if self.en_text.startswith('https://') or self.en_text.startswith('http://'):
-            return True
-        return False
 
     @staticmethod
     def create_option(**kwargs):

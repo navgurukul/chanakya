@@ -39,6 +39,38 @@ def check_enrollment_key(enrollment_key):
         } , enrollment
 
 def check_question_ids(questions_attempt):
+    '''
+        helper checks if all the questions id which was attempted by student does exist in database or not
+        with a valid option id attached to it.
+        params :
+            question_attempt = [
+                        {
+                            'answer': None,
+                            'question_id': 19,
+                            'selected_option_id': 43
+                        },
+                        {
+                            'answer': None,
+                            'question_id': 77,
+                            'selected_option_id': 182
+                        },
+                        {
+                            'answer': None,
+                            'question_id': 43,
+                            'selected_option_id': 97
+                        },
+                        {
+                            'answer': None,
+                            'question_id': 99,
+                            'selected_option_id': 228
+                        },
+                        {   'answer': None,
+                            'question_id': 41,
+                            'selected_option_id': 89
+                        },
+                    ]
+        returns : list of wrong question_ids [77, 99, 41]
+    '''
     question_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
 
     # check the question exist in the database
@@ -63,6 +95,29 @@ def check_question_ids(questions_attempt):
     return wrong_question_ids
 
 def check_question_is_in_set(enrollment, questions_attempt):
+    '''
+        validate the questions which has been submitted is in the question_set attached to the enrollment_key or not
+        params:
+            question_attempt = [
+                        {
+                            'answer': None,
+                            'question_id': 19,
+                            'selected_option_id': 43
+                        },
+                        {
+                            'answer': None,
+                            'question_id': 77,
+                            'selected_option_id': 182
+                        },
+                        {
+                            'answer': None,
+                            'question_id': 34,
+                            'selected_option_id': 182
+                        }
+                    ]
+            enrollment : contains enrollment key model instance
+        return : list of wrong_question_ids [77, 34]
+    '''
     questions = enrollment.extract_question_set()
     question_ids = [question.id for question in questions]
     question_attempt_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
