@@ -1,4 +1,4 @@
-from chanakya.src.models import EnrolmentKey
+from chanakya.src.models import EnrolmentKey, Questions
 
 def check_enrollment_key(enrollment_key):
     '''
@@ -36,3 +36,13 @@ def check_enrollment_key(enrollment_key):
             "valid": False,
             "reason": "EXPIRED"
         }, enrollment
+
+def check_option_ids(question_instance,question_dict):
+    option_ids = [option.id for option in question_instance.options.all()]
+    updated_option_ids = [option['id'] for option in question_dict['options']]
+
+    if len(option_ids) != len(updated_option_ids):
+        return updated_option_ids
+
+    wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
+    return wrong_option_ids

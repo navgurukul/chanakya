@@ -161,6 +161,27 @@ class Questions(db.Model):
 
         return question
 
+    def update_question(self, question_dict):
+
+        existing_options = { option.id: option for option in self.options.all() }
+        updated_options = question_dict['options']
+        self.en_text = question_dict.get('en_text')
+        self.hi_text = question_dict.get('hi_text')
+        self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        db.session.add(self)
+
+        for updated_option in updated_options:
+            id = updated_option['id']
+            option = existing_options[id]
+            option.en_text = updated_option['en_text']
+            option.hi_text = updated_option['hi_text']
+            option.correct = updated_option['correct']
+            db.session.add(option)
+
+        db.session.commit()
+
 class QuestionOptions(db.Model):
 
     __tablename__ = 'question_options'

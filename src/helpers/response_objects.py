@@ -13,6 +13,7 @@ enrollment_key_validation = api.model('EnrollmentKeyValidtion',{
 })
 
 option_obj = api.model('options',{
+    "id": fields.Integer,
     "hi_text": fields.String,
     "en_text": fields.String,
     "correct": fields.Boolean(default=False)
@@ -23,9 +24,9 @@ question_obj = api.model('questions',{
     'id': fields.Integer,
     'en_text': fields.String,
     'hi_text': fields.String,
-    'difficulty': fields.String(attribute=lambda x: x.difficulty.value),
-    'topic': fields.String(attribute=lambda x: x.topic.value),
-    'type': fields.String(attribute=lambda x: x.type.value),
+    'difficulty': fields.String(attribute=lambda x: x.difficulty.value if x else None),
+    'topic': fields.String(attribute=lambda x: x.topic.value if x else None),
+    'type': fields.String(attribute=lambda x: x.type.value if x else None),
     'options': fields.List(fields.Nested(option_obj))
 })
 

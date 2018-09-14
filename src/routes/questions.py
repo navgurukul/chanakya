@@ -10,6 +10,7 @@ from chanakya.src.models import (
 from werkzeug.datastructures import FileStorage
 from chanakya.src.helpers.response_objects import question_obj, create_question
 from chanakya.src.helpers.task_helpers import parse_question_dict
+from chanakya.src.helpers.validators import check_option_ids
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 
@@ -50,6 +51,41 @@ class CreateQuestion(Resource):
 		#create the question
 		question = Questions.create_question(args)
 		return question
+
+
+	question_update_obj = api.model('question_update_obj', {
+		'error': fields.Boolean(default=False),
+		'message': fields.String,
+		'invalid_option_ids': fields.List(fields.Integer),
+		'question' : fields.Nested(question_obj)
+	})
+	@api.marshal_with(question_update_obj)
+	@api.expect(question_obj, validate=True)
+	def put(self):
+		args = api.payload
+		question = Questions.query.get(args['id'])
+		if not question:
+			return {
+				'error':True,
+				'message': "Question id doesn't exist",
+			}
+
+		wrong_option_ids = check_option_ids(question, args)
+
+		if wrong_option_ids:
+			return {
+				'error':True,
+				'message':'Incorrect option_id for the question',
+				'invalid_option_ids': wrong_option_ids
+			}
+
+		question.update_question(args)
+
+		return {
+			'question': question
+		}
+
+
 
 
 
