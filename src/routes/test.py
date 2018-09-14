@@ -28,11 +28,11 @@ class EnrollmentKeyValidtion(Resource):
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
     post_parser = reqparse.RequestParser()
-    post_parser.add_argument('enrollment_key', type=str, required=True)
-    post_parser.add_argument('name', type=str, required=True)
-    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
-    post_parser.add_argument('mobile_number', type=str, required=True)
-    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
+    post_parser.add_argument('enrollment_key', type=str, required=True, location='json')
+    post_parser.add_argument('name', type=str, required=True, location='json')
+    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True, location='json')
+    post_parser.add_argument('mobile_number', type=str, required=True, location='json')
+    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True, location='json')
 
     @api.marshal_with(enrollment_key_status)
     @api.doc(parser=post_parser, description=PERSONAL_DETAILS_DESCRIPTION)
@@ -51,7 +51,7 @@ class PersonalDetailSubmit(Resource):
             # updating student data
             student_id = enrollment.student_id
             student = Student.query.filter_by(id=student_id).first()
-            student.update_data(student_data)
+            student.update_data(args)
 
             # creating student contact record
             student_contact = StudentContact.create(contact=mobile_number, student_id=student_id)
