@@ -19,12 +19,12 @@ Question mark ki jagah par sahi figure choose kijiye.
 ![](images/question_12/choice1/choice1.png)
 
 ### Options
-| Option | Values                                      |
-|:-------|:-------------------------------------------:|
-| 1      | ![](images/question_12/choice1/option1.png) |
-| 2      | ![](images/question_12/choice1/option2.png) |
-| 3      | ![](images/question_12/choice1/option3.png) |
-| 4      | ![](images/question_12/choice1/option4.png) |
+| Option | Values                                      |Id     |
+|:-------|:--------------------------------------------|:-----:|
+| 1      | ![](images/question_12/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_12/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_12/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_12/choice1/option4.png) |NULL   |
 
 ## English
 PENDING
@@ -43,12 +43,12 @@ Question mark ki jagah par sahi figure choose kijiye.
 ![](images/question_12/choice2/choice2.png)
 
 ### Options
-| Option | Values                                      |
-|:-------|:-------------------------------------------:|
-| 1      | ![](images/question_12/choice2/option1.png) |
-| 2      | ![](images/question_12/choice2/option2.png) |
-| 3      | ![](images/question_12/choice2/option3.png) |
-| 4      | ![](images/question_12/choice2/option4.png) |
+| Option | Values                                      |Id     |
+|:-------|:--------------------------------------------|:-----:|
+| 1      | ![](images/question_12/choice2/option1.png) |NULL   |
+| 2      | ![](images/question_12/choice2/option2.png) |NULL   |
+| 3      | ![](images/question_12/choice2/option3.png) |NULL   |
+| 4      | ![](images/question_12/choice2/option4.png) |NULL   |
 
 
 ## English

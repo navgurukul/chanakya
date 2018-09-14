@@ -20,12 +20,12 @@ Niche diye hue images mein agla image kaun sa aayega
 ![](images/question_18/choice1/choice1.png)
 
 ### Options
-| Option | Values                                      |
-|:-------|:-------------------------------------------:|
-| 1      | ![](images/question_18/choice1/option1.png) |
-| 2      | ![](images/question_18/choice1/option2.png) |
-| 3      | ![](images/question_18/choice1/option3.png) |
-| 4      | ![](images/question_18/choice1/option4.png) |
+| Option | Values                                      |Id     |
+|:-------|:--------------------------------------------|:-----:|
+| 1      | ![](images/question_18/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_18/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_18/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_18/choice1/option4.png) |NULL   |
 
 ## English
 PENDING
@@ -46,12 +46,12 @@ Niche diye hue images mein agla image kaun sa aayega
 
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | C      |
-| 2      | A      |
-| 3      | B      |
-| 4      | D      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | C      |NULL   |
+| 2      | A      |NULL   |
+| 3      | B      |NULL   |
+| 4      | D      |NULL   |
 
 
 ## English

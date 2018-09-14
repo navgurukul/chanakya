@@ -20,13 +20,13 @@ Niche diye hue image kitne blocks se bana hua hai?
 ![](images/question_14/choice1.png)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | B      |
-| 2      | A      |
-| 3      | E      |
-| 4      | C      |
-| 5      | D      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | B      |NULL   |
+| 2      | A      |NULL   |
+| 3      | E      |NULL   |
+| 4      | C      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -44,12 +44,12 @@ Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape bana
 ![](images/question_14/choice2.gif)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | 28     |
-| 2      | 29     |
-| 3      | 27     |
-| 4      | 25     |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | 28     |NULL   |
+| 2      | 29     |NULL   |
+| 3      | 27     |NULL   |
+| 4      | 25     |NULL   |
 
 
 ## English

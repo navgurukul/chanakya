@@ -19,13 +19,13 @@ Fold karne ke baad, ye 2D image kis box ki tarah banega?
 ![](images/question_15/choice1.png)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | A      |
-| 2      | E      |
-| 3      | B      |
-| 4      | C      |
-| 5      | D      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | A      |NULL   |
+| 2      | E      |NULL   |
+| 3      | B      |NULL   |
+| 4      | C      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -43,12 +43,12 @@ Fold karne ke baad, ye 2D image kis house ki tarah banega?
 ![](images/question_15/choice2.gif)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | A      |
-| 2      | D      |
-| 3      | B      |
-| 4      | C      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | A      |NULL   |
+| 2      | D      |NULL   |
+| 3      | B      |NULL   |
+| 4      | C      |NULL   |
 
 
 ## English

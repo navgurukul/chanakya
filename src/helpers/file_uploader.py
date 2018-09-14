@@ -6,7 +6,9 @@ from chanakya.src import app
 from werkzeug.utils import secure_filename
 import uuid
 from io import BytesIO
- def upload_file_to_s3(file, filename=None, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):
+
+
+def upload_file_to_s3(file, filename=None, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):
     '''
     The function helps to upload any file on AWS s3 which accesibile publicily to anyone using the
     key_id,secret key in config file and boto3
@@ -23,15 +25,18 @@ from io import BytesIO
         filename_extension = secure_filename(file.filename).split('.')[-1]
     else:
         filename_extension = filename.split('.')[-1]
-     random_string = str(uuid.uuid4())
+
+    random_string = str(uuid.uuid4())
     filename = random_string +'.'+filename_extension
     print(filename, type(filename))
+
     #connecting with the s3 instance with upload the file
-     session = boto3.Session(
+    session = boto3.Session(
         aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
         aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
     )
-     s3 = session.resource('s3', config=Config(signature_version='s3v4'))
+
+    s3 = session.resource('s3', config=Config(signature_version='s3v4'))
     #file upload using the connection
     try:
         s3.meta.client.upload_fileobj(
@@ -42,12 +47,14 @@ from io import BytesIO
                 "ContentType": app.config['FILE_CONTENT_TYPES'][filename_extension]
             }
         )
-     except Exception as e:
+    except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.
         print("Something Happened: ", e)
         raise e
     return '{0}{1}'.format(app.config['AWS_LOCATION'], filename)
- def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):
+
+
+def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):
     '''
     The function helps to upload any file on AWS s3 which accesibile publicily to anyone using the
     key_id,secret key in config file and boto3
@@ -67,7 +74,7 @@ from io import BytesIO
         aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
         aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
     )
-     s3 = session.resource('s3', config=Config(signature_version='s3v4'))
+    s3 = session.resource('s3', config=Config(signature_version='s3v4'))
      # byte_object_handler = BytesIO(string)
     #file upload using the connection
     try:
@@ -82,10 +89,12 @@ from io import BytesIO
         print("Something Happened: ", e)
         raise e
     return '{0}{1}'.format(app.config['AWS_LOCATION'], filename)
- class FileStorageArgument(reqparse.Argument):
+
+
+class FileStorageArgument(reqparse.Argument):
     """This argument class for flask-restful will be used in
     all cases where file uploads need to be handled."""
-     def convert(self, value, op):
+    def convert(self, value, op):
         if self.type is FileStorage:  # only in the case of files
             # this is done as self.type(value) makes the name attribute of the
             # FileStorage object same as argument name and value is a FileStorage

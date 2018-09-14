@@ -1,4 +1,3 @@
-
 import string, random
 from datetime import datetime, timedelta
 
@@ -10,7 +9,6 @@ class EnrolmentKey(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(6), unique=True)
-
     test_start_time = db.Column(db.DateTime, nullable=True)
     test_end_time = db.Column(db.DateTime, nullable=True)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
@@ -21,10 +19,8 @@ class EnrolmentKey(db.Model):
         '''
             the method helps to generate a unique enrollment key for the student_id provided
             and add it to student record.
-
             params:
                 student_id int required
-
             return enrollment (object associated to the student_id)
         '''
         # generating a new enrollment key
@@ -46,14 +42,10 @@ class EnrolmentKey(db.Model):
         '''
             the method checks if the key is been used or not
             if it is not used then the key is valid
-
             no params
-
             usage:
                 enrollment.is_valid()
-
             return Boolean value
-
         '''
 
         current_datetime = datetime.now()
@@ -73,13 +65,9 @@ class EnrolmentKey(db.Model):
     def in_use(self):
         '''
             check if the enrollment key is already in used or not
-
             no params
-
             usage: enrollment.in_use()
-
             return Boolean(true when it is being used else false)
-
         '''
         current_datetime = datetime.now()
         # if it is not used
@@ -106,8 +94,7 @@ class Questions(db.Model):
     difficulty = db.Column(db.Enum(app.config['QUESTION_DIFFICULTY']), nullable=False)
     topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
-    answer = db.Column(db.String(10), nullable=False)
-
+    options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
 
     @staticmethod
     def create_question(question_dict):
@@ -145,23 +132,42 @@ class Questions(db.Model):
         '''
         en_text = question_dict.get('en_text')
         hi_text = question_dict.get('hi_text')
-
         difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
         topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
         type = app.config['QUESTION_TYPE'](question_dict.get('type'))
         options = question_dict.get('options')
 
-        # creating question
         question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
         db.session.add(question)
         db.session.commit()
 
-        # creating options for the above question
         for option in options:
             option['question_id'] = question.id
             question_option = QuestionOptions.create_option(**option)
+
         db.session.commit()
+
         return question
+
+    def update_question(self, question_dict):
+        existing_options = { option.id: option for option in self.options.all() }
+        updated_options = question_dict['options']
+        self.en_text = question_dict.get('en_text')
+        self.hi_text = question_dict.get('hi_text')
+        self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        db.session.add(self)
+        
+        for updated_option in updated_options:
+            id = updated_option['id']
+            option = existing_options[id]
+            option.en_text = updated_option['en_text']
+            option.hi_text = updated_option['hi_text']
+            option.correct = updated_option['correct']
+            db.session.add(option)
+
+        db.session.commit()
 
 class QuestionOptions(db.Model):
 
@@ -171,6 +177,8 @@ class QuestionOptions(db.Model):
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    correct = db.Column(db.Boolean, default=False)
+
     @staticmethod
     def create_option(**kwargs):
         '''
@@ -180,13 +188,11 @@ class QuestionOptions(db.Model):
             hi_text : hindi text of the option, required, str
             question_id : id of the question of the options, required, int
             correct = False, bool
-
         '''
         question_option = QuestionOptions(**kwargs)
         db.session.add(question_option)
 
         return question_option
-
 
 class QuestionAttempts(db.Model):
 

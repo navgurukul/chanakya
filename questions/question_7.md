@@ -20,12 +20,12 @@ Shaded area poore area ka kitna percent hai?
 ![](images/question_7/choice1.png)
 
 ### Options
-| Option | Values                 |
-|:-------|:----------------------:|
-| 1      | 50%                    |
-| 2      | 70%                    |
-| 3      | 60%                    |
-| 4      | 80%                    |
+| Option | Values                 |Id     |
+|:-------|:-----------------------|:-----:|
+| 1      | 50%                    |NULL   |
+| 2      | 70%                    |NULL   |
+| 3      | 60%                    |NULL   |
+| 4      | 80%                    |NULL   |
 
 ## English
 PENDING
@@ -44,12 +44,12 @@ Neeche di gayi picture mein dekh ke batao ki pure mein se kitna area shaded hai?
 ![](images/question_7/choice2.png)
 
 ### Options
-| Option | Values                 |
-|:-------|:----------------------:|
-| 1      | 2/5                    |
-| 2      | 1/3                    |
-| 3      | 1/4                    |
-| 4      | 1/5                    |
+| Option | Values                 |Id     |
+|:-------|:-----------------------|:-----:|
+| 1      | 2/5                    |NULL   |
+| 2      | 1/3                    |NULL   |
+| 3      | 1/4                    |NULL   |
+| 4      | 1/5                    |NULL   |
 
 
 ## English

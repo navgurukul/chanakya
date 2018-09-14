@@ -20,13 +20,13 @@ Niche diye hue image ka reflection kaisa hoga?
 ![](images/question_13/choice1.png)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | E      |
-| 2      | A      |
-| 3      | C      |
-| 4      | B      |
-| 5      | D      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | E      |NULL   |
+| 2      | A      |NULL   |
+| 3      | C      |NULL   |
+| 4      | B      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -45,12 +45,12 @@ Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape bana
 ![](images/question_13/choice2.gif)
 
 ### Options
-| Option | Values |
-|:-------|:------:|
-| 1      | D      |
-| 2      | C      |
-| 3      | B      |
-| 4      | A      |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | D      |NULL   |
+| 2      | C      |NULL   |
+| 3      | B      |NULL   |
+| 4      | A      |NULL   |
 
 
 ## English

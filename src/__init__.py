@@ -2,7 +2,6 @@ from flask import Flask, make_response, request
 from flask_restplus import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
 import exotel
 from chanakya.src.config import ChanakyaConfig
 
@@ -17,6 +16,7 @@ api = Api(app)
 # Initialising Database & Migration support
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 # Initialising the exotel api to send sms
 # _exotel_auth = app.config.get("EXOTEL_AUTH")

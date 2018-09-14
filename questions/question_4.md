@@ -10,7 +10,8 @@
 ```json
 {
   "Question ID": "NOT_ADDED",
-  "Correct Answer": 3
+  "Correct Answer": 3,
+  "Option ID": "NULL"
 }
 ```
 
@@ -24,7 +25,8 @@ PENDING
 ```json
 {
   "Question ID": "NOT_ADDED",
-  "Correct Answer": 5
+  "Correct Answer": 5,
+  "Option ID": "NULL"
 }
 ```
 
