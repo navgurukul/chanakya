@@ -52,13 +52,15 @@ class CreateQuestion(Resource):
 		question = Questions.create_question(args)
 		return question
 
-
+@api.route('/question/update')
+class UpdateQuestion(Resource):
 	question_update_obj = api.model('question_update_obj', {
 		'error': fields.Boolean(default=False),
 		'message': fields.String,
 		'invalid_option_ids': fields.List(fields.Integer),
 		'question' : fields.Nested(question_obj)
 	})
+	
 	@api.marshal_with(question_update_obj)
 	@api.expect(question_obj, validate=True)
 	def put(self):
