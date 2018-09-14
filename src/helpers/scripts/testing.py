@@ -45,6 +45,7 @@ for question in questions:
     questions_attempted.append(data)
 
 
+input('End the test? ')
 end_test['question_attempted'] = questions_attempted
 pprint(end_test)
 

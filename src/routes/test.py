@@ -115,14 +115,11 @@ class TestStart(Resource):
             }
 
         elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
-            questions = enrollment.extract_question_set()
+            questions = enrollment.extract_question_from_set()
         else:
             # start the test and send the questions generated randomly
-            current_datetime = datetime.now()
-            enrollment.test_start_time = current_datetime
-            enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-            questions = Questions.get_random_question_set()
-            question_set = QuestionSet.create_new_set(questions)
+            enrollment.start_test()
+            question_set, questions = QuestionSet.create_new_set()
             enrollment.question_set_id = question_set.id
             db.session.add(enrollment)
             db.session.commit()

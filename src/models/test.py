@@ -73,11 +73,17 @@ class Questions(db.Model):
     @staticmethod
     def get_random_question_set():
         '''
-            generates the question_set of 18 questions randomly according to the exam_config.py file in config module
+            It generates a set of 18 question randomly from the question that are in database according to
+            the QUESTION_CONFIG define in config package which has the stored the number of question according to topic
+            and difficulty.
 
-            Needs question to be in the database!
+            It requires minimum number of question to be in the database according to QUESTION_CONFIG variable to work properly
+            else it will return question less than 18 in a set
+
+            params: Not Required
 
             return list of 18 questions generated
+                [<Question 1>,<Question 321>,<Question 331>,<Question 221>,<Question 111>,<Question 12>]
         '''
 
         questions = Questions.query.all()
@@ -154,7 +160,7 @@ class EnrolmentKey(db.Model):
         return enrollment
 
 
-    def extract_question_set(self):
+    def extract_question_from_set(self):
         '''
             the function extract all the question that was generated when the test was started
             in the case of getting the question when the page was being refreshed or crashing of the website or any such
@@ -228,7 +234,6 @@ class EnrolmentKey(db.Model):
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
         self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-        db.session.commit()
 
 
 class QuestionOptions(db.Model):
@@ -309,7 +314,7 @@ class QuestionSet(db.Model):
     questions = db.relationship('QuestionOrder', backref='set', cascade='all, delete-orphan', lazy='dynamic')
 
     @staticmethod
-    def create_new_set(questions,partner_name=None):
+    def create_new_set(partner_name=None):
         '''
             function to create a new set record for future refrence of calculating offline test score
             and getting the question set for online test
@@ -319,6 +324,7 @@ class QuestionSet(db.Model):
                 partner_name: the partner_name , None when the set is created for a student.
 
         '''
+        questions = Questions.get_random_question_set()
 
         question_set = QuestionSet(partner_name=partner_name)
         db.session.add(question_set)
@@ -330,7 +336,7 @@ class QuestionSet(db.Model):
             db.session.add(question_order)
         db.session.commit()
 
-        return question_set
+        return question_set, questions
 
 
 class QuestionOrder(db.Model):
