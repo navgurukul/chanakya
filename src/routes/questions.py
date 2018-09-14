@@ -15,7 +15,6 @@ from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 
 
 
-
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
 	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
@@ -36,7 +35,7 @@ class UploadQuestionImage(Resource):
 
 		return {'image_url': image_url}
 
-
+# @Amar: This should be deleted and moved to `post` method in QuestionList class.
 @api.route('/question/create')
 class CreateQuestion(Resource):
 
@@ -51,11 +50,8 @@ class CreateQuestion(Resource):
 		question = Questions.create_question(args)
 		return question
 
-
-
-
-@api.route('/question/')
-class AllQuestions(Resource):
+@api.route('/question')
+class QuestionList(Resource):
 	questions_list_obj = api.model('questions_list', {
 		'questions_list' : fields.List(fields.Nested(question_obj))
 	})
@@ -67,9 +63,12 @@ class AllQuestions(Resource):
 				"questions_list":questions_list
 			}
 
+	def post(self):
+		return "@Amar: The question should be created here."
+
 
 @api.route('/questions/<question_id>')
-class SingleQuestion(Resource):
+class Question(Resource):
 	single_question = api.model('single_question', {
 		'error': fields.Boolean(default=False),
 		'question_data': fields.Nested(question_obj),
@@ -91,3 +90,6 @@ class SingleQuestion(Resource):
 		return {
 			'question_data': question
 		}
+
+	def put(self):
+		return "@Amar: The question should be edited here."
