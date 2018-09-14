@@ -222,8 +222,7 @@ class OfflinePaper(Resource):
         for set in range(number_sets):
             try:
                 # generate the random sets and get question
-                questions = Questions.get_random_question_set()
-                questions_set = QuestionSet.create_new_set(questions, partner_name)
+                questions_set, questions = QuestionSet.create_new_set(partner_name)
 
                 # render pdf
                 pdf = render_pdf_phantomjs('question_pdf.html', **locals())
