@@ -127,7 +127,8 @@ function page2submit() {
     }
 
     $("#page2").slideUp(slide_up_time);
-    $("#page3").slideDown(slide_down_time);     
+    $("#page3").slideDown(slide_down_time);    
+    $("#timer").slideDown(slide_down_time); 
     page3submit();                                
 
     // $.post("/test/personal_details/"+enrolment_key,
@@ -159,10 +160,29 @@ function page3submit() {
 
         seconds = Math.round(time_remaining%60);
         $("#time_to_show").html("Time Remaining: " + seconds + " seconds.");
+
         if(time_remaining<=1){
+            last_recorded_time = new Date().getTime();
+            time_remaining = 3600;
+    
             $('#page3').slideUp(slide_up_time);
             dQuestions(data);
             clearInterval(do_it);
+            do_it_again = setInterval(function(){
+                var new_time   = new Date().getTime()
+                var time_spent = (new_time - last_recorded_time)/1000;
+                last_recorded_time = new_time;
+                time_remaining -= time_spent;
+       
+                minutes = Math.floor(time_remaining/60);
+                seconds = Math.round(time_remaining%60);
+                $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
+                if(time_remaining<=1){
+                    $('#page3').slideUp(slide_up_time);
+                    dQuestions(data);
+                    clearInterval(do_it_again);
+                }
+            }, 100); 
         }
     }, 100); 
 
@@ -278,9 +298,14 @@ function displayQuestion(index) {
         $('#btns_prev_submit').hide("slow");
     }
 
+    console.log(index, "bhai");
+
     if (index == questions.length - 1) {
         $('#next_btn').hide("slow");
         $('#submit_btn').show("slow");
+    } else {
+        $('#next_btn').show("slow");
+        $('#submit_btn').hide("slow");
     }
     
     if (index >= questions.length) {
@@ -288,7 +313,7 @@ function displayQuestion(index) {
         return "HO GAYA :D";
     } 
     else {
-        //display question with index 0
+        //display question with index index
         console.log(questions[index]);
 
         var question = questions[index];
