@@ -36,60 +36,6 @@ class UploadQuestionImage(Resource):
 
 		return {'image_url': image_url}
 
-# @Amar: This should be deleted and moved to `post` method in QuestionList class.
-@api.route('/question/create')
-class CreateQuestion(Resource):
-
-	@api.marshal_with(question_obj)
-	@api.expect(create_question, validate=True)
-	@api.doc(description=CREATE_QUESTION)
-	def post(self):
-
-		args = api.payload
-
-		#create the question
-		question = Questions.create_question(args)
-		return question
-
-@api.route('/question/update')
-class UpdateQuestion(Resource):
-	question_update_obj = api.model('question_update_obj', {
-		'error': fields.Boolean(default=False),
-		'message': fields.String,
-		'invalid_option_ids': fields.List(fields.Integer),
-		'question' : fields.Nested(question_obj)
-	})
-
-	@api.marshal_with(question_update_obj)
-	@api.expect(question_obj, validate=True)
-	def put(self):
-		args = api.payload
-		question = Questions.query.get(args['id'])
-		if not question:
-			return {
-				'error':True,
-				'message': "Question id doesn't exist",
-			}
-
-		wrong_option_ids = check_option_ids(question, args)
-
-		if wrong_option_ids:
-			return {
-				'error':True,
-				'message':'Incorrect option_id for the question',
-				'invalid_option_ids': wrong_option_ids
-			}
-
-		question.update_question(args)
-
-		return {
-			'question': question
-		}
-
-
-
-
-
 
 @api.route('/question/')
 class QuestionList(Resource):
@@ -104,8 +50,17 @@ class QuestionList(Resource):
 				"questions_list":questions_list
 			}
 
+	@api.marshal_with(question_obj)
+	@api.expect(create_question, validate=True)
+	@api.doc(description=CREATE_QUESTION)
 	def post(self):
-		return "@Amar: The question should be created here."
+
+		args = api.payload
+
+		#create the question
+		question = Questions.create_question(args)
+		return question
+
 
 
 @api.route('/questions/<question_id>')
@@ -132,5 +87,37 @@ class Question(Resource):
 			'question_data': question
 		}
 
-	def put(self):
-		return "@Amar: The question should be edited here."
+
+	question_update_obj = api.model('question_update_obj', {
+		'error': fields.Boolean(default=False),
+		'message': fields.String,
+		'invalid_option_ids': fields.List(fields.Integer),
+		'question' : fields.Nested(question_obj)
+	})
+
+	@api.marshal_with(question_update_obj)
+	@api.expect(question_obj, validate=True)
+	def put(self, question_id):
+		args = api.payload
+		question = Questions.query.filter_by(id = question_id).first()
+
+		if not question:
+			return {
+				'error':True,
+				'message': "Question id doesn't exist",
+			}
+
+		wrong_option_ids = check_option_ids(question, args)
+
+		if wrong_option_ids:
+			return {
+				'error':True,
+				'message':'Incorrect option_id for the question',
+				'invalid_option_ids': wrong_option_ids
+			}
+
+		question.update_question(args)
+
+		return {
+			'question': question
+		}
