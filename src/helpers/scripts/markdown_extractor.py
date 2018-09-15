@@ -7,11 +7,21 @@ from chanakya.src.helpers.file_uploader import upload_file_to_s3
 
 DEBUG = True
 
-question_url = 'http://127.0.0.1:5000/questions/'
+MAIN_URL = 'http://127.0.0.1:5000/questions/'
 
 markdown = mistune.Markdown()
+HEADERS = {'content-type': 'application/json'}
 
-question_dir = os.path.join(ROOT_DIR, 'questions') + '/'
+QUESTION_DIRECTORY = os.path.join(ROOT_DIR, 'questions') + '/'
+
+FILE_CONTENT_TYPES = {
+	# these will be used to set the content type of S3 object. It is binary by default.
+	'jpg': 'image/jpeg',
+	'jpeg': 'image/jpeg',
+	'png': 'image/png',
+	'pdf': 'application/pdf',
+	'gif': 'image/gif'
+}
 
 difficulty = {
 	'easy': 'Easy',
@@ -27,7 +37,7 @@ question_type = {
 
 class MDQuestionExtractor:
 	def __init__(self, file):
-		self.file_path = question_dir + file
+		self.file_path = QUESTION_DIRECTORY + file
 		self.file_data = open(self.file_path).read()
 		self.file_html = markdown(self.file_data)
 		self.soup = bs4.BeautifulSoup(self.file_html, 'html.parser')
@@ -103,6 +113,7 @@ class MDQuestionExtractor:
 			# question_choice 1
 			choice_1['hi_text'] = self.get_question_html(self.file_data[start_hindi_1:end_hindi_1])
 			choice_1['en_text'] = self.get_question_html(self.file_data[start_english_1:end_english_1])
+			
 			# question_choice 2
 			choice_2['hi_text'] = self.get_question_html(self.file_data[start_hindi_2:end_hindi_2])
 			choice_2['en_text'] = self.get_question_html(self.file_data[start_english_2:])
@@ -238,7 +249,7 @@ class MDQuestionExtractor:
 				# create question and update question id
 
 				# adding question through rest
-				resp = requests.post(question_url, data=json.dumps(question), headers={'content-type': 'application/json'}).json()
+				resp = requests.post(MAIN_URL, data=json.dumps(question), headers=HEADERS).json()
 
 				pprint(resp)
 
@@ -262,10 +273,10 @@ class MDQuestionExtractor:
 			else:
 				# just update the question
 				question['id'] = int(question_id)
-				question_update_url = question_url +'{}'.format(question_id)
+				question_update_url = MAIN_URL +'{}'.format(question_id)
 
 				# sending the question on the way to update itself
-				resp = requests.put(question_update_url, data=json.dumps(question), headers={'content-type': 'application/json'}).json()
+				resp = requests.put(question_update_url, data=json.dumps(question), headers=HEADERS).json()
 				pprint(resp)
 
 		#updating the md text file with the changes made
@@ -277,15 +288,25 @@ class MDQuestionExtractor:
 
 	def upload_image(self, image_path):
 		# getting the image file as binary data to be read
-		complete_image_path = question_dir + image_path
+		complete_image_path = QUESTION_DIRECTORY + image_path
 		image_data = open(complete_image_path, 'rb')
+		file_name = image_path.split('/')[-1]
 
+		filename_extension = file_name.split('.')[-1]
+
+		files = {
+		    'image': ('{0}'.format(file_name), image_data, FILE_CONTENT_TYPES[filename_extension]),
+		}
+
+		response = requests.post('http://localhost:5000/question/upload_file', files=files)
+		print(response.json())
+		s3_url = response.json()['image_url']
 		# uploading the file to the s3
-		s3_url = upload_file_to_s3(file = image_data, filename= image_data.name)
+		# s3_url = upload_file_to_s3(file = image_data, filename= image_data.name)
 
 		return s3_url
 
-files = [file for file in os.listdir(question_dir) if file.endswith('.md')]
+files = [file for file in os.listdir(QUESTION_DIRECTORY) if file.endswith('.md')]
 files.remove('README.md')
 
 for file in files:
