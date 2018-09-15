@@ -1,3 +1,6 @@
+'''
+    this file contains description for all routes.
+'''
 VALIDATE_ENROLMENT_KEY_DESCRIPTION = '''
             responses
             'valid':{

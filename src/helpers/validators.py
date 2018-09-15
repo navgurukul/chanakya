@@ -50,14 +50,14 @@ def check_question_ids(questions_attempt):
                             'selected_option_id': 43
                         },
                         {
-                            'answer': None,
+                            'answer': -21,
                             'question_id': 77,
-                            'selected_option_id': 182
+                            'selected_option_id': 0
                         },
                         {
-                            'answer': None,
+                            'answer': 216,
                             'question_id': 43,
-                            'selected_option_id': 97
+                            'selected_option_id': 0
                         },
                         {
                             'answer': None,

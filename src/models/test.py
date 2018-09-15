@@ -95,7 +95,9 @@ class Questions(db.Model):
         for question in questions:
             topic = question.topic.value
             difficulty = question.difficulty.value
+
             if topic in topics.keys():
+
                 if not questions_dict.get(topic):
                     questions_dict[topic]={}
                     questions_dict[topic][difficulty] = []
