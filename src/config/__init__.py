@@ -17,33 +17,35 @@ class ChanakyaConfig(object):
 
     #exam_config to generate question
     QUESTION_CONFIG  = {
-                        #how many question should be generated according to the category of question
-                        # and the difficulty level each question has
-                        "topic":{
-                            "Topic 1":{
-                                "Easy":3, # number of question that should be generated
-                                "Medium":3,
-                                "Hard":3
-                            },
-                            "Topic 2":{
-                                "Easy":2,
-                                "Medium":2,
-                                "Hard":2
-                            },
-                            "Topic 3":{
-                                "Easy":1,
-                                "Medium":1,
-                                "Hard":1
-                            },
-                        },
 
-                        # marks of the question according to difficulty
-                        "marks_config" :{
-                            "Easy":1,
-                            "Medium":2,
-                            "Hard":3
-                        }
-                }
+        #h ow many question should be generated according to the category of question
+        # and the difficulty level each question has
+        "topic":{
+            "Topic 1":{
+                "Easy":3, # number of questions of topic1 and level easy in the test
+                "Medium":3,
+                "Hard":3
+            },
+            "Topic 2":{
+                "Easy":2,
+                "Medium":2, # number of questions of topic2 and level medium in the test
+                "Hard":2
+            },
+            "Topic 3":{
+                "Easy":1,
+                "Medium":1,
+                "Hard":1
+            },
+        },
+
+        # marks of the question according to difficulty
+        "marks_config" :{
+            "Easy":1,
+            "Medium":2,
+            "Hard":3
+        }
+
+    }
 
 
     # Stages
