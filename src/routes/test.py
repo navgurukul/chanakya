@@ -19,15 +19,6 @@ from chanakya.src.helpers.routes_descriptions import (
             )
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 
-#
-#
-# from flask import render_template, request
-#
-# @app.route('/generate')
-# def just():
-#     questions = Questions.get_random_question_set()
-#     questions_set = QuestionSet.create_new_set(questions, partner_name='PYDS')
-#     return render_template('question_pdf.html', **locals())
 
 #Validation for the enrollment key
 @api.route('/test/validate_enrolment_key')

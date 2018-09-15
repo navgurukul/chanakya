@@ -2,7 +2,6 @@ import os
 
 from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
 
-from .exam_config import question_config
 
 class ChanakyaConfig(object):
 
@@ -17,9 +16,35 @@ class ChanakyaConfig(object):
     OUTGOING_SMS_TYPE = OutgoingSMSType
     GENDER = Gender
 
-    #exam_config
-    QUESTION_CONFIG = question_config
+    #exam_config to generate question
+    QUESTION_CONFIG  = {
+                        #how many question should be generated according to the category of question
+                        # and the difficulty level each question has
+                        "topic":{
+                            "Topic 1":{
+                                "Easy":3, # number of question that should be generated
+                                "Medium":3,
+                                "Hard":3
+                            },
+                            "Topic 2":{
+                                "Easy":2,
+                                "Medium":2,
+                                "Hard":2
+                            },
+                            "Topic 3":{
+                                "Easy":1,
+                                "Medium":1,
+                                "Hard":1
+                            },
+                        },
 
+                        # marks of the question according to difficulty
+                        "marks_config" :{
+                            "Easy":1,
+                            "Medium":2,
+                            "Hard":3
+                        }
+                }
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',

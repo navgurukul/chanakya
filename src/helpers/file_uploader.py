@@ -25,7 +25,7 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
     #filename
     filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())
-    filename = random_string +'.'+filename_extension
+    filename = random_string + '.' + filename_extension
     print(filename, type(filename))
     #connecting with the s3 instance with upload the file
 
@@ -42,7 +42,7 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
             bucket_name, #default in the config
             filename,
             ExtraArgs={
-                "ContentType": file.content_type
+                "ContentType": app.config['FILE_CONTENT_TYPES'][filename_extension]
             }
         )
 
@@ -67,9 +67,9 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
     url : http://<bucketname>.s3.amazonaws.com/<filename>
     '''
     #filename
-    filename_extension = '.pdf'
+    filename_extension = 'pdf'
     random_string = str(uuid.uuid4())
-    filename = random_string + filename_extension
+    filename = random_string + '.' + filename_extension
 
     #connecting with the s3 instance with upload the file
     session = boto3.Session(
@@ -86,7 +86,7 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
             Bucket=bucket_name,
             Key=filename,
             Body=string,
-            ContentType= 'application/pdf'
+            ContentType= app.config['FILE_CONTENT_TYPES'][filename_extension]
         )
     except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.

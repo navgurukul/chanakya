@@ -12,7 +12,7 @@ class QuestionTopic(enum.Enum):
     topic4 = "Topic 4"
 
 class QuestionType(enum.Enum):
-    mcq = 'MQC'
+    mcq = 'MCQ'
     integer_answer = 'Integer Answer'
 
 class IncomingCallType(enum.Enum):

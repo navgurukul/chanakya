@@ -12,6 +12,7 @@ enrollment_key_status = api.model('enrollment_key_status', {
     'success': fields.Boolean,
     'enrollment_key_status':fields.String
 })
+
 enrollment_key_validation = api.model('enrollment_key_validation',{
     'valid': fields.Boolean,
     'reason': fields.String
@@ -43,18 +44,18 @@ questions_list_obj = api.model('questions_list', {
 
 # create question
 create_option = api.model('create_options',{
-    "hi_text": fields.String,
-    "en_text": fields.String,
-    "correct": fields.Boolean(default=False)
+    "hi_text": fields.String(required=True),
+    "en_text": fields.String(required=True),
+    "correct": fields.Boolean(default=False, required=True)
 })
 
 create_question = api.model('create_questions',{
-    'en_text': fields.String,
-    'hi_text': fields.String,
-    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']]),
-    'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']]),
-    'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']]),
-    'options': fields.List(fields.Nested(create_option))
+    'en_text': fields.String(required=True),
+    'hi_text': fields.String(required=True),
+    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True),
+    'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True),
+    'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']], required=True),
+    'options': fields.List(fields.Nested(create_option), required=True)
 })
 
 
