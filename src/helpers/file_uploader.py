@@ -1,3 +1,8 @@
+'''
+    This file helps with all the upload of file to s3.
+
+'''
+
 import boto3
 from botocore.client import Config
 from werkzeug.datastructures import FileStorage
@@ -16,18 +21,23 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
     - file : it takes the FileStorage instance of the file which contains every details
     - bucket_name : Name of the bucket where the file should be uploaded default from the config
     - acl : Access control list which allows the file to be public or private, read or write default is public-read only
-
     it return a url of the file after uploading the file to s3 to be accesibile
-
     url : http://<bucketname>.s3.amazonaws.com/<filename>
     '''
 
     #filename
     filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())
-    filename = random_string + '.' + filename_extension
+    filename = random_string +'.'+filename_extension
+    print(filename, type(filename))
 
     #connecting with the s3 instance with upload the file
+    session = boto3.Session(
+        aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
+        aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
+    )
+
+    s3 = session.resource('s3', config=Config(signature_version='s3v4'))
 
     session = boto3.Session(
         aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
