@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "97",
   "Correct Answer": 2
 }
 ```
@@ -22,10 +22,10 @@ Shaded area poore area ka kitna percent hai?
 ### Options
 | Option | Values                 |Id     |
 |:-------|:-----------------------|:-----:|
-| 1      | 50%                    |NULL   |
-| 2      | 70%                    |NULL   |
-| 3      | 60%                    |NULL   |
-| 4      | 80%                    |NULL   |
+| 1      | 50%                    |291    |
+| 2      | 70%                    |292    |
+| 3      | 60%                    |293    |
+| 4      | 80%                    |294    |
 
 ## English
 PENDING
@@ -33,7 +33,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "98",
   "Correct Answer": 3
 }
 ```
@@ -46,10 +46,10 @@ Neeche di gayi picture mein dekh ke batao ki pure mein se kitna area shaded hai?
 ### Options
 | Option | Values                 |Id     |
 |:-------|:-----------------------|:-----:|
-| 1      | 2/5                    |NULL   |
-| 2      | 1/3                    |NULL   |
-| 3      | 1/4                    |NULL   |
-| 4      | 1/5                    |NULL   |
+| 1      | 2/5                    |295    |
+| 2      | 1/3                    |296    |
+| 3      | 1/4                    |297    |
+| 4      | 1/5                    |298    |
 
 
 ## English

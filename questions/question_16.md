@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "73",
   "Correct Answer": 3
 }
 ```
@@ -22,10 +22,10 @@ Niche diye hue images mein agla image kaun sa aayega
 ### Options
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_16/choice1/option1.png) |NULL   |
-| 2      | ![](images/question_16/choice1/option2.png) |NULL   |
-| 3      | ![](images/question_16/choice1/option3.png) |NULL   |
-| 4      | ![](images/question_16/choice1/option4.png) |NULL   |
+| 1      | ![](images/question_16/choice1/option1.png) |223    |
+| 2      | ![](images/question_16/choice1/option2.png) |224    |
+| 3      | ![](images/question_16/choice1/option3.png) |225    |
+| 4      | ![](images/question_16/choice1/option4.png) |226    |
 
 ## English
 PENDING
@@ -33,7 +33,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "74",
   "Correct Answer": 2
 }
 ```
@@ -46,10 +46,10 @@ Niche diye hue images mein se X ki mirror image ko chuniye
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | 3      |NULL   |
-| 2      | 1      |NULL   |
-| 3      | 2      |NULL   |
-| 4      | 4      |NULL   |
+| 1      | 3      |227    |
+| 2      | 1      |228    |
+| 3      | 2      |229    |
+| 4      | 4      |230    |
 
 
 ## English
