@@ -111,7 +111,6 @@ old_code/config/
 #mac
 .DS_Store
 
-
 # ignoring chanakya configuration files
 src/config/development.py
 src/config/production.py
