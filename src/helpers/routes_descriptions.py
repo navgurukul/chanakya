@@ -1,3 +1,7 @@
+'''
+    This files contains all the description for the route.
+'''
+
 VALIDATE_ENROLMENT_KEY_DESCRIPTION = '''
         responses:
 

@@ -89,6 +89,9 @@ class EnrolmentKey(db.Model):
         return False
 
     def start_test(self):
+        '''
+            function to start the test for student.
+        '''
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
         self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
@@ -149,36 +152,85 @@ class Questions(db.Model):
         type = app.config['QUESTION_TYPE'](question_dict.get('type'))
         options = question_dict.get('options')
 
+        #question create
         question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
         db.session.add(question)
         db.session.commit()
 
+        # option for the question create
         for option in options:
             option['question_id'] = question.id
             question_option = QuestionOptions.create_option(**option)
-
         db.session.commit()
-
         return question
 
     def update_question(self, question_dict):
+        '''
+            the options helps to update a question with a new data and also add any new option if provided.
+            params:
+                question_dict = {
+                    'id': 1,
+                    'hi_text':'some question',
+                    'en_text':'some question',
+                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+
+                    'options':[
+                        {   'id': 1,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': True
+                        },
+                        {   'id': 2,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': False
+                        },
+                        {   'id': 3,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': False
+                        },
+                        {   'id': 4,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': True
+                        }
+                    ]
+                }
+            return None
+        '''
 
         existing_options = { option.id: option for option in self.options.all() }
+
         updated_options = question_dict['options']
+
         self.en_text = question_dict.get('en_text')
         self.hi_text = question_dict.get('hi_text')
         self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
         self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
         self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+
         db.session.add(self)
 
         for updated_option in updated_options:
             id = updated_option['id']
-            option = existing_options[id]
-            option.en_text = updated_option['en_text']
-            option.hi_text = updated_option['hi_text']
-            option.correct = updated_option['correct']
-            db.session.add(option)
+            #updating options
+            if id:
+                option = existing_options[id]
+                option.en_text = updated_option['en_text']
+                option.hi_text = updated_option['hi_text']
+                option.correct = updated_option['correct']
+                db.session.add(option)
+            else:
+            # creating new options
+                option = {}
+                option['question_id'] = self.id
+                option['en_text'] = updated_option['en_text']
+                option['hi_text'] = updated_option['hi_text']
+                option['correct'] = updated_option['correct']
+                question_option = QuestionOptions.create_option(**option)
 
         db.session.commit()
 

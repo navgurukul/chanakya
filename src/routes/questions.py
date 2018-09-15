@@ -107,6 +107,7 @@ class Question(Resource):
 				'message': "Question id doesn't exist",
 			}
 
+		# if options id are not attached to the question
 		wrong_option_ids = check_option_ids(question, args)
 
 		if wrong_option_ids:
@@ -116,6 +117,7 @@ class Question(Resource):
 				'invalid_option_ids': wrong_option_ids
 			}
 
+		# question update
 		question.update_question(args)
 
 		return {

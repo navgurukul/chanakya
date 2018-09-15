@@ -1,3 +1,8 @@
+'''
+    This file helps with all the upload of file to s3.
+
+'''
+
 import boto3
 from botocore.client import Config
 from werkzeug.datastructures import FileStorage
@@ -25,14 +30,15 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
     random_string = str(uuid.uuid4())
     filename = random_string +'.'+filename_extension
     print(filename, type(filename))
-    #connecting with the s3 instance with upload the file
 
+    #connecting with the s3 instance with upload the file
     session = boto3.Session(
         aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
         aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
     )
 
     s3 = session.resource('s3', config=Config(signature_version='s3v4'))
+
     #file upload using the connection
     try:
         s3.meta.client.upload_fileobj(
