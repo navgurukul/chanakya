@@ -17,7 +17,7 @@ def get_crm_id_from_enrolment(enrolment_key):
 
 def add_enrolment_key(enrolment_key, phone_number, crm_potential_id):
     try:
-        en = Enrolment( enrolment_key=enrolment_key, phone_number=phone_number, 
+        en = Enrolment( enrolment_key=enrolment_key, phone_number=phone_number,
                         crm_potential_id=crm_potential_id)
         db.session.add(en)
         db.session.commit()
@@ -29,7 +29,7 @@ def add_enrolment_key(enrolment_key, phone_number, crm_potential_id):
 
 def create_question(question_details):
     try:
-        options   = question_details["options"] 
+        options   = question_details["options"]
         q_options = Options(option_1=options[0], option_2=options[1], option_3=options[2], option_4=options[3])
         question  = Question(
                                 en_question_text = question_details["en_question_text"],
@@ -45,7 +45,7 @@ def create_question(question_details):
         error = str(e)
         return False, error
     else:
-        
+
         return True, None
 
 def is_valid_enrolment(enrolment_key):
@@ -81,7 +81,7 @@ def get_q_set(global_q_set, config):
         for difficulty in config[category]:
             q_set += get_list_of_q_ids(global_q_set, category, difficulty, config[category][difficulty])
     return q_set
- 
+
 def get_questions_for_q_set(q_set):
     questions = []
     for q_id in q_set:
@@ -109,10 +109,13 @@ def get_all_questions():
     question_details = {}
     for question_set in config:
         question_details[question_set] = {}
+
         question_details[question_set]["info_before"] = config[question_set]["info_before"]
         question_details[question_set]["info_after"]  = config[question_set]["info_after"]
+
         question_details[question_set]["marks_config"]  = config[question_set]["questions"]["marks_config"]
         question_details[question_set]["time_per_question"]  = config[question_set]["questions"]["time_per_question"]
+
         global_q_set = get_global_q_set(config[question_set]["questions"])
         q_set        = get_q_set(global_q_set, config[question_set]['questions']['categories'])
         question_details[question_set]["questions"] = get_questions_for_q_set(q_set)

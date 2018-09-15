@@ -87,11 +87,9 @@ class Student(db.Model):
 
         # create a new student record in the platform with this mobile number
         student, call_from_number = Student.create(stage='EKG', mobile=mobile)
-
          # recording the api call if it was from the helpine
         if from_helpline:
             IncomingCalls.create(student_contact=call_from_number,call_type=app.config['INCOMING_CALL_TYPE'].ekg)
-
         # sending sms to each and everynumber of the student
         message = student.send_enrolment_key(from_helpline)
 
@@ -152,7 +150,7 @@ class Student(db.Model):
                 'sent': True,
             }
 
-
+        print(enrollment.key)
         # getting the test that we have to send the student
         enrollment_message = app.config.get("TEST_ENROLL_MSG").format(test_url=enrollment.key)
 
