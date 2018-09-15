@@ -1,38 +1,20 @@
 from flask_restplus import Resource, reqparse
-<<<<<<< HEAD
-from chanakya.src import api
-=======
 from chanakya.src import api, app, db
 from chanakya.src.models import Student, IncomingCalls, StudentContact
 from flask_restful.inputs import boolean
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
 
 
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
-<<<<<<< HEAD
-    # args_parser = reqparse.RequestParser()
-    # args_parser.add_argument('PhoneNumber', type=int, help='Number to which the sms will be sent')
-    # args_parser.add_argument('record_id')
-    def post(self):
-        return {'data': 'here is some *more* data'}
 
-@api.route('/start/requested_callback')
-class RequestCallBack(Resource):
-    def post(self):
-        return {
-            'data':'Navgurukul se call ajayega apko'
-        }
-=======
+	get_parser = reqparse.RequestParser()
+	get_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
+	get_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
+	get_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
 
-	enrolment_parser = reqparse.RequestParser()
-	enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
-	enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
-	enrolment_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
-
-	@api.doc(parser=enrolment_parser)
+	@api.doc(parser=get_parser)
 	def get(self):
-		args =  self.enrolment_parser.parse_args()
+		args =  self.get_parser.parse_args()
 		student_id = args.get('student_id',None)
 		mobile = args.get('mobile', None)
 		from_helpline = args.get('from_helpline')
@@ -66,13 +48,13 @@ class RequestCallBack(Resource):
 
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-	requested_callback_parser = reqparse.RequestParser()
-	requested_callback_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
+	get_parser = reqparse.RequestParser()
+	get_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
 
-	@api.doc(parser=requested_callback_parser)
+	@api.doc(parser=get_parser)
 	def get(self):
 
-		args = self.requested_callback_parser.parse_args()
+		args = self.get_parser.parse_args()
 		mobile = args.get('mobile', None)
 
 		# finding the contact of the student of have join the platform most recently
@@ -88,4 +70,3 @@ class RequestCallBack(Resource):
 		return{
 			'success': True
 		}
->>>>>>> 67b69fd4dad8ab1074580bf2eaafbb0fd5144268
