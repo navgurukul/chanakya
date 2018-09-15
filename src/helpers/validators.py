@@ -41,7 +41,7 @@ def check_option_ids(question_instance,question_dict):
     '''
         checks whether sent question and options are attached in the database or not
         is any id which has been sent is not present in the db
-        ignore the option with id = 0 (None)
+        and it ignore any new options
 
         params:
             question_instance (its the Questions model instance)
