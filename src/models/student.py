@@ -11,6 +11,8 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     stage = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(200))
+    gender = db.Column(db.Enum(app.config['GENDER']))
+    dob = db.Column(db.Date)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 
@@ -94,6 +96,20 @@ class Student(db.Model):
         message = student.send_enrolment_key(from_helpline)
 
         return message
+
+    def update_data(self, student_data):
+        '''
+         update the data of student Model
+         params: student_data should contain the fields of student instance which needs to be updated
+                 in dictionary format
+                 for example: {'name': 'Amar Kumar Sinha', 'gender': gender.male #enum}
+        return None
+        '''
+        for key, value in student_data.items():
+            if key in self.__dict__.keys():
+                setattr(self, key, value)
+        db.session.add(self)
+        db.session.commit()
 
     def send_enrolment_key(self, from_helpline):
         '''
