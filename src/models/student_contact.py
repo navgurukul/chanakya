@@ -34,7 +34,7 @@ class StudentContact(db.Model):
              contact : str ,required ,length=10
              student_id: int, required
              main_contact: bool, default=False
-             
+
         '''
         student_contact = StudentContact(contact=contact, student_id=student_id, main_contact=main_contact)
         db.session.add(student_contact)

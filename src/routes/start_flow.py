@@ -7,14 +7,14 @@ from flask_restful.inputs import boolean
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
-	enrolment_parser = reqparse.RequestParser()
-	enrolment_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
-	enrolment_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
-	enrolment_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
+	get_parser = reqparse.RequestParser()
+	get_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
+	get_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
+	get_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
 
-	@api.doc(parser=enrolment_parser)
+	@api.doc(parser=get_parser)
 	def get(self):
-		args =  self.enrolment_parser.parse_args()
+		args =  self.get_parser.parse_args()
 		student_id = args.get('student_id',None)
 		mobile = args.get('mobile', None)
 		from_helpline = args.get('from_helpline')
@@ -48,13 +48,13 @@ class GenerateEnrollmentKey(Resource):
 
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-	requested_callback_parser = reqparse.RequestParser()
-	requested_callback_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
+	get_parser = reqparse.RequestParser()
+	get_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
 
-	@api.doc(parser=requested_callback_parser)
+	@api.doc(parser=get_parser)
 	def get(self):
 
-		args = self.requested_callback_parser.parse_args()
+		args = self.get_parser.parse_args()
 		mobile = args.get('mobile', None)
 
 		# finding the contact of the student of have join the platform most recently

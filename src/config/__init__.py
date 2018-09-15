@@ -2,7 +2,6 @@ import os
 
 from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
 
-
 class ChanakyaConfig(object):
 
     # SQLAlchemy
@@ -45,6 +44,8 @@ class ChanakyaConfig(object):
                             "Hard":3
                         }
                 }
+
+
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',

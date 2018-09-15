@@ -12,7 +12,7 @@ from chanakya.src.helpers.response_objects import (
                 question_set
             )
 from chanakya.src.helpers.file_uploader import upload_pdf_to_s3
-from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids
+from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids, check_question_is_in_set
 from chanakya.src.helpers.routes_descriptions import (
                 VALIDATE_ENROLMENT_KEY_DESCRIPTION,
                 PERSONAL_DETAILS_DESCRIPTION
@@ -23,13 +23,13 @@ from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 #Validation for the enrollment key
 @api.route('/test/validate_enrolment_key')
 class EnrollmentKeyValidtion(Resource):
-    enrolment_validation_parser = reqparse.RequestParser()
-    enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
+    get_parser = reqparse.RequestParser()
+    get_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
 
     @api.marshal_with(enrollment_key_validation)
-    @api.doc(parser=enrolment_validation_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
+    @api.doc(parser=get_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
     def get(self):
-        args = self.enrolment_validation_parser.parse_args()
+        args = self.get_parser.parse_args()
         enrollment_key = args.get('enrollment_key', None)
 
         result, enrollment = check_enrollment_key(enrollment_key)
@@ -39,31 +39,23 @@ class EnrollmentKeyValidtion(Resource):
 
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
-    enrolment_validation_parser = reqparse.RequestParser()
-    enrolment_validation_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
-
-    personal_detail_parser = reqparse.RequestParser()
-    personal_detail_parser.add_argument('enrollment_key', type=str, required=True)
-    personal_detail_parser.add_argument('name', type=str, required=True)
-    personal_detail_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
-    personal_detail_parser.add_argument('mobile_number', type=str, required=True)
-    personal_detail_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
+    post_parser = reqparse.RequestParser()
+    post_parser.add_argument('enrollment_key', type=str, required=True)
+    post_parser.add_argument('name', type=str, required=True)
+    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
+    post_parser.add_argument('mobile_number', type=str, required=True)
+    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
 
     @api.marshal_with(enrollment_key_status)
-    @api.expect(personal_detail_parser)
+    @api.expect(post_parser)
     @api.doc(description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
-        args = self.personal_detail_parser.parse_args()
 
-        # student data
-        student_data = {}
-        student_data['name'] = args.get('name' , None)
-        student_data['dob'] = args.get('dob' , None)
-        #enum
-        gender = args.get('gender' ,None)
-        student_data['gender'] = app.config['GENDER'](gender)
-        mobile_number = args.get('mobile_number' , None)  # student_contact data
-        enrollment_key = args.get('enrollment_key', None) # enrollmentkey
+        args = self.post_parser.parse_args()
+        args['gender'] = app.config['GENDER'](args['gender'])
+
+        mobile_number = args['mobile_number']  # student_contact data
+        enrollment_key = args['enrollment_key'] # enrollmentkey
 
         # check the validity of enrollment key
         result, enrollment = check_enrollment_key(enrollment_key)
@@ -73,7 +65,7 @@ class PersonalDetailSubmit(Resource):
             # updating student data
             student_id = enrollment.student_id
             student = Student.query.filter_by(id=student_id).first()
-            student.update_data(student_data)
+            student.update_data(args)
 
             # creating student contact record
             student_contact = StudentContact.create(contact=mobile_number, student_id=student_id)
@@ -97,19 +89,19 @@ class PersonalDetailSubmit(Resource):
 
 @api.route('/test/start_test')
 class TestStart(Resource):
-    enrollment_key_parser = reqparse.RequestParser()
-    enrollment_key_parser.add_argument('enrollment_key', required=True, type=str)
+    get_parser = reqparse.RequestParser()
+    get_parser.add_argument('enrollment_key', required=True, type=str)
 
     start_test_response = api.model('start_test',{
         'error':fields.Boolean(default=False),
-        'questions':fields.Nested(questions_list_obj),
+        'questions':fields.List(fields.Nested(question_obj)),
         'enrollment_key_validation': fields.Boolean(default=True)
     })
 
-    @api.marshal_with(questions_list_obj)
-    @api.doc(parser=enrollment_key_parser)
+    @api.marshal_with(start_test_response)
+    @api.doc(parser=get_parser)
     def get(self):
-        args = self.enrollment_key_parser.parse_args()
+        args = self.get_parser.parse_args()
 
         # check the enrollment key
         enrollment_key =  args.get('enrollment_key')
@@ -123,14 +115,11 @@ class TestStart(Resource):
             }
 
         elif result['valid'] and result['reason'] == 'ALREADY_IN_USED':
-            questions = enrollment.extract_question_set()
+            questions = enrollment.extract_question_from_set()
         else:
             # start the test and send the questions generated randomly
-            current_datetime = datetime.now()
-            enrollment.test_start_time = current_datetime
-            enrollment.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-            questions = Questions.get_random_question_set()
-            question_set = QuestionSet.create_new_set(questions)
+            enrollment.start_test()
+            question_set, questions = QuestionSet.create_new_set()
             enrollment.question_set_id = question_set.id
             db.session.add(enrollment)
             db.session.commit()
@@ -145,15 +134,15 @@ class TestStart(Resource):
 class TestEnd(Resource):
     end_test_response =  api.model('end_test_response',{
         'error': fields.Boolean(default=False),
-        'enrollment_key_validation': fields.Boolean(default=True),
+        'enrollment_key_valid': fields.Boolean(default=True),
         'success': fields.Boolean(default=False),
-        'invalid_question_id': fields.Boolean(default=False)
+        'invalid_question_ids': fields.List(fields.Integer)
     })
 
-    @api.marshal_with(end_test_response)
     @api.expect(questions_attempts)
+    @api.marshal_with(end_test_response)
     def post(self):
-        # import pdb; pdb.set_trace()
+
         args = api.payload
 
         # check the enrollment key
@@ -164,20 +153,31 @@ class TestEnd(Resource):
         if not result['valid']:
             return {
                 'error':True,
-                'enrollment_key_validation':False
+                'enrollment_key_valid':False
             }
         #add questions to db
         questions_attempted = args.get('question_attempted')
+        # is_question_ids_correct = check_question_ids(questions_attempted)
         wrong_question_ids = check_question_ids(questions_attempted)
 
         if wrong_question_ids:
             return {
                 'error':True,
-                'enrollment_key_validation':False,
-                'invalid_question_id': True
+                'enrollment_key_valid':True,
+                'invalid_question_ids': wrong_question_ids
+            }
+        wrong_question_ids = check_question_is_in_set(enrollment, questions_attempted)
+
+        # if not question_is_in_set:
+        if wrong_question_ids:
+            return {
+                'error':True,
+                'enrollment_key_valid':True,
+                'invalid_question_ids': wrong_question_ids
             }
 
         QuestionAttempts.create_attempts(questions_attempted, enrollment)
+        enrollment.end_test()
 
         enrollment.end_test()
 
@@ -190,7 +190,87 @@ class TestEnd(Resource):
 class MoreDetail(Resource):
     def post(self):
         return {
-        'data':'All Detail Submitted'
+            'data':'All Detail Submitted'
+        }
+
+
+
+@api.route('/test/offline_paper')
+class OfflinePaper(Resource):
+    offline_paper_post = api.model('offline_paper_post', {
+        'number_sets':fields.Integer(required=True),
+        'partner_name':fields.String(required=True)
+    })
+
+    sets = api.model('sets', {
+            'sets': fields.List(fields.Nested(question_set))
+        })
+
+    offline_paper_response = api.model('offline_paper_response', {
+        'error': fields.Boolean(default=False),
+        'sets':fields.Nested(sets)
+    })
+
+    @api.marshal_with(offline_paper_response)
+    @api.expect(offline_paper_post)
+    def post(self):
+        args = api.payload
+
+        number_sets = args.get('number_sets')
+        partner_name = args.get('partner_name')
+
+        set_list = []
+
+        for set in range(number_sets):
+            try:
+                # generate the random sets and get question
+                questions_set, questions = QuestionSet.create_new_set(partner_name)
+
+                # render pdf
+                pdf = render_pdf_phantomjs('question_pdf.html', **locals())
+
+                #s3 method that upload the binary file
+                url = upload_pdf_to_s3(string=pdf)
+
+                # update url of question_set
+                question_set.url = url
+                db.session.add(questions_set)
+                db.session.commit()
+
+                set_list.append(question_set)
+            except Exception as e:
+                raise e
+        # return each and every question_set
+        return {
+            'sets': set_list
+        }
+
+    @api.marshal_with(offline_paper_response)
+    def get(self):
+        question_set = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
+        return {
+            'sets': question_set
+        }
+
+
+@api.route('/test/offline_paper/<id>')
+class SingleOfflinePaper(Resource):
+
+    single_set = api.model('single_set', {
+        'error': fields.Boolean(default=False),
+        'set': fields.Nested(question_set)
+    })
+
+    @api.marshal_with(single_set)
+    def get(self, id):
+        question_set = QuestionSet.query.filter_by(id=id).first()
+        if question_set:
+            return {
+                'set': question_set
+            }
+
+        return {
+            'error': True
         }
 
 

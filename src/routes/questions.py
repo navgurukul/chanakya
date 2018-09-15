@@ -8,13 +8,10 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.response_objects import question_obj, create_question
-from chanakya.src.helpers.task_helpers import parse_question_dict
-from chanakya.src.helpers.validators import check_option_ids
+from chanakya.src.helpers.response_objects import question_obj, questions_list_obj, create_question
+from chanakya.src.helpers.task_helpers import parse_question_dict,render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
-
-
 
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
@@ -37,30 +34,46 @@ class UploadQuestionImage(Resource):
 		return {'image_url': image_url}
 
 
-@api.route('/questions/')
-class QuestionList(Resource):
-	questions_list_obj = api.model('questions_list', {
-		'questions_list' : fields.List(fields.Nested(question_obj))
+@api.route('/question/create')
+class CreateQuestion(Resource):
+
+	create_question_obj = api.model('create_question_obj',{
+		'error': fields.Boolean(default=False),
+		'question': fields.Nested(question_obj),
+		'message': fields.String
 	})
+
+	@api.marshal_with(create_question_obj)
+	@api.expect(create_question)
+	def post(self):
+
+		#get the values out of the RequestParser
+		args = api.payload
+		print(args)
+		options = args.get('options')
+		if not options:
+			return {
+				'error':True,
+				'message': 'Required option'
+			}
+
+		#create the question
+		question = Questions.create_question(args)
+
+		return {
+			'question': question,
+			'message': 'QUESTION ADDED'
+		}
+
+@api.route('/question/')
+class AllQuestions(Resource):
 
 	@api.marshal_with(questions_list_obj)
 	def get(self):
 		questions_list = Questions.query.all()
 		return {
-				"questions_list":questions_list
+				"questions":questions_list
 			}
-
-	@api.marshal_with(question_obj)
-	@api.expect(create_question, validate=True)
-	@api.doc(description=CREATE_QUESTION)
-	def post(self):
-
-		args = api.payload
-
-		#create the question
-		question = Questions.create_question(args)
-		return question
-
 
 
 @api.route('/questions/<question_id>')
@@ -82,7 +95,6 @@ class Question(Resource):
 				'error': True,
 				'message': "question_id doesn't exist!"
 			}
-
 		return {
 			'question_data': question
 		}

@@ -31,9 +31,9 @@ question_obj = api.model('questions',{
     'id': fields.Integer,
     'en_text': fields.String,
     'hi_text': fields.String,
-    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']]),
-    'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']]),
-    'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']]),
+    'difficulty': fields.String(attribute=lambda x: x.difficulty.value if x else None),
+    'topic': fields.String(attribute=lambda x: x.topic.value if x else None),
+    'type': fields.String(attribute=lambda x: x.type.value if x else None),
     'options': fields.List(fields.Nested(option_obj))
 })
 
@@ -61,15 +61,22 @@ create_question = api.model('create_questions',{
 
 # questions attempted
 question_attempt = api.model('question_attempt',{
-    'question_id': fields.Integer,
-    'selected_option_id': fields.Integer,
-    'answer': fields.String
+    'question_id': fields.Integer(required=True),
+    'selected_option_id': fields.Integer(required=False),
+    'answer': fields.String(required=False)
 })
 
 
 questions_attempts = api.model('questions_attempts', {
-    'enrollment_key': fields.String,
-    'question_attempted': fields.List(fields.Nested(question_attempt))
+    'enrollment_key': fields.String(required=True),
+    'question_attempted': fields.List(fields.Nested(question_attempt), required=True)
+})
+
+#offline paper
+question_set = api.model('question_set',{
+    'set_number': fields.Integer(attribute='id'),
+    'pdf_url': fields.String(attribute='url'),
+    'partner_name': fields.String
 })
 
 #offline paper
