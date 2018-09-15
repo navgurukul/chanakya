@@ -215,7 +215,7 @@ class Questions(db.Model):
         db.session.add(self)
 
         for updated_option in updated_options:
-            id = updated_option['id']
+            id = updated_option.get('id')
             #updating options
             if id:
                 option = existing_options[id]

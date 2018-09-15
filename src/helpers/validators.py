@@ -54,7 +54,7 @@ def check_option_ids(question_instance,question_dict):
 
     option_ids = [option.id for option in question_instance.options.all()]
 
-    updated_option_ids = [option.get('id') for option in question_dict['options'] if option['id'] != 0]
+    updated_option_ids = [option.get('id') for option in question_dict['options'] if option.get('id')]
 
     wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
 
