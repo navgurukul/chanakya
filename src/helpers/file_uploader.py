@@ -38,13 +38,6 @@ def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'
     )
 
     s3 = session.resource('s3', config=Config(signature_version='s3v4'))
-
-    session = boto3.Session(
-        aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
-        aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
-    )
-
-    s3 = session.resource('s3', config=Config(signature_version='s3v4'))
     #file upload using the connection
     try:
         s3.meta.client.upload_fileobj(

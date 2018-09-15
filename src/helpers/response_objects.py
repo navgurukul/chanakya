@@ -7,6 +7,7 @@ from flask_restplus import fields
 from chanakya.src import app, api
 
 
+<<<<<<< HEAD
 # key validation
 enrollment_key_status = api.model('enrollment_key_status', {
     'success': fields.Boolean,
@@ -14,14 +15,23 @@ enrollment_key_status = api.model('enrollment_key_status', {
 })
 
 enrollment_key_validation = api.model('enrollment_key_validation',{
+=======
+enrollment_key_validation = api.model('EnrollmentKeyValidtion',{
+>>>>>>> questions
     'valid': fields.Boolean,
     'reason': fields.String
 })
 
+<<<<<<< HEAD
 
 #question obbject
 option_obj = api.model('options',{
     'id':fields.Integer,
+=======
+#response and update object for question
+option_obj = api.model('options',{
+    "id": fields.Integer,
+>>>>>>> questions
     "hi_text": fields.String,
     "en_text": fields.String,
     "correct": fields.Boolean(default=False)
@@ -37,11 +47,14 @@ question_obj = api.model('questions',{
     'options': fields.List(fields.Nested(option_obj))
 })
 
+<<<<<<< HEAD
 questions_list_obj = api.model('questions_list', {
     'questions': fields.List(fields.Nested(question_obj))
 })
 
 
+=======
+>>>>>>> questions
 # create question
 create_option = api.model('create_options',{
     "hi_text": fields.String(required=True),
@@ -57,6 +70,7 @@ create_question = api.model('create_questions',{
     'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']], required=True),
     'options': fields.List(fields.Nested(create_option), required=True)
 })
+<<<<<<< HEAD
 
 
 # questions attempted
@@ -85,3 +99,5 @@ question_set = api.model('question_set',{
     'pdf_url': fields.String(attribute=lambda x: x.url if x else None),
     'partner_name': fields.String
 })
+=======
+>>>>>>> questions

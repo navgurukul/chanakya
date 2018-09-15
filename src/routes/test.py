@@ -36,7 +36,6 @@ class EnrollmentKeyValidtion(Resource):
         return result
 
 
-
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
     post_parser = reqparse.RequestParser()

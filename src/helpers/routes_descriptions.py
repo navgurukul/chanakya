@@ -22,6 +22,7 @@ CREATE_QUESTION = '''
         'difficulty': ['Easy', 'Medium', 'Hard'],
         'en_text': Question in English,
         'hi_text': Question in Hindi,
+
         'options' contains a list of option as
         'options': [
             {
