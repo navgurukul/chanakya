@@ -138,7 +138,7 @@ class TestEnd(Resource):
         'invalid_question_ids': fields.List(fields.Integer)
     })
 
-    @api.expect(questions_attempts)
+    @api.expect(questions_attempts, validate=True)
     @api.marshal_with(end_test_response)
     def post(self):
 
@@ -204,7 +204,7 @@ class OfflinePaperList(Resource):
     })
 
     @api.marshal_with(offline_paper_response)
-    @api.expect(offline_paper_post)
+    @api.expect(offline_paper_post, validate=True)
     def post(self):
         args = api.payload
 
