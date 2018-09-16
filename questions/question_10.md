@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "93",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -22,10 +22,10 @@ Question mark ki jagah par sahi figure choose kijiye.
 ### Options
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_10/choice1/option1.png) |281    |
-| 2      | ![](images/question_10/choice1/option2.png) |282    |
-| 3      | ![](images/question_10/choice1/option3.png) |283    |
-| 4      | ![](images/question_10/choice1/option4.png) |284    |
+| 1      | ![](images/question_10/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_10/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_10/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_10/choice1/option4.png) |NULL   |
 
 ## English
 PENDING
@@ -33,7 +33,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "94",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -46,10 +46,10 @@ Question mark ki jagah par sahi figure choose kijiye.
 ### Options
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_10/choice2/option1.png) |285    |
-| 2      | ![](images/question_10/choice2/option2.png) |286    |
-| 3      | ![](images/question_10/choice2/option3.png) |287    |
-| 4      | ![](images/question_10/choice2/option4.png) |288    |
+| 1      | ![](images/question_10/choice2/option1.png) |NULL   |
+| 2      | ![](images/question_10/choice2/option2.png) |NULL   |
+| 3      | ![](images/question_10/choice2/option3.png) |NULL   |
+| 4      | ![](images/question_10/choice2/option4.png) |NULL   |
 
 
 ## English

@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "75",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -22,11 +22,11 @@ Niche diye hue image kitne blocks se bana hua hai?
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | B      |231    |
-| 2      | A      |232    |
-| 3      | E      |233    |
-| 4      | C      |234    |
-| 5      | D      |235    |
+| 1      | B      |NULL   |
+| 2      | A      |NULL   |
+| 3      | E      |NULL   |
+| 4      | C      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -34,7 +34,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "76",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -46,10 +46,10 @@ Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape bana
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | 28     |236    |
-| 2      | 29     |237    |
-| 3      | 27     |238    |
-| 4      | 25     |239    |
+| 1      | 28     |NULL   |
+| 2      | 29     |NULL   |
+| 3      | 27     |NULL   |
+| 4      | 25     |NULL   |
 
 
 ## English

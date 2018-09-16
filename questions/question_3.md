@@ -9,9 +9,9 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "101",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 1,
-  "Option ID": "307"
+  "Option ID": "NULL"
 }
 ```
 
@@ -24,9 +24,9 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "102",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 200,
-  "Option ID": "308"
+  "Option ID": "NULL"
 }
 ```
 

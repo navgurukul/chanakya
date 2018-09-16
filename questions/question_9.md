@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "103",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -20,10 +20,10 @@
 ### Options
 | Option | Values                  |Id     |
 |:-------|:------------------------|:-----:|
-| 1      | 40ml black, 30ml white  |309    |
-| 2      | 30ml black, 20 ml white |310    |
-| 3      | 30ml black, 24ml white  |311    |
-| 4      | 25ml black, 16ml white  |312    |
+| 1      | 40ml black, 30ml white  |NULL   |
+| 2      | 30ml black, 20 ml white |NULL   |
+| 3      | 30ml black, 24ml white  |NULL   |
+| 4      | 25ml black, 16ml white  |NULL   |
 
 ## English
 PENDING
@@ -31,7 +31,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "104",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -42,10 +42,10 @@ Nimbu paani ke ek glass mein 12 gram cheeni dalti hai aur 3 ml nimbu. Neeche diy
 ### Options
 | Option | Values                      |Id     |
 |:-------|:----------------------------|:-----:|
-| 1      | 98 gram cheeni, 21 ml nimbu |313    |
-| 2      | 96 gram cheeni, 24 ml nimbu |314    |
-| 3      | 84 gram cheeni, 24 ml nimbu |315    |
-| 4      | 92 gram cheeni, 25 ml nimbu |316    |
+| 1      | 98 gram cheeni, 21 ml nimbu |NULL   |
+| 2      | 96 gram cheeni, 24 ml nimbu |NULL   |
+| 3      | 84 gram cheeni, 24 ml nimbu |NULL   |
+| 4      | 92 gram cheeni, 25 ml nimbu |NULL   |
 
 
 ## English

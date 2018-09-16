@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "107",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -21,11 +21,11 @@ Fold karne ke baad, ye 2D image kis box ki tarah banega?
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | A      |325    |
-| 2      | E      |326    |
-| 3      | B      |327    |
-| 4      | C      |328    |
-| 5      | D      |329    |
+| 1      | A      |NULL   |
+| 2      | E      |NULL   |
+| 3      | B      |NULL   |
+| 4      | C      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -33,7 +33,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "108",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -45,10 +45,10 @@ Fold karne ke baad, ye 2D image kis house ki tarah banega?
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | A      |330    |
-| 2      | D      |331    |
-| 3      | B      |332    |
-| 4      | C      |333    |
+| 1      | A      |NULL   |
+| 2      | D      |NULL   |
+| 3      | B      |NULL   |
+| 4      | C      |NULL   |
 
 
 ## English

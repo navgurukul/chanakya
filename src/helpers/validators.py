@@ -38,11 +38,48 @@ def check_enrollment_key(enrollment_key):
         }, enrollment
 
 def check_option_ids(question_instance,question_dict):
-    option_ids = [option.id for option in question_instance.options.all()]
-    updated_option_ids = [option['id'] for option in question_dict['options']]
+    '''
+        Helps to check if the options that has id are attached to the question or not
+        if the ids are not attached to question then it return a list of wrong ids
 
-    if len(option_ids) != len(updated_option_ids):
-        return updated_option_ids
+        params:
+            question_instance : Questions model instance
+            question_dict:
+            {
+                'id': 1,
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {   'id': 1,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {   'id': 2,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'id': 3,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        return :
+            list of wrong_option_ids
+    '''
+
+    option_ids = [option.id for option in question_instance.options.all()]
+    updated_option_ids = [option['id'] for option in question_dict['options'] if option.get('id')]
 
     wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
     return wrong_option_ids

@@ -87,7 +87,7 @@ class Student(db.Model):
 
          # recording the api call if it was from the helpine
         if from_helpline:
-            IncomingCalls.create(student_contact=call_from_number,call_type=app.config['INCOMING_CALL_TYPE'].ekg)
+            IncomingCalls.create(student_contact=call_from_number, call_type=app.config['INCOMING_CALL_TYPE'].ekg)
 
         # sending sms to each and everynumber of the student
         message = student.send_enrolment_key(from_helpline)

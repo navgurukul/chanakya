@@ -19,8 +19,8 @@ migrate = Migrate(app, db)
 
 
 # Initialising the exotel api to send sms
-# _exotel_auth = app.config.get("EXOTEL_AUTH")
-# exotel = exotel.Exotel(_exotel_auth['username'], _exotel_auth['password'])
+_exotel_auth = app.config.get("EXOTEL_AUTH")
+exotel = exotel.Exotel(_exotel_auth['username'], _exotel_auth['password'])
 
 # Import all the possible EndPoints
 from chanakya.src.routes import *

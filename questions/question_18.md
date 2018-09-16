@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "99",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -22,10 +22,10 @@ Niche diye hue images mein agla image kaun sa aayega
 ### Options
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_18/choice1/option1.png) |299    |
-| 2      | ![](images/question_18/choice1/option2.png) |300    |
-| 3      | ![](images/question_18/choice1/option3.png) |301    |
-| 4      | ![](images/question_18/choice1/option4.png) |302    |
+| 1      | ![](images/question_18/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_18/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_18/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_18/choice1/option4.png) |NULL   |
 
 ## English
 PENDING
@@ -33,7 +33,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "100",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -48,10 +48,10 @@ Niche diye hue images mein agla image kaun sa aayega
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | C      |303    |
-| 2      | A      |304    |
-| 3      | B      |305    |
-| 4      | D      |306    |
+| 1      | C      |NULL   |
+| 2      | A      |NULL   |
+| 3      | B      |NULL   |
+| 4      | D      |NULL   |
 
 
 ## English

@@ -1,15 +1,19 @@
+'''
+ Take this file outside the chanakya package after that start the server of chanakya
+ and then run this file from outside of chanakya
+
+'''
+
 import mistune, json, bs4, os, requests
 
 from pprint import pprint
 from chanakya import ROOT_DIR
 
-from chanakya.src.helpers.file_uploader import upload_file_to_s3
-
+markdown = mistune.Markdown()
 DEBUG = True
 
 MAIN_URL = 'http://127.0.0.1:5000/questions/'
 
-markdown = mistune.Markdown()
 HEADERS = {'content-type': 'application/json'}
 
 QUESTION_DIRECTORY = os.path.join(ROOT_DIR, 'questions') + '/'
@@ -23,17 +27,32 @@ FILE_CONTENT_TYPES = {
 	'gif': 'image/gif'
 }
 
-difficulty = {
+DIFFICULTY = {
 	'easy': 'Easy',
 	'medium': 'Medium',
 	'hard': 'Hard'
 }
 
-question_type = {
+QUESTION_TYPE = {
 	'mcq' : 'MCQ',
 	'integer_answer' : 'Integer Answer'
 }
 
+def upload_image(image_path):
+	# getting the image file as binary data to be read
+	complete_image_path = QUESTION_DIRECTORY + image_path
+	image_data = open(complete_image_path, 'rb')
+	file_name = image_path.split('/')[-1]
+
+	filename_extension = file_name.split('.')[-1]
+	files = {
+	    'image': ('{0}'.format(file_name), image_data, FILE_CONTENT_TYPES[filename_extension]),
+	}
+	response = requests.post('http://localhost:5000/question/upload_file', files=files)
+	print(response.json())
+	s3_url = response.json()['image_url']
+	# uploading the file to the s3
+	return s3_url
 
 class MDQuestionExtractor:
 	def __init__(self, file):
@@ -53,9 +72,9 @@ class MDQuestionExtractor:
 		data = json.loads(self.soup.find('code').text)
 
 		# rearranging the data to right fields
-		data['type'] = question_type[data['type']]
+		data['type'] = QUESTION_TYPE[data['type']]
 		data['topic'] = 'Topic 1' if DEBUG else data['category'] # Turn off DEBUG when enums are updated
-		data['difficulty'] = difficulty[data['difficulty_level']]
+		data['difficulty'] = DIFFICULTY[data['difficulty_level']]
 
 		del data['difficulty_level']
 		del data['category']
@@ -79,7 +98,7 @@ class MDQuestionExtractor:
 			# update each image with s3 url
 			for image in images:
 				image_path = image.attrs['src']
-				s3_url = self.upload_image(image_path)
+				s3_url = upload_image(image_path)
 				image.attrs.update({'src':s3_url, 'class': 'center-image'})
 
 		return str(soup)
@@ -113,7 +132,7 @@ class MDQuestionExtractor:
 			# question_choice 1
 			choice_1['hi_text'] = self.get_question_html(self.file_data[start_hindi_1:end_hindi_1])
 			choice_1['en_text'] = self.get_question_html(self.file_data[start_english_1:end_english_1])
-			
+
 			# question_choice 2
 			choice_2['hi_text'] = self.get_question_html(self.file_data[start_hindi_2:end_hindi_2])
 			choice_2['en_text'] = self.get_question_html(self.file_data[start_english_2:])
@@ -195,7 +214,7 @@ class MDQuestionExtractor:
 			option_images = td.find_all('img')
 			if option_images:
 				for image in option_images:
-					s3_image_url = self.upload_image(image.get('src'))
+					s3_image_url = upload_image(image.get('src'))
 					image.attrs.update({'src': s3_image_url})
 
 			# adding id of the options if exist
@@ -237,13 +256,23 @@ class MDQuestionExtractor:
 		return options
 
 	def add_to_db(self):
+		'''
+			Helps to add or update a question through api and then update the related question markdown files
+			with question_id and options_id
+
+			update part also helps in creating a new options for MCQ even if you put it in any order.
+
+			return Nothing
+		'''
 		codes = self.soup.find_all('code')
 
 		# getting both the question on the way to api
 		for i, question in enumerate(self.questions):
-			code = json.loads(codes[i+1].text)
 
-			question_id = code['Question ID']
+			# details about the question
+			question_info = json.loads(codes[i+1].text)
+
+			question_id = question_info['Question ID']
 
 			if question_id == 'NOT_ADDED':
 				# create question and update question id
@@ -261,6 +290,7 @@ class MDQuestionExtractor:
 				# updating the options with the id
 				options = resp['options']
 				type = resp['type']
+
 				for option in options:
 					id = option['id']
 
@@ -273,10 +303,30 @@ class MDQuestionExtractor:
 			else:
 				# just update the question
 				question['id'] = int(question_id)
+
 				question_update_url = MAIN_URL +'{}'.format(question_id)
 
 				# sending the question on the way to update itself
 				resp = requests.put(question_update_url, data=json.dumps(question), headers=HEADERS).json()
+
+				# finding all the old option ids to check what is the ids of newly added option
+				old_option_ids = [option['id'] for option in question['options'] if option.get('id')]
+
+				# response options after updating
+				new_options = resp['question']['options']
+
+				type = resp['question']['type']
+
+				#updating the new options
+
+				if type == 'MCQ':
+					for option in new_options:
+						id = option['id']
+						# if the options is newly added
+						if not id in old_option_ids:
+							# updating the table for mcq question
+							self.file_data = self.file_data.replace('NULL', str(id).ljust(4), 1)
+
 				pprint(resp)
 
 		#updating the md text file with the changes made
@@ -286,26 +336,8 @@ class MDQuestionExtractor:
 			print('Data Added! for file : \n', self.file_path)
 
 
-	def upload_image(self, image_path):
-		# getting the image file as binary data to be read
-		complete_image_path = QUESTION_DIRECTORY + image_path
-		image_data = open(complete_image_path, 'rb')
-		file_name = image_path.split('/')[-1]
 
-		filename_extension = file_name.split('.')[-1]
-
-		files = {
-		    'image': ('{0}'.format(file_name), image_data, FILE_CONTENT_TYPES[filename_extension]),
-		}
-
-		response = requests.post('http://localhost:5000/question/upload_file', files=files)
-		print(response.json())
-		s3_url = response.json()['image_url']
-		# uploading the file to the s3
-		# s3_url = upload_file_to_s3(file = image_data, filename= image_data.name)
-
-		return s3_url
-
+# all the md files
 files = [file for file in os.listdir(QUESTION_DIRECTORY) if file.endswith('.md')]
 files.remove('README.md')
 

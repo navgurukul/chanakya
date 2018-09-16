@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "77",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -22,11 +22,11 @@ Niche diye hue image ka reflection kaisa hoga?
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | E      |240    |
-| 2      | A      |241    |
-| 3      | C      |242    |
-| 4      | B      |243    |
-| 5      | D      |244    |
+| 1      | E      |NULL   |
+| 2      | A      |NULL   |
+| 3      | C      |NULL   |
+| 4      | B      |NULL   |
+| 5      | D      |NULL   |
 
 ## English
 PENDING
@@ -34,7 +34,7 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "78",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -47,10 +47,10 @@ Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape bana
 ### Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | D      |245    |
-| 2      | C      |246    |
-| 3      | B      |247    |
-| 4      | A      |248    |
+| 1      | D      |NULL   |
+| 2      | C      |NULL   |
+| 3      | B      |NULL   |
+| 4      | A      |NULL   |
 
 
 ## English
