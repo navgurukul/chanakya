@@ -39,11 +39,11 @@ class EnrollmentKeyValidtion(Resource):
 @api.route('/test/personal_details')
 class PersonalDetailSubmit(Resource):
     post_parser = reqparse.RequestParser()
-    post_parser.add_argument('enrollment_key', type=str, required=True)
-    post_parser.add_argument('name', type=str, required=True)
-    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True)
-    post_parser.add_argument('mobile_number', type=str, required=True)
-    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True)
+    post_parser.add_argument('enrollment_key', type=str, required=True, location='json')
+    post_parser.add_argument('name', type=str, required=True, location='json')
+    post_parser.add_argument('dob', help='DD-MM-YYYY', type=lambda x: datetime.strptime(x, "%d-%m-%Y"), required=True, location='json')
+    post_parser.add_argument('mobile_number', type=str, required=True, location='json')
+    post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True, location='json')
 
     @api.marshal_with(enrollment_key_status)
     @api.expect(post_parser)
@@ -178,8 +178,6 @@ class TestEnd(Resource):
         QuestionAttempts.create_attempts(questions_attempted, enrollment)
         enrollment.end_test()
 
-        enrollment.end_test()
-
         return {
             'success': True
         }
@@ -193,89 +191,8 @@ class MoreDetail(Resource):
         }
 
 
-
 @api.route('/test/offline_paper')
-class OfflinePaper(Resource):
-    offline_paper_post = api.model('offline_paper_post', {
-        'number_sets':fields.Integer(required=True),
-        'partner_name':fields.String(required=True)
-    })
-
-    sets = api.model('sets', {
-            'sets': fields.List(fields.Nested(question_set))
-        })
-
-    offline_paper_response = api.model('offline_paper_response', {
-        'error': fields.Boolean(default=False),
-        'sets':fields.Nested(sets)
-    })
-
-    @api.marshal_with(offline_paper_response)
-    @api.expect(offline_paper_post)
-    def post(self):
-        args = api.payload
-
-        number_sets = args.get('number_sets')
-        partner_name = args.get('partner_name')
-
-        set_list = []
-
-        for set in range(number_sets):
-            try:
-                # generate the random sets and get question
-                questions_set, questions = QuestionSet.create_new_set(partner_name)
-
-                # render pdf
-                pdf = render_pdf_phantomjs('question_pdf.html', **locals())
-
-                #s3 method that upload the binary file
-                url = upload_pdf_to_s3(string=pdf)
-
-                # update url of question_set
-                question_set.url = url
-                db.session.add(questions_set)
-                db.session.commit()
-
-                set_list.append(question_set)
-            except Exception as e:
-                raise e
-        # return each and every question_set
-        return {
-            'sets': set_list
-        }
-
-    @api.marshal_with(offline_paper_response)
-    def get(self):
-        question_set = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
-        return {
-            'sets': question_set
-        }
-
-
-@api.route('/test/offline_paper/<id>')
-class SingleOfflinePaper(Resource):
-
-    single_set = api.model('single_set', {
-        'error': fields.Boolean(default=False),
-        'set': fields.Nested(question_set)
-    })
-
-    @api.marshal_with(single_set)
-    def get(self, id):
-        question_set = QuestionSet.query.filter_by(id=id).first()
-        if question_set:
-            return {
-                'set': question_set
-            }
-
-        return {
-            'error': True
-        }
-
-
-
-@api.route('/test/offline_paper')
-class OfflinePaper(Resource):
+class OfflinePaperList(Resource):
     offline_paper_post = api.model('offline_paper_post', {
         'number_sets':fields.Integer(required=True),
         'partner_name':fields.String(required=True)
@@ -299,23 +216,25 @@ class OfflinePaper(Resource):
         for i in range(number_sets):
             try:
                 # generate the random sets and get question
-                questions = Questions.get_random_question_set()
-                set = QuestionSet.create_new_set(questions, partner_name)
+                set_instance, questions = QuestionSet.create_new_set(partner_name)
 
                 # render pdf
                 pdf = render_pdf_phantomjs('question_pdf.html', **locals())
 
                 #s3 method that upload the binary file
                 url = upload_pdf_to_s3(string=pdf)
+
                 print(url)
+
                 # # update url of question_set
-                set.url = url
-                db.session.add(set)
+                set_instance.url = url
+                db.session.add(set_instance)
                 db.session.commit()
 
-                set_list.append(set)
+                set_list.append(set_instance)
             except Exception as e:
                 raise e
+
         print(set_list)
         # return each and every question_set
         return {
@@ -325,31 +244,31 @@ class OfflinePaper(Resource):
     @api.marshal_with(offline_paper_response)
     def get(self):
 
-        question_sets = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
+        set_instance = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
         return {
-            'question_sets': question_sets
+            'question_sets': set_instance
         }
 
 
 @api.route('/test/offline_paper/<id>')
-class SingleOfflinePaper(Resource):
+class OfflinePaper(Resource):
 
-    single_set = api.model('single_set', {
+    set_response = api.model('set_response', {
         'error': fields.Boolean(default=False),
+        'set': fields.Nested(question_set),
         'message':fields.String,
-        'set': fields.Nested(question_set)
     })
 
-    @api.marshal_with(single_set)
+    @api.marshal_with(set_response)
     def get(self, id):
 
-        question_set = QuestionSet.query.filter_by(id=id).first()
-        if question_set:
+        set_instance = QuestionSet.query.filter_by(id=id).first()
+        if set_instance:
             return {
-                'set': question_set
+                'set': set_instance
             }
 
         return {
             'error': True,
-            'message': "id doesn't exist"
+            'message': "Set doesn't exist"
         }

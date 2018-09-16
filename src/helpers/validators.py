@@ -86,10 +86,12 @@ def check_question_ids(questions_attempt):
     for question_attempt in questions_attempt:
         question_id = question_attempt.get('question_id')
         option_id = question_attempt.get('selected_option_id')
-        question = questions_id_dict[question_id]
-        option_id_list = [option.id for option in question.options.all()]
-        if not option_id in option_id_list and option_id:
-            wrong_question_ids.append(question_id)
+
+        if option_id:
+            question = questions_id_dict[question_id]
+            option_id_list = [option.id for option in question.options.all()]
+            if not option_id in option_id_list and option_id:
+                wrong_question_ids.append(question_id)
 
     return wrong_question_ids
 
@@ -125,23 +127,46 @@ def check_question_is_in_set(enrollment, questions_attempt):
 
 def check_option_ids(question_instance,question_dict):
     '''
-        checks whether sent question and options are attached in the database or not
-        is any id which has been sent is not present in the db
-        ignore the option with id = 0 (None)
-
+        Helps to check if the options that has id are attached to the question or not
+        if the ids are not attached to question then it return a list of wrong ids
         params:
-            question_instance (its the Questions model instance)
-            question_dict (contains a dictionary of questions in it which is sent through the api)
-
-        return:
-            list of wrong options id
-
+            question_instance : Questions model instance
+            question_dict:
+            {
+                'id': 1,
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {   'id': 1,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {   'id': 2,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'id': 3,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        return :
+            list of wrong_option_ids [2,3]
     '''
 
-    option_ids = [option.id for option in question_instance.options.all()]
+    existing_option_ids = [option.id for option in question_instance.options.all()]
+    updated_option_ids = [option['id'] for option in question_dict['options'] if option.get('id')]
 
-    updated_option_ids = [option.get('id') for option in question_dict['options'] if option['id'] != 0]
-
-    wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
-
+    wrong_option_ids = [id for id in updated_option_ids if not id in existing_option_ids]
     return wrong_option_ids

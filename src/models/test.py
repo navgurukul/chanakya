@@ -109,8 +109,8 @@ class EnrolmentKey(db.Model):
 
     def start_test(self):
         '''
-            for starting the test for each enrollment key
-
+            start the test for the student and provide him a time to end test
+            which is define in the config file
         '''
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
@@ -233,7 +233,6 @@ class Questions(db.Model):
                 random.shuffle(question_list)
                 required_question_num = topics[topic][difficulty]
                 main_questions_list+=question_list[:required_question_num]
-
         return main_questions_list
 
     def update_question(self, question_dict):
@@ -287,7 +286,7 @@ class Questions(db.Model):
         db.session.add(self)
 
         for updated_option in updated_options:
-            id = updated_option['id']
+            id = updated_option.get('id')
             #updating options
             if id:
                 option = existing_options[id]
@@ -372,8 +371,10 @@ class QuestionAttempts(db.Model):
         # recording the answer
         for question_attempt in questions_attempts:
             question_attempt['enrolment_key_id'] = enrollment.id
-            if not question_attempt['selected_option_id']:
+            if not question_attempt.get('selected_option_id'):
                 question_attempt['selected_option_id'] = None
+            if not question_attempt.get('answer'):
+                question_attempt['answer'] = None
             attempt = QuestionAttempts(**question_attempt)
             db.session.add(attempt)
         db.session.commit()
@@ -404,7 +405,7 @@ class QuestionSet(db.Model):
         question_set = QuestionSet(partner_name=partner_name)
         db.session.add(question_set)
         db.session.commit()
-
+        print(question_set.id)
         # save the set to database in orderwise
         for index, question in enumerate(questions):
             question_order = QuestionOrder(question_order=index+1, question_id=question.id, set_id=question_set.id)

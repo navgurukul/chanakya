@@ -17,8 +17,9 @@ VALIDATE_ENROLMENT_KEY_DESCRIPTION = '''
 
 CREATE_QUESTION = '''
         choice fields value that can be passed:
+
         'type': ['MCQ', 'Integer Answer'],
-        'topic': ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4'],
+        'topic': ['BASIC_MATH', 'ABSTRACT_REASONING', 'NON_VERBAL_LOGICAL_REASONING', 'Topic 4'],
         'difficulty': ['Easy', 'Medium', 'Hard'],
         'en_text': Question in English,
         'hi_text': Question in Hindi,

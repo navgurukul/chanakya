@@ -10,7 +10,6 @@ from flask_restplus import reqparse
 from chanakya.src import app
 from werkzeug.utils import secure_filename
 import uuid
-from io import BytesIO
 
 
 def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):

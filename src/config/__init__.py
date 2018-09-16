@@ -20,17 +20,17 @@ class ChanakyaConfig(object):
                         #how many question should be generated according to the category of question
                         # and the difficulty level each question has
                         "topic":{
-                            "Topic 1":{
+                            "BASIC_MATH":{
                                 "Easy":3, # number of question that should be generated
                                 "Medium":3,
                                 "Hard":3
                             },
-                            "Topic 2":{
+                            "ABSTRACT_REASONING":{
                                 "Easy":2,
                                 "Medium":2,
                                 "Hard":2
                             },
-                            "Topic 3":{
+                            "NON_VERBAL_LOGICAL_REASONING":{
                                 "Easy":1,
                                 "Medium":1,
                                 "Hard":1

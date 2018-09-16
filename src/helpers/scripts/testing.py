@@ -1,3 +1,6 @@
+'''
+    file to test start to end of test from enrollment genrated to start_test and then finshing it up
+'''
 import requests
 from pprint import pprint
 import json
@@ -14,7 +17,7 @@ data = {
     'mobile_number':'7896121314',
     'gender':'MALE'
 }
-resp = requests.post(personal_details_url, data=data)
+resp = requests.post(personal_details_url, data=json.dumps(data), headers = {'content-type': 'application/json'})
 pprint(resp.json())
 
 #start test
@@ -32,21 +35,20 @@ questions_attempted = []
 questions = response_json['questions']
 for question in questions:
     data = {}
-    if question['type'] == 'MQC':
+    if question['type'] == 'MCQ':
         options = question['options']
         data['question_id'] = question['id']
         data['selected_option_id'] = options[0]['id']
-        data['answer'] = None
     else:
         options = question['options']
         data['question_id'] = question['id']
-        data['selected_option_id'] = 0
-        data['answer'] = options[0]['en_text']
+        data['answer'] = 'some'
     questions_attempted.append(data)
 
 
 input('End the test? ')
 end_test['question_attempted'] = questions_attempted
+
 pprint(end_test)
 
 # end test

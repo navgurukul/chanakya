@@ -97,7 +97,8 @@ class Student(db.Model):
 
     def update_data(self, student_data):
         '''
-            update the student_data
+            method that update the student data for the same instance
+            with provided the fields as key in a dictionary
         '''
         for key, value in student_data.items():
             if key in self.__dict__.keys():

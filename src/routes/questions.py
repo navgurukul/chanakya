@@ -9,10 +9,12 @@ from chanakya.src.models import (
 			)
 from werkzeug.datastructures import FileStorage
 from chanakya.src.helpers.response_objects import question_obj, questions_list_obj, create_question
-from chanakya.src.helpers.task_helpers import parse_question_dict,render_pdf_phantomjs
+from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 from chanakya.src.helpers.validators import check_option_ids
+
+
 
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
@@ -35,7 +37,7 @@ class UploadQuestionImage(Resource):
 		return {'image_url': image_url}
 
 
-@api.route('/question')
+@api.route('/questions/')
 class QuestionList(Resource):
 	questions_list_obj = api.model('questions_list', {
 		'questions_list' : fields.List(fields.Nested(question_obj))
