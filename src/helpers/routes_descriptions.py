@@ -1,3 +1,8 @@
+'''
+    Contains the description of each routes
+
+'''
+
 VALIDATE_ENROLMENT_KEY_DESCRIPTION = '''
         responses:
         'valid':{

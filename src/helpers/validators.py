@@ -75,7 +75,7 @@ def check_option_ids(question_instance,question_dict):
                 ]
             }
         return :
-            list of wrong_option_ids
+            list of wrong_option_ids [2,3]
     '''
 
     option_ids = [option.id for option in question_instance.options.all()]

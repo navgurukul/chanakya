@@ -7,12 +7,16 @@
 import mistune, json, bs4, os, requests
 
 from pprint import pprint
-from chanakya import ROOT_DIR
+from chanakya import ROOT_DIR ## TODO: Rishabh can you add a soft-code here that can help to get the location of chanakya module
 
 markdown = mistune.Markdown()
-DEBUG = True
 
-MAIN_URL = 'http://127.0.0.1:5000/questions/'
+##### CONFIG #####
+
+DEBUG = True
+SERVER_URL = 'http://127.0.0.1:5000/'
+
+MAIN_URL = SERVER_URL+'questions/'
 
 HEADERS = {'content-type': 'application/json'}
 
@@ -38,6 +42,8 @@ QUESTION_TYPE = {
 	'integer_answer' : 'Integer Answer'
 }
 
+
+####### helper ########
 def upload_image(image_path):
 	# getting the image file as binary data to be read
 	complete_image_path = QUESTION_DIRECTORY + image_path
@@ -54,6 +60,8 @@ def upload_image(image_path):
 	# uploading the file to the s3
 	return s3_url
 
+
+###### Question Extractor #######
 class MDQuestionExtractor:
 	def __init__(self, file):
 		self.file_path = QUESTION_DIRECTORY + file
@@ -179,8 +187,37 @@ class MDQuestionExtractor:
 
 	def options_extractor(self):
 		'''
-			options extractor return a list of options that is being extracted
-			as per the api requires
+			extract options based on mcq or integer_answer
+			using mcq_extractor and integer_extractor
+			and return options for both the questions choice
+
+			option_1 or option 2 :
+				mcq extractor
+				[{ 'correct': False,
+				   'en_text': '<td style="text-align:left">40ml black, '
+							  '30ml white</td>',
+				   'hi_text': '<td style="text-align:left">40ml black, '
+							  '30ml white</td>',
+				   'id': 87},
+				  {'correct': False,
+				   'en_text': '<td style="text-align:left">30ml black, '
+							  '20 ml white</td>',
+				   'hi_text': '<td style="text-align:left">30ml black, '
+							  '20 ml white</td>',
+				   'id': 88},
+				  {'correct': True,
+				   'en_text': '<td style="text-align:left">30ml black, '
+							  '24ml white</td>',
+				   'hi_text': '<td style="text-align:left">30ml black, '
+							  '24ml white</td>',
+				   'id': 89}]
+				integer extractor
+				  [{'correct': True,
+				   'en_text': '<td style="text-align:left">25ml black, '
+							  '16ml white</td>',
+				   'hi_text': '<td style="text-align:left">25ml black, '
+							  '16ml white</td>'}]
+
 		'''
 
 		code_soup = self.soup.find_all('code')
@@ -199,6 +236,44 @@ class MDQuestionExtractor:
 
 
 	def mcq_extractor(self, table, code_soup):
+		'''
+			for extracting the MCQ question option and making it as dictionary format to be uploaded
+			the function also heps to update the whole option images if it exist with s3 url and creating option dictionary
+			list in which each option has 'id' if it exist else it has no 'id' key
+
+			Marks correct for the correct options
+
+			params:
+				table: BS4 soup format of the options table
+				code_soup: carring the details of the question like correct answer
+
+			return:
+						[{ 'correct': False,
+                           'en_text': '<td style="text-align:left">40ml black, '
+                                      '30ml white</td>',
+                           'hi_text': '<td style="text-align:left">40ml black, '
+                                      '30ml white</td>',
+                           'id': 87},
+                          {'correct': False,
+                           'en_text': '<td style="text-align:left">30ml black, '
+                                      '20 ml white</td>',
+                           'hi_text': '<td style="text-align:left">30ml black, '
+                                      '20 ml white</td>',
+                           'id': 88},
+                          {'correct': True,
+                           'en_text': '<td style="text-align:left">30ml black, '
+                                      '24ml white</td>',
+                           'hi_text': '<td style="text-align:left">30ml black, '
+                                      '24ml white</td>',
+                           'id': 89},
+
+						   #### if we update the question with new option this is how the new option looks like ####
+                          {'correct': False,
+                           'en_text': '<td style="text-align:left">25ml black, '
+                                      '16ml white</td>',
+                           'hi_text': '<td style="text-align:left">25ml black, '
+                                      '16ml white</td>'}]
+		'''
 		# extract all the soup of the td options
 		tds = [tr.find_all('td')[1] for tr in table.find_all('tr')[1:] ]
 		#extract the id of the options sequential wise
@@ -236,6 +311,30 @@ class MDQuestionExtractor:
 		return options
 
 	def integer_extractor(self, code_soup):
+		'''
+			it helps to create option dictionary for the integer_answer type question
+			since it's single option the correct value will always be True
+			params:
+				code_soup: which is a soup format data in which it contains correct answer and it's 'Option ID'
+				for single option type.
+
+			return  {
+					  'correct': True,
+					  'en_text': '<td style="text-align:left">25ml black, '
+								 '16ml white</td>',
+					  'hi_text': '<td style="text-align:left">25ml black, '
+								 '16ml white</td>',
+					  'id': 90
+					}
+					or for new option
+					{
+					  'correct': True,
+					  'en_text': '<td style="text-align:left">25ml black, '
+								 '16ml white</td>',
+					  'hi_text': '<td style="text-align:left">25ml black, '
+								 '16ml white</td>'
+					}
+		'''
 		# questionsMetaChoiceData
 		meta_choice_data = json.loads(code_soup.text)
 		answer = meta_choice_data['Correct Answer']
@@ -255,12 +354,18 @@ class MDQuestionExtractor:
 
 		return options
 
+	############# API CALL PART ##############
 	def add_to_db(self):
 		'''
 			Helps to add or update a question through api and then update the related question markdown files
 			with question_id and options_id
 
-			update part also helps in creating a new options for MCQ even if you put it in any order.
+			calls the API
+				/questions/ to create a new question
+				/question/<question_id> to update a new question
+
+			update part also creates a new options in the database for MCQ you just need to add it to the md file
+			in the same format.
 
 			return Nothing
 		'''
@@ -337,6 +442,7 @@ class MDQuestionExtractor:
 
 
 
+############## THE Main part #############
 # all the md files
 files = [file for file in os.listdir(QUESTION_DIRECTORY) if file.endswith('.md')]
 files.remove('README.md')

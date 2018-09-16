@@ -80,7 +80,8 @@ class EnrolmentKey(db.Model):
 
     def start_test(self):
         '''
-            initiate the test of a student.
+            start the test for the student and provide him a time to end test
+            which is define in the config file
 
         '''
         current_datetime = datetime.now()
