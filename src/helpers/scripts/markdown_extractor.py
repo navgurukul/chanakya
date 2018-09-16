@@ -75,7 +75,12 @@ class MDQuestionExtractor:
 	def question_extra_data(self):
 		'''
 			extracting the question data like category, type , difficulty and making it to be
-			as dict so it can be added to database.
+			as dict so it can be added to api.
+			{
+				'type': 'MCQ',
+				'topic': 'Topic 1',
+				'difficulty': 'Easy'
+			}
 		'''
 		data = json.loads(self.soup.find('code').text)
 
@@ -95,7 +100,8 @@ class MDQuestionExtractor:
 			and then changing the whole md text to html format so it can be added to database.
 			params: md text
 
-			return html_soup as string
+
+			return(html_soup as string of question en_text and hi_text)
 
 		'''
 		html_string = markdown(text)
@@ -115,6 +121,42 @@ class MDQuestionExtractor:
 		'''
 			extracting both the question choices as a dict file which can be sent to the api
 			/questions/ or /questions/<question_id>
+			and it add both the question choices to the self.questions
+
+			questions extracted as
+				questions = {
+					'en_text': 'Some English Question Text',
+					'hi_text': 'Some Hindi Question Text',
+					'type': 'MCQ',
+					'topic': 'Topic 1',
+					'difficulty': 'Easy',
+					'options': [
+						{
+							'id': 87
+							'correct': False,
+							'en_text': '<td style="text-align:left">40ml black, '
+										'30ml white</td>',
+							'hi_text': '<td style="text-align:left">40ml black, '
+										'30ml white</td>',
+						},
+						{
+							'id': 88
+							'correct': False,
+					   		'en_text': '<td style="text-align:left">30ml black, '
+								  '20 ml white</td>',
+					   		'hi_text': '<td style="text-align:left">30ml black, '
+								  '20 ml white</td>',
+						},
+						{
+							'correct': True,
+						  	'en_text': '<td style="text-align:left">30ml black, '
+									  '24ml white</td>',
+						  	'hi_text': '<td style="text-align:left">30ml black, '
+								  '24ml white</td>'
+						}
+					]
+				}
+
 
 		'''
 		choice_1 ,  choice_2 = {}, {}
@@ -248,31 +290,41 @@ class MDQuestionExtractor:
 				code_soup: carring the details of the question like correct answer
 
 			return:
-						[{ 'correct': False,
-                           'en_text': '<td style="text-align:left">40ml black, '
-                                      '30ml white</td>',
-                           'hi_text': '<td style="text-align:left">40ml black, '
-                                      '30ml white</td>',
-                           'id': 87},
-                          {'correct': False,
-                           'en_text': '<td style="text-align:left">30ml black, '
+						[
+							{
+								'correct': False,
+	                           	'en_text': '<td style="text-align:left">40ml black, '
+	                                      '30ml white</td>',
+	                           	'hi_text': '<td style="text-align:left">40ml black, '
+	                                      '30ml white</td>',
+	                           	'id': 87
+							},
+                            {
+						  		'correct': False,
+                           		'en_text': '<td style="text-align:left">30ml black, '
                                       '20 ml white</td>',
-                           'hi_text': '<td style="text-align:left">30ml black, '
+                           		'hi_text': '<td style="text-align:left">30ml black, '
                                       '20 ml white</td>',
-                           'id': 88},
-                          {'correct': True,
-                           'en_text': '<td style="text-align:left">30ml black, '
+                           		'id': 88
+							},
+                          	{
+								'correct': True,
+                           		'en_text': '<td style="text-align:left">30ml black, '
                                       '24ml white</td>',
-                           'hi_text': '<td style="text-align:left">30ml black, '
+                           		'hi_text': '<td style="text-align:left">30ml black, '
                                       '24ml white</td>',
-                           'id': 89},
+                           		'id': 89
+							},
 
 						   #### if we update the question with new option this is how the new option looks like ####
-                          {'correct': False,
-                           'en_text': '<td style="text-align:left">25ml black, '
+                          	{
+						  		'correct': False,
+                           		'en_text': '<td style="text-align:left">25ml black, '
                                       '16ml white</td>',
-                           'hi_text': '<td style="text-align:left">25ml black, '
-                                      '16ml white</td>'}]
+                           		'hi_text': '<td style="text-align:left">25ml black, '
+                                      '16ml white</td>'
+							}
+						]
 		'''
 		# extract all the soup of the td options
 		tds = [tr.find_all('td')[1] for tr in table.find_all('tr')[1:] ]
@@ -409,10 +461,10 @@ class MDQuestionExtractor:
 				# just update the question
 				question['id'] = int(question_id)
 
-				question_update_url = MAIN_URL +'{}'.format(question_id)
+				QUESTION_UPDATE_URL = MAIN_URL +'{}'.format(question_id)
 
 				# sending the question on the way to update itself
-				resp = requests.put(question_update_url, data=json.dumps(question), headers=HEADERS).json()
+				resp = requests.put(QUESTION_UPDATE_URL, data=json.dumps(question), headers=HEADERS).json()
 
 				# finding all the old option ids to check what is the ids of newly added option
 				old_option_ids = [option['id'] for option in question['options'] if option.get('id')]
@@ -443,6 +495,7 @@ class MDQuestionExtractor:
 
 
 ############## THE Main part #############
+
 # all the md files
 files = [file for file in os.listdir(QUESTION_DIRECTORY) if file.endswith('.md')]
 files.remove('README.md')
