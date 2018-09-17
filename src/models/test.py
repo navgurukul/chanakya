@@ -386,7 +386,8 @@ class QuestionSet(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     partner_name = db.Column(db.String(200))
-    url = db.Column(db.String(200))
+    question_pdf_url= db.Column(db.String(200))
+    answer_pdf_url= db.Column(db.String(200))
     questions = db.relationship('QuestionOrder', backref='set', cascade='all, delete-orphan', lazy='dynamic')
 
     @staticmethod

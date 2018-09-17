@@ -219,15 +219,19 @@ class OfflinePaperList(Resource):
                 set_instance, questions = QuestionSet.create_new_set(partner_name)
 
                 # render pdf
-                pdf = render_pdf_phantomjs('question_pdf.html', **locals())
+                question_pdf = render_pdf_phantomjs('question_pdf.html', **locals())
+                answer_pdf = render_pdf_phantomjs('answer_pdf.html', **locals())
 
                 #s3 method that upload the binary file
-                url = upload_pdf_to_s3(string=pdf)
+                question_pdf_s3_url = upload_pdf_to_s3(string=question_pdf)
+                answer_pdf_s3_url = upload_pdf_to_s3(string=answer_pdf)
 
-                print(url)
+                print(question_pdf_s3_url)
+                print(answer_pdf_s3_url)
 
                 # # update url of question_set
-                set_instance.url = url
+                set_instance.question_pdf_url = question_pdf_s3_url
+                set_instance.answer_pdf_url = answer_pdf_s3_url
                 db.session.add(set_instance)
                 db.session.commit()
 
