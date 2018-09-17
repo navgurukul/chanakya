@@ -7,7 +7,7 @@ from flask_restplus import fields
 from chanakya.src import app, api
 
 
-enrollment_key_validation = api.model('EnrollmentKeyValidtion',{
+enrollment_key_validation = api.model('enrollment_key_validation',{
     'valid': fields.Boolean,
     'reason': fields.String
 })
