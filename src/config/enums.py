@@ -32,3 +32,16 @@ class OutgoingSMSType(enum.Enum):
     alg_interview_pass = 'Algebra Interview Passed'
     alg_interview_fail = 'Algebra Interview Failed'
     other = 'Other'
+
+class Caste(enum.Enum):
+    sc = "SC"
+    st = "ST"
+    obc = "OBC"
+    general = "General"
+    other = "Others"
+
+class Religion(enum.Enum):
+    hindu = 'Hindu'
+    muslim = 'Muslim'
+    christian = 'Christian'
+    jain = 'Jain'

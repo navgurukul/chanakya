@@ -1,6 +1,15 @@
 import os
 
-from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
+from .enums import (
+        QuestionDifficulty,
+        QuestionTopic,
+        QuestionType,
+        IncomingCallType,
+        OutgoingSMSType,
+        Gender,
+        Caste,
+        Religion
+    )
 
 class ChanakyaConfig(object):
 
@@ -14,6 +23,8 @@ class ChanakyaConfig(object):
     INCOMING_CALL_TYPE = IncomingCallType
     OUTGOING_SMS_TYPE = OutgoingSMSType
     GENDER = Gender
+    CASTE = Caste
+    RELIGION = Religion
 
     #exam_config to generate question
     QUESTION_CONFIG  = {

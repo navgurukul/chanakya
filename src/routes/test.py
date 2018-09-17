@@ -15,7 +15,8 @@ from chanakya.src.helpers.file_uploader import upload_pdf_to_s3
 from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids, check_question_is_in_set
 from chanakya.src.helpers.routes_descriptions import (
                 VALIDATE_ENROLMENT_KEY_DESCRIPTION,
-                PERSONAL_DETAILS_DESCRIPTION
+                PERSONAL_DETAILS_DESCRIPTION,
+                MORE_STUDENT_DETAIL
             )
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 
@@ -184,12 +185,52 @@ class TestEnd(Resource):
 
 
 @api.route('/test/extra_details')
-class MoreDetail(Resource):
-    def post(self):
-        return {
-            'data':'All Detail Submitted'
-        }
+class MoreStudentDetail(Resource):
+    more_student_detail_post = api.model('more_detail', {
+        'enrollment_key':fields.String(required=True),
+        'caste': fields.String(enum=[attr.value for attr in app.config['CASTE']], required=True),
+        'religion': fields.String(enum=[attr.value for attr in app.config['RELIGION']], required=True),
+        'monthly_family_member': fields.Integer(required=True),
+        'total_family_member': fields.Integer(required=True),
+        'family_member_income_detail': fields.String(required=True)
+    })
 
+    more_student_detail_response = api.model('more_detail_response', {
+        'success': fields.Boolean(default=False),
+        'error':fields.Boolean(default=False),
+        'message':fields.String
+    })
+    @api.doc(description=MORE_STUDENT_DETAIL)
+    @api.marshal_with(more_student_detail_response)
+    @api.expect(more_student_detail_post, validate=True)
+    def post(self):
+
+        args = api.payload
+        enrollment_key = args.get('enrollment_key')
+
+        result, enrollment = check_enrollment_key(enrollment_key)
+
+        # if the enrollment_key does't exist
+        if not result['valid'] and result['reason'] == 'DOES_NOT_EXIST':
+            return {
+                'error':True,
+                'message':"KEY_DOESN'T_EXIST"
+            }
+        # if the key is expired it means has given examination and can fill the more details
+        if not result['valid'] and result['reason'] == 'EXPIRED':
+            student_id = enrollment.student_id
+            student = Student.query.get(student_id)
+            student.update_data(args)
+            return {
+                'success':True,
+                'message':"UPDATED_DATA"
+            }
+
+        # when the key is not used to give any test
+        return {
+            'error':True,
+            'message':"KEY_IS_NOT_USED"
+        }
 
 @api.route('/test/offline_paper')
 class OfflinePaperList(Resource):
