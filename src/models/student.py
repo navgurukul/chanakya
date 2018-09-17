@@ -37,7 +37,7 @@ class Student(db.Model):
         contacts_list=kwargs.get('contacts_list', None)
         main_contact=kwargs.get('main_contact', None)
 
-        student = Student(stage=app.config['STAGES'][stage], student_data)
+        student = Student(stage=app.config['STAGES'][stage], **student_data)
         db.session.add(student)
         db.session.commit()
 
