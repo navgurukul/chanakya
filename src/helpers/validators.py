@@ -76,7 +76,7 @@ def check_question_ids(questions_attempt):
     questions = Questions.query.filter(Questions.id.in_(question_ids)).all()
 
     if not questions or len(questions) != len(question_ids):
-        return False # wrong_question_ids
+        return wrong_question_ids # wrong_question_ids
 
     # create the a new dict of {id:question}
     questions_id_dict = { question.id: question for question in questions }
