@@ -141,7 +141,8 @@ def check_question_is_in_set(enrollment, questions_attempt):
             enrollment : contains enrollment key model instance
         return : list of wrong_question_ids [77, 34]
     '''
-    questions = enrollment.extract_question_from_set()
+    question_set = enrollment.question_set
+    questions = question_set.get_questions()
     question_ids = [question.id for question in questions]
     question_attempt_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
     wrong_question_ids = [id for id in question_attempt_ids if not id in question_ids]

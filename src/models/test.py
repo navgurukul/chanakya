@@ -14,7 +14,10 @@ class EnrolmentKey(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     question_set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
+    # score = db.Column(db.Integer, nullable=True)
 
+    question_set = db.relationship("QuestionSet", back_populates="enrolment_key")
+    student = db.relationship("Student")
 
     @staticmethod
     def generate_key(student_id):
@@ -75,31 +78,33 @@ class EnrolmentKey(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def extract_question_from_set(self):
+    def get_question_set(self):
+        """
+        Generate a question set corresponding to this enrolment key and return
+        the question set instanceself.
+
+        Note: Also runs the start_test method on the instance.
+        """
+        self.start_test()
+        question_set, questions = QuestionSet.create_new_set()
+        self.question_set_id = question_set.id
+        db.session.add(self)
+        db.session.commit()
+        return question_set, questions
+
+    def start_test(self):
         '''
-            the function extract all the question that was generated when the test was started
-            in the case of getting the question when the page was being refreshed or crashing of the website or any such
-            situation the student wan't the question back.
-
-            return [
-                <Questions id>,
-                <Questions id>,
-                <Questions id>
-            ]
+        Marks the `test_start_time` parameter of the enrolment key.
+        Also marks the `test_end_time` as `test_start_time` + the time allowed for the test.
         '''
-        question_set_id = self.question_set_id
-        question_set = QuestionSet.query.filter_by(id=question_set_id).first()
-        question_order_list = question_set.questions.order_by(QuestionOrder.question_order).all()
-        questions = [ question_order.question for question_order in question_order_list ]
-
-        return questions
-
+        current_datetime = datetime.now()
+        self.test_start_time = current_datetime
+        self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
 
     def end_test(self):
-        '''
-            it helps to record the time when the test ends so we can find if the student has cheated or not
-
-        '''
+        """
+        This records the end time of the test in `test_end_time` attribute.
+        """
         self.test_end_time = datetime.now()
         db.session.add(self)
         db.session.commit()
@@ -141,15 +146,6 @@ class EnrolmentKey(db.Model):
             return True
         return False
 
-    def start_test(self):
-        '''
-            start the test for the student and provide him a time to end test
-            which is define in the config file
-        '''
-        current_datetime = datetime.now()
-        self.test_start_time = current_datetime
-        self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
-
 class Questions(db.Model):
 
     __tablename__ = 'questions'
@@ -161,7 +157,6 @@ class Questions(db.Model):
     topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
     options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
-    questions_order = db.relationship('QuestionOrder', backref='question', lazy='dynamic')
 
     @staticmethod
     def create_question(question_dict):
@@ -215,59 +210,6 @@ class Questions(db.Model):
             question_option = QuestionOptions.create_option(**option)
         db.session.commit()
         return question
-
-    @staticmethod
-    def get_random_question_set():
-        '''
-            It generates a set of 18 question randomly from the question that are in database according to
-            the QUESTION_CONFIG define in config package which has the stored the number of question according to topic
-            and difficulty.
-
-            It requires minimum number of question to be in the database according to QUESTION_CONFIG variable to work properly
-            else it will return question less than 18 in a set
-
-            params: Not Required
-
-            return list of 18 questions generated
-                [<Question 1>,<Question 321>,<Question 331>,<Question 221>,<Question 111>,<Question 12>]
-        '''
-
-        questions = Questions.query.all()
-        # category
-        topics = app.config['QUESTION_CONFIG']['topic']
-        #arrange the question according to the topic and difficulty
-        questions_dict = {}
-        for question in questions:
-            topic = question.topic.value
-            difficulty = question.difficulty.value
-            if topic in topics.keys():
-
-                if not questions_dict.get(topic):
-                    questions_dict[topic]={}
-                    questions_dict[topic][difficulty] = []
-                    questions_dict[topic][difficulty].append(question)
-                elif not questions_dict[topic].get(difficulty):
-                    questions_dict[topic][difficulty] = []
-                    questions_dict[topic][difficulty].append(question)
-                else:
-                    questions_dict[topic][difficulty].append(question)
-
-        # Select the question randomly according to topic and difficulty
-        # from the config file
-        main_questions_list = []
-        for topic in topics:
-            for difficulty in topics[topic]:
-                question_topic = questions_dict.get(topic)
-
-                if not question_topic:
-                    continue
-                question_list = question_topic.get(difficulty)
-                if not question_list:
-                    continue
-                random.shuffle(question_list)
-                required_question_num = topics[topic][difficulty]
-                main_questions_list+=question_list[:required_question_num]
-        return main_questions_list
 
     def update_question(self, question_dict):
         '''
@@ -403,24 +345,14 @@ class QuestionAttempts(db.Model):
                     ]
                 }
         '''
-        en_text = question_dict.get('en_text')
-        hi_text = question_dict.get('hi_text')
-        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
-        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
-        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
-        options = question_dict.get('options')
-
-        #question create
-        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
-        db.session.add(question)
+        # recording the answer
+        for question_attempt in questions_attempts:
+            question_attempt['enrolment_key_id'] = enrollment.id
+            if not question_attempt.get('selected_option_id'):
+                question_attempt['selected_option_id'] = None
+            attempt = QuestionAttempts(**question_attempt)
+            db.session.add(attempt)
         db.session.commit()
-
-        # option for the question create
-        for option in options:
-            option['question_id'] = question.id
-            question_option = QuestionOptions.create_option(**option)
-        db.session.commit()
-        return question
 
 class QuestionSet(db.Model):
 
@@ -430,40 +362,93 @@ class QuestionSet(db.Model):
     partner_name = db.Column(db.String(200))
     question_pdf_url= db.Column(db.String(200))
     answer_pdf_url= db.Column(db.String(200))
-    # questions = db.relationship('QuestionOrder', backref='set', cascade='all, delete-orphan', lazy='dynamic')
+    _question_ids = db.Column(db.String(200))
+
+    enrolment_key = db.relationship("EnrolmentKey", back_populates="question_set")
+
+    def get_question_ids(self):
+        return [int(i) for i in self._question_ids.split(',')]
+
+    def set_question_ids(self, ids):
+        self._question_ids = ','.join([str(i) for i in ids])
+
+    def get_questions(self):
+        """
+        Get a list of all the questions associated with this question setself.
+        Returns a list of instances of Questions.
+        """
+        # get the related questions
+        ids = self.get_question_ids()
+        questions = Questions.query.filter(Questions.id.in_(ids)).all()
+        # order the questions as the order of the ids list
+        # the _in caluse fucks up the order
+        questions_map = {q.id: q for q in questions}
+        questions = [questions_map[id] for id in ids]
+        return questions
+
+    @staticmethod
+    def _generate_random_question_paper():
+        """
+        Generates a list of 18 questions as per the requirements of the config file.
+
+        Returns a list of question instances.
+        """
+        questions = Questions.query.all()
+
+        # arrange the question according to the topic and difficulty
+        topics = app.config['QUESTION_CONFIG']['topic']
+        questions_dict = {}
+        for question in questions:
+            topic = question.topic.value
+            difficulty = question.difficulty.value
+            if topic in topics.keys():
+                if not questions_dict.get(topic):
+                    questions_dict[topic]={}
+                    questions_dict[topic][difficulty] = []
+                elif not questions_dict[topic].get(difficulty):
+                    questions_dict[topic][difficulty] = []
+                questions_dict[topic][difficulty].append(question)
+
+        # Select the question randomly according to topic and difficulty
+        # Number of questions to be selected are defined in the CONFIG file.
+        main_questions_list = []
+        for topic in topics:
+            for difficulty in topics[topic]:
+                question_topic = questions_dict.get(topic)
+                if not question_topic:
+                    continue
+                question_list = question_topic.get(difficulty)
+                if not question_list:
+                    continue
+                # shuffle the list in place
+                random.shuffle(question_list)
+                # figure out how many questions of that topic & difficulty level are required
+                required_question_num = topics[topic][difficulty]
+                # pick the number of questions required as per the config file
+                main_questions_list+=question_list[:required_question_num]
+
+        # finally shuffle the list again while returning
+        random.shuffle(main_questions_list)
+        return main_questions_list
 
     @staticmethod
     def create_new_set(partner_name=None):
         '''
-            function to create a new set record for future refrence of calculating offline test score
-            and getting the question set for online test
+        Generates a new set of questions as per the logic defined in the config file.
+        The config file mentions how many questions of which topic and difficulty level
+        need to be included in a test.
 
-            params :
-                questions : list of question instance
-                partner_name: the partner_name , None when the set is created for a student.
-
+        params:
+        'partner_name': the partner for whom this is being generated
+                        (defaults to None when the set is created for a student)
         '''
-        questions = Questions.get_random_question_set()
+        questions = QuestionSet._generate_random_question_paper()
+        ids = [question.id for question in questions]
 
+        # Create a new question set
         question_set = QuestionSet(partner_name=partner_name)
+        question_set.set_question_ids(ids)
         db.session.add(question_set)
-        db.session.commit()
-        print(question_set.id)
-        # save the set to database in orderwise
-        for index, question in enumerate(questions):
-            question_order = QuestionOrder(question_order=index+1, question_id=question.id, set_id=question_set.id)
-            db.session.add(question_order)
         db.session.commit()
 
         return question_set, questions
-
-
-class QuestionOrder(db.Model):
-
-    __tablename__ = 'question_order'
-
-    id = db.Column(db.Integer, primary_key=True)
-    enrolment_key_id = db.Column(db.Integer, db.ForeignKey('enrolment_keys.id'))
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
-    answer = db.Column(db.String(10), nullable=False)
-    is_correct = db.Column(db.Boolean, nullable=False)

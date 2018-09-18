@@ -141,19 +141,40 @@ class Student(db.Model):
 
         return message
 
-    def update_data(self, student_data):
+    def update_data(self, student_data, mobiles=[]):
         '''
-         update the data of student Model
-         params: student_data should contain the fields of student instance which needs to be updated
-                 in dictionary format
-                 for example: {'name': 'Amar Kumar Sinha', 'gender': gender.male #enum}
-        return None
+        Update the student's data.
+
+        params:
+        `student_data`: Should contain the fields of student instance which needs to be updated
+                        in dictionary format.
+                        for example: {'name': 'Amar Kumar Sinha', 'gender': gender.male #enum}
+        `mobiles`: List of strings with student mobile numbers to be updated. Example:
+                    ['8130378953', '8130378965']. If they exist as contacts associated with the
+                    given student no new contacts will be created, otherwise new ones will be
+                    created.
         '''
+
+        # update the attributes given by the `student_data` dict
         for key, value in student_data.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
         db.session.add(self)
         db.session.commit()
+
+        # get all the associated student contacts
+        contacts = StudentContact.query.filter_by(student_id=self.id).all()
+        contacts = [contact.contact for contact in contacts]
+        for mobile in mobiles:
+            # if the given mobile doesn't exist as one of the student contacts
+            if not mobile in contacts:
+                contact = StudentContact(contact=mobile, student_id=self.id)
+                db.session.add(contact)
+            else:
+                print("Nahi hua create.")
+        db.session.commit()
+
+
 
     def send_enrolment_key(self, from_helpline):
         '''
