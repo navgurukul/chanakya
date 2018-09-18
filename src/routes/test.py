@@ -4,8 +4,6 @@ from chanakya.src import api, db, app
 from datetime import datetime, timedelta
 
 from chanakya.src.helpers.response_objects import (
-                enrollment_key_status,
-                enrollment_key_validation,
                 question_obj,
                 questions_list_obj,
                 question_set
@@ -33,7 +31,7 @@ class EnrollmentKeyValidtion(Resource):
         'reason': fields.String
     })
 
-    @api.marshal_with(enrollment_key_validation)
+    @api.marshal_with(get_response)
     @api.doc(parser=get_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
     def get(self):
         args = self.get_parser.parse_args()
@@ -284,8 +282,8 @@ class OfflinePaperList(Resource):
                 set_instance, questions = QuestionSet.create_new_set(partner_name)
 
                 # render pdf
-                question_pdf = render_pdf_phantomjs('question_pdf.html', **locals())
-                answer_pdf = render_pdf_phantomjs('answer_pdf.html', **locals())
+                question_pdf = render_pdf_phantomjs('question_pdf.html', set_instance=set_instance, questions=questions)
+                answer_pdf = render_pdf_phantomjs('answer_pdf.html', set_instance=set_instance, questions=questions)
 
                 #s3 method that upload the binary file
                 question_pdf_s3_url = upload_pdf_to_s3(string=question_pdf)
