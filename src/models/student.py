@@ -17,7 +17,7 @@ class Student(db.Model):
 
 
     @staticmethod
-    def create(stage, student_data, **kwargs):
+    def create(stage, **kwargs):
         '''
         This function create the student object with list of contact or single contact or the
         main_contact where we have to call them
@@ -37,7 +37,8 @@ class Student(db.Model):
         contacts_list=kwargs.get('contacts_list', None)
         main_contact=kwargs.get('main_contact', None)
 
-        student = Student(stage=app.config['STAGES'][stage], **student_data)
+        student = Student(stage=app.config['STAGES'][stage])
+
         db.session.add(student)
         db.session.commit()
 
@@ -65,6 +66,43 @@ class Student(db.Model):
 
         # if there was no called on helpline just send the student object
         return student
+
+
+    @staticmethod
+    def offline_student_record(stage, student_data, main_contact, mobile, set_id):
+        '''
+            function helps to add student data who have given the test offline.
+            it creates a student instance and then update it's data with contact infomation
+            and create a enrollment key for the student.
+
+            params:
+                stage: 'PRIVILEGE AND VERIFICATION CALL',
+                student_data : {
+                    contains the data which need to be added to the Student table
+                    'name':'Amar Kumar Sinha',
+                    'dob': datetime(1997, 9, 18)
+                    'gender': 'MALE',
+                    'religion': 'Hindu'
+                }
+
+                main_contact : The number on which we can contact the student
+                mobile : An another number which is present as Potential Name
+                set_id : An set_id of question set which was generated for the partner can be saved to enrollment to get the question easily.
+        '''
+
+        student , call_from = Student.create(stage, main_contact=main_contact, mobile=mobile)
+
+        student.update_data(student_data)
+        student_id = student.id
+
+        enrollment = EnrolmentKey.generate_key(student_id)
+        enrollment.question_set_id = set_id
+
+        enrollmen.start_test()
+        enrollment.end_test()
+
+        return student, enrollment
+
 
     @staticmethod
     def generate_enrolment_key(mobile, from_helpline):
@@ -140,7 +178,6 @@ class Student(db.Model):
             }
         # if the key is not valid then generating a new valid key for the student
         else:
-            print(' Not Valid')
             enrollment = EnrolmentKey.generate_key(student_id)
             message = {
                 'generate': True,
@@ -153,7 +190,6 @@ class Student(db.Model):
 
         # getting all the contact of the student
         student_contacts = StudentContact.query.filter_by(student_id=student_id).all()
-
         #send enrollment message to all the contact linked to the student
         for contact in student_contacts:
             contact.send_sms(enrollment_message)
