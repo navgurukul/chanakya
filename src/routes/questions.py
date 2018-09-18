@@ -14,7 +14,7 @@ from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArg
 from chanakya.src.helpers.validators import check_option_ids
 
 
-@api.route('/question/upload_file')
+@api.route('/questions/upload_file')
 class UploadQuestionImage(Resource):
 
 	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
