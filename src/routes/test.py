@@ -8,7 +8,6 @@ from chanakya.src.helpers.response_objects import (
                 enrollment_key_validation,
                 question_obj,
                 questions_list_obj,
-                questions_attempts,
                 question_set
             )
 from chanakya.src.helpers.file_uploader import upload_pdf_to_s3, FileStorageArgument
@@ -27,6 +26,12 @@ from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts
 class EnrollmentKeyValidtion(Resource):
     get_parser = reqparse.RequestParser()
     get_parser.add_argument('enrollment_key', type=str, required=True, help='The enrolment key you want to validate.')
+
+
+    get_response = api.model('GET_validate_enrolment_key_response',{
+        'valid': fields.Boolean,
+        'reason': fields.String
+    })
 
     @api.marshal_with(enrollment_key_validation)
     @api.doc(parser=get_parser, description=VALIDATE_ENROLMENT_KEY_DESCRIPTION)
@@ -48,7 +53,13 @@ class PersonalDetailSubmit(Resource):
     post_parser.add_argument('mobile_number', type=str, required=True, location='json')
     post_parser.add_argument('gender', type=str, choices=[ attr.value for attr in app.config['GENDER']], required=True, location='json')
 
-    @api.marshal_with(enrollment_key_status)
+    # key validation
+    post_response = api.model('POST_enrollment_key_status_response', {
+        'success': fields.Boolean,
+        'enrollment_key_status':fields.String
+    })
+
+    @api.marshal_with(post_response)
     @api.doc(parser=post_parser, description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
 
@@ -93,13 +104,13 @@ class TestStart(Resource):
     get_parser = reqparse.RequestParser()
     get_parser.add_argument('enrollment_key', required=True, type=str)
 
-    start_test_response = api.model('start_test',{
+    get_response = api.model('GET_start_test_response',{
         'error':fields.Boolean(default=False),
         'questions':fields.List(fields.Nested(question_obj)),
         'enrollment_key_validation': fields.Boolean(default=True)
     })
 
-    @api.marshal_with(start_test_response)
+    @api.marshal_with(get_response)
     @api.doc(parser=get_parser)
     def get(self):
         args = self.get_parser.parse_args()
@@ -133,15 +144,27 @@ class TestStart(Resource):
 
 @api.route('/test/end_test')
 class TestEnd(Resource):
-    end_test_response =  api.model('end_test_response',{
+    post_response =  api.model('POST_end_test_response',{
         'error': fields.Boolean(default=False),
         'enrollment_key_valid': fields.Boolean(default=True),
         'success': fields.Boolean(default=False),
         'invalid_question_ids': fields.List(fields.Integer)
     })
+    # questions attempted
+    question_attempt = api.model('POST_end_test_question_attempt',{
+        'question_id': fields.Integer(required=True),
+        'selected_option_id': fields.Integer(required=False),
+        'answer': fields.String(required=False)
+    })
 
-    @api.expect(questions_attempts, validate=True)
-    @api.marshal_with(end_test_response)
+
+    post_model = api.model('POST_end_test', {
+        'enrollment_key': fields.String(required=True),
+        'question_attempted': fields.List(fields.Nested(question_attempt), required=True)
+    })
+
+    @api.expect(post_model, validate=True)
+    @api.marshal_with(post_response)
     def post(self):
 
         args = api.payload
@@ -186,7 +209,7 @@ class TestEnd(Resource):
 
 @api.route('/test/extra_details')
 class MoreStudentDetail(Resource):
-    more_student_detail_post = api.model('more_detail', {
+    post_model = api.model('POST_extra_details', {
         'enrollment_key':fields.String(required=True),
         'caste': fields.String(enum=[attr.value for attr in app.config['CASTE']], required=True),
         'religion': fields.String(enum=[attr.value for attr in app.config['RELIGION']], required=True),
@@ -195,14 +218,15 @@ class MoreStudentDetail(Resource):
         'family_member_income_detail': fields.String(required=True)
     })
 
-    more_student_detail_response = api.model('more_detail_response', {
+    post_response = api.model('POST_extra_detail_response', {
         'success': fields.Boolean(default=False),
         'error':fields.Boolean(default=False),
         'message':fields.String
     })
+
     @api.doc(description=MORE_STUDENT_DETAIL)
-    @api.marshal_with(more_student_detail_response)
-    @api.expect(more_student_detail_post, validate=True)
+    @api.marshal_with(post_response)
+    @api.expect(post_model, validate=True)
     def post(self):
 
         args = api.payload
@@ -234,18 +258,18 @@ class MoreStudentDetail(Resource):
 
 @api.route('/test/offline_paper')
 class OfflinePaperList(Resource):
-    offline_paper_post = api.model('offline_paper_post', {
+    post_model = api.model('POST_offline_paper', {
         'number_sets':fields.Integer(required=True),
         'partner_name':fields.String(required=True)
     })
 
     offline_paper_response = api.model('offline_paper_response', {
         'error': fields.Boolean(default=False),
-        'question_sets':fields.List(fields.Nested(question_set))
+        'question_sets':fields.List(fields.Nested(post_model))
     })
 
     @api.marshal_with(offline_paper_response)
-    @api.expect(offline_paper_post, validate=True)
+    @api.expect(post_model, validate=True)
     def post(self):
         args = api.payload
 
@@ -298,13 +322,13 @@ class OfflinePaperList(Resource):
 @api.route('/test/offline_paper/<id>')
 class OfflinePaper(Resource):
 
-    set_response = api.model('set_response', {
+    get_response = api.model('GET_offline_paper_id_response', {
         'error': fields.Boolean(default=False),
         'set': fields.Nested(question_set),
         'message':fields.String,
     })
 
-    @api.marshal_with(set_response)
+    @api.marshal_with(get_response)
     def get(self, id):
 
         set_instance = QuestionSet.query.filter_by(id=id).first()
@@ -340,11 +364,11 @@ class OfflineCSVUpload(Resource):
 
 @api.route('/test/offline_paper/<id>/add_results')
 class OfflineCSVProcessing(Resource):
-    csv_processing_post = api.model('csv_processing', {
+    post_model = api.model('POST_add_results', {
         'csv_url': fields.String
     })
 
-    @api.expect(csv_processing_post, validate=True)
+    @api.expect(post_model, validate=True)
     def post(self, id):
         args = api.payload
 

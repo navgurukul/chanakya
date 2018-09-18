@@ -8,7 +8,7 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.response_objects import question_obj, questions_list_obj, create_question
+from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
@@ -35,19 +35,38 @@ class UploadQuestionImage(Resource):
 
 @api.route('/questions')
 class QuestionList(Resource):
-	questions_list_obj = api.model('questions_list', {
+	get_response = api.model('GET_questions_list', {
 		'questions_list' : fields.List(fields.Nested(question_obj))
 	})
 
-	@api.marshal_with(questions_list_obj)
+	# create question
+	post_model_option = api.model('POST_questions_options',{
+	    "hi_text": fields.String(required=True),
+	    "en_text": fields.String(required=True),
+	    "correct": fields.Boolean(default=False, required=True)
+	})
+
+	post_model = api.model('POST_questions',{
+	    'en_text': fields.String(required=True),
+	    'hi_text': fields.String(required=True),
+	    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True),
+	    'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True),
+	    'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']], required=True),
+	    'options': fields.List(fields.Nested(post_model_option), required=True)
+	})
+
+	post_response = question_obj
+
+	@api.marshal_with(get_response)
 	def get(self):
 		questions_list = Questions.query.all()
 		return {
 				"questions_list":questions_list
 			}
 
-	@api.marshal_with(question_obj)
-	@api.expect(create_question, validate=True)
+
+	@api.marshal_with(post_response)
+	@api.expect(post_model, validate=True)
 	@api.doc(description=CREATE_QUESTION)
 	def post(self):
 
@@ -61,13 +80,23 @@ class QuestionList(Resource):
 
 @api.route('/questions/<question_id>')
 class Question(Resource):
-	single_question = api.model('single_question', {
+	get_response = api.model('GET_questions_id_response', {
 		'error': fields.Boolean(default=False),
 		'question_data': fields.Nested(question_obj),
 		'message': fields.String
 	})
 
-	@api.marshal_with(single_question)
+
+	put_response = api.model('PUT_questions_id_response', {
+		'error': fields.Boolean(default=False),
+		'message': fields.String,
+		'invalid_option_ids': fields.List(fields.Integer),
+		'question' : fields.Nested(question_obj)
+	})
+
+	put_model = question_obj
+
+	@api.marshal_with(get_response)
 	def get(self, question_id):
 		# return a single question
 		question = Questions.query.filter_by(id = question_id).first()
@@ -84,15 +113,8 @@ class Question(Resource):
 		}
 
 
-	question_update_obj = api.model('question_update_obj', {
-		'error': fields.Boolean(default=False),
-		'message': fields.String,
-		'invalid_option_ids': fields.List(fields.Integer),
-		'question' : fields.Nested(question_obj)
-	})
-
-	@api.marshal_with(question_update_obj)
-	@api.expect(question_obj, validate=True)
+	@api.marshal_with(put_response)
+	@api.expect(put_model, validate=True)
 	def put(self, question_id):
 		args = api.payload
 		question = Questions.query.filter_by(id = question_id).first()

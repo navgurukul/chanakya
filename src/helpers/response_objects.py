@@ -7,17 +7,6 @@ from flask_restplus import fields
 from chanakya.src import app, api
 
 
-# key validation
-enrollment_key_status = api.model('enrollment_key_status', {
-    'success': fields.Boolean,
-    'enrollment_key_status':fields.String
-})
-
-enrollment_key_validation = api.model('enrollment_key_validation',{
-    'valid': fields.Boolean,
-    'reason': fields.String
-})
-
 #response and update object for question
 option_obj = api.model('options',{
     "id": fields.Integer(required=False),
@@ -38,37 +27,6 @@ question_obj = api.model('questions',{
 
 questions_list_obj = api.model('questions_list', {
     'questions': fields.List(fields.Nested(question_obj))
-})
-
-
-# create question
-create_option = api.model('create_options',{
-    "hi_text": fields.String(required=True),
-    "en_text": fields.String(required=True),
-    "correct": fields.Boolean(default=False, required=True)
-})
-
-create_question = api.model('create_questions',{
-    'en_text': fields.String(required=True),
-    'hi_text': fields.String(required=True),
-    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True),
-    'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True),
-    'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']], required=True),
-    'options': fields.List(fields.Nested(create_option), required=True)
-})
-
-
-# questions attempted
-question_attempt = api.model('question_attempt',{
-    'question_id': fields.Integer(required=True),
-    'selected_option_id': fields.Integer(required=False),
-    'answer': fields.String(required=False)
-})
-
-
-questions_attempts = api.model('questions_attempts', {
-    'enrollment_key': fields.String(required=True),
-    'question_attempted': fields.List(fields.Nested(question_attempt), required=True)
 })
 
 
