@@ -7,14 +7,14 @@ from flask_restful.inputs import boolean
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
-	get_parser = reqparse.RequestParser()
-	get_parser.add_argument('mobile', type=str, required=False, help='Not required when regenerating enrollment key for same student')
-	get_parser.add_argument('student_id', type=str, required=False, help='Requires only when regenerate enrollment key manually')
-	get_parser.add_argument('from_helpline', type=boolean, required=True, help='Set to true if the call is from helpline')
+	post_parser = reqparse.RequestParser()
+	post_parser.add_argument('mobile', type=str, location='json', required=False, help='Not required when regenerating enrollment key for same student')
+	post_parser.add_argument('student_id', type=str, required=False, location='json', help='Requires only when regenerate enrollment key manually')
+	post_parser.add_argument('from_helpline', type=boolean, required=True, location='json', help='Set to true if the call is from helpline')
 
-	@api.doc(parser=get_parser)
-	def get(self):
-		args =  self.get_parser.parse_args()
+	@api.doc(parser=post_parser)
+	def post(self):
+		args =  self.post_parser.parse_args()
 		student_id = args.get('student_id',None)
 		mobile = args.get('mobile', None)
 		from_helpline = args.get('from_helpline')
