@@ -40,6 +40,42 @@ class EnrolmentKey(db.Model):
 
         return enrollment
 
+    def calculate_test_score(self):
+        attempts = self.attempts.all()
+        # get marks config
+        marks_config = app.config['QUESTION_CONFIG']['marks_config']
+
+        score = 0
+        # iterate over each question
+        for attempt in attempts:
+            question_id = attempt.question_id
+            question = Questions.query.get(question_id)
+            is_correct = False
+            # for mcq check if the id which is select is correct = True or not
+            if question.type.value == 'MCQ':
+                selected_option_id = attempt.selected_option_id
+            # for integer_answer strip both attempt answer and answer in the db and check if both are equal or not
+                option = QuestionOptions.query.get(selected_option_id)
+                if option.correct:
+                    is_correct = True
+            else:
+                option = question.options.all()[0]
+                # using bs4 to convert the html string which is the database to text
+                correct_answer = BeautifulSoup(option.en_text, 'html.parser').text.strip()
+                student_answer = attempt.answer.strip()
+
+                if correct_answer == student_answer:
+                    is_correct = True
+
+            # if the flag is true include the score in the score variable
+            if is_correct:
+                question_difficulty =  question.difficulty.value
+                mark = marks_config[question_difficulty]
+                score+=mark
+        print(score)
+        self.score = score
+        db.session.add(self)
+        db.session.commit()
 
     def extract_question_from_set(self):
         '''
@@ -314,11 +350,6 @@ class QuestionOptions(db.Model):
     hi_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     correct = db.Column(db.Boolean, default=False)
-
-    def is_url(self):
-        if self.en_text.startswith('https://') or self.en_text.startswith('http://'):
-            return True
-        return False
 
     @staticmethod
     def create_option(**kwargs):
