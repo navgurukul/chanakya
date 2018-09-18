@@ -177,7 +177,7 @@ class Questions(db.Model):
                     'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
 
                     'options':[
-                        {   'id': 1,
+                        {   'id': 1, // if it's a new option don't specify an ID
                             'en_text':'something',
                             'hi_text':'something',
                             'correct': True
