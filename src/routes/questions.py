@@ -15,26 +15,20 @@ from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 from chanakya.src.helpers.validators import check_option_ids
 
 
-
-
-
 @api.route('/question/upload_file')
 class UploadQuestionImage(Resource):
+
 	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
 	post_parser.add_argument('image', required=True, type=FileStorage, location='files')
 
 	@api.doc(parser=post_parser)
 	def post(self):
-		args = self.post_parser.parse_args()
-		image = args['image']
 
-		# check image file extension
-		extension = image.filename.rsplit('.', 1)[1].lower()
-		if '.' in image.filename and not extension in app.config['ALLOWED_EXTENSIONS']:
-			abort(400, message="File extension is not one of our supported types.")
+		args = self.post_parser.parse_args()
 
 		# upload to s3
-		image_url = upload_file_to_s3(image)
+		image = args['image']
+		image_url = upload_file_to_s3(image, app.config['S3_QUESTION_IMAGES_BUCKET'])
 
 		return {'image_url': image_url}
 
