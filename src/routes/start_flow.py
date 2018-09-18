@@ -1,4 +1,4 @@
-from flask_restplus import Resource, reqparse
+from flask_restplus import Resource, reqparse, fields
 from chanakya.src import api, app, db
 from chanakya.src.models import Student, IncomingCalls, StudentContact
 from flask_restful.inputs import boolean
@@ -7,14 +7,21 @@ from flask_restful.inputs import boolean
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
-	post_parser = reqparse.RequestParser()
-	post_parser.add_argument('mobile', type=str, location='json', required=False, help='Not required when regenerating enrollment key for same student')
-	post_parser.add_argument('student_id', type=str, required=False, location='json', help='Requires only when regenerate enrollment key manually')
-	post_parser.add_argument('from_helpline', type=boolean, required=True, location='json', help='Set to true if the call is from helpline')
+	# post_parser = reqparse.RequestParser()
+	# post_parser.add_argument('mobile', type=str, location='json', required=False, help='Not required when regenerating enrollment key for same student')
+	# post_parser.add_argument('student_id', type=str, required=False, location='json', help='Requires only when regenerate enrollment key manually')
+	# post_parser.add_argument('from_helpline', type=boolean, required=True, location='json', help='Set to true if the call is from helpline')
 
-	@api.doc(parser=post_parser)
+	post_model = api.model('POST_send_enrolment_key', {
+		'mobile': fields.String(required=False),
+		'student_id': fields.Integer(required=False),
+		'from_helpline': fields.Boolean(required=True)
+	})
+
+	@api.expect(post_model)
 	def post(self):
-		args =  self.post_parser.parse_args()
+		args = api.payload
+
 		student_id = args.get('student_id',None)
 		mobile = args.get('mobile', None)
 		from_helpline = args.get('from_helpline')

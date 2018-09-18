@@ -16,6 +16,9 @@ class ChanakyaConfig(object):
     # SQLAlchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Restplus
+    RESTPLUS_VALIDATE = True
+
     # All the Enums
     QUESTION_DIFFICULTY = QuestionDifficulty
     QUESTION_TOPIC = QuestionTopic
