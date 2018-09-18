@@ -36,7 +36,7 @@ class UploadQuestionImage(Resource):
 		return {'image_url': image_url}
 
 
-@api.route('/questions/')
+@api.route('/questions')
 class QuestionList(Resource):
 	questions_list_obj = api.model('questions_list', {
 		'questions_list' : fields.List(fields.Nested(question_obj))
