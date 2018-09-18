@@ -184,7 +184,6 @@ class TestEnd(Resource):
             'success': True
         }
 
-
 @api.route('/test/extra_details')
 class MoreStudentDetail(Resource):
     more_student_detail_post = api.model('more_detail', {
@@ -204,6 +203,49 @@ class MoreStudentDetail(Resource):
     @api.doc(description=MORE_STUDENT_DETAIL)
     @api.marshal_with(more_student_detail_response)
     @api.expect(more_student_detail_post, validate=True)
+    def post(self):
+
+        args = api.payload
+        enrollment_key = args.get('enrollment_key')
+
+        result, enrollment = check_enrollment_key(enrollment_key)
+
+        # if the enrollment_key does't exist
+        if not result['valid'] and result['reason'] == 'DOES_NOT_EXIST':
+            return {
+                'error':True,
+                'message':"KEY_DOESN'T_EXIST"
+            }
+        # if the key is expired it means has given examination and can fill the more details
+        if not result['valid'] and result['reason'] == 'EXPIRED':
+            student_id = enrollment.student_id
+            student = Student.query.get(student_id)
+            student.update_data(args)
+            return {
+                'success':True,
+                'message':"UPDATED_DATA"
+            }
+
+        # when the key is not used to give any test
+        return {
+            'error':True,
+            'message':"KEY_IS_NOT_USED"
+        }
+
+@api.route('/test/offline_paper')
+class OfflinePaperList(Resource):
+    offline_paper_post = api.model('offline_paper_post', {
+        'number_sets':fields.Integer(required=True),
+        'partner_name':fields.String(required=True)
+    })
+
+    offline_paper_response = api.model('offline_paper_response', {
+        'error': fields.Boolean(default=False),
+        'question_sets':fields.List(fields.Nested(question_set))
+    })
+
+    @api.marshal_with(offline_paper_response)
+    @api.expect(offline_paper_post, validate=True)
     def post(self):
         args = api.payload
 
