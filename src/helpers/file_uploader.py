@@ -1,3 +1,8 @@
+'''
+    This file helps with all the upload of file to s3.
+
+'''
+
 import boto3
 from botocore.client import Config
 from werkzeug.datastructures import FileStorage
@@ -60,30 +65,32 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
     - acl : Access control list which allows the file to be public or private, read or write default is public-read only
 
     it return a url of the file after uploading the file to s3 to be accesibile
-
     url : http://<bucketname>.s3.amazonaws.com/<filename>
     '''
 
     #filename
-    filename_extension = '.pdf'
+    filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())
-    filename = random_string + filename_extension
+    filename = random_string +'.'+filename_extension
+    print(filename, type(filename))
 
     #connecting with the s3 instance with upload the file
-    s3 = boto3.client(
-           "s3",
-           aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
-           aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
-        )
+    session = boto3.Session(
+        aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
+        aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
+    )
+
+    s3 = session.resource('s3', config=Config(signature_version='s3v4'))
 
     #file upload using the connection
     try:
-        s3.put_object(
-            Bucket=bucket_name,
-            Key=filename,
-            Body=string,
-            ACL= acl,
-            ContentType= 'application/pdf'
+        s3.meta.client.upload_fileobj(
+            file,
+            bucket_name, #default in the config
+            filename,
+            ExtraArgs={
+                "ContentType": app.config['FILE_CONTENT_TYPES'][filename_extension]
+            }
         )
     except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.

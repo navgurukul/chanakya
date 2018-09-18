@@ -22,21 +22,22 @@ def check_enrollment_key(enrollment_key):
         return {
             'valid':True,
             'reason': 'NOT_USED'
-        } , enrollment
+        }, enrollment
 
     # checks if the enrollment key is not in use
     elif enrollment.in_use():
         return {
             'valid':True,
             'reason': 'ALREADY_IN_USED'
-        } , enrollment
+        }, enrollment
 
     # enrollment key is expired
     else:
         return {
             "valid": False,
             "reason": "EXPIRED"
-        } , enrollment
+        }, enrollment
+
 
 def check_question_ids(questions_attempt):
     '''
@@ -123,3 +124,26 @@ def check_question_is_in_set(enrollment, questions_attempt):
     question_attempt_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
     wrong_question_ids = [id for id in question_attempt_ids if not id in question_ids]
     return wrong_question_ids
+
+def check_option_ids(question_instance,question_dict):
+    '''
+        checks whether sent question and options are attached in the database or not
+        is any id which has been sent is not present in the db
+        and it ignore any new options
+
+        params:
+            question_instance (its the Questions model instance)
+            question_dict (contains a dictionary of questions in it which is sent through the api)
+
+        return:
+            list of wrong options id
+
+    '''
+
+    option_ids = [option.id for option in question_instance.options.all()]
+
+    updated_option_ids = [option.get('id') for option in question_dict['options'] if option.get('id')]
+
+    wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
+
+    return wrong_option_ids

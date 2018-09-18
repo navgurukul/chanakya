@@ -17,10 +17,9 @@ enrollment_key_validation = api.model('enrollment_key_validation',{
     'reason': fields.String
 })
 
-
-#question obbject
+#response and update object for question
 option_obj = api.model('options',{
-    'id':fields.Integer,
+    "id": fields.Integer(required=False),
     "hi_text": fields.String,
     "en_text": fields.String,
     "correct": fields.Boolean(default=False)
