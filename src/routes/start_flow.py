@@ -7,11 +7,6 @@ from flask_restful.inputs import boolean
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
-	# post_parser = reqparse.RequestParser()
-	# post_parser.add_argument('mobile', type=str, location='json', required=False, help='Not required when regenerating enrollment key for same student')
-	# post_parser.add_argument('student_id', type=str, required=False, location='json', help='Requires only when regenerate enrollment key manually')
-	# post_parser.add_argument('from_helpline', type=boolean, required=True, location='json', help='Set to true if the call is from helpline')
-
 	post_model = api.model('POST_send_enrolment_key', {
 		'mobile': fields.String(required=False),
 		'student_id': fields.Integer(required=False),
@@ -20,6 +15,7 @@ class GenerateEnrollmentKey(Resource):
 
 	@api.expect(post_model)
 	def post(self):
+
 		args = api.payload
 
 		student_id = args.get('student_id',None)
@@ -47,7 +43,7 @@ class GenerateEnrollmentKey(Resource):
 					'error':True,
 					'message':"Student doesn't exist for the given student_id"
 				}
-		# if mobile exists, it means that a new student needs to be created as we don't have access to the student record.
+		# If mobile is provided in payload, means a new student needs to be created
 		elif mobile:
 			message = Student.generate_enrolment_key(mobile, from_helpline)
 			return message
@@ -55,25 +51,30 @@ class GenerateEnrollmentKey(Resource):
 
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
-	get_parser = reqparse.RequestParser()
-	get_parser.add_argument('mobile', type=str, required=True, help='Not required when regenerating enrollment key for same student')
 
-	@api.doc(parser=get_parser)
-	def get(self):
+	post_model = api.model('POST_requested_callback', {
+		'mobile': fields.String(required=True)
+	})
 
-		args = self.get_parser.parse_args()
+	@api.expect(post_model)
+	def post(self):
+
+		args = api.payload
+
 		mobile = args.get('mobile', None)
 
-		# finding the contact of the student of have join the platform most recently
+		# Find the most recently created student with the given mobile
+		# For a student whose record exists, only a new incoming call will be recorded
 		called_number = StudentContact.query.filter_by(contact=mobile).order_by(StudentContact.created_at.desc()).first()
 
-		# if the caller number doesn't exist in the platform then create a new student
+		# If the student with the given mobile doesn't exist then create a new student
+		# This student will have the RQC stage
 		if not called_number:
 			student, called_number = Student.create(stage = 'RQC', mobile = mobile)
 
-		# record the incoming call of that number
+		# Record the incoming call in the DB
 		IncomingCalls.create(called_number, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
 
-		return{
+		return {
 			'success': True
 		}
