@@ -30,25 +30,6 @@ PERSONAL_DETAILS_DESCRIPTION = '''
             }
 '''
 
-CREATE_QUESTION = '''
-        choice fields value that can be passed:
-
-        'type': ['MCQ', 'Integer Answer'],
-        'topic': ['BASIC_MATH', 'ABSTRACT_REASONING', 'NON_VERBAL_LOGICAL_REASONING', 'Topic 4'],
-        'difficulty': ['Easy', 'Medium', 'Hard'],
-        'en_text': Question in English,
-        'hi_text': Question in Hindi,
-
-        'options' contains a list of option as
-        'options': [
-            {
-                'en_text': 'Option in English',
-                'hi_text': 'Option in Hindi',
-                'correct': True  if it's correct option for the question else False
-            }
-        ]
-'''
-
 MORE_STUDENT_DETAIL = '''
         responses:
 

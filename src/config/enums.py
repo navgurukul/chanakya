@@ -9,7 +9,6 @@ class QuestionTopic(enum.Enum):
     topic1 = "BASIC_MATH"
     topic2 = "ABSTRACT_REASONING"
     topic3 = "NON_VERBAL_LOGICAL_REASONING"
-    topic4 = "Topic 4"
 
 class QuestionType(enum.Enum):
     mcq = 'MCQ'

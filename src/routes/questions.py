@@ -11,7 +11,6 @@ from werkzeug.datastructures import FileStorage
 from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
-from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
 from chanakya.src.helpers.validators import check_option_ids
 
 
@@ -35,9 +34,30 @@ class UploadQuestionImage(Resource):
 
 @api.route('/questions')
 class QuestionList(Resource):
+
 	get_response = api.model('GET_questions_list', {
 		'questions_list' : fields.List(fields.Nested(question_obj))
 	})
+
+	# Description of POST method
+	CREATE_QUESTION = """
+	Possible values of different JSON keys which can be passed.
+
+	- 'type': ['MCQ', 'Integer Answer'],
+	- 'topic': ['BASIC_MATH', 'ABSTRACT_REASONING', 'NON_VERBAL_LOGICAL_REASONING'],
+	- 'difficulty': ['Easy', 'Medium', 'Hard'],
+	- 'en_text': Question string in English,
+	- 'hi_text': Question string in Hindi,
+
+	- 'options': This will contain an array of options. Every object in the array will look like:
+		[
+		    {
+		        'en_text': 'Option in English',
+		        'hi_text': 'Option in Hindi',
+		        'correct': True  if it's correct option for the question else False
+		    }
+		]
+	"""
 
 	# create question
 	post_model_option = api.model('POST_questions_options',{
@@ -46,7 +66,7 @@ class QuestionList(Resource):
 	    "correct": fields.Boolean(default=False, required=True)
 	})
 
-	post_model = api.model('POST_questions',{
+	post_payload_model = api.model('POST_questions',{
 	    'en_text': fields.String(required=True),
 	    'hi_text': fields.String(required=True),
 	    'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True),
@@ -61,21 +81,17 @@ class QuestionList(Resource):
 	def get(self):
 		questions_list = Questions.query.all()
 		return {
-				"questions_list":questions_list
-			}
-
+			"questions_list":questions_list
+		}
 
 	@api.marshal_with(post_response)
-	@api.expect(post_model, validate=True)
+	@api.expect(post_payload_model)
 	@api.doc(description=CREATE_QUESTION)
 	def post(self):
-
 		args = api.payload
-
-		#create the question
+		# create the question
 		question = Questions.create_question(args)
 		return question
-
 
 
 @api.route('/questions/<question_id>')
