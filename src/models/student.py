@@ -38,6 +38,7 @@ class Student(db.Model):
         main_contact=kwargs.get('main_contact', None)
 
         student = Student(stage=app.config['STAGES'][stage])
+
         db.session.add(student)
         db.session.commit()
 
