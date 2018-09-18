@@ -271,40 +271,46 @@ class Questions(db.Model):
 
     def update_question(self, question_dict):
         '''
-            the options helps to update a question with a new data and also add any new option if provided.
-            params:
-                question_dict = {
-                    'id': 1,
-                    'hi_text':'some question',
-                    'en_text':'some question',
-                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
-                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
-                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+        the options helps to update a question with a new data and also add any new option if provided.
 
-                    'options':[
-                        {   'id': 1,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        },
-                        {   'id': 2,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 3,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 4,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        }
-                    ]
+        params:
+        'question_dict': {
+            'id': 1,
+            'hi_text':'some question',
+            'en_text':'some question',
+            'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+            'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+            'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+
+            'options':[
+                {
+                    'id': 1,
+                    'en_text':'something',
+                    'hi_text':'something',
+                    'correct': True
+                },
+                {
+                    'id': 2,
+                    'en_text':'something',
+                    'hi_text':'something',
+                    'correct': False
+                },
+                {
+                    'id': 3,
+                    'en_text':'something',
+                    'hi_text':'something',
+                    'correct': False
+                },
+                {   // don't specify an option ID if you want to create a new option.
+                    'en_text':'something',
+                    'hi_text':'something',
+                    'correct': True
                 }
-            return None
+            ]
+        }
+
+        *Note: If the question before had options with IDs 1,2,3,4 and while updating 1,2,3 are
+               specified then 4 would be deleted.*
         '''
 
         existing_options = { option.id: option for option in self.options.all() }

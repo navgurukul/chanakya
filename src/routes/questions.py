@@ -1,13 +1,16 @@
-from flask_restplus import Resource, reqparse, abort, marshal_with, fields
-from chanakya.src import app, api, db
 from io import BytesIO
+
+from flask_restplus import Resource, reqparse, abort, marshal_with, fields
+from werkzeug.datastructures import FileStorage
+
+from chanakya.src import app, api, db
 from chanakya.src.models import (
 					Student,
 					IncomingCalls,
 					StudentContact,
 					Questions
 			)
-from werkzeug.datastructures import FileStorage
+
 from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
@@ -96,9 +99,10 @@ class QuestionList(Resource):
 
 @api.route('/questions/<question_id>')
 class Question(Resource):
+
 	get_response = api.model('GET_questions_id_response', {
 		'error': fields.Boolean(default=False),
-		'question_data': fields.Nested(question_obj),
+		'data': fields.Nested(question_obj),
 		'message': fields.String
 	})
 
@@ -107,43 +111,42 @@ class Question(Resource):
 		'error': fields.Boolean(default=False),
 		'message': fields.String,
 		'invalid_option_ids': fields.List(fields.Integer),
-		'question' : fields.Nested(question_obj)
+		'data' : fields.Nested(question_obj)
 	})
 
-	put_model = question_obj
+	put_payload_model = question_obj
 
 	@api.marshal_with(get_response)
 	def get(self, question_id):
 		# return a single question
 		question = Questions.query.filter_by(id = question_id).first()
 
-		# if question_id is wrong or doesn't exist
+		# find question or error
 		if not question:
 			return {
 				'error': True,
-				'message': "question_id doesn't exist!"
+				'message': "Question with given ID doesn't exist."
 			}
 
-		return {
-			'question_data': question
-		}
+		return { 'data': question }
 
 
 	@api.marshal_with(put_response)
-	@api.expect(put_model, validate=True)
+	@api.expect(put_payload_model)
 	def put(self, question_id):
 		args = api.payload
-		question = Questions.query.filter_by(id = question_id).first()
 
+		# find question or error
+		question = Questions.query.filter_by(id = question_id).first()
 		if not question:
 			return {
 				'error':True,
 				'message': "Question id doesn't exist",
 			}
 
-		# if options id are not attached to the question
+		# In the PUT request the IDs of the options being edited need to be mentioned.
+		# Check if any wrong option IDs are attached. If yes, then throw an error.
 		wrong_option_ids = check_option_ids(question, args)
-
 		if wrong_option_ids:
 			return {
 				'error':True,
@@ -151,9 +154,7 @@ class Question(Resource):
 				'invalid_option_ids': wrong_option_ids
 			}
 
-		# question update
+		# Update the question
 		question.update_question(args)
 
-		return {
-			'question': question
-		}
+		return { 'data': question }
