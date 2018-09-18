@@ -8,10 +8,13 @@ from chanakya.src.models import (
 					Questions
 			)
 from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.response_objects import question_obj, create_question
-from chanakya.src.helpers.validators import check_option_ids
+from chanakya.src.helpers.response_objects import question_obj, questions_list_obj, create_question
+from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.routes_descriptions import CREATE_QUESTION
+from chanakya.src.helpers.validators import check_option_ids
+
+
 
 
 

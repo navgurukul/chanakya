@@ -15,7 +15,8 @@ from chanakya.src.helpers.file_uploader import upload_pdf_to_s3
 from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids, check_question_is_in_set
 from chanakya.src.helpers.routes_descriptions import (
                 VALIDATE_ENROLMENT_KEY_DESCRIPTION,
-                PERSONAL_DETAILS_DESCRIPTION
+                PERSONAL_DETAILS_DESCRIPTION,
+                MORE_STUDENT_DETAIL
             )
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 
@@ -137,7 +138,7 @@ class TestEnd(Resource):
         'invalid_question_ids': fields.List(fields.Integer)
     })
 
-    @api.expect(questions_attempts)
+    @api.expect(questions_attempts, validate=True)
     @api.marshal_with(end_test_response)
     def post(self):
 
@@ -183,7 +184,24 @@ class TestEnd(Resource):
 
 
 @api.route('/test/extra_details')
-class MoreDetail(Resource):
+class MoreStudentDetail(Resource):
+    more_student_detail_post = api.model('more_detail', {
+        'enrollment_key':fields.String(required=True),
+        'caste': fields.String(enum=[attr.value for attr in app.config['CASTE']], required=True),
+        'religion': fields.String(enum=[attr.value for attr in app.config['RELIGION']], required=True),
+        'monthly_family_member': fields.Integer(required=True),
+        'total_family_member': fields.Integer(required=True),
+        'family_member_income_detail': fields.String(required=True)
+    })
+
+    more_student_detail_response = api.model('more_detail_response', {
+        'success': fields.Boolean(default=False),
+        'error':fields.Boolean(default=False),
+        'message':fields.String
+    })
+    @api.doc(description=MORE_STUDENT_DETAIL)
+    @api.marshal_with(more_student_detail_response)
+    @api.expect(more_student_detail_post, validate=True)
     def post(self):
         return {
             'data':'All Detail Submitted'

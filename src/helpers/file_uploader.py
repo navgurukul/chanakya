@@ -10,7 +10,6 @@ from flask_restplus import reqparse
 from chanakya.src import app
 from werkzeug.utils import secure_filename
 import uuid
-from io import BytesIO
 
 
 def upload_file_to_s3(file, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET']):
@@ -67,7 +66,6 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
     it return a url of the file after uploading the file to s3 to be accesibile
     url : http://<bucketname>.s3.amazonaws.com/<filename>
     '''
-
     #filename
     filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())
@@ -82,6 +80,7 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
 
     s3 = session.resource('s3', config=Config(signature_version='s3v4'))
 
+    # byte_object_handler = BytesIO(string)
     #file upload using the connection
     try:
         s3.meta.client.upload_fileobj(

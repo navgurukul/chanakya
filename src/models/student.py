@@ -9,12 +9,20 @@ class Student(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    # personal details fields
     stage = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(200))
     gender = db.Column(db.Enum(app.config['GENDER']))
     dob = db.Column(db.Date)
-    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    #extra detail fields
+    caste = db.Column(db.Enum(app.config['CASTE']))
+    religion = db.Column(db.Enum(app.config['RELIGION']))
+    monthly_family_member = db.Column(db.Integer)
+    total_family_member = db.Column(db.Integer)
+    family_member_income_detail = db.Column(db.Text)
 
     @staticmethod
     def create(stage, **kwargs):

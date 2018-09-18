@@ -12,6 +12,7 @@ enrollment_key_status = api.model('enrollment_key_status', {
     'success': fields.Boolean,
     'enrollment_key_status':fields.String
 })
+
 enrollment_key_validation = api.model('enrollment_key_validation',{
     'valid': fields.Boolean,
     'reason': fields.String
@@ -70,9 +71,10 @@ questions_attempts = api.model('questions_attempts', {
     'question_attempted': fields.List(fields.Nested(question_attempt), required=True)
 })
 
+
 #offline paper
 question_set = api.model('question_set',{
-    'set_number': fields.Integer(attribute='id'),
-    'pdf_url': fields.String(attribute='url'),
+    'set_name': fields.Integer(attribute=lambda x: x.id if x else None),
+    'pdf_url': fields.String(attribute=lambda x: x.url if x else None),
     'partner_name': fields.String
 })

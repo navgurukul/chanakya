@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+  <style>
+      body{
+        margin: 20px;
+      }
+      .main{
+        margin: 20px 0;
+      }
+      tr.inline-block{
+        display: inline-block;
+      }
+      table, li{
+          page-break-inside:avoid !important;
+          width:100% !important;
+      }
+      option-cell{
+
+      }
+      .inline-block img{
+        display:inline-block;
+        vertical-align: text-top;
+        margin:auto;
+        max-height: 80px;
+      }
+      .center-image{
+        display: block;
+        margin: 0 auto;
+        max-height: 320px;
+    }
+  </style>
+  </head>
+
+  <body >
+    <div>
+       <div>
+        <center>
+          <h2>
+            <b>NavGurukul Scholarship Test - Set {{ set_instance.id }}</b>
+          </>
+          <h5>Question Paper</h5>
+        </center>
+      </div>
+
+      {% set strings = 'abcdefghijklmnopqrstuvwxyz' %}
+
+      <div class="main">
+        <ol>
+        {% for question in questions %}
+          <li>
+            <br>
+            <table>
+                {% if question.type.value == 'MCQ' %}
+                      <tr>
+                        <td colspan="2">
+                          <!-- {{ question.en_text | safe}}
+                          <br> -->
+                          {{ question.hi_text | safe}}
+                        </td>
+                      </tr>
+
+                      {% if question.options.all() %}
+                        <tr class="inline-block">
+                            {% for option in question.options.all() %}
+                                      <tr style="display:inline-block; min-width:45%;">
+                                        <td style="width:20px">{{ strings[loop.index0] }})</td>
+                                        {{ option.hi_text | safe }}
+                                      </tr>
+                            {% endfor %}
+                        </tr>
+                      {% endif %}
+                {% else %}
+                        <tr>
+                          <td>
+                            {{ question.hi_text | safe}}</br>
+                            <p>Iska answer likho answers wale page pe.</p>
+                          </td>
+                        </tr>
+                {% endif %}
+            </table>
+          </li>
+        {% endfor %}
+        </ol>
+
+      </div>
+    </div>
+  </body>
+</html>

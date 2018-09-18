@@ -1,6 +1,15 @@
 import os
 
-from .enums import (QuestionDifficulty, QuestionTopic, QuestionType, IncomingCallType, OutgoingSMSType, Gender)
+from .enums import (
+        QuestionDifficulty,
+        QuestionTopic,
+        QuestionType,
+        IncomingCallType,
+        OutgoingSMSType,
+        Gender,
+        Caste,
+        Religion
+    )
 
 class ChanakyaConfig(object):
 
@@ -14,24 +23,26 @@ class ChanakyaConfig(object):
     INCOMING_CALL_TYPE = IncomingCallType
     OUTGOING_SMS_TYPE = OutgoingSMSType
     GENDER = Gender
+    CASTE = Caste
+    RELIGION = Religion
 
     #exam_config to generate question
     QUESTION_CONFIG  = {
 
-        #h ow many question should be generated according to the category of question
+        # how many question should be generated according to the category of question
         # and the difficulty level each question has
         "topic":{
-            "Topic 1":{
-                "Easy":3, # number of questions of topic1 and level easy in the test
+            "BASIC_MATH":{
+                "Easy":3, # number of question that should be generated
                 "Medium":3,
                 "Hard":3
             },
-            "Topic 2":{
+            "ABSTRACT_REASONING":{
                 "Easy":2,
-                "Medium":2, # number of questions of topic2 and level medium in the test
+                "Medium":2,
                 "Hard":2
             },
-            "Topic 3":{
+            "NON_VERBAL_LOGICAL_REASONING":{
                 "Easy":1,
                 "Medium":1,
                 "Hard":1

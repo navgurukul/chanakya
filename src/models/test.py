@@ -3,197 +3,6 @@ from datetime import datetime, timedelta
 
 from chanakya.src import db, app
 
-
-class Questions(db.Model):
-
-    __tablename__ = 'questions'
-
-    id = db.Column(db.Integer, primary_key=True)
-    en_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
-    hi_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
-    difficulty = db.Column(db.Enum(app.config['QUESTION_DIFFICULTY']), nullable=False)
-    topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
-    type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
-    options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
-    questions_order = db.relationship('QuestionOrder', backref='question', lazy='dynamic')
-
-    @staticmethod
-    def create_question(question_dict):
-        '''
-            create a question object for the question_dict
-            question_dict = {
-                'hi_text':'some question',
-                'en_text':'some question',
-                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
-                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
-                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
-                'options':[
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': True
-                    },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': False
-                    },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': False
-                    },
-                    {
-                        'en_text':'something',
-                        'hi_text':'something',
-                        'correct': True
-                    }
-                ]
-            }
-        '''
-        en_text = question_dict.get('en_text')
-        hi_text = question_dict.get('hi_text')
-        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
-        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
-        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
-        options = question_dict.get('options')
-
-        # creating question
-        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
-        db.session.add(question)
-        db.session.commit()
-
-        # creating options for the above question
-        for option in options:
-            option['question_id'] = question.id
-            question_option = QuestionOptions.create_option(**option)
-        db.session.commit()
-        return question
-
-    def update_question(self, question_dict):
-        '''
-            the options helps to update a question with a new data and also add any new option if provided.
-            params:
-                question_dict = {
-                    'id': 1,
-                    'hi_text':'some question',
-                    'en_text':'some question',
-                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
-                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
-                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
-
-                    'options':[
-                        {   'id': 1, // if it's a new option don't specify an ID
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        },
-                        {   'id': 2,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 3,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 4,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        }
-                    ]
-                }
-            return None
-        '''
-
-        existing_options = { option.id: option for option in self.options.all() }
-
-        updated_options = question_dict['options']
-
-        self.en_text = question_dict.get('en_text')
-        self.hi_text = question_dict.get('hi_text')
-        self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
-        self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
-        self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
-
-        db.session.add(self)
-
-        for updated_option in updated_options:
-            id = updated_option.get('id')
-            #updating options
-            if id:
-                option = existing_options[id]
-                option.en_text = updated_option['en_text']
-                option.hi_text = updated_option['hi_text']
-                option.correct = updated_option['correct']
-                db.session.add(option)
-            else:
-            # creating new options
-                option = {}
-                option['question_id'] = self.id
-                option['en_text'] = updated_option['en_text']
-                option['hi_text'] = updated_option['hi_text']
-                option['correct'] = updated_option['correct']
-                question_option = QuestionOptions.create_option(**option)
-
-        db.session.commit()
-
-    @staticmethod
-    def get_random_question_set():
-        '''
-            It generates a set of 18 question randomly from the question that are in database according to
-            the QUESTION_CONFIG define in config package which has the stored the number of question according to topic
-            and difficulty.
-
-            It requires minimum number of question to be in the database according to QUESTION_CONFIG variable to work properly
-            else it will return question less than 18 in a set
-
-            params: Not Required
-
-            return list of 18 questions generated
-                [<Question 1>,<Question 321>,<Question 331>,<Question 221>,<Question 111>,<Question 12>]
-        '''
-
-        questions = Questions.query.all()
-        # category
-        topics = app.config['QUESTION_CONFIG']['topic']
-
-        #arrange the question according to the topic and difficulty
-        questions_dict = {}
-        for question in questions:
-            topic = question.topic.value
-            difficulty = question.difficulty.value
-            if topic in topics.keys():
-                if not questions_dict.get(topic):
-                    questions_dict[topic]={}
-                    questions_dict[topic][difficulty] = []
-                    questions_dict[topic][difficulty].append(question)
-                elif not questions_dict[topic].get(difficulty):
-                    questions_dict[topic][difficulty] = []
-                    questions_dict[topic][difficulty].append(question)
-                else:
-                    questions_dict[topic][difficulty].append(question)
-
-        # Select the question randomly according to topic and difficulty
-        # from the config file
-        main_questions_list = []
-        for topic in topics:
-            for difficulty in topics[topic]:
-                question_topic = questions_dict.get(topic)
-
-                if not question_topic:
-                    continue
-                question_list = question_topic.get(difficulty)
-                if not question_list:
-                    continue
-                random.shuffle(question_list)
-                required_question_num = topics[topic][difficulty]
-                main_questions_list+=question_list[:required_question_num]
-
-        return main_questions_list
-
 class EnrolmentKey(db.Model):
 
     __tablename__ = 'enrolment_keys'
@@ -298,12 +107,201 @@ class EnrolmentKey(db.Model):
 
     def start_test(self):
         '''
-            function to start the test for student.
+            start the test for the student and provide him a time to end test
+            which is define in the config file
         '''
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
         self.test_end_time = current_datetime + timedelta(seconds=app.config['TEST_DURATION'])
 
+class Questions(db.Model):
+
+    __tablename__ = 'questions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    en_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
+    hi_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
+    difficulty = db.Column(db.Enum(app.config['QUESTION_DIFFICULTY']), nullable=False)
+    topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
+    type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
+    options = db.relationship('QuestionOptions', backref='question', cascade='all, delete-orphan', lazy='dynamic')
+    questions_order = db.relationship('QuestionOrder', backref='question', lazy='dynamic')
+
+    @staticmethod
+    def create_question(question_dict):
+        '''
+            create a question object for the question_dict
+            question_dict = {
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        '''
+        en_text = question_dict.get('en_text')
+        hi_text = question_dict.get('hi_text')
+        difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+        options = question_dict.get('options')
+
+        # creating question
+        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
+        db.session.add(question)
+        db.session.commit()
+
+        # creating options for the above question
+        for option in options:
+            option['question_id'] = question.id
+            question_option = QuestionOptions.create_option(**option)
+        db.session.commit()
+        return question
+
+    @staticmethod
+    def get_random_question_set():
+        '''
+            It generates a set of 18 question randomly from the question that are in database according to
+            the QUESTION_CONFIG define in config package which has the stored the number of question according to topic
+            and difficulty.
+
+            It requires minimum number of question to be in the database according to QUESTION_CONFIG variable to work properly
+            else it will return question less than 18 in a set
+
+            params: Not Required
+
+            return list of 18 questions generated
+                [<Question 1>,<Question 321>,<Question 331>,<Question 221>,<Question 111>,<Question 12>]
+        '''
+
+        questions = Questions.query.all()
+        # category
+        topics = app.config['QUESTION_CONFIG']['topic']
+        #arrange the question according to the topic and difficulty
+        questions_dict = {}
+        for question in questions:
+            topic = question.topic.value
+            difficulty = question.difficulty.value
+            if topic in topics.keys():
+
+                if not questions_dict.get(topic):
+                    questions_dict[topic]={}
+                    questions_dict[topic][difficulty] = []
+                    questions_dict[topic][difficulty].append(question)
+                elif not questions_dict[topic].get(difficulty):
+                    questions_dict[topic][difficulty] = []
+                    questions_dict[topic][difficulty].append(question)
+                else:
+                    questions_dict[topic][difficulty].append(question)
+
+        # Select the question randomly according to topic and difficulty
+        # from the config file
+        main_questions_list = []
+        for topic in topics:
+            for difficulty in topics[topic]:
+                question_topic = questions_dict.get(topic)
+
+                if not question_topic:
+                    continue
+                question_list = question_topic.get(difficulty)
+                if not question_list:
+                    continue
+                random.shuffle(question_list)
+                required_question_num = topics[topic][difficulty]
+                main_questions_list+=question_list[:required_question_num]
+        return main_questions_list
+
+    def update_question(self, question_dict):
+        '''
+            the options helps to update a question with a new data and also add any new option if provided.
+            params:
+                question_dict = {
+                    'id': 1,
+                    'hi_text':'some question',
+                    'en_text':'some question',
+                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+
+                    'options':[
+                        {   'id': 1,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': True
+                        },
+                        {   'id': 2,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': False
+                        },
+                        {   'id': 3,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': False
+                        },
+                        {   'id': 4,
+                            'en_text':'something',
+                            'hi_text':'something',
+                            'correct': True
+                        }
+                    ]
+                }
+            return None
+        '''
+
+        existing_options = { option.id: option for option in self.options.all() }
+
+        updated_options = question_dict['options']
+
+        self.en_text = question_dict.get('en_text')
+        self.hi_text = question_dict.get('hi_text')
+        self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
+        self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
+        self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
+
+        db.session.add(self)
+
+        for updated_option in updated_options:
+            id = updated_option.get('id')
+            #updating options
+            if id:
+                option = existing_options[id]
+                option.en_text = updated_option['en_text']
+                option.hi_text = updated_option['hi_text']
+                option.correct = updated_option['correct']
+                db.session.add(option)
+            else:
+            # creating new options
+                option = {}
+                option['question_id'] = self.id
+                option['en_text'] = updated_option['en_text']
+                option['hi_text'] = updated_option['hi_text']
+                option['correct'] = updated_option['correct']
+                question_option = QuestionOptions.create_option(**option)
+
+        db.session.commit()
 
 class QuestionOptions(db.Model):
 
@@ -314,6 +312,11 @@ class QuestionOptions(db.Model):
     hi_text = db.Column(db.Unicode(2000, collation='utf8mb4_unicode_ci'))
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     correct = db.Column(db.Boolean, default=False)
+
+    def is_url(self):
+        if self.en_text.startswith('https://') or self.en_text.startswith('http://'):
+            return True
+        return False
 
     @staticmethod
     def create_option(**kwargs):
@@ -407,7 +410,7 @@ class QuestionSet(db.Model):
         question_set = QuestionSet(partner_name=partner_name)
         db.session.add(question_set)
         db.session.commit()
-
+        print(question_set.id)
         # save the set to database in orderwise
         for index, question in enumerate(questions):
             question_order = QuestionOrder(question_order=index+1, question_id=question.id, set_id=question_set.id)

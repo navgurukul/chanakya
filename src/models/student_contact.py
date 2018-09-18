@@ -61,7 +61,7 @@ class IncomingCalls(db.Model):
 
     @staticmethod
     def create(student_contact, call_type):
-        incoming_call = IncomingCalls(contact=student_contact.id, call_type=app.config['INCOMING_CALL_TYPE'].rqc)
+        incoming_call = IncomingCalls(contact=student_contact.id, call_type=call_type)
         db.session.add(incoming_call)
         db.session.commit()
 

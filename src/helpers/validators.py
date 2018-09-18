@@ -15,7 +15,7 @@ def check_enrollment_key(enrollment_key):
         return {
             "valid": False,
             "reason": "DOES_NOT_EXIST"
-        } , enrollment
+        }, enrollment
 
     # else not expire than start countdown and send it to them
     elif enrollment.is_valid() and not enrollment.in_use():
@@ -38,7 +38,6 @@ def check_enrollment_key(enrollment_key):
             "reason": "EXPIRED"
         }, enrollment
 
-
 def check_question_ids(questions_attempt):
     '''
         helper checks if all the questions id which was attempted by student does exist in database or not
@@ -51,14 +50,14 @@ def check_question_ids(questions_attempt):
                             'selected_option_id': 43
                         },
                         {
-                            'answer': None,
+                            'answer': -21,
                             'question_id': 77,
-                            'selected_option_id': 182
+                            'selected_option_id': 0
                         },
                         {
-                            'answer': None,
+                            'answer': 216,
                             'question_id': 43,
-                            'selected_option_id': 97
+                            'selected_option_id': 0
                         },
                         {
                             'answer': None,
@@ -78,7 +77,7 @@ def check_question_ids(questions_attempt):
     questions = Questions.query.filter(Questions.id.in_(question_ids)).all()
 
     if not questions or len(questions) != len(question_ids):
-        return False # wrong_question_ids
+        return wrong_question_ids # wrong_question_ids
 
     # create the a new dict of {id:question}
     questions_id_dict = { question.id: question for question in questions }
@@ -88,10 +87,12 @@ def check_question_ids(questions_attempt):
     for question_attempt in questions_attempt:
         question_id = question_attempt.get('question_id')
         option_id = question_attempt.get('selected_option_id')
-        question = questions_id_dict[question_id]
-        option_id_list = [option.id for option in question.options.all()]
-        if not option_id in option_id_list and option_id:
-            wrong_question_ids.append(question_id)
+
+        if option_id:
+            question = questions_id_dict[question_id]
+            option_id_list = [option.id for option in question.options.all()]
+            if not option_id in option_id_list and option_id:
+                wrong_question_ids.append(question_id)
 
     return wrong_question_ids
 
@@ -132,12 +133,39 @@ def check_option_ids(question_instance,question_dict):
         and it ignore any new options
 
         params:
-            question_instance (its the Questions model instance)
-            question_dict (contains a dictionary of questions in it which is sent through the api)
-
-        return:
-            list of wrong options id
-
+            question_instance : Questions model instance
+            question_dict:
+            {
+                'id': 1,
+                'hi_text':'some question',
+                'en_text':'some question',
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {   'id': 1,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {   'id': 2,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'id': 3,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+        return :
+            list of wrong_option_ids [2,3]
     '''
 
     option_ids = [option.id for option in question_instance.options.all()]
@@ -146,4 +174,5 @@ def check_option_ids(question_instance,question_dict):
 
     wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
 
+    wrong_option_ids = [id for id in updated_option_ids if not id in existing_option_ids]
     return wrong_option_ids

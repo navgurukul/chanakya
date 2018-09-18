@@ -1,7 +1,6 @@
 '''
-    This files contains all the description for the route.
+    this file contains description for all routes.
 '''
-
 VALIDATE_ENROLMENT_KEY_DESCRIPTION = '''
         responses:
 
@@ -32,11 +31,10 @@ PERSONAL_DETAILS_DESCRIPTION = '''
 '''
 
 CREATE_QUESTION = '''
-
         choice fields value that can be passed:
 
         'type': ['MCQ', 'Integer Answer'],
-        'topic': ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4'],
+        'topic': ['BASIC_MATH', 'ABSTRACT_REASONING', 'NON_VERBAL_LOGICAL_REASONING', 'Topic 4'],
         'difficulty': ['Easy', 'Medium', 'Hard'],
         'en_text': Question in English,
         'hi_text': Question in Hindi,
@@ -49,4 +47,13 @@ CREATE_QUESTION = '''
                 'correct': True  if it's correct option for the question else False
             }
         ]
+'''
+
+MORE_STUDENT_DETAIL = '''
+        responses:
+
+            "KEY_DOESN'T_EXIST" : Enrollment key is not present in the database.
+            "UPDATED_DATA": Data have been successfully added to the database
+            "KEY_IS_NOT_USED": KEY is not used which means have not submitted or gave the test so we can't taked
+                                detials until the test is over.
 '''
