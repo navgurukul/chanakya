@@ -62,7 +62,10 @@ class ChanakyaConfig(object):
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',
-        'EKG': 'ENROLLMENT KEY GENERATED'
+        'EKG': 'ENROLLMENT KEY GENERATED',
+        'PDS': 'PERSONAL DETAIL SUBMITTED',
+        'ADS': 'ALL DETAIL SUBMITTED',
+        'PVC': 'PRIVILEGE & VERIFICATION CALL'
     }
 
     @staticmethod

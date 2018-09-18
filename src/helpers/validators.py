@@ -38,6 +38,29 @@ def check_enrollment_key(enrollment_key):
             "reason": "EXPIRED"
         }, enrollment
 
+def check_option_ids(question_instance,question_dict):
+    '''
+        checks whether sent question and options are attached in the database or not
+        is any id which has been sent is not present in the db
+        and it ignore any new options
+
+        params:
+            question_instance (its the Questions model instance)
+            question_dict (contains a dictionary of questions in it which is sent through the api)
+
+        return:
+            list of wrong options id
+
+    '''
+
+    option_ids = [option.id for option in question_instance.options.all()]
+
+    updated_option_ids = [option.get('id') for option in question_dict['options'] if option.get('id')]
+
+    wrong_option_ids = [id for id in updated_option_ids if not id in option_ids]
+
+    return wrong_option_ids
+
 def check_question_ids(questions_attempt):
     '''
         helper checks if all the questions id which was attempted by student does exist in database or not
@@ -50,14 +73,14 @@ def check_question_ids(questions_attempt):
                             'selected_option_id': 43
                         },
                         {
-                            'answer': -21,
+                            'answer': None,
                             'question_id': 77,
-                            'selected_option_id': 0
+                            'selected_option_id': 182
                         },
                         {
-                            'answer': 216,
+                            'answer': None,
                             'question_id': 43,
-                            'selected_option_id': 0
+                            'selected_option_id': 97
                         },
                         {
                             'answer': None,
@@ -87,12 +110,10 @@ def check_question_ids(questions_attempt):
     for question_attempt in questions_attempt:
         question_id = question_attempt.get('question_id')
         option_id = question_attempt.get('selected_option_id')
-
-        if option_id:
-            question = questions_id_dict[question_id]
-            option_id_list = [option.id for option in question.options.all()]
-            if not option_id in option_id_list and option_id:
-                wrong_question_ids.append(question_id)
+        question = questions_id_dict[question_id]
+        option_id_list = [option.id for option in question.options.all()]
+        if not option_id in option_id_list and option_id:
+            wrong_question_ids.append(question_id)
 
     return wrong_question_ids
 
@@ -124,6 +145,7 @@ def check_question_is_in_set(enrollment, questions_attempt):
     question_ids = [question.id for question in questions]
     question_attempt_ids = [ question_attempt.get('question_id') for question_attempt in questions_attempt ]
     wrong_question_ids = [id for id in question_attempt_ids if not id in question_ids]
+    print(wrong_question_ids)
     return wrong_question_ids
 
 def check_option_ids(question_instance,question_dict):
