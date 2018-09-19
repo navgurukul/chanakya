@@ -123,6 +123,34 @@ class Question(Resource):
 
 	put_payload_model = question_obj
 
+	QUESTIONS_UPDATE_DESCRIPTION = """
+		Possible values of different JSON keys which can be passed:
+
+			- 'id': Id of the Question in Integer,
+			- 'type': ['MCQ', 'Integer Answer'],
+			- 'topic': ['BASIC_MATH', 'ABSTRACT_REASONING', 'NON_VERBAL_LOGICAL_REASONING'],
+			- 'difficulty': ['Easy', 'Medium', 'Hard'],
+			- 'en_text': Question string in English,
+			- 'hi_text': Question string in Hindi,
+
+			- 'options': This will contain an array of options. Every object in the array will look like:
+				[
+				    {
+						'id': Id of the Option in Integer,
+				        'en_text': 'Option in English',
+				        'hi_text': 'Option in Hindi',
+				        'correct': True  if it's correct option for the question else False
+				    }
+				]
+
+			RETURN fields:
+
+			- 'invalid_option_ids' : [ 1, 4, 11, 112, 131, 142, 122] Invalid options ids
+
+
+	"""
+
+
 	@api.marshal_with(get_response)
 	def get(self, question_id):
 		# return a single question
@@ -137,7 +165,7 @@ class Question(Resource):
 
 		return { 'data': question }
 
-
+	@api.doc(description=QUESTIONS_UPDATE_DESCRIPTION)
 	@api.marshal_with(put_response)
 	@api.expect(put_payload_model)
 	def put(self, question_id):

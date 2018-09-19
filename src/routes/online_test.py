@@ -1,17 +1,12 @@
 from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import EnrolmentKey, StudentContact, Student, Questions, QuestionAttempts,QuestionSet
+from chanakya.src.models import Student, Questions, QuestionAttempts
 from chanakya.src import api, db, app
-from datetime import datetime, timedelta
 
 from chanakya.src.helpers.response_objects import (
                 question_obj,
-                questions_list_obj,
-                question_set
+                questions_list_obj
             )
-from chanakya.src.helpers.file_uploader import upload_pdf_to_s3, FileStorageArgument
-from werkzeug.datastructures import FileStorage
-from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids, check_question_is_in_set
-from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts, get_dataframe_from_csv
+from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids
 
 
 #Validation for the enrollment key
@@ -34,7 +29,7 @@ class EnrollmentKeyValidtion(Resource):
         True: already in use or not used till yet,
         False: expired or doesn't exist
     }
-    reason: {
+    'reason': {
         'NOT_USED' : The key is not used and but has been generated,
         'DOES_NOT_EXIST' : The key have not been generated or doesn't exist in the platform,
         'ALREADY_IN_USED' : A Student is already using to give the test,
@@ -68,21 +63,33 @@ class PersonalDetailSubmit(Resource):
         'enrollment_key_status':fields.String
     })
 
-    PERSONAL_DETAILS_DESCRIPTION = """
-    Response will comprise of two JSON keys. `success` and `enrollment_key_status`
-    Possible values of both are explained below.
-    'success': {
-        True : when the data is added,
-        False : when we can't data can't be added
-    }
-    'enrollment_key_status':{
-        'NOT_USED' : The key is not used and but has been generated,
-        'DOES_NOT_EXIST' : The key have not been generated or doesn't exist in the platform,
-        'ALREADY_IN_USED' : A Student is already using to give the test but you can't post the data to it,
-        'EXPIRED' : Time to generate a new key
-    }
-    """
 
+    PERSONAL_DETAILS_DESCRIPTION = """
+
+        Description:
+
+            Response will comprise of two JSON keys. `success` and `enrollment_key_status`
+            Possible values of both are explained below:
+
+                'success': {
+                    True : when the data is added,
+                    False : when we can't data can't be added
+                }
+                'enrollment_key_status':{
+                    'NOT_USED' : The key is not used and but has been generated,
+                    'DOES_NOT_EXIST' : The key have not been generated or doesn't exist in the platform,
+                    'ALREADY_IN_USED' : A Student is already using to give the test but you can't post the data to it,
+                    'EXPIRED' : Time to generate a new key
+                }
+
+        	Possible values of different JSON keys which can be passed:
+
+                - 'enrollment_key': 'SFD190',
+                - 'name': 'Amar Kumar Sinha',
+                - 'dob': '1997-09-18', [YYYY-MM--DD]
+                - 'mobile_number': '7896121314',
+                - 'gender': 'MALE', ['MALE', 'FEMALE', 'OTHER']
+    """
     @api.marshal_with(post_response)
     @api.doc(description=PERSONAL_DETAILS_DESCRIPTION)
     @api.expect(post_payload_model)
@@ -188,7 +195,7 @@ class TestEnd(Resource):
 
     post_payload_model = api.model('POST_end_test', {
         'enrollment_key': fields.String(required=True),
-        'question_attempted': fields.List(fields.Nested(question_attempt), required=True)
+        'questions_attempt': fields.List(fields.Nested(question_attempt), required=True)
     })
 
     @api.expect(post_payload_model)
@@ -208,17 +215,8 @@ class TestEnd(Resource):
             }
 
         # Check if only valid question IDs are there
-        questions_attempted = args.get('question_attempted')
-        wrong_question_ids = check_question_ids(questions_attempted)
-        if wrong_question_ids:
-            return {
-                'error':True,
-                'enrollment_key_valid':True,
-                'invalid_question_ids': wrong_question_ids
-            }
-
-        # check if the ids given by the user are among his set only
-        wrong_question_ids = check_question_is_in_set(enrollment, questions_attempted)
+        questions_attempt = args.get('questions_attempt')
+        wrong_question_ids = check_question_ids(enrollment, questions_attempt)
         if wrong_question_ids:
             return {
                 'error':True,
@@ -227,8 +225,9 @@ class TestEnd(Resource):
             }
 
         # Create attempts in the DB
-        QuestionAttempts.create_attempts(questions_attempted, enrollment)
+        QuestionAttempts.create_attempts(questions_attempt, enrollment)
         enrollment.end_test()
+        enrollment.calculate_test_score()
 
         return {
             'success': True,

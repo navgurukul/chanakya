@@ -20,27 +20,27 @@ class Student(db.Model):
     #extra detail fields
     caste = db.Column(db.Enum(app.config['CASTE']))
     religion = db.Column(db.Enum(app.config['RELIGION']))
-    monthly_family_member = db.Column(db.Integer)
+    monthly_family_income = db.Column(db.Integer)
     total_family_member = db.Column(db.Integer)
     family_member_income_detail = db.Column(db.Text)
 
     @staticmethod
     def create(stage, **kwargs):
-        '''
+        """
         This function create the student object with list of contact or single contact or the
         main_contact where we have to call them
         it requires **kwargs
 
-        params:
+        Params:
             mobile : str  (the number from which the person called on the helpline)
             contact_list: list of str (list of all the number of the student)
             main_contact : str (the number to which we can connect with the student)
 
-        USAGE: Student.create(**kwargs)
+        USAGE: Student.create(stage, **kwargs)
 
-        returns student object and also the student_contact object if the called was not the helpline
+        Returns: student object and also the student_contact object if the called was not the helpline
 
-        '''
+        """
         mobile=kwargs.get('mobile', None)
         contacts_list=kwargs.get('contacts_list', None)
         main_contact=kwargs.get('main_contact', None)
@@ -78,7 +78,7 @@ class Student(db.Model):
 
     @staticmethod
     def offline_student_record(stage, student_data, main_contact, mobile, set_id):
-        '''
+        """
             function helps to add student data who have given the test offline.
             it creates a student instance and then update it's data with contact infomation
             and create a enrollment key for the student.
@@ -96,7 +96,7 @@ class Student(db.Model):
                 main_contact : The number on which we can contact the student
                 mobile : An another number which is present as Potential Name
                 set_id : An set_id of question set which was generated for the partner can be saved to enrollment to get the question easily.
-        '''
+        """
 
         student , call_from = Student.create(stage, main_contact=main_contact, mobile=mobile)
 
@@ -114,22 +114,22 @@ class Student(db.Model):
 
     @staticmethod
     def generate_enrolment_key(mobile, from_helpline):
-        '''
-            this function helps to create a a record of a new student in
+        """
+            This function helps to create a a record of a new student in
             the database were the from_helpine varibale helps to track was
             the call from helpline or was manually created and send the enrollment
             key to the mobile number
 
-            if was from_helpline record the incoming calls also
+            Note: if the key was generated from_helpline record also record the incoming calls.
 
             USAGE :
                 Student.generate_enrolment_key(mobile, from_helpline)
 
-            params:
-                mobile : String required
-                from_helpline : Boolean required
+            Params:
+                `mobile` : String required
+                `from_helpline` : Boolean required
 
-        '''
+        """
 
         # create a new student record in the platform with this mobile number
         student, call_from_number = Student.create(stage='EKG', mobile=mobile)
@@ -142,7 +142,7 @@ class Student(db.Model):
         return message
 
     def update_data(self, student_data, mobiles=[]):
-        '''
+        """
         Update the student's data.
 
         params:
@@ -153,7 +153,7 @@ class Student(db.Model):
                     ['8130378953', '8130378965']. If they exist as contacts associated with the
                     given student no new contacts will be created, otherwise new ones will be
                     created.
-        '''
+        """
 
         # update the attributes given by the `student_data` dict
         for key, value in student_data.items():
@@ -177,7 +177,7 @@ class Student(db.Model):
 
 
     def send_enrolment_key(self, from_helpline):
-        '''
+        """
             Method is used to send valid enrollment key to the student if exist
             else it will generate a new enrollment key and send it to the user
 
@@ -187,7 +187,7 @@ class Student(db.Model):
             params:
                 from_helpline : Boolean required
 
-        '''
+        """
 
         student_id = self.id
 
@@ -200,13 +200,15 @@ class Student(db.Model):
             #send the enrollment key message to the student contact
             message = {
                 'generate':True,
-                'sent':True
+                'sent':True,
+                'enrollment_key':enrollment.key
             }
         #check if the enrollment key is valid or not
         elif enrollment.is_valid():
             message = {
                 'generate': False,
                 'sent': True,
+                'enrollment_key':enrollment.key
             }
         # if the key is not valid then generating a new valid key for the student
         else:
@@ -214,6 +216,7 @@ class Student(db.Model):
             message = {
                 'generate': True,
                 'sent': True,
+                'enrollment_key':enrollment.key
             }
 
         print(enrollment.key)

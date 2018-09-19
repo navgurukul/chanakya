@@ -1,7 +1,7 @@
-'''
+"""
     This file helps with all the upload of file to s3.
 
-'''
+"""
 
 import boto3
 from botocore.client import Config
@@ -13,17 +13,17 @@ import uuid
 
 
 def upload_file_to_s3(file, bucket_name, folder=None):
-    '''
+    """
     The function helps to upload any file on AWS in a specified bucket.
 
     Params:
-    - file: it takes the FileStorage instance of the file which contains every details
-    - bucket_name: Name of the bucket where the file should be uploaded default from the config
-    - folder (defaults to None): Name of the folder. Will append this in front of the filename.
+    - `file`: it takes the FileStorage instance of the file which contains every details
+    - `bucket_name`: Name of the bucket where the file should be uploaded default from the config
+    - `folder` (defaults to None): Name of the folder. Will append this in front of the filename.
                                  Should not have a trailing slash. Example: 'folder1/subfolder'
 
     Returns the S3 url of the uploaded file.
-    '''
+    """
 
     # get file extension
     filename_extension = secure_filename(file.filename).split('.')[-1]
@@ -57,7 +57,7 @@ def upload_file_to_s3(file, bucket_name, folder=None):
 
 
 def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'], acl="public-read"):
-    '''
+    """
     The function helps to upload any file on AWS s3 which accesibile publicily to anyone using the
     key_id,secret key in config file and boto3
     params:
@@ -67,7 +67,7 @@ def upload_pdf_to_s3(string, bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET
 
     it return a url of the file after uploading the file to s3 to be accesibile
     url : http://<bucketname>.s3.amazonaws.com/<filename>
-    '''
+    """
     #filename
     filename_extension = secure_filename(file.filename).split('.')[-1]
     random_string = str(uuid.uuid4())

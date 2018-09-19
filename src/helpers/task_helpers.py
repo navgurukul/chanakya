@@ -17,14 +17,15 @@ def render_pdf_phantomjs(template_name , **kwargs):
 
 
 def get_attempts(row, enrollment):
-    '''
+    """
         Helps to extract the attempts of student from dataframe row which is created by pandas
         by reading a csv format of question 1-18 with student answer.
 
-        params: row dataframe of pandas which carry a row of student data from which we will get student question attempts
-        enrollment: the enrollment instance which we need to extract question set
+        Params:
+        `row`: row dataframe of pandas which carry a row of student data from which we will get student question attempts.
+        `enrollment`: the enrollment instance which we need to extract question set.
 
-    '''
+    """
     attempts = []
     questions = enrollment.extract_question_from_set()
     for i in range(0,18):
@@ -45,8 +46,15 @@ def get_attempts(row, enrollment):
             attempts.append(attempt)
     return attempts
 
-def get_dataframe_from_csv(args):
-    csv_url = args.get('csv_url')
+def get_dataframe_from_csv(csv_url):
+    """
+        Helps to create a dataframe using pandas for the CSV file containing the partner offline test details.
+        Require the url of CSV File
+        Params:
+            `args`: "csv_url" the Url of the csv file on s3
+    """
+
+
     response = requests.get(csv_url)
     csv_buffer = BytesIO(response.content)
     dataframe = pandas.read_csv(csv_buffer, keep_default_na=False)

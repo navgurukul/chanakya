@@ -17,6 +17,7 @@ class GenerateEnrollmentKey(Resource):
 		'error': fields.Boolean(default=False),
 		'generated':fields.Boolean(default=False),
 		'sent':fields.Boolean(default=False),
+		'enrollment_key':fields.String,
 		'message':fields.String
 	})
 

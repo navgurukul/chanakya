@@ -1,8 +1,8 @@
-'''
+"""
     This file helps to add dumy question for testing through api
     requires qsn_dump file with dumy questions
 
-'''
+"""
 
 from questions import questions
 import requests

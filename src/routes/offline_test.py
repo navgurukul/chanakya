@@ -1,4 +1,15 @@
 
+from flask_restplus import Resource, reqparse, fields
+from chanakya.src.models import Student, QuestionAttempts, QuestionSet
+from chanakya.src import api, db, app
+from datetime import datetime
+
+from chanakya.src.helpers.response_objects import (
+                question_set
+            )
+from chanakya.src.helpers.file_uploader import upload_pdf_to_s3, FileStorageArgument
+from werkzeug.datastructures import FileStorage
+from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts, get_dataframe_from_csv
 
 
 @api.route('/test/offline_paper')
@@ -128,7 +139,7 @@ class OfflineCSVProcessing(Resource):
     def post(self, id):
         args = api.payload
 
-        student_rows = get_dataframe_from_csv(args)
+        student_rows = get_dataframe_from_csv(args.get('csv_url'))
         for row in student_rows:
             student_data = {}
 

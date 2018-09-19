@@ -11,11 +11,7 @@ from chanakya.src.helpers.response_objects import (
 from chanakya.src.helpers.file_uploader import upload_pdf_to_s3, FileStorageArgument
 from werkzeug.datastructures import FileStorage
 from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids, check_question_is_in_set
-from chanakya.src.helpers.routes_descriptions import (
-                VALIDATE_ENROLMENT_KEY_DESCRIPTION,
-                PERSONAL_DETAILS_DESCRIPTION,
-                MORE_STUDENT_DETAIL
-            )
+
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts, get_dataframe_from_csv
 
 
@@ -57,6 +53,29 @@ class PersonalDetailSubmit(Resource):
         'enrollment_key_status':fields.String
     })
 
+
+    PERSONAL_DETAILS_DESCRIPTION = """
+
+        Description:
+            Response will comprise of two JSON keys. `success` and `enrollment_key_status`
+            Possible values of both are explained below:
+                'success': {
+                    True : when the data is added,
+                    False : when we can't data can't be added
+                }
+                'enrollment_key_status':{
+                    'NOT_USED' : The key is not used and but has been generated,
+                    'DOES_NOT_EXIST' : The key have not been generated or doesn't exist in the platform,
+                    'ALREADY_IN_USED' : A Student is already using to give the test but you can't post the data to it,
+                    'EXPIRED' : Time to generate a new key
+                }
+        	Possible values of different JSON keys which can be passed:
+                - 'enrollment_key': 'SFD190',
+                - 'name': 'Amar Kumar Sinha',
+                - 'dob': '1997-09-18', [YYYY-MM--DD]
+                - 'mobile_number': '7896121314',
+                - 'gender': 'MALE', ['MALE', 'FEMALE', 'OTHER']
+    """
     @api.marshal_with(post_response)
     @api.doc(parser=post_parser, description=PERSONAL_DETAILS_DESCRIPTION)
     def post(self):
@@ -180,17 +199,8 @@ class TestEnd(Resource):
         #add questions to db
         questions_attempted = args.get('question_attempted')
         # is_question_ids_correct = check_question_ids(questions_attempted)
-        wrong_question_ids = check_question_ids(questions_attempted)
+        wrong_question_ids = check_question_ids(questions_attempted, enrollment)
 
-        if wrong_question_ids:
-            return {
-                'error':True,
-                'enrollment_key_valid':True,
-                'invalid_question_ids': wrong_question_ids
-            }
-        wrong_question_ids = check_question_is_in_set(enrollment, questions_attempted)
-
-        # if not question_is_in_set:
         if wrong_question_ids:
             return {
                 'error':True,
@@ -376,7 +386,8 @@ class OfflineCSVProcessing(Resource):
     def post(self, id):
         args = api.payload
 
-        student_rows = get_dataframe_from_csv(args)
+        student_rows = get_dataframe_from_csv(args.get('csv_url'))
+
         for row in student_rows:
             student_data = {}
 

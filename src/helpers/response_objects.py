@@ -1,7 +1,7 @@
-'''
+"""
  This file contains the response object for all the routes.
 
-'''
+"""
 
 from flask_restplus import fields
 from chanakya.src import app, api

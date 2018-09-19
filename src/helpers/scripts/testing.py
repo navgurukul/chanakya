@@ -5,16 +5,21 @@ import requests
 from pprint import pprint
 import json
 
-response = requests.get("http://127.0.0.1:5000/start/send_enrolment_key?mobile=7896121314&from_helpline=true")
-enrollment_key = input('EnrollmentKey : ')
-
+data = {
+    'mobile':'7896121314',
+    'from_helpline':True
+}
+response = requests.post("http://127.0.0.1:5000/start/send_enrolment_key", data=json.dumps(data),headers = {'content-type': 'application/json'})
+response_json = response.json()
+pprint(response_json)
+enrollment_key = response_json['enrollment_key']
 # submit personal details
 personal_details_url = 'http://127.0.0.1:5000/test/personal_details'
 data = {
     'enrollment_key': enrollment_key,
     'name':'Amar Kumar Sinha',
-    'dob':'18-09-1997',
-    'mobile_number':'7896121314',
+    'dob':'1997-09-18',
+    'mobile_number':'7002879316',
     'gender':'MALE'
 }
 resp = requests.post(personal_details_url, data=json.dumps(data), headers = {'content-type': 'application/json'})
@@ -25,29 +30,32 @@ start_test_url = 'http://127.0.0.1:5000/test/start_test?enrollment_key={0}'.form
 resp = requests.get(start_test_url)
 response_json = resp.json()
 pprint(response_json)
-pprint(len(response_json['questions']))
+pprint(len(response_json['data']))
 
 end_test = {
     'enrollment_key':enrollment_key
 }
 questions_attempted = []
 
-questions = response_json['questions']
+questions = response_json['data']
 for question in questions:
     data = {}
     if question['type'] == 'MCQ':
         options = question['options']
-        data['question_id'] = question['id']
-        data['selected_option_id'] = options[0]['id']
+        for option in options:
+            if option['correct']:
+                data['question_id'] = question['id']
+                data['selected_option_id'] = option['id']
     else:
         options = question['options']
         data['question_id'] = question['id']
-        data['answer'] = 'some'
+        data['answer'] = options[0]['en_text']
     questions_attempted.append(data)
 
 
 input('End the test? ')
-end_test['question_attempted'] = questions_attempted
+end_test['questions_attempt'] =  questions_attempted
+
 
 pprint(end_test)
 
