@@ -39,7 +39,9 @@ class UploadQuestionImage(Resource):
 class QuestionList(Resource):
 
 	get_response = api.model('GET_questions_list', {
-		'questions_list' : fields.List(fields.Nested(question_obj))
+		'data' : fields.List(fields.Nested(question_obj)),
+		'error':fields.Boolean(default=False),
+		'message':fields.String
 	})
 
 	# Description of POST method
@@ -83,8 +85,13 @@ class QuestionList(Resource):
 	@api.marshal_with(get_response)
 	def get(self):
 		questions_list = Questions.query.all()
+		if questions_list:
+			return {
+				"data":questions_list
+			}
 		return {
-			"questions_list":questions_list
+			'error':True,
+			'message':'There no question on platform. Please add some question'
 		}
 
 	@api.marshal_with(post_response)

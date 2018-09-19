@@ -7,13 +7,20 @@ from flask_restful.inputs import boolean
 @api.route('/start/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
-	post_model = api.model('POST_send_enrolment_key', {
+	post_payload_model = api.model('POST_send_enrolment_key', {
 		'mobile': fields.String(required=False),
 		'student_id': fields.Integer(required=False),
 		'from_helpline': fields.Boolean(required=True)
 	})
 
-	@api.expect(post_model)
+	post_response = api.model('POST_send_enrolment_key_response', {
+		'error': fields.Boolean(default=False),
+		'generated':fields.Boolean(default=False),
+		'sent':fields.Boolean(default=False),
+		'message':fields.String
+	})
+
+	@api.expect(post_payload_model)
 	def post(self):
 
 		args = api.payload
@@ -52,16 +59,16 @@ class GenerateEnrollmentKey(Resource):
 @api.route('/start/requested_callback')
 class RequestCallBack(Resource):
 
-	post_model = api.model('POST_requested_callback', {
+	post_payload_model = api.model('POST_requested_callback', {
 		'mobile': fields.String(required=True)
 	})
 
-	@api.expect(post_model)
+	@api.expect(post_payload_model)
 	def post(self):
 
 		args = api.payload
 
-		mobile = args.get('mobile', None)
+		mobile = args.get('mobile')
 
 		# Find the most recently created student with the given mobile
 		# For a student whose record exists, only a new incoming call will be recorded

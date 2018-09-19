@@ -131,7 +131,7 @@ class TestStart(Resource):
 
     get_response = api.model('GET_start_test_response',{
         'error':fields.Boolean(default=False),
-        'questions':fields.List(fields.Nested(question_obj)),
+        'data':fields.List(fields.Nested(question_obj)),
         'enrollment_key_validation': fields.Boolean(default=True)
     })
 
@@ -163,7 +163,10 @@ class TestStart(Resource):
             # start the test and send the questions generated randomly
             question_set, questions = enrollment.get_question_set()
 
-        return { 'questions':questions }
+        return {
+                'data':questions,
+                'enrollment_key_validation':True
+            }
 
 
 @api.route('/test/end_test')
@@ -228,7 +231,8 @@ class TestEnd(Resource):
         enrollment.end_test()
 
         return {
-            'success': True
+            'success': True,
+            'enrollment_key_valid':True
         }
 
 
@@ -244,9 +248,10 @@ class MoreStudentDetail(Resource):
         'family_member_income_detail': fields.String(required=False)
     })
 
-    post_response = api.model('POST_extra_detail_response', {
+    post_response = api.model('POST_extra_details_response', {
         'success': fields.Boolean(default=False),
-        'error':fields.Boolean(default=False)
+        'error':fields.Boolean(default=False),
+        'message':fields.String
     })
 
     @api.marshal_with(post_response)

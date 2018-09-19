@@ -3,18 +3,18 @@
 
 @api.route('/test/offline_paper')
 class OfflinePaperList(Resource):
-    post_model = api.model('POST_offline_paper', {
+    post_payload_model = api.model('POST_offline_paper', {
         'number_sets':fields.Integer(required=True),
         'partner_name':fields.String(required=True)
     })
 
     offline_paper_response = api.model('offline_paper_response', {
         'error': fields.Boolean(default=False),
-        'question_sets':fields.List(fields.Nested(post_model))
+        'data':fields.List(fields.Nested(post_payload_model))
     })
 
     @api.marshal_with(offline_paper_response)
-    @api.expect(post_model, validate=True)
+    @api.expect(post_payload_model)
     def post(self):
         args = api.payload
 
@@ -52,24 +52,28 @@ class OfflinePaperList(Resource):
         print(set_list)
         # return each and every question_set
         return {
-            'question_sets': set_list
+            'data': set_list
         }
 
     @api.marshal_with(offline_paper_response)
     def get(self):
 
         set_instance = QuestionSet.query.filter(QuestionSet.partner_name != None).all()
-        return {
-            'question_sets': set_instance
+        if set_instance:
+            return {
+                'data': set_instance
+            }
+        return{
+            'error':True,
+            'message':'No set generated for any partner till yet.'
         }
-
 
 @api.route('/test/offline_paper/<id>')
 class OfflinePaper(Resource):
 
     get_response = api.model('GET_offline_paper_id_response', {
         'error': fields.Boolean(default=False),
-        'set': fields.Nested(question_set),
+        'data': fields.Nested(question_set),
         'message':fields.String,
     })
 
@@ -79,11 +83,12 @@ class OfflinePaper(Resource):
         set_instance = QuestionSet.query.filter_by(id=id).first()
         if set_instance:
             return {
-                'set': set_instance
+                'data': set_instance
             }
 
         return {
-            'data':'All Detail Submitted'
+            'message':"Set doesn't exist",
+            'error':True
         }
 
 @api.route('/test/offline_paper/<id>/upload_results')
@@ -107,13 +112,19 @@ class OfflineCSVUpload(Resource):
 		return {'csv_url': csv_url}
 
 
+@api
 @api.route('/test/offline_paper/<id>/add_results')
 class OfflineCSVProcessing(Resource):
-    post_model = api.model('POST_add_results', {
+    post_payload_model = api.model('POST_add_results', {
         'csv_url': fields.String
     })
 
-    @api.expect(post_model, validate=True)
+    post_response = api.model('POST_add_results_response', {
+        'error':fields.Boolean(default=False),
+        'success':fields.Boolean(default=False),
+        'message':fields.String
+    })
+    @api.expect(post_payload_model, validate=True)
     def post(self, id):
         args = api.payload
 
@@ -124,7 +135,8 @@ class OfflineCSVProcessing(Resource):
             student_data['name'] =  row.get('Name')
             if not student_data['name']:
                 return {
-                    'error':True
+                    'error':True,
+                    'message':'Name of all the student must be there in CSV'
                 }
 
             student_data['gender'] =  app.config['GENDER'](row.get('Gender').upper())
@@ -143,13 +155,15 @@ class OfflineCSVProcessing(Resource):
                 return {
                     'error': True
                 }
+                'message':'Students must provide his contact to get connected'
 
             set = int(row.get('Set'))
             set_instance = QuestionSet.query.get(set)
 
             if not set_instance:
                 return {
-                    'error': True
+                    'error': True,
+                    'message': 'Please check the set id'
                 }
 
             set_id = set_instance.id

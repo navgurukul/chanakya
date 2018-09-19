@@ -62,7 +62,7 @@ class EnrolmentKey(db.Model):
             else:
                 option = question.options.all()[0]
                 # using bs4 to convert the html string which is the database to text
-                correct_answer = BeautifulSoup(option.en_text, 'html.parser').text.strip()
+                correct_answer = option.en_text.strip()
                 student_answer = attempt.answer.strip()
 
                 if correct_answer == student_answer:
