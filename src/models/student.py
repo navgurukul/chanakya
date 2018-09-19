@@ -54,14 +54,14 @@ class Student(db.Model):
         # adding the number to which we can connect to the student
         if main_contact:
             student_contact = StudentContact(contact=mobile, main_contact=True, student_id=student.id)
-            db.session.add(contact)
+            db.session.add(student_contact)
             db.session.commit()
 
         # adding the list of the contact
         if contacts_list:
             for contact in main_contacts:
                 contact = StudentContact(contact=mobile, student_id=student.id)
-                db.session.add(contacts)
+                db.session.add(contact)
                 db.session.commit()
         # if the call is from helpline create a record in student contact
         if mobile:
@@ -77,7 +77,7 @@ class Student(db.Model):
 
 
     @staticmethod
-    def offline_student_record(stage, student_data, main_contact, mobile, set_id):
+    def offline_student_record(stage, student_data, main_contact, mobile, set):
         """
             function helps to add student data who have given the test offline.
             it creates a student instance and then update it's data with contact infomation
@@ -104,9 +104,9 @@ class Student(db.Model):
         student_id = student.id
 
         enrollment = EnrolmentKey.generate_key(student_id)
-        enrollment.question_set_id = set_id
+        enrollment.question_set_id = set.id
 
-        enrollmen.start_test()
+        enrollment.start_test()
         enrollment.end_test()
 
         return student, enrollment

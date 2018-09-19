@@ -27,7 +27,9 @@ def get_attempts(row, enrollment):
 
     """
     attempts = []
-    questions = enrollment.extract_question_from_set()
+    question_set = enrollment.question_set
+    questions = question_set.get_questions()
+    
     for i in range(0,18):
         question_num = str(i+1)
         attempt = {}

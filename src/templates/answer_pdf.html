@@ -32,7 +32,8 @@
 	  <tr >
 	    <th>QUESTION NUMBER</th>
 	    <th>QUESTION TYPE</th>
-	    <th>QUESTION ANSWER</th>
+			<th>QUESTION ANSWER</th>
+	    <th>QUESTION DIFFICULTY</th>
 	  </tr>
 		{% for question in questions %}
 	  <tr>
@@ -51,6 +52,7 @@
 				{% endfor %}
 			{% endif %}
 			</td>
+			<td>{{ question.difficulty.value }}</td>
 	  </tr>
 		{% endfor %}
 	</table>

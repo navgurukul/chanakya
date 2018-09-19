@@ -30,7 +30,7 @@ class UploadQuestionImage(Resource):
 
 		# upload to s3
 		image = args['image']
-		image_url = upload_file_to_s3(image, app.config['S3_QUESTION_IMAGES_BUCKET'])
+		image_url = upload_file_to_s3(app.config['S3_QUESTION_IMAGES_BUCKET'], image)
 
 		return {'image_url': image_url}
 

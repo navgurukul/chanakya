@@ -2,41 +2,61 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
+  </head>
   <style>
-      body{
-        margin: 20px;
-      }
-      .main{
-        margin: 20px 0;
-      }
-      tr.inline-block{
-        display: inline-block;
-      }
-      table, li{
-          page-break-inside:avoid !important;
-          width:100% !important;
-      }
-      option-cell{
+    .questions img{
+      display: block;
+      margin: 0 auto;
+      max-height: 320px;
+    }
+    /*custom style for heading "Set A" Text*/
+    .heading{
+      text-align: center;
+      font-size: 20px;
+    }
 
-      }
-      .inline-block img{
-        display:inline-block;
-        vertical-align: text-top;
-        margin:auto;
-        max-height: 80px;
-      }
-      .center-image{
-        display: block;
-        margin: 0 auto;
-        max-height: 320px;
+    /*css for studet detail form secction...*/
+    .student-info{
+      width: 90%;
+      margin: 0 auto;
+    }
+    /*css for all answer submmit section..*/
+    .answer-section{
+      width: 90%;
+      margin: 0 auto;
+    }
+    .answer-section td, .answer-section th, .student-info td , .student-info th{
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+    }
+    #answer{
+      page-break-before: always;
+    }
+
+    /*answer form inner table css...*/
+    .inner-table{
+      width: 100%;
+    }
+    .inner-table tr td{
+      border:none;
+    }
+    .th-width{
+      width: 10%;
+    }
+    /*css for zero padding in inner table..*/
+    .padding-zero{
+      padding: 0px !important;
+    }
+    .padding{
+      padding-top: 40px;
+      padding-bottom: 5px;
     }
   </style>
-  </head>
-
   <body >
-    <div>
+    <div style="margin:40px;">
        <div>
         <center>
           <h2>
@@ -48,35 +68,39 @@
 
       {% set strings = 'abcdefghijklmnopqrstuvwxyz' %}
 
-      <div class="main">
+      <div style="margin-top:20px; margin-bottom: 20px;">
         <ol>
         {% for question in questions %}
-          <li>
-            <br>
-            <table>
+          <li style="page-break-inside:avoid !important; ">
+            <table style="page-break-inside:avoid !important; width:100% !important;">
                 {% if question.type.value == 'MCQ' %}
                       <tr>
-                        <td colspan="2">
-                          <!-- {{ question.en_text | safe}}
-                          <br> -->
+                        <td class="questions">
+                          {{ question.en_text | safe}}
+                          <br>
                           {{ question.hi_text | safe}}
+                          <!-- tell rishabh here should be something for images also both in models and here -->
                         </td>
                       </tr>
 
                       {% if question.options.all() %}
-                        <tr class="inline-block">
+                        <tr style="display:inline-block;">
                             {% for option in question.options.all() %}
-                                      <tr style="display:inline-block; min-width:45%;">
-                                        <td style="width:20px">{{ strings[loop.index0] }})</td>
-                                        {{ option.hi_text | safe }}
-                                      </tr>
+                                {% if loop.index is divisibleby 2 %}
+                                  <td>
+                                {% else %}
+                                  <td style="float: left; min-width: 400px;">
+                                {% endif %}
+                                      {{ strings[loop.index0] }}) {{ option.en_text | safe}}
+                                  </td>
                             {% endfor %}
                         </tr>
                       {% endif %}
                 {% else %}
                         <tr>
                           <td>
-                            {{ question.hi_text | safe}}</br>
+                            {{ question.en_text | safe}}</br>
+                            {{ question.hi_text | safe }}</p>
                             <p>Iska answer likho answers wale page pe.</p>
                           </td>
                         </tr>
@@ -85,8 +109,96 @@
           </li>
         {% endfor %}
         </ol>
-
       </div>
+    </div>
+
+    <div id="answer">
+    	<!-- Question paper set a heading.... -->
+    	<p class="heading">Set {{ set_instance.id }}</p>
+
+    	<div class="student-info">
+    		<table style="width:100%;">
+    		<tr>
+    		   <td class="padding">
+    				 <b>Name / Apka Naam<br></b>
+    			 </td>
+    		   <td class="padding"><br>___________________</td>
+    		   <td class="padding">
+    				 <b>Mobile : <br></b>
+    			 </td>
+    		   <td class="padding"><br>___________________</td>
+    		</tr>
+
+    	 	<tr>
+    		    <td class="padding">
+    						<b>Gender /Apka Ling</b>
+    				</td>
+    		    <td class="padding">
+    		    	<input type="checkbox" name="1" value="Male"> Male
+    		    	<input type="checkbox" name="1" value="Female"> Female
+    		    </td>
+    		    <td class="padding">
+    					<b>State / Aap kaunse <br>rajya mein rehte ho?</b>
+    				</td>
+    		    <td class="padding"></td>
+    	  	</tr>
+
+    	  	<tr>
+    		    <td>
+    					<b>Aap gaon mein rehte <br> ho ya sheher?</b>
+    				</td>
+    		    <td>
+    		    	<input type="checkbox" name="2" value="Urban"> Urban
+    		    	<input type="checkbox" name="2" value="Rural"> Rural
+    		    </td>
+    		    <td>
+    					<b>Religon / Aapka kya <br>dharam hai?</b>
+    				</td>
+    		    <td></td>
+    	  	</tr>
+    	  <tr>
+    	    <td>
+    				<b>Caste</b>
+    			</td>
+    	    <td>
+    	    	<input type="checkbox" name="3" value="General"> General
+    	    	<input type="checkbox" name="3" value="OBC"> OBC</br>
+    	    	<input type="checkbox" name="3" value="SC"> SC
+    	    	<input type="checkbox" name="3" value="ST"> ST
+    	    </td>
+    	    <td>Date of Birth <br> DD-MM-YYYY</td>
+    	    <td></td>
+    	  </tr>
+    		</table>
+    	</div>
+
+    	<div class="answer-section">
+    		<h3>Your Answers / ​ Correct options par yahan tick mark lagaiye.</h3>
+    		<table style="width:100%;">
+
+          {% set strings_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+
+            {% for question in questions %}
+            <tr>
+              <th class="th-width">{{ loop.index }})</th>
+                {% if question.type.value == 'MCQ' %}
+                  <td  class="padding-zero">
+          			 		<table class="inner-table">
+          			 			<tr>
+                        {% for option in question.options.all() %}
+          			 				      <td><input type="checkbox"> {{ strings_upper[loop.index0] }}</td>
+                        {% endfor %}
+                      </tr>
+          			 		</table>
+          			 	</td>
+                {% else %}
+               			 	<td></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+    		</table>
+    	</div>
+
     </div>
   </body>
 </html>

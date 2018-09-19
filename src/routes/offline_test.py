@@ -7,7 +7,7 @@ from datetime import datetime
 from chanakya.src.helpers.response_objects import (
                 question_set
             )
-from chanakya.src.helpers.file_uploader import upload_pdf_to_s3, FileStorageArgument
+from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from werkzeug.datastructures import FileStorage
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts, get_dataframe_from_csv
 
@@ -21,7 +21,7 @@ class OfflinePaperList(Resource):
 
     offline_paper_response = api.model('offline_paper_response', {
         'error': fields.Boolean(default=False),
-        'data':fields.List(fields.Nested(post_payload_model))
+        'data':fields.List(fields.Nested(question_set))
     })
 
     @api.marshal_with(offline_paper_response)
@@ -40,12 +40,12 @@ class OfflinePaperList(Resource):
                 set_instance, questions = QuestionSet.create_new_set(partner_name)
 
                 # render pdf
-                question_pdf = render_pdf_phantomjs('question_pdf.html', set_instance=set_instance, questions=questions)
+                question_pdf = render_pdf_phantomjs('question_pdf.bkp.html', set_instance=set_instance, questions=questions)
                 answer_pdf = render_pdf_phantomjs('answer_pdf.html', set_instance=set_instance, questions=questions)
 
                 #s3 method that upload the binary file
-                question_pdf_s3_url = upload_pdf_to_s3(string=question_pdf)
-                answer_pdf_s3_url = upload_pdf_to_s3(string=answer_pdf)
+                question_pdf_s3_url = upload_file_to_s3(bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'], string=question_pdf, filename_extension='pdf')
+                answer_pdf_s3_url = upload_file_to_s3(bucket_name = app.config['S3_QUESTION_IMAGES_BUCKET'], string=answer_pdf,   filename_extension='pdf')
 
                 print(question_pdf_s3_url)
                 print(answer_pdf_s3_url)
@@ -118,12 +118,11 @@ class OfflineCSVUpload(Resource):
 			abort(400, message="File extension is not one of our supported types.")
 
 		# upload to s3
-		csv_url = upload_file_to_s3(csv)
+		csv_url = upload_file_to_s3(bucket_name=app.config['S3_QUESTION_IMAGES_BUCKET'], file=csv)
 
 		return {'csv_url': csv_url}
 
 
-@api
 @api.route('/test/offline_paper/<id>/add_results')
 class OfflineCSVProcessing(Resource):
     post_payload_model = api.model('POST_add_results', {
@@ -151,7 +150,7 @@ class OfflineCSVProcessing(Resource):
                 }
 
             student_data['gender'] =  app.config['GENDER'](row.get('Gender').upper())
-            student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
+            # student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
 
             stage =  'PVC'
 
@@ -164,9 +163,9 @@ class OfflineCSVProcessing(Resource):
 
             if not mobile or not main_contact:
                 return {
-                    'error': True
+                    'error': True,
+                    'message':'Students must provide his contact to get connected'
                 }
-                'message':'Students must provide his contact to get connected'
 
             set = int(row.get('Set'))
             set_instance = QuestionSet.query.get(set)
@@ -180,7 +179,7 @@ class OfflineCSVProcessing(Resource):
             set_id = set_instance.id
 
             # creating the student, student_contact and an enrollment_key for the student with set_id
-            student, enrollment = Student.offline_student_record(stage, student_data, main_contact, mobile, set_id)
+            student, enrollment = Student.offline_student_record(stage, student_data, main_contact, mobile, set_instance)
 
             attempts = get_attempts(row, enrollment) # this get all the attempts made by student
 
