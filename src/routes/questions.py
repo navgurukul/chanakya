@@ -80,7 +80,11 @@ class QuestionList(Resource):
 	    'options': fields.List(fields.Nested(post_model_option), required=True)
 	})
 
-	post_response = question_obj
+	post_response = api.model('POST_questions_response', {
+		'error': fields.Boolean(default=False),
+		'message':fields.String,
+		'data': fields.Nested(question_obj)
+	})
 
 	@api.marshal_with(get_response)
 	def get(self):
@@ -100,8 +104,19 @@ class QuestionList(Resource):
 	def post(self):
 		args = api.payload
 		# create the question
+		options = args.get('options')
+		is_any_option_correct = False
+		for option in options:
+			if option['correct']:
+				is_any_option_correct = True
+
+		if not is_any_option_correct:
+			return{
+				'error':True,
+				'message': 'Minimum 1 option should be correct for the question.'
+			}
 		question = Questions.create_question(args)
-		return question
+		return {'data':question}
 
 
 @api.route('/questions/<question_id>')

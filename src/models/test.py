@@ -272,7 +272,9 @@ class Questions(db.Model):
 
         updated_options = question_dict['options']
 
-        deletable_options = [option.id for option in existing_options if not updated_options.get(option.id)]
+        option_ids = [option['id'] for option in updated_options if option.get('id')]
+
+        deletable_options = [option for option in existing_options.keys() if not option in option_ids]
 
         self.en_text = question_dict.get('en_text')
         self.hi_text = question_dict.get('hi_text')
