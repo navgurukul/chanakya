@@ -59,8 +59,7 @@ class EnrolmentKey(db.Model):
         score = 0
         # iterate over each question
         for attempt in attempts:
-            question_id = attempt.question_id
-            question = Questions.query.get(question_id)
+            question = attempt.question
             is_correct = False
             # for mcq check if the id which is select is correct = True or not
             if question.type.value == 'MCQ':
@@ -349,6 +348,7 @@ class QuestionAttempts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     enrolment_key_id = db.Column(db.Integer, db.ForeignKey('enrolment_keys.id'), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
+    question = db.relationship('Questions')
     selected_option_id = db.Column(db.Integer, db.ForeignKey('question_options.id')) #to store mcq answer
     answer = db.Column(db.String(10)) #to store integer value
 
