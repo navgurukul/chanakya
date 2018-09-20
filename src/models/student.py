@@ -242,3 +242,24 @@ class StudentStageTransition(db.Model):
     notes = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+    student = db.relationship("Student")
+
+    @staticmethod
+    def record_stage_change(to_stage, student, notes=None):
+        """
+            Helps to keep track of student stages in which it has been changed.
+
+            Params:
+                `from_stage`: Existing student stage.
+                `to_stage`: New student stage.
+                `student`: student instance.
+                `notes`: (default is None) Notes for the stage change.
+        """
+
+        to_stage = app.config['STAGES'][to_stage]
+        student_stage_transition = StudentStageTransition(from_stage=student.stage, to_stage=to_stage, student=student, notes=notes)
+        student.stage = to_stage
+        db.session.add(student_stage_transition)
+        db.session.add(student)
+
+        db.session.commit()

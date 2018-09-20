@@ -1,5 +1,5 @@
 from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import Student, Questions, QuestionAttempts
+from chanakya.src.models import Student, Questions, QuestionAttempts, StudentStageTransition
 from chanakya.src import api, db, app
 
 from chanakya.src.helpers.response_objects import (
@@ -110,6 +110,8 @@ class PersonalDetailSubmit(Resource):
             student_id = enrollment.student_id
             student = Student.query.filter_by(id=student_id).first()
             student.update_data(args, [mobile_number])
+
+            StudentStageTransition.record_stage_change('PDS', student)
 
             return {
                 'success':True,
@@ -242,7 +244,7 @@ class MoreStudentDetail(Resource):
         'enrollment_key':fields.String(required=True),
         'caste': fields.String(enum=[attr.value for attr in app.config['CASTE']], required=False),
         'religion': fields.String(enum=[attr.value for attr in app.config['RELIGION']], required=False),
-        'monthly_family_member': fields.Integer(required=False),
+        'monthly_family_income': fields.Integer(required=False),
         'total_family_member': fields.Integer(required=False),
         'family_member_income_detail': fields.String(required=False)
     })
@@ -272,5 +274,6 @@ class MoreStudentDetail(Resource):
         # update the data of the student
         student = enrollment.student
         student.update_data(args)
+        StudentStageTransition.record_stage_change('ADS', student)
 
         return { 'success':True }

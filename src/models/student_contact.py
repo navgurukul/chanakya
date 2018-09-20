@@ -12,6 +12,7 @@ class StudentContact(db.Model):
     main_contact = db.Column(db.Boolean, default=False)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    student = db.relationship("Student")
 
     def send_sms(self, message):
         """

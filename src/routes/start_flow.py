@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 from chanakya.src import api, app, db
-from chanakya.src.models import Student, IncomingCalls, StudentContact
+from chanakya.src.models import Student, IncomingCalls, StudentContact, StudentStageTransition
 from flask_restful.inputs import boolean
 
 
@@ -79,6 +79,9 @@ class RequestCallBack(Resource):
 		# This student will have the RQC stage
 		if not called_number:
 			student, called_number = Student.create(stage = 'RQC', mobile = mobile)
+		else:
+			student = called_number.student
+			StudentStageTransition.record_stage_change('RQC',student)
 
 		# Record the incoming call in the DB
 		IncomingCalls.create(called_number, call_type=app.config['INCOMING_CALL_TYPE'].rqc)

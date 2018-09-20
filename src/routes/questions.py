@@ -160,9 +160,7 @@ class Question(Resource):
 
 			RETURN fields:
 
-			- 'invalid_option_ids' : [ 1, 4, 11, 112, 131, 142, 122] Invalid options ids
-
-
+			- 'invalid_option_ids' : [ 1, 4, 11, 112, 131, 142, 122] Invalid options ids.
 	"""
 
 
