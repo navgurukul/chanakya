@@ -14,21 +14,21 @@ import uuid
 
 def upload_file_to_s3( bucket_name, file=None, folder=None, string=None, filename_extension=None):
     """
-    The function helps to upload any file on AWS in a specified bucket.
+        The function helps to upload any file on AWS in a specified bucket.
 
-    Params:
-    - `file`: it takes the FileStorage instance of the file which contains every details(default=None)
-    - `string`: it takes a data in either string or bytes(default=None)
-    - `filename_extension`: The extension of the file(default=None) ['pdf', 'csv']
-    - `bucket_name`: Name of the bucket where the file should be uploaded default from the config
-    - `folder` (defaults to None): Name of the folder. Will append this in front of the filename.
-                                 Should not have a trailing slash. Example: 'folder1/subfolder'
+        Params:
+        - `file`: it takes the FileStorage instance of the file which contains every details(default=None)
+        - `string`: it takes a data in either string or bytes(default=None)
+        - `filename_extension`: The extension of the file(default=None) ['pdf', 'csv']
+        - `bucket_name`: Name of the bucket where the file should be uploaded default from the config
+        - `folder` (defaults to None): Name of the folder. Will append this in front of the filename.
+                                     Should not have a trailing slash. Example: 'folder1/subfolder'
 
-    Returns the S3 url of the uploaded file.
+        Returns the S3 url of the uploaded file.
 
 
-    *Note: Either file or string must be passed.
-           If you are passing string you also have to pass a filename_extension param*
+        *Note: Either file or string must be passed.
+               If you are passing string you also have to pass a filename_extension param*
     """
 
     # if the FileStorage object is passed
@@ -75,8 +75,10 @@ def upload_file_to_s3( bucket_name, file=None, folder=None, string=None, filenam
 
 
 class FileStorageArgument(reqparse.Argument):
-    """This argument class for flask-restful will be used in
-    all cases where file uploads need to be handled."""
+    """
+        This argument class for flask-restplus will be used in
+        all cases where file uploads need to be handled.
+    """
 
     def convert(self, value, op):
         if self.type is FileStorage:  # only in the case of files

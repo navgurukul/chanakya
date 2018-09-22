@@ -1,13 +1,11 @@
 from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import Student, Questions, QuestionAttempts, StudentStageTransition
 from chanakya.src import api, db, app
+from chanakya.src.models import Student, Questions, QuestionAttempts, StudentStageTransition
 
-from chanakya.src.helpers.response_objects import (
-                question_obj,
-                questions_list_obj
-            )
+from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
 from chanakya.src.helpers.validators import check_enrollment_key, check_question_ids
 
+from chanakya.src.google_sheet_sync.sync_google_sheet import SyncGoogleSheet
 
 #Validation for the enrollment key
 @api.route('/test/validate_enrolment_key')
@@ -275,5 +273,5 @@ class MoreStudentDetail(Resource):
         student = enrollment.student
         student.update_data(args)
         StudentStageTransition.record_stage_change('ADS', student)
-
+        syncgooglesheet = SyncGoogleSheet(student)
         return { 'success':True }

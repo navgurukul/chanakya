@@ -5,15 +5,21 @@ import requests
 from pprint import pprint
 import json
 
+########################### GENERATE ENROLLMENT KEY ############################
 data = {
     'mobile':'7896121314',
     'from_helpline':True
 }
 response = requests.post("http://127.0.0.1:5000/start/send_enrolment_key", data=json.dumps(data),headers = {'content-type': 'application/json'})
 response_json = response.json()
+
 pprint(response_json)
 enrollment_key = response_json['enrollment_key']
-# submit personal details
+################################################################################
+
+
+
+########################## PERSONAL DETAIL SUBMITTED ###########################
 personal_details_url = 'http://127.0.0.1:5000/test/personal_details'
 data = {
     'enrollment_key': enrollment_key,
@@ -24,14 +30,22 @@ data = {
 }
 resp = requests.post(personal_details_url, data=json.dumps(data), headers = {'content-type': 'application/json'})
 pprint(resp.json())
+################################################################################
 
-#start test
+
+
+##################################### START TEST ###############################
 start_test_url = 'http://127.0.0.1:5000/test/start_test?enrollment_key={0}'.format(enrollment_key)
 resp = requests.get(start_test_url)
 response_json = resp.json()
 pprint(response_json)
 pprint(len(response_json['data']))
+################################################################################
 
+
+
+
+################################# END TEST #####################################
 end_test = {
     'enrollment_key':enrollment_key
 }
@@ -55,12 +69,29 @@ for question in questions:
 
 input('End the test? ')
 end_test['questions_attempt'] =  questions_attempted
-
-
 pprint(end_test)
 
-# end test
 end_test_url = "http://127.0.0.1:5000/test/end_test"
 response = requests.post(end_test_url, data=json.dumps(end_test), headers = {'content-type': 'application/json'})
 
 pprint(response.json())
+################################################################################
+
+
+
+
+################################ EXTRA DETAILS #################################
+
+extra_details = {
+    'enrollment_key':enrollment_key,
+    'caste': 'OBC',
+    'religion': 'Hindu',
+    'monthly_family_income': 19000,
+    'total_family_member': 7,
+    'family_member_income_detail': 'Karlete hai jugaad'
+}
+
+more_details_url = "http://127.0.0.1:5000/test/extra_details"
+response = requests.post(more_details_url, data=json.dumps(extra_details), headers = {'content-type': 'application/json'})
+pprint(response.json())
+################################################################################

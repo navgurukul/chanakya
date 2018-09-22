@@ -61,7 +61,16 @@ class ChanakyaConfig(object):
 
     }
 
+    TEST_DURATION = 3670 + (20*60)#in seconds
 
+    # Exotel Related Config
+    TEST_ENROLL_MSG = """
+    NavGurukul ki scholarship ke liye apply karne ke liye, thank you.
+    Iss test ko dene ke liye aap jald hi, yeh website - http://join.navgurukul.org/?key={test_url} kholein aur test ko de.
+    Test dene ke liye aap apne paas ek notebook aur pen tayyar rakhe, aur apne answers ko apne phone mei hi answer karein.
+    NavGurukul ke baarein mei aur jaanne ke liye, youtube par yeh video - http://bit.ly/navgurukul-intro dekhein.
+    Test ke liye best of luck :) Test ke baad hum aap ko call kar kar, aage ke steps batayenge.
+    """
     # Stages
     STAGES = {
         'RQC': 'REQUESTED CALLBACK',
@@ -70,6 +79,7 @@ class ChanakyaConfig(object):
         'ADS': 'ALL DETAIL SUBMITTED',
         'PVC': 'PRIVILEGE & VERIFICATION CALL'
     }
+    
 
     @staticmethod
     def get_config():

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "chanakya-217011",
+  "private_key_id": "0a3e5c1bcea37c3b57578f9eda30df53d8e13633",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCtPM/d+dzlTP1w\ny90IYcnE7DVH4L74303NcAWE2W9s7hbawC73cocRc3JjNHJvGty0rKhKBPKp8+yD\nvheGFWmE+C/qXfKrJnRVLP6DG1PqP+M2rYAYTcF62avnn9X5HL5d8fc6JYTGa5UY\nItpV2tK9AuFJvpXrue7dOHBAUzJqF1I2hukEMa4lcqiUsghYZzEuf60FPHcPe3DS\nfohOiSouYv7qiqY9fbDgxFZJY9LUgBVWP7/oFSKrYswA8Fb+hJXpbsLAO7SbweCP\nT+mZuRTRI0nj3pyE8Y1s/+Bxw8b/jr6a0/zuKPvFSQ7IwBaBDW2vG8QprJCfq9sa\nzEoEeoLnAgMBAAECggEAAWxvPqpSYFpiihyhnPNsxCgMR19JvF174DaQwZ2+LwUv\n2Tm3+djRTJx72YK0dxPisbMCkWaroH0X9sWoxHJgQ8WhSsn12XhwBXty3NN4fy45\nE7H49ufgq1Ag10s2mJCtHf1TM2j0nQGpLANLNkG79oBHiKjRG/PoXJFCI3TNFs2n\nHlDpsWPbdQqUgZXLkkcnjFYLqPma733licWfKiWucZrPdCgnxLb21faCNabPwWQH\nAoMkliYyj7u6eLGM6meouX9w6BRR/uG/v0rMd5N62R7Kf6AQGrmzD+WiLBYmxIsp\nYsvuOVgvGCarlcby5/9jo1GNtxcl5Ftl4EuySRo9FQKBgQDkOtWnJ871to9yKkaf\nA8zoNkWqFJ1dMm7XPI6o/dalUtKjS+yMQ3lHXOM3S3yJhFuNXMCLJnLwMZHHWdJj\nMyH+72tqzd+n3MoLrVL+js45+u9WOoJ75WmzzcKYh/LwYzWcBKwtL1rRItYc/IzE\nd/T+NpJIs8osaElNm7GG8JvmbQKBgQDCUQO/0jWoPXp6AcoOg8JJNjcvDwf4Wavf\nxGZ4Dvq9mwKbbEe8aqT6ZYIU7ALYLGy665rpIIMy+QclHaC5Z2arqLpvBot1dxLU\n1EhjI9ePUjze1MTSe6fShm2WOwmqvYVGR8xaWYIpbx73bM7pR5mFDqVmGmBHF8tt\nSMFeUbjKIwKBgQDfvMmsl3rtKG4Rdl5LDte2oVXD+XeXYJSGjkgwZMAizEHQceLQ\nUmk3S1k34NmSml2CBHaBM00kKQQHUQfN1dey6xT73B0wm2K69cxR3r9O2a/9cVhv\niyQHb2QgUc4YWLm6XF5J4Y1/Tk5mljKNfCeBexAHE7HTvNx3p3TumzvKNQKBgDlu\njHcjgCxrj0mEQd4sXz4YQhMslCR5DG2ktMyDUOS9bfXV+RXdR0miuuHIJ8cQykos\n3KpOq7hjFhOIQDrMLvJJemDaRFnBidVRsNtseoenvMn3hPzZA28bwEQIywCl50Aw\ndFu33Nq2NybWCAm22c8T1xrobNBWXg+80zo3WTCVAoGBANf4mNEmVqbZBVdXnzqf\nvHqPLBfs7Qw4M0e5p5G5X5Yrx/n9d0ulYl/8jvpJOoCWY9kNlbdcq3zvQ9B/tPgA\nkpzBumpamz/UzCdr7toqsIsPEfjLkC8lyXMQ8XvuDVSSNSTCFxTvEhBFVuDrLb70\n5pWSMePSfIjBVe8YwTuPmks+\n-----END PRIVATE KEY-----\n",
+  "client_email": "sync-helper@chanakya-217011.iam.gserviceaccount.com",
+  "client_id": "109255855965760992549",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sync-helper%40chanakya-217011.iam.gserviceaccount.com"
+}

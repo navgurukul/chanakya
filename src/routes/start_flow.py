@@ -1,7 +1,8 @@
 from flask_restplus import Resource, reqparse, fields
+
 from chanakya.src import api, app, db
 from chanakya.src.models import Student, IncomingCalls, StudentContact, StudentStageTransition
-from flask_restful.inputs import boolean
+from chanakya.src.google_sheet_sync.sync_database import SyncDatabase
 
 
 @api.route('/start/send_enrolment_key')
@@ -88,4 +89,12 @@ class RequestCallBack(Resource):
 
 		return {
 			'success': True
+		}
+
+@api.route('/sync_google_sheet')
+class Sync(Resource):
+	def put(self):
+		sync_datadase = SyncDatabase()
+		return {
+			'success':True
 		}

@@ -17,8 +17,8 @@ class EnrolmentKey(db.Model):
     score = db.Column(db.Integer, nullable=True)
 
     attempts = db.relationship('QuestionAttempts', backref='enrollment', cascade='all, delete-orphan', lazy='dynamic')
+
     question_set = db.relationship("QuestionSet", back_populates="enrolment_key")
-    student = db.relationship("Student")
 
     @staticmethod
     def generate_key(student_id):
@@ -27,7 +27,7 @@ class EnrolmentKey(db.Model):
             and add it to student record.
             Params:
                 `student_id`: int
-            return enrollment (object associated to the student_id)
+            Return enrollment (object associated to the student_id)
         """
         # generating a new enrollment key
         ALPHABETS, NUMBERS =  string.ascii_uppercase, string.digits
@@ -89,10 +89,10 @@ class EnrolmentKey(db.Model):
 
     def get_question_set(self):
         """
-        Generate a question set corresponding to this enrolment key and return
-        the question set instanceself.
+            Generate a question set corresponding to this enrolment key and return
+            the question set instanceself.
 
-        Note: Also runs the start_test method on the instance.
+            Note: Also runs the start_test method on the instance.
         """
         self.start_test()
         question_set, questions = QuestionSet.create_new_set()
@@ -103,15 +103,15 @@ class EnrolmentKey(db.Model):
 
     def start_test(self):
         """
-        Marks the `test_start_time` parameter of the enrolment key.
-        Also marks the `test_end_time` as `test_start_time` + the time allowed for the test.
+            Marks the `test_start_time` parameter of the enrolment key.
+            Also marks the `test_end_time` as `test_start_time` + the time allowed for the test.
         """
         current_datetime = datetime.now()
         self.test_start_time = current_datetime
 
     def end_test(self):
         """
-        This records the end time of the test in `test_end_time` attribute.
+            This records the end time of the test in `test_end_time` attribute.
         """
         self.test_end_time = datetime.now()
         db.session.add(self)
@@ -119,8 +119,9 @@ class EnrolmentKey(db.Model):
 
     def is_valid(self):
         """
-            the method checks if the key is been used or not
+            The method checks if the key is been used or not
             if it is not used then the key is valid
+
             No params
             Usage:
                 enrollment.is_valid()
@@ -138,11 +139,25 @@ class EnrolmentKey(db.Model):
         elif expired_datetime > current_datetime:
             return True
 
+    def is_test_ended(self):
+        """
+            Checks if the enrollment mkey has been used to give the test or not.
+            No Params
+            Usage:
+                enrollment.is_test_ended()
+            Returns True if the test has ended else False.
+        """
+        if self.test_end_time:
+            return True
+        return False
+
+
     def in_use(self):
         """
             Check if the enrollment key is already in used or not.
             No Params
-            Usage: enrollment.in_use()
+            Usage:
+                enrollment.in_use()
             Return Boolean(True when it is being used else False)
 
         """
@@ -173,8 +188,8 @@ class Questions(db.Model):
     @staticmethod
     def create_question(question_dict):
         """
-            create a question object for the question_dict
-            question_dict = {
+            Create a question object for the question_dict
+            `question_dict` = {
                 'hi_text':'some question',
                 'en_text':'some question',
                 'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
@@ -203,6 +218,7 @@ class Questions(db.Model):
                     }
                 ]
             }
+            Return Question instance
         """
         en_text = question_dict.get('en_text')
         hi_text = question_dict.get('hi_text')
@@ -228,7 +244,7 @@ class Questions(db.Model):
         The method helps update the student data and also create or delete the option for the question as per requirement.
 
         Params:
-            'question_dict': {
+            `question_dict`: {
                 'id': 1,
                 'hi_text':'some question',
                 'en_text':'some question',
@@ -329,12 +345,12 @@ class QuestionOptions(db.Model):
     def create_option(**kwargs):
         """
         Staticmethod to create option for a specific question_id in the database
-        params:
-            en_text : english text of the option, required, str
-            hi_text : hindi text of the option, required, str
-            question_id : id of the question of the options, required, int
-            correct = False, bool
-
+        Params:
+            `en_text` : english text of the option, required, str
+            `hi_text` : hindi text of the option, required, str
+            `question_id` : id of the question of the options, required, int
+            `correct` = False, bool
+        Return QuestionOptions instance
         """
         question_option = QuestionOptions(**kwargs)
         db.session.add(question_option)
@@ -415,9 +431,9 @@ class QuestionSet(db.Model):
     @staticmethod
     def _generate_random_question_paper():
         """
-        Generates a list of 18 questions as per the requirements of the config file.
+            Generates a list of 18 questions as per the requirements of the config file.
 
-        Returns a list of question instances.
+            Returns a list of question instances.
         """
         questions = Questions.query.all()
 
@@ -460,19 +476,19 @@ class QuestionSet(db.Model):
     @staticmethod
     def create_new_set(partner_name=None):
         """
-        Generates a new set of questions as per the logic defined in the config file.
-        The config file mentions how many questions of which topic and difficulty level
-        need to be included in a test.
+            Generates a new set of questions as per the logic defined in the config file.
+            The config file mentions how many questions of which topic and difficulty level
+            need to be included in a test.
 
-        Params:
-            `partner_name`: the partner for whom this is being generated
-                        (defaults to None when the set is created for a student)
+            Params:
+                `partner_name`: the partner for whom this is being generated
+                            (defaults to None when the set is created for a student)
 
 
-        Return:
-            `questiom_set`: QuestionSet instance.
-            `questions`:  [ <Questions 1>,<Questions 18>,<Questions 21>,<Questions 11>,<Questions 13>,<Questions 51>]
-                          Total 18 questions in each set.
+            Return:
+                `questiom_set`: QuestionSet instance.
+                `questions`:  [ <Questions 1>,<Questions 18>,<Questions 21>,<Questions 11>,<Questions 13>,<Questions 51>]
+                              Total 18 questions in each set.
         """
         questions = QuestionSet._generate_random_question_paper()
         ids = [question.id for question in questions]

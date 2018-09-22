@@ -1,16 +1,17 @@
 
-from flask_restplus import Resource, reqparse, fields
-from chanakya.src.models import Student, QuestionAttempts, QuestionSet
-from chanakya.src import api, db, app
 from datetime import datetime
+from flask_restplus import Resource, reqparse, fields
 
-from chanakya.src.helpers.response_objects import (
-                question_set
-            )
-from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from werkzeug.datastructures import FileStorage
+
+from chanakya.src import api, db, app
+from chanakya.src.models import Student, QuestionAttempts, QuestionSet
+
+from chanakya.src.helpers.response_objects import question_set
+from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts, get_dataframe_from_csv
 
+from chanakya.src.google_sheet_sync.sync_google_sheet import SyncGoogleSheet
 
 @api.route('/test/offline_paper')
 class OfflinePaperList(Resource):
@@ -187,6 +188,7 @@ class OfflineCSVProcessing(Resource):
 
             enrollment.calculate_test_score() #calculating the score of the student
 
+            student = SyncGoogleSheet(student)
         return {
             'success':True
         }

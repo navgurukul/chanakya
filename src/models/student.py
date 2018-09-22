@@ -24,21 +24,25 @@ class Student(db.Model):
     total_family_member = db.Column(db.Integer)
     family_member_income_detail = db.Column(db.Text)
 
+    contacts = db.relationship('StudentContact', backref='student', cascade='all, delete-orphan', lazy='dynamic')
+    enrollment_keys = db.relationship('EnrolmentKey', backref='student', cascade='all, delete-orphan', lazy='dynamic')
+
     @staticmethod
     def create(stage, **kwargs):
         """
-        This function create the student object with list of contact or single contact or the
-        main_contact where we have to call them
-        it requires **kwargs
+            This function create the student object with list of contact or single contact or the
+            main_contact where we have to call them
+            it requires **kwargs
 
-        Params:
-            mobile : str  (the number from which the person called on the helpline)
-            contact_list: list of str (list of all the number of the student)
-            main_contact : str (the number to which we can connect with the student)
+            Params:
+                `mobile` : str  (the number from which the person called on the helpline)
+                `contact_list`: list of str (list of all the number of the student)
+                `main_contact` : str (the number to which we can connect with the student)
 
-        USAGE: Student.create(stage, **kwargs)
+            USAGE:
+                Student.create(stage, **kwargs)
 
-        Returns: student object and also the student_contact object if the called was not the helpline
+            Returns: student object and also the student_contact object if the called was not the helpline
 
         """
         mobile=kwargs.get('mobile', None)
@@ -79,13 +83,13 @@ class Student(db.Model):
     @staticmethod
     def offline_student_record(stage, student_data, main_contact, mobile, set):
         """
-            function helps to add student data who have given the test offline.
+            Function helps to add student data who have given the test offline.
             it creates a student instance and then update it's data with contact infomation
             and create a enrollment key for the student.
 
-            params:
-                stage: 'PRIVILEGE AND VERIFICATION CALL',
-                student_data : {
+            Params:
+                `stage`: 'PRIVILEGE AND VERIFICATION CALL',
+                `student_data` : {
                     contains the data which need to be added to the Student table
                     'name':'Amar Kumar Sinha',
                     'dob': datetime(1997, 9, 18)
@@ -93,9 +97,9 @@ class Student(db.Model):
                     'religion': 'Hindu'
                 }
 
-                main_contact : The number on which we can contact the student
-                mobile : An another number which is present as Potential Name
-                set_id : An set_id of question set which was generated for the partner can be saved to enrollment to get the question easily.
+                `main_contact` : The number on which we can contact the student
+                `mobile` : An another number which is present as Potential Name
+                `set` : A QuestionSet intance for the student.
         """
 
         student , call_from = Student.create(stage, main_contact=main_contact, mobile=mobile)
@@ -145,7 +149,7 @@ class Student(db.Model):
         """
         Update the student's data.
 
-        params:
+        Params:
         `student_data`: Should contain the fields of student instance which needs to be updated
                         in dictionary format.
                         for example: {'name': 'Amar Kumar Sinha', 'gender': gender.male #enum}
@@ -154,10 +158,15 @@ class Student(db.Model):
                     given student no new contacts will be created, otherwise new ones will be
                     created.
         """
-
+        enums = {
+            'caste':'CASTE',
+            'religion':'RELIGION',
+            'gender':'GENDER'
+        }
         # update the attributes given by the `student_data` dict
         for key, value in student_data.items():
             if key in self.__dict__.keys():
+                # if key in
                 setattr(self, key, value)
         db.session.add(self)
         db.session.commit()
@@ -184,9 +193,15 @@ class Student(db.Model):
             USAGE:
                 instance.send_enrollment_key(from_helpline)
 
-            params:
-                from_helpline : Boolean required
+            Params:
+                `from_helpline` : Boolean required
 
+            Return a dictionary which is structured below
+                {
+                    'generate': False, # True if Generate a new enrollment key else False
+                    'sent':True, # True if the new Generated Key is been sent to all the Phone Number
+                    'enrollment_key': 'ASD456' # Newly Generated Enrollment Key
+                }
         """
 
         student_id = self.id
