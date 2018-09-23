@@ -1,5 +1,5 @@
-from flask_restplus import Resource, reqparse, fields
-from chanakya.src import api, db, app
+from flask_restplus import Resource, reqparse, fields, Namespace
+from chanakya.src import db, app
 from chanakya.src.models import Student, Questions, QuestionAttempts, StudentStageTransition
 
 from chanakya.src.helpers.response_objects import question_obj, questions_list_obj
@@ -7,8 +7,11 @@ from chanakya.src.helpers.validators import check_enrollment_key, check_question
 
 from chanakya.src.google_sheet_sync.sync_google_sheet import SyncGoogleSheet
 
+api = Namespace('online_test', description='Handle complete online test of students')
+
+
 #Validation for the enrollment key
-@api.route('/test/validate_enrolment_key')
+@api.route('/validate_enrolment_key')
 class EnrollmentKeyValidtion(Resource):
 
     get_parser = reqparse.RequestParser()
@@ -45,7 +48,7 @@ class EnrollmentKeyValidtion(Resource):
         return result
 
 
-@api.route('/test/personal_details')
+@api.route('/personal_details')
 class PersonalDetailSubmit(Resource):
 
     post_payload_model = api.model('POST_personal_details', {
@@ -130,7 +133,7 @@ class PersonalDetailSubmit(Resource):
         }
 
 
-@api.route('/test/start_test')
+@api.route('/start_test')
 class TestStart(Resource):
 
     get_parser = reqparse.RequestParser()
@@ -176,7 +179,7 @@ class TestStart(Resource):
             }
 
 
-@api.route('/test/end_test')
+@api.route('/end_test')
 class TestEnd(Resource):
 
     post_response =  api.model('POST_end_test_response',{
@@ -235,7 +238,7 @@ class TestEnd(Resource):
         }
 
 
-@api.route('/test/extra_details')
+@api.route('/extra_details')
 class MoreStudentDetail(Resource):
 
     post_payload_model = api.model('POST_extra_details', {

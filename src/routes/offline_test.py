@@ -1,10 +1,10 @@
 
 from datetime import datetime
-from flask_restplus import Resource, reqparse, fields
+from flask_restplus import Resource, reqparse, fields, Namespace
 
 from werkzeug.datastructures import FileStorage
 
-from chanakya.src import api, db, app
+from chanakya.src import db, app
 from chanakya.src.models import Student, QuestionAttempts, QuestionSet
 
 from chanakya.src.helpers.response_objects import question_set
@@ -13,7 +13,10 @@ from chanakya.src.helpers.task_helpers import render_pdf_phantomjs, get_attempts
 
 from chanakya.src.google_sheet_sync.sync_google_sheet import SyncGoogleSheet
 
-@api.route('/test/offline_paper')
+
+api = Namespace('offline_test', description='Handle complete offline test of students')
+
+@api.route('/offline_paper')
 class OfflinePaperList(Resource):
     post_payload_model = api.model('POST_offline_paper', {
         'number_sets':fields.Integer(required=True),
@@ -80,7 +83,7 @@ class OfflinePaperList(Resource):
             'message':'No set generated for any partner till yet.'
         }
 
-@api.route('/test/offline_paper/<id>')
+@api.route('/offline_paper/<id>')
 class OfflinePaper(Resource):
 
     get_response = api.model('GET_offline_paper_id_response', {
@@ -103,7 +106,7 @@ class OfflinePaper(Resource):
             'error':True
         }
 
-@api.route('/test/offline_paper/<id>/upload_results')
+@api.route('/offline_paper/<id>/upload_results')
 class OfflineCSVUpload(Resource):
 	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
 	post_parser.add_argument('partner_csv', required=True, type=FileStorage, location='files')
@@ -124,7 +127,7 @@ class OfflineCSVUpload(Resource):
 		return {'csv_url': csv_url}
 
 
-@api.route('/test/offline_paper/<id>/add_results')
+@api.route('/offline_paper/<id>/add_results')
 class OfflineCSVProcessing(Resource):
     post_payload_model = api.model('POST_add_results', {
         'csv_url': fields.String

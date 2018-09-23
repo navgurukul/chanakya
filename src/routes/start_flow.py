@@ -1,11 +1,12 @@
-from flask_restplus import Resource, reqparse, fields
+from flask_restplus import Resource, reqparse, fields, Namespace
 
-from chanakya.src import api, app, db
+from chanakya.src import app, db
 from chanakya.src.models import Student, IncomingCalls, StudentContact, StudentStageTransition
 from chanakya.src.google_sheet_sync.sync_database import SyncDatabase
 
 
-@api.route('/start/send_enrolment_key')
+api = Namespace('start_flow', description='Handle student when they join the Platform.')
+@api.route('/send_enrolment_key')
 class GenerateEnrollmentKey(Resource):
 
 	post_payload_model = api.model('POST_send_enrolment_key', {
@@ -58,7 +59,7 @@ class GenerateEnrollmentKey(Resource):
 			return message
 
 
-@api.route('/start/requested_callback')
+@api.route('/requested_callback')
 class RequestCallBack(Resource):
 
 	post_payload_model = api.model('POST_requested_callback', {

@@ -1,9 +1,9 @@
 from io import BytesIO
 
-from flask_restplus import Resource, reqparse, abort, marshal_with, fields
+from flask_restplus import Resource, reqparse, abort, marshal_with, fields, Namespace
 from werkzeug.datastructures import FileStorage
 
-from chanakya.src import app, api, db
+from chanakya.src import app, db
 from chanakya.src.models import (
 					Student,
 					IncomingCalls,
@@ -16,8 +16,9 @@ from chanakya.src.helpers.task_helpers import render_pdf_phantomjs
 from chanakya.src.helpers.file_uploader import upload_file_to_s3, FileStorageArgument
 from chanakya.src.helpers.validators import check_option_ids
 
+api = Namespace('questions', description='Handle CRUD and file upload related to questions for the Test')
 
-@api.route('/questions/upload_file')
+@api.route('/upload_file')
 class UploadQuestionImage(Resource):
 
 	post_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
@@ -35,7 +36,7 @@ class UploadQuestionImage(Resource):
 		return {'image_url': image_url}
 
 
-@api.route('/questions')
+@api.route('')
 class QuestionList(Resource):
 
 	get_response = api.model('GET_questions_list', {
@@ -119,7 +120,7 @@ class QuestionList(Resource):
 		return {'data':question}
 
 
-@api.route('/questions/<question_id>')
+@api.route('/<question_id>')
 class Question(Resource):
 
 	get_response = api.model('GET_questions_id_response', {
