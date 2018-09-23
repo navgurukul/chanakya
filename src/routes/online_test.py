@@ -272,6 +272,8 @@ class MoreStudentDetail(Resource):
         # update the data of the student
         student = enrollment.student
         student.update_data(args)
+
         StudentStageTransition.record_stage_change('ADS', student)
+
         syncgooglesheet = SyncGoogleSheet(student)
         return { 'success':True }

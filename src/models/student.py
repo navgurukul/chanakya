@@ -271,10 +271,15 @@ class StudentStageTransition(db.Model):
                 `notes`: (default is None) Notes for the stage change.
         """
 
-        to_stage = app.config['STAGES'][to_stage]
-        student_stage_transition = StudentStageTransition(from_stage=student.stage, to_stage=to_stage, student=student, notes=notes)
-        student.stage = to_stage
+        new_stage = app.config['STAGES'][to_stage]
+        student_stage_transition = StudentStageTransition(from_stage=student.stage, to_stage=new_stage, student=student, notes=notes)
+        student.stage = new_stage
         db.session.add(student_stage_transition)
         db.session.add(student)
-
+        
+        if to_stage in app.config['OUTGOING_SMS'].keys():
+            message = app.config['OUTGOING_SMS'][to_stage]
+            contacts =  student.contacts.all()
+            for contact in contacts:
+                contact.send_sms(message)
         db.session.commit()

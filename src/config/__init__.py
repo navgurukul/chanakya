@@ -79,7 +79,11 @@ class ChanakyaConfig(object):
         'ADS': 'ALL DETAIL SUBMITTED',
         'PVC': 'PRIVILEGE & VERIFICATION CALL'
     }
-    
+    OUTGOING_SMS = {
+        'PVC': 'Kuch message Privilege and verification call ke liye',
+        'ADS': 'Kuch message All details Sumitted ke liye'
+    }
+
 
     @staticmethod
     def get_config():
