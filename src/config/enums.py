@@ -34,9 +34,9 @@ class OutgoingSMSType(enum.Enum):
     other = 'Other'
 
 class Caste(enum.Enum):
-    sc = "SC"
-    st = "ST"
-    obc = "OBC"
+    sc = "SC (Scheduled Caste)"
+    st = "ST (Scheduled Tribe)"
+    obc = "OBC (Other Backward Classes)"
     general = "General"
     other = "Others"
 

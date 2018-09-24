@@ -158,18 +158,26 @@ class Student(db.Model):
                     given student no new contacts will be created, otherwise new ones will be
                     created.
         """
-        enums = {
+
+        fields = ('stage','name','dob','monthly_family_income','total_family_member','family_member_income_detail')
+        enum_fields = {
             'caste':'CASTE',
             'religion':'RELIGION',
             'gender':'GENDER'
         }
         # update the attributes given by the `student_data` dict
         for key, value in student_data.items():
-            if key in self.__dict__.keys():
-                # if key in
+            if key in fields or key in enum_fields.keys():
+                # converting the value for enums type fields
+                if key in enum_fields.keys():
+                    enum_class_name = enum_fields[key]
+                    enum_value = student_data[key]
+                    value = app.config[enum_class_name](enum_value)
+
+                # adding new value to the attributes
                 setattr(self, key, value)
+
         db.session.add(self)
-        db.session.commit()
 
         # get all the associated student contacts
         contacts = StudentContact.query.filter_by(student_id=self.id).all()
@@ -179,8 +187,7 @@ class Student(db.Model):
             if not mobile in contacts:
                 contact = StudentContact(contact=mobile, student_id=self.id)
                 db.session.add(contact)
-            else:
-                print("Nahi hua create.")
+
         db.session.commit()
 
 
@@ -276,7 +283,7 @@ class StudentStageTransition(db.Model):
         student.stage = new_stage
         db.session.add(student_stage_transition)
         db.session.add(student)
-        
+
         if to_stage in app.config['OUTGOING_SMS'].keys():
             message = app.config['OUTGOING_SMS'][to_stage]
             contacts =  student.contacts.all()

@@ -154,12 +154,12 @@ class OfflineCSVProcessing(Resource):
                 }
 
             student_data['gender'] =  app.config['GENDER'](row.get('Gender').upper())
-            # student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
+            student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
 
             stage =  'PVC'
 
-            # student_data['religion'] =  app.config['RELIGION'](row.get('Religon'))
-            # student_data['caste'] =  app.config['CASTE'](row.get('Caste'))
+            student_data['religion'] =  app.config['RELIGION'](row.get('Religon'))
+            student_data['caste'] =  app.config['CASTE'](row.get('Caste'))
             # student_data['state'] =  row.get('State')
 
             main_contact = row.get('Mobile')
@@ -191,7 +191,7 @@ class OfflineCSVProcessing(Resource):
 
             enrollment.calculate_test_score() #calculating the score of the student
 
-            student = SyncGoogleSheet(student)
+            # student = SyncGoogleSheet(student)
         return {
             'success':True
         }
