@@ -191,7 +191,7 @@ class OfflineCSVProcessing(Resource):
 
             enrollment.calculate_test_score() #calculating the score of the student
 
-            # student = SyncGoogleSheet(student)
+            student = SyncGoogleSheet(student)
         return {
             'success':True
         }
