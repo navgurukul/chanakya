@@ -145,19 +145,11 @@ class OfflineCSVProcessing(Resource):
         student_rows = get_dataframe_from_csv(args.get('csv_url'))
         for row in student_rows:
             student_data = {}
-
-            student_data['name'] =  row.get('Name')
-            if not student_data['name']:
-                return {
-                    'error':True,
-                    'message':'Name of all the student must be there in CSV'
-                }
-
-            student_data['gender'] =  app.config['GENDER'](row.get('Gender').upper())
-            student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
-
             stage =  'PVC'
 
+            student_data['name'] =  row.get('Name')
+            student_data['gender'] =  app.config['GENDER'](row.get('Gender').upper())
+            student_data['dob'] =  datetime.strptime(row.get('Date of Birth'), '%d-%m-%Y')
             student_data['religion'] =  app.config['RELIGION'](row.get('Religon'))
             student_data['caste'] =  app.config['CASTE'](row.get('Caste'))
             # student_data['state'] =  row.get('State')
@@ -165,16 +157,21 @@ class OfflineCSVProcessing(Resource):
             main_contact = row.get('Mobile')
             mobile = row.get('Potential Name')
 
-            if not mobile or not main_contact:
+            set = int(row.get('Set'))
+            set_instance = QuestionSet.query.get(set)
+
+
+            if not student_data['name']:
+                return {
+                'error':True,
+                'message':'Name of all the student must be there in CSV'
+                }
+            elif not mobile or not main_contact:
                 return {
                     'error': True,
                     'message':'Students must provide his contact to get connected'
                 }
-
-            set = int(row.get('Set'))
-            set_instance = QuestionSet.query.get(set)
-
-            if not set_instance:
+            elif not set_instance:
                 return {
                     'error': True,
                     'message': 'Please check the set id'
