@@ -15,6 +15,7 @@ option_obj = api.model('options',{
     "id": fields.Integer(required=False),
     "hi_text": fields.String,
     "en_text": fields.String,
+    "is_common":  fields.Boolean(default=False),
     "correct": fields.Boolean(default=False)
 })
 
@@ -23,6 +24,7 @@ question_obj = api.model('questions',{
     'id': fields.Integer,
     'en_text': fields.String,
     'hi_text': fields.String,
+    "common_text":  fields.String,
     'difficulty': fields.String(attribute=lambda x: x.difficulty.value if x else None),
     'topic': fields.String(attribute=lambda x: x.topic.value if x else None),
     'type': fields.String(attribute=lambda x: x.type.value if x else None),
@@ -39,6 +41,7 @@ create_option = api.model('create_options',{
 create_question = api.model('create_questions',{
     'en_text': fields.String(required=True),
     'hi_text': fields.String(required=True),
+    "common_text":  fields.String(required=False),
     'difficulty': fields.String(enum=[attr.value for attr in app.config['QUESTION_DIFFICULTY']], required=True),
     'topic': fields.String(enum=[attr.value for attr in app.config['QUESTION_TOPIC']], required=True),
     'type': fields.String(enum=[attr.value for attr in app.config['QUESTION_TYPE']], required=True),

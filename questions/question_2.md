@@ -9,12 +9,14 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "17",
   "Correct Answer": -21,
-  "Option ID": "NULL"
+  "Option ID": "49"
 
 }
 ```
+## Common Text
+
 
 ## Hindi
 Cheerapunji ka temperature morning mein -14 degree celsius. Agar wahan ka temperature 7 degrees aur drop hota hai, toh Cheerapunji ka temperature kitna hai?
@@ -25,12 +27,15 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "18",
   "Correct Answer": -7,
-  "Option ID": "NULL"
+  "Option ID": "50"
 
 }
 ```
+
+## Common Text
+
 
 ## Hindi
 Manali mein temperature Monday ko -3 degree celsius tha. Tuesday ko waha ka temperature 8 degrees aur drop ho gaya. Wednesday Tuesday se thoda garam tha aur temperature bhi 4 degree rise ho gaya. Wednesday ko Manali mein kitna temperature hua?

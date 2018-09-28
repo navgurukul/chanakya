@@ -9,18 +9,18 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "13",
   "Correct Answer": 4,
-  "Option ID": "NULL"
+  "Option ID": "39"
 }
 ```
-
-## Hindi
-Neeche diye hue equations mein x ke liye solve karein:
-
+## Common Text
 x = y - 6
 y = 10
 x = ?
+
+## Hindi
+Neeche diye hue equations mein x ke liye solve karein:
 
 ## English
 PENDING
@@ -28,18 +28,18 @@ PENDING
 # Question Choice 2
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "14",
   "Correct Answer": 2,
-  "Option ID": "NULL"
+  "Option ID": "40"
 }
 ```
-
-## Hindi
-Neeche diye hue equations mein x ke liye solve karein:
-
+## Common Text
 x = y + 8
 x = 10
 y = ?
+
+## Hindi
+Neeche diye hue equations mein x ke liye solve karein:
 
 ## English
 PENDING

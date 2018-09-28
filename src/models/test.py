@@ -96,6 +96,7 @@ class Questions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
+    common_text = db.Column(db.String(2000))
     difficulty = db.Column(db.Enum(app.config['QUESTION_DIFFICULTY']), nullable=False)
     topic = db.Column(db.Enum(app.config['QUESTION_TOPIC']), nullable=False)
     type = db.Column(db.Enum(app.config['QUESTION_TYPE']), nullable=False)
@@ -108,6 +109,7 @@ class Questions(db.Model):
             question_dict = {
                 'hi_text':'some question',
                 'en_text':'some question',
+                'common_text': 'some commen text' #Common between both English and Hindi
                 'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
                 'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
                 'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
@@ -141,8 +143,8 @@ class Questions(db.Model):
         topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
         type = app.config['QUESTION_TYPE'](question_dict.get('type'))
         options = question_dict.get('options')
-
-        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, topic=topic, type=type)
+        common_text = question_dict.get('common_text')
+        question = Questions(en_text=en_text, hi_text=hi_text, difficulty=difficulty, common_text=common_text, topic=topic, type=type)
         db.session.add(question)
         db.session.commit()
 
@@ -155,53 +157,64 @@ class Questions(db.Model):
         return question
 
     def update_question(self, question_dict):
-        '''
-            the options helps to update a question with a new data and also add any new option if provided.
-            params:
-                question_dict = {
-                    'id': 1,
-                    'hi_text':'some question',
-                    'en_text':'some question',
-                    'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
-                    'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
-                    'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
-                    'options':[
-                        {   'id': 1,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        },
-                        {   'id': 2,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 3,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': False
-                        },
-                        {   'id': 4,
-                            'en_text':'something',
-                            'hi_text':'something',
-                            'correct': True
-                        }
-                    ]
-                }
-            return None
-        '''
+        """
+        The method helps update the student data and also create or delete the option for the question as per requirement.
+        Params:
+            `question_dict`: {
+                'id': 1,
+                'hi_text':'some question',
+                'en_text':'some question',
+                'common_text': 'some commen text' #Common between both English and Hindi
+                'difficulty': 'Medium',  // from the choices= ['Medium', 'Hard', 'Easy']
+                'topic': 'Topic 1',   // from the choices= ['Topic 1','Topic 2','Topic 3','Topic 4']
+                'type': 'MQC', // from the choice= ['MQC', 'Integer Answer']
+                'options':[
+                    {
+                        'id': 1,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    },
+                    {
+                        'id': 2,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {
+                        'id': 3,
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': False
+                    },
+                    {   // don't specify an option ID if you want to create a new option.
+                        'en_text':'something',
+                        'hi_text':'something',
+                        'correct': True
+                    }
+                ]
+            }
+            *Note: If the question before had options with IDs 1,2,3,4 and while updating 1,2,3 are
+                   specified then 4 would be deleted.*
+        """
 
         existing_options = { option.id: option for option in self.options.all() }
 
         updated_options = question_dict['options']
 
+        option_ids = [option['id'] for option in updated_options if option.get('id')]
+
+        deletable_options = [option for option in existing_options.keys() if not option in option_ids]
+
         self.en_text = question_dict.get('en_text')
         self.hi_text = question_dict.get('hi_text')
+        self.common_text = question_dict.get('common_text')
         self.difficulty = app.config['QUESTION_DIFFICULTY'](question_dict.get('difficulty'))
         self.topic = app.config['QUESTION_TOPIC'](question_dict.get('topic'))
         self.type = app.config['QUESTION_TYPE'](question_dict.get('type'))
 
         db.session.add(self)
+
 
         for updated_option in updated_options:
             id = updated_option.get('id')
@@ -210,6 +223,7 @@ class Questions(db.Model):
                 option = existing_options[id]
                 option.en_text = updated_option['en_text']
                 option.hi_text = updated_option['hi_text']
+                option.is_common = True if option.en_text == option.hi_text else False
                 option.correct = updated_option['correct']
                 db.session.add(option)
             else:
@@ -221,6 +235,20 @@ class Questions(db.Model):
                 option['correct'] = updated_option['correct']
                 question_option = QuestionOptions.create_option(**option)
 
+
+        for deletable_option in deletable_options:
+            option = QuestionOptions.query.get(deletable_option)
+
+            # unlinking all the attempts containing this options
+
+            # attempts = QuestionAttempts.query.filter_by(selected_option_id=option.id).all()
+            # for attempt in attempts:
+            #     attempt.selected_option_id = None
+            #     db.session.add(attempt)
+            #     db.session.commit()
+
+            db.session.delete(option)
+
         db.session.commit()
 
 class QuestionOptions(db.Model):
@@ -230,6 +258,7 @@ class QuestionOptions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     en_text = db.Column(db.String(2000))
     hi_text = db.Column(db.String(2000))
+    is_common = db.Column(db.Boolean, default=False)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     correct = db.Column(db.Boolean, default=False)
 
@@ -238,11 +267,15 @@ class QuestionOptions(db.Model):
         '''
         Staticmethod to create option for a specific question_id in the database
         params:
-            en_text : english text of the option, required, str
-            hi_text : hindi text of the option, required, str
-            question_id : id of the question of the options, required, int
-            correct = False, bool
+            `en_text` : english text of the option, required, str
+            `hi_text` : hindi text of the option, required, str
+            `question_id` : id of the question of the options, required, int
+            `correct` : False, bool
         '''
+        # Checking if the text inside options is common or not
+        if kwargs['en_text'] == kwargs['hi_text']:
+            kwargs['is_common'] = True
+
         question_option = QuestionOptions(**kwargs)
         db.session.add(question_option)
 

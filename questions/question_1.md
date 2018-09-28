@@ -9,29 +9,34 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "11",
   "Correct Answer": 8,
-  "Option ID": "NULL"
+  "Option ID": "37"
 }
 ```
 
-## Hindi
+## Common Text
 8 + (−25) + 16 − (−25) −16
 
+## Hindi
+Upar diye gaye equation ko solve kare.
+
 ## English
-PENDING
+Solve the equation given above.
 
 # Question Choice 2
 ```json
 {
-  "Question ID": "NOT_ADDED",
+  "Question ID": "12",
   "Correct Answer": 50,
-  "Option ID": "NULL"
+  "Option ID": "38"
 }
 ```
-
-## Hindi
+## Common Text
 33 - 8 + 17 + 10 - (-8) - 10
 
+## Hindi
+Upar diye gaye equation ko solve kare.
+
 ## English
-PENDING
+Solve the equation given above.
