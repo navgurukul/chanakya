@@ -14,7 +14,8 @@ CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 ##### CONFIG #####
 
-DEBUG = True
+# DEBUG = True
+
 SERVER_URL = 'http://127.0.0.1:5000/'
 
 MAIN_URL = SERVER_URL+'questions/'
