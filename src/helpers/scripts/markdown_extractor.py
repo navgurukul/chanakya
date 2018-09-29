@@ -14,8 +14,6 @@ CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 ##### CONFIG #####
 
-# DEBUG = True
-
 SERVER_URL = 'http://127.0.0.1:5000/'
 
 MAIN_URL = SERVER_URL+'questions/'
@@ -87,13 +85,6 @@ class MDQuestionExtractor:
         data = json.loads(self.soup.find('code').text)
         # rearranging the data to right fields
         data['type'] = QUESTION_TYPE[data['type']]
-
-
-        # random_topic = random.randint(0,len(QUESTION_TOPIC)-1)
-        # random_difficulty = random.randint(0,2)
-        # data['topic'] = QUESTION_TOPIC[random_topic] if DEBUG else data['category']
-        # data['difficulty'] = list(QUESTION_DIFFICULTY.values())[random_difficulty] if DEBUG else QUESTION_DIFFICULTY[data['difficulty_level']]
-
         data['topic'] = data['category']
         data['difficulty'] =  QUESTION_DIFFICULTY[data['difficulty_level']]
 
@@ -102,7 +93,7 @@ class MDQuestionExtractor:
 
         return data
 
-    def update_question_image(self, soup):
+    def update_image(self, soup, image_class):
 
         images = soup.find_all('img')
 
@@ -111,9 +102,8 @@ class MDQuestionExtractor:
             for image in images:
                 image_path = image.attrs['src']
                 s3_url = upload_image(image_path)
-                image.attrs.update({'src':s3_url, 'class': 'center-image'})
+                image.attrs.update({'src':s3_url, 'class': image_class})
 
-        return str(soup)
 
     def get_soup_in_between(self, start_soup, end_soup=None):
         if not start_soup:
@@ -134,6 +124,11 @@ class MDQuestionExtractor:
         choice_1, choice_2 = {}, {}
         question_soup = [s for s in self.soup.find_all('h2')]
         print(question_soup)
+
+        for soup in question_soup:
+            if not 'Common Options' in soup.text:
+                update_image(soup, 'center-image')
+
         if self.extra_data['type'] == 'MCQ':
 
             common_text_1 = self.get_soup_in_between(question_soup[0], question_soup[1])
