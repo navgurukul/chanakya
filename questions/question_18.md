@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "63",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
@@ -25,16 +25,16 @@ PENDING
 ## Common Options
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_18/choice1/option1.png) |189    |
-| 2      | ![](images/question_18/choice1/option2.png) |190    |
-| 3      | ![](images/question_18/choice1/option3.png) |191    |
-| 4      | ![](images/question_18/choice1/option4.png) |192    |
+| 1      | ![](images/question_18/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_18/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_18/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_18/choice1/option4.png) |NULL   |
 
 
 # Question Choice 2
 ```json
 {
-  "Question ID": "64",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
@@ -53,7 +53,7 @@ PENDING
 ## Common Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | C      |193    |
-| 2      | A      |194    |
-| 3      | B      |195    |
-| 4      | D      |196    |
+| 1      | C      |NULL   |
+| 2      | A      |NULL   |
+| 3      | B      |NULL   |
+| 4      | D      |NULL   |

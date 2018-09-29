@@ -9,13 +9,13 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "37",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 3
 }
 ```
 
 ## Common Text
-<!-- This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API. -->
+This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API.
 
 ![](images/question_16/choice1/choice1.png)
 
@@ -26,25 +26,25 @@ Inn images mein agla part kaunsa aayega?
 What would be the next image in this pattern?
 
 ## Common Options
-<!-- When no `###` options heading is there then check for existence of a Common Options heading. Both Common Options and langauge specific options cannot exist at the same time that will be problematic. *Also delete this line. Only adding this for Amar's reference.* -->
+When no `###` options heading is there then check for existence of a Common Options heading. Both Common Options and langauge specific options cannot exist at the same time that will be problematic. *Also delete this line. Only adding this for Amar's reference.*
 
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_16/choice1/option1.png) |113    |
-| 2      | ![](images/question_16/choice1/option2.png) |114    |
-| 3      | ![](images/question_16/choice1/option3.png) |115    |
-| 4      | ![](images/question_16/choice1/option4.png) |116    |
+| 1      | ![](images/question_16/choice1/option1.png) |NULL   |
+| 2      | ![](images/question_16/choice1/option2.png) |NULL   |
+| 3      | ![](images/question_16/choice1/option3.png) |NULL   |
+| 4      | ![](images/question_16/choice1/option4.png) |NULL   |
 
 # Question Choice 2
 ```json
 {
-  "Question ID": "38",
+  "Question ID": "NOT_ADDED",
   "Correct Answer": 2
 }
 ```
 
 ## Common Text
-<!-- This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API. -->
+This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API.
 
 ![](images/question_16/choice2/choice2.png)
 
@@ -57,7 +57,7 @@ Choose the Mirror image of X from the images given below.
 ## Common Options
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
-| 1      | 3      |117    |
-| 2      | 1      |118    |
-| 3      | 2      |119    |
-| 4      | 4      |120    |
+| 1      | 3      |NULL   |
+| 2      | 1      |NULL   |
+| 3      | 2      |NULL   |
+| 4      | 4      |NULL   |
