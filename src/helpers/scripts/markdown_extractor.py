@@ -125,9 +125,6 @@ class MDQuestionExtractor:
         question_soup = [s for s in self.soup.find_all('h2')]
         print(question_soup)
 
-        for soup in question_soup:
-            if not 'Common Options' in soup.text:
-                update_image(soup, 'center-image')
 
         if self.extra_data['type'] == 'MCQ':
 

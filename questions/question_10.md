@@ -9,7 +9,7 @@
 # Question Choice 1
 ```json
 {
-  "Question ID": "21",
+  "Question ID": "57",
   "Correct Answer": 3
 }
 ```
@@ -25,16 +25,16 @@ PENDING
 ### Options
 | Option | English Values                              | Hindi Values                                |Id     |
 |:-------|:--------------------------------------------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_10/choice1/option1.png) | ![](images/question_10/choice1/option1.png) |59     |
-| 2      | ![](images/question_10/choice1/option2.png) | ![](images/question_10/choice1/option2.png) |60     |
-| 3      | ![](images/question_10/choice1/option3.png) | ![](images/question_10/choice1/option3.png) |61     |
-| 4      | ![](images/question_10/choice1/option4.png) | ![](images/question_10/choice1/option4.png) |62     |
+| 1      | ![](images/question_10/choice1/option1.png) | ![](images/question_10/choice1/option1.png) |171    |
+| 2      | ![](images/question_10/choice1/option2.png) | ![](images/question_10/choice1/option2.png) |172    |
+| 3      | ![](images/question_10/choice1/option3.png) | ![](images/question_10/choice1/option3.png) |173    |
+| 4      | ![](images/question_10/choice1/option4.png) | ![](images/question_10/choice1/option4.png) |174    |
 
 
 # Question Choice 2
 ```json
 {
-  "Question ID": "22",
+  "Question ID": "58",
   "Correct Answer": 2
 }
 ```
@@ -47,10 +47,10 @@ Question mark ki jagah par sahi figure choose kijiye.
 ## English
 PENDING
 
-### Options
+## Common Options
 | Option | English Values                              | Hindi Values                                |Id     |
 |:-------|:--------------------------------------------|:--------------------------------------------|:-----:|
-| 1      | ![](images/question_10/choice2/option1.png) | ![](images/question_10/choice2/option1.png) |63     |
-| 2      | ![](images/question_10/choice2/option2.png) | ![](images/question_10/choice2/option2.png) |64     |
-| 3      | ![](images/question_10/choice2/option3.png) | ![](images/question_10/choice2/option3.png) |65     |
-| 4      | ![](images/question_10/choice2/option4.png) | ![](images/question_10/choice2/option4.png) |66     |
+| 1      | ![](images/question_10/choice2/option1.png) | ![](images/question_10/choice2/option1.png) |175    |
+| 2      | ![](images/question_10/choice2/option2.png) | ![](images/question_10/choice2/option2.png) |176    |
+| 3      | ![](images/question_10/choice2/option3.png) | ![](images/question_10/choice2/option3.png) |177    |
+| 4      | ![](images/question_10/choice2/option4.png) | ![](images/question_10/choice2/option4.png) |178    |
