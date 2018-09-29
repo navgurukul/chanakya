@@ -300,7 +300,7 @@ class MDQuestionExtractor:
                                       '24ml white</td>',
                            'id': 89},
 
-						   #### if we update the question with new option this is how the new option looks like ####
+						   *Note: if we update the question with new option this is how the new option looks like *
                           {'correct': False,
                            'en_text': '<td style="text-align:left">25ml black, '
                                       '16ml white</td>',
@@ -339,9 +339,9 @@ class MDQuestionExtractor:
             else:
                 option_images = option_col[index].find_all('img')
 
+
             # updating all the image src with s3 url if the options has any image
             self.update_images_with_s3_url(option_images, 'option-image')
-
 
 
             # adding id of the options if exist
@@ -419,11 +419,11 @@ class MDQuestionExtractor:
             Helps to add or update a question through api and then update the related question markdown files
             with question_id and options_id
 
-            calls the API
+            Calls the API
                 /questions/ to create a new question
                 /question/<question_id> to update a new question
 
-            update part also creates a new options in the database for MCQ you just need to add it to the md file
+            Update part also creates a new options in the database for MCQ you just need to add it to the md file
             in the same format.
 
             return Nothing
@@ -438,12 +438,10 @@ class MDQuestionExtractor:
 
             question_id = question_info['Question ID']
 
+            # create question and update Question ID
             if question_id == 'NOT_ADDED':
-                # create question and update question id
-
                 # adding question through rest
                 resp = requests.post(MAIN_URL, data=json.dumps(question), headers=HEADERS).json()
-
                 pprint(resp)
 
                 # getting the id after the question has been added
@@ -453,13 +451,12 @@ class MDQuestionExtractor:
 
                 # updating the options with the id
                 options = resp['options']
-                type = resp['type']
+                question_type = resp['type']
 
                 for option in options:
                     id = option['id']
-
                     # updating the table for mcq question
-                    if type == 'MCQ':
+                    if question_type == 'MCQ':
                         self.file_data = self.file_data.replace('NULL', str(id).ljust(4), 1)
                     # updating the questionsMetaChoiceData for integer option
                     else:
@@ -469,21 +466,16 @@ class MDQuestionExtractor:
                 question['id'] = int(question_id)
 
                 question_update_url = MAIN_URL +'{}'.format(question_id)
-
                 # sending the question on the way to update itself
                 resp = requests.put(question_update_url, data=json.dumps(question), headers=HEADERS).json()
-
                 # finding all the old option ids to check what is the ids of newly added option
                 old_option_ids = [option['id'] for option in question['options'] if option.get('id')]
-
                 # response options after updating
                 new_options = resp['question']['options']
 
-                type = resp['question']['type']
-
                 #updating the new options
-
-                if type == 'MCQ':
+                question_type = resp['question']['type']
+                if question_type == 'MCQ':
                     for option in new_options:
                         id = option['id']
                         # if the options is newly added
