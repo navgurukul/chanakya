@@ -78,10 +78,15 @@ class MDQuestionExtractor:
         self.extra_data = self.question_extra_data()
 
     def question_extra_data(self):
-        '''
-        	extracting the question data like category, type , difficulty and making it to be
-        	as dict so it can be added to database.
-        '''
+        """
+        	Extracting the question data like category, type , difficulty formatting it in a dictionary which is required in the chanakya question CREATE and UPDATE payload.
+            Return dictionary which look like below.
+            {
+                'type': 'MCQ'
+                'topic': 'BASIC_MATH'
+                'difficulty': 'Easy'
+            }
+        """
         data = json.loads(self.soup.find('code').text)
         # rearranging the data to right fields
         data['type'] = QUESTION_TYPE[data['type']]
@@ -93,9 +98,27 @@ class MDQuestionExtractor:
 
         return data
 
-    def update_image(self, soup, image_class):
+    def update_question_images_from_string(self, html_string):
+        """
+            Helps to update the images that are present in question common text with s3 link.
 
+            Params:
+                `html_string` : Contains the string formatted html of questions Common Text.
+
+            Return: Contains the string formatted html of questions Common Text with updated s3 link.
+        """
+        soup = bs4.BeautifulSoup(html_string, 'html.parser')
         images = soup.find_all('img')
+        self.update_images_with_s3_url(images, 'center-image')
+        return str(soup)
+
+    def update_images_with_s3_url(self, images, image_class):
+        """
+            Helps to update all the images provided in a `images` list with s3 link and CSS class for the images.
+            Params:
+                `images` : Contains list of images soup that need updated s3 link in 'src'.
+                `image_class` : CSS class of the images in html that need to be added.
+        """
 
         if images:
             # update each image with s3 url
@@ -106,6 +129,24 @@ class MDQuestionExtractor:
 
 
     def get_soup_in_between(self, start_soup, end_soup=None):
+        """
+            Helps to get all the question data which is in html as string between 2 points.
+            Params:
+                `start_soup` : Contains the point from where string need to be extracted.
+                `end_soup` : Contains the point till where string need to be extracted.
+
+            Return:
+                html_string which is in between start_soup and end_soup point.
+
+            For Example:
+                <h1>Hindi</h1>
+                <p>Some data in hindi</p>
+                <p>Some extra data in Hindi</p>
+                <h1>English</h1>
+
+                The functions helps to extract data below for question hi_text.
+                "<p>Some data in hindi</p>\n<p>Some extra data in Hindi</p>"
+        """
         if not start_soup:
             return ''
         soup =  start_soup.find_next_sibling()
@@ -115,11 +156,10 @@ class MDQuestionExtractor:
 
 
     def question_extractor(self):
-        '''
-        	extracting both the question choices as a dict file which can be sent to the api
-        	/questions/ or /questions/<question_id>
-
-        '''
+        """
+        	Extract the question and saves it to self.questions list
+            so it can be updated to chanakya.
+        """
 
         choice_1, choice_2 = {}, {}
         question_soup = [s for s in self.soup.find_all('h2')]
@@ -130,14 +170,17 @@ class MDQuestionExtractor:
 
             common_text_1 = self.get_soup_in_between(question_soup[0], question_soup[1])
             hi_text_1 = self.get_soup_in_between(question_soup[1], question_soup[2])
-            option_tag = self.soup.find('h3')
 
+            option_tag = self.soup.find('h3') # <h3>Options</h3>
+
+            # when there is ### Options
             if option_tag:
                 en_text_1 = self.get_soup_in_between(question_soup[2], option_tag)
                 common_text_2 = self.get_soup_in_between(question_soup[3], question_soup[4])
                 hi_text_2 = self.get_soup_in_between(question_soup[4], question_soup[5])
                 en_text_2 = self.get_soup_in_between(question_soup[5], option_tag)
 
+            # when there is no ## Common Options
             else:
                 en_text_1 = self.get_soup_in_between(question_soup[2], question_soup[3])
                 common_text_2 = self.get_soup_in_between(question_soup[4], question_soup[5])
@@ -145,11 +188,13 @@ class MDQuestionExtractor:
                 en_text_2 = self.get_soup_in_between(question_soup[6], question_soup[7])
 
         else:
-            question_2_tag = self.soup.find_all('h1')[1]
+            # For Integer answer type question
+            question_2_tag = self.soup.find_all('h1')[1] # <h1>Question Choice 2</h1>
 
             common_text_1 = self.get_soup_in_between(question_soup[0], question_soup[1])
             hi_text_1 = self.get_soup_in_between(question_soup[1], question_soup[2])
             en_text_1 = self.get_soup_in_between(question_soup[2], question_2_tag)
+
             common_text_2 = self.get_soup_in_between(question_soup[3], question_soup[4])
             hi_text_2 = self.get_soup_in_between(question_soup[4], question_soup[5])
             en_text_2 = self.get_soup_in_between(question_soup[5], None)
@@ -158,13 +203,15 @@ class MDQuestionExtractor:
 
         choice_1['hi_text'] = hi_text_1
         choice_1['en_text'] = en_text_1
-        choice_1['common_text'] = common_text_1
         choice_1['options'] = option_1
 
         choice_2['hi_text'] = hi_text_2
         choice_2['en_text'] = en_text_2
-        choice_2['common_text'] = common_text_2
         choice_2['options'] = option_2
+
+        #updating question src with new s3 link and center-image class
+        choice_1['common_text'] = self.update_question_images_from_string(common_text_1)
+        choice_2['common_text'] = self.update_question_images_from_string(common_text_2)
 
         choice_1.update(self.extra_data)
         choice_2.update(self.extra_data)
@@ -172,9 +219,6 @@ class MDQuestionExtractor:
         self.questions.append(choice_1)
         self.questions.append(choice_2)
 
-        from pprint import pprint
-        pprint(choice_1)
-        pprint(choice_2)
 
     def options_extractor(self):
         '''
@@ -265,6 +309,7 @@ class MDQuestionExtractor:
         '''
         option_tag = self.soup.find('h3')
 
+        # when there is language specific optons
         if option_tag:
             # extract all the soup of the td options
             en_options = [tr.find_all('td')[1] for tr in table.find_all('tr')[1:]]
@@ -274,11 +319,10 @@ class MDQuestionExtractor:
             option_ids = [tr.find_all('td')[3].text for tr in table.find_all('tr')[1:]]
 
             option_col = en_options
-
+        # when there is common options
         else:
             # extract all the soup of the td options
             option_col = [tr.find_all('td')[1] for tr in table.find_all('tr')[1:]]
-
             # extract the id of the options sequential wise
             option_ids = [tr.find_all('td')[2].text for tr in table.find_all('tr')[1:]]
 
@@ -288,6 +332,7 @@ class MDQuestionExtractor:
         for index in range(len(option_col)):
             option = {}
 
+            # when there are english and hindi options
             if option_tag:
                 option_images = en_options[index].find_all('img')
                 option_images.extend(hi_options[index].find_all('img'))
@@ -295,18 +340,19 @@ class MDQuestionExtractor:
                 option_images = option_col[index].find_all('img')
 
             # updating all the image src with s3 url if the options has any image
-            if option_images:
-                for image in option_images:
-                    s3_image_url = upload_image(image.get('src'))
-                    image.attrs.update({'src': s3_image_url, 'class':'option-image'})
+            self.update_images_with_s3_url(option_images, 'option-image')
+
+
 
             # adding id of the options if exist
             if option_ids[index] != 'NULL':
                 option['id'] = int(option_ids[index])
 
+            # language specific options
             if option_tag:
                 option['en_text'] = str(en_options[index])
                 option['hi_text'] = str(hi_options[index])
+            # common options
             else:
                 option['en_text'] = str(option_col[index])
                 option['hi_text'] = str(option_col[index])
@@ -315,7 +361,6 @@ class MDQuestionExtractor:
             options.append(option)
 
         # questionsMetaChoiceData
-        print(code_soup.text)
         meta_choice_data = json.loads(code_soup.text)
         answer_index = meta_choice_data['Correct Answer']
 
@@ -460,7 +505,6 @@ class MDQuestionExtractor:
 # all the md files
 files = [file for file in os.listdir(QUESTION_DIRECTORY) if file.endswith('.md')]
 files.remove('README.md')
-
 for file in files:
     pprint(file)
     question = MDQuestionExtractor(file)

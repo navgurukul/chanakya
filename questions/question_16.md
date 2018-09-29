@@ -15,7 +15,7 @@
 ```
 
 ## Common Text
-This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API.
+<!-- This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API. -->
 
 ![](images/question_16/choice1/choice1.png)
 
@@ -26,7 +26,7 @@ Inn images mein agla part kaunsa aayega?
 What would be the next image in this pattern?
 
 ## Common Options
-When no `###` options heading is there then check for existence of a Common Options heading. Both Common Options and langauge specific options cannot exist at the same time that will be problematic. *Also delete this line. Only adding this for Amar's reference.*
+<!-- When no `###` options heading is there then check for existence of a Common Options heading. Both Common Options and langauge specific options cannot exist at the same time that will be problematic. *Also delete this line. Only adding this for Amar's reference.* -->
 
 | Option | Values                                      |Id     |
 |:-------|:--------------------------------------------|:-----:|
@@ -44,7 +44,7 @@ When no `###` options heading is there then check for existence of a Common Opti
 ```
 
 ## Common Text
-This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API.
+<!-- This will be the text that comes above before beginning with the hindi of English text. Your backend will stitch up this + hindi / english to render it in the offline paper and serve it in 3 parts in the API. -->
 
 ![](images/question_16/choice2/choice2.png)
 

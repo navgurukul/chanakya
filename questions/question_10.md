@@ -47,7 +47,7 @@ Question mark ki jagah par sahi figure choose kijiye.
 ## English
 PENDING
 
-## Common Options
+### Options
 | Option | English Values                              | Hindi Values                                |Id     |
 |:-------|:--------------------------------------------|:--------------------------------------------|:-----:|
 | 1      | ![](images/question_10/choice2/option1.png) | ![](images/question_10/choice2/option1.png) |NULL   |
