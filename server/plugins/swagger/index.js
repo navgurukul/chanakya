@@ -20,7 +20,8 @@ module.exports = {
                     validatorUrl: null,
                     info: {
                         version: Package.version
-                    }
+                    },
+                    options.grouping: 'tags'
                 }
             }
         ]);
