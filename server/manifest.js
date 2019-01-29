@@ -12,9 +12,13 @@ module.exports = new Confidence.Store({
     server: {
         host: 'localhost',
         port: {
-            $env: 'PORT',
-            $coerce: 'number',
-            $default: 3000
+            $filter: { $env: 'NODE_ENV' },
+            $default: {
+                $env: 'PORT',
+                $coerce: 'number',
+                $default: 3000
+            },
+            test: { $value: undefined }         // Let the server find an open port
         },
         debug: {
             $filter: { $env: 'NODE_ENV' },
@@ -31,20 +35,47 @@ module.exports = new Confidence.Store({
         plugins: [
             {
                 plugin: '../lib', // Main plugin
-                options: {}
+                options: {
+                    jwtKey: {
+                        $filter: { $env: 'NODE_ENV' },
+                        $default: {
+                            $env: 'APP_SECRET',
+                            $default: 'app-secret'
+                        },
+                        production: {           // In production do not default to "app-secret"
+                            $env: 'APP_SECRET'
+                        }
+                    }
+                }
+            },
+            {
+                plugin: {
+                    $filter: { $env: 'NODE_ENV' },
+                    $default: 'hpal-debug',
+                    production: Toys.noop
+                }
             },
             {
                 plugin: 'schwifty',
                 options: {
-                    $filter: 'NODE_ENV',
+                    $filter: { $env: 'NODE_ENV' },
                     $default: {},
                     $base: {
                         migrateOnStart: true,
                         knex: {
-                            client: 'sqlite3',
-                            useNullAsDefault: true,     // Suggested for sqlite3
+                            client: "mysql",
                             connection: {
-                                filename: ':memory:'
+                                database: "chanakya",
+                                host: "127.0.0.1",
+                                user: "root",
+                                password: "learntolearn",
+                                requestTimeout: 90000,
+                                connectionTimeout: 30000,
+                                acquireConnectionTimeout: 30000
+                            },
+                            pool: {
+                                min: 4,
+                                max: 10
                             }
                         }
                     },
@@ -56,13 +87,6 @@ module.exports = new Confidence.Store({
             {
                 plugin: './plugins/swagger'
             },
-            {
-                plugin: {
-                    $filter: { $env: 'NODE_ENV' },
-                    $default: 'hpal-debug',
-                    production: Toys.noop
-                }
-            }
         ]
     }
 });

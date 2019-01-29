@@ -15,7 +15,7 @@ module.exports = Hoek.applyToDefaults(
         }
     },
     Manifest
-        .get('/register/plugins')
+        .get('/register/plugins', process.env)
         .find(({ plugin }) => plugin === 'schwifty')
         .options.knex
 );

@@ -1,248 +1,104 @@
-<p align="center">
-  <a href="https://hapipal.com"><img src="https://imgur.com/shaShr0.png" alt="hapi pal" width="200" /></a>
-</p>
-<h3 align="center">
-  the pal boilerplate
-</h3>
-<p align="center">
-  A friendly, proven starting place for your next hapi plugin or deployment
-</p>
-<p align="center">
-  <a target="_blank" href="https://join.slack.com/t/hapihour/shared_invite/enQtMjM5Njk1NDgzNTY5LThmODkxODIzOTg5NjJjODFiYjcxZDMxMTAyMzBkZDk3MWY4MTFlNDAyMTU3MmUwMmM0Y2UwMjU3YjAwYjRkN2E">
-    <img alt="Slack: hapihour/hapipal" src="https://img.shields.io/badge/slack-hapihour/hapipal-orange.svg?logo=slack&style=flat-square" />
-  </a>
-</p>
+# ![RealWorld Example App](.github/logo.png)
+[![Build Status](https://travis-ci.org/devinivy/hapipal-realworld-example-app.svg?branch=master)](https://travis-ci.org/devinivy/hapipal-realworld-example-app)
 
-Lead Maintainer - [Devin Ivy](https://github.com/devinivy)
+> ### hapi pal codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
-**Features**
- - Supports hapi v18+
- - Setup with [hpal-debug](https://github.com/hapipal/hpal-debug) hapi CLI debugging tools.
- - Provides conventions for building plugins by mapping the entire hapi plugin API onto files and folders, using [haute-couture](https://github.com/hapipal/haute-couture).
- - Designed to allow you to deploy your plugin on its own or as part of a larger application.
- - Textbook integrations with Objection ORM, Swagger UI, and more via [flavors](#flavors).
- - Fully setup with a [lab](https://github.com/hapijs/lab) test suite and [eslint](https://github.com/eslint/eslint) configuration.
- - Powerful, [12factor](https://12factor.net/)-oriented deployment configuration using
- [confidence](https://github.com/hapijs/confidence) and [dotenv](https://github.com/motdotla/dotenv).
- - Up-to-date versions of all dependencies.
- - Follows established hapi best practices out of the box.
- - The code is minimal and completely generic– no need to find-and-replace with your project name to get started.
 
-## Getting Started
-> If you're interested to hear about why we came together to create pal, check out our Medium article [Introducing hapi pal](https://medium.com/@hapipal/introducing-hapi-pal-550c13f30c5b).
->
-> Below is a simple tutorial to create your first route.  For a more in-depth look at the pal ecosystem, database integration, etc. see [our official starting guide](https://hapipal.com/getting-started).
+### [Demo](https://glitch.com/~hapipal-realworld)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+
+This codebase was created to demonstrate a fully fledged application backend built with [**hapi pal**](https://hapipal.com) including CRUD operations, authentication, routing, pagination, and more.  The functionality implemented in this project is specified by the [RealWorld API spec](https://github.com/gothinkster/realworld/tree/master/api).
+
+We've gone to great lengths to adhere to the **hapi pal** community styleguides & best practices.
+
+For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
+
+## Getting started
+
+The database used by this backend is [SQLite](https://github.com/mapbox/node-sqlite3), which is installed via `npm install`, so it's very simple to get started!
+
+Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/download/) (v8.11+), which comes bundled with the npm package manager referenced in commands below.
+
+> Note that the database is persisted to disk based upon the environment's `NODE_ENV`: `.test.db`, `.production.db`, etc., or `.tmp.db` by default.
+
+##### Development installation
+```sh
+$ npm install
+$ npm start
+```
+
+###### Test a route
+```sh
+$ npx hpal run debug:curl articles-list -v
+```
+
+###### Run test suite
+```sh
+$ npm test
+```
+
+##### Production installation
 
 ```sh
-npx hpal new my-project
-cd ./my-project
-npm install
+$ npm install --production
+$ cp server/.env-keep server/.env
+$ vi server/.env # Set APP_SECRET using your favorite editor
+$ NODE_ENV=production npm start
 ```
 
-<details>
-  <summary> <i>(click to expand)</i>
+## How it works
 
-The [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) command comes with npm 5.2+ and higher.  Here you can find instructions for older npm versions.
-  </summary>
+[hapi pal](https://hapipal.com/) is an ecosystem of tools and best practices for the [hapijs](https://hapijs.com/) web framework.  Lots of questions about this project are likely to be answered by following pal's [Getting Started](https://hapipal.com/getting-started) guide, but let's take a look at some of the highlights of this codebase.
 
-```sh
-npm install --global hpal
-hpal new my-project
-cd ./my-project
-npm install
-```
-Going forward, any instructions that use npx can directly use your global installation of `hpal` instead.  Just replace CLI instructions that say `npx hpal` with `hpal`.
-</details>
-<details>
-  <summary> <i>(click to expand)</i>
+### Directory structure
 
-Perhaps you'd like to perform a manual installation without any fancy CLI tools—that's possible too!  Here you can find instructions for installation using only git.
-  </summary>
+The codebase is based upon the [pal boilerplate](https://github.com/hapipal/boilerplate), which splits-up projects into two top-level directories: [`lib/`](lib) and [`server/`](server).
 
-```sh
-git clone --depth=1 --origin=pal --branch=pal git@github.com:hapipal/boilerplate.git my-project
-cd my-project
-git checkout --orphan master # New branch without history
-npm init
-npm install
-```
-</details>
+The `lib/` directory contains all the core functionality of the application.  Strictly speaking, it constitutes a [hapi plugin](https://hapijs.com/tutorials/plugins), which is a portable and well-encapsulated way to articulate a web service.  The sub-directories under `lib/` each define some pieces of the application: routes, models, services, other hapi plugins, etc.  Most of the contents of `lib/` are picked-up automatically by pal's file-based hapi plugin composer [haute-couture](https://github.com/hapipal/haute-couture), and were scaffolded using the [hpal CLI](https://github.com/hapipal/hpal).  Without haute-couture we would instead make many imperative calls to the hapi server interface; for example, we would call [`server.route()`](https://github.com/hapijs/hapi/tree/master/API.md#server.route()) rather than creating a file in `lib/routes/`, [`server.auth.strategy()`](https://github.com/hapijs/hapi/tree/master/API.md#server.auth.strategy()) rather than a file in `lib/auth/strategies/`, [`server.register()`](https://github.com/hapijs/hapi/tree/master/API.md#server.register()) rather than a file in `lib/plugins/`, etc.
 
-#### Make your first commit to init project history
-```sh
-git add --all
-git commit -m "Init commit"
-```
+The `server/` directory contains all configuration and code required to deploy the application.  Given that `lib/` exports a hapi plugin, `server/` is primarily responsible to create a hapi server and register the app's plugin with some configuration provided by `server/.env`.
 
-### Creating your first route
-Here we'll will pick-up where we left off (inside a new pal project folder with all dependencies installed) and create a route that serves a random quotation.
+The reasoning behind this separation of `lib/` and `server/` is explained in detail in an article: [The joys of server / plugin separation](https://hapipal.com/best-practices/server-plugin-separation).
 
-```sh
-# First, consider installing hpal globally,
-npm install --global hpal
-# or locally to your project,
-npm install --save-dev hpal
-```
-```sh
-npx hpal make route random-quotation
-# Wrote lib/routes/random-quotation.js
-```
+### The model layer
 
-Now open the newly-created file in your favorite text editor.  You should find something like this indicating which parts of the route configuration you need to fill-in, and the signature of a route handler.
-```js
-// lib/routes/random-quotation.js
-'use strict';
+This application's model is based upon [Objection ORM](https://github.com/Vincit/objection.js), which is integrated into hapi using the [schwifty](https://github.com/hapipal/schwifty) plugin.  Each model lives in [`lib/models/`](lib/models) and corresponds to a particular table in the SQLite database: `Users`, `Articles`, `Comments`, and `Tags`.
 
-module.exports = {
-    method: '',
-    path: '',
-    options: {
-        handler: async (request, h) => {}
-    }
-};
-```
+Our model layer is very light.  It represents a thin mapping between the application and the database, and enforces some basic rules related to data integrity: setting `createdAt` and `updatedAt` fields, computing an article's `slug` from its `title`, and validating column values when they are persisted to the database.  The models are used to interface with the database via Objection's wonderfully expressive SQL query builder which extends [knexjs](http://knexjs.org/).
 
-Let's fill-in the `method` and `path` so that the route we hit is at `get /random-quotation`, and write the `handler` to serve a random quotation from a list.  Our handler doesn't need to do anything asynchronous or use the [response toolkit](https://github.com/hapijs/hapi/blob/master/API.md#response-toolkit), so the route handler's signature appears a little simpler than before.
+You will find that models are used exclusively within the service layer, which is detailed below.
 
-```js
-// lib/routes/random-quotation.js
-'use strict';
+### The service layer
 
-module.exports = {
-    method: 'get',
-    path: '/random-quotation',
-    options: {
-        handler: (request) => {
+The service layer represents a sort of "headless" interface to all the actions and means of fetching data within the application.  You'll find a service method that causes one user to follow another, another to fetch a user's articles feed, etc.  In this way our route handlers/controllers have a means of sharing common logic ("how do I get an article by its id?") while hiding away the implementation details (e.g. details of the model) in a common library.  The service layer is actually generic enough that it could also be re-used to write a different interface to the exact same data and actions, such as a CLI.
 
-            const quotations = [
-                {
-                    quotation: 'I would rather fish any day than go to heaven.',
-                    saidBy: 'Cornelia "Fly Rod" Crosby'
-                },
-                {
-                    quotation: 'I want a turkey nut yogurt cane!',
-                    saidBy: 'Stimpy'
-                },
-                {
-                    quotation: 'Streams make programming in node simple, elegant, and composable.',
-                    saidBy: 'substack'
-                }
-            ];
+We endow our application with a service layer using the [schmervice](https://github.com/hapipal/schmervice) hapi plugin.  Alongside the plugin, schmervice also ships with a base service class that provides some useful and convenient functionality, such as access to the hapi server and application configuration (plugin options), integration with the server's start/stop lifecycle, and the ability to leverage hapi's robust system for persistent caching.
 
-            const randomIndex = Math.floor(Math.random() * quotations.length);
+This application has three services: the [`ArticleService`](lib/services/article.js), the [`UserService`](lib/services/user.js), and the [`DisplayService`](lib/services/display.js), all in the [`lib/services/`](lib/services) directory.  Each service is a class that extends schmervice's base class.  The `ArticleService` comes with methods such as `create()`, `findBySlug()`, and `addComment()`; it provides an interface to articles, comments, tags, and favorites.  The `UserService` comes with methods such as `signup()`, `findByUsername()`, and `login()`; it provides an interface to users, following, and authentication.
 
-            return quotations[randomIndex];
-        }
-    }
-};
-```
+Lastly, the `DisplayService` is responsible for enriching and transforming user, article, comment, and tag models into objects transferred by the API endpoints.  This allows us to defer to the `ArticleService` and `UserService` to worry about the details of fetching/searching articles and users in various ways—which are complex in their own right—without having to also be concerned with composing the data in these equally complex API responses.  For example, the articles list (`GET /articles`) must be able to paginate while filtering by tag, author, or favorited status; then the API response must additionally include specially-formatted information about whether the author of each article is followed by the current user (if there's a logged-in user), and whether each article is favorited by the current user.  In the RealWorld specification there are also multiple representations of some models; for example, a user presents differently when the current user is acting on or asking for information about themselves, versus a separate user (a.k.a. a "profile").  That's a lot of responsibility, so we decided to decouple fetching from enriching/formatting!  Luckily, as you will see in the `DisplayService`, Objection's [`loadRelated()`](http://vincit.github.io/objection.js/#loadrelated) feature is especially well-suited to this approach.
 
-Now start your server and try hitting it in-browser or over `curl`.
-```sh
-npm start
-# Server started at http://0.0.0.0:3000
-```
+The final point of interest in the service layer is its convention for transactions.  Objection's handling of SQL transactions is very ergonomic.  We take advantage of the fact that you may optionally specify a knex transaction object at query-time to any Objection query.  By convention, each of our database-backed service methods take a transaction object as an optional final argument.  That transaction object is simply passed down to any queries inside the method, and commits/rollbacks of a transaction are handled by the caller of the service method.  In this way _any_ database-backed service method may be composed into arbitrary transactions with other service methods without the caller having to understand the underlying queries being made.  More on this in the next section on routes!
 
-```sh
-curl http://localhost:3000/random-quotation
-# {"quotation":"I would rather fish any day than go to heaven.","saidBy":"Cornelia \"Fly Rod\" Crosby"}
-```
+### Routes
 
-This common practice of restarting the server and curling can be simplified by leveraging [hpal-debug](https://github.com/hapipal/hpal-debug)'s curl command, which allows you to hit a route using its name _without having a started server_!
-```sh
-npx hpal run debug:curl random-quotation
-# { quotation: 'I want a turkey nut yogurt cane!', saidBy: 'Stimpy' }
-```
+At the end of the day, we do all this work so that we can create some routes, or API endpoints.  Each route consists of a [hapi route configuration](https://github.com/hapijs/hapi/blob/master/API.md#server.route()) placed as a file in [`lib/routes/`](lib/routes).  These configurations provide information about the matching HTTP method and path; validation of incoming query, path, and payload parameters; authentication; and a handler or controller implementing the logic behind the route.
 
-**And that's it!**  Keep in mind that if you run into anything along the way that's unfamiliar to you, you can always search the hapi API documentation using `hpal`.
+Validation is specified using hapi's robust [joi](https://github.com/hapijs/joi) validation library, which is the same means of validation used by our model layer.  Since the routes and models use the same means of validation, routes are able to refer to the model's validation.  For example, when a user logs-in the payload contains an `email` parameter that must be a valid email; in the route configuration we defer to the `User` model's definition of a valid email and mark it as a required field: [`User.field('email').required()`](lib/routes/users/signup.js#L16).
 
-```sh
-npx hpal docs route.options.handler
-```
+The route handlers themselves are relatively light.  They generally compose payload, query, and path parameters, and the user's authentication status into one or many calls into the service layer, then return a response.  Handlers are also responsible for the transactional integrity of their calls into the service layer.  For example, if a user makes requests in quick succession to favorite then unfavorite an article, each of those requests must come back reflecting the proper state: there should be no way for the request to unfavorite the article sneak its way in so that the request to favorite the article responds with `favorited: false`, or vice-versa.  So, handlers will often generate a transaction object using a thin helper around [`Objection.transaction()`](http://vincit.github.io/objection.js/#transaction]) (defined in [`lib/bind.js`](lib/bind.js)), then pass that transaction to the various service methods that it uses.   As mentioned in the previous section, handlers typically end with a call to the `DisplayService`, whose sole purpose is to format and enrich information about the model (users, articles, comments, and tags) for API responses.
 
-## Flavors
+### Authentication
 
-hapi pal makes it easy to use the boilerplate as a jumping-off point for several different types of projects, which we call "flavors" (:lollipop: :fries: :doughnut: :poultry_leg:).  Flavors may be mixed and matched, or skipped altogether.  Only utilize them if they'll be useful to you!
+Per the RealWorld API spec, authentication occurs via signed JSON Web Tokens (JWTs).  There are essentially two sides to this form of authentication:
+ - The application must hand-out a JWT to a user when that user provides a matching email and password.
+ - The application must verify the authenticity and contents of the JWT when it is passed with future requests.
 
-They're simple little buggers.  We've simply tagged commits that we think will contain useful code patches depending on what direction you'd like to take your project.
+In order to hand-out a JWT, we have a [login endpoint](lib/routes/users/login.js) that performs the process described above by calling into the service layer.  In particular, the [`UserService`](lib/services/user.js) has a [`login()`](lib/services/user.js#L96) method to lookup a user by their email and password, and a [`createToken()`](lib/services/user.js#L116) method to create a JWT containing the user's id.  Aside from the user id, `createToken()` also needs a "secret key" in order to sign the token.  In our case, we obtain the secret from our application's plugin options (`this.options.jwtKey`), which the `UserService` has access to because it extends the [schmervice](https://github.com/hapipal/schmervice) base class.  The `jwtKey` plugin option is set using the `APP_SECRET` environment variable inside our app's deployment, configured within [`server/`](server).
 
-**NOTE** Since flavors are just tagged commits, please be aware that you may experience merge conflicts when mixing flavors together
+In order to verify the authenticity and contents of the JWTs passed with future requests, we utilize the [hapi-auth-jwt2](https://github.com/dwyl/hapi-auth-jwt2) (registered via [haute-couture](https://github.com/hapipal/haute-couture) in [`lib/plugins`](lib/plugins)).  This plugin creates an "auth scheme" for JWTs which we configure into an auth strategy in [`lib/auth/strategies/jwt.js`](lib/auth/strategies/jwt.js).  The auth strategy determines the details underlying our JWT auth: tokens should be signed using a certain hashing algorithm, with a certain secret key (as described above); the token is further validated by looking-up the user whose id is stored on the token; etc.  One the auth strategy is created in this way, it's trivial to protect an API endpoint with JWT authentication using hapi's [`auth` route configuration](https://github.com/hapijs/hapi/blob/master/API.md#route.options.auth), as can be seen on [the route for article deletion](lib/routes/articles/delete.js#L16).
 
-**Pull down the latest flavors**
+### Error handling
 
-If you used the `hpal` CLI to create a new project then this should already be done for you.  But you can always do it manually as well– simply pull down git tags from the `pal` remote.
+The RealWorld API Spec [is particular](https://github.com/gothinkster/realworld/tree/master/api#errors-and-status-codes) about the format and HTTP codes that our application responds with.  In order to meet those requirements we wrote a centralized hapi [request extension](https://github.com/hapijs/hapi/blob/master/API.md#server.ext.args()), which can be found in [`lib/extensions/error.js`](lib/extensions/error.js).  This request extension is a hook into hapi's [request lifecycle](https://github.com/hapijs/hapi/blob/master/API.md#request-lifecycle) to process all responses right before the server responds.  In hapi parlance this request extension point is called "`onPreResponse`".
 
-```sh
-git fetch pal --tags
-```
-
-**Use some flavors**
-```sh
-git cherry-pick flavor-one flavor-two
-```
-
-### Available flavors
-#### Swagger
-> `git cherry-pick swagger` [[view](https://github.com/hapipal/boilerplate/commit/swagger)]
-
-Integrates [hapi-swagger](https://github.com/glennjones/hapi-swagger) onto the server with some reasonable default configuration.
-
-#### Custom Swagger
-> `git cherry-pick custom-swagger` [[view](https://github.com/hapipal/boilerplate/commit/custom-swagger)]
-
-Integrates [hapi-swagger](https://github.com/glennjones/hapi-swagger) onto the server with some reasonable default configuration, and also includes an editable handlebars template for swagger-ui.
-
-#### Objection ORM
-> `git cherry-pick objection` [[view](https://github.com/hapipal/boilerplate/commit/objection)]
-
-Integrates [Objection ORM](https://github.com/Vincit/objection.js) into your server and plugin using the hapi plugin [schwifty](https://github.com/hapipal/schwifty).  This is a great way to get started with a SQL-oriented plugin.  Adds a `models/` directory to your plugin where Objection models should be placed, and a `migrations/` directory where your migrations should be placed.  Configured to work with SQLite out of the box.
-
-##### Using the knex CLI
-We've added an npm script for `knex` so that you can avoid writing the whole path to the knex CLI (`node_modules/.bin/knex`) when running commands.  To use the knex CLI, you may write your commands as `npm run knex -- <knex-command>`.
-
-For example, to create a new migration,
-```
-npm run knex -- migrate:make my-first-migration
-```
-
-#### Deployment
-> `git cherry-pick deployment` [[view](https://github.com/hapipal/boilerplate/commit/deployment)]
-
-By default all deployment-oriented dependencies are placed in package.json's `devDependencies`.  This flavor pulls all the default deployment dependencies up into `dependencies`.  This is useful when you want to use pal primarily as a deployment rather than a harness to author an application plugin.  Note that the other flavors always place their deployment-oriented dependencies in `devDependencies`, and that you will have to pull those into `dependencies` separately.
-
-#### Templated Site
-> `git cherry-pick templated-site` [[view](https://github.com/hapipal/boilerplate/commit/templated-site)]
-
-Sets-up [handlebars](https://github.com/wycats/handlebars.js/) templating with a useful layout and openly serves the `lib/public` directory, which contains folders to place javascript and CSS.  This flavor additionally introduces three npm scripts: one to minify front-end javascript (`npm run build:js`) with [uglify](https://github.com/mishoo/UglifyJS2); one to minify CSS with [PostCSS](https://github.com/postcss/postcss)/[cssnano](https://github.com/ben-eb/cssnano) (`npm run build:css`); and one to do both (`npm run build`).  Lastly, this flavor introduces a plugin option `developmentMode` that controls whether the minified or un-minified javascript and CSS are served on the page.  The `developmentMode` is configured to be active when `NODE_ENV` is not `production`.
-
-#### Fancy Templated Site
-> `git cherry-pick fancy-templated-site` [[view](https://github.com/hapipal/boilerplate/commit/fancy-templated-site)]
-
-Building on top of the [templated site flavor](#templated-site), this flavor also incorporates [browserify](https://github.com/substack/node-browserify), [Sass](https://www.npmjs.com/package/node-sass), and [Browsersync](https://github.com/Browsersync/browser-sync).  As such, there are two new npm scripts: one to pre-build javascript from nodejs-style to ES5 using browserify and [Babel](https://github.com/babel/babel) (`npm run prebuild:js`); and one to pre-build CSS from SCSS using node-sass.  When `developmentMode` is active browser-sync will rebuild SCSS and nodejs-style javascript, then reload the page or stylesheets as necessary.
-
-### Versioning
-> Note: most of the time you'll be pulling in flavors at the time you install the pal boilerplate, in which case you don't need to worry much about flavor versioning.
-
-It's worth noting that over time these flavor tags may point to different commits.  The flavors are updated to keep-up with the latest pal boilerplate.  For this reason, as flavor tags move, we leave static versioned tags for your convenience.  Tags are named as such,
-```
-<flavor-name>-v<major>.<minor>.<patch>
-```
-where,
-
- - `<flavor-name>` - the name of this flavor.  Identical to the unversioned tag for this flavor.
- - `<major>` - the major version of the flavor, identical to the major version of the pal boilerplate that it is compatible with.
- - `<minor>` - the minor version of the flavor, bumped when a feature is added to the flavor (rare), but more typically when its dependencies are updated.
- - `<patch>` - the patch version of the flavor, bumped when a bug is fixed in the flavor, or the flavor requires update to account for bugs in the version of the pal boilerplate with which it is compatible.
-
-For example the first version of the "custom swagger" flavor is,
-```
-custom-swagger-v1.0.0
-```
-
-<br>
-<a href='https://hapipal.com'>
-  <div align='center'>
-    <img width='280' src='https://imgur.com/rWnkFOO.png' />
-  </div>
-</a>
-<br>
+There are a few different types of errors that are encountered in the app and pass through this request extension.  Whenever a route needs to express a standard HTTP error, its handler will throw a [boom](https://github.com/hapijs/boom) error, which is standard in the hapi ecosystem.  Other errors also may come from within the model layer (e.g. when a record is not found) or from a route's request validation (these are already considered "400 Bad Request" boom errors).  We interpret errors from the model with help from Objection's [objection-db-errors](https://github.com/Vincit/objection-db-errors) plugin—which normalizes database errors across the various flavors of SQL—and [avocat](https://github.com/PixulHQ/avocat) which further transforms them into hapi's preferred boom HTTP error objects; for example, a uniqueness violation may be transformed into a "409 Conflict" boom error.  Once the error is interpreted as an HTTP error, the final step is to simply format them into the shape preferred by the RealWorld specification.
