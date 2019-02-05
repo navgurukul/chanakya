@@ -8,6 +8,12 @@ exports.deployment = async (start) => {
     const manifest = Manifest.get('/');
     const server = await Glue.compose(manifest, { relativeTo: __dirname });
 
+    // Printing a request log
+    server.events.on('response', function (request) {
+        request.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.url.path + ' --> ' + request.response.statusCode);
+    });
+
+
     await server.initialize();
 
     if (!start) {
