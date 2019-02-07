@@ -20,9 +20,11 @@
   },
   "dependencies": {
     "avocat": "1.x.x",
-    "boom": "7.x.x",
+    "axios": "^0.18.0",
+    "boom": "^7.3.0",
     "bounce": "1.x.x",
     "confidence": "4.x.x",
+    "dot": "^1.1.2",
     "dotenv": "6.x.x",
     "glue": "5.x.x",
     "hapi": "18.x.x",
