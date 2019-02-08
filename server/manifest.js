@@ -94,7 +94,15 @@ module.exports = new Confidence.Store({
                                 password: "learntolearn",
                                 requestTimeout: 90000,
                                 connectionTimeout: 30000,
-                                acquireConnectionTimeout: 30000
+                                acquireConnectionTimeout: 30000,
+                                typeCast: function(field, next) {
+                                // Convert 1 to true, 0 to false, and leave null alone
+                                if (field.type === 'TINY' && field.length === 1) {
+                                    const value = field.string()
+                                    return value ? value === '1' : null
+                                }
+                                return next()
+                                }
                             },
                             pool: {
                                 min: 4,

@@ -45,6 +45,7 @@
     "slugify": "1.x.x",
     "sqlite3": "4.x.x",
     "toys": "2.x.x",
+    "underscore": "^1.9.1",
     "vision": "^5.4.4"
   },
   "devDependencies": {

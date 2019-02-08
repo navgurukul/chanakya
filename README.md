@@ -1,4 +1,4 @@
-# Ramanujan
+# Chanakya
 
 ## Important Commands
 
