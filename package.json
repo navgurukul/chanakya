@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "avocat": "1.x.x",
+    "aws-sdk": "^2.399.0",
     "axios": "^0.18.0",
     "boom": "^7.3.0",
     "bounce": "1.x.x",
