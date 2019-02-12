@@ -13,20 +13,18 @@
   "correctOption": 1
 }
 ```
-
 ## Common Text
-8 + (−25) + 16 − (−25) −16
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+Maan lein ki x = a/b hai. Agar a =6 aur b=2 toh x ki value kya hai?
 
 ### English
-Solve the equation given above.
+
 
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 8                     |null   |
+| 1      | 3                     |null   |
 
 # Question Choice 2
 ```json
@@ -36,15 +34,14 @@ Solve the equation given above.
 }
 ```
 ## Common Text
-33 - 8 + 17 + 10 - (-8) - 10
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+Maan lein ki x = a * b hai. Ab agar x = 10 aur a = 2 hai, toh b ki value kitni hogi?
 
 ### English
-Solve the equation given above.
+
 
 ## Options
-| Option | Values |ID     |
-|:-------|:-------|:-----:|
-| 1      | 50     |null   |
+| Option | Values                |ID     |
+|:-------|:----------------------|:-----:|
+| 1      | 5                     |null   |

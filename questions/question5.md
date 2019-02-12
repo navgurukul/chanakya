@@ -13,20 +13,20 @@
   "correctOption": 1
 }
 ```
-
 ## Common Text
-8 + (−25) + 16 − (−25) −16
+x = y - 6
+y = 10
+x = ?
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+Neeche diye hue equations mein x ke liye solve karein:
 
 ### English
-Solve the equation given above.
 
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 8                     |null   |
+| 1      | 4                     |null   |
 
 # Question Choice 2
 ```json
@@ -36,15 +36,16 @@ Solve the equation given above.
 }
 ```
 ## Common Text
-33 - 8 + 17 + 10 - (-8) - 10
+x = y + 8
+x = 10
+y = ?
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+Neeche diye hue equations mein x ke liye solve karein:
 
 ### English
-Solve the equation given above.
 
 ## Options
-| Option | Values |ID     |
-|:-------|:-------|:-----:|
-| 1      | 50     |null   |
+| Option | Values                |ID     |
+|:-------|:----------------------|:-----:|
+| 1      | 2                     |null   |
