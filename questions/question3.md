@@ -1,7 +1,7 @@
 ```json
 {
   "type": "integer",
-  "difficulty": "easy",
+  "difficulty": "hard",
   "topic": "Basic Math"
 }
 ```

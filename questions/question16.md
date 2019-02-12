@@ -2,7 +2,7 @@
 {
   "type": "mcq",
   "difficulty": "easy",
-  "topic": "Basic Math"
+  "topic": "Non Verbal Reasoning"
 }
 ```
 

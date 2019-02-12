@@ -1,8 +1,8 @@
 ```json
 {
   "type": "integer",
-  "difficulty": "easy",
-  "topic": "Basic Math"
+  "difficulty": "medium",
+  "topic": "Non Verbal Reasoning"
 }
 ```
 

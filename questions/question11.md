@@ -1,8 +1,8 @@
 ```json
 {
   "type": "mcq",
-  "difficulty": "easy",
-  "topic": "Basic Math"
+  "difficulty": "medium",
+  "topic": "Abstract Reasoning"
 }
 ```
 

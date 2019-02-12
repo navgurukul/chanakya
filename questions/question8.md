@@ -1,7 +1,7 @@
 ```json
 {
   "type": "mcq",
-  "difficulty": "easy",
+  "difficulty": "medium",
   "topic": "Basic Math"
 }
 ```
