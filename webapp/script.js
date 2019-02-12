@@ -157,21 +157,6 @@ function time_aware_submit() {
     var last_recorded_time   = new Date().getTime();
     var time_remaining = DEBUG ? 5 : 86400;
 
-    do_it = setInterval(function(){
-        var new_time   = new Date().getTime()
-        var time_spent = (new_time - last_recorded_time)/1000;
-        last_recorded_time = new_time;
-        time_remaining -= time_spent;
-
-        minutes = Math.floor(time_remaining/60);
-        seconds = Math.round(time_remaining%60);
-        $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
-        if(time_remaining<=1){
-            dQuestions(data);
-            clearInterval(do_it_again);
-        }
-    }, 100);
-
     // var last_recorded_time   = new Date().getTime();
     // var time_remaining = 3670;
     // var time_after = 60;
@@ -248,6 +233,22 @@ function time_aware_submit() {
                 }
             ]
         };
+
+        dQuestions(data);
+
+        do_it = setInterval(function(){
+            var new_time   = new Date().getTime()
+            var time_spent = (new_time - last_recorded_time)/1000;
+            last_recorded_time = new_time;
+            time_remaining -= time_spent;
+    
+            minutes = Math.floor(time_remaining/60);
+            seconds = Math.round(time_remaining%60);
+            $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
+            if(time_remaining<=1){
+                clearInterval(do_it);
+            }
+        }, 100);    
     }
 
     function dQuestions(data) {
@@ -277,14 +278,31 @@ function previousQuestion() {
     displayQuestion(current_question);
 }
 
+function updateAnswer(index) {
+    if (index == 0) {
+        return false;
+    }
+
+    ans_index = index - 1;
+    if (questions[ans_index]["type"] == "mcq") {
+        answers[ans_index] = $('#qmcq .option button.active').html();
+    } else {
+        answers[ans_index] = $('#qinteger_answer input').val();
+    }
+    return true;
+}
+
 function displayQuestion(index) {
+    updateAnswer(index);
+
     if (index == 1) {
-        $('#btns_prev_submit').show("slow");
+        $('#prev_button').show("slow");
     } else if (index == 0) {
-        $('#btns_prev_submit').hide("slow");
+        $('#prev_button').hide("slow");
     }
 
     if (index == questions.length - 1) {
+        //i am at last question
         $('#next_btn').hide("slow");
         $('#submit_btn').show("slow");
     } else {
@@ -293,27 +311,40 @@ function displayQuestion(index) {
     }
     
     if (index >= questions.length) {
-        $('#btns_next_submit').hide('slow');
+        $('#btn_next_submit').hide('slow');
         return "HO GAYA :D";
     } 
     else {
         //display question with index index
-        console.log(questions[index]);
-
         var question = questions[index];
         if (question["type"] == "mcq") {
-            console.log(1);
             $('#qmcq').slideUp(slide_up_time);
             $('#qinteger_answer').slideUp(slide_up_time);
             $('#qmcq').slideDown(slide_down_time);
-            $('#qmcq').html(question["text"]["hi"]);
+            $('#qmcq .qtext').html(question["text"]["hi"]);
+            var options = question["options"];
+            var options_html = "";
+
+            for(var i=0; i<options.length; i++) {
+                //button 
+                options_html += `<div class="option col-xs-12 col-sm-12 col-md-6 mt-1 text-center mt-2"> \
+                <button type="button" class="btn btn-outline-info" onclick="makeActive(`+i+`)">` + options[i]["hi"] +
+                `</div>`;
+
+                // <input type="radio" value="B or C" name="answer_1"  \
+                // id="id_10" class="cls_1"/> \
+                //     <label class="answer-label" for="id_10">`
+
+            }
+
+            $('#qmcq .options .row').html(options_html);
+            $('#qmcq .qtext').html(question["text"]["hi"])
         } 
         else if (question["type"] == "integer_answer") {
-            console.log(2);
             $('#qmcq').slideUp(slide_up_time);
             $('#qinteger_answer').slideUp(slide_up_time);
             $('#qinteger_answer').slideDown(slide_down_time);
-            $('#qinteger_answer').html(question["text"]["hi"]);
+            $('#qinteger_answer .qtext').html(question["text"]["hi"]);
         }
         else {
             console.log("YEH KAHA AA GAYE HUM, YUHI SERVER PAR TRUST KARTE KARTE!");
@@ -323,24 +354,25 @@ function displayQuestion(index) {
     }
 }
 
-function page4submit() {
-
+function makeActive(index) {
+    $('#qmcq .option button').each(function(i, obj) {
+        if (i==index) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    })
 }
 
 function submitTest() {
-    console.log("Submit karein!");
-
-    $('#qmcq').slideUp(slide_up_time);
-    $('#qinteger_answer').slideUp(slide_up_time);
+    updateAnswer(questions.length);
+    $('#question_answer_page').slideUp(slide_up_time);
     $("#end_page").slideDown(slide_down_time);
-    $("#btns_prev_submit").hide();
-    $("#btns_next_submit").hide();
     
     if (!DEBUG) {
         $.post("/test/end_test/"+enrolment_key,
             {"answers": answers},
             function(data, resp) {
-                
             }
         )
     } else {
@@ -352,5 +384,6 @@ if (DEBUG) {
     $(document).ready(function() {
         landing_page_submit();
         personal_details_submit();
+        time_aware_submit();
     });
 }
