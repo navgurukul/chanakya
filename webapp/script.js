@@ -11,17 +11,20 @@ function appending(error) {
     $('#errors').html(error);
 }
 
-// for getting lat and long
+// For getting lat and long
 if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(positions){coordinates = positions.coords.latitude +','+ positions.coords.longitude});
+    navigator.geolocation.getCurrentPosition(function(positions){
+        coordinates = positions.coords.latitude +','+ positions.coords.longitude;
+        console.log(coordinates);
+    });
 }
 else{
     appending('Geolocation not supported!');
 }
 
-function page1submit() {
-    $("#page1").slideUp(slide_up_time);
-    $("#page2").slideDown(slide_down_time);
+function landing_page_submit() {
+    $("#landing_page").slideUp(slide_up_time);
+    $("#personal_details").slideDown(slide_down_time);
     setupDatePicker();
 };
 
@@ -52,7 +55,7 @@ function setupDatePicker() {
     }    
 }
 
-function page2submit() {
+function personal_details_submit() {
     var name = $('#name').val();
     var date = $('#date').val();
     var month = $('#month').val();
@@ -69,11 +72,12 @@ function page2submit() {
         gender = "MALE";
     }
 
-    // user_agent.value = navigator.userAgent
-    // coords.value = coordinates;
     // network_speed.value  = navigator.connection.downlink;
 
+    console.log('hello1', mobile);
+
     if(!mobile){
+        console.log('hello2', mobile);
         appending('Kripaya mobile number dijye!');
         return false;
     }
@@ -126,10 +130,8 @@ function page2submit() {
         "dob": dob
     }
 
-    $("#page2").slideUp(slide_up_time);
-    $("#page3").slideDown(slide_down_time);    
-    $("#timer").slideDown(slide_down_time); 
-    page3submit();                                
+    $("#personal_details").slideUp(slide_up_time);
+    $("#time_aware").slideDown(slide_down_time);    
 
     // $.post("/test/personal_details/"+enrolment_key,
     //     obj,
@@ -139,18 +141,21 @@ function page2submit() {
     //             {},
     //             function newts(data, resp) {
     //                 $("#page2").slideUp(slide_up_time);
-    //                 $("#page3").slideDown(slide_down_time);                    
+    //                 $("#time_aware").slideDown(slide_down_time);                    
     //             }
     //         );    
     //     }
     // );
 }
 
-function page3submit() {
-    var data;
+function time_aware_submit() {
+    // show question_answer_page page
+    $("#time_aware").slideUp(slide_up_time);
+    $("#question_answer_page").slideDown(slide_down_time);    
 
+    var data;
     var last_recorded_time   = new Date().getTime();
-    var time_remaining = DEBUG ? 5 : 60;
+    var time_remaining = DEBUG ? 5 : 86400;
 
     do_it = setInterval(function(){
         var new_time   = new Date().getTime()
@@ -158,33 +163,14 @@ function page3submit() {
         last_recorded_time = new_time;
         time_remaining -= time_spent;
 
+        minutes = Math.floor(time_remaining/60);
         seconds = Math.round(time_remaining%60);
-        $("#time_to_show").html("Time Remaining: " + seconds + " seconds.");
-
+        $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
         if(time_remaining<=1){
-            last_recorded_time = new Date().getTime();
-            time_remaining = 3600;
-    
-            $('#page3').slideUp(slide_up_time);
             dQuestions(data);
-            clearInterval(do_it);
-            do_it_again = setInterval(function(){
-                var new_time   = new Date().getTime()
-                var time_spent = (new_time - last_recorded_time)/1000;
-                last_recorded_time = new_time;
-                time_remaining -= time_spent;
-       
-                minutes = Math.floor(time_remaining/60);
-                seconds = Math.round(time_remaining%60);
-                $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
-                if(time_remaining<=1){
-                    $('#page3').slideUp(slide_up_time);
-                    dQuestions(data);
-                    clearInterval(do_it_again);
-                }
-            }, 100); 
+            clearInterval(do_it_again);
         }
-    }, 100); 
+    }, 100);
 
     // var last_recorded_time   = new Date().getTime();
     // var time_remaining = 3670;
@@ -298,8 +284,6 @@ function displayQuestion(index) {
         $('#btns_prev_submit').hide("slow");
     }
 
-    console.log(index, "bhai");
-
     if (index == questions.length - 1) {
         $('#next_btn').hide("slow");
         $('#submit_btn').show("slow");
@@ -366,7 +350,7 @@ function submitTest() {
 
 if (DEBUG) {
     $(document).ready(function() {
-        page1submit();
-        page2submit();
+        landing_page_submit();
+        personal_details_submit();
     });
 }

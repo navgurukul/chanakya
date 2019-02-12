@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+{% block title %}
+NG Result
+{% endblock %}
+
+{% block head_extra %}
+<style>
+	img{width:100%!important}
+	.btn{margin-top:8px;}
+        .qsn{
+            margin-bottom:1.2rem;
+            border:1px solid #444;
+        }
+</style>
+{% endblock %}
+
+{% block main %}
+{%if not error %}
+  {% for set_name in data %}
+    <div class="row">
+    <h1 class="col-sm-12"> {{set_name}} | Marks: {{marks_dict[set_name].received_marks}} / {{marks_dict[set_name].max_possible_marks}}</h1>
+    {% set questions = data[set_name]['questions']['questions'] %}
+    {% for question in questions %}
+        {% set q_no = questions.index(question) %}
+        <div class="col-sm-12 col-xs-12 col-md-5 offset-md-1 qsn">
+        <h3>{{ question['en_question_text'] | safe }}</h3>
+        <button class="btn btn-warning">Category: {{question['category']}}</button>
+        <button class="btn btn-danger">Difficulty: {{question['difficulty']}}</button>
+	{% for option in question['random_options'] %}
+		{% if option!= '' %}
+			{% if option == question['answer'] %}
+				<button class=" btn btn-lg btn-success col-xs-12 col-md-12">{{ option }}</button>
+			{%else%}
+				<button class=" btn btn-lg btn-info col-xs-12 col-md-12">{{ option }}</button>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+	<button type="button" class="btn btn-outline-dark">User Answer: {{data[set_name]['answers']['answer_'+(q_no+1)|string]}}</button>
+        </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+{% else %}
+  {{error}}
+{% endif %}
+{% endblock %}

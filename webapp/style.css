@@ -5,15 +5,6 @@
 .form-container{
     padding:2rem;
 }
-form>*{
-    margin-top:1rem;
-}
-main{
-    margin-top:9%;
-}
-h2{
-    font-size:1.5rem;
-}
 .hide{
     display:none;
 }

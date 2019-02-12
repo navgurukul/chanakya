@@ -1,0 +1,291 @@
+{% extends "master.html" %}
+{% block title %}
+Road to Navgurukul
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    .question{
+        //padding:0.45rem 1.25rem;
+        font-size:1.4rem;
+        color:#222;
+    }
+    .question-small{
+        font-size:1.2rem;
+        color:#676767;
+    }
+    .question-small:before{ content:"( "; }
+    .question-small:after{ content:" )"; }
+    .answer-label{
+        display:block;
+        width:100%;
+        border:1px solid #444;         
+        background-color:#e2e2e2;
+        padding:0.35rem;
+        cursor:pointer;
+        text-transform:uppercase;
+    }
+    .options input[type="radio"]:hover+label,
+    .options input[type="radio"]:checked+label {
+        background-color: #00A43A;
+        color:white;
+        border:1px solid white;
+    }
+    .options input[type="radio"]{
+        display:none;
+    }
+    input[type="number"]{
+        margin-bottom:1rem;
+        padding:0.5rem;
+    }
+    #time_remaining{
+        padding:1.6rem;
+    }
+    .qsn-img{
+        display: block;
+        width: 250px;
+        margin: 3rem auto;
+    }
+    .red{
+        color:red;
+        padding: 20px 0px;
+        font-size: 1.2rem;
+    }
+    .b{
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {  
+      50% { opacity: 0; }
+    }
+    .answer-label img{
+        max-height:250px;
+    }
+    .custom.progress{
+	height:2rem;
+	margin-bottom:15px;
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<div class="row">
+    <div class="red b col-sm-12 col-xs-12 col-md-6" id="time_to_show"></div>
+    <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div>
+    <div class="col-sm-12 col-xs-12 col-md-6">
+	<div class="progress custom">
+		<div class="progress-bar progress-bar-success progress-bar-striped active" 
+			    role="progressbar"  aria-valuemin="0" 
+			    aria-valuemax="100">
+		</div> 
+	</div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block main %}
+    <div class="row hide" id="info_before">
+        {{ question_set['info_before']['html'] | safe }}
+    </div>
+    <form class="row hide" method="post" action="end" id="questions">
+        {% set questions = question_set['questions'] %}
+        <script>
+            $(function(){
+                total_questions = {{questions | length}};
+            })
+        </script>
+	<div class="col-xs-12 col-sm-12">
+                <button type="button" class="btn btn-md btn-warning cls_{{q_no}} hide" id="prev_btn">
+                    Previous Question / पिछला प्रश्न
+                    <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+		</button>
+	</div>
+        {% for question in questions %}
+            {% set en_question_text = question["en_question_text"] %}
+            {% set hi_question_text = question["hi_question_text"] %}
+            {% set random_options   = question["random_options"] %}
+            {% set question_type    = question["question_type"] %}
+            {% set q_no = questions.index(question)+1 %}
+            <div class="col-xs-12 hide hide-all" id="question_{{q_no}}">
+                <h2 class="question col-xs-12 col-sm-12">{{en_question_text | safe}}</h2>
+                <h2 class="question question-small col-xs-12 col-sm-12">{{hi_question_text | safe}}</h2>
+                <div class="col-xs-12 col-sm-12 options">
+                    {% if question_type=="MCQ" %}
+                    <ol class="row">
+                        {% for x in range(4) %}
+                            {% set _id = q_no|string + x|string %}
+			    {% if random_options[x]|length > 0 %}
+				    <li class="col-xs-12 col-sm-12 col-md-5 offset-md-1">
+					<input type="radio" value="{{random_options[x]}}" name="answer_{{q_no}}" 
+					id="id_{{_id}}" class="cls_{{q_no}}"/>
+					{% if "https://" in random_options[x] %}
+					    <label class="answer-label" for="id_{{_id}}"><img src="{{random_options[x]}}"></label>
+					{% else %}
+					    <label class="answer-label" for="id_{{_id}}">{{random_options[x]}}</label>
+					{% endif %}
+				    </li>
+			    {% endif %}
+                        {% endfor %}
+                    </ol>
+                    {% elif question_type=="short_answer" %}
+                        <input type="number" step="any" placeholder="enter your answer here" name="answer_{{q_no}}" 
+                        class="border border-info col-xs-12 col-sm-12 cls_{{q_no}}">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+            <div class="col-xs-12 col-sm-12" style="margin-bottom: 5rem;">
+                <button type="button" class="btn btn-md btn-primary cls_{{q_no}}" id="next_btn">
+                    Next Question / अगला प्रश्न
+                    <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                </button>
+                <button type="submit" class="hide btn btn-lg btn-danger" id="submit_btn">
+                    Submit Test!
+                </button>
+            </div>
+    </form>
+    <div class="row hide" id="info_after">
+        {{ question_set['info_after']['html'] | safe }}
+    </div>
+{% endblock %}
+
+{% block footer %}
+<style>
+    .hide {
+        display:none;
+    }
+</style>
+<script>
+    var do_it;
+    $(function(){
+
+	is_submitted = false;
+    	var frm = $('form');
+    	frm.submit(function (e) {
+        e.preventDefault();
+
+	if(!is_submitted){
+		clearInterval(do_it);
+		$.ajax({
+		    type: frm.attr('method'),
+		    url: frm.attr('action'),
+		    data: frm.serialize(),
+		    success: function (data) {
+			console.log('Submission was successful.');
+			console.log(data);
+			window.location = window.location.href;
+			is_submitted = true;
+		    },
+		    error: function (data) {
+			console.log('An error occurred.');
+			console.log(data);
+		    },
+			});
+		}
+    	});
+
+        $('form').on('keyup keypress', function(e) {
+          var keyCode = e.keyCode || e.which;
+          if (keyCode === 13) { 
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        $("button.cls_1").on("click", function(){
+            if($("input.cls_1").checkValidity()) {
+                alert('validated');
+            }
+            else {
+                alert("invalid");
+            }
+        });
+
+        last_recorded_time   = new Date().getTime()
+        time_before = {{question_set['info_before']['time_in_seconds'] }};
+        time_after =  {{question_set['info_after']['time_in_seconds'] }};
+        time_questions =  {{question_set['time_per_question'] }} * total_questions;
+
+        present_question = 1;
+        time_remaining = {{time_remaining}};
+        $("#question_1").removeClass("hide");
+        $("#next_btn").click(function(){
+            present_question += 1;
+
+	    width = present_question/total_questions;
+	    $(".progress-bar").html("Progress: "+ present_question + " / " + total_questions);
+	    $(".progress-bar").css({"width": 100*width+"%"});
+	    $(".progress-bar").attr("aria-valuenow",width);
+
+	    if(present_question == 2){
+	   	$("#prev_btn").removeClass("hide");
+	    }
+            if(present_question <= total_questions){
+                $(".hide-all").addClass("hide");
+                $("#question_"+ present_question.toString() ).removeClass("hide");
+                if(present_question == total_questions){
+                    $("#submit_btn").removeClass("hide");
+                    $("#next_btn").addClass("hide");
+                }
+            }
+        });
+        $("#prev_btn").click(function(){
+            present_question -= 1;
+
+	    width = present_question/total_questions;
+	    $(".progress-bar").html("Progress: "+ present_question + " / " + total_questions);
+	    $(".progress-bar").css({"width": 100*width+"%"});
+	    $(".progress-bar").attr("aria-valuenow",width);
+
+            $("#next_btn").removeClass("hide");
+            $("#submit_btn").addClass("hide");
+	    if(present_question == 1){
+	   	$("#prev_btn").addClass("hide");
+	    }
+	    else if(present_question >= 2){
+                $(".hide-all").addClass("hide");
+                $("#question_"+ present_question.toString() ).removeClass("hide");
+                if(present_question == total_questions){
+                    $("#submit_btn").removeClass("hide");
+                    $("#next_btn").addClass("hide");
+                }
+            }
+        });
+	function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+	}
+        do_it = setInterval(function(){
+            new_time   = new Date().getTime()
+            time_spent = (new_time - last_recorded_time)/1000;
+            last_recorded_time = new_time;
+            time_remaining -= time_spent;
+
+            if(time_remaining >= time_after+time_questions){
+                $("#info_before").removeClass("hide");
+                time_to_show = time_remaining - (time_after+time_questions);
+            }
+            else if(time_remaining <= time_after){
+                $("#questions").addClass("hide");
+                $("#info_after").removeClass("hide");
+                time_to_show = time_remaining;
+            }
+            else{
+                $("#info_before").addClass("hide");
+                $("#questions").removeClass("hide");
+                time_to_show = time_remaining - time_after;
+            }
+
+            minutes = Math.floor(time_to_show/60);
+            seconds = Math.round(time_to_show%60);
+            $("#time_to_show").html("Time Remaining: "+minutes+" minutes "+seconds+" seconds.");
+            if(time_remaining==3){
+                $("#alert_text").html("<h2>Time Over Submitting Your Test Now.</h2>");
+            }
+            if(time_remaining<=1){
+		$("#submit_btn").click();
+		clearInterval(do_it);
+            }
+        }, 100); 
+    });
+</script>
+{% endblock %}
