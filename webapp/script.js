@@ -4,6 +4,7 @@ var slide_up_time = 600;
 var slide_down_time = slide_down_time;
 var questions = [];
 var answers = [];
+var dirty_answers = [];
 var current_question = 0;
 
 function appending(error) {
@@ -34,6 +35,7 @@ function setupDatePicker() {
         'Jun':"06",'Jul':"07","Aug":"08",'Sep':"09",'Oct':'10',
         'Nov':"11",'Dec':'12', 
     }
+
     // To get the year
     var today = new Date();
     var yyyy = today.getFullYear()-10;
@@ -230,6 +232,13 @@ function time_aware_submit() {
                         "hi": "question 2 text in hindi! <b>main HTML hun</b>"
                     },
                     "type": "integer_answer",
+                },
+                {
+                    "text": {
+                        "en": "question 3 text in english! <b>can also contain html</b>",
+                        "hi": "question 3 text in hindi! <b>main HTML hun</b>"
+                    },
+                    "type": "integer_answer",
                 }
             ]
         };
@@ -253,8 +262,11 @@ function time_aware_submit() {
 
     function dQuestions(data) {
         questions = data["questions"];
+        console.log(questions);
+
         for (i=0; i<questions.length; i++) {
             answers.push(-1);
+            dirty_answers.push(-1);
         }
         $('#btns_next_submit').show("slow");
         displayQuestion(0);
@@ -269,32 +281,50 @@ function time_aware_submit() {
 }
 
 function nextQuestion() {
+    updateAnswer(current_question);
     current_question += 1;
     displayQuestion(current_question);
 }
 
 function previousQuestion() {
+    updateAnswer(current_question);
     current_question -= 1;
     displayQuestion(current_question);
 }
 
 function updateAnswer(index) {
-    if (index == 0) {
-        return false;
-    }
-
-    ans_index = index - 1;
-    if (questions[ans_index]["type"] == "mcq") {
-        answers[ans_index] = $('#qmcq .option button.active').html();
+    if (questions[index]["type"] == "mcq") {
+        answers[index] = $('#qmcq .option button.active').html();
     } else {
-        answers[ans_index] = $('#qinteger_answer input').val();
+        answers[index] = $('#qinteger_answer input').val();
+    }
+    console.log(index, answers);
+    return true;
+}
+
+function showAnswer(index) {
+    console.log("showing answer", index)
+    if (dirty_answers[index] == -1) {
+        dirty_answers[index] = 0;
+        $('#qmcq .option button.active').removeClass('active');
+        $('#qinteger_answer input').val("");
+    }
+    else if (questions[index]["type"] == "mcq") {
+        $('#qmcq .option button').each(function(i, obj) {
+            if ($(this).html()==answers[index]) {
+                $(this).addClass('active');
+            } else {
+                $(this).removeClass('active');
+            }
+        });
+    } else if (answers[index] != -1) {
+        $('#qinteger_answer input').val(answers[index]);
     }
     return true;
 }
 
-function displayQuestion(index) {
-    updateAnswer(index);
 
+function displayQuestion(index) {
     if (index == 1) {
         $('#prev_button').show("slow");
     } else if (index == 0) {
@@ -318,7 +348,7 @@ function displayQuestion(index) {
         //display question with index index
         var question = questions[index];
         if (question["type"] == "mcq") {
-            $('#qmcq').slideUp(slide_up_time);
+            // $('#qmcq').slideUp(slide_up_time);
             $('#qinteger_answer').slideUp(slide_up_time);
             $('#qmcq').slideDown(slide_down_time);
             $('#qmcq .qtext').html(question["text"]["hi"]);
@@ -342,16 +372,17 @@ function displayQuestion(index) {
         } 
         else if (question["type"] == "integer_answer") {
             $('#qmcq').slideUp(slide_up_time);
-            $('#qinteger_answer').slideUp(slide_up_time);
+            // $('#qinteger_answer').slideUp(slide_up_time);
             $('#qinteger_answer').slideDown(slide_down_time);
             $('#qinteger_answer .qtext').html(question["text"]["hi"]);
         }
         else {
             console.log("YEH KAHA AA GAYE HUM, YUHI SERVER PAR TRUST KARTE KARTE!");
             //        displayQuestion(index+1);
-
         }
     }
+
+    showAnswer(index);
 }
 
 function makeActive(index) {
@@ -361,17 +392,20 @@ function makeActive(index) {
         } else {
             $(this).removeClass('active');
         }
-    })
+    });
 }
 
 function submitTest() {
-    updateAnswer(questions.length);
+    updateAnswer(current_question);
+
     $('#question_answer_page').slideUp(slide_up_time);
     $("#end_page").slideDown(slide_down_time);
     
     if (!DEBUG) {
         $.post("/test/end_test/"+enrolment_key,
-            {"answers": answers},
+            {
+                "answers": answers
+            },
             function(data, resp) {
             }
         )
