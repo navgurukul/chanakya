@@ -157,46 +157,34 @@ function time_aware_submit() {
 
     var data;
     var last_recorded_time   = new Date().getTime();
-    var time_remaining = DEBUG ? 5 : 86400;
+    var total_time = DEBUG ? 1000 : 3600;
+    var time_remaining = total_time;
 
-    // var last_recorded_time   = new Date().getTime();
-    // var time_remaining = 3670;
-    // var time_after = 60;
-    // var time_before = 10;
-    // var total_questions = 18;
-    // var time_questions =  200 * total_questions;
+    do_it = setInterval(function(){
+        new_time   = new Date().getTime()
+        time_spent = (new_time - last_recorded_time)/1000;
+        last_recorded_time = new_time;
+        time_remaining -= time_spent;
 
-    // do_it = setInterval(function(){
-    //     new_time   = new Date().getTime()
-    //     time_spent = (new_time - last_recorded_time)/1000;
-    //     last_recorded_time = new_time;
-    //     time_remaining -= time_spent;
+        time_to_show = time_remaining;
 
-    //     if(time_remaining >= time_after+time_questions){
-    //         $("#info_before").removeClass("hide");
-    //         time_to_show = time_remaining - (time_after+time_questions);
-    //     }
-    //     else if(time_remaining <= time_after){
-    //         $("#questions").addClass("hide");
-    //         $("#info_after").removeClass("hide");
-    //         time_to_show = time_remaining;
-    //     }
-    //     else{
-    //         $("#info_before").addClass("hide");
-    //         $("#questions").removeClass("hide");
-    //         time_to_show = time_remaining - time_after;
-    //     }
+        minutes = Math.floor(time_to_show/60);
+        seconds = Math.round(time_to_show%60);
 
-    //     minutes = Math.floor(time_to_show/60);
-    //     seconds = Math.round(time_to_show%60);
-    //     $("#time_to_show").html("Time Remaining: "+minutes+" minutes "+seconds+" seconds.");
-    //     if(time_remaining==3){
-    //         $("#alert_text").html("<h2>Time Over Submitting Your Test Now.</h2>");
-    //     }
-    //     if(time_remaining<=1){
-    //         clearInterval(do_it);
-    //     }
-    // }, 100); 
+        $('.progress-bar').css({"width":time_remaining*100/(total_time)+"%"})
+
+        if(time_remaining<=1) {
+            $("#time_to_show").html("<h4>Time Over Submitting Your Test Now.</h4>");
+            submitTest();
+            $('.progress').hide();
+            clearInterval(do_it);
+        } else if (time_remaining <= 15) {
+            msg = "<h4>Time Over Submitting Your Test Now "+ ".".repeat(Math.floor(time_remaining)%4+1) + " </h4>";
+            $("#time_to_show").html(msg);
+        } else {
+            $("#time_to_show").html("Time Remaining: "+minutes+" minutes "+seconds+" seconds.");
+        }
+    }, 1000); 
 
     if (DEBUG) {
         var data = {
@@ -244,20 +232,6 @@ function time_aware_submit() {
         };
 
         dQuestions(data);
-
-        do_it = setInterval(function(){
-            var new_time   = new Date().getTime()
-            var time_spent = (new_time - last_recorded_time)/1000;
-            last_recorded_time = new_time;
-            time_remaining -= time_spent;
-    
-            minutes = Math.floor(time_remaining/60);
-            seconds = Math.round(time_remaining%60);
-            $("#time_to_show").html("Time Remaining: " + minutes + " minutes and " + seconds + " seconds.");
-            if(time_remaining<=1){
-                clearInterval(do_it);
-            }
-        }, 100);    
     }
 
     function dQuestions(data) {
