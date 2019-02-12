@@ -1,5 +1,5 @@
 var enrolment_key = "NTH36";
-var DEBUG = true;
+var DEBUG = false;
 var slide_up_time = 600;
 var slide_down_time = slide_down_time;
 var questions = [];
@@ -16,7 +16,6 @@ function appending(error) {
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(function(positions){
         coordinates = positions.coords.latitude +','+ positions.coords.longitude;
-        console.log(coordinates);
     });
 }
 else{
@@ -76,10 +75,7 @@ function personal_details_submit() {
 
     // network_speed.value  = navigator.connection.downlink;
 
-    console.log('hello1', mobile);
-
     if(!mobile){
-        console.log('hello2', mobile);
         appending('Kripaya mobile number dijye!');
         return false;
     }
@@ -236,7 +232,6 @@ function time_aware_submit() {
 
     function dQuestions(data) {
         questions = data["questions"];
-        console.log(questions);
 
         for (i=0; i<questions.length; i++) {
             answers.push(-1);
@@ -272,12 +267,10 @@ function updateAnswer(index) {
     } else {
         answers[index] = $('#qinteger_answer input').val();
     }
-    console.log(index, answers);
     return true;
 }
 
 function showAnswer(index) {
-    console.log("showing answer", index)
     if (dirty_answers[index] == -1) {
         dirty_answers[index] = 0;
         $('#qmcq .option button.active').removeClass('active');
