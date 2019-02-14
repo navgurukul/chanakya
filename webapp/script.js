@@ -1,6 +1,11 @@
-// var enrolment_key = window.location.href.split('k/').slice(-1);
-var enrolment_key = "NJ97U2";
 var DEBUG = false;
+
+if (DEBUG) {
+    var enrolment_key = window.location.href.split('k/').slice(-1);
+} else {
+    var enrolment_key = "C4RRNU";
+}
+
 var slide_up_time = 600;
 var slide_down_time = slide_down_time;
 var questions = [];
@@ -106,7 +111,7 @@ function personal_details_submit() {
         appending('Kripaya mobile number dijye!');
         return false;
     }
-    if(!mobile.length<10 || mobile.length>10){
+    if(mobile.length<10 || mobile.length>10){
         appending('10 digit ka mobile number daliye!');
         return false;
     }
@@ -166,7 +171,8 @@ function personal_details_submit() {
         obj,
         (data, resp) => {
             $("#personal_details").slideUp(slide_up_time);
-            $("#time_aware").slideDown(slide_down_time);    
+            $("#time_aware").slideDown(slide_down_time);
+            appending('');
 
             console.log(resp);
             $.post(base_url+"/on_assessment/questions/"+enrolment_key,
@@ -186,6 +192,8 @@ function personal_details_submit() {
 }
 
 function submitApp() {
+    appending('');
+
     var pinCode = $('#pinCode').val();
     var qualification = $('#qualification').val();
     var state = $('#state').val();
@@ -210,43 +218,43 @@ function submitApp() {
         appending('Sahi Pin Code enter kijiye!');
         return false;
     }
-
-    if(!qualification){
-        appending('Qualification select karo!');
-        return false;
-    }
     
-    if(!state){
+    if( !state || state == "NONE"){
         appending('Apna State Select karo!');
         return false;
     }
 
-    if(!city){
+    if( !city ) {
         appending('Apni City ya Village ka naam enter karo!');
         return false;
     }
 
-    if( /^[a-zA-Z]$/i.test(city)){
+    if( /^[a-zA-Z]$/i.test(city)) { 
         appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
         return false;
     }
 
-    if(!currentStatus){
+    if(!currentStatus || currentStatus=="NONE"){
         appending('Apne current status ko select karo!');
         return false;
     }
 
-    if(!schoolMedium){
+    if(!qualification || qualification == "NONE"){
+        appending('Qualification select karo!');
+        return false;
+    }
+
+    if(!schoolMedium || schoolMedium=="NONE"){
         appending('Apne last school ka medium select karo!');
         return false;
     }
 
-    if(!caste){
+    if(!caste || caste=="NONE"){
         appending('Apni caste select karo!');
         return false;
     }
 
-    if(!religion){
+    if(!religion || religion=="NONE"){
         appending('Apna religion select karo!');
         return false;
     }
@@ -446,8 +454,8 @@ function submitTest() {
 
 $(document).ready(function() {
     if (DEBUG) {
-        landing_page_submit();
-        personal_details_submit();
+        // landing_page_submit();
+        // personal_details_submit();
         // time_aware_submit();
     }
     else {
