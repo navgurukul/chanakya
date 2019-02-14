@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="row m-row">
                                     <div class="col-xs-12 col-sm-6 col-md-6">Aapka Mobile Number</div>
-                                    <input type="number" id='mobile' name="mobile" placeholder="Your Mobile Number"
+                                    <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number"
                                         class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
                                 </div>
                                 <div class="row m-row">
@@ -89,7 +89,7 @@
                                         <option value="NONE">Select Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
-                                        <option value="others">Other</option>
+                                        <option value="trans">Trans</option>
                                     </select>
                                 </div>
                             <div class="row m-row" style='margin-top:2rem;margin-bottom:4rem;'>
@@ -133,16 +133,16 @@
                 </div>
                 
                 <div class="row hide" id="qmcq">
-                    <h2 class="question qtext col-xs-12 col-sm-12 mt-2 col-md-10 offset-1">
-                    </h2>
+                    <h3 class="question qtext col-xs-12 col-sm-12 mt-2 col-md-10 offset-1">
+                    </h3>
                     <div class="col-xs-12 col-sm-12 options">
                         <div class="row">
                         </div>
                     </div>
                 </div>
                 <div class="row hide" id="qinteger_answer">
-                    <h2 class="question qtext col-xs-12 col-sm-12 mt-2  col-md-10 offset-1">
-                    </h2>
+                    <h3 class="question qtext col-xs-12 col-sm-12 mt-2  col-md-10 offset-1">
+                    </h3>
                     <div class="text-center col-xs-12 col-sm-12">
                         <input type="number" name="uanswer" placeholder="yaha answer likho..."
                         class="col-xs-12 col-sm-6 border border-warning rounded section-1 ml-3 mt-4 mb-4"/>
@@ -177,27 +177,22 @@
                         <div class="col-xs-12 col-sm-12">
                         <form class="row mt-3" method="post">
                             <div class="row border border-warning rounded form-container">
-                                <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Address Details</h2>
+                                <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Last Kuch Questions!</h2>
                                     <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Pincode</div>
                                         <input type="number" name="pin_code" placeholder="Pincode"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                                     </div>
-                                    <div class="row m-row">
-                                        <div class="col-xs-12 col-sm-6 col-md-6">Aapki City/Village ka Naame</div>
-                                        <input type="text" name="city_or_village" placeholder="City ya Village ka naam"
-                                            class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
-                                    </div>
-                                    <div class="row m-row">
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Tehsil</div>
                                         <input type="text" name="tehsil" placeholder="Tehsil"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
-                                    </div>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">District</div>
                                         <input type="text" name="district" placeholder="District"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
-                                    </div>
+                                    </div> -->
                                     <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Aap kis State me rehte hai</div>
                                         <select name="state"
@@ -241,24 +236,23 @@
                                                 <option value='West Bengal'>West Bengal</option>
                                         </select>
                                     </div>
-                            </div>
-                            <div class="row border border-warning rounded form-container">
-                                <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Education Details</h2>
+                                    <div class="row m-row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6">Aapki City/Village ka Naame</div>
+                                        <input type="text" name="city_or_village" placeholder="City ya Village ka naam"
+                                            class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                                    </div>
                                     <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Maximum Qualification</div>
                                         <select name="qualification" id="qualification" 
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                                                 <option value="NONE">Select Option</option>
-                                                <option value='class_5_pass'>Class 5 Pass</option>
-                                                <option value='class_8_pass'>Class 8 Pass</option>
-                                                <option value='class_10_pass'>Class 10 Pass</option>
-                                                <option value='class_12_pass'>Class 12 Pass</option>
-                                                <option value='graduate'>Graduation Completed</option>
-                                                <option value='post_graduate'>Post Graduate</option>
-                                                <option value='prof_degree'>Professional Degree</option>
+                                                <option value='lessThan10th'>Less than 10th Paas</option>
+                                                <option value='class10th'>Class 10th Pass</option>
+                                                <option value='class12th'>Class 12th Pass</option>
+                                                <option value='graduate'>Graduation completed</option>
                                         </select>
                                     </div>
-                                    <div class="row m-row min-10 hide">
+                                    <!-- <div class="row m-row min-10 hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Percentage in 10th</div>
                                         <input type="number" name="class_10_marks" 
                                             placeholder="Percentage in 10th" min='0' step='any'
@@ -269,8 +263,8 @@
                                         <input type="number" name="class_12_marks" 
                                             placeholder="Percentage in 12th"  min='0' step='any'
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row min-12 hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row min-12 hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Stream in Class 12th</div>
                                         <select name="class_12_stream"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
@@ -283,20 +277,17 @@
                                             <option value="arts">Arts</option>
                                             <option value="others">Others</option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                     <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">School Medium</div>
-                                        <select name="school_medium"
+                                        <select name="medium"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
                                             <option value="NONE">Select Option</option>
-                                            <option value="english">English</option>
-                                            <option value="vernacular">Non English</option>
+                                            <option value="en">English</option>
+                                            <option value="other">Non English</option>
                                         </select>
                                     </div>
-                            </div>
-                            <div class="row border border-warning rounded form-container">
-                                <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Family Details</h2>
-                                    <div class="row m-row">
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Head</div>
                                         <select name="family_head" id="family_head"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -305,14 +296,14 @@
                                                 <option value='mother'>Mother</option>
                                                 <option value='other'>Other</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row family-other hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row family-other hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Head(other) Specify</div>
                                         <input type="text" name="family_head_other" 
                                             placeholder="Family Head(Other)"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Head's Qualification</div>
                                         <select name="family_head_qualification"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -327,29 +318,26 @@
                                                 <option value='post_graduation'>Post Graduate</option>
                                                 <option value='prof_degree'>Professional Degree</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Number of Family Members</div>
                                         <input type="number" name="fam_members" 
                                             placeholder="Aapki Family me kitne log hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Number of Earning Family Members</div>
                                         <input type="number" name="earning_fam_members" 
                                             placeholder="Aapki Family me kitne log kamate hai" 
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Monthly Family Income</div>
                                         <input type="number" name="monthly_family_income" 
                                             placeholder="Aapki Family ki Montly Income kya hai" 
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                            </div>
-                            <div class="row border border-warning rounded form-container">
-                                <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Other Family Details</h2>
-                                    <div class="row m-row">
+                                    </div> -->
+                                    <!-- <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar kaha hai</div>
                                         <select name="urban_rural" id="urban_rural"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -357,9 +345,9 @@
                                                 <option value='urban'>Shehar mein</option>
                                                 <option value='rural'>Gao mein</option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                     <!--  Urban -->
-                                    <div class="row m-row urban">
+                                    <!-- <div class="row m-row urban">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
                                         <select name="urban_family_head_prof"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -372,15 +360,15 @@
                                                 <option value='routine_work'>Routine Work (Lecturer, High School Techer etc)</option>
                                                 <option value='prof_degree_work'>Professional Degree (Doctor, Engineer etc)</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row urban">
+                                    </div> -->
+                                    <!-- <div class="row m-row urban">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Monthly Income of Family Head</div>
                                         <input type="number" name="family_head_income" 
                                             placeholder="Family Head ki Monthly Income kya hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
+                                    </div> -->
                                     <!--  Rural -->
-                                    <div class="row m-row rural hide">
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Head Profession</div>
                                         <select name="rural_family_head_prof"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -393,8 +381,8 @@
                                                 <option value='work_on_own_land'>Work on Own Land</option>
                                                 <option value='service'>Service</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Organization Membership</div>
                                         <select name="family_head_org_membership"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -405,8 +393,8 @@
                                                 <option value='office_holder'>Office Holder in an organization</option>
                                                 <option value='pub_leader'>Public Leader</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Type</div>
                                         <select name="family_type"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -414,20 +402,20 @@
                                                 <option value='single'>Single</option>
                                                 <option value='joint'>Joint</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Family Land Holding(in Acres)</div>
                                         <input type="number" name="family_land_holding" 
                                             placeholder="Aapki Family k paas kitni Jameen hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Number Draught animals your Family Owns.</div>
                                         <input type="number" name="family_draught_animals" 
                                             placeholder="jaise ki horse, cow, goat, hen etc."
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Aapka Ghar Kaisa hai</div>
                                         <select name="housing_type"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -437,8 +425,8 @@
                                                 <option value='pucca_house'>Pakka Ghar</option>
                                                 <option value='kothi'>Kothi</option>
                                         </select>
-                                    </div>
-                                    <div class="row m-row rural hide">
+                                    </div> -->
+                                    <!-- <div class="row m-row rural hide">
                                         <h5 class="col-sm-12 text-center"> Inme se kaun kaun si vastu aapke ghar me hai ?</h5>
                                         <div class="col-xs-6 col-sm-4">
                                             <label for="bullock_cart">Bullock Cart</label>
@@ -468,25 +456,39 @@
                                             <label for="refrigerator">Refrigerator</label>
                                             <input type="checkbox" name="items_owned" id="refrigerator" value="refrigerator"/>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row m-row">
                                         <div class="col-xs-12 col-sm-6">Caste/Tribe</div>
                                         <select name="caste_parent_category" id="caste_parent_category"
                                             class="col-xs-12 col-sm-6 border border-warning rounded section-1">
                                             <option value="NONE">Select Option</option>
-                                            <option value="sc">(SC) Scheduled Caste</option>
-                                            <option value="st">(ST) Scheduled Tribe</option>
+                                            <!-- <option value="sc">(SC) Scheduled Caste</option> -->
+                                            <option value="scSt">(SC) Scheduled Caste / (ST) Scheduled Tribe</option>
                                             <option value="obc">(OBC) Other Backward Classes</option>
                                             <option value="general">General</option>
-                                            <option value="other">Other</option>
+                                            <option value="others">Other</option>
                                         </select>
                                     </div>
-                                    <div class="row m-row caste-other">
+                                    <div class="row m-row">
+                                        <div class="col-xs-12 col-sm-6">Religion/dharam</div>
+                                        <select name="caste_parent_category" id="caste_parent_category"
+                                            class="col-xs-12 col-sm-6 border border-warning rounded section-1">
+                                            <option value="NONE">Select Option</option>
+                                            <!-- <option value="sc">(SC) Scheduled Caste</option> -->
+                                            <option value="hindu">Hindu</option>
+                                            <option value="islam">Islam</option>
+                                            <option value="sikh">Sikh</option>
+                                            <option value="jain">Jain</option>
+                                            <option value="christian">Christian</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                        <!-- <div class="row m-row caste-other">
                                         <div class="col-xs-12 col-sm-6 col-md-6">Jaati</div>
                                         <input type="text" name="caste" 
                                             placeholder="Aapki Caste Kya hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row m-row" style='margin-top:2rem;margin-bottom:4rem;'>
                                     <button class="btn btn-lg btn-danger col-xs-12 

@@ -11,3 +11,6 @@
 .extra{
     margin-left: 1%;
 }
+.option button {
+    min-width: 120px !important;
+}
