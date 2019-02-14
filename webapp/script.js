@@ -1,6 +1,6 @@
 var DEBUG = false;
 
-if (DEBUG) {
+if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
 } else {
     var enrolment_key = "C4RRNU";
