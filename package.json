@@ -1,8 +1,8 @@
 {
-  "name": "hapipal-realworld-example-app",
-  "version": "0.0.0",
-  "description": "Exemplary real world application built with hapi pal",
-  "author": "Devin Ivy <devin@bigroomstudios.com>",
+  "name": "Chanakya Testing Platform",
+  "version": "0.0.7",
+  "description": "The testing platform for NavGurukul.",
+  "author": "NavGurukul <platform@navgurukul.org>",
   "license": "MIT",
   "main": "lib/index.js",
   "engines": {
