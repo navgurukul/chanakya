@@ -1,8 +1,0 @@
-student states implementation
-data validations
-data-zipping
-write integration tests, functional tests and unit tests
-session expiry policy
-5-min test
-on submit popup and previous button in test
-url for student result
