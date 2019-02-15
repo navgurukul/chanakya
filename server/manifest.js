@@ -21,6 +21,9 @@ module.exports = new Confidence.Store({
             test: { $value: undefined }         // Let the server find an open port
         },
         routes: {
+            cors: {
+                'headers': ['Accept', 'Authorization', 'Content-Type', 'If-None-Match', 'Accept-language']
+            },
             validate: {
               failAction: async (request, h, err) => {
                 if (process.env.NODE_ENV === 'production') {
