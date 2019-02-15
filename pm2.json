@@ -1,7 +1,7 @@
 {
     "apps": [{
         "exec_mode": "fork",
-        "instances": 4,
+        "instances": 1,
         "script": "server/index.js",
         "name": "chanakya-node-app",
         "interpreter": "node",
