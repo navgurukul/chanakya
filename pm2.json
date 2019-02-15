@@ -1,0 +1,11 @@
+{
+    "apps": [{
+        "exec_mode": "fork",
+        "instances": 4,
+        "script": "server/index.js",
+        "name": "chanakya-node-app",
+        "interpreter": "node",
+        "out_file": "/logs/chanakya-node-app.log",
+        "error_file": "/logs/chanakya-node-app-err.log"
+    }]
+}
