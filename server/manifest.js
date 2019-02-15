@@ -5,7 +5,7 @@ const Confidence = require('confidence');
 const Toys = require('toys');
 
 // Pull .env into process.env
-Dotenv.config({ path: `${__dirname}/.env` });
+Dotenv.config({ path: `${__dirname}/../.env` });
 
 // Glue manifest as a confidence store
 module.exports = new Confidence.Store({
@@ -91,10 +91,18 @@ module.exports = new Confidence.Store({
                         knex: {
                             client: "mysql",
                             connection: {
-                                database: "chanakya",
-                                host: "127.0.0.1",
-                                user: "root",
-                                password: "learntolearn",
+                                database: {
+                                    $env: 'DB_NAME',
+                                },
+                                host: {
+                                    $env: 'DB_HOST'
+                                },
+                                user: {
+                                    $env: 'DB_USER'
+                                },
+                                password: {
+                                    $env: 'DB_PASS'
+                                },
                                 requestTimeout: 90000,
                                 connectionTimeout: 30000,
                                 acquireConnectionTimeout: 30000,
