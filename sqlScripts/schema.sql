@@ -30,7 +30,7 @@ CREATE TABLE `contacts` (
   PRIMARY KEY (`id`),
   KEY `student_idx` (`studentId`),
   CONSTRAINT `student` FOREIGN KEY (`studentId`) REFERENCES `students` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `enrolment_keys` (
   UNIQUE KEY `key_UNIQUE` (`key`),
   KEY `student_idx` (`studentId`),
   CONSTRAINT `student2` FOREIGN KEY (`studentId`) REFERENCES `students` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +104,25 @@ CREATE TABLE `knex_migrations_lock` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `partner_assessments`
+--
+
+DROP TABLE IF EXISTS `partner_assessments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `partner_assessments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `answerKeyUrl` varchar(300) DEFAULT NULL,
+  `assessmentUrl` varchar(300) DEFAULT NULL,
+  `questionSetId` varchar(45) NOT NULL,
+  `partnerId` int(11) NOT NULL,
+  `createdAt` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `partners`
 --
 
@@ -114,8 +133,9 @@ CREATE TABLE `partners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `notes` varchar(2000) NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +153,7 @@ CREATE TABLE `question_attempts` (
   `textAnswer` varchar(45) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,12 +185,12 @@ DROP TABLE IF EXISTS `question_sets`;
 CREATE TABLE `question_sets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `questionIds` varchar(2000) NOT NULL,
-  `enrolmentKeyId` int(11) NOT NULL,
+  `enrolmentKeyId` int(11) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `enrolmentKey_idx` (`enrolmentKeyId`),
   CONSTRAINT `enrolmentKey` FOREIGN KEY (`enrolmentKeyId`) REFERENCES `enrolment_keys` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,15 +229,18 @@ CREATE TABLE `students` (
   `email` varchar(150) DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
-  `gps` varchar(500) DEFAULT NULL,
+  `gpsLat` varchar(45) DEFAULT NULL,
+  `gpsLong` varchar(45) DEFAULT NULL,
+  `pinCode` varchar(10) DEFAULT NULL,
   `qualification` int(11) DEFAULT NULL,
   `currentStatus` int(11) DEFAULT NULL,
-  `caste` int(11) DEFAULT NULL,
+  `schoolMedium` int(11) DEFAULT NULL,
   `religon` int(11) DEFAULT NULL,
+  `caste` int(11) DEFAULT NULL,
   `stage` varchar(45) NOT NULL,
   `createdAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -229,4 +252,4 @@ CREATE TABLE `students` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-13 15:21:44
+-- Dump completed on 2019-02-15 12:07:07
