@@ -3,7 +3,7 @@
 ## Important Commands
 
 ### Export Schema of DB
-`mysqldump -u username -p --no-data chanakya > schema.sql`
+`mysqldump -u root -p --no-data chanakya > sqlScripts/schema.sql`
 
 ### Import Schema
 `mysql -u username -p chanakya < schema.sql`
