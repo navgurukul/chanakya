@@ -47,6 +47,7 @@ if (navigator.geolocation){
     });
 }
 else{
+    positions = {"latitude": -1, "longitude": -1};
     appending('Geolocation not supported!');
 }
 
