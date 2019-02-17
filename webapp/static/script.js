@@ -42,9 +42,15 @@ function dQuestions() {
 // For getting lat and long
 var positions;
 if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(positions){
-        positions = positions.coords;
-    });
+    navigator.geolocation.getCurrentPosition(
+        (positions) => {
+            positions = positions.coords;
+        },
+        (error) => {
+            positions = {"latitude": -1, "longitude": -1};
+            appending('Geolocation not supported!');
+        }
+    );
 }
 else{
     positions = {"latitude": -1, "longitude": -1};
