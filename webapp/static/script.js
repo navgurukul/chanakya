@@ -447,17 +447,18 @@ function submitTest() {
     console.log('ok');
 
     updateAnswer(current_question);
-
-    $('#question_answer_page').slideUp(slide_up_time);
-    $("#end_page").slideDown(slide_down_time);
     
-    $.post(base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
-        answers,
-        function(data, resp) {
-            console.log(resp);
+    $.ajax({
+        url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
+        type: 'POST',
+        data: JSON.stringify(answers),
+        contentType: 'application/json; charset=utf-8', 
+        dataType: 'json',
+        success: function(data, resp) {
+            $('#question_answer_page').slideUp(slide_up_time);
+            $("#end_page").slideDown(slide_down_time);
         },
-        'json'
-    );
+    });
 }
 
 $(document).ready(function() {
