@@ -161,10 +161,8 @@ function personal_details_submit() {
         "whatsapp": mobile,
         "gender": gender,
         "dob": dob,
-        // "gps" : {
-        //     "lat": positions.latitude,
-        //     "lon": positions.longitude
-        // }
+        "gpsLat": positions.latitude,
+        "gpsLong": positions.longitude
     }
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
@@ -187,7 +185,8 @@ function personal_details_submit() {
                     }
                 }
             );    
-        }
+        },
+        'json'
     );
 }
 
@@ -275,7 +274,8 @@ function submitApp() {
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
-        }
+        },
+        'json'
     );
 }
 
@@ -448,7 +448,8 @@ function submitTest() {
         answers,
         function(data, resp) {
             console.log(resp);
-        }
+        },
+        'json'
     );
 }
 
