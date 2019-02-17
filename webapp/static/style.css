@@ -1,0 +1,16 @@
+.m-row{
+    margin:0.5rem;
+    width:100%;
+}
+.form-container{
+    padding:2rem;
+}
+.hide{
+    display:none;
+}
+.extra{
+    margin-left: 1%;
+}
+.option button {
+    min-width: 120px !important;
+}
