@@ -1,6 +1,6 @@
 var DEBUG = false;
 
-if (DEBUG) {
+if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
 } else {
     var enrolment_key = "C4RRNU";
@@ -12,7 +12,7 @@ var questions = [];
 var answers = {};
 var dirty_answers = [];
 var current_question = 0;
-var base_url="http://35ec7046.ngrok.io";
+var base_url="/api";
 var qDisplayed=false;
 
 function appending(error) {

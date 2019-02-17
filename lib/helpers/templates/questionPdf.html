@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    
+    body{
+      font-family: 'Open Sans';
+      margin: 10px;
+      font-size: 10px;
+    }
+    .main{
+      margin: 20px 0;
+    }
+    tr.inline-block{
+      display: inline-block;
+    }
+    table.question-display, .question-table{
+      page-break-inside:avoid !important;
+      width:95% !important;
+      margin-bottom: 10px;
+      margin-top:0;
+      padding-top: 0;
+    }
+    .question-text, .question-table tr, .question-table td, .question-table tbody {
+      margin: 0;
+      padding: 0;
+    }
+    .question-text p, .question-text p p{
+      margin-top: 0px;
+      margin-bottom: 5px;
+    }
+    .question-text p:first-child, .question-text p p:first-child {
+      margin-top:-1px;
+    }
+    #answer-sheet {
+      page-break-before: always;
+    }
+    #student-detail {
+      page-break-before: always;
+    }
+    .inline-block img{
+      display:inline-block;
+      vertical-align: text-top;
+      margin:auto;
+      height: 70px !important;
+    }
+
+    /** Image size fixing for question*/
+    .commen-text img{
+      display: block;
+      margin: 0 auto;
+      max-height: 120px;
+    }
+    /** Image size fixing for options*/
+    .options-cell img{
+      height: 50px;
+    }
+
+    /*css for studet detail form secction...*/
+    .student-info{
+      width: 90%;
+      margin: 0 auto;
+    }
+    /*css for all answer submmit section..*/
+    #answer-sheet, #student-detail {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .answer-section td, .answer-section th, .student-info td , .student-info th{
+      border: 1px solid #dddddd;
+      text-align: center;
+    }
+    
+    .question-table{
+      margin: 20px;
+    }
+    /*answer form inner table css...*/
+    .inner-table{
+      width: 100%;
+    }
+    .inner-table tr td{
+      border:none;
+    }
+    .th-width{
+      width: 5%;
+    }
+    /*css for zero padding in inner table..*/
+    .padding-zero{
+      padding: 0px !important;
+    }
+    .padding{   
+      padding-top: 20px;
+      padding-bottom: 5px;
+    }
+    .set-heading {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .student-basic-detail {
+      border: 2px solid #dddddd;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .student-basic-detail td {
+      border: 2px solid #dddddd;
+      padding-top: 5px;
+      padding-right: 1%;
+      padding-left: 1%; 
+    }
+    .answer-choices-table{
+      width:100%;
+      border-collapse: collapse;
+    }
+    .sub-heading {
+      color:gray;
+      font-weight: bold;
+    }
+    .answer-choices-table td{
+      padding-top: 5px;
+    }
+    .empty-cell{
+      width: 100px;
+    }
+    .student-detail-table-head p{
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="heading">
+      <center>
+        <h2>
+          <b>NavGurukul Scholarship Test - Set {{ setName }}</b> </br>
+          <b>Partner : {{ partnerName }}</b>
+        </h2>
+        <h3>Question Paper</h3>
+      </center>
+    </div>
+    <!-- question set display -->
+    <div class="main">
+      {{#each questions}}
+      <table class="question-table padding-zero">
+        <tr>
+          <td width="4%" valign='top'><b> {{inc @index}}. </b></td>
+          <td valign='top' class="padding-zero">
+            <table class="question-display padding-zero">   
+              <tr>
+                <td valign='top' class="question-text">
+                  {{!-- 
+                    commen text between the questions like
+                    images, mathematical equation.
+                  --}}
+                  {{#if this.commonText}}
+                    <div class="commen-text">
+                      {{#if (hasParaTag this.commonText) }}
+                        {{{this.commonText}}}                    
+                      {{else}}
+                        <p>
+                          {{{this.commonText}}}
+                        </p>
+                      {{/if}}
+                    </div>
+                  {{/if}}
+
+                  {{!-- English text --}}
+                  {{#if this.enText}}
+                    {{#if (hasParaTag this.enText) }}
+                      {{{this.enText}}}                    
+                    {{else}}
+                      <p>
+                        {{{this.enText}}}
+                      </p>
+                    {{/if}}
+                  {{/if}}
+
+                  {{!-- Hindi text --}}
+                  {{#if this.hiText}}
+                    {{#if (hasParaTag this.hiText) }}
+                      {{{this.hiText}}}                    
+                    {{else}}
+                      <p>
+                        {{{this.hiText}}}
+                      </p>
+                    {{/if}} 
+                  {{/if}}
+
+
+                  {{#if (eq this.type 2)}}
+                    <p>Iska answer likho answers wale page pe.</p>
+                  {{/if}}
+                </td>
+              </tr>
+
+              {{#if (eq this.type 1)}}
+                  <tr class="inline-block">
+                    {{#each this.options}}
+                    <tr style="display:inline-block; min-width:45%;">
+                      <td style="width:20px" colspan="2">{{string_lower @index}}).</td>
+                      <td class="options-cell">
+                        {{#if (hasParaTag this.text) }}
+                          {{{this.text}}}                    
+                        {{else}}
+                          <p>
+                            {{{this.text}}}
+                          </p>
+                        {{/if}}
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tr>
+              {{/if}}
+            </table>
+          </td>
+        </tr>
+      </table>
+      {{/each}}
+
+    </div>
+  </div>
+
+  <div id="answer-sheet">
+    <div class="set-heading heading">
+      <center>
+        <h1>
+          Set {{ setName }}
+        </h1>
+      </center>
+    </div>
+
+    <div id="student-basic-detail">
+      <table class="student-basic-detail">
+        <tr>
+          <td>
+            <b><i>Name</i></b> / आपका नाम
+          </td>
+          <td>
+            _________________
+          </td>
+          <td>
+            <b><i>Mobile</i></b> / मोबाइल
+          </td>
+          <td>
+            _________________
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="answer-section">
+      <h1>Your Answers</h1>
+      <p class="sub-heading">Tick-mark the correct option here:</p>
+      <p class="sub-heading">यहां सही विकल्प पर टिक-मार्क करें:</p>
+      <table class="answer-choices-table">
+        {{#each questions}}
+        <tr>
+          <td class="th-width">
+            <b>
+              {{inc @index}})
+            </b>
+          </td>
+          {{#if (eq this.type 1)}}
+          <td class="padding-zero">
+            <table class="inner-table">
+              <tr>
+                {{#each this.options}}
+                <td class="choices">
+                  ❏ {{string_upper @index}}
+                </td>
+                {{/each}}
+              </tr>
+            </table>
+          </td>
+          {{else}}
+          <td>
+
+          </td>
+          {{/if}}
+          <td class="empty-cell">
+
+          </td>
+          <td class="empty-cell">
+
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+
+  <div id="student-detail">
+    <div class="set-heading heading">
+      <center>
+        <h1>
+          Set {{ setName }}
+        </h1>
+      </center>
+    </div>
+
+    <div id="student-basic-detail">
+      <p>
+        Write your name and mobile number here :</br>
+        यहां अपना नाम और मोबाइल नंबर लिखें :
+      </p>
+      </p>
+      <table class="student-basic-detail">
+        <tr>
+          <td>
+            <b>Name</b> / आपका नाम
+          </td>
+          <td>
+            _________________
+          </td>
+          <td>
+            <b>Mobile</b> / मोबाइल
+          </td>
+          <td>
+            _________________
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="student-basic-detail">
+      <p>
+        We need few more details of you. Please fill in the following details after the test.</br>
+        हमें आपकी कुछ और जानकारी चाहिए। कृपया परीक्षण के बाद निम्नलिखित विवरण भरें.
+      </p>
+      </p>
+      <table class="student-basic-detail">
+        <tr>
+          <td class="student-detail-table-head">
+            <b>WhatsApp Number</b>
+          </td>
+          <td>
+            ______________
+          </td>
+          <td class="student-detail-table-head">
+            <b>E-mail Id</b>
+          </td>
+          <td>
+            ______________
+          </td>
+        </tr>
+
+        <tr>
+          <td class="student-detail-table-head">
+            <b>Gender/</b> ​लंग
+          </td>
+          <td>
+            ❏ Male / पुरुष </br>
+            ❏ Female / ​महिला </br>
+            ❏ Transgender / ​अन्य </br>
+          </td>
+          <td class="student-detail-table-head">
+            <b>You live in urban or rural area?</b></br>
+            आप शहरी या ग्रामीण क्षेत्र में रहते हैं?
+          </td>
+          <td>
+            ❏ शहर (Urban) </br>
+            ❏ गाँव (Rural) </br>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="student-detail-table-head">
+            <b>State /</b> राज्य
+          </td>
+          <td>
+            _______________
+          </td>
+          <td class="student-detail-table-head">
+            <b>District​ /</b> ज़िला
+          </td>
+          <td>
+            _______________
+          </td>
+        </tr>
+
+        <tr>
+          <td class="student-detail-table-head">
+            <b>Town / Village</b> </br>
+            गाँव / शहर का नाम
+          </td>
+          <td>
+            _______________
+          </td>
+          <td class="student-detail-table-head">
+            <b>Religion​ /</b> धर्म
+          </td>
+          <td>
+            _______________
+          </td>
+        </tr>
+        <tr>
+          <td class="student-detail-table-head">
+            <b>Caste ​ /</b> जाती
+          </td>
+          <td>
+            ❏ General ❏ OBC </br>
+            ❏ SC ❏ ST </br>
+          </td>
+          <td class="student-detail-table-head">
+            <b>No. of family members</b><br>
+            परिवार के सदस्यों की संख्या
+          </td>
+          <td>
+            _______________
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="student-detail-table-head">
+            <p>
+              <b>
+                Write the occupation of your family and how much they earn? /
+              </b>
+              अपने परिवार का व्यवसाय लिखें और वे कितना कमाते हैं?
+            </p>
+            <p>
+              If your father and mother are farmers and your brother is computer operator and your sister is a student:
+            </p>
+            <p>
+              यदि आपके पिता और माता किसान हैं और आपका भाई कंप्यूटर ऑपरेटर है और आपकी बहन एक छात्र है:
+            </p>
+            <p>
+              Father(farmer) / पिता (किसान)- 5000 per month </br>
+              Brother (Computer Operator) / भाई (कंप्यूटर ऑपरेटर) - 8000 per month
+              Sister (Student) / बहन (छात्र) - Not earning/ कमाई नहीं
+            </p>
+          </td>
+          <td colspan="2">
+            ___________________________________ <br>
+            ___________________________________ <br>
+            ___________________________________
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="student-detail-table-head">
+            <p>
+              <b>
+                Total Family Income per month </br>
+              </b>
+              प्रति माह कुल पारिवारिक आय ?
+            </p>
+          </td>
+          <td colspan="2">
+            ___________________________________
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</body>
+
+</html>
