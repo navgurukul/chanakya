@@ -7,9 +7,6 @@
 3. Create a .env file in the root directory of the project and update the required variables. You can use `sample.env` as the skeleton.
 4. `npm start` to run the server. The server will run with auto reloading using nodemon.
 
-```
-
-
 ## How to use Knex Migrations?
 
 The initial schema created while developing Chanakya is not created as a Knex schema but stored in a SQL file in `sqlScripts/initialSchema.sql`. When you are installing Chanakya for the first time you need to first import this schema into the MySQL DB.
