@@ -14,7 +14,7 @@
 }
 ```
 ## Common Text
-y = x + 4
+y = x + 4  
 y = 2x + 2
 
 ### Hindi
