@@ -10,7 +10,7 @@
 ```json
 {
   "id": null,
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -18,10 +18,10 @@
 ![](images/question_16/choice1/choice1.png)
 
 ### Hindi
-Inn images mein agla part kaunsa aayega?
+नीचे दिए गए चित्रों में अगला चित्र चुनिए.
 
 ### English
-What would be the next image in this pattern?
+What will be the next image in the series of images given below?
 
 ## Options
 | Option | Values                                      |Id     |
@@ -35,7 +35,7 @@ What would be the next image in this pattern?
 ```json
 {
   "id": null,
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -43,10 +43,10 @@ What would be the next image in this pattern?
 ![](images/question_16/choice2/choice2.png)
 
 ### Hindi
-Niche diye hue images mein se X ki mirror image ko chuniye
+नीचे दिए गए चित्रों में X का प्रतिबिम्ब चित्र कौन सा है?
 
 ### English
-Choose the Mirror image of X from the images given below.
+What will be the mirror image of the image X?
 
 ## Options
 | Option | Values |Id     |
