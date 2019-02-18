@@ -37,6 +37,7 @@ Neeche diye hue equations mein x ke liye solve karein:
 ```
 ## Common Text
 x = y + 8
+
 x = 10
 y = ?
 
