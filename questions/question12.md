@@ -17,10 +17,10 @@
 ![](images/question_12/choice1/choice1.png)
 
 ### Hindi
-Question mark ki jagah par sahi figure choose kijiye.
+नीचे दिए गए चित्र में ? की जगह सही चित्र चुनिए.
 
 ### English
-PENDING
+Choose the correct figure in place of the question mark.
 
 ## Options
 | Option | Values                                      |Id     |
@@ -43,10 +43,10 @@ PENDING
 ![](images/question_12/choice2/choice2.png)
 
 ### Hindi
-Question mark ki jagah par sahi figure choose kijiye.
+नीचे दिए गए चित्र में ? की जगह सही चित्र चुनिए.
 
 ### English
-PENDING
+Choose the correct figure in place of the question mark.
 
 ## Options
 | Option | Values                                      |Id     |
