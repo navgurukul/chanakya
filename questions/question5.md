@@ -15,13 +15,16 @@
 ```
 ## Common Text
 x = y - 6
+
 y = 10
+
 x = ?
 
 ### Hindi
-Neeche diye hue equations mein x ke liye solve karein:
+नीचे दिए गए सवाल को x के मान के लिए हल करें.
 
 ### English
+Solve the equation below for the value of x:
 
 ## Options
 | Option | Values                |ID     |
@@ -39,12 +42,14 @@ Neeche diye hue equations mein x ke liye solve karein:
 x = y + 8
 
 x = 10
+
 y = ?
 
 ### Hindi
-Neeche diye hue equations mein x ke liye solve karein:
+नीचे दिए गए सवाल को x के मान के लिए हल करें:
 
 ### English
+Solve the equation below for the value of x:
 
 ## Options
 | Option | Values                |ID     |
