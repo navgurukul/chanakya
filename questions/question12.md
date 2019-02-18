@@ -35,7 +35,7 @@ Choose the correct figure in place of the question mark.
 ```json
 {
   "id": null,
-  "correctOption": 2
+  "correctOption": 4
 }
 ```
 
