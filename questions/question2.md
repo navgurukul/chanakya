@@ -17,9 +17,10 @@
 
 
 ### Hindi
-Cheerapunji ka temperature morning mein -14 degree celsius. Agar wahan ka temperature 7 degrees aur drop hota hai, toh Cheerapunji ka temperature kitna hai?
+चेरापूंजी का तापमान सुबह-सुबह -14 degree Celsius होता है. अगर वहाँ का तापमान 7 degrees और गिर जाता है, तो चेरापूंजी का तापमान कितना होगा?
 
 ### English
+The temperature of Cheerapunji in the morning is -14 degree Celsius. If the temperature drops 7 degrees, then what will be the temperature of Cheerapunji?
 
 ## Options
 | Option | Values                |ID     |
@@ -38,9 +39,10 @@ Cheerapunji ka temperature morning mein -14 degree celsius. Agar wahan ka temper
 
 
 ### Hindi
-Manali mein temperature Monday ko -3 degree celsius tha. Tuesday ko waha ka temperature 8 degrees aur drop ho gaya. Wednesday Tuesday se thoda garam tha aur temperature bhi 4 degree rise ho gaya. Wednesday ko Manali mein kitna temperature hua?
+सोमवार को मनाली का तापमान -3 degree Celsius था. मंगलवार को वहां का तापमान 8 degrees और नीचे गिर गया. बुधवार मंगलवार से थोड़ा गरम था और तापमान भी 4 degree बढ़ गया. बुधवार को मनाली का तापमान क्या था?
 
 ### English
+The temperature of Manali on Monday was -3 degree celsius. On Tuesday, the temperature dropped 8 degrees. Wednesday was a bit hotter than Tuesday and temperature rose 4 degree. What was the temperature of Manali on Wednesday?
 
 ## Options
 | Option | Values                |ID     |

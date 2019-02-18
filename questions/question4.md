@@ -16,10 +16,10 @@
 ## Common Text
 
 ### Hindi
-Maan lein ki x = a/b hai. Agar a =6 aur b=2 toh x ki value kya hai?
+मान लीजिये कि x = a/b है. अगर a =6 है और  b=2  है तो, x का मान क्या होगा?
 
 ### English
-
+Suppose x = a/b. If a=6 and b=2, then what is the value of x?
 
 ## Options
 | Option | Values                |ID     |
@@ -36,12 +36,12 @@ Maan lein ki x = a/b hai. Agar a =6 aur b=2 toh x ki value kya hai?
 ## Common Text
 
 ### Hindi
-Maan lein ki x = a * b hai. Ab agar x = 10 aur a = 2 hai, toh b ki value kitni hogi?
+मान लीजिये कि x = a * b है. अब, अगर x = 10 है और  a = 2  है, तो b का मान कितना होगा? 
 
 ### English
-
+Suppose x = a * b. Now, if x = 10 and a = 2 , then what will be the value of b?
 
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 5                     |null   |
+| 1      | 20                     |null   |
