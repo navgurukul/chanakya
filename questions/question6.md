@@ -18,9 +18,10 @@ y = x + 4
 y = 2x + 2
 
 ### Hindi
-**x** aur **y** ke liye solve karein:
+x और y के मान के लिए हल करें:
 
 ### English
+Solve for the value of x and y:
 
 ## Options
 | Option | Values                 |Id     |
@@ -46,9 +47,10 @@ y = x + 8
 y = 3x + 10
 
 ### Hindi
-**x** aur **y** ke liye solve karein:
+x और y के मान के लिए हल करें:
 
 ### English
+Solve for the value of x and y:
 
 ## Common Options
 | Option | Values                 |Id     |
