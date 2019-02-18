@@ -18,9 +18,10 @@
 ![](images/question_18/choice1/choice1.png)
 
 ### Hindi
-Niche diye hue images mein agla image kaun sa aayega
+नीचे दिए गए चित्रों में अगला चित्र चुनिए.
 
 ### English
+What will be the next image in the series of images given below?
 
 ## Options
 | Option | Values                                      |Id     |
@@ -44,9 +45,10 @@ Niche diye hue images mein agla image kaun sa aayega
 ![](images/question_18/choice2/choice2_2.png)
 
 ### Hindi
-Niche diye hue images mein agla image kaun sa aayega
+नीचे दिए गए चित्रों में अगला चित्र चुनिए.
 
 ### English
+What will be the next image in the series of images given below?
 
 ## Common Options
 | Option | Values |Id     |

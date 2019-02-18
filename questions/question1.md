@@ -18,10 +18,10 @@
 8 + (−25) + 16 − (−25) −16
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Solve the equation given above.
+Write down its answer on the answer page.
 
 ## Options
 | Option | Values                |ID     |
@@ -39,10 +39,10 @@ Solve the equation given above.
 33 - 8 + 17 + 10 - (-8) - 10
 
 ### Hindi
-Upar diye gaye equation ko solve kare.
+जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Solve the equation given above.
+Write down its answer on the answer page.
 
 ## Options
 | Option | Values |ID     |

@@ -10,17 +10,17 @@
 ```json
 {
   "id": null,
-  "correctOption": 3
+  "correctOption": 5
 }
 ```
 ## Common Text
 ![](images/question_13/choice1.png)
 
 ### Hindi
-Niche diye hue image ka reflection kaisa hoga?
+नीचे दिए गए चित्र का प्रतिबिम्ब कैसा होगा?
 
 ### English
-PENDING
+What will be the reflection of the image given below?
 
 ## Options
 | Option | Values |Id     |
@@ -44,10 +44,10 @@ PENDING
 ![](images/question_13/choice2.gif)
 
 ### Hindi
-Neeche kuch chhote shapes diye huye hai. Un sab ko jod kar konsa bada shape banaya jaa sakta hai? Apna option choose kijiye aur answer wale page par likhiye.
+नीचे कुछ छोटे आकार दिए हुए हैं. इस सभी को जोड़ कर हम कौन सा बड़ा आकार बना सकते हैं? दिए गए विकल्पों में से एक चुनें.
 
 ### English
-PENDING
+Given below are some small shapes. What big shape can we make by joining all of them? Choose from the options
 
 ## Common Options
 | Option | Values |Id     |

@@ -17,9 +17,11 @@
 **1, 8, 27, 64, 125, ___**
 
 ### Hindi
-Inn numbers ko dekhiye aur agla number guess kijiye. Apna answer ko answers wale page pe likhiye.
+इन अंको को ध्यान से देखकर अगला अंक लिखिए. जवाब वाले पेज पर इसका जवाब लिखिए.
+
 
 ### English
+Look at these numbers and guess the next number. Write down its answer on the answer page.
 
 ## Options
 | Option | Values |Id     |
@@ -37,9 +39,11 @@ Inn numbers ko dekhiye aur agla number guess kijiye. Apna answer ko answers wale
 **5, 6, 10, 19, 35, ___**
 
 ### Hindi
-Inn numbers ko dekhiye aur agla number guess kijiye. Apna answer ko answers wale page pe likhiye.
+इन अंको को ध्यान से देखकर अगला अंक लिखिए. जवाब वाले पेज पर इसका जवाब लिखिए.
+
 
 ### English
+Look at these numbers and guess the next number. Write down its answer on the answer page.
 
 ## Options
 | Option | Values |Id     |

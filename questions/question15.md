@@ -10,7 +10,7 @@
 ```json
 {
   "id": null,
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -18,9 +18,10 @@
 ![](images/question_15/choice1.png)
 
 ### Hindi
-Fold karne ke baad, ye 2D image kis box ki tarah banega?
+नीचे दिए गए 2D चित्र को तह करने/ मोड़ने के बाद, यह किस तरह का चित्र बनेगा?
 
 ### English
+After folding this 2D image, what will the image look like?
 
 ## Options
 | Option | Values |Id     |
@@ -36,16 +37,17 @@ Fold karne ke baad, ye 2D image kis box ki tarah banega?
 ```json
 {
   "id": null,
-  "correctOption": 2
+  "correctOption": 3
 }
 ```
 ## Common Text
 ![](images/question_15/choice2.gif)
 
 ### Hindi
-Fold karne ke baad, ye 2D image kis house ki tarah banega?
+नीचे दिए गए 2D चित्र को तह करने/ मोड़ने के बाद, यह किस तरह का चित्र बनेगा?
 
 ### English
+After folding this 2D image, what will the image look like?
 
 ## Common Options
 | Option | Values |Id     |

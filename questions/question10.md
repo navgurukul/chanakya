@@ -10,7 +10,7 @@
 ```json
 {
   "id": null,
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -18,9 +18,10 @@
 ![](images/question_10/choice1/choice1.png)
 
 ### Hindi
-Question mark ki jagah par sahi figure choose kijiye.
+नीचे दिए गए चित्र में ? की जगह सही चित्र चुनिए.
 
 ### English
+Choose the correct figure in place of the question mark.
 
 ## Options
 | Option | Values                                      |Id     |
@@ -42,9 +43,10 @@ Question mark ki jagah par sahi figure choose kijiye.
 ![](images/question_10/choice2/choice2.png)
 
 ### Hindi
-Question mark ki jagah par sahi figure choose kijiye.
+नीचे दिए गए चित्र में ? की जगह सही चित्र चुनिए.
 
 ### English
+Choose the correct figure in place of the question mark.
 
 ## Options
 | Option | Values                                      | Id     |
