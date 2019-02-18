@@ -35,7 +35,7 @@ What is the percentage of the shaded area?
 ```json
 {
   "id": null,
-  "correctOption": 2
+  "correctOption": 3
 }
 ```
 
