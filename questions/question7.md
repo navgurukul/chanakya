@@ -17,9 +17,10 @@
 ![](images/question_7/choice1.png)
 
 ### Hindi
-Shaded area poore area ka kitna percent hai?
+चित्र का कितना प्रतिशत हिस्सा भरा हुआ है?
 
 ### English
+What is the percentage of the shaded area?
 
 ## Options
 | Option | Values                 |Id     |
@@ -42,10 +43,10 @@ Shaded area poore area ka kitna percent hai?
 ![](images/question_7/choice2.png)
 
 ### Hindi
-Neeche di gayi picture mein dekh ke batao ki pure mein se kitna area shaded hai?
+चित्र का कितना प्रतिशत हिस्सा भरा हुआ है?
 
 ### English
-PENDING
+What is the percentage of the shaded area?
 
 ## Options
 | Option | Values                 |Id     |
