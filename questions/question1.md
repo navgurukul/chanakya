@@ -18,10 +18,8 @@
 8 + (−25) + 16 − (−25) −16
 
 ### Hindi
-जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Write down its answer on the answer page.
 
 ## Options
 | Option | Values                |ID     |
