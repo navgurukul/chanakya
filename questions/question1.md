@@ -37,10 +37,8 @@
 33 - 8 + 17 + 10 - (-8) - 10
 
 ### Hindi
-जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Write down its answer on the answer page.
 
 ## Options
 | Option | Values |ID     |
