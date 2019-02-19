@@ -44,4 +44,4 @@ Suppose x = a * b. Now, if x = 10 and a = 2 , then what will be the value of b?
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 20                     |null   |
+| 1      | 5                     |null   |
