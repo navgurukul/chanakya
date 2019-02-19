@@ -42,11 +42,18 @@ function dQuestions() {
 // For getting lat and long
 var positions;
 if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(positions){
-        positions = positions.coords;
-    });
+    navigator.geolocation.getCurrentPosition(
+        (positions) => {
+            positions = positions.coords;
+        },
+        (error) => {
+            positions = {"latitude": -1, "longitude": -1};
+            appending('Geolocation not supported!');
+        }
+    );
 }
 else{
+    positions = {"latitude": -1, "longitude": -1};
     appending('Geolocation not supported!');
 }
 
@@ -161,10 +168,8 @@ function personal_details_submit() {
         "whatsapp": mobile,
         "gender": gender,
         "dob": dob,
-        // "gps" : {
-        //     "lat": positions.latitude,
-        //     "lon": positions.longitude
-        // }
+        "gpsLat": positions.latitude,
+        "gpsLong": positions.longitude
     }
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
@@ -187,7 +192,8 @@ function personal_details_submit() {
                     }
                 }
             );    
-        }
+        },
+        'json'
     );
 }
 
@@ -275,7 +281,8 @@ function submitApp() {
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
-        }
+        },
+        'json'
     );
 }
 
@@ -440,16 +447,18 @@ function submitTest() {
     console.log('ok');
 
     updateAnswer(current_question);
-
-    $('#question_answer_page').slideUp(slide_up_time);
-    $("#end_page").slideDown(slide_down_time);
     
-    $.post(base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
-        answers,
-        function(data, resp) {
-            console.log(resp);
-        }
-    );
+    $.ajax({
+        url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
+        type: 'POST',
+        data: JSON.stringify(answers),
+        contentType: 'application/json; charset=utf-8', 
+        dataType: 'json',
+        success: function(data, resp) {
+            $('#question_answer_page').slideUp(slide_up_time);
+            $("#end_page").slideDown(slide_down_time);
+        },
+    });
 }
 
 $(document).ready(function() {
