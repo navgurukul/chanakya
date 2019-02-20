@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <style>
-    
+
     body{
       font-family: 'Open Sans';
       margin: 10px;
@@ -75,7 +75,7 @@
       border: 1px solid #dddddd;
       text-align: center;
     }
-    
+
     .question-table{
       margin: 20px;
     }
@@ -93,7 +93,7 @@
     .padding-zero{
       padding: 0px !important;
     }
-    .padding{   
+    .padding{
       padding-top: 20px;
       padding-bottom: 5px;
     }
@@ -110,7 +110,7 @@
       border: 2px solid #dddddd;
       padding-top: 5px;
       padding-right: 1%;
-      padding-left: 1%; 
+      padding-left: 1%;
     }
     .answer-choices-table{
       width:100%;
@@ -137,7 +137,7 @@
     <div class="heading">
       <center>
         <h2>
-          <b>NavGurukul Scholarship Test - Set {{ setName }}</b> </br>
+          <b>NavGurukul Scholarship Test - {{ setName }}</b> </br>
           <b>Partner : {{ partnerName }}</b>
         </h2>
         <h3>Question Paper</h3>
@@ -150,17 +150,17 @@
         <tr>
           <td width="4%" valign='top'><b> {{inc @index}}. </b></td>
           <td valign='top' class="padding-zero">
-            <table class="question-display padding-zero">   
+            <table class="question-display padding-zero">
               <tr>
                 <td valign='top' class="question-text">
-                  {{!-- 
+                  {{!--
                     commen text between the questions like
                     images, mathematical equation.
                   --}}
                   {{#if this.commonText}}
                     <div class="commen-text">
                       {{#if (hasParaTag this.commonText) }}
-                        {{{this.commonText}}}                    
+                        {{{this.commonText}}}
                       {{else}}
                         <p>
                           {{{this.commonText}}}
@@ -172,7 +172,7 @@
                   {{!-- English text --}}
                   {{#if this.enText}}
                     {{#if (hasParaTag this.enText) }}
-                      {{{this.enText}}}                    
+                      {{{this.enText}}}
                     {{else}}
                       <p>
                         {{{this.enText}}}
@@ -183,12 +183,12 @@
                   {{!-- Hindi text --}}
                   {{#if this.hiText}}
                     {{#if (hasParaTag this.hiText) }}
-                      {{{this.hiText}}}                    
+                      {{{this.hiText}}}
                     {{else}}
                       <p>
                         {{{this.hiText}}}
                       </p>
-                    {{/if}} 
+                    {{/if}}
                   {{/if}}
 
 
@@ -205,7 +205,7 @@
                       <td style="width:20px" colspan="2">{{string_lower @index}}).</td>
                       <td class="options-cell">
                         {{#if (hasParaTag this.text) }}
-                          {{{this.text}}}                    
+                          {{{this.text}}}
                         {{else}}
                           <p>
                             {{{this.text}}}
@@ -229,7 +229,7 @@
     <div class="set-heading heading">
       <center>
         <h1>
-          Set {{ setName }}
+          {{ setName }}
         </h1>
       </center>
     </div>
@@ -298,7 +298,7 @@
     <div class="set-heading heading">
       <center>
         <h1>
-          Set {{ setName }}
+          {{ setName }}
         </h1>
       </center>
     </div>
