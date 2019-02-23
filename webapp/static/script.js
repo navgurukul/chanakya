@@ -48,13 +48,13 @@ if (navigator.geolocation){
         },
         (error) => {
             positions = {"latitude": -1, "longitude": -1};
-            appending('Geolocation not supported!');
+            //appending('Geolocation not supported!');
         }
     );
 }
 else{
     positions = {"latitude": -1, "longitude": -1};
-    appending('Geolocation not supported!');
+    //appending('Geolocation not supported!');
 }
 
 function landing_page_submit() {
