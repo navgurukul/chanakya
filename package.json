@@ -32,6 +32,8 @@
     "formdata-node": "^1.3.0",
     "fs-extra": "^7.0.1",
     "glue": "5.x.x",
+    "google-spreadsheet": "^2.0.7",
+    "googleapis": "^27.0.0",
     "handlebars": "^4.1.0",
     "hapi": "18.x.x",
     "hapi-auth-jwt2": "8.x.x",
