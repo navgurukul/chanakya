@@ -44,6 +44,7 @@
     "jsonwebtoken": "8.x.x",
     "knex": "0.16.x",
     "marked": "^0.6.0",
+    "moment": "^2.24.0",
     "mustache": "^3.0.1",
     "mysql": "^2.16.0",
     "node-phantom": "^0.2.5",
