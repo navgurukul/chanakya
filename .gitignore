@@ -127,4 +127,9 @@ typings/
 # migrations
 # !migrations/migration_1.sql
 
-curriculum
+# chanakya specific
+gSheetPrivate.key
+currentQuesPaper.html
+currentQuesPaper.pdf
+currentAnswerKey.html
+currentAnswerKey.pdf
