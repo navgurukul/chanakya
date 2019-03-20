@@ -7,7 +7,6 @@
 3. Create a .env file in the root directory of the project and update the required variables. You can use `sample.env` as the skeleton.
 4. `npm start` to run the server. The server will run with auto reloading using nodemon.
 
-```
 
 ## How to use Knex Migrations?
 
@@ -27,3 +26,15 @@ After importing the schema you can run the migrations using `knex migrate:latest
 
 ### Run server with Auto Reload
 `npm start`
+
+## Seeding Questions into the DB
+
+You have to run the following command while seeding questions into the DB from the markdown files.
+
+```sh
+node lib/seedQuestions/index.js --questionsDir questions
+```
+
+*This needs to be run from the root of the project.*
+
+Make sure to re-start the server after doing this because the question paper generation features loads all the questions in memory to load the questions. If you don't restart the server, then it will keep on generating questions from the old question set.

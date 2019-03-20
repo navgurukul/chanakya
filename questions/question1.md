@@ -18,10 +18,8 @@
 8 + (−25) + 16 − (−25) −16
 
 ### Hindi
-जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Write down its answer on the answer page.
 
 ## Options
 | Option | Values                |ID     |
@@ -39,10 +37,8 @@ Write down its answer on the answer page.
 33 - 8 + 17 + 10 - (-8) - 10
 
 ### Hindi
-जवाब वाले पेज पर इसका जवाब लिखिए.
 
 ### English
-Write down its answer on the answer page.
 
 ## Options
 | Option | Values |ID     |

@@ -1,9 +1,11 @@
-var DEBUG = false;
+var DEBUG = true;
 
 if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
+    var base_url="/api";
 } else {
-    var enrolment_key = "C4RRNU";
+    var enrolment_key = "4I3GXC";
+    var base_url="http://join.navgurukul.org/api";
 }
 
 var slide_up_time = 600;
@@ -12,7 +14,6 @@ var questions = [];
 var answers = {};
 var dirty_answers = [];
 var current_question = 0;
-var base_url="/api";
 var qDisplayed=false;
 
 function appending(error) {
@@ -42,12 +43,19 @@ function dQuestions() {
 // For getting lat and long
 var positions;
 if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(positions){
-        positions = positions.coords;
-    });
+    navigator.geolocation.getCurrentPosition(
+        (positions) => {
+            positions = positions.coords;
+        },
+        (error) => {
+            positions = {"latitude": -1, "longitude": -1};
+            //appending('Geolocation not supported!');
+        }
+    );
 }
 else{
-    appending('Geolocation not supported!');
+    positions = {"latitude": -1, "longitude": -1};
+    //appending('Geolocation not supported!');
 }
 
 function landing_page_submit() {
@@ -161,10 +169,8 @@ function personal_details_submit() {
         "whatsapp": mobile,
         "gender": gender,
         "dob": dob,
-        // "gps" : {
-        //     "lat": positions.latitude,
-        //     "lon": positions.longitude
-        // }
+        "gpsLat": positions.latitude,
+        "gpsLong": positions.longitude
     }
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
@@ -187,7 +193,8 @@ function personal_details_submit() {
                     }
                 }
             );    
-        }
+        },
+        'json'
     );
 }
 
@@ -275,7 +282,8 @@ function submitApp() {
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
-        }
+        },
+        'json'
     );
 }
 
@@ -440,16 +448,18 @@ function submitTest() {
     console.log('ok');
 
     updateAnswer(current_question);
-
-    $('#question_answer_page').slideUp(slide_up_time);
-    $("#end_page").slideDown(slide_down_time);
     
-    $.post(base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
-        answers,
-        function(data, resp) {
-            console.log(resp);
-        }
-    );
+    $.ajax({
+        url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
+        type: 'POST',
+        data: JSON.stringify(answers),
+        contentType: 'application/json; charset=utf-8', 
+        dataType: 'json',
+        success: function(data, resp) {
+            $('#question_answer_page').slideUp(slide_up_time);
+            $("#end_page").slideDown(slide_down_time);
+        },
+    });
 }
 
 $(document).ready(function() {
