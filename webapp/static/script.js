@@ -1,9 +1,11 @@
-var DEBUG = false;
+var DEBUG = true;
 
 if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
+    var base_url="/api";
 } else {
-    var enrolment_key = "C4RRNU";
+    var enrolment_key = "4I3GXC";
+    var base_url="http://join.navgurukul.org/api";
 }
 
 var slide_up_time = 600;
@@ -12,7 +14,6 @@ var questions = [];
 var answers = {};
 var dirty_answers = [];
 var current_question = 0;
-var base_url="/api";
 var qDisplayed=false;
 
 function appending(error) {
