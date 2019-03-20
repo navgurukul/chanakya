@@ -1,57 +1,29 @@
-git clone this repository in your home directory
+# Chanakya
 
-# chanakya
-Testing Platform of NavGurukul
+## How to run the Project?
 
-## create chanakya database in mysql with user and password as chanakya too
-```bash
-mysql -u root -p
+1. `npm install` to install the dependencies
+2. Set up the DB in MySQL. Read the `How to use Knex Migrations?` section.
+3. Create a .env file in the root directory of the project and update the required variables. You can use `sample.env` as the skeleton.
+4. `npm start` to run the server. The server will run with auto reloading using nodemon.
 
-mysql> create database chanakya;
-mysql> CREATE USER 'chanakya'@'localhost' IDENTIFIED BY 'chanakya';
-mysql> GRANT ALL PRIVILEGES ON chanakya.* TO 'chanakya'@'localhost';
-mysql> FLUSH PRIVILEGES;
-mysql> quit
 ```
 
-## Setup
+## How to use Knex Migrations?
 
-- sudo apt-get install redis-server
-- sudo apt-get install mysql-server
-- sudo apt-get install libmysqlclient-dev
-- sudo apt-get install libmariadbclient-dev
-- Make Sure you are in chanakya directory
-- python3 -m venv venv
-- pip install -r requirements.txt
+The initial schema created while developing Chanakya is not created as a Knex schema but stored in a SQL file in `sqlScripts/initialSchema.sql`. When you are installing Chanakya for the first time you need to first import this schema into the MySQL DB.
 
-- append these lines to your ~/.bashrc file
-```bash
-export FLASK_APP=${HOME}/chanakya/chanakya.py
-export FLASK_DEBUG=1
-export CHANAKYA_ENV=../config/developement.py 
-```
-now open a new terminal window and close this one
+After importing the schema you can run the migrations using `knex migrate:latest`.
 
-flask db upgrade
+*Note: Check `Import Schema` section under `Important Commands` to see how to import the initialSchema.sql file into your DB.*
 
-## Handling Config
+## Important Commands
 
-The environment variable `CHANAKYA_ENV` needs to be set pointing to the location of the config file relative to the `app/` directory.
+### Export Schema of DB
+`mysqldump -u root -p --no-data chanakya > schema.sql`
 
-For example, your config file is stored in `config/testing_and_dev.py` the value of your `CHANAKYA_ENV` variable would be `../config/testing_and_dev.py`. Before running the app flask will automatically load the config from the given environment variable and set the relevant config values.
+### Import Schema
+`mysql -u username -p chanakya < sqlScripts/initialSchema.sql`
 
-You can use `config/local.py` as your file name. It is also added in the `.gitignore`
-
-### Running app
-
-flask run -p 8000
-
-## To create Question run client.py - make sure you know what you are doing
-
-- keep the server running and open a new terminal
-- go to chanakya folder
-- source venv/bin/activate
-- python client.py rajeev
-
-### Useful links:
-Trello: https://trello.com/b/DJEYDHs1/chanakya
+### Run server with Auto Reload
+`npm start`

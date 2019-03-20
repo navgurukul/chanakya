@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Answer List</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<style>
+		*{
+			font-family: 'Open Sans', sans-serif;
+		}
+		table {
+		  border-collapse: collapse;
+		  overflow: hidden;
+		  width: 100%;
+			font-size: 12px;
+			font-weight: normal;
+		}
+		table, th, td {
+	    border: 1px solid black;
+	    padding: 5px;
+      text-align: center;
+		}
+		.container{
+			width: 90%;
+			margin: 0 auto;
+		}
+		.heading{
+			text-align: center;
+	    font-size: 15px;
+	    font-weight: bolder;
+		}
+</style>
+</head>
+<body>
+		{{!-- {{setVar 'strings' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}} --}}
+<div class="container">
+	<p class="heading">Set {{ setName }} </br> Answer Key</p>
+	{{!-- <p class="heading">Set ID : ({{ id }})</p> --}}
+	<table width="100%">
+	  <tr >
+	    <th>QUESTION NUMBER</th>
+	    <th>QUESTION TYPE</th>
+			<th>QUESTION ANSWER</th>
+	    <th>QUESTION DIFFICULTY</th>
+	  </tr>
+		{{#each questions}}
+	  <tr>
+	    <td>{{inc @index}}.</td>
+	    <td>{{this.type}}</td>
+			<td>
+			{{#if (eq this.type 1)}}
+		    {{#each this.options}}
+					{{#if this.correct}}
+						{{ string_upper @index }}
+					{{/if}}
+				{{/each}}
+			{{else}}
+				{{#each this.options}}
+					{{ this.text }}
+				{{/each}}
+			{{/if}}
+			</td>
+			<td>{{ this.difficulty }}</td>
+	  </tr>
+		{{/each}}
+	</table>
+</div>
+</body>
+</html>
