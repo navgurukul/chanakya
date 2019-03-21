@@ -4,7 +4,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "4I3GXC";
+    var enrolment_key = "YO3UVK";
     var base_url="http://join.navgurukul.org/api";
 }
 
@@ -101,18 +101,18 @@ function personal_details_submit() {
     var mobile = $('#mobile').val();
     var gender = $('#gender').val();
 
-    if (DEBUG) {
-        name = "abhishek";
-        date = "28";
-        month = "02";
-        year = "1992";
-        mobile = "1010101010";
-        gender = "male";
-        positions = {
-            "latitude": 22,
-            "longitude": 77
-        }
-    }
+    // if (DEBUG) {
+    //     name = "abhishek";
+    //     date = "28";
+    //     month = "02";
+    //     year = "1992";
+    //     mobile = "1010101010";
+    //     gender = "male";
+    //     positions = {
+    //         "latitude": 22,
+    //         "longitude": 77
+    //     }
+    // }
 
     // network_speed.value  = navigator.connection.downlink;
 
@@ -155,15 +155,7 @@ function personal_details_submit() {
     }
 
     var dob = year +'-'+ month +'-'+date;
-
-    // dob.style.display = 'none';
-    // coords.style.display = 'none';
-    // network_speed.style.display = "none";
-    // user_agent.style.display = "none";
-    // form.appendChild(coords);
-    // form.appendChild(dob);
-    // form.appendChild(network_speed);
-    // form.appendChild(user_agent);
+    var mdob = year+"-"+month+"-"+date+"T00:00:00";
 
     var obj = {
         "name": name,
@@ -172,18 +164,26 @@ function personal_details_submit() {
         "dob": dob,
         "gpsLat": positions.latitude,
         "gpsLong": positions.longitude
-    }
+    };
+    
+    mixpanel.identify(mobile);
+
+    mixpanel.people.set({
+        "$name": name,
+        "$phone": mobile,
+        "$gender": gender,
+        "$dob" : mdob
+    });
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
         (data, resp) => {
-            mixpanel.track("Time Notify");
+            mixpanel.track("Personal Details Submitted");
 
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
 
-            console.log(resp);
             $.post(base_url+"/on_assessment/questions/"+enrolment_key,
                 {},
                 (data, resp) => {
@@ -213,16 +213,16 @@ function submitApp() {
     var caste = $('#caste').val();
     var religion = $('#religion').val();
 
-    if (DEBUG) {
-        pinCode = 110010;
-        qualification = "lessThan10th";
-        state = "AN";
-        city = "Gurgaon";
-        currentStatus = "job";
-        schoolMedium = "en";
-        caste = "scSt";
-        religion = "hindu";
-    }
+    // if (DEBUG) {
+    //     pinCode = 110010;
+    //     qualification = "lessThan10th";
+    //     state = "AN";
+    //     city = "Gurgaon";
+    //     currentStatus = "job";
+    //     schoolMedium = "en";
+    //     caste = "scSt";
+    //     religion = "hindu";
+    // }
 
     if(!pinCode || pinCode.length < 6 || pinCode.length > 6){
         appending('Sahi Pin Code enter kijiye!');
@@ -279,6 +279,17 @@ function submitApp() {
         "caste": caste,
         "religon": religion
     }
+
+    mixpanel.people.set({
+        "$pinCode": pinCode,
+        "$qualification": qualification,
+        "$state": state,
+        "$city": city,
+        "$currentStatus": currentStatus,
+        "$schoolMedium": schoolMedium,
+        "$caste": caste,
+        "$religon": religion
+    });
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
@@ -339,12 +350,14 @@ function time_aware_submit() {
 
 function nextQuestion() {
     updateAnswer(current_question);
+    mixpanel.track("Next " + current_question);
     current_question += 1;
     displayQuestion(current_question);
 }
 
 function previousQuestion() {
     updateAnswer(current_question);
+    mixpanel.track("Previous " + current_question);
     current_question -= 1;
     displayQuestion(current_question);
 }
@@ -453,11 +466,17 @@ function makeActive(index) {
     });
 }
 
-function submitTest() {
-    console.log('ok');
+function visit_website() {
+    mixpanel.track("Visit NG Website");
+    window.location.href='http://navgurukul.org';
+} 
 
-    updateAnswer(current_question);
-    
+function learn_coding() {
+    mixpanel.track("Visit SARAL");
+    window.location.href='http://saral.navgurukul.org';
+}
+function submitTest() {
+    updateAnswer(current_question);    
     $.ajax({
         url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
         type: 'POST',
@@ -467,7 +486,7 @@ function submitTest() {
         success: function(data, resp) {
             $('#question_answer_page').slideUp(slide_up_time);
             $("#end_page").slideDown(slide_down_time);
-            mixpanel.track("Final Submission");
+            mixpanel.track("Answers Submitted");
         },
     });
 }
