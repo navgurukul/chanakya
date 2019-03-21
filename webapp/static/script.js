@@ -524,7 +524,7 @@ function submitTest() {
 }
 
 $(document).ready(function() {
-    if (DEBUG) {
+    if (!DEBUG) {
         // landing_page_submit();
         // personal_details_submit();
         // time_aware_submit();
@@ -538,6 +538,7 @@ $(document).ready(function() {
                 $('#end_page').show();
             }
         }).fail(function(response) {
+            $("#myModal").modal();
             Sentry.captureException(response);
         });;
     }
