@@ -1,5 +1,10 @@
 var DEBUG = false;
 
+Sentry.init({
+    dsn: 'https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126',
+    environment: DEBUG ? 'staging' : 'production'
+});
+
 if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
@@ -173,6 +178,10 @@ function personal_details_submit() {
         "$dob" : mdob
     });
 
+    Sentry.configureScope((scope) => {
+        scope.setUser({"username": mobile});
+    });
+
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
         (data, resp) => {
@@ -195,7 +204,11 @@ function personal_details_submit() {
             );    
         },
         'json'
-    );
+    )
+    .fail(function(response) {
+        mixpanel.track("Error in Personal Details Submission");
+        Sentry.captureException(response);
+    });
 }
 
 function submitApp() {
@@ -296,7 +309,10 @@ function submitApp() {
             mixpanel.track("Thank You");
         },
         'json'
-    );
+    ).fail(function(response) {
+        mixpanel.track("Error in Submission of final details");
+        Sentry.captureException(response);
+    });
 }
 
 function time_aware_submit() {
@@ -487,6 +503,10 @@ function submitTest() {
             $("#end_page").slideDown(slide_down_time);
             mixpanel.track("Answers Submitted");
         },
+        error: function(error) {
+            mixpanel.track("Error in Answers Submission");
+            Sentry.captureException(response);
+        }
     });
 }
 
@@ -504,6 +524,8 @@ $(document).ready(function() {
                 $('.page').hide();
                 $('#end_page').show();
             }
-        });
+        }).fail(function(response) {
+            Sentry.captureException(response);
+        });;
     }
 });
