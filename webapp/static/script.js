@@ -466,8 +466,6 @@ function displayQuestion(index) {
 
             }
 
-            console.log(options_html);
-
             $('#qmcq .options').html(options_html);
         } 
         else if (question["type"] == 2) {

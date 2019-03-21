@@ -57,13 +57,22 @@
                         <p class='en lang'>
                             Before the starting of the test, please read the following instructions. All these instructions will be very helpful when you will attempt the test.
                         </p>
-                        <ol>
+                        <ol class='hi lang'>
                             <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.</li>
                             <li>Test dete waqt <strong>apne paas ek notebook aur pen rakhein</strong>. Aap koi bhi rough work notebook mein kar sakte hain.</li>
                             <li>Har question ka answer apne phone pe hi test dete hue daal dein.</li>
                             <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)</li>
                         </ol>
-                        <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start My Test</button>
+                        <ol class='en lang'>
+                                <li>The entire test is for <strong>1 hour</strong>. Please attempt this test in a silent place.</li>
+                                <li>Keep a <strong>notebook</strong> while giving the test with you. You can do the rough work in the notebook.</li>
+                                <li>Answer the question only on your phone.</li>
+                                <li>We trust you to attempt this test with honesty :)</li>
+                        </ol>
+                        <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                            <span class="en lang">Start My Test</span>
+                            <span class="hi lang">Test Shuru Karein</span>
+                        </button>
                     </div>
                 </div>
             </div>	      
@@ -72,7 +81,10 @@
                     <div class="col-xs-12 col-sm-12">
                     <div class="clearfix" id="ask_personal_details">
                         <div class="clearfix rounded form-container">
-                            <h2 class="col-md-12 text-center col-xs-12 col-sm-12">Aapki Personal Details</h2>
+                            <h2 class="col-md-12 text-center col-xs-12 col-sm-12">
+                                <span class="en lang">Your Personal Details</span>
+                                <span class="hi lang">Aapki Kuch Details</span>
+                            </h2>
                                 <span class='errors text text-center text-danger ml-3'></span>
                                 <div class="clearfix">
                                     <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
@@ -116,7 +128,8 @@
                             <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
                                 <button class="btn btn-lg btn-danger col-xs-12 
                                     col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
-                                    Test Shuru Karein
+                                        <span class="en lang">Start My Test</span>
+                                        <span class="hi lang">Test Shuru Karein</span>        
                                 </button>
                             </div>
                             </div>
@@ -127,15 +140,31 @@
             <div class="row hide page" id="time_aware">    
                 <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
                     <div class="clearfix rounded form-container">
-                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Important Instructions:</h2>
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">
+                            <span class="en lang">Final Instructions:</span>
+                            <span class="hi lang">Ek aur baat:</span>
+                        </h2>
                         <br><br>
-                        <p>
+                        <p class="hi lang">
                             Aapse ab test mein kuch questions pooche jaenge.
                             Aapko answers araam se soch samajh kar dena hai.
                         </p>
-                        <h2>Par time ka bhi khyaal rakhe!</h2>
-                        <h3>Aapko next 18 questions, 1 Hour me karne hai</h3>
-                       <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4" >Shuru Karein</button>                
+                        <p class="en lang">
+                            You will be now asked some questions in the test.
+                            Please think carefully before answering the questions.
+                        </p>
+                        <h2>
+                            <span class="en lang">But please take care of TIME!</span>
+                            <span class="hi lang">Par time ka bhi khyaal rakhe!</span>
+                        </h2>
+                        <h3>
+                            <span class="en lang">You have to answer 18 questions in one hour!</span>
+                            <span class="hi lang">Aapko next 18 questions, 1 Hour me karne hai!</span>
+                        </h3>
+                        <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4">
+                            <span class="en lang">Start the test!</span>
+                            <span class="hi lang">Shuru Karein</span>
+                        </button>                
                     </div>
                 </div>
             </div>
@@ -174,14 +203,16 @@
 
                 <div class="col-12 mt-3 text-center">
                     <button type="button" class="btn btn-md btn-primary mt-1 btn-success" id="next_btn" onclick="nextQuestion();">
-                            Next Answer / अगला प्रश्न
+                        <span class="en lang">Next Question</span>
+                        <span class="hi lang">अगला प्रश्न</span>
                         <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                     </button>
                 </div>
 
                 <div class="col-12 text-center">
                     <button type="button" class="btn btn-md btn-outline-warning mt-1" id="prev_button" onclick="previousQuestion();">
-                        Previous Question / पीछला प्रश्न
+                        <span class="en lang">Previous Answer</span>
+                        <span class="hi lang">पीछला प्रश्न</span>
                         <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                     </button>
                 </div>
