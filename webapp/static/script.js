@@ -1,10 +1,10 @@
-var DEBUG = true;
+var DEBUG = false;
 
 if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "YO3UVK";
+    var enrolment_key = "LW8A0G";
     var base_url="http://join.navgurukul.org/api";
 }
 
@@ -41,20 +41,18 @@ function dQuestions() {
 }
 
 // For getting lat and long
-var positions;
+var positions = {"latitude": -1, "longitude": -1};
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
         (positions) => {
             positions = positions.coords;
         },
         (error) => {
-            positions = {"latitude": -1, "longitude": -1};
             //appending('Geolocation not supported!');
         }
     );
 }
 else{
-    positions = {"latitude": -1, "longitude": -1};
     //appending('Geolocation not supported!');
 }
 
@@ -101,18 +99,18 @@ function personal_details_submit() {
     var mobile = $('#mobile').val();
     var gender = $('#gender').val();
 
-    // if (DEBUG) {
-    //     name = "abhishek";
-    //     date = "28";
-    //     month = "02";
-    //     year = "1992";
-    //     mobile = "1010101010";
-    //     gender = "male";
-    //     positions = {
-    //         "latitude": 22,
-    //         "longitude": 77
-    //     }
-    // }
+    if (DEBUG) {
+        name = "abhishek";
+        date = "28";
+        month = "02";
+        year = "1992";
+        mobile = "1010101010";
+        gender = "male";
+        positions = {
+            "latitude": 22,
+            "longitude": 77
+        }
+    }
 
     // network_speed.value  = navigator.connection.downlink;
 
@@ -188,7 +186,6 @@ function personal_details_submit() {
                 {},
                 (data, resp) => {
                     questions = data["data"];
-                    console.log(questions);
                     $("#page2").slideUp(slide_up_time);
                     $("#time_aware").slideDown(slide_down_time);                    
                     if (!qDisplayed) {
@@ -213,16 +210,16 @@ function submitApp() {
     var caste = $('#caste').val();
     var religion = $('#religion').val();
 
-    // if (DEBUG) {
-    //     pinCode = 110010;
-    //     qualification = "lessThan10th";
-    //     state = "AN";
-    //     city = "Gurgaon";
-    //     currentStatus = "job";
-    //     schoolMedium = "en";
-    //     caste = "scSt";
-    //     religion = "hindu";
-    // }
+    if (DEBUG) {
+        pinCode = 110010;
+        qualification = "lessThan10th";
+        state = "AN";
+        city = "Gurgaon";
+        currentStatus = "job";
+        schoolMedium = "en";
+        caste = "scSt";
+        religion = "hindu";
+    }
 
     if(!pinCode || pinCode.length < 6 || pinCode.length > 6){
         appending('Sahi Pin Code enter kijiye!');
@@ -429,7 +426,7 @@ function displayQuestion(index) {
             for(var i=0; i<options.length; i++) {
                 //button 
                 // options[i]["id"]
-                options_html += `<div class="option col-xs-12 col-sm-12 col-md-6 mt-1 text-center mt-2"> \
+                options_html += `<div class="option col-6 text-center mt-2"> \
                 <button type="button" class="btn btn-outline-info" data-id="`+options[i]["id"]+`" onclick="makeActive(`+i+`)">` + options[i]["text"] +
                 `</div>`;
 
@@ -439,7 +436,9 @@ function displayQuestion(index) {
 
             }
 
-            $('#qmcq .options .row').html(options_html);
+            console.log(options_html);
+
+            $('#qmcq .options').html(options_html);
         } 
         else if (question["type"] == 2) {
             $('#qmcq').slideUp(slide_up_time);
