@@ -1,4 +1,5 @@
 var DEBUG = false;
+var current_language = 'hi';
 
 Sentry.init({
     dsn: 'https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126',
@@ -28,10 +29,10 @@ function appending(error) {
 
 function getQuestion(question) {
     if (question["commonText"]) {
-        return question["hiText"]+"<br>"+question["commonText"];
+        return question[current_language+"Text"]+"<br>"+question["commonText"];
     }
     else {
-        return question["hiText"];
+        return question[current_language+"Text"];
     }
 }
 
@@ -542,4 +543,11 @@ $(document).ready(function() {
             Sentry.captureException(response);
         });;
     }
+});
+
+$(function(){
+    $( ".lang_picker" ).change(function() {
+        current_language = $(this).children("option:selected").val();
+        displayQuestion(current_question);
+    });
 });
