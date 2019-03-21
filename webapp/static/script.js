@@ -59,6 +59,7 @@ else{
 }
 
 function landing_page_submit() {
+    mixpanel.track("Personal Details");
     $("#landing_page").slideUp(slide_up_time);
     $("#personal_details").slideDown(slide_down_time);
     setupDatePicker();
@@ -176,6 +177,8 @@ function personal_details_submit() {
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
         (data, resp) => {
+            mixpanel.track("Time Notify");
+
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
@@ -282,6 +285,7 @@ function submitApp() {
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
+            mixpanel.track("Thank You");
         },
         'json'
     );
@@ -291,6 +295,8 @@ function time_aware_submit() {
     // show question_answer_page page
     $("#time_aware").slideUp(slide_up_time);
     $("#question_answer_page").slideDown(slide_down_time);    
+
+    mixpanel.track("Question 1");
 
     var data;
     var last_recorded_time   = new Date().getTime();
@@ -355,6 +361,9 @@ function updateAnswer(index) {
 function showAnswer(index) {
     if (dirty_answers[index] == -1) {
         dirty_answers[index] = 0;
+
+        mixpanel.track("Question " + index);
+
         $('#qmcq .option button.active').removeClass('active');
         $('#qinteger_answer input').val("");
     }
@@ -373,7 +382,7 @@ function showAnswer(index) {
 }
 
 
-function displayQuestion(index) {
+function displayQuestion(index) {    
     if (index == 1) {
         $('#prev_button').show("slow");
     } else if (index == 0) {
@@ -458,6 +467,7 @@ function submitTest() {
         success: function(data, resp) {
             $('#question_answer_page').slideUp(slide_up_time);
             $("#end_page").slideDown(slide_down_time);
+            mixpanel.track("Final Submission");
         },
     });
 }
