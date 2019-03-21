@@ -1,4 +1,4 @@
-var DEBUG = false;
+var DEBUG = true;
 
 Sentry.init({
     dsn: 'https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126',
@@ -9,7 +9,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "LW8A0G";
+    var enrolment_key = "EJ1PWG";
     var base_url="http://join.navgurukul.org/api";
 }
 
@@ -407,8 +407,21 @@ function showAnswer(index) {
     return true;
 }
 
+function kitne_kar_liye(answers) {
+    var itne_kar_liye = 0;
+    var keys = Object.keys(answers);
+    for (var i=0; i<keys.length; i++) {
+        if (answers[keys[i]]!= undefined & answers[keys[i]]!="") {
+            itne_kar_liye++;
+        }
+    }
+    return itne_kar_liye;
+}
 
 function displayQuestion(index) {    
+    $("#on_question").html("Yeh Question no. <b>"+(index+1)+"</b> (out of <b>"+questions.length+"</b> questions)");
+    $("#kitne_questions").html("Aapne <b>"+kitne_kar_liye(answers)+"</b> questions already attempt kar liye hai!");
+
     if (index == 1) {
         $('#prev_button').show("slow");
     } else if (index == 0) {
