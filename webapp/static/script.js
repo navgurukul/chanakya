@@ -1,4 +1,4 @@
-var DEBUG = true;
+var DEBUG = false;
 
 Sentry.init({
     dsn: 'https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126',
