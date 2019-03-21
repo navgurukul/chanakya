@@ -546,8 +546,13 @@ $(document).ready(function() {
 });
 
 $(function(){
+    $('.lang').hide();
+    $('.lang.hi').show();
+
     $( ".lang_picker" ).change(function() {
         current_language = $(this).children("option:selected").val();
         displayQuestion(current_question);
+        $('.lang').hide();
+        $('.lang.'+current_language).show();
     });
 });
