@@ -1,9 +1,17 @@
 var DEBUG = false;
+var current_language = 'hi';
+
+Sentry.init({
+    dsn: 'https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126',
+    environment: DEBUG ? 'staging' : 'production'
+});
 
 if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
+    var base_url="/api";
 } else {
-    var enrolment_key = "C4RRNU";
+    var enrolment_key = "EJ1PWG";
+    var base_url="http://join.navgurukul.org/api";
 }
 
 var slide_up_time = 600;
@@ -12,7 +20,6 @@ var questions = [];
 var answers = {};
 var dirty_answers = [];
 var current_question = 0;
-var base_url="/api";
 var qDisplayed=false;
 
 function appending(error) {
@@ -22,10 +29,10 @@ function appending(error) {
 
 function getQuestion(question) {
     if (question["commonText"]) {
-        return question["hiText"]+"<br>"+question["commonText"];
+        return question[current_language+"Text"]+"<br>"+question["commonText"];
     }
     else {
-        return question["hiText"];
+        return question[current_language+"Text"];
     }
 }
 
@@ -40,24 +47,23 @@ function dQuestions() {
 }
 
 // For getting lat and long
-var positions;
+var positions = {"latitude": -1, "longitude": -1};
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
         (positions) => {
             positions = positions.coords;
         },
         (error) => {
-            positions = {"latitude": -1, "longitude": -1};
             //appending('Geolocation not supported!');
         }
     );
 }
 else{
-    positions = {"latitude": -1, "longitude": -1};
     //appending('Geolocation not supported!');
 }
 
 function landing_page_submit() {
+    mixpanel.track("Personal Details");
     $("#landing_page").slideUp(slide_up_time);
     $("#personal_details").slideDown(slide_down_time);
     setupDatePicker();
@@ -153,15 +159,7 @@ function personal_details_submit() {
     }
 
     var dob = year +'-'+ month +'-'+date;
-
-    // dob.style.display = 'none';
-    // coords.style.display = 'none';
-    // network_speed.style.display = "none";
-    // user_agent.style.display = "none";
-    // form.appendChild(coords);
-    // form.appendChild(dob);
-    // form.appendChild(network_speed);
-    // form.appendChild(user_agent);
+    var mdob = year+"-"+month+"-"+date+"T00:00:00";
 
     var obj = {
         "name": name,
@@ -170,21 +168,34 @@ function personal_details_submit() {
         "dob": dob,
         "gpsLat": positions.latitude,
         "gpsLong": positions.longitude
-    }
+    };
+    
+    mixpanel.identify(mobile);
+
+    mixpanel.people.set({
+        "$name": name,
+        "$phone": mobile,
+        "$gender": gender,
+        "$dob" : mdob
+    });
+
+    Sentry.configureScope((scope) => {
+        scope.setUser({"username": mobile});
+    });
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
         (data, resp) => {
+            mixpanel.track("Personal Details Submitted");
+
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
 
-            console.log(resp);
             $.post(base_url+"/on_assessment/questions/"+enrolment_key,
                 {},
                 (data, resp) => {
                     questions = data["data"];
-                    console.log(questions);
                     $("#page2").slideUp(slide_up_time);
                     $("#time_aware").slideDown(slide_down_time);                    
                     if (!qDisplayed) {
@@ -194,7 +205,11 @@ function personal_details_submit() {
             );    
         },
         'json'
-    );
+    )
+    .fail(function(response) {
+        mixpanel.track("Error in Personal Details Submission");
+        Sentry.captureException(response);
+    });
 }
 
 function submitApp() {
@@ -276,20 +291,37 @@ function submitApp() {
         "religon": religion
     }
 
+    mixpanel.people.set({
+        "$pinCode": pinCode,
+        "$qualification": qualification,
+        "$state": state,
+        "$city": city,
+        "$currentStatus": currentStatus,
+        "$schoolMedium": schoolMedium,
+        "$caste": caste,
+        "$religon": religion
+    });
+
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
+            mixpanel.track("Thank You");
         },
         'json'
-    );
+    ).fail(function(response) {
+        mixpanel.track("Error in Submission of final details");
+        Sentry.captureException(response);
+    });
 }
 
 function time_aware_submit() {
     // show question_answer_page page
     $("#time_aware").slideUp(slide_up_time);
     $("#question_answer_page").slideDown(slide_down_time);    
+
+    mixpanel.track("Question 1");
 
     var data;
     var last_recorded_time   = new Date().getTime();
@@ -332,12 +364,14 @@ function time_aware_submit() {
 
 function nextQuestion() {
     updateAnswer(current_question);
+    mixpanel.track("Next " + current_question);
     current_question += 1;
     displayQuestion(current_question);
 }
 
 function previousQuestion() {
     updateAnswer(current_question);
+    mixpanel.track("Previous " + current_question);
     current_question -= 1;
     displayQuestion(current_question);
 }
@@ -354,6 +388,9 @@ function updateAnswer(index) {
 function showAnswer(index) {
     if (dirty_answers[index] == -1) {
         dirty_answers[index] = 0;
+
+        mixpanel.track("Question " + index);
+
         $('#qmcq .option button.active').removeClass('active');
         $('#qinteger_answer input').val("");
     }
@@ -371,8 +408,21 @@ function showAnswer(index) {
     return true;
 }
 
+function kitne_kar_liye(answers) {
+    var itne_kar_liye = 0;
+    var keys = Object.keys(answers);
+    for (var i=0; i<keys.length; i++) {
+        if (answers[keys[i]]!= undefined & answers[keys[i]]!="") {
+            itne_kar_liye++;
+        }
+    }
+    return itne_kar_liye;
+}
 
-function displayQuestion(index) {
+function displayQuestion(index) {    
+    $("#on_question").html("Yeh Question no. <b>"+(index+1)+"</b> (out of <b>"+questions.length+"</b> questions)");
+    $("#kitne_questions").html("Aapne <b>"+kitne_kar_liye(answers)+"</b> questions already attempt kar liye hai!");
+
     if (index == 1) {
         $('#prev_button').show("slow");
     } else if (index == 0) {
@@ -406,7 +456,7 @@ function displayQuestion(index) {
             for(var i=0; i<options.length; i++) {
                 //button 
                 // options[i]["id"]
-                options_html += `<div class="option col-xs-12 col-sm-12 col-md-6 mt-1 text-center mt-2"> \
+                options_html += `<div class="option col-6 text-center mt-2"> \
                 <button type="button" class="btn btn-outline-info" data-id="`+options[i]["id"]+`" onclick="makeActive(`+i+`)">` + options[i]["text"] +
                 `</div>`;
 
@@ -416,7 +466,7 @@ function displayQuestion(index) {
 
             }
 
-            $('#qmcq .options .row').html(options_html);
+            $('#qmcq .options').html(options_html);
         } 
         else if (question["type"] == 2) {
             $('#qmcq').slideUp(slide_up_time);
@@ -443,11 +493,17 @@ function makeActive(index) {
     });
 }
 
-function submitTest() {
-    console.log('ok');
+function visit_website() {
+    mixpanel.track("Visit NG Website");
+    window.location.href='http://navgurukul.org';
+} 
 
-    updateAnswer(current_question);
-    
+function learn_coding() {
+    mixpanel.track("Visit SARAL");
+    window.location.href='http://saral.navgurukul.org';
+}
+function submitTest() {
+    updateAnswer(current_question);    
     $.ajax({
         url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
         type: 'POST',
@@ -457,12 +513,17 @@ function submitTest() {
         success: function(data, resp) {
             $('#question_answer_page').slideUp(slide_up_time);
             $("#end_page").slideDown(slide_down_time);
+            mixpanel.track("Answers Submitted");
         },
+        error: function(error) {
+            mixpanel.track("Error in Answers Submission");
+            Sentry.captureException(response);
+        }
     });
 }
 
 $(document).ready(function() {
-    if (DEBUG) {
+    if (!DEBUG) {
         // landing_page_submit();
         // personal_details_submit();
         // time_aware_submit();
@@ -475,6 +536,21 @@ $(document).ready(function() {
                 $('.page').hide();
                 $('#end_page').show();
             }
-        });
+        }).fail(function(response) {
+            $("#myModal").modal();
+            Sentry.captureException(response);
+        });;
     }
+});
+
+$(function(){
+    $('.lang').hide();
+    $('.lang.hi').show();
+
+    $( ".lang_picker" ).change(function() {
+        current_language = $(this).children("option:selected").val();
+        displayQuestion(current_question);
+        $('.lang').hide();
+        $('.lang.'+current_language).show();
+    });
 });
