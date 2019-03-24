@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8"> 
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="static/bootstrap.min.css">
-        <link rel="stylesheet" href="static/style.css">
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/style.css">
 
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-        <script src="static/jquery.min.js"></script>
+        <script src="/static/jquery.min.js"></script>
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-        <script src="static/bootstrap.min.js"></script>
+        <script src="/static/bootstrap.min.js"></script>
         <script src="https://browser.sentry-cdn.com/4.6.4/bundle.min.js" crossorigin="anonymous"></script>
-        <script src="static/script.js"></script>        
+        <script src="/static/script.js"></script>        
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
 
@@ -35,11 +35,11 @@
         </script>
     </head>
     <body>
-        <header class="container">    
+        <header class="container">
         <nav>
         </nav>
         </header>
-        <main class="container mt-3">		
+        <main class="container mt-3">
             <div class="row">
                 <select class="lang_picker col-2 offset-10" data-width="fit">
                     <option value='hi'>Hindi</option>
@@ -75,7 +75,7 @@
                         </button>
                     </div>
                 </div>
-            </div>	      
+            </div>
             <div class="row hide page" id="personal_details">
                 <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
                     <div class="col-xs-12 col-sm-12">
@@ -97,23 +97,23 @@
                                         class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
                                 </div>
                                 <div class="clearfix container">
-                                    <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>   
-                                    
+                                    <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>
+
                                     <div class="row">
                                         <select id='date'  class="col-4 col-md-3 border border-warning rounded section-1">
                                             <option value="">Date</option>
-                                        </select>              
-            
+                                        </select>
+
                                         <select id='month' class="col-4 col-md-3 border border-warning rounded section-1">
                                             <option value="">Month</option>
-                                        </select> 
-                                        
+                                        </select>
+
                                         <select id='year'  class="col-4 col-md-3 border border-warning rounded section-1">
                                             <option value="">Year</option>
                                         </select>
                                     </div>
                                 </div>
-        
+
                                 <div class="clearfix">
                                     <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Gender/ लिंग</div>
                                     <select name="gender" id ='gender'
@@ -126,10 +126,10 @@
                                     </select>
                                 </div>
                             <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
-                                <button class="btn btn-lg btn-danger col-xs-12 
+                                <button class="btn btn-lg btn-danger col-xs-12
                                     col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
                                         <span class="en lang">Start My Test</span>
-                                        <span class="hi lang">Test Shuru Karein</span>        
+                                        <span class="hi lang">Test Shuru Karein</span>
                                 </button>
                             </div>
                             </div>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row hide page" id="time_aware">    
+            <div class="row hide page" id="time_aware">
                 <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
                     <div class="clearfix rounded form-container">
                         <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">
@@ -164,26 +164,26 @@
                         <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4">
                             <span class="en lang">Start the test!</span>
                             <span class="hi lang">Shuru Karein</span>
-                        </button>                
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="row hide page" id="question_answer_page">
                 <div class="clearfix" id="timer">
-                    <div class="red b col-12" id="on_question"></div>   
-                    <div class="red b col-12" id="kitne_questions"></div>   
+                    <div class="red b col-12" id="on_question"></div>
+                    <div class="red b col-12" id="kitne_questions"></div>
                     <div class="red b col-12" id="time_to_show"></div>
                     <!-- <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div> -->
                     <div class="col-10 col-md-6 mb-4">
                         <div class="progress custom">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning" 
-                                    role="progressbar"  aria-valuemin="0" 
+                            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
+                                    role="progressbar"  aria-valuemin="0"
                                     aria-valuemax="100">
-                            </div> 
+                            </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
-                
+
                 <div class="container hide" id="qmcq">
                     <h3 class="row question qtext col-xs-12 col-sm-12 mt-2 col-md-12">
                     </h3>
@@ -217,7 +217,7 @@
                     </button>
                 </div>
 
-                <div class="col-12 mt-1 text-center"> 
+                <div class="col-12 mt-1 text-center">
                     <button type="button" class="hide btn btn-md btn-primary btn-success" id="submit_btn" onclick="submitTest();">
                             Submit Test
                         <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
@@ -298,7 +298,7 @@
                                     </div>
                                     <div class="clearfix">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Current Status</div>
-                                        <select name="currentStatus" id="currentStatus" 
+                                        <select name="currentStatus" id="currentStatus"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                                                 <option value="NONE">Select Option</option>
                                                 <option value='nothing'>Nothing</option>
@@ -309,7 +309,7 @@
                                     </div>
                                     <div class="clearfix">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Maximum Qualification</div>
-                                        <select name="qualification" id="qualification" 
+                                        <select name="qualification" id="qualification"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                                                 <option value="NONE">Select Option</option>
                                                 <option value='lessThan10th'>Less than 10th Paas</option>
@@ -320,13 +320,13 @@
                                     </div>
                                     <!-- <div class="clearfix min-10 hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                                        <input type="number" name="class_10_marks" 
+                                        <input type="number" name="class_10_marks"
                                             placeholder="Percentage in 10th" min='0' step='any'
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div>
                                     <div class="clearfix min-12 hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                                        <input type="number" name="class_12_marks" 
+                                        <input type="number" name="class_12_marks"
                                             placeholder="Percentage in 12th"  min='0' step='any'
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
@@ -365,7 +365,7 @@
                                     </div> -->
                                     <!-- <div class="clearfix family-other hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head(other) Specify</div>
-                                        <input type="text" name="family_head_other" 
+                                        <input type="text" name="family_head_other"
                                             placeholder="Family Head(Other)"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
@@ -387,20 +387,20 @@
                                     </div> -->
                                     <!-- <div class="clearfix">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number of Family Members</div>
-                                        <input type="number" name="fam_members" 
+                                        <input type="number" name="fam_members"
                                             placeholder="Aapki Family me kitne log hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
                                     <!-- <div class="clearfix">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number of Earning Family Members</div>
-                                        <input type="number" name="earning_fam_members" 
-                                            placeholder="Aapki Family me kitne log kamate hai" 
+                                        <input type="number" name="earning_fam_members"
+                                            placeholder="Aapki Family me kitne log kamate hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
                                     <!-- <div class="clearfix">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Monthly Family Income</div>
-                                        <input type="number" name="monthly_family_income" 
-                                            placeholder="Aapki Family ki Montly Income kya hai" 
+                                        <input type="number" name="monthly_family_income"
+                                            placeholder="Aapki Family ki Montly Income kya hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
                                     <!-- <div class="clearfix">
@@ -429,7 +429,7 @@
                                     </div> -->
                                     <!-- <div class="clearfix urban">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Monthly Income of Family Head</div>
-                                        <input type="number" name="family_head_income" 
+                                        <input type="number" name="family_head_income"
                                             placeholder="Family Head ki Monthly Income kya hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
@@ -471,13 +471,13 @@
                                     </div> -->
                                     <!-- <div class="clearfix rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Land Holding(in Acres)</div>
-                                        <input type="number" name="family_land_holding" 
+                                        <input type="number" name="family_land_holding"
                                             placeholder="Aapki Family k paas kitni Jameen hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
                                     <!-- <div class="clearfix rural hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number Draught animals your Family Owns.</div>
-                                        <input type="number" name="family_draught_animals" 
+                                        <input type="number" name="family_draught_animals"
                                             placeholder="jaise ki horse, cow, goat, hen etc."
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
@@ -551,13 +551,13 @@
                                     </div>
                                         <!-- <div class="clearfix caste-other">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Jaati</div>
-                                        <input type="text" name="caste" 
+                                        <input type="text" name="caste"
                                             placeholder="Aapki Caste Kya hai"
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div> -->
                                 </div>
                                 <div class="clearfix" class="mt-2 mb-4">
-                                    <button class="btn btn-lg btn-danger col-xs-12 
+                                    <button class="btn btn-lg btn-danger col-xs-12
                                         col-sm-12 col-md-6 offset-md-3" onclick="submitApp()">
                                         Submit Application
                                     </button>
@@ -591,7 +591,7 @@
 
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-            
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -609,10 +609,10 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
             </div>
-            
+
         </div>
         </div>
-        
+
         <footer class="container"></footer>
     </body>
 </html>
