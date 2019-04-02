@@ -54,6 +54,7 @@
     "phantom": "^6.0.3",
     "phantomjs": "^2.1.7",
     "randomstring": "1.x.x",
+    "readline-sync": "^1.4.9",
     "schmervice": "1.x.x",
     "schwifty": "4.x.x",
     "secure-password": "3.x.x",
