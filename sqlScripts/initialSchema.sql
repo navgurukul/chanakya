@@ -225,7 +225,6 @@ CREATE TABLE `students` (
   `name` varchar(300) DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `dob` datetime DEFAULT NULL,
-  `whatsapp` varchar(10) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
