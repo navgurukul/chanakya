@@ -49,3 +49,25 @@ Look at these numbers and guess the next number. Write down its answer on the an
 | Option | Values |Id     |
 |:-------|:-------|:-----:|
 | 1      | 60     |864    |
+
+
+# Question Choice 3
+```json
+{
+  "correctOption": 1
+}
+```
+## Common Text
+**3, 7, 13, 21, 31,___**
+
+### Hindi
+इन अंको को ध्यान से देखकर अगला अंक लिखिए. जवाब वाले पेज पर इसका जवाब लिखिए.
+
+
+### English
+Look at these numbers and guess the next number. Write down its answer on the answer page.
+
+## Options
+| Option | Values |
+|:-------|:-------|
+| 1      | 43     |

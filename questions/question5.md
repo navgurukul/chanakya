@@ -54,4 +54,27 @@ Solve the equation below for the value of x:
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 2                     |882   |
+| 1      | 2                     |882    |
+
+
+# Question Choice 3
+```json
+{
+  "correctOption": 1
+}
+```
+## Common Text
+x = 3 + 3y
+x = 18
+y = ?
+
+### Hindi
+नीचे दिए गए सवाल को y के मान के लिए हल करें.
+
+### English
+Solve the equation below for the value of y:
+
+## Options
+| Option | Values                |
+|:-------|:----------------------|
+| 1      | 5                     |
