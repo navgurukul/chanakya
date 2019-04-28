@@ -54,6 +54,7 @@ Look at these numbers and guess the next number. Write down its answer on the an
 # Question Choice 3
 ```json
 {
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -68,6 +69,6 @@ Look at these numbers and guess the next number. Write down its answer on the an
 Look at these numbers and guess the next number. Write down its answer on the answer page.
 
 ## Options
-| Option | Values |
-|:-------|:-------|
-| 1      | 43     |
+| Option | Values |Id     |
+|:-------|:-------|:-----:|
+| 1      | 43     |null   |

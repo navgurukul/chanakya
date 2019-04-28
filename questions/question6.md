@@ -65,11 +65,13 @@ Solve for the value of x and y:
 # Question Choice 3
 ```json
 {
+  "id": null,
   "correctOption": 4
 }
 ```
 ## Common Text
-y = 3x + 4  
+y = 3x + 4
+
 y = x + 8
 
 ### Hindi
@@ -79,9 +81,9 @@ x और y के मान के लिए हल करें:
 Solve for the value of x and y:
 
 ## Options
-| Option | Values                 |
-|:-------|:-----------------------|
-| 1      | **x = 1, y = 4**       |
-| 2      | **x = 2, y = 8**       |
-| 3      | **x = 3, y = 6**       |
-| 4      | **x = 2, y = 10**       |
+| Option | Values                 |Id     |
+|:-------|:-----------------------|:-----:|
+| 1      | **x = 1, y = 4**       |null   |
+| 2      | **x = 2, y = 8**       |null   |
+| 3      | **x = 3, y = 6**       |null   |
+| 4      | **x = 2, y = 10**      |null   |

@@ -60,12 +60,15 @@ Solve the equation below for the value of x:
 # Question Choice 3
 ```json
 {
+  "id": null,
   "correctOption": 1
 }
 ```
 ## Common Text
 x = 3 + 3y
+
 x = 18
+
 y = ?
 
 ### Hindi
@@ -75,6 +78,6 @@ y = ?
 Solve the equation below for the value of y:
 
 ## Options
-| Option | Values                |
-|:-------|:----------------------|
-| 1      | 5                     |
+| Option | Values                |ID     |
+|:-------|:----------------------|:-----:|
+| 1      | 5                     |null   |

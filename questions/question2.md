@@ -52,6 +52,7 @@ The temperature of Manali on Monday was -3 degree celsius. On Tuesday, the tempe
 # Question Choice 3
 ```json
 {
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -62,9 +63,9 @@ The temperature of Manali on Monday was -3 degree celsius. On Tuesday, the tempe
 रविवार की दोपहर में गुवाहाटी का तापमान - 6 degrees था। शाम तक तापमान - 5 degrees और नीचे चला गया। अगले दिन, मौसम थोड़ा गरम हुआ और तापमान में 3 degrees बढ़ोतरी हुई। सोमवार को गुवाहाटी का तापमान क्या हुआ?
 
 ### English
-The temperature of Guwahati was - 6 degrees in the noon of Sunday. It dropped to - 5 degrees in the evening. The next day, it was a little warmer and the temperature rose almost 3 degrees. What was the temperature of Guwahati on Monday?
+The temperature of Guwahati was - 6 degrees in the noon of Sunday. It dropped by - 5 degrees in the evening. The next day, it was a little warmer and the temperature rose almost 3 degrees. What was the temperature of Guwahati on Monday?
 
 ## Options
-| Option | Values                |
-|:-------|:----------------------|
-| 1      | -8                    |
+| Option | Values                |ID     |
+|:-------|:----------------------|:-----:|
+| 1      | -8                    |null   |

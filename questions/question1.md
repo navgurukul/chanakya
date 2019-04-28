@@ -53,6 +53,7 @@ Write down its answer on the answer page.
 # Question Choice 3
 ```json
 {
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -67,6 +68,6 @@ Write down its answer on the answer page.
 Write down its answer on the answer page.
 
 ## Options
-| Option | Values                |
-|:-------|:----------------------|
-| 1      | 5                     |
+| Option | Values |ID     |
+|:-------|:-------|:-----:|
+| 1      | 5      |null   |
