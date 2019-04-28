@@ -45,3 +45,24 @@ Suppose x = a * b. Now, if x = 10 and a = 2 , then what will be the value of b?
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
 | 1      | 5                     |880    |
+
+
+# Question Choice 3
+```json
+{
+  "id": null,
+  "correctOption": 1
+}
+```
+## Common Text
+
+### Hindi
+मान लीजिये कि 2x = a + b है. अगर a = 3 है और  b = 9  है तो, x का मान क्या होगा?
+
+### English
+Suppose 2x = a + b. If a = 3 and b = 9, then what is the value of x?
+
+## Options
+| Option | Values                |ID     |
+|:-------|:----------------------|:-----:|
+| 1      | 6                     |null   |
