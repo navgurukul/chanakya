@@ -53,3 +53,29 @@ For one glass lemonade, 3ml lemon juice and 12 gram sugar is added. How much sug
 | 2      | 96 gram cheeni, 24 ml nimbu  /  96 gram चीनी, 24 ml नीम्बू का रस |910   |
 | 3      | 84 gram cheeni, 24 ml nimbu  /  84 gram चीनी, 24 ml नीम्बू का रस |911   |
 | 4      | 92 gram cheeni, 25 ml nimbu  /  92 gram चीनी, 25 ml नीम्बू का रस |912   |
+
+
+# Question Choice 3
+```json
+{
+  "id": null,
+  "correctOption": 3
+}
+```
+
+## Common Text
+
+### Hindi
+अगर 1 कप कॉफ़ी बनाने के लिए हमें 8g कॉफी और 6g चीनी की ज़रूरत होती है, तो 4 कप कॉफी के लिए कितनी कॉफ़ी और चीनी लगेगी?
+
+### English
+To make 1 cup of coffee, we need 8g coffee and 6g sugar. Which of the following combination will make 4 cups of coffee?
+
+
+## Options
+| Option | Values                                     |Id     |
+|:-------|:-------------------------------------------|:-----:|
+| 1      | 24g coffee, 16g sugar  /  24g कॉफ़ी, 16g चीनी |null   |
+| 2      | 22g coffee, 18g sugar  /  22g कॉफ़ी, 18g चीनी |null   |
+| 3      | 32g coffee, 24g sugar  /  32g कॉफ़ी, 24g चीनी |null   |
+| 4      | 30g coffee, 24g sugar  /  30g कॉफ़ी, 24g चीनी |null   |

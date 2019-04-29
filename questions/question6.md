@@ -43,7 +43,8 @@ Solve for the value of x and y:
 ```
 
 ## Common Text
-y = x + 8  
+y = x + 8
+
 y = 3x + 10
 
 ### Hindi
@@ -59,3 +60,30 @@ Solve for the value of x and y:
 | 2      | **x = 0, y = 8**       | 889   |
 | 3      | **x = -1, y = 7**      | 890   |
 | 4      | **x = 2, y = 10**      | 891   |
+
+
+# Question Choice 3
+```json
+{
+  "id": null,
+  "correctOption": 4
+}
+```
+## Common Text
+y = 3x + 4
+
+y = x + 8
+
+### Hindi
+x और y के मान के लिए हल करें:
+
+### English
+Solve for the value of x and y:
+
+## Options
+| Option | Values                 |Id     |
+|:-------|:-----------------------|:-----:|
+| 1      | **x = 1, y = 4**       |null   |
+| 2      | **x = 2, y = 8**       |null   |
+| 3      | **x = 3, y = 6**       |null   |
+| 4      | **x = 2, y = 10**      |null   |
