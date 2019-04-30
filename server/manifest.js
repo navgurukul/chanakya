@@ -90,6 +90,9 @@ module.exports = new Confidence.Store({
                         migrateOnStart: true,
                         knex: {
                             client: "mysql",
+                            migrations: {
+                                stub: 'lib/migrations/defaultMigrationTemplate.js'
+                            },
                             connection: {
                                 database: {
                                     $env: 'DB_NAME',
