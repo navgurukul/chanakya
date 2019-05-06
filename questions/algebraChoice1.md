@@ -64,7 +64,7 @@ Weight of one apple is 70 grams. And weight of one orange is 45 grams. You have 
 ```json
 {
 
-    "type": "mcq",
+    "type": "integer",
     "difficulty": "medium",
     "topic": "Algebra",
 
@@ -92,7 +92,7 @@ Weight of one apples is 120 grams And weight of one orange is 40 grams. You have
 ```json
 {
 
-    "type": "mcq",
+    "type": "integer",
     "difficulty": "medium",
     "topic": "Algebra",
 
@@ -120,7 +120,7 @@ Weight of one apple is 70 grams. And weight of one orange is 50 grams. You have 
 ```json
 {
 
-    "type": "mcq",
+    "type": "integer",
     "difficulty": "hard",
     "topic": "Algebra",
 
@@ -148,7 +148,7 @@ Weight of one apple is 75 grams. An apple is 3 times heavier than an orange. Num
 ```json
 {
 
-    "type": "mcq",
+    "type": "integer",
     "difficulty": "hard",
     "topic": "Algebra",
 
