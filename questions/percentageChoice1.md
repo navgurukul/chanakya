@@ -76,7 +76,7 @@ If there is 105 ml water in one glass and 20 ml lemon. Now, if we add 25 ml lemo
 Agar ek glass mei 140 ml paani hai. Aur hume thoda nimbu daal kar, aisa nimbu paani banana hai, jismei 20% nimbu ho, toh kitne “ml” nimbu daalenge?		
 
 ### English
-There is 100 ml water in a glass and we added a little lemon to create lemon water solution such that there is 20% lemon in it. How many ml of lemon would you add?
+There is 140 ml water in a glass and we added a little lemon to create lemon water solution such that there is 20% lemon in it. How many ml of lemon would you add?
 
 ## Options
 | Option | Values                |ID     |
