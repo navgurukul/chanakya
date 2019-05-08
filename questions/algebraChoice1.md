@@ -77,15 +77,15 @@ Weight of one apple is 70 grams. And weight of one orange is 45 grams. You have 
 ## Common Text
 
 ### Hindi
-Ek apple ka weight 120 grams hai. Aur ek orange ka weight 40 grams hai. Aapke paas 5280 grams fruits hai. Aur aapke paas same number of apples and same number of oranges hai. Batayie aapke paas kitne apples hai?
+Ek apple ka weight 120 grams hai. Aur ek orange ka weight 40 grams hai. Aapke paas 6400 grams fruits hai. Aur aapke paas same number of apples and same number of oranges hai. Batayie aapke paas kitne apples hai?
 
 ### English
-Weight of one apples is 120 grams And weight of one orange is 40 grams. You have 5280 grams of fruits. You have same number of apples and oranges. How many apples do you have?
+Weight of one apples is 120 grams And weight of one orange is 40 grams. You have 6400 grams of fruits. You have same number of apples and oranges. How many apples do you have?
 
 ## Options
 | Option | Values                        |ID     |
 |:-------|:-----------------------------:|:-----:|
-| 1      | 33                            |null   |
+| 1      | 40                            |null   |
 
 
 # Question Choice 4
@@ -161,12 +161,12 @@ Weight of one apple is 75 grams. An apple is 3 times heavier than an orange. Num
 ## Common Text
 
 ### Hindi
-Ek apple ka weight 20 grams hai. Aur ek orange ka weight 30 grams hai. Aapke paas har 2 oranges ke liye, 3 apples hai. (Yaani agar 2 orange hai, toh 3 apples honge, etc.) (Yaani agar 4 orange hai, toh 6 apples honge, etc.) Aap ke paas total 4320 grams ke fruits hai. Aapke paas kitne apples hai?
+Ek apple ka weight 20 grams hai. Aur ek orange ka weight 30 grams hai. Aapke paas har 2 oranges ke liye, 3 apples hai. (Yaani agar 2 orange hai, toh 3 apples honge, etc.) (Yaani agar 4 orange hai, toh 6 apples honge, etc.) Aap ke paas total 4800 grams ke fruits hai. Aapke paas kitne apples hai?
 
 ### English
-Weight of one apple is 20 grams. And weight of one orange is 30 grams. You have 2 oranges and 3 apples. (If 2 oranges then you have 3 apples) (If 4 oranges then you have 6 apples and so on) You have total of 4320 grams of fruits. How many apples do you have?
+Weight of one apple is 20 grams. And weight of one orange is 30 grams. You have 2 oranges and 3 apples. (If 2 oranges then you have 3 apples) (If 4 oranges then you have 6 apples and so on) You have total of 4800 grams of fruits. How many apples do you have?
 
 ## Options
 | Option | Values                        |ID     |
 |:-------|:-----------------------------:|:-----:|
-| 1      | 108                           |null   |
+| 1      | 120                           |null   |
