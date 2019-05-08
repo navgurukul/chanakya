@@ -45,15 +45,15 @@ Please think and answer carefully.
 ## Common Text
 
 ### Hindi
-Agar ek glass mei 170 ml paani hai. Aur 18 ml nimbu hai. Humne ab 12 ml nimbu aur daal diya. Toh, ab nimbu kitna pratishat hai?
+Agar ek glass mei 105 ml paani hai. Aur 20 ml nimbu hai. Humne ab 25 ml nimbu aur daal diya. Toh, ab nimbu kitna pratishat hai?
 
 ### English
-If there is 90 ml in one glass and 20 ml lemon and we added 10 ml lemon more then what is the % of lemon?
+If there is 105 ml water in one glass and 20 ml lemon. Now, if we add 25 ml lemon more then what is the % of lemon?
 
 ## Options
 | Option | Values                |ID     |
 |:-------|:----------------------|:-----:|
-| 1      | 15                    |null   |
+| 1      | 30                    |null   |
 
 
 # Question Choice 3
