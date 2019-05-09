@@ -149,11 +149,11 @@ Weight of one apple is 75 grams. An apple is 3 times heavier than an orange. Num
 ## Common Text
 
 ### Hindi
-Ek apple ka weight 20 grams hai. Aur ek orange ka weight 30 grams hai. Aapke paas har 2 oranges ke liye, 3 apples hai. (Yaani agar 2 orange hai, toh 3 apples honge, etc.) (Yaani agar 4 orange hai, toh 6 apples honge, etc.) Aap ke paas total 4800 grams ke fruits hai. Aapke paas kitne apples hai?
+Ek apple ka weight 20 grams hai. Aur ek orange ka weight 30 grams hai. Aapke paas har 2 oranges ke liye, 3 apples hai. (Example: Yaani agar 2 orange hai, toh 3 apples honge, 4 oranges hain toh 6 apples honge etc.) (Yaani agar 4 orange hai, toh 6 apples honge, etc.) Aap ke paas total 4800 grams ke fruits hai. Aapke paas kitne apples hai?
 
 
 ### English
-Weight of one apple is 20 grams. And weight of one orange is 30 grams. You have 2 oranges and 3 apples. (If 2 oranges then you have 3 apples) (If 4 oranges then you have 6 apples and so on) You have total of 4800 grams of fruits. How many apples do you have?
+Weight of one apple is 20 grams. And weight of one orange is 30 grams. You have 2 oranges for every 3 apples. (Example: If 2 oranges then you have 3 apples, If 4 oranges then you have 6 apples and so on) You have total of 4800 grams of fruits. How many apples do you have?
 
 
 ## Options
