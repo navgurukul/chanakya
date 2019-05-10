@@ -132,5 +132,3 @@ Here we can create a bucket which will have the name of `Algebra` and create 3 b
 Every **Question Bucket** will have a name and **Number of Questions** allowed in every bucket choice associated with it.
 
 A **Question Bucket** can have multiple **Question Bucket Choices** associated with it. The number of questions in every choice should be the same as the **Number of Questions** specified in the question bucket.
-
-### Question Bucket Choices
