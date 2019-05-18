@@ -19,6 +19,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@hapi/bossy": "^4.1.1",
     "avocat": "1.x.x",
     "aws-sdk": "^2.399.0",
     "axios": "^0.18.0",
