@@ -1,0 +1,40 @@
+{
+    "buckets": [
+        {
+            "name": "Percentage",
+            "id": null,
+            "numQuestions": 5,
+            "choices": [
+                {
+                    "file": "percentageChoice1.md",
+                    "id": null
+                }
+            ]
+        },
+        {
+            "name": "Unitary Method",
+            "id": null,
+            "numQuestions": 3,
+            "choices": [
+                {
+                    "file": "unitMethodChoice1.md",
+                    "id": null
+                }
+            ]
+        },
+        {
+            "name": "Algebra",
+            "id": null,
+            "numQuestions": 6,
+            "choices": [
+                {
+                    "file": "algebraChoice1.md",
+                    "id": null
+                }
+            ]
+        }
+    ],
+    "normalQuestionFiles": [
+        "normalQuestions.md"
+    ]
+}
