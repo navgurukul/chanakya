@@ -26,7 +26,7 @@ Toh nimbu kitna pratishat hai?
 **nimbu ki pratishat** = ( nimbu paani mei kitna nimbu hai ) / ( **paani aur nimbu milakar total kitna nimbu paani hai** ) * 100
 
 yaani,
-	nimbu ki pratishat = (10 / 50) * 100 = 20%
+    nimbu ki pratishat = (10 / 50) * 100 = 20%
 
 Yeh dhyaan rakhte hue ab aage diye hue questions solve karo:
 
@@ -51,7 +51,7 @@ Quantity of lemon = 50 ml - 40 ml = 10 ml
 **% of Lemon**= ( Quantity of lemon in lemon water )/( **Total Quantity of lemon water including lemon and water** )*100
 
 So, in the above example
-	% of lemon = (10 / 50) * 100 = 20%
+    % of lemon = (10 / 50) * 100 = 20%
 
 Keeping in mind above, now solve the following questions:
 
@@ -59,6 +59,7 @@ If in one glass there is 120 ml water
 and 30 ml lemon, then
 what is the percentage of lemon?
 Please think and answer carefully.
+
 
 ## Options
 | Option | Values | ID |

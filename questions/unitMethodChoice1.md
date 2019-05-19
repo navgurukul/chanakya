@@ -20,6 +20,7 @@ Agar 100 glasses paani se bharne ke liye,
 Toh 10 taps - kitne samay mei
 100 glasses paani se bhar denge?
 
+
 ### English
 For the next three questions, think practically on how you can solve these questions. For example, if you can plant 100 trees in an hour, then how many can you plant in 4 hours? Answer will be 100 multiplied by 4. Since the amount of work you can do in one hour, four times of that you can do in four hours. By thinking on similar practical lines, answer following four questions.
 
@@ -92,6 +93,7 @@ If to fill 100 glasses of water,
 5 taps require 10 mins in total.
 Then with 25 taps to fill 300 glasses,
 how much time would be required?
+
 
 ## Options
 | Option | Values | ID |
