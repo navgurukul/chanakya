@@ -65,10 +65,16 @@ else{
 function landing_page_submit() {
     mixpanel.track("Personal Details");
     $("#landing_page").slideUp(slide_up_time);
-    $("#personal_details").slideDown(slide_down_time);
-    setupDatePicker();
+    $("#no_cheating_promise").slideDown(slide_down_time);
 };
 
+function no_cheating_promise_submit() {
+    mixpanel.track("No Cheating Promise");
+    console.log(1)
+    $("#no_cheating_promise").slideUp(slide_up_time);
+    $("#personal_details").slideDown(slide_down_time);
+    setupDatePicker();
+}
 function setupDatePicker() {
     var monthdict ={
         'Jan':"01",'Feb':"02",'Mar':'03','April':"04","May":"05",
