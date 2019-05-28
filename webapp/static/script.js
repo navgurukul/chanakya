@@ -10,8 +10,8 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "EJ1PWG";
-    var base_url="http://join.navgurukul.org/api";
+    var enrolment_key = "JSZE4N";
+    var base_url="http://localhost:3000";
 }
 
 var slide_up_time = 600;
@@ -65,10 +65,16 @@ else{
 function landing_page_submit() {
     mixpanel.track("Personal Details");
     $("#landing_page").slideUp(slide_up_time);
-    $("#personal_details").slideDown(slide_down_time);
-    setupDatePicker();
+    $("#no_cheating_promise").slideDown(slide_down_time);
 };
 
+function no_cheating_promise_submit() {
+    mixpanel.track("No Cheating Promise");
+    console.log(1)
+    $("#no_cheating_promise").slideUp(slide_up_time);
+    $("#personal_details").slideDown(slide_down_time);
+    setupDatePicker();
+}
 function setupDatePicker() {
     var monthdict ={
         'Jan':"01",'Feb':"02",'Mar':'03','April':"04","May":"05",
@@ -223,7 +229,11 @@ function submitApp() {
     var schoolMedium = $('#schoolMedium').val();
     var caste = $('#caste').val();
     var religion = $('#religion').val();
-
+    var percentageIn12th = $('#percentageIn12th').val();
+    var percentageIn10th = $('#percentageIn10th').val();
+    var mathMarksIn10th = $('#mathMarksIn10th').val();
+    var mathMarksIn12th = $('#mathMarksIn12th').val();
+    
     if (DEBUG) {
         pinCode = 110010;
         qualification = "lessThan10th";
@@ -280,6 +290,49 @@ function submitApp() {
         return false;
     }
 
+    qualification = $("#qualification").children("option:selected").val();
+
+    if (qualification == "class10th"){
+        
+        if (!percentageIn10th) {
+            appending("Apke 10th ke percentage dijye!")
+            return false
+        }
+        
+        if(!mathMarksIn10th) {
+            appending("Apke 10th ke total marks dijye!")
+            return false
+        }
+        mathMarksIn12th = 0
+        percentageIn12th = ""
+
+    } else if (qualification == "class12th" || qualification == "graduate") {
+        if (!percentageIn10th) {
+            appending("Apke 10th ke percentage dijye!")
+            return false
+        }
+        
+        if(!mathMarksIn10th) {
+            appending("Apke 10th ke total marks dijye!")
+            return false
+        }
+        
+        if (!percentageIn12th) {
+            appending("Apke 12th ke percentage dijye!")
+            return false
+        }
+        
+        if(!mathMarksIn12th) {
+            appending("Apke 12th ke total marks dijye!")
+            return false
+        }
+    } else if (qualification == "lessThan10th"){
+        percentageIn10th = ""
+        percentageIn12th = ""
+        mathMarksIn10th = 0
+        mathMarksIn12th = 0
+    }
+
     var obj = {
         "pinCode": pinCode,
         "qualification": qualification,
@@ -288,7 +341,11 @@ function submitApp() {
         "currentStatus": currentStatus,
         "schoolMedium": schoolMedium,
         "caste": caste,
-        "religon": religion
+        "religon": religion,
+        "percentageIn10th": percentageIn10th,
+        "mathMarksIn10th": mathMarksIn10th,
+        "percentageIn12th": percentageIn12th,
+        "mathMarksIn12th": mathMarksIn12th
     }
 
     mixpanel.people.set({
@@ -553,4 +610,18 @@ $(function(){
         $('.lang').hide();
         $('.lang.'+current_language).show();
     });
+
+    $("#qualification").change(function(){
+        qualification = $(this).children("option:selected").val();
+        if (qualification == "lessThan10th"){
+            $('.pass10').hide()
+            $('.pass12').hide()
+        } else if (qualification == "class10th"){
+            $('.pass10').show()
+            $('.pass12').hide()
+        } else if (qualification == "class12th" || qualification == "graduate") {
+            $('.pass10').show()
+            $('.pass12').show()
+        }
+    })
 });

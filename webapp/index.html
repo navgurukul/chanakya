@@ -70,6 +70,50 @@
                                 <li>We trust you to attempt this test with honesty :)</li>
                         </ol>
                         <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                            <span class="en lang">I am ready</span>
+                            <span class="hi lang">Meh tayaar hu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hide page" id="no_cheating_promise">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Ready Carefully</h2>
+                        <br><br>
+                        <p class="en lang">
+                            A lot of students all across India answer the NavGurukul's test to go through the 1 year program and get high paying software engineering jobs.
+                            Though there is a great reward at the end, but you will have to do a lot of hard work to get that reward. 
+                            We would love to teach every student irrespective of their educational qualifications but sadly we require some basic knowledge of certain things. 
+                            We use this test to see if you have that basic knowledge.
+                        </p>
+                        <p class="hi lang">
+                            Kafi sare students pure India se NavGurukul ka test dete ha taki woh NavGurukul ke 1 saal wale program ke madad se high paying software engineering jobs le sake. Hala ki akhir me bohut bada eenam hota ha, magar uske liye apko kafi jada mehnat bi karni padhti hai.
+                            Hume har kisi student ko padhna chate hai chae uske educational qualifications kuch bi ho magar hume kuch basic knowledge chaiye kuch chizo me.
+                            Yeh test ke duwara hum yeh jane ki kosish karte ha ki kya apke pass woh basic knowledge hai.
+                        </p>
+
+                        <p class="en lang">
+                            Some students try to <strong>cheat and score</strong> well in the test but sadly are not able to do well during the program. 
+                            All of them have to leave the course.
+                        </p>
+                        
+                        <p class="hi lang">
+                            Kuch students meh <strong> cheate karke score </strong> karlete ha but woh program meh ache tarike se perform ni kar pahte ha, Jiske karan uneh yeh program chorna padhta ha.
+                        </p>
+
+                        <p class="en lang">
+                            If you are proceeding with the test please make sure you do it yourself without anyone's help. 
+                            We will disqualify you from NavGurukul if we detect any form of cheating. <br /><br />
+                        </p>
+
+                        <p class="hi lang">
+                            Agar aap ish test ke liye aage badh rahe hai toh kripaya ish test ko khudse de bina kisike madad ke.
+                            Agar hume pata chalta ha ki apne cheating ki hai toh hum apko disqualify kardenge aage. <br /><br />
+                        </p>
+
+                        <button onclick="no_cheating_promise_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
                             <span class="en lang">Start My Test</span>
                             <span class="hi lang">Test Shuru Karein</span>
                         </button>
@@ -318,18 +362,33 @@
                                                 <option value='graduate'>Graduation completed</option>
                                         </select>
                                     </div>
-                                    <!-- <div class="clearfix min-10 hide">
+                                    <div class="clearfix min-10 hide pass10">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                                        <input type="number" name="class_10_marks"
+                                        <input type="number" name="class_10_percentage" id="percentageIn10th"
                                             placeholder="Percentage in 10th" min='0' step='any'
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
                                     </div>
-                                    <div class="clearfix min-12 hide">
+
+                                    <div class="clearfix min-10 hide pass10">
+                                            <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 10th</div>
+                                            <input type="number" name="class_10_marks" id="mathMarksIn10th"
+                                                placeholder="Total Marks in 10th" min='0' step='any'
+                                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                                    </div>
+                                    
+                                    <div class="clearfix min-12 hide pass12">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                                        <input type="number" name="class_12_marks"
+                                        <input type="number" name="class_12_percentage" id="percentageIn12th"
                                             placeholder="Percentage in 12th"  min='0' step='any'
                                             class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
-                                    </div> -->
+                                    </div>
+                                    
+                                    <div class="clearfix min-12 hide pass12">
+                                            <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 12th</div>
+                                            <input type="number" name="class_12_marks" id="mathMarksIn12th"
+                                                placeholder="Total Marks in 12th"  min='0' step='any'
+                                                class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                                    </div>
                                     <!-- <div class="clearfix min-12 hide">
                                         <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Stream in Class 12th</div>
                                         <select name="class_12_stream"
