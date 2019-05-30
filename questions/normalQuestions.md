@@ -17,8 +17,10 @@
 ### Hindi
 Upar diye hue pattern mein next kaunsa term aayega?
 
+
 ### English
 What will be the next term in the above pattern?
+
 
 ## Options
 | Option | Values | ID |

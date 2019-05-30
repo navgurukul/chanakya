@@ -1,10 +1,11 @@
+
 # Question Choice 1
 ```json
 {
   "type": "integer",
   "difficulty": "easy",
   "topic": "Percentage",
-  "id": null,
+  "id": 556,
   "correctOption": 1
 }
 ```
@@ -26,14 +27,16 @@ kitne ladke bimmar hai = 50  - 40 = 10
 
 yaani,
 
-	bimaar ladko ki pratishat = (10 / 50) * 100 = 20%
-
+```
+bimaar ladko ki pratishat = (10 / 50) * 100 = 20%
+```
 Ab iss concept ko use karte hue, yeh questions solve karne ki koshish karna. Dhyaan rakhna - ki hamesha yeh sochna kitne healthy boys hai, kitne unhealthy aur kitne **total boys** hai?
 
 Agar 180 boys hai, jismei se
-45 ladke unhealthy hai	
+45 ladke unhealthy hai    
 Toh kitne ladke unhealthy hai?
 Dhyaan se socho aur likho kya answer hai.
+
 
 ### English
 Percentage is a very important question in Maths. To understand, please observe the following example carefully:
@@ -49,8 +52,9 @@ Number of unhealthy boys = 50 - 40 = 10
 
 So, in the above example
 
-	% of unhealthy boys = (10 / 50) * 100 = 20%
-
+```
+% of unhealthy boys = (10 / 50) * 100 = 20%
+```
 Now using this concept, please solve the following questions. Please take care to think carefully what is the number of unhealthy boys, healthy boys and **total boys**.
 
 If there are 180 boys, out of which
@@ -58,10 +62,11 @@ If there are 180 boys, out of which
 Then how many boys are unhealthy?
 Please think and answer carefully.
 
+
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 25 | null |
+| 1 | 25 | 948 |
 
 # Question Choice 2
 ```json
@@ -69,7 +74,7 @@ Please think and answer carefully.
   "type": "integer",
   "difficulty": "medium",
   "topic": "Percentage",
-  "id": null,
+  "id": 557,
   "correctOption": 1
 }
 ```
@@ -94,7 +99,7 @@ then what is the % of unhealthy boys?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 25 | null |
+| 1 | 25 | 949 |
 
 # Question Choice 3
 ```json
@@ -102,7 +107,7 @@ then what is the % of unhealthy boys?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Percentage",
-  "id": null,
+  "id": 558,
   "correctOption": 1
 }
 ```
@@ -125,7 +130,7 @@ the % of unhealthy boys will be 20%?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 40 | null |
+| 1 | 40 | 950 |
 
 # Question Choice 4
 ```json
@@ -133,7 +138,7 @@ the % of unhealthy boys will be 20%?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Percentage",
-  "id": null,
+  "id": 561,
   "correctOption": 1
 }
 ```
@@ -158,7 +163,7 @@ would the percentage of unhealthy boys be 20%?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 30 | null |
+| 1 | 30 | 953 |
 
 # Question Choice 5
 ```json
@@ -166,7 +171,7 @@ would the percentage of unhealthy boys be 20%?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Percentage",
-  "id": null,
+  "id": 559,
   "correctOption": 1
 }
 ```
@@ -191,4 +196,4 @@ the school will have 36% unhealthy boys?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 200 | null |
+| 1 | 200 | 951 |

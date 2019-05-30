@@ -5,7 +5,7 @@
   "type": "integer",
   "difficulty": "easy",
   "topic": "Unitary Method",
-  "id": null,
+  "id": 560,
   "correctOption": 1
 }
 ```
@@ -15,9 +15,9 @@
 ### Hindi
 Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi tarah se sochte hue, yeh teen questions answer karo.
 
-Agar 200 glasses nimbu paani banane ke liye,	
-10 log (people) 20 mins lete hai.			
-Toh 20 log - kitne samay mei				
+Agar 200 glasses nimbu paani banane ke liye,    
+10 log (people) 20 mins lete hai.            
+Toh 20 log - kitne samay mei                
 200 glasses nimbu paani bana sakte hai?
 
 
@@ -33,7 +33,7 @@ can prepare 200 glasses of lemonade?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 10 | null |
+| 1 | 10 | 952 |
 
 # Question Choice 2
 ```json
@@ -41,7 +41,7 @@ can prepare 200 glasses of lemonade?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "id": null,
+  "id": 562,
   "correctOption": 1
 }
 ```
@@ -49,10 +49,10 @@ can prepare 200 glasses of lemonade?
 ## Common Text
 
 ### Hindi
-Agar 200 glasses nimbu paani banane ke liye,	
-10 log (people) 20 mins lete hai.			
-Toh 20 mins mei 600 nimbu paani glasses banane	
-Ke liye kitne logo ki jaroorat padegi?			
+Agar 200 glasses nimbu paani banane ke liye,    
+10 log (people) 20 mins lete hai.            
+Toh 20 mins mei 600 nimbu paani glasses banane    
+Ke liye kitne logo ki jaroorat padegi?            
 
 
 ### English
@@ -65,7 +65,7 @@ mins how many people would be needed?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 30 | null |
+| 1 | 30 | 954 |
 
 # Question Choice 3
 ```json
@@ -73,7 +73,7 @@ mins how many people would be needed?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "id": null,
+  "id": 563,
   "correctOption": 1
 }
 ```
@@ -81,11 +81,11 @@ mins how many people would be needed?
 ## Common Text
 
 ### Hindi
-Agar 200 glasses nimbu paani banane ke liye,	
-10 log (people) 20 mins lete hai.		
-Toh agar 40 log, 600 glasses			
-nimbu paani banayenge toh			
-kitne minutes ki jaroorat hogi?		
+Agar 200 glasses nimbu paani banane ke liye,    
+10 log (people) 20 mins lete hai.        
+Toh agar 40 log, 600 glasses            
+nimbu paani banayenge toh            
+kitne minutes ki jaroorat hogi?        
 
 
 ### English
@@ -99,4 +99,4 @@ how much time would be needed?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
-| 1 | 15 | null |
+| 1 | 15 | 955 |

@@ -5,7 +5,7 @@
   "type": "mcq",
   "difficulty": "easy",
   "topic": "Algebra",
-  "id": null,
+  "id": 564,
   "correctOption": 2
 }
 ```
@@ -29,10 +29,10 @@ What is the price of the clothes that you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | ₹800 | null |
-| 2 | ₹960 | null |
-| 3 | ₹980 | null |
-| 4 | ₹1000 | null |
+| 1 | ₹800 | 956 |
+| 2 | ₹960 | 957 |
+| 3 | ₹980 | 958 |
+| 4 | ₹1000 | 959 |
 
 # Question Choice 2
 ```json
@@ -40,7 +40,7 @@ What is the price of the clothes that you have?
   "type": "mcq",
   "difficulty": "easy",
   "topic": "Algebra",
-  "id": null,
+  "id": 569,
   "correctOption": 3
 }
 ```
@@ -50,10 +50,10 @@ What is the price of the clothes that you have?
 ### Hindi
 Inn questions ko karne ke liye aap sochiye - aapke paas jo jo information nahi hai, usse x aur y jaise variables de kar maanni padegi. Phir unn variables se equation bana sakte hai jaise 3x+2y=100. Agar aap Maths se darte toh bhi mat ghabrayie, aap thoda sa dhyaan laga kar sochenge toh bhi kuch questions toh solve kar hi loge.
 
-1m cotton ka price 60₹ hai.				
-Aur 1m silk ka price 55₹ hai.				
-Aapke paas 4000₹ ke kapde hai.			
-In mei se kaunsa combination ki cost			
+1m cotton ka price 60₹ hai.                
+Aur 1m silk ka price 55₹ hai.                
+Aapke paas 4000₹ ke kapde hai.            
+In mei se kaunsa combination ki cost            
 4000₹ hogi.
 
 
@@ -70,10 +70,10 @@ has 4000₹ price?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 38m cotton, 31m silk | null |
-| 2 | 40m cotton, 29m silk | null |
-| 3 | 41m cotton, 28m silk | null |
-| 4 | 43m cotton, 26m silk | null |
+| 1 | 38m cotton, 31m silk | 960 |
+| 2 | 40m cotton, 29m silk | 961 |
+| 3 | 41m cotton, 28m silk | 962 |
+| 4 | 43m cotton, 26m silk | 963 |
 
 # Question Choice 3
 ```json
@@ -81,7 +81,7 @@ has 4000₹ price?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Algebra",
-  "id": null,
+  "id": 565,
   "correctOption": 1
 }
 ```
@@ -89,12 +89,13 @@ has 4000₹ price?
 ## Common Text
 
 ### Hindi
-1m cotton ka price 110₹ hai.			
-Aur 1m silk ka price 60₹ hai.			
-Aapke paas 5780₹ ke kapde hai.		
-Aur aapke paas same length ki cotton	
-and aur silk ka kapda hai.			
-Batayie aapke paas kitne metre cotton hai?	
+1m cotton ka price 110₹ hai.            
+Aur 1m silk ka price 60₹ hai.            
+Aapke paas 5780₹ ke kapde hai.        
+Aur aapke paas same length ki cotton    
+and aur silk ka kapda hai.            
+Batayie aapke paas kitne metre cotton hai?    
+
 
 ### English
 Price of 1m cotton is 110₹.
@@ -104,11 +105,10 @@ You have same length of cotton and silk.
 How is the length of your cotton?
 
 
-
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 34 | null |
+| 1 | 34 | 964 |
 
 # Question Choice 4
 ```json
@@ -116,7 +116,7 @@ How is the length of your cotton?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Algebra",
-  "id": null,
+  "id": 568,
   "correctOption": 1
 }
 ```
@@ -124,13 +124,13 @@ How is the length of your cotton?
 ## Common Text
 
 ### Hindi
-1m cotton ka price 40₹ hai.				
-Aur 1m silk ka price 70₹ hai.				
-Aapke paas 5400₹ ke kapde hai.			
-Aur aapke paas jitne length ka silk hai uske		
-double length ka cotton hai.				
-(Yaani agar 5m silk hai, toh 10m cotton hogi)	
-Batayie aapke paas kitni length ki cotton hai?	
+1m cotton ka price 40₹ hai.                
+Aur 1m silk ka price 70₹ hai.                
+Aapke paas 5400₹ ke kapde hai.            
+Aur aapke paas jitne length ka silk hai uske        
+double length ka cotton hai.                
+(Yaani agar 5m silk hai, toh 10m cotton hogi)    
+Batayie aapke paas kitni length ki cotton hai?    
 
 
 ### English
@@ -146,7 +146,7 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 72 | null |
+| 1 | 72 | 967 |
 
 # Question Choice 5
 ```json
@@ -154,7 +154,7 @@ What length of cotton do you have?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Algebra",
-  "id": null,
+  "id": 566,
   "correctOption": 1
 }
 ```
@@ -162,13 +162,13 @@ What length of cotton do you have?
 ## Common Text
 
 ### Hindi
-1m cotton ka price 105₹ hai.				
-1m cotton ka price, 1m silk				
-se 3 times (yaani 3 guna) hai.	
-Aur aapke paas jitni cotton hai, 			
-usse 7 times lambi silk hai.				
-Aapke paas 7000₹ ke kapde hai.			
-Batayie aapke paas kitni length ki cotton hai?	
+1m cotton ka price 105₹ hai.                
+1m cotton ka price, 1m silk                
+se 3 times (yaani 3 guna) hai.    
+Aur aapke paas jitni cotton hai,             
+usse 7 times lambi silk hai.                
+Aapke paas 7000₹ ke kapde hai.            
+Batayie aapke paas kitni length ki cotton hai?    
 
 
 ### English
@@ -183,7 +183,7 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 20 | null |
+| 1 | 20 | 965 |
 
 # Question Choice 6
 ```json
@@ -191,7 +191,7 @@ What length of cotton do you have?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Algebra",
-  "id": null,
+  "id": 567,
   "correctOption": 1
 }
 ```
@@ -199,12 +199,12 @@ What length of cotton do you have?
 ## Common Text
 
 ### Hindi
-1m cotton ka price 40₹ hai.				
-Aur 1m silk ka price 30₹ hai.				
-Aapke paas har 2m silk ke liye, 3m cotton hai.	
-(Yaani agar 2m silk hai, toh 3m cotton hai, etc.)	
-(Yaani agar 4m silk hai, toh 6m cotton etc.)		
-Aap ke paas total 5400₹ ke clothes hai.		
+1m cotton ka price 40₹ hai.                
+Aur 1m silk ka price 30₹ hai.                
+Aapke paas har 2m silk ke liye, 3m cotton hai.    
+(Yaani agar 2m silk hai, toh 3m cotton hai, etc.)    
+(Yaani agar 4m silk hai, toh 6m cotton etc.)        
+Aap ke paas total 5400₹ ke clothes hai.        
 Batayie aapke paas kitni length ki cotton hai?
 
 
@@ -221,4 +221,4 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 90 | null |
+| 1 | 90 | 966 |
