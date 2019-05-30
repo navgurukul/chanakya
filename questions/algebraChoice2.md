@@ -5,7 +5,7 @@
   "type": "mcq",
   "difficulty": "easy",
   "topic": "Algebra",
-  "id": 542,
+  "id": null,
   "correctOption": 2
 }
 ```
@@ -29,10 +29,10 @@ What is the price of the clothes that you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 800₹ | 928 |
-| 2 | 960₹ | 929 |
-| 3 | 980₹ | 930 |
-| 4 | 1000₹ | 931 |
+| 1 | ₹800 | null |
+| 2 | ₹960 | null |
+| 3 | ₹980 | null |
+| 4 | ₹1000 | null |
 
 # Question Choice 2
 ```json
@@ -40,7 +40,7 @@ What is the price of the clothes that you have?
   "type": "mcq",
   "difficulty": "easy",
   "topic": "Algebra",
-  "id": 545,
+  "id": null,
   "correctOption": 3
 }
 ```
@@ -70,10 +70,10 @@ has 4000₹ price?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 38m cotton, 31m silk | 934 |
-| 2 | 40m cotton, 29m silk | 935 |
-| 3 | 41m cotton, 28m silk | 936 |
-| 4 | 43m cotton, 26m silk | 937 |
+| 1 | 38m cotton, 31m silk | null |
+| 2 | 40m cotton, 29m silk | null |
+| 3 | 41m cotton, 28m silk | null |
+| 4 | 43m cotton, 26m silk | null |
 
 # Question Choice 3
 ```json
@@ -81,7 +81,7 @@ has 4000₹ price?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Algebra",
-  "id": 543,
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -108,7 +108,7 @@ How is the length of your cotton?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 34 | 932 |
+| 1 | 34 | null |
 
 # Question Choice 4
 ```json
@@ -116,7 +116,7 @@ How is the length of your cotton?
   "type": "integer",
   "difficulty": "medium",
   "topic": "Algebra",
-  "id": 544,
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -146,7 +146,7 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 72 | 933 |
+| 1 | 72 | null |
 
 # Question Choice 5
 ```json
@@ -154,7 +154,7 @@ What length of cotton do you have?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Algebra",
-  "id": 548,
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -183,7 +183,7 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 20 | 940 |
+| 1 | 20 | null |
 
 # Question Choice 6
 ```json
@@ -191,7 +191,7 @@ What length of cotton do you have?
   "type": "integer",
   "difficulty": "hard",
   "topic": "Algebra",
-  "id": 547,
+  "id": null,
   "correctOption": 1
 }
 ```
@@ -221,4 +221,4 @@ What length of cotton do you have?
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 90 | 939 |
+| 1 | 90 | null |
