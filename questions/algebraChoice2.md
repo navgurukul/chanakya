@@ -6,7 +6,7 @@
   "difficulty": "easy",
   "topic": "Algebra",
   "id": 542,
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -41,7 +41,7 @@ What is the price of the clothes that you have?
   "difficulty": "easy",
   "topic": "Algebra",
   "id": 545,
-  "correctOption": 2
+  "correctOption": 3
 }
 ```
 
@@ -82,7 +82,7 @@ has 4000₹ price?
   "difficulty": "medium",
   "topic": "Algebra",
   "id": 543,
-  "correctOption": 3
+  "correctOption": 1
 }
 ```
 
