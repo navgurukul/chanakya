@@ -17,15 +17,9 @@
 ### Hindi
 Upar diye hue pattern mein next kaunsa term aayega?
 
-**Hint**
-Inn chaar questions ko solve karne ke liye aap dhyaan se dekhein numbers ke beech mei kya patterns hai. Pattern dekhne ke liye, aap yeh bhi dekh sakte hai ki - jaise jaise hum series mei aage badhte hai, toh next number peechle wale number se kitna bada hai.
-
 
 ### English
 What will be the next term in the above pattern?
-
-**Hint**
-To solve the following four questions, please observe the pattern carefully. To observe the pattern, observe the differences between the consecutive numbers.
 
 
 ## Options
