@@ -48,6 +48,7 @@
     "moment": "^2.24.0",
     "mustache": "^3.0.1",
     "mysql": "^2.16.0",
+    "node-cron": "^2.0.3",
     "node-phantom": "^0.2.5",
     "objection": "1.x.x",
     "objection-db-errors": "1.x.x",

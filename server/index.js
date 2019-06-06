@@ -2,6 +2,8 @@
 
 const Glue = require('glue');
 const Manifest = require('./manifest');
+const cron = require("node-cron");
+const CONSTANTS = require('../lib/constants')
 
 exports.deployment = async (start) => {
 
@@ -10,6 +12,7 @@ exports.deployment = async (start) => {
 
     // Printing a request log
     server.events.on('response', function (request) {
+        console.log(request.server)
         request.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.url.path + ' --> ' + request.response.statusCode);
     });
 
@@ -23,6 +26,23 @@ exports.deployment = async (start) => {
     await server.start();
 
     console.log(`Server started at ${server.info.uri}`);
+        /**
+        * * * * * *
+        | | | | | |
+        | | | | | day of week
+        | | | | month
+        | | | day of month
+        | | hour
+        | minute
+        second ( optional )
+    **/
+
+    const { cronSchedule } = CONSTANTS;
+    let schedule = `${cronSchedule.second} ${cronSchedule.minute} ${cronSchedule.hour}`;
+    schedule += ` ${cronSchedule.dayOfMonth} ${cronSchedule.month} ${cronSchedule.dayOfWeek}`;
+    cron.schedule(schedule, function () {
+        console.log("Running Cron Job");
+    });
 
     return server;
 };
