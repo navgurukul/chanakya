@@ -1,7 +1,6 @@
 'use strict';
 
 const Path = require('path');
-const g = "pralhad"
 const Hoek = require('hoek');
 const Manifest = require('./server/manifest');
 const PluginConfig = require('./lib/plugins/schwifty').plugins.options;
