@@ -30,7 +30,7 @@ What is the price of the clothes that you have?
 | Option | Values | ID |
 |:---|:---:|:---:|
 | 1 | ₹800 | 956 |
-| 2 | ₹960 | 957 |
+| 2 | ₹860 | 957 |
 | 3 | ₹980 | 958 |
 | 4 | ₹1000 | 959 |
 
