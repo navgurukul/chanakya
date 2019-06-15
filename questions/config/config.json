@@ -6,11 +6,11 @@
             "numQuestions": 5,
             "choices": [
                 {
-                    "file": "percentageChoice1.md",
+                    "file": "percentage/percentageChoice1.md",
                     "id": 1
                 },
                 {
-                    "file": "percentageChoice2.md",
+                    "file": "percentage/percentageChoice2.md",
                     "id": null
                 }
             ]
@@ -21,11 +21,11 @@
             "numQuestions": 3,
             "choices": [
                 {
-                    "file": "unitMethodChoice1.md",
+                    "file": "unitaryMethod/unitMethodChoice1.md",
                     "id": 2
                 },
                 {
-                    "file": "unitMethodChoice2.md",
+                    "file": "unitaryMethod/unitMethodChoice2.md",
                     "id": null
                 }
             ]
@@ -36,11 +36,11 @@
             "numQuestions": 6,
             "choices": [
                 {
-                    "file": "algebraChoice1.md",
+                    "file": "algebra/algebraChoice1.md",
                     "id": 3
                 },
                 {
-                    "file": "algebraChoice2.md",
+                    "file": "algebra/algebraChoice2.md",
                     "id": null
                 }
             ]
