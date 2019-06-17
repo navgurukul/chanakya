@@ -12,7 +12,6 @@ exports.deployment = async (start) => {
 
     // Printing a request log
     server.events.on('response', function (request) {
-        console.log(request.server)
         request.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.url.path + ' --> ' + request.response.statusCode);
     });
 
@@ -26,15 +25,15 @@ exports.deployment = async (start) => {
     await server.start();
 
     console.log(`Server started at ${server.info.uri}`);
-        /**
-        * * * * * *
-        | | | | | |
-        | | | | | day of week
-        | | | | month
-        | | | day of month
-        | | hour
-        | minute
-        second ( optional )
+    /**
+    * * * * * *
+    | | | | | |
+    | | | | | day of week
+    | | | | month
+    | | | day of month
+    | | hour
+    | minute
+    second ( optional )
     **/
 
     const { cronSchedule } = CONSTANTS;
