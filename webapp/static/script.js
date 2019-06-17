@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "JSZE4N";
+    var enrolment_key = "Q0IP7O";
     var base_url="http://localhost:3000";
 }
 
@@ -70,7 +70,6 @@ function landing_page_submit() {
 
 function no_cheating_promise_submit() {
     mixpanel.track("No Cheating Promise");
-    console.log(1)
     $("#no_cheating_promise").slideUp(slide_up_time);
     $("#personal_details").slideDown(slide_down_time);
     setupDatePicker();
@@ -116,7 +115,7 @@ function personal_details_submit() {
         date = "28";
         month = "02";
         year = "1992";
-        mobile = "1010101010";
+        mobile = "7896121314";
         gender = "male";
         positions = {
             "latitude": 22,
@@ -234,6 +233,8 @@ function submitApp() {
     var mathMarksIn10th = $('#mathMarksIn10th').val();
     var mathMarksIn12th = $('#mathMarksIn12th').val();
     
+
+    var academicDetails = {}
     if (DEBUG) {
         pinCode = 110010;
         qualification = "lessThan10th";
@@ -298,22 +299,15 @@ function submitApp() {
             appending("Apke 10th ke percentage dijye!")
             return false
         }
-        
-        if(!mathMarksIn10th) {
-            appending("Apke 10th ke total marks dijye!")
-            return false
+
+        academicDetails = {
+            mathMarksIn10th: mathMarksIn10th,
+            percentageIn10th: percentageIn10th,
         }
-        mathMarksIn12th = 0
-        percentageIn12th = ""
 
     } else if (qualification == "class12th" || qualification == "graduate") {
         if (!percentageIn10th) {
             appending("Apke 10th ke percentage dijye!")
-            return false
-        }
-        
-        if(!mathMarksIn10th) {
-            appending("Apke 10th ke total marks dijye!")
             return false
         }
         
@@ -322,15 +316,15 @@ function submitApp() {
             return false
         }
         
-        if(!mathMarksIn12th) {
-            appending("Apke 12th ke total marks dijye!")
-            return false
+        academicDetails = {
+            mathMarksIn10th : mathMarksIn10th,
+            percentageIn10th: percentageIn10th,
+            mathMarksIn12th: mathMarksIn12th,
+            percentageIn12th: percentageIn12th
         }
+
     } else if (qualification == "lessThan10th"){
-        percentageIn10th = ""
-        percentageIn12th = ""
-        mathMarksIn10th = 0
-        mathMarksIn12th = 0
+        // Do nothing for now
     }
 
     var obj = {
@@ -342,22 +336,19 @@ function submitApp() {
         "schoolMedium": schoolMedium,
         "caste": caste,
         "religon": religion,
-        "percentageIn10th": percentageIn10th,
-        "mathMarksIn10th": mathMarksIn10th,
-        "percentageIn12th": percentageIn12th,
-        "mathMarksIn12th": mathMarksIn12th
     }
 
-    mixpanel.people.set({
-        "$pinCode": pinCode,
-        "$qualification": qualification,
-        "$state": state,
-        "$city": city,
-        "$currentStatus": currentStatus,
-        "$schoolMedium": schoolMedium,
-        "$caste": caste,
-        "$religon": religion
-    });
+    obj = Object.assign(obj, academicDetails);
+
+    var mixpanelObj = {}
+    var objKeys = Object.keys(obj)
+    
+    for(var i = 0; i < objKeys; i++){
+        var key = objKeys[i];
+        mixpanelObj["$"+key] = obj[key];
+    }
+
+    mixpanel.people.set(mixpanelObj);
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,

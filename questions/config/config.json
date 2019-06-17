@@ -21,7 +21,7 @@
             "numQuestions": 3,
             "choices": [
                 {
-                    "file": "unitaryMethod/unitMethodChoice1.md",
+                    "file": "unitMethodChoice1.md",
                     "id": 2
                 },
                 {
