@@ -64,14 +64,7 @@ module.exports = new Confidence.Store({
                         production: {           // In production do not default to "app-secret"
                             $env: 'APP_SECRET'
                         }
-                    },
-                    incomingCallType: ['requestCallback'],
-                    studentStages: [
-                        'requestCallback',
-                        'enrolmentKeyGenerated',
-                        'stageXYZ',
-                        'stageABC'
-                    ]
+                    }
                 }
             },
             {
