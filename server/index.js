@@ -36,12 +36,12 @@ exports.deployment = async (start) => {
     second ( optional )
     **/
 
-    const { cronSchedule } = CONSTANTS;
-    let schedule = `${cronSchedule.second} ${cronSchedule.minute} ${cronSchedule.hour}`;
-    schedule += ` ${cronSchedule.dayOfMonth} ${cronSchedule.month} ${cronSchedule.dayOfWeek}`;
-    cron.schedule(schedule, function () {
-        console.log("Running Cron Job");
-    });
+    // const { cronSchedule } = CONSTANTS;
+    // let schedule = `${cronSchedule.second} ${cronSchedule.minute} ${cronSchedule.hour}`;
+    // schedule += ` ${cronSchedule.dayOfMonth} ${cronSchedule.month} ${cronSchedule.dayOfWeek}`;
+    // cron.schedule(schedule, function () {
+    //     console.log("Running Cron Job");
+    // });
 
     return server;
 };
