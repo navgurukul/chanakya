@@ -25,23 +25,12 @@ exports.deployment = async (start) => {
     await server.start();
 
     console.log(`Server started at ${server.info.uri}`);
-    /**
-    * * * * * *
-    | | | | | |
-    | | | | | day of week
-    | | | | month
-    | | | day of month
-    | | hour
-    | minute
-    second ( optional )
-    **/
 
-    // const { cronSchedule } = CONSTANTS;
-    // let schedule = `${cronSchedule.second} ${cronSchedule.minute} ${cronSchedule.hour}`;
-    // schedule += ` ${cronSchedule.dayOfMonth} ${cronSchedule.month} ${cronSchedule.dayOfWeek}`;
-    // cron.schedule(schedule, function () {
-    //     console.log("Running Cron Job");
-    // });
+    // schedule the metric calculation cron
+    cron.schedule(CONSTANTS.metricCalcCron, () => {
+        const { metricsService } = server.services();
+        metricsService.recordPendingMetrics();
+    });
 
     return server;
 };
