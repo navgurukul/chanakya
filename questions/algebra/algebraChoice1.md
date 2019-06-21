@@ -125,27 +125,36 @@ How many apples do you have?
 
 ### Hindi
 Ek apple ka weight 70 grams hai.
+
 Aur ek orange ka weight 50 grams hai.
-Aapke paas 5700 grams fruits hai.
-Aur aapke paas jitne oranges hai
-uske double number of apples hai.
+
+Aapke paas 4940 grams fruits hai.
+
+Aur aapke paas jitne oranges hai uske double number of apples hai.
+
 (Yaani agar 5 orange hai, toh 10 apples honge)
+
 Batayie aapke paas kitne apples hai?
 
 
 ### English
 Weight of one apple is 70 grams.
+
 And weight of one orange is 50 grams.
+
 You have 4940 grams of fruits in total.
-Number of oranges is twice that of number of apples.
+
+Number of apples is twice that of number of oranges.
+
 (If 5 oranges then it means 10 apples)
+
 How many apples do you have?
 
 
 ## Options
 | Option | Values | ID |
 |:---|:---:|:---:|
-| 1 | 60 | 933 |
+| 1 | 26 | 933 |
 
 # Question Choice 5
 ```json
