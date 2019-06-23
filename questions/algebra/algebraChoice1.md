@@ -98,7 +98,7 @@ Batayie aapke paas kitne apples hai?
 
 
 ### English
-Weight of one apples is 120 grams
+Weight of one apple is 120 grams
 And weight of one orange is 40 grams.
 You have 6400 grams of fruits.
 You have same number of apples and oranges.
