@@ -13,17 +13,13 @@
 ## Common Text
 
 ### Hindi
-Inn questions ko karne ke liye aap sochiye - aapke paas jo jo information nahi hai, usse x aur y jaise variables de kar maanni padegi. Phir unn variables se equation bana sakte hai jaise 3x+2y=100. Agar aap Maths se darte toh bhi mat ghabrayie, aap thoda sa dhyaan laga kar sochenge toh bhi kuch questions toh solve kar hi loge.
-
 1m (Ek meter) cotton ka price 70₹ hai.
 Aur 1m silk ka price 50₹ hai.
 Aapke paas 8m cotton aur 6m silk hai.
-Toh aap ke paas kitne ₹ ka kapda hai?
+Toh aap ke paas kitne ₹ ke kapda hai?
 
 
 ### English
-For this final set of questions try to understand what information is given to you, and then try to put that information in terms of variables like x and y,in an equation like 3x+2y=100. Even if you don’t know maths properly, don’t worry. Just try to solve these questions one at a time and with focus, and you would be able to solve a few.
-
 Price of 1m (one metre) cotton is 70₹.
 And price 1m silk is 50₹.
 You have 8m cotton and 6m silk.
@@ -52,6 +48,8 @@ What is the price of the clothes that you have?
 ## Common Text
 
 ### Hindi
+Inn questions ko karne ke liye aap sochiye - aapke paas jo jo information nahi hai, usse x aur y jaise variables de kar maanni padegi. Phir unn variables se equation bana sakte hai jaise 3x+2y=100. Agar aap Maths se darte toh bhi mat ghabrayie, aap thoda sa dhyaan laga kar sochenge toh bhi kuch questions toh solve kar hi loge.
+
 1m cotton ka price 60₹ hai.                
 Aur 1m silk ka price 55₹ hai.                
 Aapke paas 4000₹ ke kapde hai.            
@@ -60,6 +58,8 @@ In mei se kaunsa combination ki cost
 
 
 ### English
+For this final set of questions try to understand what information is given to you, and then try to put that information in terms of variables like x and y, in an equation like 3x+2y=100. Even if you don’t know maths properly, don’t worry. Just try to solve these questions one at a time and with focus, and you would be able to solve a few.
+
 Price of 1m cotton is 60₹.
 And weight of 1m silk is 55₹.
 You have clothes with a cost of 4000₹.
