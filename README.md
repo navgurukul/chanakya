@@ -51,6 +51,11 @@ When you use this flag it ignores the question & option IDs in the markdown file
 ### `--updateMD`
 If this is not specified it adds the questions but doesn't update the markdown files with the IDs returned by the server. This flag should normally be used during development when you want to play around with the questions but don't want to update the markdown files. The markdown files should only be updated when the questions are being seeded on the production environment.
 
+### `--noUpdateToConfig`
+when you use this flag you can update the config.json file.
+
+### `--ignoreConfigBucketsAndChoices`
+Using this flag you can add new bucket and new question choices if buckets are not exist in your database.
 ### Running the Script
 
 Here is how you can run the script. The script needs to be run from the root of the project.
@@ -73,6 +78,18 @@ node lib/seedQuestions/index.js --questionsDir question --addAllQuestions
 ```
 
 Running it with `--addAllQuestions` flag will ensure that the IDs in the markdown files will be ignored and all questions in the files will be added as new questions.
+
+
+```bash
+node lib/seedQuestions/index.js --questionsDir questions --noUpdateToConfig
+```
+Running it with `--noUpdateToConfig` flag will update the config.json file and maintained buckets Id and question choice Id
+
+
+```bash
+node lib/seedQuestions/index.js --questionsDir questions --ignoreConfigBucketsAndChoices
+```
+Running it with `--ignoreConfigBucketsAndChoices` flag will add new bucket and question choice if bucket Id and question choise does not exist.
 
 ## How are tests generated?
 
