@@ -55,7 +55,10 @@ If this is not specified it adds the questions but doesn't update the markdown f
 when you use this flag you can update the config.json file.
 
 ### `--ignoreConfigBucketsAndChoices`
-Using this flag you can add new bucket and new question choices if buckets are not exist in your database.
+Using this flag you can ignore IDs of the buckets and choices in the config file and add new buckets and choices IDs in you database.
+
+### `--updateConfigFile`
+Using this flag you can maintain config file update or not will adding a new question in your database. according to user choice He/She want to update config file or not.
 ### Running the Script
 
 Here is how you can run the script. The script needs to be run from the root of the project.
@@ -89,7 +92,12 @@ Running it with `--noUpdateToConfig` flag will update the config.json file and m
 ```bash
 node lib/seedQuestions/index.js --questionsDir questions --ignoreConfigBucketsAndChoices
 ```
-Running it with `--ignoreConfigBucketsAndChoices` flag will add new bucket and question choice if bucket Id and question choise does not exist.
+Running it with `--ignoreConfigBucketsAndChoices` flag will add new bucket and question choice IDs.
+
+```bash
+node lib/seedQuestions/index.js --questionsDir questions --updateConfigFile
+```
+Running it with `--updateConfigFile` flag will update config file or not.
 
 ## How are tests generated?
 
