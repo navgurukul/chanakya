@@ -589,7 +589,7 @@ $(document).ready(function() {
         $.get(base_url+"/on_assessment/validate_enrolment_key/"+enrolment_key,
         {},
         (data, resp) => {
-            if (data["keyStatus"]=="testAnswered") {
+            if (data["keyStatus"] == "testAnswered") {
                 $('.page').hide();
                 $('#end_page').show();
             }
@@ -599,6 +599,11 @@ $(document).ready(function() {
                 $("#time_aware").slideDown(slide_down_time);
                 // fetch direct questions and options.
                 fetchQuestionsAndOptions();
+            }
+            // once student is enter hes complete details then hide end_page it is related to final students details.
+            if (data["stage"] == "completedTestWithDetails") {
+                $('.page').hide();
+                $("#thank_you_page").slideDown(slide_down_time);
             }
         }).fail(function(response) {
             $("#myModal").modal();
