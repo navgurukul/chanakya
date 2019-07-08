@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "Q0IP7O";
+    var enrolment_key = "YIGCDA";
     var base_url="http://localhost:3000";
 }
 
@@ -100,6 +100,25 @@ function setupDatePicker() {
     for (var i = minyyyy ; i <= yyyy; i++) {
         yearfield.append("<option value="+i+">"+i+"</option>");
     }    
+}
+
+function fetchQuestionsAndOptions(){
+    $.post(base_url+"/on_assessment/questions/"+enrolment_key,
+        {},
+        (data, resp) => {
+            questions = data["data"];
+            $("#page2").slideUp(slide_up_time);
+            $("#time_aware").slideDown(slide_down_time);                    
+            if (!qDisplayed) {
+                dQuestions();
+            }
+        },
+        'json'
+    )
+    .fail(function(response) {
+        mixpanel.track("Error in fetching questins and options.");
+        Sentry.captureException(response);
+    });
 }
 
 function personal_details_submit() {
@@ -196,18 +215,8 @@ function personal_details_submit() {
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
-
-            $.post(base_url+"/on_assessment/questions/"+enrolment_key,
-                {},
-                (data, resp) => {
-                    questions = data["data"];
-                    $("#page2").slideUp(slide_up_time);
-                    $("#time_aware").slideDown(slide_down_time);                    
-                    if (!qDisplayed) {
-                        dQuestions();
-                    }
-                }
-            );    
+            // fetch question and options after filling basic details of student.
+            fetchQuestionsAndOptions();
         },
         'json'
     )
@@ -584,6 +593,13 @@ $(document).ready(function() {
                 $('.page').hide();
                 $('#end_page').show();
             }
+            // If students stage is basicDetailsEntered then hide personal_details div.
+            if (data["stage"] == "basicDetailsEntered"){
+                $('.page').hide();
+                $("#time_aware").slideDown(slide_down_time);
+                // fetch direct questions and options.
+                fetchQuestionsAndOptions();
+            }
         }).fail(function(response) {
             $("#myModal").modal();
             Sentry.captureException(response);
@@ -616,3 +632,4 @@ $(function(){
         }
     })
 });
+
