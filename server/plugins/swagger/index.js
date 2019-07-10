@@ -21,7 +21,13 @@ module.exports = {
                     info: {
                         version: Package.version
                     },
-                    options.grouping: 'tags'
+                    securityDefinitions: {
+                        jwt: {
+                            type: 'apiKey',
+                            name: 'Authorization',
+                            in: 'header'
+                        }
+                    },
                 }
             }
         ]);
