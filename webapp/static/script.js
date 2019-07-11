@@ -1,4 +1,4 @@
-var DEBUG = false;
+var DEBUG = true;
 var current_language = 'hi';
 
 Sentry.init({
@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "Q0IP7O";
+    var enrolment_key = "ILU3FX";
     var base_url="http://localhost:3000";
 }
 
@@ -102,6 +102,25 @@ function setupDatePicker() {
     }    
 }
 
+function fetchQuestionsAndOptions(){
+    $.post(base_url+"/on_assessment/questions/"+enrolment_key,
+        {},
+        (data, resp) => {
+            questions = data["data"];
+            $("#page2").slideUp(slide_up_time);
+            $("#time_aware").slideDown(slide_down_time);                    
+            if (!qDisplayed) {
+                dQuestions();
+            }
+        },
+        'json'
+    )
+    .fail(function(response) {
+        mixpanel.track("Error in fetching questins and options.");
+        Sentry.captureException(response);
+    });
+}
+
 function personal_details_submit() {
     var name = $('#name').val();
     var date = $('#date').val();
@@ -110,18 +129,18 @@ function personal_details_submit() {
     var mobile = $('#mobile').val();
     var gender = $('#gender').val();
 
-    if (DEBUG) {
-        name = "abhishek";
-        date = "28";
-        month = "02";
-        year = "1992";
-        mobile = "7896121314";
-        gender = "male";
-        positions = {
-            "latitude": 22,
-            "longitude": 77
-        }
-    }
+    // if (DEBUG) {
+    //     name = "abhishek";
+    //     date = "28";
+    //     month = "02";
+    //     year = "1992";
+    //     mobile = "7896121314";
+    //     gender = "male";
+    //     positions = {
+    //         "latitude": 22,
+    //         "longitude": 77
+    //     }
+    // }
 
     // network_speed.value  = navigator.connection.downlink;
 
@@ -196,18 +215,8 @@ function personal_details_submit() {
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
-
-            $.post(base_url+"/on_assessment/questions/"+enrolment_key,
-                {},
-                (data, resp) => {
-                    questions = data["data"];
-                    $("#page2").slideUp(slide_up_time);
-                    $("#time_aware").slideDown(slide_down_time);                    
-                    if (!qDisplayed) {
-                        dQuestions();
-                    }
-                }
-            );    
+            // fetch question and options after filling basic details of student.
+            fetchQuestionsAndOptions();
         },
         'json'
     )
@@ -580,9 +589,21 @@ $(document).ready(function() {
         $.get(base_url+"/on_assessment/validate_enrolment_key/"+enrolment_key,
         {},
         (data, resp) => {
-            if (data["keyStatus"]=="testAnswered") {
+            if (data["keyStatus"] == "testAnswered") {
                 $('.page').hide();
                 $('#end_page').show();
+            }
+            // If students stage is basicDetailsEntered then hide personal_details div.
+            if (data["stage"] == "basicDetailsEntered"){
+                $('.page').hide();
+                $("#time_aware").slideDown(slide_down_time);
+                // fetch direct questions and options.
+                fetchQuestionsAndOptions();
+            }
+            // once student is enter hes complete details then hide end_page it is related to final students details.
+            if (data["stage"] == "completedTestWithDetails") {
+                $('.page').hide();
+                $("#thank_you_page").slideDown(slide_down_time);
             }
         }).fail(function(response) {
             $("#myModal").modal();
