@@ -129,18 +129,18 @@ function personal_details_submit() {
     var mobile = $('#mobile').val();
     var gender = $('#gender').val();
 
-    if (DEBUG) {
-        name = "abhishek";
-        date = "28";
-        month = "02";
-        year = "1992";
-        mobile = "7896121314";
-        gender = "male";
-        positions = {
-            "latitude": 22,
-            "longitude": 77
-        }
-    }
+    // if (DEBUG) {
+    //     name = "abhishek";
+    //     date = "28";
+    //     month = "02";
+    //     year = "1992";
+    //     mobile = "7896121314";
+    //     gender = "male";
+    //     positions = {
+    //         "latitude": 22,
+    //         "longitude": 77
+    //     }
+    // }
 
     // network_speed.value  = navigator.connection.downlink;
 
