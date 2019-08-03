@@ -51,6 +51,12 @@ When you use this flag it ignores the question & option IDs in the markdown file
 ### `--updateMD`
 If this is not specified it adds the questions but doesn't update the markdown files with the IDs returned by the server. This flag should normally be used during development when you want to play around with the questions but don't want to update the markdown files. The markdown files should only be updated when the questions are being seeded on the production environment.
 
+### `--ignoreConfigBucketsAndChoices`
+Using this flag you can ignore IDs of the buckets and choices in the config file and add new buckets and choices IDs in you database.
+
+### `--updateConfigFile`
+Using this flag you can maintain config file update or not will adding a new question in your database. according to user choice He/She want to update config file or not.
+
 ### Running the Script
 
 Here is how you can run the script. The script needs to be run from the root of the project.
