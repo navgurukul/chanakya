@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "YIGCDA";
+    var enrolment_key = "XYBRJO";
     var base_url="http://localhost:3000";
 }
 
@@ -585,7 +585,7 @@ $(document).ready(function() {
         // personal_details_submit();
         // time_aware_submit();
     }
-    else {
+    // else {
         $.get(base_url+"/on_assessment/validate_enrolment_key/"+enrolment_key,
         {},
         (data, resp) => {
@@ -608,8 +608,8 @@ $(document).ready(function() {
         }).fail(function(response) {
             $("#myModal").modal();
             Sentry.captureException(response);
-        });;
-    }
+        });
+    // }
 });
 
 $(function(){
