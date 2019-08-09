@@ -139,3 +139,16 @@ Here we can create a bucket which will have the name of `Algebra` and create 3 b
 Every **Question Bucket** will have a name and **Number of Questions** allowed in every bucket choice associated with it.
 
 A **Question Bucket** can have multiple **Question Bucket Choices** associated with it. The number of questions in every choice should be the same as the **Number of Questions** specified in the question bucket.
+
+
+## Useful Tips
+
+These are just some nice tips which might be helpful while dealing with this codebase. They are not neccesarily chanakya specific documentation. You might be able to find most of these things online. They are just meant to save time :)
+
+### Debugging Knex
+Set the following environment variable to log all the knex queries etc. being done. Makes debugging knex errors very easy because of `not-so-smart` stack traces given out by Knex.
+
+```shell
+export DEBUG=knex:*
+npm start
+```
