@@ -33,10 +33,10 @@ exports.deployment = async (start) => {
     });
 
     // Inform students test result sending to SMS after 4 hours.
-    // cron.schedule(CONSTANTS.testResultCron, () =>{
-    //     const { assessmentService } = server.services();
-    //     assessmentService.informTestResult();
-    // });
+    cron.schedule(CONSTANTS.testResultCron, () =>{
+        const { assessmentService } = server.services();
+        assessmentService.informTestResult();
+    });
 
     return server;
 };
