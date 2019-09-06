@@ -51,3 +51,7 @@ img {
 @media only screen and (max-device-width: 600px) {
 
 }
+
+#passage{
+    margin-left:0%!important;
+}
