@@ -12,7 +12,8 @@
 ## Common Text
 
 ### Hindi
-Percentage bahut hi important concept hai maths mei. Bas aap yeh socho ki
+Percentage bahut hi important concept hai maths mei.
+Aaiye iss concept ko iss example se samajhte hai:
 
 Agar 50 ladke hai, aur
 40 ladke healthy hai.
@@ -28,11 +29,11 @@ yaani,
 
 	bimaar ladko ki pratishat = (10 / 50) * 100 = 20%
 
-Ab iss concept ko use karte hue, yeh questions solve karne ki koshish karna. Dhyaan rakhna - ki hamesha yeh sochna kitne healthy boys hai, kitne unhealthy aur kitne **total boys** hai?
+Ab iss concept ko use karte hue, yeh questions solve karne ki koshish karna. Dhyaan rakhna - ki hamesha yeh sochna kitne pratishat healthy boys hai, kitne unhealthy aur kitne **total boys** hai?
 
 Agar 180 boys hai, jismei se
 45 ladke unhealthy hai	
-Toh kitne ladke unhealthy hai?
+Toh kitne pratishat ladke unhealthy hai?
 Dhyaan se socho aur likho kya answer hai.
 
 ### English
