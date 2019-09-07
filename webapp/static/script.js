@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "JSZE4N";
+    var enrolment_key = "XYBRJO";
     var base_url="http://localhost:3000";
 }
 
@@ -70,7 +70,6 @@ function landing_page_submit() {
 
 function no_cheating_promise_submit() {
     mixpanel.track("No Cheating Promise");
-    console.log(1)
     $("#no_cheating_promise").slideUp(slide_up_time);
     $("#personal_details").slideDown(slide_down_time);
     setupDatePicker();
@@ -103,6 +102,25 @@ function setupDatePicker() {
     }    
 }
 
+function fetchQuestionsAndOptions(){
+    $.post(base_url+"/on_assessment/questions/"+enrolment_key,
+        {},
+        (data, resp) => {
+            questions = data["data"];
+            $("#page2").slideUp(slide_up_time);
+            $("#time_aware").slideDown(slide_down_time);                    
+            if (!qDisplayed) {
+                dQuestions();
+            }
+        },
+        'json'
+    )
+    .fail(function(response) {
+        mixpanel.track("Error in fetching questins and options.");
+        Sentry.captureException(response);
+    });
+}
+
 function personal_details_submit() {
     var name = $('#name').val();
     var date = $('#date').val();
@@ -111,18 +129,18 @@ function personal_details_submit() {
     var mobile = $('#mobile').val();
     var gender = $('#gender').val();
 
-    if (DEBUG) {
-        name = "abhishek";
-        date = "28";
-        month = "02";
-        year = "1992";
-        mobile = "1010101010";
-        gender = "male";
-        positions = {
-            "latitude": 22,
-            "longitude": 77
-        }
-    }
+    // if (DEBUG) {
+    //     name = "abhishek";
+    //     date = "28";
+    //     month = "02";
+    //     year = "1992";
+    //     mobile = "7896121314";
+    //     gender = "male";
+    //     positions = {
+    //         "latitude": 22,
+    //         "longitude": 77
+    //     }
+    // }
 
     // network_speed.value  = navigator.connection.downlink;
 
@@ -197,18 +215,8 @@ function personal_details_submit() {
             $("#personal_details").slideUp(slide_up_time);
             $("#time_aware").slideDown(slide_down_time);
             appending('');
-
-            $.post(base_url+"/on_assessment/questions/"+enrolment_key,
-                {},
-                (data, resp) => {
-                    questions = data["data"];
-                    $("#page2").slideUp(slide_up_time);
-                    $("#time_aware").slideDown(slide_down_time);                    
-                    if (!qDisplayed) {
-                        dQuestions();
-                    }
-                }
-            );    
+            // fetch question and options after filling basic details of student.
+            fetchQuestionsAndOptions();
         },
         'json'
     )
@@ -234,6 +242,8 @@ function submitApp() {
     var mathMarksIn10th = $('#mathMarksIn10th').val();
     var mathMarksIn12th = $('#mathMarksIn12th').val();
     
+
+    var academicDetails = {}
     if (DEBUG) {
         pinCode = 110010;
         qualification = "lessThan10th";
@@ -298,22 +308,15 @@ function submitApp() {
             appending("Apke 10th ke percentage dijye!")
             return false
         }
-        
-        if(!mathMarksIn10th) {
-            appending("Apke 10th ke total marks dijye!")
-            return false
+
+        academicDetails = {
+            mathMarksIn10th: mathMarksIn10th,
+            percentageIn10th: percentageIn10th,
         }
-        mathMarksIn12th = 0
-        percentageIn12th = ""
 
     } else if (qualification == "class12th" || qualification == "graduate") {
         if (!percentageIn10th) {
             appending("Apke 10th ke percentage dijye!")
-            return false
-        }
-        
-        if(!mathMarksIn10th) {
-            appending("Apke 10th ke total marks dijye!")
             return false
         }
         
@@ -322,15 +325,15 @@ function submitApp() {
             return false
         }
         
-        if(!mathMarksIn12th) {
-            appending("Apke 12th ke total marks dijye!")
-            return false
+        academicDetails = {
+            mathMarksIn10th : mathMarksIn10th,
+            percentageIn10th: percentageIn10th,
+            mathMarksIn12th: mathMarksIn12th,
+            percentageIn12th: percentageIn12th
         }
+
     } else if (qualification == "lessThan10th"){
-        percentageIn10th = ""
-        percentageIn12th = ""
-        mathMarksIn10th = 0
-        mathMarksIn12th = 0
+        // Do nothing for now
     }
 
     var obj = {
@@ -342,22 +345,19 @@ function submitApp() {
         "schoolMedium": schoolMedium,
         "caste": caste,
         "religon": religion,
-        "percentageIn10th": percentageIn10th,
-        "mathMarksIn10th": mathMarksIn10th,
-        "percentageIn12th": percentageIn12th,
-        "mathMarksIn12th": mathMarksIn12th
     }
 
-    mixpanel.people.set({
-        "$pinCode": pinCode,
-        "$qualification": qualification,
-        "$state": state,
-        "$city": city,
-        "$currentStatus": currentStatus,
-        "$schoolMedium": schoolMedium,
-        "$caste": caste,
-        "$religon": religion
-    });
+    obj = Object.assign(obj, academicDetails);
+
+    var mixpanelObj = {}
+    var objKeys = Object.keys(obj)
+    
+    for(var i = 0; i < objKeys; i++){
+        var key = objKeys[i];
+        mixpanelObj["$"+key] = obj[key];
+    }
+
+    mixpanel.people.set(mixpanelObj);
 
     $.post(base_url+"/on_assessment/details/"+enrolment_key,
         obj,
@@ -585,19 +585,31 @@ $(document).ready(function() {
         // personal_details_submit();
         // time_aware_submit();
     }
-    else {
+    // else {
         $.get(base_url+"/on_assessment/validate_enrolment_key/"+enrolment_key,
         {},
         (data, resp) => {
-            if (data["keyStatus"]=="testAnswered") {
+            if (data["keyStatus"] == "testAnswered") {
                 $('.page').hide();
                 $('#end_page').show();
+            }
+            // If students stage is basicDetailsEntered then hide personal_details div.
+            if (data["stage"] == "basicDetailsEntered"){
+                $('.page').hide();
+                $("#time_aware").slideDown(slide_down_time);
+                // fetch direct questions and options.
+                fetchQuestionsAndOptions();
+            }
+            // once student is enter hes complete details then hide end_page it is related to final students details.
+            if (data["stage"] == "completedTestWithDetails") {
+                $('.page').hide();
+                $("#thank_you_page").slideDown(slide_down_time);
             }
         }).fail(function(response) {
             $("#myModal").modal();
             Sentry.captureException(response);
-        });;
-    }
+        });
+    // }
 });
 
 $(function(){
@@ -625,3 +637,4 @@ $(function(){
         }
     })
 });
+

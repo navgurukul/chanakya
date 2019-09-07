@@ -1,52 +1,52 @@
 {
-    "buckets": [
-        {
-            "name": "Percentage",
-            "id": 2,
-            "numQuestions": 5,
-            "choices": [
-                {
-                    "file": "percentageChoice1.md",
-                    "id": 1
-                },
-                {
-                    "file": "percentageChoice2.md",
-                    "id": null
-                }
-            ]
-        },
-        {
-            "name": "Unitary Method",
-            "id": 1,
-            "numQuestions": 3,
-            "choices": [
-                {
-                    "file": "unitMethodChoice1.md",
-                    "id": 2
-                },
-                {
-                    "file": "unitMethodChoice2.md",
-                    "id": null
-                }
-            ]
-        },
-        {
-            "name": "Algebra",
-            "id": 3,
-            "numQuestions": 6,
-            "choices": [
-                {
-                    "file": "algebraChoice1.md",
-                    "id": 3
-                },
-                {
-                    "file": "algebraChoice2.md",
-                    "id": null
-                }
-            ]
-        }
-    ],
-    "normalQuestionFiles": [
-        "normalQuestions.md"
-    ]
+  "buckets": [
+      {
+          "name": "Percentage",
+          "id": 2,
+          "numQuestions": 5,
+          "choices": [
+              {
+                  "file": "percentage/percentageChoice1.md",
+                  "id": 1
+              },
+              {
+                  "file": "percentage/percentageChoice2.md",
+                  "id": 13
+              }
+          ]
+      },
+      {
+          "name": "Unitary Method",
+          "id": 1,
+          "numQuestions": 3,
+          "choices": [
+              {
+                  "file": "unitaryMethod/unitMethodChoice1.md",
+                  "id": 2
+              },
+              {
+                  "file": "unitaryMethod/unitMethodChoice2.md",
+                  "id": 14
+              }
+          ]
+      },
+      {
+          "name": "Algebra",
+          "id": 3,
+          "numQuestions": 6,
+          "choices": [
+              {
+                  "file": "algebra/algebraChoice1.md",
+                  "id": 3
+              },
+              {
+                  "file": "algebra/algebraChoice2.md",
+                  "id": 15
+              }
+          ]
+      }
+  ],
+  "normalQuestionFiles": [
+      "normalQuestions.md"
+  ]
 }

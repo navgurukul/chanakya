@@ -2,6 +2,8 @@
 
 const Glue = require('glue');
 const Manifest = require('./manifest');
+const cron = require("node-cron");
+const CONSTANTS = require('../lib/constants')
 
 exports.deployment = async (start) => {
 
@@ -23,6 +25,12 @@ exports.deployment = async (start) => {
     await server.start();
 
     console.log(`Server started at ${server.info.uri}`);
+
+    // schedule the metric calculation cron
+    cron.schedule(CONSTANTS.metricCalcCron, () => {
+        const { metricsService } = server.services();
+        metricsService.recordPendingMetrics();
+    });
 
     return server;
 };

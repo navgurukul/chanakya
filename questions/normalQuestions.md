@@ -17,8 +17,10 @@
 ### Hindi
 Neeche diye hue pattern mein next kaunsa term aayega?
 
+
 ### English
 What will be the next term in the below pattern?
+
 
 ## Options
 | Option | Values | ID |
