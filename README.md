@@ -42,7 +42,7 @@ Make sure to re-start the server after doing this because the question paper gen
 
 ## Importing Questions from MD Files
 
-All the questions in Chanakya are stored in Markdown files stored in `questions/` directory. The database maintains IDs of all the questions and also of every option associated with the questions. Whenever the questions are seeded into the DB the questions & their respective options are assigned IDs. The seeding script has the ability to edit the markdown files and add the question IDs in the file itself.
+All the questions in Chanakya are stored in Markdown files stored in `questions/mcq` directory. The database maintains IDs of all the questions and also of every option associated with the questions. Whenever the questions are seeded into the DB the questions & their respective options are assigned IDs. The seeding script has the ability to edit the markdown files and add the question IDs in the file itself.
 
 The questions can be seeded by invoking the `lib/seedQuestions/index.js` script. This script supports two flags. Here is what the two flags mean.
 
@@ -63,20 +63,20 @@ Using this flag you can maintain config file update or not will adding a new que
 Here is how you can run the script. The script needs to be run from the root of the project.
 
 ```bash
-node lib/seedQuestions/index.js --questionsDir questions
+node lib/seedQuestions/index.js --questionsDir questions --questionType mcq
 ```
 
 Running it without any flag above wouldn't update the markdown files. Also it will ensure that the questions with IDs are edited while the questions without IDs are created.
 
 
 ```bash
-node lib/seedQuestions/index.js --questionsDir questions --updateMD
+node lib/seedQuestions/index.js --updateMD --questionsDir questions --questionType mcq
 ```
 
 Running it with `--updateMD` will ensure that the markdown files are edited with the updated IDs returned by the server.
 
 ```bash
-node lib/seedQuestions/index.js --questionsDir question --addAllQuestions
+node lib/seedQuestions/index.js --addAllQuestions --questionsDir question --questionType mcq
 ```
 
 Running it with `--addAllQuestions` flag will ensure that the IDs in the markdown files will be ignored and all questions in the files will be added as new questions.
@@ -139,6 +139,36 @@ Here we can create a bucket which will have the name of `Algebra` and create 3 b
 Every **Question Bucket** will have a name and **Number of Questions** allowed in every bucket choice associated with it.
 
 A **Question Bucket** can have multiple **Question Bucket Choices** associated with it. The number of questions in every choice should be the same as the **Number of Questions** specified in the question bucket.
+
+
+# Importing Passages And Questions for English Test.
+
+All the passages and questions in Chanakya are stored in Markdown files stored in `questions/english` directory. The database maintains IDs of all the questions and also of every option associated with the questions. Whenever the questions are seeded into the DB the questions & their respective options are assigned IDs. The seeding script has the ability to edit the markdown files and add the question IDs in the file itself.
+
+The questions can be seeded by invoking the `lib/seedQuestions/englishTest.js` script. This script supports two flags. Here is what the two flags mean.
+
+### `--updateMD`
+If this is not specified it adds the questions but doesn't update the markdown files with the IDs returned by the server. This flag should normally be used during development when you want to play around with the questions but don't want to update the markdown files. The markdown files should only be updated when the questions are being seeded on the production environment.
+
+### `--questionType english/mcq`
+using this flag you can select which type of test you want to seed and stored questions in DB.
+
+### Running the Script
+
+Here is how you can run the script. The script needs to be run from the root of the project.
+
+```bash
+node lib/seedQuestions/index.js --questionsDir questions --questionType english
+```
+
+Running it with `--questionType` flag above you can seed passages nad respective passage questions and stored into in DB.
+
+
+```bash
+node lib/seedQuestions/index.js --updateMD --questionsDir questions --questionType english
+```
+
+Running it with `--updateMD` and `--questionType` flag will ensure that the markdown files are edited with the updated IDs returned by the server.
 
 
 ## Useful Tips
