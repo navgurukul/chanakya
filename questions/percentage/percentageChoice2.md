@@ -34,7 +34,7 @@ Ab iss concept ko use karte hue, yeh questions solve karne ki koshish karna. Dhy
 
 Agar 180 boys hai, jismei se
 45 ladke unhealthy hai    
-Toh kitne ladke unhealthy hai?
+Toh kitne pratishat ladke unhealthy hai?
 Dhyaan se socho aur likho kya answer hai.
 
 
@@ -59,7 +59,7 @@ Now using this concept, please solve the following questions. Please take care t
 
 If there are 180 boys, out of which
 45 boys are unhealthy.
-Then how many boys are unhealthy?
+Then how many percent boys are unhealthy?
 Please think and answer carefully.
 
 
@@ -183,7 +183,7 @@ Ek school mei 800 boys hai.
 uss mei 20% boys unhealthy hai.
 Kitne unhealthy boys add karne se
 aapke school mei 36% unhealthy boys
-reh jayenge.
+ho jayenge.
 
 
 ### English
