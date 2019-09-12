@@ -1,51 +1,66 @@
+jobs:
+  build:
+    executor:
+      name: node/default
+      tag: '10.16'
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run lint
+orbs:
+  node: circleci/node@1.1
 version: 2.1
 
-aliases:
-  - &working_directory  ~/chanakya
-  - &load_node
-    - image: circleci/node:10.16
+# version: 2
 
-  - &save-install-cache
-    paths:
-      - node_modules
-    key: v1-install-{{ checksum "yarn.lock" }}
-  - &restore-install-cache
-    keys:
-      - v1-install-{{ checksum "yarn.lock" }}
-      - v1-install-
+# aliases:
+#   - &working_directory  ~/chanakya
+#   - &load_node
+#     - image: circleci/node:10.16
 
-  - &persist_install_node
-    root: *working_directory
-    paths:
-      - node_modules
+#   - &save-install-cache
+#     paths:
+#       - node_modules
+#     key: v1-install-{{ checksum "yarn.lock" }}
+#   - &restore-install-cache
+#     keys:
+#       - v1-install-{{ checksum "yarn.lock" }}
+#       - v1-install-
 
-  - &attach-install_node
-    at: *working_directory
+#   - &persist_install_node
+#     root: *working_directory
+#     paths:
+#       - node_modules
 
-jobs:
-  install:
-    working_directory: *working_directory
-    docker: 
-      - image: *load_node
-    steps:
-      - checkout
-      - restore_cache: *restore-install-cache
-      - run: npm install
-      - save_cache: *save-install-cache
-      - persist_to_workspace: *persist_install_node
-  lint:
-    docker:
-      - image: *load_node
-    steps:
-      - checkout
-      - attach_workspace: *attach-install_node
-      - run: npm run lint
+#   - &attach-install_node
+#     at: *working_directory
 
-workflows:
-  version: 2
-  build-test-deploy:
-  jobs:
-    - install
-    - lint:
-        requires:
-          - install
+# jobs:
+#   install:
+#     working_directory: *working_directory
+#     docker: 
+#       - image: *load_node
+#     steps:
+#       - checkout
+#       - restore_cache: *restore-install-cache
+#       - run: npm install
+#       - save_cache: *save-install-cache
+#       - persist_to_workspace: *persist_install_node
+#   lint:
+#     docker:
+#       - image: *load_node
+#     steps:
+#       - checkout
+#       - attach_workspace: *attach-install_node
+#       - run: npm run lint
+
+# workflows:
+#   version: 2
+#   build-test-deploy:
+#   jobs:
+#     - install
+#     - lint:
+#         requires:
+#           - install
