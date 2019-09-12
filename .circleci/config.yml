@@ -19,6 +19,9 @@ aliases:
     paths:
       - node_modules
 
+  - &attach-install_node
+    at: *working_directory
+
 jobs:
   install:
     working_directory: *working_directory
