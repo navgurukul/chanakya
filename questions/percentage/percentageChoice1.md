@@ -13,7 +13,8 @@
 ## Common Text
 
 ### Hindi
-Percentage bahut hi important concept hai maths mei. Bas aap yeh socho ki
+Percentage bahut hi important concept hai maths mei.
+Aaiye iss concept ko iss example se samajhte hai:
 
 Agar ek glass mei 50 ml nimbu paani hai
 Jismei se 40 ml paani hai.
