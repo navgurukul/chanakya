@@ -46,6 +46,6 @@ workflows:
   build-test-deploy:
   jobs:
     - install
-    - lint
-      requires:
-        - install
+    - lint:
+        requires:
+          - install
