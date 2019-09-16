@@ -153,6 +153,9 @@ If this is not specified it adds the questions but doesn't update the markdown f
 ### `--questionType english/mcq`
 using this flag you can select which type of test you want to seed and stored questions in DB.
 
+### `--addAllQuestionsAndPassages`
+using this flag you can add all new questions and passages. 
+
 ### Running the Script
 
 Here is how you can run the script. The script needs to be run from the root of the project.
