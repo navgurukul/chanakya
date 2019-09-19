@@ -32,7 +32,7 @@ module.exports = {
                             in: 'header'
                         }
                     },
-                    // swaggerUIPath: swaggerUIPath,
+                    swaggerUIPath: swaggerUIPath,
                 }
             }
         ]);
