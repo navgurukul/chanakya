@@ -256,7 +256,6 @@ function makeActive(index) {
 
 function submitTest() {
     updateAnswer(current_question);
-    console.log(answers) 
     $.ajax({
         url: base_url+"/englishTest/questions/"+enrolment_key+"/answers",
         type: 'POST',
