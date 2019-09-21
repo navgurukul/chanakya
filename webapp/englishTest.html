@@ -138,27 +138,32 @@
                 </div>
             </div>
             <div class="row hide page " id="Passage_page">
-                <div class="clearfix" id="timer">
-                    <div class="red b col-12" id="on_question_passage"></div>
-                    <div class="red b col-12" id="kitne_questions_passage"></div>
-                    <div class="red b col-12" id="time_to_show_passage"></div>
-                    <div class="col-10 col-md-6 mb-4">
-                        <div class="progress custom">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
-                                role="progressbar"  aria-valuemin="0"
-                                aria-valuemax="100">
-                            </div>
-                        </div>
+                 <div class="clearfix" id="timer">
+                                <div class="red b col-12" id="on_question_passage"></div>
+                                <div class="red b col-12" id="kitne_questions_passage"></div>
+                                <div class="red b col-12" id="time_to_show_passage"></div>
+                                <div class="col-10 col-md-6 mb-4">
+                                    <div class="progress custom">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
+                                            role="progressbar"  aria-valuemin="0"
+                                            aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                                <!-- <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3" id="passage"> -->
+                                    <p class="ptext"></p>
+                                    <button type="button" class="btn btn-md btn-outline-warning mt-1" id="question_button" onclick="goOnQuestions();">
+                                            <span class="en lang">Go On Question</span>
+                                            <span class="hi lang">प्रश्न पर जाएं</span>
+                                            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                                    </button>
+                                <!-- </div> -->
                     </div>
-                </div> 
-                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3" id="passage">
-                    <p class="ptext"></p>
-                    <button type="button" class="btn btn-md btn-outline-warning mt-1" id="question_button" onclick="goOnQuestions();">
-                            <span class="en lang">Go On Question</span>
-                            <span class="hi lang">प्रश्न पर जाएं</span>
-                            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-                    </button>
                 </div>
+                
             </div>
             
             <div class="row hide page" id="question_answer_page">
