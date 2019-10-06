@@ -40,13 +40,13 @@ exports.deployment = async (start) => {
 
 if (!module.parent) {
     try {
-        if (process.env.mode) {
+        if (process.env.NODE_ENV) {
             exports.deployment(true);
             process.on('unhandledRejection', (err) => {
                 throw err;
             });       
-        }else {
-            var NODE_ENV = NodeEnvironmentMode;
+        } else {
+            throw Error("An environment variable needs to be defined.")
         }
     } catch (err) { // if mode is not defiend then inform to user defined mode.
         console.log( "Please defined Node Environment mode either development or production in .env file")
