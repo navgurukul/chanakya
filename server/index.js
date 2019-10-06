@@ -4,6 +4,9 @@ const Glue = require('glue');
 const Manifest = require('./manifest');
 const cron = require("node-cron");
 const CONSTANTS = require('../lib/constants')
+// taking mode of node environment from .env file.
+const Dotenv = require('dotenv')
+Dotenv.config({ path: `${__dirname}/../.env` });
 
 exports.deployment = async (start) => {
 
@@ -36,11 +39,17 @@ exports.deployment = async (start) => {
 };
 
 if (!module.parent) {
-
-    exports.deployment(true);
-
-    process.on('unhandledRejection', (err) => {
-
-        throw err;
-    });
+    try {
+        if (process.env.mode) {
+            exports.deployment(true);
+            process.on('unhandledRejection', (err) => {
+                throw err;
+            });       
+        }else {
+            var NODE_ENV = NodeEnvironmentMode;
+        }
+    } catch (err) { // if mode is not defiend then inform to user defined mode.
+        console.log( "Please defined Node Environment mode either development or production in .env file")
+        throw err
+    }
 }
