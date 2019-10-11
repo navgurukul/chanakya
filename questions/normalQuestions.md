@@ -43,11 +43,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -71,11 +71,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -99,11 +99,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -127,11 +127,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -155,11 +155,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -183,11 +183,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
@@ -211,11 +211,11 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+*Neeche* diye hue pattern mein next kaunsa term aayega?
 
 
 ### English
-What will be the next term in the below pattern?
+*What* will be the next term in the below pattern?
 
 
 ## Options
