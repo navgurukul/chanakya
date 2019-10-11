@@ -8,6 +8,45 @@
 3. Create a .env file in the root directory of the project and update the required variables. You can use `sample.env` as the skeleton.
 4. `npm start` to run the server. The server will run with auto reloading using nodemon.
 
+## Good Practices
+
+### Linting
+
+Code should be properly linted before any pull request is merged into the `master`. `npm run lint` to see all the linting errors. In cases where exceptions need to be made and a particular linting error cannot be fixed use the following code above the concerned line.
+
+```javascript
+// eslint-disable-next-line no-useless-escape
+```
+
+Here `no-useless-escape` is the rule which needs to be ignored for the line below.
+
+### Constants
+
+Don't hard code any values in the code whatsoever. Try to always declare the values in `lib/constants.js` instead of declaring them anywhere in the code. Here's an example on how we declared the current mode in constants and then used it across the code.
+
+```javascript
+{
+  mode: process.env.NODE_ENV,
+  supportedModes: {
+    prod: 'production',
+    dev: 'development',
+  },
+}
+```
+
+The above snippet is from `lib/constants.js`. Now to write a conditional logic on basis of the mode which the server is running under right now, we wrote the following code in `lib/services/exotel.js`
+
+```javascript
+if (CONSTANTS.mode !== CONSTANTS.supportedModes.prod) {
+  // do something here
+}
+```
+
+The mode is not picked from the `process.env` neither is the value to which it is compared.
+
+### Services
+
+All the heavy business logic should exist strictly in the concerned services. No logic should be there in any helper file or the API endpoints
 
 ## How to use Knex Migrations?
 
@@ -139,3 +178,16 @@ Here we can create a bucket which will have the name of `Algebra` and create 3 b
 Every **Question Bucket** will have a name and **Number of Questions** allowed in every bucket choice associated with it.
 
 A **Question Bucket** can have multiple **Question Bucket Choices** associated with it. The number of questions in every choice should be the same as the **Number of Questions** specified in the question bucket.
+
+
+## Useful Tips
+
+These are just some nice tips which might be helpful while dealing with this codebase. They are not neccesarily chanakya specific documentation. You might be able to find most of these things online. They are just meant to save time :)
+
+### Debugging Knex
+Set the following environment variable to log all the knex queries etc. being done. Makes debugging knex errors very easy because of `not-so-smart` stack traces given out by Knex.
+
+```shell
+export DEBUG=knex:*
+npm start
+```
