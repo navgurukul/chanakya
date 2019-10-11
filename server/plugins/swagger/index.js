@@ -6,6 +6,8 @@ const Handlebars = require('handlebars');
 const HapiSwagger = require('hapi-swagger');
 const Package = require('../../../package.json');
 
+const swaggerUIPath = process.env.NODE_ENV === 'production' ? '/api/swaggerui/' : '/swaggerui/';
+
 module.exports = {
     name: 'app-swagger',
     async register(server) {
@@ -28,6 +30,7 @@ module.exports = {
                             in: 'header'
                         }
                     },
+                    swaggerUIPath: swaggerUIPath,
                 }
             }
         ]);
