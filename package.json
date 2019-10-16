@@ -65,6 +65,7 @@
     "system": "^2.0.1",
     "toys": "2.x.x",
     "underscore": "^1.9.1",
+    "uuid": "^3.3.3",
     "vision": "^5.4.4",
     "webpage": "^0.3.0"
   },
