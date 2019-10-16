@@ -1,0 +1,12 @@
+{
+    "passages": [
+        {
+            "passage": "passage1/index.md",
+            "passageQuestion": "passage1/questions.md"
+        },
+        {
+            "passage": "passage2/index.md",
+            "passageQuestion": "passage2/questions.md"
+        }
+    ]
+}
