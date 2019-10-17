@@ -29,6 +29,36 @@ img {
     padding: 10px;
 }
 
-@media only screen and (max-device-width: 600px) {
+#question_button {
+    background: orangered;
+    color: black;
+    position: fixed;
+    bottom: 10px;
+    margin-left: 30%
+}
 
+#passage_button {
+    background: orangered;
+    color: black;
+}
+
+#Passage_page p img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+@media only screen and (max-device-width: 600px) {
+   
+}
+#passage{
+    margin-left:0%!important;
+}
+
+#Passage_page{
+    margin-top:10px;
+    box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)
+}
+.clearfix{
+    padding-top:20px;
 }

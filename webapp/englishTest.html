@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/style.css">
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="/static/jquery.min.js"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+        <script src="/static/bootstrap.min.js"></script>
+        <script src="https://browser.sentry-cdn.com/4.6.4/bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/static/englishTest.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
+
+        <script>
+        window.dataLayer = window.dataLayer || [];  
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-115187076-1');
+        </script>
+        <title>Admission Test - Navgurukul</title>
+        <!-- start Mixpanel -->
+        <script type="text/javascript">
+            (function(c,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,f=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};f&&d(f,"state")&&(j=JSON.parse(decodeURIComponent(d(f,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",f),history.replaceState(j.desiredHash||"",c.title,k.pathname+k.search)))}catch(n){}var l,h;window.mixpanel=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
+            0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="mixpanel";e.people=e.people||[];e.toString=function(b){var a="mixpanel";"mixpanel"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+            for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.2;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?
+            MIXPANEL_CUSTOM_LIB_URL:"file:"===c.location.protocol&&"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}})(document,window.mixpanel||[]);
+            mixpanel.init("9940df8cde093561bb1f636e0cc2409b", {debug: true});
+            mixpanel.track("Initiated");
+        </script>
+    </head>
+    <body>
+        <header class="container">
+        <nav>
+        </nav>
+        </header>
+        <main class="container mt-3">
+            <div class="row">
+                <select class="lang_picker col-2 offset-10" data-width="fit">
+                    <option value='hi'>Hindi</option>
+                    <option value='en'>English</option>
+                </select>
+            </div>
+            <div class="row page" id="landing_page">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">NavGurukul English Scholarship Test</h2>
+                        <br><br>
+                        <p class='hi lang'>
+                            Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot kaam aayengi.
+                        </p>
+                        <p class='en lang'>
+                            Before the starting of the test, please read the following instructions. All these instructions will be very helpful when you will attempt the test.
+                        </p>
+                        <ol class='hi lang'>
+                            <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.</li>
+                            <li>Har question ka answer apne phone pe hi test dete hue daal dein.</li>
+                            <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)</li>
+                        </ol>
+                        <ol class='en lang'>
+                                <li>The entire test is for <strong>1 hour</strong>. Please attempt this test in a silent place.</li>
+                                <li>Answer the question only on your phone.</li>
+                                <li>We trust you to attempt this test with honesty :)</li>
+                        </ol>
+                        <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                            <span class="en lang">I am ready</span>
+                            <span class="hi lang">Meh tayaar hu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row hide page" id="no_cheating_promise">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Read Carefully</h2>
+                        <br><br>
+                        <p class="en lang">
+                            A lot of students all across India answer the NavGurukul's test to go through the 1 year program and get high paying software engineering jobs.
+                            Though there is a great reward at the end, but you will have to do a lot of hard work to get that reward. 
+                            We would love to teach every student irrespective of their educational qualifications but sadly we require some basic knowledge of certain things. 
+                            We use this test to see if you have that basic knowledge.
+                        </p>
+                        <p class="hi lang">
+                            Kafi sare students pure India se NavGurukul ka test dete ha taki woh NavGurukul ke 1 saal wale program ke madad se high paying software engineering jobs le sake. Hala ki akhir me bohut bada eenam hota ha, magar uske liye apko kafi jada mehnat bi karni padhti hai.
+                            Hume har kisi student ko padhna chate hai chae uske educational qualifications kuch bi ho magar hume kuch basic knowledge chaiye kuch chizo me.
+                            Yeh test ke duwara hum yeh jane ki kosish karte ha ki kya apke pass woh basic knowledge hai.
+                        </p>
+                        <p class="en lang">
+                            If you are proceeding with the test please make sure you do it yourself without anyone's help. 
+                            We will disqualify you from NavGurukul if we detect any form of cheating. <br /><br />
+                        </p>
+
+                        <p class="hi lang">
+                            Agar aap ish test ke liye aage badh rahe hai toh kripaya ish test ko khudse de bina kisike madad ke.
+                            Agar hume pata chalta ha ki apne cheating ki hai toh hum apko disqualify kardenge aage. <br /><br />
+                        </p>
+
+                        <button onclick="no_cheating_promise_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                            <span class="en lang">Start My Test</span>
+                            <span class="hi lang">Test Shuru Karein</span>
+                        </button>
+                    </div>  
+                </div>
+            </div>
+            <div class="row hide page" id="time_aware">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">
+                            <span class="en lang">Final Instructions:</span>
+                            <span class="hi lang">Ek aur baat:</span>
+                        </h2>
+                        <br><br>
+                        <p class="hi lang">
+                            Apako Ek English paragraph diya jayenga aur us paragraph par kuch question.
+                            puche gaye hai unhe apako dhyanse se padhke answer karna hai.
+                        </p>
+                        <p class="en lang">
+                            We have given to you English paragraph and based on that pragraph we asked some multiple choice questions.
+                            Read the passage carefully and answer the questions given to you.
+                        </p>
+                        <h2>
+                            <span class="en lang">But please take care of TIME!</span>
+                            <span class="hi lang">Par time ka bhi khyaal rakhe!</span>
+                        </h2>
+                        <h3>
+                            <span class="en lang">You have to answer 7 questions in one hour!</span>
+                            <span class="hi lang">Aapko next 7 questions, 1 Hour me karne hai!</span>
+                        </h3>
+                        <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4">
+                            <span class="en lang">Start the test!</span>
+                            <span class="hi lang">Shuru Karein</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row hide page" id="Passage_page">
+                 <div class="clearfix" id="timer">
+                     <div class="red b col-12" id="on_question_passage"></div>
+                     <div class="red b col-12" id="kitne_questions_passage"></div>
+                     <div class="red b col-12" id="time_to_show_passage"></div>
+                     <div class="col-10 col-md-6 mb-4">
+                         <div class="progress custom">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
+                                role="progressbar"  aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+                <div>
+                    <div class="clearfix rounded form-container">
+                        <p class="ptext"></p>
+                        <button type="button" class="btn btn-md btn-outline-warning mt-1" id="question_button" onclick="goOnQuestions();">
+                            <span class="en lang">Go On Question</span>
+                            <span class="hi lang">प्रश्न पर जाएं</span>
+                            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row hide page" id="question_answer_page">
+                <div class="clearfix" id="timer">
+                    <div class="red b col-12" id="on_question"></div>
+                    <div class="red b col-12" id="kitne_questions"></div>
+                    <div class="red b col-12" id="time_to_show"></div>
+                    <div class="col-10 col-md-6 mb-4">
+                        <div class="progress custom">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
+                                    role="progressbar"  aria-valuemin="0"
+                                    aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container hide" id="qmcq">
+                    <h3 class="row question qtext col-xs-12 col-sm-12 mt-2 col-md-12">
+                    </h3>
+                    <div class="col-xs-12 col-sm-12 options row">
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 mt-3 text-center p-2">
+                    <button type="button" class="btn btn-warning" id="prev_button" onclick="previousQuestion();">
+                            <span class="en lang">Previous Answer</span>
+                            <span class="hi lang">पीछला प्रश्न</span>
+                            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                    </button>
+
+                    <button type="button" class="btn right btn-success ml-2"id="next_btn" onclick="nextQuestion();">
+                        <span class="en lang">Next Question</span>
+                        <span class="hi lang">अगला प्रश्न</span>
+                        <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                    </button>
+                    
+                     <button type="button" class="hide btn btn-success ml-2" id="submit_btn" onclick="submitTest();">
+                            Submit Test
+                        <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+                
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-md btn-outline-warning mt-1" id="passage_button" onclick="goOnPassage();">
+                        <span class="en lang">Go On passage</span>
+                        <span class="hi lang">पैसेज पर जाएं</span>
+                        <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-12 mt-1 text-center">
+                   
+                </div>
+            </div>
+            <div class="row hide page" id="thank_you_page">
+                <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+                    <div class="clearfix rounded form-container">
+                        <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Thank you!</h2>
+                        <p class="text-center mt-3">
+                            NavGurukul ki One Year Fellowship mein<br>
+                            apply karne ke liye shukriya. <br>
+                            Hum jald hi aapko contact karenge.<br><br>
+                            Aap humein <a href="mailto:admission@navgurukul.org">admission@navgurukul.org</a> par mail bhi kar sakte hai.
+                        </p>
+                        <div class="clearfix col-xs-12 col-sm-12 mt-2">
+                            <button onclick="visit_website()" class="btn btn-lg btn-success col-xs-12 col-sm-12">Visit NavGurukul Website</button>
+                        </div>
+                        <div class="clearfix col-xs-12 col-sm-12 mt-2">
+                            <button onclick="learn_coding()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start Learning Coding Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Galat Link Hai!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Aapki link invalid hai.<br>
+                Aap <b>011-4084-6385</b> par call kar kar,<br>
+                sahi link ko open karo.<br><br>
+                Agar phir bhi problem aati hai toh<br>
+                admission@navgurukul.org par email karo.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+
+        </div>
+        </div>
+        <footer class="container"></footer>
+    </body>
+</html>

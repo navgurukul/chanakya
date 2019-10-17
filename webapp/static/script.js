@@ -1,4 +1,4 @@
-var DEBUG = false;
+var DEBUG = true;
 var current_language = 'hi';
 
 Sentry.init({
@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "XYBRJO";
+    var enrolment_key = "BXC4WR";
     var base_url="http://localhost:3000";
 }
 
@@ -398,7 +398,7 @@ function time_aware_submit() {
 
         $('.progress-bar').css({"width":time_remaining*100/(total_time)+"%"})
 
-        if(time_remaining<=1) {
+        if(time_remaining <=1) {
             $("#time_to_show").html("<h4>Time Over Submitting Your Test Now.</h4>");
             submitTest();
             $('.progress').hide();
@@ -581,11 +581,12 @@ function submitTest() {
 
 $(document).ready(function() {
     if (!DEBUG) {
+        console.log("Pralhad is here")
         // landing_page_submit();
         // personal_details_submit();
         // time_aware_submit();
-    }
-    // else {
+    }else {
+        console.log("enrolmentkey", enrolment_key)
         $.get(base_url+"/on_assessment/validate_enrolment_key/"+enrolment_key,
         {},
         (data, resp) => {
@@ -609,7 +610,7 @@ $(document).ready(function() {
             $("#myModal").modal();
             Sentry.captureException(response);
         });
-    // }
+    }
 });
 
 $(function(){
