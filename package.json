@@ -16,7 +16,8 @@
     "knex": "knex",
     "start": "nodemon --watch lib server",
     "test": "lab -a code -I '__core-js_shared__' -L",
-    "lint": "eslint lib"
+    "lint": "eslint lib",
+    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit"
   },
   "dependencies": {
     "@hapi/bossy": "^4.1.1",
@@ -71,12 +72,14 @@
   },
   "devDependencies": {
     "code": "5.x.x",
+    "cross-env": "^6.0.3",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-hapi": "12.x.x",
     "eslint-plugin-hapi": "4.x.x",
     "eslint-plugin-import": "^2.18.2",
     "hpal-debug": "1.x.x",
+    "increase-memory-limit": "^1.0.7",
     "lab": "18.x.x",
     "newman": "^4.5.4",
     "nodemon": "^1.18.9"
