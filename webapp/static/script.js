@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "XYBRJO";
+    var enrolment_key = "R4PGVA";
     var base_url="http://localhost:3000";
 }
 
@@ -560,6 +560,11 @@ function learn_coding() {
     window.location.href='http://saral.navgurukul.org';
 }
 function submitTest() {
+    for(let key of Object.keys(answers)) {
+       if (answers[key] === undefined){
+           answers[key] = '';
+       }
+   }
     updateAnswer(current_question);    
     $.ajax({
         url: base_url+"/on_assessment/questions/"+enrolment_key+"/answers",
