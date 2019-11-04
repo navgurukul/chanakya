@@ -4,6 +4,7 @@
         "no-console": "off",
         "global-require": "off",
 	"prefer-rest-params": "off",
-	"class-methods-use-this": "off"
+	"class-methods-use-this": "off",
+	"no-underscore-dangle": [2, {"allow": ["_data"]}]
     }
 }
