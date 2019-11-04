@@ -382,7 +382,7 @@ function time_aware_submit() {
 
     var data;
     var last_recorded_time   = new Date().getTime();
-    var total_time = DEBUG ? 1000 : 3600;
+    var total_time = DEBUG ? 1000 : 5400;
     var time_remaining = total_time;
 
     do_it = setInterval(function(){
