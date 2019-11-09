@@ -1,4 +1,4 @@
-var DEBUG = true;
+var DEBUG = false;
 var current_language = 'hi';
 
 Sentry.init({
