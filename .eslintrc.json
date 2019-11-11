@@ -5,6 +5,7 @@
         "global-require": "off",
         "prefer-rest-params": "off",
         "class-methods-use-this": "off",
+        "object-shorthand": "off",
         "no-underscore-dangle": ["error", {"allow": ["_data", "_value"]}]
     },
     "overrides": [
