@@ -1,6 +1,6 @@
 'use strict';
 
-const Glue = require('glue');
+const Glue = require('@hapi/glue');
 const Manifest = require('./manifest');
 const cron = require("node-cron");
 const CONSTANTS = require('../lib/constants')

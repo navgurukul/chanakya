@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "R4PGVA";
+    var enrolment_key = "1BSREU";
     var base_url="http://localhost:3000";
 }
 
