@@ -30,16 +30,16 @@ exports.deployment = async (start) => {
     console.log(`Server started at ${server.info.uri}`);
 
     // schedule the metric calculation cron
-    cron.schedule(CONSTANTS.metricCalcCron, () => {
-        const { metricsService } = server.services();
-        metricsService.recordPendingMetrics();
-    });
+    // cron.schedule(CONSTANTS.metricCalcCron, () => {
+    //     const { metricsService } = server.services();
+    //     metricsService.recordPendingMetrics();
+    // });
 
-    // Inform students test result sending to SMS after 4 hours.
-    cron.schedule(CONSTANTS.testResultCron, () =>{
-        const { assessmentService } = server.services();
-        assessmentService.informTestResult();
-    });
+    // // Inform students test result sending to SMS after 4 hours.
+    // cron.schedule(CONSTANTS.testResultCron, () =>{
+    //     const { assessmentService } = server.services();
+    //     assessmentService.informTestResult();
+    // });
 
     return server;
 };
