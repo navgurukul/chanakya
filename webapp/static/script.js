@@ -10,7 +10,7 @@ if (!DEBUG) {
     var enrolment_key = window.location.href.split('k/').slice(-1);
     var base_url="/api";
 } else {
-    var enrolment_key = "1BSREU";
+    var enrolment_key = "YVAW0Q";
     var base_url="http://localhost:3000";
 }
 
@@ -364,6 +364,7 @@ function submitApp() {
         (data, resp) => {
             $("#end_page").slideUp(slide_up_time);
             $("#thank_you_page").slideDown(slide_down_time);
+            $('#Languge_select').hide();
             mixpanel.track("Thank You");
         },
         'json'
@@ -584,6 +585,13 @@ function submitTest() {
     });
 }
 
+function selectLanguge() {
+    mixpanel.track("Languge selector");
+    $("#select_languge").slideUp(slide_up_time);
+    $("#landing_page").slideDown(slide_down_time);
+    $('#Languge_select').show();
+}
+
 $(document).ready(function() {
     if (!DEBUG) {
         // landing_page_submit();
@@ -602,6 +610,7 @@ $(document).ready(function() {
             if (data["stage"] == "basicDetailsEntered"){
                 $('.page').hide();
                 $("#time_aware").slideDown(slide_down_time);
+                $('#Languge_select').show();
                 // fetch direct questions and options.
                 fetchQuestionsAndOptions();
             }
@@ -617,18 +626,18 @@ $(document).ready(function() {
     // }
 });
 
-$(function(){
+$(function (){
     $('.lang').hide();
     $('.lang.hi').show();
 
-    $( ".lang_picker" ).change(function() {
-        current_language = $(this).children("option:selected").val();
-        displayQuestion(current_question);
+    $('#choose_languge').change(function() {
+        current_language = $(this).children('option:selected').val();
         $('.lang').hide();
         $('.lang.'+current_language).show();
+        $("#lang_choice").val(current_language);
     });
 
-    $("#qualification").change(function(){
+    $('#qualification').change(function(){
         qualification = $(this).children("option:selected").val();
         if (qualification == "lessThan10th"){
             $('.pass10').hide()
@@ -643,3 +652,9 @@ $(function(){
     })
 });
 
+function langugeSelector() {
+    current_language = $('#lang_choice').children('option:selected').val()
+    $('.lang').hide();
+    $('.lang.'+current_language).show();
+    displayQuestion(current_question);
+}
