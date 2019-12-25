@@ -39,30 +39,32 @@
         </nav>
         </header>
         <main class="container mt-3">
-            <div class="row page" id="select_languge">
+            <div class="row page" id="select_language">
                 <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
                     <div class="clearfix rounded form-container">
                         <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">NavGurukul Scholarship Test</h2>
                         <br><br>
                         <h3>Select Your Languge/ अपनी भाषा चुने</h3>
+                        <p>You can also change the langauge between Hindi and English during the test.</p>
+                        <p>आप test के बीच मे भी अपने test की भाशा बदल सकते है।</p>
                         <br>
                         <div class="b-select-wrap">
-                            <select class="form-control b-select" id='choose_languge' data-width="fit">
+                            <select class="form-control b-select" id='choose_language' data-width="fit">
                                 <option value='hi'>हिंदी</option>
                                 <option value='en'>English</option>
                             </select>
                         </div>
                         <br><br>
-                        <button onclick="selectLanguge()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
+                        <button onclick="selectLanguage()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
                             <span class="en lang">Next</span>
-                            <span class="hi lang">अगला पन्ना</span>
+                            <span class="hi lang">आगे चलें</span>
                         </button>
                     </div>  
                 </div>
             </div>
             
-            <div class="row hide page" id="Languge_select">
-                <select class="lang_picker col-2 offset-10" id='lang_choice' onchange="langugeSelector()" data-width="fit">
+            <div class="row hide page" id="language_select">
+                <select class="lang_picker col-2 offset-10" id='lang_choice' onchange="languageSelector()" data-width="fit">
                     <option value='hi'>हिंदी</option>
                     <option value='en'>English</option>
                 </select>
