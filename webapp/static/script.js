@@ -580,7 +580,7 @@ function submitTest() {
     },
     error: function (error) {
       mixpanel.track("Error in Answers Submission");
-      Sentry.captureException(response);
+      Sentry.captureException(error);
     }
   });
 }
