@@ -44,7 +44,7 @@ exports.deployment = async (start) => {
     // Inform pending mobilization work to user sending to SMS after 15 hours.
     cron.schedule(CONSTANTS.deadlineResultCron, () =>{
         const { feedbackService } = server.services();
-        feedbackService.informPendingMobilizationWork();
+        feedbackService.informPendingMobilizationWorkToAssignUser();
     });
 
     return server;
