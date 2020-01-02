@@ -40,6 +40,12 @@ exports.deployment = async (start) => {
         const { assessmentService } = server.services();
         assessmentService.informTestResult();
     });
+    
+    // Inform pending mobilization work to user sending to SMS after 1 hours.
+    cron.schedule(CONSTANTS.deadlineResultCron, () =>{
+        const { feedbackService } = server.services();
+        feedbackService.informPendingMobilizationWorkToAssignUser();
+    });
 
     return server;
 };
