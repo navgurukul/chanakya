@@ -34,12 +34,6 @@ exports.deployment = async (start) => {
         const { metricsService } = server.services();
         metricsService.recordPendingMetrics();
     });
-
-    // Inform students test result sending to SMS after 4 hours.
-    cron.schedule(CONSTANTS.testResultCron, () =>{
-        const { assessmentService } = server.services();
-        assessmentService.informTestResult();
-    });
     
     // Inform pending mobilization work to user sending to SMS after 1 hours.
     cron.schedule(CONSTANTS.deadlineResultCron, () =>{
