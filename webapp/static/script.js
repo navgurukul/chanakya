@@ -10,7 +10,7 @@ if (!DEBUG) {
   var enrolment_key = window.location.href.split('k/').slice(-1);
   var base_url = "/api";
 } else {
-  var enrolment_key = "YVAW0Q";
+  var enrolment_key = "AZ79ES";
   var base_url = "http://localhost:3000";
 }
 
@@ -608,7 +608,7 @@ $(document).ready(function () {
         fetchQuestionsAndOptions();
       }
       // once student is enter hes complete details then hide end_page it is related to final students details.
-      if (data["stage"] == "completedTestWithDetails") {
+      if (data["stage"] == "pendingEnglishInterview" || data["stage"] == "testFailed") {
         $('.page').hide();
         $("#thank_you_page").slideDown(slide_down_time);
       }
