@@ -44,7 +44,7 @@
     "googleapis": "^46.0.0",
     "handlebars": "^4.5.3",
     "hapi-auth-jwt2": "8.x.x",
-    "hapi-swagger": "^11.1.0",
+    "hapi-swagger": "^9.3.0",
     "haute-couture": "^3",
     "inert": "^5.1.3",
     "joi": "14.x.x",
