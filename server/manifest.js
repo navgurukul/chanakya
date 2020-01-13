@@ -23,9 +23,18 @@ module.exports = new Confidence.Store({
         },
         routes: {
             cors: {
-                'headers': ['Accept', 'Authorization', 'Content-Type', 'If-None-Match', 'Accept-language']
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with'],
+                headers: ['Accept', 'Authorization', 'Content-Type', 'If-None-Match', 'Accept-language']
+            },
+            timeout: {
+                socket: 11 * 60 * 1000, // Determines how long before closing request socket.
+                server: false // Determines how long to wait for server request processing. Disabled by default
             },
             validate: {
+              options: {
+                abortEarly: false,
+              },
               failAction: async (request, h, err) => {
                 if (process.env.NODE_ENV === 'production') {
                   // In prod, log a limited error message and throw the default Bad Request error.
