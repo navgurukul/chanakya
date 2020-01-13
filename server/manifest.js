@@ -32,6 +32,9 @@ module.exports = new Confidence.Store({
                 server: false // Determines how long to wait for server request processing. Disabled by default
             },
             validate: {
+              options: {
+                abortEarly: false,
+              },
               failAction: async (request, h, err) => {
                 if (process.env.NODE_ENV === 'production') {
                   // In prod, log a limited error message and throw the default Bad Request error.
