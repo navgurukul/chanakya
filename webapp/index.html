@@ -29,25 +29,25 @@
   <title>Admission Test - Navgurukul</title>
   <!-- start Mixpanel -->
   <script type="text/javascript">
-    (function(c, a) {
+    (function (c, a) {
       if (!a.__SV) {
         var b = window;
         try {
           var d, m, j, k = b.location,
             f = k.hash;
-          d = function(a, b) {
+          d = function (a, b) {
             return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
           };
           f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
-        } catch (n) {}
+        } catch (n) { }
         var l, h;
         window.mixpanel = a;
         a._i = [];
-        a.init = function(b, d, g) {
+        a.init = function (b, d, g) {
           function c(b, i) {
             var a = i.split(".");
             2 == a.length && (b = b[a[0]], i = a[1]);
-            b[i] = function() {
+            b[i] = function () {
               b.push([i].concat(Array.prototype.slice.call(arguments,
                 0)))
             }
@@ -55,21 +55,21 @@
           var e = a;
           "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
           e.people = e.people || [];
-          e.toString = function(b) {
+          e.toString = function (b) {
             var a = "mixpanel";
             "mixpanel" !== g && (a += "." + g);
             b || (a += " (stub)");
             return a
           };
-          e.people.toString = function() {
+          e.people.toString = function () {
             return e.toString(1) + ".people (stub)"
           };
           l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
           for (h = 0; h < l.length; h++) c(e, l[h]);
           var f = "set set_once union unset remove delete".split(" ");
-          e.get_group = function() {
+          e.get_group = function () {
             function a(c) {
-              b[c] = function() {
+              b[c] = function () {
                 call2_args = arguments;
                 call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
                 e.push([d, call2])
@@ -114,14 +114,14 @@
           <br>
           <div class="b-select-wrap">
             <select class="form-control b-select" id='choose_language' data-width="fit">
-                  <option value='hi'>हिंदी</option>
-                  <option value='en'>English</option>
-              </select>
+              <option value='hi'>हिंदी</option>
+              <option value='en'>English</option>
+            </select>
           </div>
           <br><br>
           <button onclick="selectLanguage()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-              <span class="en lang">Next</span>
-              <span class="hi lang">आगे चलें</span>
+            <span class="en lang">Next</span>
+            <span class="hi lang">आगे चलें</span>
           </button>
         </div>
       </div>
@@ -129,9 +129,9 @@
 
     <div class="row hide page" id="language_select">
       <select class="lang_picker col-2 offset-10" id='lang_choice' onchange="languageSelector()" data-width="fit">
-      <option value='hi'>हिंदी</option>
-      <option value='en'>English</option>
-  </select>
+        <option value='hi'>हिंदी</option>
+        <option value='en'>English</option>
+      </select>
     </div>
     <div class="row hide page" id="landing_page">
       <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
@@ -139,65 +139,161 @@
           <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">NavGurukul Scholarship Test</h2>
           <br><br>
           <p class='hi lang'>
-            Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot kaam aayengi.
+            Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot
+            kaam aayengi.
           </p>
           <p class='en lang'>
-            Before the starting of the test, please read the following instructions. All these instructions will be very helpful when you will attempt the test.
+            Before the starting of the test, please read the following instructions. All these instructions will be very
+            helpful when you will attempt the test.
           </p>
           <ol class='hi lang'>
-            <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.</li>
-            <li>Test dete waqt <strong>apne paas ek notebook aur pen rakhein</strong>. Aap koi bhi rough work notebook mein kar sakte hain.</li>
+            <li>Poora test <strong>1 hour</strong> ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap
+              ache se saare saavalon ka javab de payenge.</li>
+            <li>Test dete waqt <strong>apne paas ek notebook aur pen rakhein</strong>. Aap koi bhi rough work notebook
+              mein kar sakte hain.</li>
             <li>Har question ka answer apne phone pe hi test dete hue daal dein.</li>
-            <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)</li>
+            <li>Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi
+              karenge :)</li>
           </ol>
           <ol class='en lang'>
             <li>The entire test is for <strong>1 hour</strong>. Please attempt this test in a silent place.</li>
-            <li>Keep a <strong>notebook</strong> while giving the test with you. You can do the rough work in the notebook.</li>
+            <li>Keep a <strong>notebook</strong> while giving the test with you. You can do the rough work in the
+              notebook.</li>
             <li>Answer the question only on your phone.</li>
             <li>We trust you to attempt this test with honesty :)</li>
           </ol>
           <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-              <span class="en lang">I am ready</span>
-              <span class="hi lang">Meh tayaar hu</span>
+            <span class="en lang">I am ready</span>
+            <span class="hi lang">Meh tayaar hu</span>
           </button>
         </div>
       </div>
     </div>
-
+    <div class="row hide page" id="test_pass">
+      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+        <div class="card" style="padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;">
+          <paper-card heading="Test Result">
+            <div class="card-content">
+              <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center"
+                style="color:green; padding: 0px;">
+                Congratulations!!</h2>
+              <br><br>
+              <p class='hi lang'>
+                आप <strong>Navgurukul</strong> के इस टेस्ट में पास हो गए है और अगले राउंड के लिए सेलेक्ट हो गए है | आपके
+                <strong class="marks"></strong>
+                नंबर आए है |
+              </p>
+              <p class='en lang'>
+                You have cleared the <strong>Navgurukul Scholarship Test.</strong> You have scored <strong
+                  class="marks"></strong> marks in the
+                test.
+              </p>
+              <p class="en lang">
+                You will now get a phone call for an <strong>English Interview</strong> in next 2 days. You are doing
+                great so far,
+                keep it up for the next rounds!
+              </p>
+              <p class="hi lang">
+                अब आपको <strong>इंग्लिश इंटरव्यू</strong> के लिए कॉल आएगा अगले २ दिनों में | आपने अभी तक बहुत अच्छा किया
+                हैं, अगले राउंड मै भी ऐसे ही करना,
+                अगले राउंड के लिए हमारी तरफ से आपको बहुत सारी शुभकामनाये!!!
+              </p>
+            </div>
+            <div class="card-actions">
+              <button onclick="show_thanksPage()" class="btn btn-md btn-primary mt-1 btn-success" style="width: 107px;">
+                <span class="en lang">OK</span>
+                <span class="hi lang">ओके</span>
+              </button>
+            </div>
+          </paper-card>
+        </div>
+      </div>
+    </div>
+    <div class="row hide page" id="test_fail">
+      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
+        <div class="card" style="padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;">
+          <paper-card heading="Test Result">
+            <div class="card-content">
+              <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center"
+                style="color: red; padding: 0px;">Oh Sorry!!</h2>
+              <br><br>
+              <p class='hi lang'>
+                आप इस बारी इस टेस्ट में पास नहीं हो पाए। आपके <strong class="marks"></strong> नंबर आए है|
+                कोई बात नहीं आप दोबारा कोशिश कर सकते हो।
+              </p>
+              <p class='en lang'>
+                You could not clear the <strong>Navgurukul Scholarship Test</strong> this time. You have scored <strong
+                  class="marks"></strong> marks
+                in the
+                test. Dont't worry, you can give the test again after some preparation
+              </p>
+              <p class="en lang">
+                You can use this study guide for more maths practice <a
+                  href="http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction">click
+                  here.</a>
+                Prepare, Practice and Pass :)
+              </p>
+              <p class="hi lang">
+                आप थोड़ी और तैयारी के बाद यह टेस्ट फिर से दे सकते है | गणित की प्रैक्टिस के लिए <a
+                  href="http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction">यहाँ
+                  क्लिक करे</a> स्टडी गाइड का उपयोग करे |
+              </p>
+            </div>
+            <div class="card-actions">
+              <button onclick="show_thanksPage()" class="btn btn-md btn-primary mt-1 btn-danger" style="width: 107px;">
+                <span class="en lang">OK</span>
+                <span class="hi lang">ओके</span>
+              </button>
+            </div>
+          </paper-card>
+        </div>
+      </div>
+    </div>
     <div class="row hide page" id="no_cheating_promise">
       <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
         <div class="clearfix rounded form-container">
           <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Read Carefully</h2>
           <br><br>
           <p class="en lang">
-            A lot of students all across India answer the NavGurukul's test to go through the 1 year program and get high paying software engineering jobs. Though there is a great reward at the end, but you will have to do a lot of hard work to get that reward. We
-            would love to teach every student irrespective of their educational qualifications but sadly we require some basic knowledge of certain things. We use this test to see if you have that basic knowledge.
+            A lot of students all across India answer the NavGurukul's test to go through the 1 year program and get
+            high paying software engineering jobs. Though there is a great reward at the end, but you will have to do a
+            lot of hard work to get that reward. We
+            would love to teach every student irrespective of their educational qualifications but sadly we require some
+            basic knowledge of certain things. We use this test to see if you have that basic knowledge.
           </p>
           <p class="hi lang">
-            Kafi sare students pure India se NavGurukul ka test dete ha taki woh NavGurukul ke 1 saal wale program ke madad se high paying software engineering jobs le sake. Hala ki akhir me bohut bada eenam hota ha, magar uske liye apko kafi jada mehnat bi karni
-            padhti hai. Hume har kisi student ko padhna chate hai chae uske educational qualifications kuch bi ho magar hume kuch basic knowledge chaiye kuch chizo me. Yeh test ke duwara hum yeh jane ki kosish karte ha ki kya apke pass woh basic knowledge
+            Kafi sare students pure India se NavGurukul ka test dete ha taki woh NavGurukul ke 1 saal wale program ke
+            madad se high paying software engineering jobs le sake. Hala ki akhir me bohut bada eenam hota ha, magar
+            uske liye apko kafi jada mehnat bi karni
+            padhti hai. Hume har kisi student ko padhna chate hai chae uske educational qualifications kuch bi ho magar
+            hume kuch basic knowledge chaiye kuch chizo me. Yeh test ke duwara hum yeh jane ki kosish karte ha ki kya
+            apke pass woh basic knowledge
             hai.
           </p>
 
           <p class="en lang">
-            Some students try to <strong>cheat and score</strong> well in the test but sadly are not able to do well during the program. All of them have to leave the course.
+            Some students try to <strong>cheat and score</strong> well in the test but sadly are not able to do well
+            during the program. All of them have to leave the course.
           </p>
 
           <p class="hi lang">
-            Kuch students test meh <strong> cheat karke score </strong> kar lete ha but woh program meh ache tarike se perform ni kar pahte ha, Jiske karan uneh yeh program chorna padhta ha.
+            Kuch students test meh <strong> cheat karke score </strong> kar lete ha but woh program meh ache tarike se
+            perform ni kar pahte ha, Jiske karan uneh yeh program chorna padhta ha.
           </p>
 
           <p class="en lang">
-            If you are proceeding with the test please make sure you do it yourself without anyone's help. We will disqualify you from NavGurukul if we detect any form of cheating. <br /><br />
+            If you are proceeding with the test please make sure you do it yourself without anyone's help. We will
+            disqualify you from NavGurukul if we detect any form of cheating. <br /><br />
           </p>
 
           <p class="hi lang">
-            Agar aap ish test ke liye aage badh rahe hai toh kripaya ish test ko khudse de bina kisike madad ke. Agar hume pata chalta ha ki apne cheating ki hai toh hum apko disqualify kardenge aage. <br /><br />
+            Agar aap ish test ke liye aage badh rahe hai toh kripaya ish test ko khudse de bina kisike madad ke. Agar
+            hume pata chalta ha ki apne cheating ki hai toh hum apko disqualify kardenge aage. <br /><br />
           </p>
 
           <button onclick="no_cheating_promise_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-              <span class="en lang">Start My Test</span>
-              <span class="hi lang">Test Shuru Karein</span>
+            <span class="en lang">Start My Test</span>
+            <span class="hi lang">Test Shuru Karein</span>
           </button>
         </div>
       </div>
@@ -214,45 +310,48 @@
               <span class='errors text text-center text-danger ml-3'></span>
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
-                <input type="text" id='name' name="name" placeholder="Your Name" required class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                <input type="text" id='name' name="name" placeholder="Your Name" required
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
               </div>
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Mobile Number</div>
-                <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required/>
+                <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
               </div>
               <div class="clearfix container">
                 <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>
 
                 <div class="row">
                   <select id='date' class="col-4 col-md-3 border border-warning rounded section-1">
-                              <option value="">Date</option>
-                          </select>
+                    <option value="">Date</option>
+                  </select>
 
                   <select id='month' class="col-4 col-md-3 border border-warning rounded section-1">
-                              <option value="">Month</option>
-                          </select>
+                    <option value="">Month</option>
+                  </select>
 
                   <select id='year' class="col-4 col-md-3 border border-warning rounded section-1">
-                              <option value="">Year</option>
-                          </select>
+                    <option value="">Year</option>
+                  </select>
                 </div>
               </div>
 
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Gender/ लिंग</div>
-                <select name="gender" id='gender' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required>
-                          <option value="NONE">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="trans">Trans</option>
-                      </select>
+                <select name="gender" id='gender'
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required>
+                  <option value="NONE">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="trans">Trans</option>
+                </select>
               </div>
               <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
                 <button class="btn btn-lg btn-danger col-xs-12
                       col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
-                          <span class="en lang">Start My Test</span>
-                          <span class="hi lang">Test Shuru Karein</span>
-                  </button>
+                  <span class="en lang">Start My Test</span>
+                  <span class="hi lang">Test Shuru Karein</span>
+                </button>
               </div>
             </div>
           </div>
@@ -282,8 +381,8 @@
             <span class="hi lang">Aapko next 18 questions, 1 Hour me karne hai!</span>
           </h3>
           <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4">
-              <span class="en lang">Start the test!</span>
-              <span class="hi lang">Shuru Karein</span>
+            <span class="en lang">Start the test!</span>
+            <span class="hi lang">Shuru Karein</span>
           </button>
         </div>
       </div>
@@ -296,7 +395,8 @@
         <!-- <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div> -->
         <div class="col-10 col-md-6 mb-4">
           <div class="progress custom">
-            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
+              role="progressbar" aria-valuemin="0" aria-valuemax="100">
             </div>
           </div>
         </div>
@@ -314,7 +414,8 @@
         <h3 class="question qtext col-xs-12 col-sm-12 mt-2  col-md-12">
         </h3>
         <div class="text-center col-xs-12 col-sm-12">
-          <input type="number" name="uanswer" placeholder="yaha answer likho..." class="border border-warning rounded section-1 ml-3 mt-4 mb-4 input_box" />
+          <input type="number" name="uanswer" placeholder="yaha answer likho..."
+            class="border border-warning rounded section-1 ml-3 mt-4 mb-4 input_box" />
         </div>
       </div>
 
@@ -323,22 +424,23 @@
           <span class="en lang">Next Question</span>
           <span class="hi lang">अगला प्रश्न</span>
           <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-      </button>
+        </button>
       </div>
 
       <div class="col-12 text-center">
-        <button type="button" class="btn btn-md btn-outline-warning mt-1" id="prev_button" onclick="previousQuestion();">
+        <button type="button" class="btn btn-md btn-outline-warning mt-1" id="prev_button"
+          onclick="previousQuestion();">
           <span class="en lang">Previous Answer</span>
           <span class="hi lang">पीछला प्रश्न</span>
           <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-      </button>
+        </button>
       </div>
 
       <div class="col-12 mt-1 text-center">
         <button type="button" class="hide btn btn-md btn-primary btn-success" id="submit_btn" onclick="submitTest();">
-              Submit Test
+          Submit Test
           <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-      </button>
+        </button>
       </div>
 
     </div>
@@ -352,7 +454,8 @@
                 <span class='errors text text-center text-danger ml-3'></span>
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Pincode</div>
-                  <input type="number" name="pinCode" id="pinCode" placeholder="Pincode" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                  <input type="number" name="pinCode" id="pinCode" placeholder="Pincode"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
                 </div>
                 <!-- <div class="clearfix">
                           <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Tehsil</div>
@@ -366,88 +469,96 @@
                       </div> -->
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
-                  <select id="state" name="state" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select State</option>
-                                  <option value='AN'>Andaman and Nicobar Islands</option>
-                                  <option value='AP'>Andhra Pradesh</option>
-                                  <option value='AR'>Arunachal Pradesh</option>
-                                  <option value='AS'>Assam</option>
-                                  <option value='BR'>Bihar</option>
-                                  <option value='CH'>Chandigarh</option>
-                                  <option value='CT'>Chhattisgarh</option>
-                                  <option value='DH'>Dadra and Nagar Haveli</option>
-                                  <option value='DD'>Daman and Diu</option>
-                                  <option value='DL'>Delhi</option>
-                                  <option value='GA'>Goa</option>
-                                  <option value='GJ'>Gujarat</option>
-                                  <option value='HR'>Haryana</option>
-                                  <option value='HP'>Himachal Pradesh</option>
-                                  <option value='JK'>Jammu and Kashmir</option>
-                                  <option value='JH'>Jharkhand</option>
-                                  <option value='KA'>Karnataka</option>
-                                  <option value='KL'>Kerala</option>
-                                  <option value='LD'>Lakshadweep</option>
-                                  <option value='MP'>Madhya Pradesh</option>
-                                  <option value='MH'>Maharashtra</option>
-                                  <option value='MN'>Manipur</option>
-                                  <option value='ML'>Meghalaya</option>
-                                  <option value='MZ'>Mizoram</option>
-                                  <option value='NL'>Nagaland</option>
-                                  <option value='OR'>Odisha</option>
-                                  <option value='PY'>Puducherry</option>
-                                  <option value='PB'>Punjab</option>
-                                  <option value='RJ'>Rajasthan</option>
-                                  <option value='SK'>Sikkim</option>
-                                  <option value='TN'>Tamil Nadu</option>
-                                  <option value='TG'>Telangana</option>
-                                  <option value='TR'>Tripura</option>
-                                  <option value='UP'>Uttar Pradesh</option>
-                                  <option value='UK'>Uttarakhand</option>
-                                  <option value='WB'>West Bengal</option>
-                          </select>
+                  <select id="state" name="state"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                    <option value="NONE">Select State</option>
+                    <option value='AN'>Andaman and Nicobar Islands</option>
+                    <option value='AP'>Andhra Pradesh</option>
+                    <option value='AR'>Arunachal Pradesh</option>
+                    <option value='AS'>Assam</option>
+                    <option value='BR'>Bihar</option>
+                    <option value='CH'>Chandigarh</option>
+                    <option value='CT'>Chhattisgarh</option>
+                    <option value='DH'>Dadra and Nagar Haveli</option>
+                    <option value='DD'>Daman and Diu</option>
+                    <option value='DL'>Delhi</option>
+                    <option value='GA'>Goa</option>
+                    <option value='GJ'>Gujarat</option>
+                    <option value='HR'>Haryana</option>
+                    <option value='HP'>Himachal Pradesh</option>
+                    <option value='JK'>Jammu and Kashmir</option>
+                    <option value='JH'>Jharkhand</option>
+                    <option value='KA'>Karnataka</option>
+                    <option value='KL'>Kerala</option>
+                    <option value='LD'>Lakshadweep</option>
+                    <option value='MP'>Madhya Pradesh</option>
+                    <option value='MH'>Maharashtra</option>
+                    <option value='MN'>Manipur</option>
+                    <option value='ML'>Meghalaya</option>
+                    <option value='MZ'>Mizoram</option>
+                    <option value='NL'>Nagaland</option>
+                    <option value='OR'>Odisha</option>
+                    <option value='PY'>Puducherry</option>
+                    <option value='PB'>Punjab</option>
+                    <option value='RJ'>Rajasthan</option>
+                    <option value='SK'>Sikkim</option>
+                    <option value='TN'>Tamil Nadu</option>
+                    <option value='TG'>Telangana</option>
+                    <option value='TR'>Tripura</option>
+                    <option value='UP'>Uttar Pradesh</option>
+                    <option value='UK'>Uttarakhand</option>
+                    <option value='WB'>West Bengal</option>
+                  </select>
                 </div>
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naame</div>
-                  <input type="text" name="city_or_village" id="city_or_village" placeholder="City ya Village ka naam" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                  <input type="text" name="city_or_village" id="city_or_village" placeholder="City ya Village ka naam"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
                 </div>
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Current Status</div>
-                  <select name="currentStatus" id="currentStatus" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
-                                  <option value='nothing'>Nothing</option>
-                                  <option value='job'>Job</option>
-                                  <option value='study'>Study</option>
-                                  <option value='other'>Other</option>
-                          </select>
+                  <select name="currentStatus" id="currentStatus"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                    <option value="NONE">Select Option</option>
+                    <option value='nothing'>Nothing</option>
+                    <option value='job'>Job</option>
+                    <option value='study'>Study</option>
+                    <option value='other'>Other</option>
+                  </select>
                 </div>
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Maximum Qualification</div>
-                  <select name="qualification" id="qualification" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
-                                  <option value='lessThan10th'>Less than 10th Paas</option>
-                                  <option value='class10th'>Class 10th Pass</option>
-                                  <option value='class12th'>Class 12th Pass</option>
-                                  <option value='graduate'>Graduation completed</option>
-                          </select>
+                  <select name="qualification" id="qualification"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                    <option value="NONE">Select Option</option>
+                    <option value='lessThan10th'>Less than 10th Paas</option>
+                    <option value='class10th'>Class 10th Pass</option>
+                    <option value='class12th'>Class 12th Pass</option>
+                    <option value='graduate'>Graduation completed</option>
+                  </select>
                 </div>
                 <div class="clearfix min-10 hide pass10">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                  <input type="number" name="class_10_percentage" id="percentageIn10th" placeholder="Percentage in 10th" min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_10_percentage" id="percentageIn10th" placeholder="Percentage in 10th"
+                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-10 hide pass10">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 10th</div>
-                  <input type="number" name="class_10_marks" id="mathMarksIn10th" placeholder="Total Marks in 10th" min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_10_marks" id="mathMarksIn10th" placeholder="Total Marks in 10th"
+                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-12 hide pass12">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                  <input type="number" name="class_12_percentage" id="percentageIn12th" placeholder="Percentage in 12th" min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_12_percentage" id="percentageIn12th" placeholder="Percentage in 12th"
+                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-12 hide pass12">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 12th</div>
-                  <input type="number" name="class_12_marks" id="mathMarksIn12th" placeholder="Total Marks in 12th" min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_12_marks" id="mathMarksIn12th" placeholder="Total Marks in 12th"
+                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
                 <!-- <div class="clearfix min-12 hide">
                           <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Stream in Class 12th</div>
@@ -465,11 +576,12 @@
                       </div> -->
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">School Medium</div>
-                  <select name="schoolMedium" id="schoolMedium" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
-                              <option value="NONE">Select Option</option>
-                              <option value="en">English</option>
-                              <option value="other">Non English</option>
-                          </select>
+                  <select name="schoolMedium" id="schoolMedium"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
+                    <option value="NONE">Select Option</option>
+                    <option value="en">English</option>
+                    <option value="other">Non English</option>
+                  </select>
                 </div>
                 <!-- <div class="clearfix">
                           <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head</div>
@@ -644,26 +756,27 @@
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 mt-3">Caste/Tribe</div>
                   <select name="caste" id="caste" class="col-xs-12 col-sm-6 border border-warning rounded section-1">
-                              <option value="NONE">Select Option</option>
-                              <!-- <option value="sc">(SC) Scheduled Caste</option> -->
-                              <option value="scSt">(SC) Scheduled Caste / (ST) Scheduled Tribe</option>
-                              <option value="obc">(OBC) Other Backward Classes</option>
-                              <option value="general">General</option>
-                              <option value="others">Other</option>
-                          </select>
+                    <option value="NONE">Select Option</option>
+                    <!-- <option value="sc">(SC) Scheduled Caste</option> -->
+                    <option value="scSt">(SC) Scheduled Caste / (ST) Scheduled Tribe</option>
+                    <option value="obc">(OBC) Other Backward Classes</option>
+                    <option value="general">General</option>
+                    <option value="others">Other</option>
+                  </select>
                 </div>
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 mt-3">Religion/dharam</div>
-                  <select name="religion" id="religion" class="col-xs-12 col-sm-6 border border-warning rounded section-1">
-                              <option value="NONE">Select Option</option>
-                              <!-- <option value="sc">(SC) Scheduled Caste</option> -->
-                              <option value="hindu">Hindu</option>
-                              <option value="islam">Islam</option>
-                              <option value="sikh">Sikh</option>
-                              <option value="jain">Jain</option>
-                              <option value="christian">Christian</option>
-                              <option value="others">Others</option>
-                          </select>
+                  <select name="religion" id="religion"
+                    class="col-xs-12 col-sm-6 border border-warning rounded section-1">
+                    <option value="NONE">Select Option</option>
+                    <!-- <option value="sc">(SC) Scheduled Caste</option> -->
+                    <option value="hindu">Hindu</option>
+                    <option value="islam">Islam</option>
+                    <option value="sikh">Sikh</option>
+                    <option value="jain">Jain</option>
+                    <option value="christian">Christian</option>
+                    <option value="others">Others</option>
+                  </select>
                 </div>
                 <!-- <div class="clearfix caste-other">
                           <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Jaati</div>
@@ -675,8 +788,8 @@
               <div class="clearfix" class="mt-2 mb-4">
                 <button class="btn btn-lg btn-danger col-xs-12
                           col-sm-12 col-md-6 offset-md-3" onclick="submitApp()">
-                          Submit Application
-                      </button>
+                  Submit Application
+                </button>
               </div>
             </div>
           </div>
@@ -689,13 +802,17 @@
         <div class="clearfix rounded form-container">
           <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Thank you!</h2>
           <p class="text-center mt-3">
-            NavGurukul ki One Year Fellowship mein<br> apply karne ke liye shukriya. <br> Hum jald hi aapko contact karenge.<br><br> Aap humein <a href="mailto:hi@navgurukul.org">hi@navgurukul.org</a> par mail bhi kar sakte hai.
+            NavGurukul ki One Year Fellowship mein<br> apply karne ke liye shukriya. <br> Hum jald hi aapko contact
+            karenge.<br><br> Aap humein <a href="mailto:hi@navgurukul.org">hi@navgurukul.org</a> par mail bhi kar sakte
+            hai.
           </p>
           <div class="clearfix col-xs-12 col-sm-12 mt-2">
-            <button onclick="visit_website()" class="btn btn-lg btn-success col-xs-12 col-sm-12">Visit NavGurukul Website</button>
+            <button onclick="visit_website()" class="btn btn-lg btn-success col-xs-12 col-sm-12">Visit NavGurukul
+              Website</button>
           </div>
           <div class="clearfix col-xs-12 col-sm-12 mt-2">
-            <button onclick="learn_coding()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start Learning Coding Now</button>
+            <button onclick="learn_coding()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start Learning Coding
+              Now</button>
           </div>
         </div>
       </div>
@@ -712,7 +829,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p>Aapki link invalid hai.<br> Aap <b>011-4084-6385</b> par call kar kar,<br> sahi link ko open karo.<br><br> Agar phir bhi problem aati hai toh<br> admission@navgurukul.org par email karo.</p>
+          <p>Aapki link invalid hai.<br> Aap <b>011-4084-6385</b> par call kar kar,<br> sahi link ko open karo.<br><br>
+            Agar phir bhi problem aati hai toh<br> admission@navgurukul.org par email karo.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -721,7 +839,8 @@
 
     </div>
   </div>
-  
+
   <footer class="container"></footer>
 </body>
+
 </html>

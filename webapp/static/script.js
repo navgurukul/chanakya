@@ -10,7 +10,7 @@ if (!DEBUG) {
   var enrolment_key = window.location.href.split('k/').slice(-1);
   var base_url = "/api";
 } else {
-  var enrolment_key = "AZ79ES";
+  var enrolment_key = "ZJ9JPA";
   var base_url = "http://localhost:3000";
 }
 
@@ -21,6 +21,7 @@ var answers = {};
 var dirty_answers = [];
 var current_question = 0;
 var qDisplayed = false;
+var testMarks = 0
 
 function appending(error) {
   $('.errors').html('');
@@ -362,9 +363,9 @@ function submitApp() {
   $.post(base_url + "/on_assessment/details/" + enrolment_key,
     obj,
     (data, resp) => {
-      $("#end_page").slideUp(slide_up_time);
-      $("#thank_you_page").slideDown(slide_down_time);
-      $('#language_select').hide();
+      $('.page').hide();
+      $("#end_page").slideDown(slide_down_time);
+      show_TestResult();
       mixpanel.track("Thank You");
     },
     'json'
@@ -549,6 +550,34 @@ function makeActive(index) {
       $(this).removeClass('active');
     }
   });
+}
+
+function show_thanksPage() {
+  $('.page').hide();
+  $('#thank_you_page').show();
+}
+function show_TestResult() {
+  $.get(base_url + "/on_assessment/Show_testResult/" + enrolment_key,
+    {},
+    (data, resp) => {
+      testMarks = data['totalMarks']
+      if (data["Result"] === "Passed") {
+        $('.page').hide()
+        $('#test_pass').slideDown(slide_down_time);
+        $('#language_select').show();
+        $('#test_pass .marks').html(testMarks);
+      }
+      // If students Failed in test.
+      if (data["Result"] == "Failed") {
+        $('.page').hide()
+        $('#test_fail').slideDown(slide_down_time);
+        $('#language_select').show();
+        $('#test_fail .marks').html(testMarks);
+      }
+    }).fail(function (response) {
+      $("#myModal").modal();
+      Sentry.captureException(response);
+    });
 }
 
 function visit_website() {
