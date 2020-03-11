@@ -23,7 +23,7 @@ Toh aap ke paas kitne grams fruits hai?
 Weight of one apple is 80 grams.
 And weight of one orange is 60 grams.
 You have 8 apples and 6 oranges.
-How many grams of fruits do you have?
+How many grams of fruits do you have? 
 
 
 ## Options
