@@ -13,7 +13,7 @@
 ## Common Text
 
 ### Hindi
-Ek apple ka weight 80 grams hai.
+Ek apple ka weight 80 grams hai. TT
 Aur ek orange ka weight 60 grams hai.
 Aapke paas 8 apples aur 6 oranges hai.
 Toh aap ke paas kitne grams fruits hai?
