@@ -13,10 +13,10 @@
 ## Common Text
 
 ### Hindi
-Ek apple ka weight 80 grams hai. TT
-Aur ek orange ka weight 60 grams hai.
-Aapke paas 8 apples aur 6 oranges hai.
-Toh aap ke paas kitne grams fruits hai?
+एक सेब  का वज़न 80 ग्राम् हैं|
+एक संतरे  का वज़न 60  ग्राम् है| 
+आपके पास 8  सेब और 6 संतरे हैं 
+तोह आपके पास कुल मिला के कितने ग्राम्स फल हैं?
 
 
 ### English
