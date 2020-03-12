@@ -13,30 +13,23 @@
 ## Common Text
 
 ### Hindi
-Percentage bahut hi important concept hai maths mei. Bas aap yeh socho ki
+परसेंटेज बहोत इम्पोर्टेन्ट है मैथ्स मैं. इस को इस उद्धरण से समझते हैं:
 
-Agar 50 ladke hai, aur
-40 ladke healthy hai.
-Aur baaki bache hue ladke bimaar hai.
+अगर 50 लड़के है और 40 लड़के सेहतमंद है. और बाकी बचे हुए लड़के बिमार है 
+तोह कितने प्रतिशत लड़के बीमार है?
 
-Toh kitne pratishat ladke bimaar hai?
+कितने लड़के बीमार है = 50 - 40 =10 
 
-kitne ladke bimmar hai = 50  - 40 = 10
+बीमार लड़को की प्रतिशत = (कितने लड़के बीमार है )/ (टोटल लड़के) X 100 
 
-**bimmar ladko ki pratishat** = (kitne ladke bimaar hai)/(**total kitne ladke hai chahe healthy ho ya bimaar**)*100`
-
-yaani,
-
+यानि बीमार लड़को की प्रतिशत = (10 / 50) * 100 = 20%
 ```
-bimaar ladko ki pratishat = (10 / 50) * 100 = 20%
-```
-Ab iss concept ko use karte hue, yeh questions solve karne ki koshish karna. Dhyaan rakhna - ki hamesha yeh sochna kitne healthy boys hai, kitne unhealthy aur kitne **total boys** hai?
+अगर एक गिलास मैं 120 मल पानी है और 30मल निम्बू है तोह निम्बू कितना प्रतिशत है? ध्यान से सोचना और लिखना क्या जवाब है |ध्यान रखना की हमेशा यह सोचना की कितने सेहतमंद लड़के हैं, कितने बीमार लड़के हैं और कितने टोटल लड़के हैं?
 
-Agar 180 boys hai, jismei se
-45 ladke unhealthy hai    
-Toh kitne pratishat ladke unhealthy hai?
-Dhyaan se socho aur likho kya answer hai.
-
+अगर 180 लड़के है और 
+45  लड़के बीमार  है. 
+तोह कितने प्रतिशत लड़के बीमार हैं ?
+सोच समझ के आंसर देना 
 
 ### English
 Percentage is a very important question in Maths. To understand, please observe the following example carefully:
@@ -82,11 +75,10 @@ Please think and answer carefully.
 ## Common Text
 
 ### Hindi
-Agar ek school mei 130 boys hai,
-jismei se 10 ladke unhealthy hai
-Uss school mei ab 20 unhealthy boys ne
-admission liya. Toh ab unhealthy boys ka
-pratishat kya hai?
+अगर एक विद्यालय मैं 130 लड़के है और 
+जिसमें 10  लड़के बीमार  है. 
+उस विद्यालय मैं 20 बीमार लड़को ने  लिया 
+तोह कितने प्रतिशत लड़के बीमार हैं ?
 
 
 ### English
@@ -115,10 +107,9 @@ then what is the % of unhealthy boys?
 ## Common Text
 
 ### Hindi
-Agar ek school mei 160 healthy boys hai.
-Uss school mei kitne unhealthy boys
-ke admission lene se, unhealthy boys ki
-pratishat 20% reh jayegi?
+अगर एक विद्यालय मैं 160 सेहतमंद  लड़के है और 
+उस विद्यालय मैं कितने बीमार लड़को के प्रवेश लेने से 
+बीमार लड़को की प्रतिशत 20% रह जाएगी?
 
 
 ### English
@@ -146,11 +137,8 @@ the % of unhealthy boys will be 20%?
 ## Common Text
 
 ### Hindi
-Agar ek school mei 224 healthy boys hai
-aur 26 unhealthy boys hai.
-Toh kitne unhealthy boys ke school join
-karne se, unhealthy boys ki
-pratishat 20% ho jayegi?
+अगर एक विद्यालय मैं 220  सेहतमंद  लड़के है और 26 बीमार लड़के हैं. 
+उस विद्यालय मैं कितने बीमार लड़को के प्रवेश लेने से बीमार लड़को की प्रतिशत 20% रह जाएगी?
 
 
 ### English
@@ -179,11 +167,9 @@ would the percentage of unhealthy boys be 20%?
 ## Common Text
 
 ### Hindi
-Ek school mei 800 boys hai.
-uss mei 20% boys unhealthy hai.
-Kitne unhealthy boys add karne se
-aapke school mei 36% unhealthy boys
-ho jayenge.
+अगर एक विद्यालय मैं 800 लड़के है
+उस मैं 20% लड़के बीमार हैं 
+उस विद्यालय मैं कितने बीमार लड़को के प्रवेश लेने से बीमार लड़को की प्रतिशत 36%  हो जाएगी?
 
 
 ### English
