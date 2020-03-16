@@ -48,9 +48,9 @@ How many grams of fruits do you have?
 ## Common Text
 
 ### Hindi
-इन सवालो को समझे और अप्पके पास जो जानकारी है उसे X और य Y के वेरिएबल मैं रखें | फिर उन वेरिएबल से आपको ेकशन बनानी पड़ेगी जैसे 3x+2y=100. अगर आप मैथ्स से डरते है तोह मत घबराइए बस ध्यान लगा के सवाल सुलझाइये | 
+इन सवालो को समझे और आपके पास जो जानकारी है उसे X और य Y के वेरिएबल मैं रखें | फिर उन वेरिएबल से आपको ेकशन बनानी पड़ेगी जैसे 3x+2y=100. अगर आप मैथ्स से डरते है तोह मत घबराइए बस ध्यान लगा के सवाल सुलझाइये | 
 
-एक सेब  का वज़न  70 ग्राम्स है और एक संतरे का वज़न 45 ग्राम्स है| आपके पास 4000 ग्राम्स फल है| इन मे  से किस मेल से आप 4000 ग्राम्स फल बना सकते हैं?
+एक सेब  का वज़न  70 ग्राम्स है और एक संतरे का वज़न 45 ग्राम्स है| आपके पास 4000 ग्राम्स फल है| इन मे से किस मेल से आप 4000 ग्राम्स फल बना सकते हैं?
 
 ### English
 For this final set of questions try to understand what information is given to you, and then try to put that information in terms of variables like x and y, in an equation like 3x+2y=100. Even if you don’t know maths properly, don’t worry. Just try to solve these questions one at a time and with focus, and you would be able to solve a few.
