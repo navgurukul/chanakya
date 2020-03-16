@@ -23,7 +23,7 @@
 Price of 1m (one metre) cotton is 70₹.
 And price 1m silk is 50₹.
 You have 8m cotton and 6m silk.
-What is the price of the clothes that you have?
+What is the price of the clothe that you have?
 
 
 ## Options
@@ -65,7 +65,7 @@ Price of 1m cotton is 60₹.
 And weight of 1m silk is 55₹.
 You have clothes with a cost of 4000₹.
 Which of the following combinations
-has 4000₹ price?
+would be of 4000₹ price?
 
 
 ## Options
@@ -102,7 +102,7 @@ Price of 1m cotton is 110₹.
 And price of 1m silk is 60₹.
 You have clothes with a cost of 5780₹.
 You have same length of cotton and silk.
-How is the length of your cotton?
+What is the length of your cotton?
 
 
 ## Options
@@ -162,8 +162,8 @@ What length of cotton do you have?
 
 ### Hindi
  1 मी (एक मीटर) कपास का मूल्य ₹105 है।
-और 1 मीटर कपास  का का मूल्य 1म रेशम से 3 गुना है ।
-आपके पासे ₹5400 के कपडे हैं 
+और 1 मीटर कपास  का मूल्य 1म रेशम से 3 गुना है ।
+आपके पासे ₹7000 के कपडे हैं 
 आपके पास जितना  लंबा कपास  है उसका 7 गुना रेशम  है 
 बताइये आपके पास कितने मीटर कपास है ?  
 
@@ -200,7 +200,7 @@ What length of cotton do you have?
 और 1 मीटर रेशम का मूल्य ₹30  है 
 आपके पास 2 म सिल्क के लिए 3म कॉटन है 
 (अगर 4 म सिल्क है तोह 6 म कॉटन है)
-आपके पासे ₹5400 के कपडे हैं 
+आपके पासे ₹4320 के कपडे हैं 
 बताइये आपके पास कितने मीटर कपास है ?
 
 
