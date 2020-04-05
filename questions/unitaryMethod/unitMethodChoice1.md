@@ -13,12 +13,11 @@
 ## Common Text
 
 ### Hindi
-Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi tarah se sochte hue, yeh teen questions answer karo.
+अगले तीन सवाल को सुलझाने के लिए थोड़ा असल ज़िन्दगी के उधारंड के द्वारा सोचे| अगर आप एक घंटे मैं 100 पौधे लगा सकते है तोह आप ४ में कितने लगा पाओगे? 100 से 4 गुना ज़्यादा क्यूंकि जितना काम एक घंटे मैं करोगे उसका 4 गुना काम आप 4 घंटे  मैं कर सकते हैं. इसी तरह इन तीन सवालो का जवाब दें | 
 
-Agar 100 glasses paani se bharne ke liye,
-5 taps (nal) 10 mins lete hai.
-Toh 10 taps - kitne samay mei
-100 glasses paani se bhar denge?
+अगर 100 ग्लासेज को पानी से भरने के लिए 
+5 नल 10 मिनट्स लेते हैं 
+तोह 10 नल कितने मिनट मैं 100 ग्लासेज पानी से भर देंगे?
 
 
 ### English
@@ -50,10 +49,11 @@ would be needed to fill
 ## Common Text
 
 ### Hindi
-Agar 100 glasses paani se bharne ke liye,
-5 taps (nal) 10 mins lete hai.
-Toh 5 mins mei 200 glasses bharne ke liye
-Kitne taps (nal) ki jaroorat padegi?
+
+अगर 100 ग्लासेज को पानी से भरने के लिए 
+5 नल 10 मिनट्स लेते हैं 
+तोह 5 मिनट्स मैं 200 ग्लासेज भरने के लिए 
+कितने नलो की ज़रूरत पडेगी ?
 
 
 ### English
@@ -82,10 +82,9 @@ how many taps would you need?
 ## Common Text
 
 ### Hindi
-Agar 100 glasses paani se bharne ke liye,
-5 taps (nal) 10 mins lete hai.
-Toh 25 taps se, 300 glasses bharne mei
-kitne minutes ki jaroorat hogi?
+अगर 100 ग्लासेज को पानी से भरने के लिए 
+5 नल 10 मिनट्स लेते हैं 
+तोह 25 नल कितने मिनट मैं 300 ग्लासेज पानी से भर देंगे?
 
 
 ### English

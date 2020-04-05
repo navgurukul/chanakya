@@ -15,7 +15,7 @@
 
 
 ### Hindi
-Neeche diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -43,7 +43,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -71,7 +71,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -99,7 +99,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -127,7 +127,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -155,7 +155,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -183,7 +183,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English
@@ -211,7 +211,7 @@ What will be the next term in the below pattern?
 
 
 ### Hindi
-*Neeche* diye hue pattern mein next kaunsa term aayega?
+नीचे दीये ह्यू पैटर्न में अगला कौनसा नंबर आएगा?
 
 
 ### English

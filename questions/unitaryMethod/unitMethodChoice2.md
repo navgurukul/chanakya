@@ -13,12 +13,12 @@
 ## Common Text
 
 ### Hindi
-Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi tarah se sochte hue, yeh teen questions answer karo.
+अगले तीन सवाल को सुलझाने के लिए थोड़ा असल ज़िन्दगी के उधारंड के द्वारा सोचे| अगर आप एक घंटे मैं 100 पौधे लगा सकते है तोह आप 4 में कितने लगा पाओगे? 100 से 4 गुना क्यूंकि जितना काम एक घंटे ें करोगे उसका 4  गुना काम आप 4 घंटे मैं कर सकते हैं. इसी तरह इन तीन सवालो का जवाब दें | 
 
-Agar 200 glasses nimbu paani banane ke liye,    
-10 log (people) 20 mins lete hai.            
-Toh 20 log - kitne samay mei                
-200 glasses nimbu paani bana sakte hai?
+अगर 200 गिलास निम्बू पानी बनाने के लिए 
+10 लोग 20 मिनट्स लेते हैं 
+तोह 20 लोग कितने समय मैं 
+200 ग्लासेज निम्बू पानी बना सकती हैं?
 
 
 ### English
@@ -49,10 +49,9 @@ can prepare 200 glasses of lemonade?
 ## Common Text
 
 ### Hindi
-Agar 200 glasses nimbu paani banane ke liye,    
-10 log (people) 20 mins lete hai.            
-Toh 20 mins mei 600 nimbu paani glasses banane    
-Ke liye kitne logo ki jaroorat padegi?            
+अगर 200 गिलास निम्बू पानी बनाने के लिए 
+10 लोग 20 मिनट्स लेते हैं 
+तोह 20 मिनट मैं 600 निम्बू पानी बनाने के लिए कितने लोगो की ज़रूरत पड़ेगी?          
 
 
 ### English
@@ -81,11 +80,10 @@ mins how many people would be needed?
 ## Common Text
 
 ### Hindi
-Agar 200 glasses nimbu paani banane ke liye,    
-10 log (people) 20 mins lete hai.        
-Toh agar 40 log, 600 glasses            
-nimbu paani banayenge toh            
-kitne minutes ki jaroorat hogi?        
+ अगर 200 गिलास निम्बू पानी बनाने के लिए 
+10 लोग 20 मिनट्स लेते हैं 
+तोह 40 लोग 600  गिलास निम्बू पानी बनाएंगे तोह 
+कितने मिनट्स की ज़रुरत होगी?   
 
 
 ### English

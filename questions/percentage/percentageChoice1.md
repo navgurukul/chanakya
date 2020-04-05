@@ -13,28 +13,15 @@
 ## Common Text
 
 ### Hindi
-Percentage bahut hi important concept hai maths mei.
-Aaiye iss concept ko iss example se samajhte hai:
+परसेंटेज बहोत इम्पोर्टेन्ट है मैथ्स मैं. इस को इस उद्धरण से समझते हैं:
+अगर एक गिलास ऐन 50 एम.एल निम्बू है जिसमें 40 एम.एल पानी है और बाकी बचा हुआ निम्बू है तोह नुम्बु कितनी प्रतिशत है?
+कितना निम्बू है = 40 एम.एल-50 एम.एल=10 मल 
+निम्बू की प्रतिशत = (निम्बी पानी मैं कितना निम्बू है)/ ९पानी और निम्बू मिलकर टोटल कितना निम्बू पानी है) X 100 
 
-Agar ek glass mei 50 ml nimbu paani hai
-Jismei se 40 ml paani hai.
-Aur baaki bacha hua nimbu hai.
+मतलब निम्बू की प्रतिशत = (10/50 ) X 100 = 20%
+इसको ध्यान रखते आगे दिए हुए क़ुएस्तिओन्स सोल्वे करो:
 
-Toh nimbu kitna pratishat hai?
-
-**kitna nimbu hai** = 50 ml - 40 ml = 10 ml
-
-**nimbu ki pratishat** = ( nimbu paani mei kitna nimbu hai ) / ( **paani aur nimbu milakar total kitna nimbu paani hai** ) * 100
-
-yaani,
-    nimbu ki pratishat = (10 / 50) * 100 = 20%
-
-Yeh dhyaan rakhte hue ab aage diye hue questions solve karo:
-
-Agar ek glass mei 120 ml paani hai.
-Aur 30 ml nimbu hai.
-Toh nimbu kitna pratishat hai?
-Dhyaan se sochna aur likhna kya answer hai.
+अगर एक गिलास मैं 120 एम.एल पानी है और 30मल निम्बू है तोह निम्बू कितना प्रतिशत है? ध्यान से सोचना और लिखना क्या जवाब है | 
 
 
 ### English
@@ -81,10 +68,11 @@ Please think and answer carefully.
 ## Common Text
 
 ### Hindi
-Agar ek glass mei 105 ml paani hai.
-Aur 20 ml nimbu hai.
-Humne ab 25 ml nimbu aur daal diya.
-Toh, ab nimbu kitna pratishat hai?
+अगर एक गिलास मैं 105एम.एल पानी है 
+और 20एम.एल निम्बू है तोह निम्बू है 
+हमने अब 25 एम.एल य 
+ निम्बू और दाल दीया 
+तोह अब निम्बू कितना प्रतिशत है? 
 
 
 ### English
@@ -113,11 +101,11 @@ then what is the % of lemon?
 ## Common Text
 
 ### Hindi
-Agar ek glass mei 140 ml paani hai.
-Aur hume thoda nimbu daal kar,
-aisa nimbu paani banana hai,
-jismei 20% nimbu ho,
-toh kitne “ml” nimbu daalenge?        
+  
+अगर एक गिलास मैं 140एम.एल पानी है 
+ और हमने थोड़ा निम्बू डाल कर निम्बू पानी बनाया है 
+ जिसमें 20% निम्बू हैं. 
+ तोह कितने एम.एल निम्बू डालेंगे?    
 
 
 ### English
@@ -147,12 +135,10 @@ How many ml of lemon would you add?
 ## Common Text
 
 ### Hindi
-Agar ek glass mei 180 ml paani hai.
-Aur 20 ml nimbu hai.
-Hume aisa nimbu paani banana hai,
-jismei 20% nimbu ho,
-toh kitna “ml” nimbu aur daalenge?
-
+अगर एक गिलास मैं 180 एम.एल पानी है 
+और 20 एम.एल निम्बू है 
+और हमने थोड़ा निम्बू डाल कर निम्बू पानी बनाया है जिसमें 20% निम्बू हैं. 
+तोह कितने एम.एल निम्बू डालेंगे?
 
 ### English
 There is 180ml of water in a glass
@@ -181,11 +167,10 @@ How many ml of lemon would you add?
 ## Common Text
 
 ### Hindi
-400ml ka aapke paas nimbu paani hai.
-Uss mei 10% pratishat nimbu hai.
-Kitna “ml” nimbu milane se
-aapke naye nimbu paani jisse ki
-20% nimbu hoga.
+400 एम.एल के आपके पास निम्बू पानी है 
+उसमें 10 प्रतिशत निम्बू है 
+कितना 'एम.एल' निम्बू मिलाने से 
+आपके नए निम्बू पानी मैं 20% निम्बू होगा?
 
 
 ### English
