@@ -365,7 +365,7 @@ function submitApp() {
     (data, resp) => {
       $('.page').hide();
       $("#end_page").slideDown(slide_down_time);
-      show_TestResult(obj);
+      show_TestResult();
       mixpanel.track("Thank You");
     },
     'json'
@@ -557,24 +557,7 @@ function show_thanksPage() {
   $('#thank_you_page').show();
 }
 
-function getPercentile(obj) {
-  $.post(base_url + "/students/percentile/" + enrolment_key, {
-    "state": obj["state"]
-  },
-  (data, resp) => {
-    console.log(data, "Pralhad")
-    $('#test_pass .percentileNationalwise').html(data["data"].percentileNationalwise);
-    $('#test_pass .percentileStatewise').html(data["data"].percentileStatewise);
-    $('#test_fail .percentileNationalwise').html(data["data"].percentileNationalwise);
-    $('#test_fail .percentileStatewise').html(data["data"].percentileStatewise);
-  }).fail(function (response) {
-    $("#myModal").modal();
-    Sentry.captureException(response);
-  });
-}
-
-function show_TestResult(obj) {
-  getPercentile(obj)
+function show_TestResult() {
   $.get(base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
     (data, resp) => {
