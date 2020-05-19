@@ -556,7 +556,6 @@ function show_thanksPage() {
   $('.page').hide();
   $('#thank_you_page').show();
 }
-
 function show_TestResult() {
   $.get(base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
