@@ -208,7 +208,8 @@ function personal_details_submit() {
     scope.setUser({ "username": mobile });
   });
 
-  $.post(base_url + "/on_assessment/details/" + enrolment_key,
+  if (gender !== "male" || !gender ) {
+    $.post(base_url + "/on_assessment/details/" + enrolment_key,
     obj,
     (data, resp) => {
       mixpanel.track("Personal Details Submitted");
@@ -225,6 +226,10 @@ function personal_details_submit() {
       mixpanel.track("Error in Personal Details Submission");
       Sentry.captureException(response);
     });
+  } else {
+    $("#personal_details").slideUp(slide_up_time);
+    $("#boyesTestClose").slideDown(slide_down_time);
+  }
 }
 
 function submitApp() {
