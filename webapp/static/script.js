@@ -207,9 +207,8 @@ function personal_details_submit() {
   Sentry.configureScope((scope) => {
     scope.setUser({ "username": mobile });
   });
-
-  if (gender !== "male" || !gender ) {
-    $.post(base_url + "/on_assessment/details/" + enrolment_key,
+    
+  $.post(base_url + "/on_assessment/details/" + enrolment_key,
     obj,
     (data, resp) => {
       mixpanel.track("Personal Details Submitted");
@@ -222,14 +221,10 @@ function personal_details_submit() {
     },
     'json'
   )
-    .fail(function (response) {
-      mixpanel.track("Error in Personal Details Submission");
-      Sentry.captureException(response);
-    });
-  } else {
-    $("#personal_details").slideUp(slide_up_time);
-    $("#boyesTestClose").slideDown(slide_down_time);
-  }
+  .fail(function (response) {
+    mixpanel.track("Error in Personal Details Submission");
+    Sentry.captureException(response);
+  });
 }
 
 function submitApp() {
