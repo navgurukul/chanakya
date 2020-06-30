@@ -41,6 +41,12 @@ exports.deployment = async (start) => {
         feedbackService.informPendingMobilizationWorkToAssignUser();
     });
 
+    // Inform student to complete the pending online test after 3 hours
+    cron.schedule(CONSTANTS.informToCompleteTheTestCron, () => {
+      const { studentService } = server.services();   
+      studentService.informToCompleteTheTest();
+    })
+
     return server;
 };
 
