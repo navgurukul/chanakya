@@ -191,3 +191,12 @@ Set the following environment variable to log all the knex queries etc. being do
 export DEBUG=knex:*
 npm start
 ```
+
+### Auto calling to failed students
+create `gSheetPrivateKey.json` file in root directory. add EXOTEL_AAPID and EXOTEL_CALLERID variables in .evn file.
+
+Running it with `--autoCallToFailedStudent` will ensure that the contact number fetch from google sheet and then run by the server to call all failed student.
+
+```bash
+node lib/helpers/gSheetSync.js --autoCallToFailedStudent
+```
