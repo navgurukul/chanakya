@@ -92,7 +92,7 @@ module.exports = new Confidence.Store({
                     $base: {
                         migrateOnStart: true,
                         knex: {
-                            client: "mysql",
+                            client: "pg",
                             migrations: {
                                 stub: 'lib/migrations/templates/defaultMigrationTemplate.js'
                             },

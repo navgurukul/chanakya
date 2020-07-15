@@ -115,7 +115,7 @@ node lib/seedQuestions/index.js --questionsDir questions --updateMD
 Running it with `--updateMD` will ensure that the markdown files are edited with the updated IDs returned by the server.
 
 ```bash
-node lib/seedQuestions/index.js --questionsDir question --addAllQuestions
+node lib/seedQuestions/index.js --questionsDir questions --addAllQuestions
 ```
 
 Running it with `--addAllQuestions` flag will ensure that the IDs in the markdown files will be ignored and all questions in the files will be added as new questions.

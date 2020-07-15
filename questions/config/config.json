@@ -3,7 +3,7 @@
       {
           "name": "Percentage",
           "id": 2,
-          "numQuestions": 5,
+          "num_questions": 5,
           "choices": [
               {
                   "file": "percentage/percentageChoice1.md",
@@ -18,7 +18,7 @@
       {
           "name": "Unitary Method",
           "id": 1,
-          "numQuestions": 3,
+          "num_questions": 3,
           "choices": [
               {
                   "file": "unitaryMethod/unitMethodChoice1.md",
@@ -33,7 +33,7 @@
       {
           "name": "Algebra",
           "id": 3,
-          "numQuestions": 6,
+          "num_questions": 6,
           "choices": [
               {
                   "file": "algebra/algebraChoice1.md",
