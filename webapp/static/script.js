@@ -1,4 +1,5 @@
-var DEBUG = false;
+// var DEBUG = false;
+var DEBUG = true;
 var current_language = 'hi';
 
 Sentry.init({
@@ -10,7 +11,7 @@ if (!DEBUG) {
   var enrolment_key = window.location.href.split('k/').slice(-1);
   var base_url = "/api";
 } else {
-  var enrolment_key = "ZJ9JPA";
+  var enrolment_key = "IOKMC9";
   var base_url = "http://localhost:3000";
 }
 
@@ -29,11 +30,11 @@ function appending(error) {
 }
 
 function getQuestion(question) {
-  if (question["commonText"]) {
-    return question[current_language + "Text"] + "<br>" + question["commonText"];
+  if (question["common_text"]) {
+    return question[current_language + "_text"] + "<br>" + question["common_text"];
   }
   else {
-    return question[current_language + "Text"];
+    return question[current_language + "_text"];
   }
 }
 
@@ -191,8 +192,8 @@ function personal_details_submit() {
     "whatsapp": mobile,
     "gender": gender,
     "dob": dob,
-    "gpsLat": positions.latitude,
-    "gpsLong": positions.longitude
+    "gps_lat": positions.latitude,
+    "gps_long": positions.longitude
   };
 
   mixpanel.identify(mobile);
@@ -230,33 +231,33 @@ function personal_details_submit() {
 function submitApp() {
   appending('');
 
-  var pinCode = $('#pinCode').val();
+  var pin_code = $('#pin_code').val();
   var qualification = $('#qualification').val();
   var state = $('#state').val();
   var city = $('#city_or_village').val();
-  var currentStatus = $('#currentStatus').val();
-  var schoolMedium = $('#schoolMedium').val();
+  var current_status = $('#current_status').val();
+  var school_medium = $('#school_medium').val();
   var caste = $('#caste').val();
   var religion = $('#religion').val();
-  var percentageIn12th = $('#percentageIn12th').val();
-  var percentageIn10th = $('#percentageIn10th').val();
-  var mathMarksIn10th = $('#mathMarksIn10th').val();
-  var mathMarksIn12th = $('#mathMarksIn12th').val();
+  var percentage_in12th = $('#percentage_in12th').val();
+  var percentage_in10th = $('#percentage_in10th').val();
+  var math_marks_in10th = $('#math_marks_in10th').val();
+  var math_marks_in12th = $('#math_marks_in12th').val();
 
 
   var academicDetails = {}
   if (DEBUG) {
-    pinCode = 110010;
+    pin_code = 110010;
     qualification = "lessThan10th";
     state = "AN";
     city = "Gurgaon";
-    currentStatus = "job";
-    schoolMedium = "en";
+    current_status = "job";
+    school_medium = "en";
     caste = "scSt";
     religion = "hindu";
   }
 
-  if (!pinCode || pinCode.length < 6 || pinCode.length > 6) {
+  if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
     appending('Sahi Pin Code enter kijiye!');
     return false;
   }
@@ -276,7 +277,7 @@ function submitApp() {
     return false;
   }
 
-  if (!currentStatus || currentStatus == "NONE") {
+  if (!current_status || current_status == "NONE") {
     appending('Apne current status ko select karo!');
     return false;
   }
@@ -286,7 +287,7 @@ function submitApp() {
     return false;
   }
 
-  if (!schoolMedium || schoolMedium == "NONE") {
+  if (!school_medium || school_medium == "NONE") {
     appending('Apne last school ka medium select karo!');
     return false;
   }
@@ -305,32 +306,32 @@ function submitApp() {
 
   if (qualification == "class10th") {
 
-    if (!percentageIn10th) {
+    if (!percentage_in10th) {
       appending("Apke 10th ke percentage dijye!")
       return false
     }
 
     academicDetails = {
-      mathMarksIn10th: mathMarksIn10th,
-      percentageIn10th: percentageIn10th,
+      math_marks_in10th: math_marks_in10th,
+      percentage_in10th: percentage_in10th,
     }
 
   } else if (qualification == "class12th" || qualification == "graduate") {
-    if (!percentageIn10th) {
+    if (!percentage_in10th) {
       appending("Apke 10th ke percentage dijye!")
       return false
     }
 
-    if (!percentageIn12th) {
+    if (!percentage_in12th) {
       appending("Apke 12th ke percentage dijye!")
       return false
     }
 
     academicDetails = {
-      mathMarksIn10th: mathMarksIn10th,
-      percentageIn10th: percentageIn10th,
-      mathMarksIn12th: mathMarksIn12th,
-      percentageIn12th: percentageIn12th
+      math_marks_in10th: math_marks_in10th,
+      percentage_in10th: percentage_in10th,
+      math_marks_in12th: math_marks_in12th,
+      percentage_in12th: percentage_in12th
     }
 
   } else if (qualification == "lessThan10th") {
@@ -338,12 +339,12 @@ function submitApp() {
   }
 
   var obj = {
-    "pinCode": pinCode,
+    "pin_code": pin_code,
     "qualification": qualification,
     "state": state,
     "city": city,
-    "currentStatus": currentStatus,
-    "schoolMedium": schoolMedium,
+    "current_status": current_status,
+    "school_medium": school_medium,
     "caste": caste,
     "religon": religion,
   }
@@ -560,7 +561,7 @@ function show_TestResult() {
   $.get(base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
     (data, resp) => {
-      testMarks = data['totalMarks']
+      testMarks = data['total_marks']
       if (data["Result"] === "Passed") {
         $('.page').hide()
         $('#test_pass').slideDown(slide_down_time);

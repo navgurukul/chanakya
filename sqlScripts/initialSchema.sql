@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `contacts`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `studentId` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
   `mobile` varchar(10) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `student_idx` (`studentId`),
-  CONSTRAINT `student` FOREIGN KEY (`studentId`) REFERENCES `students` (`id`)
+  KEY `student_idx` (`student_id`),
+  CONSTRAINT `student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,15 +43,15 @@ DROP TABLE IF EXISTS `enrolment_keys`;
 CREATE TABLE `enrolment_keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(6) DEFAULT NULL,
-  `studentId` int(11) DEFAULT NULL,
-  `startTime` datetime DEFAULT NULL,
-  `endTime` datetime DEFAULT NULL,
-  `totalMarks` varchar(45) DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `total_marks` varchar(45) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_UNIQUE` (`key`),
-  KEY `student_idx` (`studentId`),
-  CONSTRAINT `student2` FOREIGN KEY (`studentId`) REFERENCES `students` (`id`)
+  KEY `student_idx` (`student_id`),
+  CONSTRAINT `student2` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,12 +64,12 @@ DROP TABLE IF EXISTS `incoming_calls`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `incoming_calls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contactId` int(11) DEFAULT NULL,
-  `callType` varchar(15) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
+  `contact_id` int(11) DEFAULT NULL,
+  `call_type` varchar(15) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `contact_idx` (`contactId`),
-  CONSTRAINT `contact` FOREIGN KEY (`contactId`) REFERENCES `contacts` (`id`)
+  KEY `contact_idx` (`contact_id`),
+  CONSTRAINT `contact` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -113,11 +113,11 @@ DROP TABLE IF EXISTS `partner_assessments`;
 CREATE TABLE `partner_assessments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `answerKeyUrl` varchar(300) DEFAULT NULL,
-  `assessmentUrl` varchar(300) DEFAULT NULL,
-  `questionSetId` varchar(45) NOT NULL,
-  `partnerId` int(11) NOT NULL,
-  `createdAt` varchar(45) NOT NULL,
+  `answer_key_url` varchar(300) DEFAULT NULL,
+  `assessment_url` varchar(300) DEFAULT NULL,
+  `question_set_id` varchar(45) NOT NULL,
+  `partner_id` int(11) NOT NULL,
+  `created_at` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -133,7 +133,7 @@ CREATE TABLE `partners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `notes` varchar(2000) NOT NULL,
-  `createdAt` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -147,11 +147,11 @@ DROP TABLE IF EXISTS `question_attempts`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `question_attempts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `enrolmentKeyId` int(11) NOT NULL,
-  `questionId` int(11) NOT NULL,
-  `selectedOptionId` int(11) DEFAULT NULL,
-  `textAnswer` varchar(45) DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
+  `enrolment_key_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `selected_option_id` int(11) DEFAULT NULL,
+  `text_answer` varchar(45) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -166,12 +166,12 @@ DROP TABLE IF EXISTS `question_options`;
 CREATE TABLE `question_options` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(2000) NOT NULL,
-  `questionId` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
   `correct` tinyint(1) NOT NULL,
-  `createdAt` varchar(45) NOT NULL,
+  `created_at` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `question_idx` (`questionId`),
-  CONSTRAINT `question` FOREIGN KEY (`questionId`) REFERENCES `questions` (`id`)
+  KEY `question_idx` (`question_id`),
+  CONSTRAINT `question` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=698 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -184,12 +184,12 @@ DROP TABLE IF EXISTS `question_sets`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `question_sets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `questionIds` varchar(2000) NOT NULL,
-  `enrolmentKeyId` int(11) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
+  `question_ids` varchar(2000) NOT NULL,
+  `enrolment_key_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `enrolmentKey_idx` (`enrolmentKeyId`),
-  CONSTRAINT `enrolmentKey` FOREIGN KEY (`enrolmentKeyId`) REFERENCES `enrolment_keys` (`id`)
+  KEY `enrolmentKey_idx` (`enrolment_key_id`),
+  CONSTRAINT `enrolmentKey` FOREIGN KEY (`enrolment_key_id`) REFERENCES `enrolment_keys` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -202,13 +202,13 @@ DROP TABLE IF EXISTS `questions`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `commonText` varchar(2000) DEFAULT NULL,
-  `enText` varchar(2000) DEFAULT NULL,
-  `hiText` varchar(2000) NOT NULL,
+  `common_text` varchar(2000) DEFAULT NULL,
+  `en_text` varchar(2000) DEFAULT NULL,
+  `hi_text` varchar(2000) NOT NULL,
   `difficulty` int(11) NOT NULL,
   `topic` varchar(45) NOT NULL,
   `type` int(11) NOT NULL,
-  `createdAt` varchar(45) NOT NULL,
+  `created_at` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=462 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,16 +229,16 @@ CREATE TABLE `students` (
   `email` varchar(150) DEFAULT NULL,
   `state` varchar(2) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
-  `gpsLat` varchar(45) DEFAULT NULL,
-  `gpsLong` varchar(45) DEFAULT NULL,
-  `pinCode` varchar(10) DEFAULT NULL,
+  `gps_lat` varchar(45) DEFAULT NULL,
+  `gps_long` varchar(45) DEFAULT NULL,
+  `pin_code` varchar(10) DEFAULT NULL,
   `qualification` int(11) DEFAULT NULL,
-  `currentStatus` int(11) DEFAULT NULL,
-  `schoolMedium` int(11) DEFAULT NULL,
+  `current_status` int(11) DEFAULT NULL,
+  `school_medium` int(11) DEFAULT NULL,
   `religon` int(11) DEFAULT NULL,
   `caste` int(11) DEFAULT NULL,
   `stage` varchar(45) NOT NULL,
-  `createdAt` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

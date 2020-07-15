@@ -29,16 +29,17 @@ exports.deployment = async (start) => {
 
     console.log(`Server started at ${server.info.uri}`);
 
+    // cron is throwing error I dont know why after talking with Abhishek bhaiya I commented this.
     // schedule the metric calculation cron
-    cron.schedule(CONSTANTS.metricCalcCron, () => {
-        const { metricsService } = server.services();
-        metricsService.recordPendingMetrics();
-    });
+    // cron.schedule(CONSTANTS.metricCalcCron, () => {
+    //     const { metricsService } = server.services();
+    //     metricsService.recordPendingMetrics();
+    // });
     
     // Inform pending mobilization work to user sending to SMS after 1 hours.
     cron.schedule(CONSTANTS.deadlineResultCron, () =>{
         const { feedbackService } = server.services();
-        feedbackService.informPendingMobilizationWorkToAssignUser();
+        feedbackService.informPendingMobilizationWorkto_assignUser();
     });
 
     // Inform student to complete the pending online test after 3 hours

@@ -157,36 +157,36 @@
                     commen text between the questions like
                     images, mathematical equation.
                   --}}
-                  {{#if this.commonText}}
+                  {{#if this.common_text}}
                     <div class="commen-text">
-                      {{#if (hasParaTag this.commonText) }}
-                        {{{this.commonText}}}
+                      {{#if (hasParaTag this.common_text) }}
+                        {{{this.common_text}}}
                       {{else}}
                         <p>
-                          {{{this.commonText}}}
+                          {{{this.common_text}}}
                         </p>
                       {{/if}}
                     </div>
                   {{/if}}
 
                   {{!-- English text --}}
-                  {{#if this.enText}}
-                    {{#if (hasParaTag this.enText) }}
-                      {{{this.enText}}}
+                  {{#if this.en_text}}
+                    {{#if (hasParaTag this.en_text) }}
+                      {{{this.en_text}}}
                     {{else}}
                       <p>
-                        {{{this.enText}}}
+                        {{{this.en_text}}}
                       </p>
                     {{/if}}
                   {{/if}}
 
                   {{!-- Hindi text --}}
-                  {{#if this.hiText}}
-                    {{#if (hasParaTag this.hiText) }}
-                      {{{this.hiText}}}
+                  {{#if this.hi_text}}
+                    {{#if (hasParaTag this.hi_text) }}
+                      {{{this.hi_text}}}
                     {{else}}
                       <p>
-                        {{{this.hiText}}}
+                        {{{this.hi_text}}}
                       </p>
                     {{/if}}
                   {{/if}}
