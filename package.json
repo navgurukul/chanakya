@@ -66,7 +66,7 @@
     "readline-sync": "^1.4.10",
     "schmervice": "1.x.x",
     "schwifty": "4.x.x",
-    "secure-password": "3.x.x",
+    "secure-password": "^3.1.0",
     "slugify": "1.x.x",
     "sqlite3": "4.x.x",
     "system": "^2.0.1",
