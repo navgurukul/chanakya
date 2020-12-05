@@ -64,6 +64,9 @@ After importing the schema you can run the migrations using `npm run knex migrat
 ### Import Schema
 `mysql -u <insert your username> -p chanakya < sqlScripts/initialSchema.sql`
 
+### Set default schema to main
+`ALTER DATABASE main SET search_path TO main;`
+
 ### Run server with Auto Reload
 `npm start`
 
