@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "engines": {
-    "node": "10.x.x"
+    "node": "12.x.x"
   },
   "directories": {
     "lib": "lib",
