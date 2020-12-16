@@ -4,7 +4,8 @@ const Glue = require("@hapi/glue");
 const Manifest = require("./manifest");
 const cron = require("node-cron");
 const CONSTANTS = require("../lib/constants");
-const knex = require("knex");
+const knexfile = require("../knexfile");
+const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
 Dotenv.config({ path: `${__dirname}/../.env` });
