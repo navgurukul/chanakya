@@ -196,6 +196,8 @@ function personal_details_submit() {
     "gps_long": positions.longitude
   };
 
+  conso
+
   mixpanel.identify(mobile);
 
   mixpanel.people.set({
