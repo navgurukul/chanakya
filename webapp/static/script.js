@@ -130,7 +130,9 @@ function fetchQuestionsAndOptions() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in fetching questins and options.");
-    Sentry.captureException(response);
+    try {
+      Sentry.captureException(response);
+    } catch (e) {}
   });
 }
 
@@ -212,10 +214,11 @@ function personal_details_submit() {
     $gender: gender,
     $dob: mdob,
   });
-
-  Sentry.configureScope((scope) => {
-    scope.setUser({ username: mobile });
-  });
+  try {
+    Sentry.configureScope((scope) => {
+      scope.setUser({ username: mobile });
+    });
+  } catch (e) {}
 
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
@@ -232,7 +235,9 @@ function personal_details_submit() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in Personal Details Submission");
-    Sentry.captureException(response);
+    try {
+      Sentry.captureException(response);
+    } catch (e) {}
   });
 }
 
@@ -377,7 +382,9 @@ function submitApp() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in Submission of final details");
-    Sentry.captureException(response);
+    try {
+      Sentry.captureException(response);
+    } catch (e) {}
   });
 }
 
@@ -604,7 +611,9 @@ function show_TestResult() {
     }
   ).fail(function (response) {
     $("#myModal").modal();
-    Sentry.captureException(response);
+    try {
+      Sentry.captureException(response);
+    } catch (e) {}
   });
 }
 
@@ -637,7 +646,9 @@ function submitTest() {
     },
     error: function (error) {
       mixpanel.track("Error in Answers Submission");
-      Sentry.captureException(error);
+      try {
+        Sentry.captureException(error);
+      } catch (e) {}
     },
   });
 }
@@ -676,7 +687,9 @@ $(document).ready(function () {
     }
   ).fail(function (response) {
     $("#myModal").modal();
-    Sentry.captureException(response);
+    try {
+      Sentry.captureException(response);
+    } catch (e) {}
   });
   // }
 });
