@@ -79,10 +79,10 @@ exports.deployment = async (start) => {
   });
 
   // Inform pending mobilization work to user sending to SMS after 1 hours.
-  cron.schedule(CONSTANTS.deadlineResultCron, () => {
-    const { feedbackService } = server.services();
-    feedbackService.informPendingMobilizationWorkto_assignUser();
-  });
+  // cron.schedule(CONSTANTS.deadlineResultCron, () => {
+  //   const { feedbackService } = server.services();
+  //   feedbackService.informPendingMobilizationWorkto_assignUser();
+  // });
 
   // Inform student to complete the pending online test after 3 hours
   cron.schedule(CONSTANTS.informToCompleteTheTestCron, () => {
