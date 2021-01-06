@@ -7,9 +7,9 @@ Sentry.init({
   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
   environment: DEBUG ? "staging" : "production",
 });
-var base_url = "/api";
 
 if (!DEBUG) {
+  var base_url = "/api";
   var enrolment_key = window.location.href.split("k/").slice(-1)[0];
 } else {
   var enrolment_key = "IOKMC9";
@@ -207,8 +207,8 @@ function personal_details_submit() {
     whatsapp: mobile,
     gender: gender,
     dob: dob,
-    gps_lat: positions ? positions.latitude : null,
-    gps_long: positions ? positions.longitude : null,
+    gps_lat: positions ? positions.latitude : -1,
+    gps_long: positions ? positions.longitude : -1,
   };
 
   mixpanel.identify(mobile);
