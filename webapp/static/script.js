@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
