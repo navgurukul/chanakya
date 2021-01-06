@@ -6,14 +6,18 @@ Sentry.init({
   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
   environment: DEBUG ? "staging" : "production",
 });
+var base_url = "/api";
 
 if (!DEBUG) {
-  var enrolment_key = window.location.href.split("k/").slice(-1);
-  var base_url = "/api";
+  var enrolment_key = window.location.href.split("k/").slice(-1)[0];
 } else {
   var enrolment_key = "IOKMC9";
   var base_url = "http://localhost:3000";
 }
+
+console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+console.log(base_url, enrolment_key);
+console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 
 var slide_up_time = 600;
 var slide_down_time = slide_down_time;
@@ -130,9 +134,9 @@ function fetchQuestionsAndOptions() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in fetching questins and options.");
-    try {
-      Sentry.captureException(response);
-    } catch (e) {}
+    // try {
+    Sentry.captureException(response);
+    // } catch (e) {}
   });
 }
 
@@ -214,11 +218,11 @@ function personal_details_submit() {
     $gender: gender,
     $dob: mdob,
   });
-  try {
-    Sentry.configureScope((scope) => {
-      scope.setUser({ username: mobile });
-    });
-  } catch (e) {}
+  // try {
+  Sentry.configureScope((scope) => {
+    scope.setUser({ username: mobile });
+  });
+  // } catch (e) {}
 
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
@@ -235,9 +239,9 @@ function personal_details_submit() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in Personal Details Submission");
-    try {
-      Sentry.captureException(response);
-    } catch (e) {}
+    // try {
+    Sentry.captureException(response);
+    // } catch (e) {}
   });
 }
 
@@ -382,9 +386,9 @@ function submitApp() {
     "json"
   ).fail(function (response) {
     mixpanel.track("Error in Submission of final details");
-    try {
-      Sentry.captureException(response);
-    } catch (e) {}
+    // try {
+    Sentry.captureException(response);
+    // } catch (e) {}
   });
 }
 
@@ -611,9 +615,9 @@ function show_TestResult() {
     }
   ).fail(function (response) {
     $("#myModal").modal();
-    try {
-      Sentry.captureException(response);
-    } catch (e) {}
+    // try {
+    Sentry.captureException(response);
+    // } catch (e) {}
   });
 }
 
@@ -646,9 +650,9 @@ function submitTest() {
     },
     error: function (error) {
       mixpanel.track("Error in Answers Submission");
-      try {
-        Sentry.captureException(error);
-      } catch (e) {}
+      // try {
+      Sentry.captureException(error);
+      // } catch (e) {}
     },
   });
 }
@@ -687,9 +691,9 @@ $(document).ready(function () {
     }
   ).fail(function (response) {
     $("#myModal").modal();
-    try {
-      Sentry.captureException(response);
-    } catch (e) {}
+    // try {
+    Sentry.captureException(response);
+    // } catch (e) {}
   });
   // }
 });
