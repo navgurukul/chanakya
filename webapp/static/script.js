@@ -257,6 +257,14 @@ function submitApp() {
   var percentage_in10th = $("#percentage_in10th").val();
   var math_marks_in10th = $("#math_marks_in10th").val();
   var math_marks_in12th = $("#math_marks_in12th").val();
+  console.log(
+    pin_code,
+    qualification,
+    state,
+    city,
+    current_status,
+    percentage_in12th
+  );
   if (
     pin_code &&
     qualification &&
@@ -270,6 +278,7 @@ function submitApp() {
   ) {
     submitable = true;
   }
+  console.log(submitable);
   var academicDetails = {};
   if (DEBUG) {
     pin_code = 110010;
