@@ -278,7 +278,11 @@ function submitApp() {
   ) {
     submitable = true;
   }
-  console.log(submitable);
+  if (!submitable) {
+    console.log("I will not submit the form now");
+    alert("Not all fields entered");
+    return;
+  }
   var academicDetails = {};
   if (DEBUG) {
     pin_code = 110010;
@@ -392,26 +396,22 @@ function submitApp() {
 
   mixpanel.people.set(mixpanelObj);
 
-  if (submitable) {
-    $.post(
-      base_url + "/on_assessment/details/" + enrolment_key,
-      obj,
-      (data, resp) => {
-        $(".page").hide();
-        $("#end_page").slideDown(slide_down_time);
-        show_TestResult();
-        mixpanel.track("Thank You");
-      },
-      "json"
-    ).fail(function (response) {
-      mixpanel.track("Error in Submission of final details");
-      // try {
-      //   Sentry.captureException(response);
-      // } catch (e) {}
-    });
-  } else {
-    alert("Kuch sthan khali hai..Unhe bhare");
-  }
+  $.post(
+    base_url + "/on_assessment/details/" + enrolment_key,
+    obj,
+    (data, resp) => {
+      $(".page").hide();
+      $("#end_page").slideDown(slide_down_time);
+      show_TestResult();
+      mixpanel.track("Thank You");
+    },
+    "json"
+  ).fail(function (response) {
+    mixpanel.track("Error in Submission of final details");
+    // try {
+    //   Sentry.captureException(response);
+    // } catch (e) {}
+  });
 }
 
 function time_aware_submit() {
