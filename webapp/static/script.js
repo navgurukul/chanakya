@@ -243,7 +243,6 @@ function personal_details_submit() {
 
 function submitApp() {
   appending("");
-  var submitable = false;
 
   var pin_code = $("#pin_code").val();
   var qualification = $("#qualification").val();
@@ -258,23 +257,6 @@ function submitApp() {
   var math_marks_in10th = $("#math_marks_in10th").val();
   var math_marks_in12th = $("#math_marks_in12th").val();
 
-  if (
-    pin_code &&
-    qualification &&
-    state &&
-    city &&
-    current_status &&
-    percentage_in10th &&
-    percentage_in12th &&
-    math_marks_in10th &&
-    math_marks_in12th
-  ) {
-    submitable = true;
-  }
-  if (!submitable) {
-    window.alert("Not all fields entered");
-    return;
-  }
   var academicDetails = {};
   if (DEBUG) {
     pin_code = 110010;
@@ -387,24 +369,23 @@ function submitApp() {
   }
 
   mixpanel.people.set(mixpanelObj);
-  if (submitable) {
-    $.post(
-      base_url + "/on_assessment/details/" + enrolment_key,
-      obj,
-      (data, resp) => {
-        $(".page").hide();
-        $("#end_page").slideDown(slide_down_time);
-        show_TestResult();
-        mixpanel.track("Thank You");
-      },
-      "json"
-    ).fail(function (response) {
-      mixpanel.track("Error in Submission of final details");
-      // try {
-      //   Sentry.captureException(response);
-      // } catch (e) {}
-    });
-  }
+
+  $.post(
+    base_url + "/on_assessment/details/" + enrolment_key,
+    obj,
+    (data, resp) => {
+      $(".page").hide();
+      $("#end_page").slideDown(slide_down_time);
+      show_TestResult();
+      mixpanel.track("Thank You");
+    },
+    "json"
+  ).fail(function (response) {
+    mixpanel.track("Error in Submission of final details");
+    // try {
+    //   Sentry.captureException(response);
+    // } catch (e) {}
+  });
 }
 
 function time_aware_submit() {
