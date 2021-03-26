@@ -129,12 +129,16 @@ function fetchQuestionsAndOptions() {
     },
     "json"
   ).fail(function (response) {
-    mixpanel.track("Error in fetching questins and options.");
+    mixpanel.track("Error in fetching questions and options.");
     // try {
     //   Sentry.captureException(response);
     // } catch (e) {}
   });
 }
+
+// function fetchPartnersDistricts() {
+//   $.post(`${base_url}/partners/slug/${}`);
+// }
 
 function personal_details_submit() {
   var name = $("#name").val();
