@@ -136,9 +136,26 @@ function fetchQuestionsAndOptions() {
   });
 }
 
-// function fetchPartnersDistricts() {
-//   $.post(`${base_url}/partners/slug/${}`);
-// }
+function fetchPartnersDistricts() {
+  $.get(
+    `${base_url}/partners/enrolment_key/${window.location.href
+      .split("/")
+      .pop()}`,
+    {},
+    (data) => {
+      console.log(data);
+      var select = document.getElementById("city_or_village");
+      data[partner][0].districts.map((district) => {
+        var opt = document.createElement("option");
+        opt.value = "value";
+        opt.textContent = district;
+        select.appendChild(opt);
+      });
+    }
+  ).fail(function (response) {
+    console.log(response);
+  });
+}
 
 function personal_details_submit() {
   var name = $("#name").val();
@@ -637,6 +654,7 @@ function submitTest() {
     }
   }
   updateAnswer(current_question);
+  fetchPartnersDistricts();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
