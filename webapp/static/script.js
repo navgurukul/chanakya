@@ -147,10 +147,14 @@ function fetchPartnersDistricts() {
       var select = document.getElementById("city_or_village");
       data.data.partner[0].districts.map((district) => {
         var opt = document.createElement("option");
-        opt.value = "value";
+        opt.value = district;
         opt.textContent = district;
         select.appendChild(opt);
       });
+      var otherOpt = document.createElement("option");
+      otherOpt.value = "other";
+      otherOpt.textContent = "Other";
+      select.appendChild(otherOpt);
     }
   ).fail(function (response) {
     console.log(response);
@@ -269,6 +273,9 @@ function submitApp() {
   var qualification = $("#qualification").val();
   var state = $("#state").val();
   var city = $("#city_or_village").val();
+  if (city === "other") {
+    city = $("#city_or_village_2").val();
+  }
   var current_status = $("#current_status").val();
   var school_medium = $("#school_medium").val();
   var caste = $("#caste").val();
