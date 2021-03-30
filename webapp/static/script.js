@@ -158,6 +158,7 @@ function fetchPartnersDistricts() {
     }
   ).fail(function (response) {
     console.log(response);
+    var select = document.getElementById("city_or_village");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
