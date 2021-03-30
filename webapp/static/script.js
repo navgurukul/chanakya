@@ -145,12 +145,14 @@ function fetchPartnersDistricts() {
     (data) => {
       console.log(data.data);
       var select = document.getElementById("city_or_village");
-      data.data.partner[0].districts.map((district) => {
-        var opt = document.createElement("option");
-        opt.value = district;
-        opt.textContent = district;
-        select.appendChild(opt);
-      });
+      if (data.data.partner[0] !== undefined) {
+        data.data.partner[0].districts.map((district) => {
+          var opt = document.createElement("option");
+          opt.value = district;
+          opt.textContent = district;
+          select.appendChild(opt);
+        });
+      }
       var otherOpt = document.createElement("option");
       otherOpt.value = "other";
       otherOpt.textContent = "Other";
