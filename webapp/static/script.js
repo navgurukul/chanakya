@@ -158,6 +158,10 @@ function fetchPartnersDistricts() {
     }
   ).fail(function (response) {
     console.log(response);
+    var otherOpt = document.createElement("option");
+    otherOpt.value = "other";
+    otherOpt.textContent = "Other";
+    select.appendChild(otherOpt);
   });
 }
 
