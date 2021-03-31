@@ -143,8 +143,6 @@ function fetchPartnersDistricts() {
       .pop()}`,
     {},
     (data) => {
-      console.log(data.data);
-      console.log(data.data.districts);
       var select = document.getElementById("city_or_village");
       if (data.data.districts !== null) {
         data.data.districts.map((district) => {
