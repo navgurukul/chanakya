@@ -138,7 +138,7 @@ function fetchQuestionsAndOptions() {
 
 function fetchPartnersDistricts() {
   $.get(
-    `${base_url}/partners/enrolment_key/${window.location.href
+    `${base_url}/partners/enrolmentKey/${window.location.href
       .split("/")
       .pop()}`,
     {},
