@@ -1,19 +1,19 @@
 {
-    "extends": "airbnb-base",
-    "rules": {
-        "no-console": "off",
-        "global-require": "off",
-        "prefer-rest-params": "off",
-        "class-methods-use-this": "off",
-        "object-shorthand": "off",
-        "no-underscore-dangle": ["error", {"allow": ["_data", "_value"]}],
-	"no-restricted-syntax": "off"
+    'extends': 'airbnb-base',
+    'rules': {
+        'no-console': 'off',
+        'global-require': 'off',
+        'prefer-rest-params': 'off',
+        'class-methods-use-this': 'off',
+        'object-shorthand': 'off',
+        'no-underscore-dangle': ['error', {'allow': ['_data', '_value']}],
+	'no-restricted-syntax': 'off'
     },
-    "overrides": [
+    'overrides': [
       {
-        "files" : ["*Template.js"],
-    	"rules" : {
-            "no-unused-vars": "off"
+        'files' : ['*Template.js'],
+    	'rules' : {
+            'no-unused-vars': 'off'
         }
       }
     ]

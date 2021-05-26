@@ -1,52 +1,52 @@
 {
-  "buckets": [
+  'buckets': [
       {
-          "name": "Percentage",
-          "id": 2,
-          "num_questions": 5,
-          "choices": [
+          'name': 'Percentage',
+          'id': 2,
+          'num_questions': 5,
+          'choices': [
               {
-                  "file": "percentage/percentageChoice1.md",
-                  "id": 1
+                  'file': 'percentage/percentageChoice1.md',
+                  'id': 1
               },
               {
-                  "file": "percentage/percentageChoice2.md",
-                  "id": 13
+                  'file': 'percentage/percentageChoice2.md',
+                  'id': 13
               }
           ]
       },
       {
-          "name": "Unitary Method",
-          "id": 1,
-          "num_questions": 3,
-          "choices": [
+          'name': 'Unitary Method',
+          'id': 1,
+          'num_questions': 3,
+          'choices': [
               {
-                  "file": "unitaryMethod/unitMethodChoice1.md",
-                  "id": 2
+                  'file': 'unitaryMethod/unitMethodChoice1.md',
+                  'id': 2
               },
               {
-                  "file": "unitaryMethod/unitMethodChoice2.md",
-                  "id": 14
+                  'file': 'unitaryMethod/unitMethodChoice2.md',
+                  'id': 14
               }
           ]
       },
       {
-          "name": "Algebra",
-          "id": 3,
-          "num_questions": 6,
-          "choices": [
+          'name': 'Algebra',
+          'id': 3,
+          'num_questions': 6,
+          'choices': [
               {
-                  "file": "algebra/algebraChoice1.md",
-                  "id": 3
+                  'file': 'algebra/algebraChoice1.md',
+                  'id': 3
               },
               {
-                  "file": "algebra/algebraChoice2.md",
-                  "id": 15
+                  'file': 'algebra/algebraChoice2.md',
+                  'id': 15
               }
           ]
       }
   ],
-  "normalQuestionFiles": [
-      "normalQuestions.md"
+  'normalQuestionFiles': [
+      'normalQuestions.md'
   ]
 }
