@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  "type": "integer",
-  "difficulty": "easy",
-  "topic": "Mathematical Patterns",
-  "id": 546,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'easy',
+  'topic': 'Mathematical Patterns',
+  'id': 546,
+  'correctOption': 1
 }
 ```
 
@@ -30,11 +30,11 @@ What will be the next term in the below pattern?
 # Question Choice 2
 ```json
 {
-  "type": "integer",
-  "difficulty": "easy",
-  "topic": "Mathematical Patterns",
-  "id": 549,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'easy',
+  'topic': 'Mathematical Patterns',
+  'id': 549,
+  'correctOption': 1
 }
 ```
 
@@ -58,11 +58,11 @@ What will be the next term in the below pattern?
 # Question Choice 3
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Mathematical Patterns",
-  "id": 550,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Mathematical Patterns',
+  'id': 550,
+  'correctOption': 1
 }
 ```
 
@@ -86,11 +86,11 @@ What will be the next term in the below pattern?
 # Question Choice 4
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Mathematical Patterns",
-  "id": 551,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Mathematical Patterns',
+  'id': 551,
+  'correctOption': 1
 }
 ```
 
@@ -114,11 +114,11 @@ What will be the next term in the below pattern?
 # Question Choice 5
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Mathematical Patterns",
-  "id": 552,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Mathematical Patterns',
+  'id': 552,
+  'correctOption': 1
 }
 ```
 
@@ -142,11 +142,11 @@ What will be the next term in the below pattern?
 # Question Choice 6
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Mathematical Patterns",
-  "id": 553,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Mathematical Patterns',
+  'id': 553,
+  'correctOption': 1
 }
 ```
 
@@ -170,11 +170,11 @@ What will be the next term in the below pattern?
 # Question Choice 7
 ```json
 {
-  "type": "integer",
-  "difficulty": "hard",
-  "topic": "Mathematical Patterns",
-  "id": 554,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'hard',
+  'topic': 'Mathematical Patterns',
+  'id': 554,
+  'correctOption': 1
 }
 ```
 
@@ -198,11 +198,11 @@ What will be the next term in the below pattern?
 # Question Choice 8
 ```json
 {
-  "type": "integer",
-  "difficulty": "hard",
-  "topic": "Mathematical Patterns",
-  "id": 555,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'hard',
+  'topic': 'Mathematical Patterns',
+  'id': 555,
+  'correctOption': 1
 }
 ```
 
