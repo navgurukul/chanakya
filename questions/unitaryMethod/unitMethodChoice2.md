@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  "type": "integer",
-  "difficulty": "easy",
-  "topic": "Unitary Method",
-  "id": 560,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'easy',
+  'topic': 'Unitary Method',
+  'id': 560,
+  'correctOption': 1
 }
 ```
 
@@ -38,11 +38,11 @@ can prepare 200 glasses of lemonade?
 # Question Choice 2
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Unitary Method",
-  "id": 562,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Unitary Method',
+  'id': 562,
+  'correctOption': 1
 }
 ```
 
@@ -70,11 +70,11 @@ mins how many people would be needed?
 # Question Choice 3
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Unitary Method",
-  "id": 563,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Unitary Method',
+  'id': 563,
+  'correctOption': 1
 }
 ```
 
