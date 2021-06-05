@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<meta http-equiv='X-UA-Compatible' content='ie=edge' />
 		<title>Sync Report</title>
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 			<br>
 			{{#if (ne syncErrors.platform.enrolmentKeys.length 0)}}
 				<h3>Enrolment Keys Sync Report</h3>
-				<table style="width:80%" border="1">
+				<table style='width:80%' border='1'>
 					<tr>
 						<th>Enrolment Key</th>
 						<th>Error in Syncing</th>
@@ -29,13 +29,13 @@
 					</tr>
 					{{#each syncErrors.platform.enrolmentKeys}}
 					<tr>
-						<td align="center">{{ this.key }}</td>
-						<td align="center">
+						<td align='center'>{{ this.key }}</td>
+						<td align='center'>
 							{{#each this.errors}}
 							- {{this}} <br />
 							{{/each}}
 						</td>
-						<td align="center">{{ this.row }}</td>
+						<td align='center'>{{ this.row }}</td>
 					</tr>
 					{{/each}}
 				</table>
@@ -43,7 +43,7 @@
 			{{/if}}
 			{{#if (ne syncErrors.platform.incomingCalls.length 0)}}
 				<h3>Incoming Call Sync Report</h3>
-				<table border="1" style="width:80%"> 
+				<table border='1' style='width:80%'> 
 					<tr>
 						<th>Incoming Call Ids</th>
 						<th>Error in Syncing</th>
@@ -51,13 +51,13 @@
 					</tr>
 					{{#each syncErrors.platform.incomingCalls}}
 					<tr>
-						<td align="center">{{ this.id }}</td>
-						<td align="center">
+						<td align='center'>{{ this.id }}</td>
+						<td align='center'>
 							{{#each this.errors}}
 							- {{this}} <br />
 							{{/each}}
 						</td>
-						<td align="center">{{ this.row }}</td>
+						<td align='center'>{{ this.row }}</td>
 					</tr>
 					{{/each}}
 				</table>

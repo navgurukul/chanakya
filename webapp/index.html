@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="/static/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/style.css">
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'> -->
+  <link rel='stylesheet' href='/static/bootstrap.min.css'>
+  <link rel='stylesheet' href='/static/style.css'>
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-  <script src="/static/jquery.min.js"></script>
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-  <script src="/static/bootstrap.min.js"></script>
-  <script src="https://browser.sentry-cdn.com/4.6.4/bundle.min.js" crossorigin="anonymous"></script>
-  <script src="/static/script.js"></script>
+  <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script> -->
+  <script src='/static/jquery.min.js'></script>
+  <!-- <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script> -->
+  <script src='/static/bootstrap.min.js'></script>
+  <script src='https://browser.sentry-cdn.com/4.6.4/bundle.min.js' crossorigin='anonymous'></script>
+  <script src='/static/script.js'></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
+  <script async src='https://www.googletagmanager.com/gtag/js?id=UA-115187076-1'></script>
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -28,7 +28,7 @@
   </script>
   <title>Admission Test - Navgurukul</title>
   <!-- start Mixpanel -->
-  <script type="text/javascript">
+  <script type='text/javascript'>
     (function (c, a) {
       if (!a.__SV) {
         var b = window;
@@ -36,16 +36,16 @@
           var d, m, j, k = b.location,
             f = k.hash;
           d = function (a, b) {
-            return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null
+            return (m = a.match(RegExp(b + '=([^&]*)'))) ? m[1] : null
           };
-          f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search)))
+          f && d(f, 'state') && (j = JSON.parse(decodeURIComponent(d(f, 'state'))), 'mpeditor' === j.action && (b.sessionStorage.setItem('_mpcehash', f), history.replaceState(j.desiredHash || '', c.title, k.pathname + k.search)))
         } catch (n) { }
         var l, h;
         window.mixpanel = a;
         a._i = [];
         a.init = function (b, d, g) {
           function c(b, i) {
-            var a = i.split(".");
+            var a = i.split('.');
             2 == a.length && (b = b[a[0]], i = a[1]);
             b[i] = function () {
               b.push([i].concat(Array.prototype.slice.call(arguments,
@@ -53,20 +53,20 @@
             }
           }
           var e = a;
-          "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel";
+          'undefined' !== typeof g ? e = a[g] = [] : g = 'mixpanel';
           e.people = e.people || [];
           e.toString = function (b) {
-            var a = "mixpanel";
-            "mixpanel" !== g && (a += "." + g);
-            b || (a += " (stub)");
+            var a = 'mixpanel';
+            'mixpanel' !== g && (a += '.' + g);
+            b || (a += ' (stub)');
             return a
           };
           e.people.toString = function () {
-            return e.toString(1) + ".people (stub)"
+            return e.toString(1) + '.people (stub)'
           };
-          l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+          l = 'disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove'.split(' ');
           for (h = 0; h < l.length; h++) c(e, l[h]);
-          var f = "set set_once union unset remove delete".split(" ");
+          var f = 'set set_once union unset remove delete'.split(' ');
           e.get_group = function () {
             function a(c) {
               b[c] = function () {
@@ -75,68 +75,68 @@
                 e.push([d, call2])
               }
             }
-            for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
+            for (var b = {}, d = ['get_group'].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++) a(f[c]);
             return b
           };
           a._i.push([b, d, g])
         };
         a.__SV = 1.2;
-        b = c.createElement("script");
-        b.type = "text/javascript";
+        b = c.createElement('script');
+        b.type = 'text/javascript';
         b.async = !0;
-        b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
-          MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";
-        d = c.getElementsByTagName("script")[0];
+        b.src = 'undefined' !== typeof MIXPANEL_CUSTOM_LIB_URL ?
+          MIXPANEL_CUSTOM_LIB_URL : 'file:' === c.location.protocol && '//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js'.match(/^\/\//) ? 'https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js' : '//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js';
+        d = c.getElementsByTagName('script')[0];
         d.parentNode.insertBefore(b, d)
       }
     })(document, window.mixpanel || []);
-    mixpanel.init("9940df8cde093561bb1f636e0cc2409b", {
+    mixpanel.init('9940df8cde093561bb1f636e0cc2409b', {
       debug: true
     });
-    mixpanel.track("Initiated");
+    mixpanel.track('Initiated');
   </script>
 </head>
 
 <body>
-  <header class="container">
+  <header class='container'>
     <nav>
     </nav>
   </header>
-  <main class="container mt-3">
-    <div class="row page" id="select_language">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="clearfix rounded form-container">
-          <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">NavGurukul Scholarship Test</h2>
+  <main class='container mt-3'>
+    <div class='row page' id='select_language'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='clearfix rounded form-container'>
+          <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'>NavGurukul Scholarship Test</h2>
           <br><br>
           <h3>Select Your Languge/ अपनी भाषा चुने</h3>
           <p>You can also change the langauge between Hindi and English during the test.</p>
           <p>आप test के बीच मे भी अपने test की भाशा बदल सकते है।</p>
           <br>
-          <div class="b-select-wrap">
-            <select class="form-control b-select" id='choose_language' data-width="fit">
+          <div class='b-select-wrap'>
+            <select class='form-control b-select' id='choose_language' data-width='fit'>
               <option value='hi'>हिंदी</option>
               <option value='en'>English</option>
             </select>
           </div>
           <br><br>
-          <button onclick="selectLanguage()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-            <span class="en lang">Next</span>
-            <span class="hi lang">आगे चलें</span>
+          <button onclick='selectLanguage()' class='btn btn-lg btn-warning col-xs-12 col-sm-12'>
+            <span class='en lang'>Next</span>
+            <span class='hi lang'>आगे चलें</span>
           </button>
         </div>
       </div>
     </div>
 
-    <div class="row hide page" id="language_select">
-      <select class="lang_picker col-2 offset-10" id='lang_choice' onchange="languageSelector()" data-width="fit">
+    <div class='row hide page' id='language_select'>
+      <select class='lang_picker col-2 offset-10' id='lang_choice' onchange='languageSelector()' data-width='fit'>
         <option value='hi'>हिंदी</option>
         <option value='en'>English</option>
       </select>
     </div>
-    <div class="row hide page" id="landing_page">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="clearfix rounded form-container">
-          <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">NavGurukul Scholarship Test</h2>
+    <div class='row hide page' id='landing_page'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='clearfix rounded form-container'>
+          <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'>NavGurukul Scholarship Test</h2>
           <br><br>
           <p class='hi lang'>
             Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot
@@ -162,106 +162,106 @@
             <li>Answer the question only on your phone.</li>
             <li>We trust you to attempt this test with honesty :)</li>
           </ol>
-          <button onclick="landing_page_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-            <span class="en lang">I am ready</span>
-            <span class="hi lang">Meh tayaar hu</span>
+          <button onclick='landing_page_submit()' class='btn btn-lg btn-warning col-xs-12 col-sm-12'>
+            <span class='en lang'>I am ready</span>
+            <span class='hi lang'>Meh tayaar hu</span>
           </button>
         </div>
       </div>
     </div>
-    <div class="row hide page" id="test_pass">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="card" style="padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;">
-          <paper-card heading="Test Result">
-            <div class="card-content">
-              <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center"
-                style="color:green; padding: 0px;">
+    <div class='row hide page' id='test_pass'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='card' style='padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;'>
+          <paper-card heading='Test Result'>
+            <div class='card-content'>
+              <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'
+                style='color:green; padding: 0px;'>
                 Congratulations!!</h2>
               <br><br>
               <p class='hi lang'>
                 आप <strong>Navgurukul</strong> के इस टेस्ट में पास हो गए है और अगले राउंड के लिए सेलेक्ट हो गए है | आपके
-                <strong class="marks"></strong>
+                <strong class='marks'></strong>
                 नंबर आए है |
               </p>
               <p class='en lang'>
                 You have cleared the <strong>Navgurukul Scholarship Test.</strong> You have scored <strong
-                  class="marks"></strong> marks in the
+                  class='marks'></strong> marks in the
                 test.
               </p>
-              <p class="en lang">
+              <p class='en lang'>
                 You will now get a phone call for an <strong>English Interview</strong> in next 2 days. You are doing
                 great so far,
                 keep it up for the next rounds!
               </p>
-              <p class="hi lang">
+              <p class='hi lang'>
                 अब आपको <strong>इंग्लिश इंटरव्यू</strong> के लिए कॉल आएगा अगले २ दिनों में | आपने अभी तक बहुत अच्छा किया
                 हैं, अगले राउंड मै भी ऐसे ही करना,
                 अगले राउंड के लिए हमारी तरफ से आपको बहुत सारी शुभकामनाये!!!
               </p>
             </div>
-            <div class="card-actions">
-              <button onclick="show_thanksPage()" class="btn btn-md btn-primary mt-1 btn-success" style="width: 107px;">
-                <span class="en lang">OK</span>
-                <span class="hi lang">ओके</span>
+            <div class='card-actions'>
+              <button onclick='show_thanksPage()' class='btn btn-md btn-primary mt-1 btn-success' style='width: 107px;'>
+                <span class='en lang'>OK</span>
+                <span class='hi lang'>ओके</span>
               </button>
             </div>
           </paper-card>
         </div>
       </div>
     </div>
-    <div class="row hide page" id="test_fail">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="card" style="padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;">
-          <paper-card heading="Test Result">
-            <div class="card-content">
-              <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center"
-                style="color: red; padding: 0px;">Oh Sorry!!</h2>
+    <div class='row hide page' id='test_fail'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='card' style='padding:25px !important; border: 6px solid rgba(0,0,0,.125) !important;'>
+          <paper-card heading='Test Result'>
+            <div class='card-content'>
+              <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'
+                style='color: red; padding: 0px;'>Oh Sorry!!</h2>
               <br><br>
               <p class='hi lang'>
-                आप इस बारी इस टेस्ट में पास नहीं हो पाए। आपके <strong class="marks"></strong> नंबर आए है|
+                आप इस बारी इस टेस्ट में पास नहीं हो पाए। आपके <strong class='marks'></strong> नंबर आए है|
                 कोई बात नहीं आप दोबारा कोशिश कर सकते हो।
               </p>
               <p class='en lang'>
                 You could not clear the <strong>Navgurukul Scholarship Test</strong> this time. You have scored <strong
-                  class="marks"></strong> marks
+                  class='marks'></strong> marks
                 in the
                 test. Dont't worry, you can give the test again after some preparation
               </p>
-              <p class="en lang">
+              <p class='en lang'>
                 You can use this study guide for more maths practice <a
-                  href="http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction">click
+                  href='http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction'>click
                   here.</a>
                 Prepare, Practice and Pass :)
               </p>
-              <p class="hi lang">
+              <p class='hi lang'>
                 आप थोड़ी और तैयारी के बाद यह टेस्ट फिर से दे सकते है | गणित की प्रैक्टिस के लिए <a
-                  href="http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction">यहाँ
+                  href='http://saral.navgurukul.org/course?id=92&slug=maths-hi-toh-hai__Navgurukul-Introduction'>यहाँ
                   क्लिक करे</a> स्टडी गाइड का उपयोग करे |
               </p>
             </div>
-            <div class="card-actions">
-              <button onclick="show_thanksPage()" class="btn btn-md btn-primary mt-1 btn-danger" style="width: 107px;">
-                <span class="en lang">OK</span>
-                <span class="hi lang">ओके</span>
+            <div class='card-actions'>
+              <button onclick='show_thanksPage()' class='btn btn-md btn-primary mt-1 btn-danger' style='width: 107px;'>
+                <span class='en lang'>OK</span>
+                <span class='hi lang'>ओके</span>
               </button>
             </div>
           </paper-card>
         </div>
       </div>
     </div>
-    <div class="row hide page" id="no_cheating_promise">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="clearfix rounded form-container">
-          <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Read Carefully</h2>
+    <div class='row hide page' id='no_cheating_promise'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='clearfix rounded form-container'>
+          <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'>Read Carefully</h2>
           <br><br>
-          <p class="en lang">
+          <p class='en lang'>
             A lot of students all across India answer the NavGurukul's test to go through the 1 year program and get
             high paying software engineering jobs. Though there is a great reward at the end, but you will have to do a
             lot of hard work to get that reward. We
             would love to teach every student irrespective of their educational qualifications but sadly we require some
             basic knowledge of certain things. We use this test to see if you have that basic knowledge.
           </p>
-          <p class="hi lang">
+          <p class='hi lang'>
             Kafi sare students pure India se NavGurukul ka test dete ha taki woh NavGurukul ke 1 saal wale program ke
             madad se high paying software engineering jobs le sake. Hala ki akhir me bohut bada eenam hota ha, magar
             uske liye apko kafi jada mehnat bi karni
@@ -271,86 +271,86 @@
             hai.
           </p>
 
-          <p class="en lang">
+          <p class='en lang'>
             Some students try to <strong>cheat and score</strong> well in the test but sadly are not able to do well
             during the program. All of them have to leave the course.
           </p>
 
-          <p class="hi lang">
+          <p class='hi lang'>
             Kuch students test meh <strong> cheat karke score </strong> kar lete ha but woh program meh ache tarike se
             perform ni kar pahte ha, Jiske karan uneh yeh program chorna padhta ha.
           </p>
 
-          <p class="en lang">
+          <p class='en lang'>
             If you are proceeding with the test please make sure you do it yourself without anyone's help. We will
             disqualify you from NavGurukul if we detect any form of cheating. <br /><br />
           </p>
 
-          <p class="hi lang">
+          <p class='hi lang'>
             Agar aap ish test ke liye aage badh rahe hai toh kripaya ish test ko khudse de bina kisike madad ke. Agar
             hume pata chalta ha ki apne cheating ki hai toh hum apko disqualify kardenge aage. <br /><br />
           </p>
 
-          <button onclick="no_cheating_promise_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">
-            <span class="en lang">Start My Test</span>
-            <span class="hi lang">Test Shuru Karein</span>
+          <button onclick='no_cheating_promise_submit()' class='btn btn-lg btn-warning col-xs-12 col-sm-12'>
+            <span class='en lang'>Start My Test</span>
+            <span class='hi lang'>Test Shuru Karein</span>
           </button>
         </div>
       </div>
     </div>
-    <div class="row hide page" id="personal_details">
-      <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
-        <div class="col-xs-12 col-sm-12">
-          <div class="clearfix" id="ask_personal_details">
-            <div class="clearfix rounded form-container">
-              <h2 class="col-md-12 text-center col-xs-12 col-sm-12">
-                <span class="en lang">Your Personal Details</span>
-                <span class="hi lang">Aapki Kuch Details</span>
+    <div class='row hide page' id='personal_details'>
+      <div class='col-sm-12 col-xs-12 col-md-8 offset-md-2'>
+        <div class='col-xs-12 col-sm-12'>
+          <div class='clearfix' id='ask_personal_details'>
+            <div class='clearfix rounded form-container'>
+              <h2 class='col-md-12 text-center col-xs-12 col-sm-12'>
+                <span class='en lang'>Your Personal Details</span>
+                <span class='hi lang'>Aapki Kuch Details</span>
               </h2>
               <span class='errors text text-center text-danger ml-3'></span>
-              <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
-                <input type="text" id='name' name="name" placeholder="Your Name" required
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              <div class='clearfix'>
+                <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapka Naam</div>
+                <input type='text' id='name' name='name' placeholder='Your Name' required
+                  class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1' />
               </div>
-              <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Mobile Number</div>
-                <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number"
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
+              <div class='clearfix'>
+                <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapka Mobile Number</div>
+                <input type='number' id='mobile' name='mobile' placeholder='Aapka Whatsapp Number'
+                  class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1' required />
               </div>
-              <div class="clearfix container">
-                <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>
+              <div class='clearfix container'>
+                <div class='row col-xs-12 col-sm-6 col-md-6 mt-3'>Date of Birth</div>
 
-                <div class="row">
-                  <select id='date' class="col-4 col-md-3 border border-warning rounded section-1">
-                    <option value="">Date</option>
+                <div class='row'>
+                  <select id='date' class='col-4 col-md-3 border border-warning rounded section-1'>
+                    <option value=''>Date</option>
                   </select>
 
-                  <select id='month' class="col-4 col-md-3 border border-warning rounded section-1">
-                    <option value="">Month</option>
+                  <select id='month' class='col-4 col-md-3 border border-warning rounded section-1'>
+                    <option value=''>Month</option>
                   </select>
 
-                  <select id='year' class="col-4 col-md-3 border border-warning rounded section-1">
-                    <option value="">Year</option>
+                  <select id='year' class='col-4 col-md-3 border border-warning rounded section-1'>
+                    <option value=''>Year</option>
                   </select>
                 </div>
               </div>
 
-              <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Gender/ लिंग</div>
-                <select name="gender" id='gender'
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required>
-                  <option value="NONE">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="trans">Trans</option>
+              <div class='clearfix'>
+                <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Gender/ लिंग</div>
+                <select name='gender' id='gender'
+                  class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1' required>
+                  <option value='NONE'>Select Gender</option>
+                  <option value='male'>Male</option>
+                  <option value='female'>Female</option>
+                  <option value='trans'>Trans</option>
                 </select>
               </div>
-              <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
-                <button class="btn btn-lg btn-danger col-xs-12
-                      col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
-                  <span class="en lang">Start My Test</span>
-                  <span class="hi lang">Test Shuru Karein</span>
+              <div class='clearfix' style='margin-top:2rem;margin-bottom:4rem;'>
+                <button class='btn btn-lg btn-danger col-xs-12
+                      col-sm-12 col-md-6 offset-md-3' id='button' onclick='personal_details_submit();' type='button'>
+                  <span class='en lang'>Start My Test</span>
+                  <span class='hi lang'>Test Shuru Karein</span>
                 </button>
               </div>
             </div>
@@ -358,120 +358,120 @@
         </div>
       </div>
     </div>
-    <div class="row hide page" id="time_aware">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="clearfix rounded form-container">
-          <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">
-            <span class="en lang">Final Instructions:</span>
-            <span class="hi lang">Ek aur baat:</span>
+    <div class='row hide page' id='time_aware'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='clearfix rounded form-container'>
+          <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'>
+            <span class='en lang'>Final Instructions:</span>
+            <span class='hi lang'>Ek aur baat:</span>
           </h2>
           <br><br>
-          <p class="hi lang">
+          <p class='hi lang'>
             Aapse ab test mein kuch questions pooche jaenge. Aapko answers araam se soch samajh kar dena hai.
           </p>
-          <p class="en lang">
+          <p class='en lang'>
             You will be now asked some questions in the test. Please think carefully before answering the questions.
           </p>
           <h2>
-            <span class="en lang">But please take care of TIME!</span>
-            <span class="hi lang">Par time ka bhi khyaal rakhe!</span>
+            <span class='en lang'>But please take care of TIME!</span>
+            <span class='hi lang'>Par time ka bhi khyaal rakhe!</span>
           </h2>
           <h3>
-            <span class="en lang">You have to answer 18 questions in one hour!</span>
-            <span class="hi lang">Aapko next 18 questions, 1 Hour me karne hai!</span>
+            <span class='en lang'>You have to answer 18 questions in one hour!</span>
+            <span class='hi lang'>Aapko next 18 questions, 1 Hour me karne hai!</span>
           </h3>
-          <button onclick="time_aware_submit()" class="btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4">
-            <span class="en lang">Start the test!</span>
-            <span class="hi lang">Shuru Karein</span>
+          <button onclick='time_aware_submit()' class='btn btn-lg btn-warning col-xs-12 col-sm-12 mt-4'>
+            <span class='en lang'>Start the test!</span>
+            <span class='hi lang'>Shuru Karein</span>
           </button>
         </div>
       </div>
     </div>
-    <div class="row hide page" id="question_answer_page">
-      <div class="clearfix" id="timer">
-        <div class="red b col-12" id="on_question"></div>
-        <div class="red b col-12" id="kitne_questions"></div>
-        <div class="red b col-12" id="time_to_show"></div>
-        <!-- <div class="col-sm-12 col-xs-12 col-md-6" id="alert_text"></div> -->
-        <div class="col-10 col-md-6 mb-4">
-          <div class="progress custom">
-            <div class="progress-bar progress-bar-success progress-bar-striped active border border-warning"
-              role="progressbar" aria-valuemin="0" aria-valuemax="100">
+    <div class='row hide page' id='question_answer_page'>
+      <div class='clearfix' id='timer'>
+        <div class='red b col-12' id='on_question'></div>
+        <div class='red b col-12' id='kitne_questions'></div>
+        <div class='red b col-12' id='time_to_show'></div>
+        <!-- <div class='col-sm-12 col-xs-12 col-md-6' id='alert_text'></div> -->
+        <div class='col-10 col-md-6 mb-4'>
+          <div class='progress custom'>
+            <div class='progress-bar progress-bar-success progress-bar-striped active border border-warning'
+              role='progressbar' aria-valuemin='0' aria-valuemax='100'>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container hide" id="qmcq">
-        <h3 class="row question qtext col-xs-12 col-sm-12 mt-2 col-md-12">
+      <div class='container hide' id='qmcq'>
+        <h3 class='row question qtext col-xs-12 col-sm-12 mt-2 col-md-12'>
         </h3>
-        <div class="col-xs-12 col-sm-12 options row">
-          <div class="clearfix">
+        <div class='col-xs-12 col-sm-12 options row'>
+          <div class='clearfix'>
           </div>
         </div>
       </div>
-      <div class="clearfix hide" id="qinteger_answer">
-        <h3 class="question qtext col-xs-12 col-sm-12 mt-2  col-md-12">
+      <div class='clearfix hide' id='qinteger_answer'>
+        <h3 class='question qtext col-xs-12 col-sm-12 mt-2  col-md-12'>
         </h3>
-        <div class="text-center col-xs-12 col-sm-12">
-          <input type="number" name="uanswer" placeholder="yaha answer likho..."
-            class="border border-warning rounded section-1 ml-3 mt-4 mb-4 input_box" />
+        <div class='text-center col-xs-12 col-sm-12'>
+          <input type='number' name='uanswer' placeholder='yaha answer likho...'
+            class='border border-warning rounded section-1 ml-3 mt-4 mb-4 input_box' />
         </div>
       </div>
 
-      <div class="col-12 mt-3 text-center">
-        <button type="button" class="btn btn-md btn-primary mt-1 btn-success" id="next_btn" onclick="nextQuestion();">
-          <span class="en lang">Next Question</span>
-          <span class="hi lang">अगला प्रश्न</span>
-          <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+      <div class='col-12 mt-3 text-center'>
+        <button type='button' class='btn btn-md btn-primary mt-1 btn-success' id='next_btn' onclick='nextQuestion();'>
+          <span class='en lang'>Next Question</span>
+          <span class='hi lang'>अगला प्रश्न</span>
+          <span class='glyphicon glyphicon-hand-right' aria-hidden='true'></span>
         </button>
       </div>
 
-      <div class="col-12 text-center">
-        <button type="button" class="btn btn-md btn-outline-warning mt-1" id="prev_button"
-          onclick="previousQuestion();">
-          <span class="en lang">Previous Answer</span>
-          <span class="hi lang">पीछला प्रश्न</span>
-          <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+      <div class='col-12 text-center'>
+        <button type='button' class='btn btn-md btn-outline-warning mt-1' id='prev_button'
+          onclick='previousQuestion();'>
+          <span class='en lang'>Previous Answer</span>
+          <span class='hi lang'>पीछला प्रश्न</span>
+          <span class='glyphicon glyphicon-hand-right' aria-hidden='true'></span>
         </button>
       </div>
 
-      <div class="col-12 mt-1 text-center">
-        <button type="button" class="hide btn btn-md btn-primary btn-success" id="submit_btn" onclick="submitTest();">
+      <div class='col-12 mt-1 text-center'>
+        <button type='button' class='hide btn btn-md btn-primary btn-success' id='submit_btn' onclick='submitTest();'>
           Submit Test
-          <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+          <span class='glyphicon glyphicon-hand-right' aria-hidden='true'></span>
         </button>
       </div>
 
     </div>
-    <div class="clearfix hide page" id="end_page">
-      <div class="clearfix">
-        <div class="col-sm-12 col-xs-12 col-md-8 offset-md-2">
-          <div class="col-xs-12 col-sm-12">
-            <div class="clearfix mt-3">
-              <div class="clearfix rounded form-container">
-                <h2 class="col-md-12 text-center col-xs-12 col-sm-12 text-center">Last Kuch Questions!</h2>
+    <div class='clearfix hide page' id='end_page'>
+      <div class='clearfix'>
+        <div class='col-sm-12 col-xs-12 col-md-8 offset-md-2'>
+          <div class='col-xs-12 col-sm-12'>
+            <div class='clearfix mt-3'>
+              <div class='clearfix rounded form-container'>
+                <h2 class='col-md-12 text-center col-xs-12 col-sm-12 text-center'>Last Kuch Questions!</h2>
                 <span class='errors text text-center text-danger ml-3'></span>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">pin_code</div>
-                  <input type="number" name="pin_code" id="pin_code" placeholder="pin_code"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>pin_code</div>
+                  <input type='number' name='pin_code' id='pin_code' placeholder='pin_code'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1' />
                 </div>
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Tehsil</div>
-                          <input type="text" name="tehsil" placeholder="Tehsil"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Tehsil</div>
+                          <input type='text' name='tehsil' placeholder='Tehsil'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'/>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">District</div>
-                          <input type="text" name="district" placeholder="District"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>District</div>
+                          <input type='text' name='district' placeholder='District'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'/>
                       </div> -->
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
-                  <select id="state" name="state"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                    <option value="NONE">Select State</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aap kis State me rehte hai</div>
+                  <select id='state' name='state'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                    <option value='NONE'>Select State</option>
                     <option value='AN'>Andaman and Nicobar Islands</option>
                     <option value='AP'>Andhra Pradesh</option>
                     <option value='AR'>Arunachal Pradesh</option>
@@ -510,106 +510,106 @@
                     <option value='WB'>West Bengal</option>
                   </select>
                 </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam</div>
-                  <select name="city_or_village" id="city_or_village"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapki City/Village ka Naam</div>
+                  <select name='city_or_village' id='city_or_village'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
                   </select>
                 </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
-                  <input type="text" name="city_or_village_2" id="city_or_village_2" placeholder="Agar aapke city / village ka naam upar list me na ho"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapki City/Village ka Naam (agar upar list me nahi)</div>
+                  <input type='text' name='city_or_village_2' id='city_or_village_2' placeholder='Agar aapke city / village ka naam upar list me na ho'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1' />
                 </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Current Status</div>
-                  <select name="current_status" id="current_status"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                    <option value="NONE">Select Option</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Current Status</div>
+                  <select name='current_status' id='current_status'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                    <option value='NONE'>Select Option</option>
                     <option value='nothing'>Nothing</option>
                     <option value='job'>Job</option>
                     <option value='study'>Study</option>
                     <option value='other'>Other</option>
                   </select>
                 </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Maximum Qualification</div>
-                  <select name="qualification" id="qualification"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                    <option value="NONE">Select Option</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Maximum Qualification</div>
+                  <select name='qualification' id='qualification'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                    <option value='NONE'>Select Option</option>
                     <option value='lessThan10th'>Less than 10th Paas</option>
                     <option value='class10th'>Class 10th Pass</option>
                     <option value='class12th'>Class 12th Pass</option>
                     <option value='graduate'>Graduation completed</option>
                   </select>
                 </div>
-                <div class="clearfix min-10 hide pass10">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                  <input type="number" name="class_10_percentage" id="percentage_in10th" placeholder="Percentage in 10th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                <div class='clearfix min-10 hide pass10'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Percentage in 10th</div>
+                  <input type='number' name='class_10_percentage' id='percentage_in10th' placeholder='Percentage in 10th'
+                    min='0' step='any' class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded' />
                 </div>
 
-                <div class="clearfix min-10 hide pass10">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 10th</div>
-                  <input type="number" name="class_10_marks" id="math_marks_in10th" placeholder="Total Marks in 10th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                <div class='clearfix min-10 hide pass10'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Total Marks in 10th</div>
+                  <input type='number' name='class_10_marks' id='math_marks_in10th' placeholder='Total Marks in 10th'
+                    min='0' step='any' class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded' />
                 </div>
 
-                <div class="clearfix min-12 hide pass12">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                  <input type="number" name="class_12_percentage" id="percentage_in12th" placeholder="Percentage in 12th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                <div class='clearfix min-12 hide pass12'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Percentage in 12th</div>
+                  <input type='number' name='class_12_percentage' id='percentage_in12th' placeholder='Percentage in 12th'
+                    min='0' step='any' class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded' />
                 </div>
 
-                <div class="clearfix min-12 hide pass12">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Total Marks in 12th</div>
-                  <input type="number" name="class_12_marks" id="math_marks_in12th" placeholder="Total Marks in 12th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                <div class='clearfix min-12 hide pass12'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Total Marks in 12th</div>
+                  <input type='number' name='class_12_marks' id='math_marks_in12th' placeholder='Total Marks in 12th'
+                    min='0' step='any' class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded' />
                 </div>
-                <!-- <div class="clearfix min-12 hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Stream in Class 12th</div>
-                          <select name="class_12_stream"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
-                              <option value="NONE">Select Option</option>
-                              <option value="pcm">Non Medical (Physics, Chemistry, Maths)</option>
-                              <option value="pcb">Medical (Physics, Chemistry, Biology)</option>
-                              <option value="pcmb">Combined (Physics, Chemistry, Biology, Maths)</option>
-                              <option value="commerce_with_maths">Commerce (With Maths)</option>
-                              <option value="commerce_without_maths">Commerce (Without Maths)</option>
-                              <option value="arts">Arts</option>
-                              <option value="others">Others</option>
+                <!-- <div class='clearfix min-12 hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Stream in Class 12th</div>
+                          <select name='class_12_stream'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'>
+                              <option value='NONE'>Select Option</option>
+                              <option value='pcm'>Non Medical (Physics, Chemistry, Maths)</option>
+                              <option value='pcb'>Medical (Physics, Chemistry, Biology)</option>
+                              <option value='pcmb'>Combined (Physics, Chemistry, Biology, Maths)</option>
+                              <option value='commerce_with_maths'>Commerce (With Maths)</option>
+                              <option value='commerce_without_maths'>Commerce (Without Maths)</option>
+                              <option value='arts'>Arts</option>
+                              <option value='others'>Others</option>
                           </select>
                       </div> -->
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">School Medium</div>
-                  <select name="school_medium" id="school_medium"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded">
-                    <option value="NONE">Select Option</option>
-                    <option value="en">English</option>
-                    <option value="other">Non English</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>School Medium</div>
+                  <select name='school_medium' id='school_medium'
+                    class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'>
+                    <option value='NONE'>Select Option</option>
+                    <option value='en'>English</option>
+                    <option value='other'>Non English</option>
                   </select>
                 </div>
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head</div>
-                          <select name="family_head" id="family_head"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Head</div>
+                          <select name='family_head' id='family_head'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='father'>Father</option>
                                   <option value='mother'>Mother</option>
                                   <option value='other'>Other</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix family-other hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head(other) Specify</div>
-                          <input type="text" name="family_head_other"
-                              placeholder="Family Head(Other)"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix family-other hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Head(other) Specify</div>
+                          <input type='text' name='family_head_other'
+                              placeholder='Family Head(Other)'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head's Qualification</div>
-                          <select name="family_head_qualification"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Head's Qualification</div>
+                          <select name='family_head_qualification'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='no_reading_writing'>Padna aur likhna nahi aata</option>
                                   <option value='reading_writing'>Padna ya likhna aata hai</option>
                                   <option value='class_5_pass'>Class 5 Pass</option>
@@ -621,39 +621,39 @@
                                   <option value='prof_degree'>Professional Degree</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number of Family Members</div>
-                          <input type="number" name="fam_members"
-                              placeholder="Aapki Family me kitne log hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Number of Family Members</div>
+                          <input type='number' name='fam_members'
+                              placeholder='Aapki Family me kitne log hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number of Earning Family Members</div>
-                          <input type="number" name="earning_fam_members"
-                              placeholder="Aapki Family me kitne log kamate hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Number of Earning Family Members</div>
+                          <input type='number' name='earning_fam_members'
+                              placeholder='Aapki Family me kitne log kamate hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Monthly Family Income</div>
-                          <input type="number" name="monthly_family_income"
-                              placeholder="Aapki Family ki Montly Income kya hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Monthly Family Income</div>
+                          <input type='number' name='monthly_family_income'
+                              placeholder='Aapki Family ki Montly Income kya hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Ghar kaha hai</div>
-                          <select name="urban_rural" id="urban_rural"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapka Ghar kaha hai</div>
+                          <select name='urban_rural' id='urban_rural'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='urban'>Shehar mein</option>
                                   <option value='rural'>Gao mein</option>
                           </select>
                       </div> -->
                 <!--  Urban -->
-                <!-- <div class="clearfix urban">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head Profession</div>
-                          <select name="urban_family_head_prof"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix urban'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Head Profession</div>
+                          <select name='urban_family_head_prof'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='unemployed'>Unemployed</option>
                                   <option value='no_training_jobs'>Jobs without training (Servent, Peon etc)</option>
                                   <option value='jobs_with_training'>Jobs with training (Factory Worker, Waiter etc)</option>
@@ -663,18 +663,18 @@
                                   <option value='prof_degree_work'>Professional Degree (Doctor, Engineer etc)</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix urban">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Monthly Income of Family Head</div>
-                          <input type="number" name="family_head_income"
-                              placeholder="Family Head ki Monthly Income kya hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix urban'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Monthly Income of Family Head</div>
+                          <input type='number' name='family_head_income'
+                              placeholder='Family Head ki Monthly Income kya hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
                 <!--  Rural -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Head Profession</div>
-                          <select name="rural_family_head_prof"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Head Profession</div>
+                          <select name='rural_family_head_prof'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='unemployed'>Unemployed</option>
                                   <option value='labourer'>Labourer</option>
                                   <option value='caste_related_work'>Caste Related Work</option>
@@ -684,11 +684,11 @@
                                   <option value='service'>Service</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Organization Membership</div>
-                          <select name="family_head_org_membership"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Organization Membership</div>
+                          <select name='family_head_org_membership'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='nothing'>None</option>
                                   <option value='member_1_org'>Member of 1 organization</option>
                                   <option value='member_1plus_org'>Member of more than 1 organization</option>
@@ -696,104 +696,104 @@
                                   <option value='pub_leader'>Public Leader</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Type</div>
-                          <select name="family_type"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Type</div>
+                          <select name='family_type'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='single'>Single</option>
                                   <option value='joint'>Joint</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Family Land Holding(in Acres)</div>
-                          <input type="number" name="family_land_holding"
-                              placeholder="Aapki Family k paas kitni Jameen hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Family Land Holding(in Acres)</div>
+                          <input type='number' name='family_land_holding'
+                              placeholder='Aapki Family k paas kitni Jameen hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Number Draught animals your Family Owns.</div>
-                          <input type="number" name="family_draught_animals"
-                              placeholder="jaise ki horse, cow, goat, hen etc."
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Number Draught animals your Family Owns.</div>
+                          <input type='number' name='family_draught_animals'
+                              placeholder='jaise ki horse, cow, goat, hen etc.'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Ghar Kaisa hai</div>
-                          <select name="housing_type"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                                  <option value="NONE">Select Option</option>
+                <!-- <div class='clearfix rural hide'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Aapka Ghar Kaisa hai</div>
+                          <select name='housing_type'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1'>
+                                  <option value='NONE'>Select Option</option>
                                   <option value='hut'>Hut</option>
                                   <option value='kacha_house'>Kacha Ghar</option>
                                   <option value='pucca_house'>Pakka Ghar</option>
                                   <option value='kothi'>Kothi</option>
                           </select>
                       </div> -->
-                <!-- <div class="clearfix rural hide">
-                          <h5 class="col-sm-12 text-center"> Inme se kaun kaun si vastu aapke ghar me hai ?</h5>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="bullock_cart">Bullock Cart</label>
-                              <input type="checkbox" name="items_owned" id="bullock_cart" value="bullock_cart"/>
+                <!-- <div class='clearfix rural hide'>
+                          <h5 class='col-sm-12 text-center'> Inme se kaun kaun si vastu aapke ghar me hai ?</h5>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='bullock_cart'>Bullock Cart</label>
+                              <input type='checkbox' name='items_owned' id='bullock_cart' value='bullock_cart'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="cycle">Cycle</label>
-                              <input type="checkbox" name="items_owned" id="cycle" value="cycle"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='cycle'>Cycle</label>
+                              <input type='checkbox' name='items_owned' id='cycle' value='cycle'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="radio">Radio</label>
-                              <input type="checkbox" name="items_owned" id="radio" value="radio"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='radio'>Radio</label>
+                              <input type='checkbox' name='items_owned' id='radio' value='radio'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="chairs">Chairs</label>
-                              <input type="checkbox" name="items_owned" id="chairs" value="chairs"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='chairs'>Chairs</label>
+                              <input type='checkbox' name='items_owned' id='chairs' value='chairs'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="mobile">Mobile Phone</label>
-                              <input type="checkbox" name="items_owned" id="mobile" value="mobile"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='mobile'>Mobile Phone</label>
+                              <input type='checkbox' name='items_owned' id='mobile' value='mobile'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="television">Television</label>
-                              <input type="checkbox" name="items_owned" id="television" value="television"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='television'>Television</label>
+                              <input type='checkbox' name='items_owned' id='television' value='television'/>
                           </div>
-                          <div class="col-xs-6 col-sm-4">
-                              <label for="refrigerator">Refrigerator</label>
-                              <input type="checkbox" name="items_owned" id="refrigerator" value="refrigerator"/>
+                          <div class='col-xs-6 col-sm-4'>
+                              <label for='refrigerator'>Refrigerator</label>
+                              <input type='checkbox' name='items_owned' id='refrigerator' value='refrigerator'/>
                           </div>
                       </div> -->
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 mt-3">Caste/Tribe</div>
-                  <select name="caste" id="caste" class="col-xs-12 col-sm-6 border border-warning rounded section-1">
-                    <option value="NONE">Select Option</option>
-                    <!-- <option value="sc">(SC) Scheduled Caste</option> -->
-                    <option value="scSt">(SC) Scheduled Caste / (ST) Scheduled Tribe</option>
-                    <option value="obc">(OBC) Other Backward Classes</option>
-                    <option value="general">General</option>
-                    <option value="others">Other</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 mt-3'>Caste/Tribe</div>
+                  <select name='caste' id='caste' class='col-xs-12 col-sm-6 border border-warning rounded section-1'>
+                    <option value='NONE'>Select Option</option>
+                    <!-- <option value='sc'>(SC) Scheduled Caste</option> -->
+                    <option value='scSt'>(SC) Scheduled Caste / (ST) Scheduled Tribe</option>
+                    <option value='obc'>(OBC) Other Backward Classes</option>
+                    <option value='general'>General</option>
+                    <option value='others'>Other</option>
                   </select>
                 </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 mt-3">Religion/dharam</div>
-                  <select name="religion" id="religion"
-                    class="col-xs-12 col-sm-6 border border-warning rounded section-1">
-                    <option value="NONE">Select Option</option>
-                    <!-- <option value="sc">(SC) Scheduled Caste</option> -->
-                    <option value="hindu">Hindu</option>
-                    <option value="islam">Islam</option>
-                    <option value="sikh">Sikh</option>
-                    <option value="jain">Jain</option>
-                    <option value="christian">Christian</option>
-                    <option value="others">Others</option>
+                <div class='clearfix'>
+                  <div class='col-xs-12 col-sm-6 mt-3'>Religion/dharam</div>
+                  <select name='religion' id='religion'
+                    class='col-xs-12 col-sm-6 border border-warning rounded section-1'>
+                    <option value='NONE'>Select Option</option>
+                    <!-- <option value='sc'>(SC) Scheduled Caste</option> -->
+                    <option value='hindu'>Hindu</option>
+                    <option value='islam'>Islam</option>
+                    <option value='sikh'>Sikh</option>
+                    <option value='jain'>Jain</option>
+                    <option value='christian'>Christian</option>
+                    <option value='others'>Others</option>
                   </select>
                 </div>
-                <!-- <div class="clearfix caste-other">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Jaati</div>
-                          <input type="text" name="caste"
-                              placeholder="Aapki Caste Kya hai"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded"/>
+                <!-- <div class='clearfix caste-other'>
+                          <div class='col-xs-12 col-sm-6 col-md-6 mt-3'>Jaati</div>
+                          <input type='text' name='caste'
+                              placeholder='Aapki Caste Kya hai'
+                              class='col-xs-12 col-sm-6 col-md-6 border border-warning rounded'/>
                       </div> -->
               </div>
-              <div class="clearfix" class="mt-2 mb-4">
-                <button class="btn btn-lg btn-danger col-xs-12
-                          col-sm-12 col-md-6 offset-md-3" onclick="submitApp()">
+              <div class='clearfix' class='mt-2 mb-4'>
+                <button class='btn btn-lg btn-danger col-xs-12
+                          col-sm-12 col-md-6 offset-md-3' onclick='submitApp()'>
                   Submit Application
                 </button>
               </div>
@@ -803,21 +803,21 @@
       </div>
     </div>
     </div>
-    <div class="row hide page" id="thank_you_page">
-      <div class="col-sm-12 col-xs-12 col-md-6 offset-md-3">
-        <div class="clearfix rounded form-container">
-          <h2 class="clearfix col-xs-12 col-sm-12 before-test-heading text-center">Thank you!</h2>
-          <p class="text-center mt-3">
+    <div class='row hide page' id='thank_you_page'>
+      <div class='col-sm-12 col-xs-12 col-md-6 offset-md-3'>
+        <div class='clearfix rounded form-container'>
+          <h2 class='clearfix col-xs-12 col-sm-12 before-test-heading text-center'>Thank you!</h2>
+          <p class='text-center mt-3'>
             NavGurukul ki One Year Fellowship mein<br> apply karne ke liye shukriya. <br> Hum jald hi aapko contact
-            karenge.<br><br> Aap humein <a href="mailto:hi@navgurukul.org">hi@navgurukul.org</a> par mail bhi kar sakte
+            karenge.<br><br> Aap humein <a href='mailto:hi@navgurukul.org'>hi@navgurukul.org</a> par mail bhi kar sakte
             hai.
           </p>
-          <div class="clearfix col-xs-12 col-sm-12 mt-2">
-            <button onclick="visit_website()" class="btn btn-lg btn-success col-xs-12 col-sm-12">Visit NavGurukul
+          <div class='clearfix col-xs-12 col-sm-12 mt-2'>
+            <button onclick='visit_website()' class='btn btn-lg btn-success col-xs-12 col-sm-12'>Visit NavGurukul
               Website</button>
           </div>
-          <div class="clearfix col-xs-12 col-sm-12 mt-2">
-            <button onclick="learn_coding()" class="btn btn-lg btn-warning col-xs-12 col-sm-12">Start Learning Coding
+          <div class='clearfix col-xs-12 col-sm-12 mt-2'>
+            <button onclick='learn_coding()' class='btn btn-lg btn-warning col-xs-12 col-sm-12'>Start Learning Coding
               Now</button>
           </div>
         </div>
@@ -825,28 +825,28 @@
     </div>
   </main>
 
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+  <div class='modal fade' id='myModal' role='dialog'>
+    <div class='modal-dialog'>
 
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Galat Link Hai!</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h4 class='modal-title'>Galat Link Hai!</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
         </div>
-        <div class="modal-body">
+        <div class='modal-body'>
           <p>Aapki link invalid hai.<br> Aap <b>011-4084-6385</b> par call kar kar,<br> sahi link ko open karo.<br><br>
             Agar phir bhi problem aati hai toh<br> admission@navgurukul.org par email karo.</p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
         </div>
       </div>
 
     </div>
   </div>
 
-  <footer class="container"></footer>
+  <footer class='container'></footer>
 </body>
 
 </html>

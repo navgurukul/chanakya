@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  "type": "integer",
-  "difficulty": "easy",
-  "topic": "Percentage",
-  "id": 556,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'easy',
+  'topic': 'Percentage',
+  'id': 556,
+  'correctOption': 1
 }
 ```
 
@@ -71,11 +71,11 @@ Please think and answer carefully.
 # Question Choice 2
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Percentage",
-  "id": 557,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Percentage',
+  'id': 557,
+  'correctOption': 1
 }
 ```
 
@@ -104,11 +104,11 @@ then what is the % of unhealthy boys?
 # Question Choice 3
 ```json
 {
-  "type": "integer",
-  "difficulty": "medium",
-  "topic": "Percentage",
-  "id": 558,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'medium',
+  'topic': 'Percentage',
+  'id': 558,
+  'correctOption': 1
 }
 ```
 
@@ -135,11 +135,11 @@ the % of unhealthy boys will be 20%?
 # Question Choice 4
 ```json
 {
-  "type": "integer",
-  "difficulty": "hard",
-  "topic": "Percentage",
-  "id": 561,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'hard',
+  'topic': 'Percentage',
+  'id': 561,
+  'correctOption': 1
 }
 ```
 
@@ -168,11 +168,11 @@ would the percentage of unhealthy boys be 20%?
 # Question Choice 5
 ```json
 {
-  "type": "integer",
-  "difficulty": "hard",
-  "topic": "Percentage",
-  "id": 559,
-  "correctOption": 1
+  'type': 'integer',
+  'difficulty': 'hard',
+  'topic': 'Percentage',
+  'id': 559,
+  'correctOption': 1
 }
 ```
 
