@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  'type': 'mcq',
-  'difficulty': 'easy',
-  'topic': 'Algebra',
-  'id': 542,
-  'correctOption': 3
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Algebra",
+  "id": 542,
+  "correctOption": 3
 }
 ```
 
@@ -37,11 +37,11 @@ How many grams of fruits do you have?
 # Question Choice 2
 ```json
 {
-  'type': 'mcq',
-  'difficulty': 'easy',
-  'topic': 'Algebra',
-  'id': 545,
-  'correctOption': 4
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Algebra",
+  "id": 545,
+  "correctOption": 4
 }
 ```
 
@@ -78,11 +78,11 @@ has 4000 grams of weight?
 # Question Choice 3
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Algebra',
-  'id': 543,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Algebra",
+  "id": 543,
+  "correctOption": 1
 }
 ```
 
@@ -113,11 +113,11 @@ How many apples do you have?
 # Question Choice 4
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Algebra',
-  'id': 544,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Algebra",
+  "id": 544,
+  "correctOption": 1
 }
 ```
 
@@ -159,11 +159,11 @@ How many apples do you have?
 # Question Choice 5
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'hard',
-  'topic': 'Algebra',
-  'id': 548,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "hard",
+  "topic": "Algebra",
+  "id": 548,
+  "correctOption": 1
 }
 ```
 
@@ -193,11 +193,11 @@ How many apples do you have?
 # Question Choice 6
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'hard',
-  'topic': 'Algebra',
-  'id': 547,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "hard",
+  "topic": "Algebra",
+  "id": 547,
+  "correctOption": 1
 }
 ```
 
