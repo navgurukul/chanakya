@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  'type': 'mcq',
-  'difficulty': 'easy',
-  'topic': 'Algebra',
-  'id': 564,
-  'correctOption': 2
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Algebra",
+  "id": 564,
+  "correctOption": 2
 }
 ```
 
@@ -37,11 +37,11 @@ What is the price of the clothes that you have?
 # Question Choice 2
 ```json
 {
-  'type': 'mcq',
-  'difficulty': 'easy',
-  'topic': 'Algebra',
-  'id': 569,
-  'correctOption': 3
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Algebra",
+  "id": 569,
+  "correctOption": 3
 }
 ```
 
@@ -78,11 +78,11 @@ has 4000₹ price?
 # Question Choice 3
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Algebra',
-  'id': 565,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Algebra",
+  "id": 565,
+  "correctOption": 1
 }
 ```
 
@@ -113,11 +113,11 @@ How is the length of your cotton?
 # Question Choice 4
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Algebra',
-  'id': 568,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Algebra",
+  "id": 568,
+  "correctOption": 1
 }
 ```
 
@@ -151,11 +151,11 @@ What length of cotton do you have?
 # Question Choice 5
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'hard',
-  'topic': 'Algebra',
-  'id': 566,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "hard",
+  "topic": "Algebra",
+  "id": 566,
+  "correctOption": 1
 }
 ```
 
@@ -188,11 +188,11 @@ What length of cotton do you have?
 # Question Choice 6
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'hard',
-  'topic': 'Algebra',
-  'id': 567,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "hard",
+  "topic": "Algebra",
+  "id": 567,
+  "correctOption": 1
 }
 ```
 

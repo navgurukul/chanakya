@@ -2,11 +2,11 @@
 # Question Choice 1
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'easy',
-  'topic': 'Unitary Method',
-  'id': 539,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "id": 539,
+  "correctOption": 1
 }
 ```
 
@@ -39,11 +39,11 @@ would be needed to fill
 # Question Choice 2
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Unitary Method',
-  'id': 540,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Unitary Method",
+  "id": 540,
+  "correctOption": 1
 }
 ```
 
@@ -71,11 +71,11 @@ how many taps would you need?
 # Question Choice 3
 ```json
 {
-  'type': 'integer',
-  'difficulty': 'medium',
-  'topic': 'Unitary Method',
-  'id': 538,
-  'correctOption': 1
+  "type": "integer",
+  "difficulty": "medium",
+  "topic": "Unitary Method",
+  "id": 538,
+  "correctOption": 1
 }
 ```
 

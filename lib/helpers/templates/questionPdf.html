@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang='en' dir='ltr'>
+<html lang="en" dir="ltr">
 
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <style>
 
@@ -134,7 +134,7 @@
 
 <body>
   <div>
-    <div class='heading'>
+    <div class="heading">
       <center>
         <h2>
           <b>NavGurukul Scholarship Test - {{ setName }}</b> </br>
@@ -144,21 +144,21 @@
       </center>
     </div>
     <!-- question set display -->
-    <div class='main'>
+    <div class="main">
       {{#each questions}}
-      <table class='question-table padding-zero'>
+      <table class="question-table padding-zero">
         <tr>
-          <td width='4%' valign='top'><b> {{inc @index}}. </b></td>
-          <td valign='top' class='padding-zero'>
-            <table class='question-display padding-zero'>
+          <td width="4%" valign='top'><b> {{inc @index}}. </b></td>
+          <td valign='top' class="padding-zero">
+            <table class="question-display padding-zero">
               <tr>
-                <td valign='top' class='question-text'>
+                <td valign='top' class="question-text">
                   {{!--
                     commen text between the questions like
                     images, mathematical equation.
                   --}}
                   {{#if this.common_text}}
-                    <div class='commen-text'>
+                    <div class="commen-text">
                       {{#if (hasParaTag this.common_text) }}
                         {{{this.common_text}}}
                       {{else}}
@@ -199,11 +199,11 @@
               </tr>
 
               {{#if (eq this.type 1)}}
-                  <tr class='inline-block'>
+                  <tr class="inline-block">
                     {{#each this.options}}
-                    <tr style='display:inline-block; min-width:45%;'>
-                      <td style='width:20px' colspan='2'>{{string_lower @index}}).</td>
-                      <td class='options-cell'>
+                    <tr style="display:inline-block; min-width:45%;">
+                      <td style="width:20px" colspan="2">{{string_lower @index}}).</td>
+                      <td class="options-cell">
                         {{#if (hasParaTag this.text) }}
                           {{{this.text}}}
                         {{else}}
@@ -225,8 +225,8 @@
     </div>
   </div>
 
-  <div id='answer-sheet'>
-    <div class='set-heading heading'>
+  <div id="answer-sheet">
+    <div class="set-heading heading">
       <center>
         <h1>
           {{ setName }}
@@ -234,8 +234,8 @@
       </center>
     </div>
 
-    <div id='student-basic-detail'>
-      <table class='student-basic-detail'>
+    <div id="student-basic-detail">
+      <table class="student-basic-detail">
         <tr>
           <td>
             <b><i>Name</i></b> / आपका नाम
@@ -260,24 +260,24 @@
       </table>
     </div>
 
-    <div class='answer-section'>
+    <div class="answer-section">
       <h1>Your Answers</h1>
-      <p class='sub-heading'>Tick-mark the correct option here:</p>
-      <p class='sub-heading'>यहां सही विकल्प पर टिक-मार्क करें:</p>
-      <table class='answer-choices-table'>
+      <p class="sub-heading">Tick-mark the correct option here:</p>
+      <p class="sub-heading">यहां सही विकल्प पर टिक-मार्क करें:</p>
+      <table class="answer-choices-table">
         {{#each questions}}
         <tr>
-          <td class='th-width'>
+          <td class="th-width">
             <b>
               {{inc @index}})
             </b>
           </td>
           {{#if (eq this.type 1)}}
-          <td class='padding-zero'>
-            <table class='inner-table'>
+          <td class="padding-zero">
+            <table class="inner-table">
               <tr>
                 {{#each this.options}}
-                <td class='choices'>
+                <td class="choices">
                   ❏ {{string_upper @index}}
                 </td>
                 {{/each}}
@@ -289,10 +289,10 @@
 
           </td>
           {{/if}}
-          <td class='empty-cell'>
+          <td class="empty-cell">
 
           </td>
-          <td class='empty-cell'>
+          <td class="empty-cell">
 
           </td>
         </tr>
@@ -301,8 +301,8 @@
     </div>
   </div>
 
-  <div id='student-detail'>
-    <div class='set-heading heading'>
+  <div id="student-detail">
+    <div class="set-heading heading">
       <center>
         <h1>
           {{ setName }}
@@ -310,13 +310,13 @@
       </center>
     </div>
 
-    <div id='student-basic-detail'>
+    <div id="student-basic-detail">
       <p>
         Write your name and mobile number here :</br>
         यहां अपना नाम और मोबाइल नंबर लिखें :
       </p>
       </p>
-      <table class='student-basic-detail'>
+      <table class="student-basic-detail">
         <tr>
           <td>
             <b>Name</b> / आपका नाम
@@ -334,21 +334,21 @@
       </table>
     </div>
 
-    <div id='student-basic-detail'>
+    <div id="student-basic-detail">
       <p>
         We need few more details of you. Please fill in the following details after the test.</br>
         हमें आपकी कुछ और जानकारी चाहिए। कृपया परीक्षण के बाद निम्नलिखित विवरण भरें.
       </p>
       </p>
-      <table class='student-basic-detail'>
+      <table class="student-basic-detail">
         <tr>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>WhatsApp Number</b>
           </td>
           <td>
             ______________
           </td>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>E-mail Id</b>
           </td>
           <td>
@@ -357,7 +357,7 @@
         </tr>
 
         <tr>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>Gender/</b> ​लंग
           </td>
           <td>
@@ -365,7 +365,7 @@
             ❏ Female / ​महिला </br>
             ❏ Transgender / ​अन्य </br>
           </td>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>Pin Code</b></br>
             आपका पिन कोड क्या है?
           </td>
@@ -375,13 +375,13 @@
         </tr>
 
         <tr>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>State /</b> राज्य
           </td>
           <td>
             _______________
           </td>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>City or Village & District /</b> अपने शहर या गांव और ज़िले का नाम लिखें।
           </td>
           <td>
@@ -390,14 +390,14 @@
         </tr>
 
         <tr>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>Town / Village</b> </br>
             गाँव / शहर का नाम
           </td>
           <td>
             _______________
           </td>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>Religion​ /</b> धर्म
           </td>
           <td>
@@ -408,14 +408,14 @@
           </td>
         </tr>
         <tr>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>Caste ​ /</b> जाती
           </td>
           <td>
             ❏ General ❏ OBC </br>
             ❏ SC ❏ ST </br>
           </td>
-          <td class='student-detail-table-head'>
+          <td class="student-detail-table-head">
             <b>What is your qualification? Select the option till where you have studied.</b><br>
             आप कहाँ तक पढ़े हो?
           </td>
@@ -425,7 +425,7 @@
           </td>
         </tr>
         <tr>
-            <td class='student-detail-table-head'>
+            <td class="student-detail-table-head">
                 <b> What are you doing currently? (Select one option) </b> <br>
                 आप अभी क्या कर रहे हो?
             </td>
@@ -438,7 +438,7 @@
     </div>
   </div>
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </body>
 
 </html>
