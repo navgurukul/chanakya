@@ -168,13 +168,15 @@ function fetchPartnersDistricts() {
 }
 
 function personal_details_submit() {
+  console.log("checking the function");
   var name = $("#name").val();
   var date = $("#date").val();
   var month = $("#month").val();
   var year = $("#year").val();
   var mobile = $("#mobile").val();
   var gender = $("#gender").val();
-
+  console.log(gender,"gender")
+console.log(typeof year)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -220,13 +222,13 @@ function personal_details_submit() {
   } else if (year == "") {
     appending("Kripaya Apne Janam Ka Saal Chuniye!");
     return false;
-  } else if (2021 - year > 28) {
+  } else if ((2021 - year) > 28) {
     appending("28 saal se oopar ke students test nahin de sakate");
     return false;
   } else if (gender == "NONE") {
     appending("Apna gender select kijye!");
     return false;
-  } else if (gender === "male") {
+  } else if (gender == "male") {
     appending("Ladko ke liya abhi admissions open nahin hai");
     return false;
   }
