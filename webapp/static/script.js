@@ -158,7 +158,6 @@ function fetchPartnersDistricts() {
       select.appendChild(otherOpt);
     }
   ).fail(function (response) {
-    console.log(response);
     var select = document.getElementById("city_or_village");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
@@ -168,15 +167,13 @@ function fetchPartnersDistricts() {
 }
 
 function personal_details_submit() {
-  console.log("checking the function");
   var name = $("#name").val();
   var date = $("#date").val();
   var month = $("#month").val();
   var year = $("#year").val();
   var mobile = $("#mobile").val();
   var gender = $("#gender").val();
-  console.log(gender,"gender")
-console.log(typeof year)
+  console.log(name,"name")
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -223,7 +220,7 @@ console.log(typeof year)
     appending("Kripaya Apne Janam Ka Saal Chuniye!");
     return false;
   } else if ((2021 - year) > 28) {
-    appending("28 saal se oopar ke students test nahin de sakate");
+    appending("<h3>28 saal se oopar ke students test nahin de sakate</h3>");
     return false;
   } else if (gender == "NONE") {
     appending("Apna gender select kijye!");
