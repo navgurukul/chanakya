@@ -220,8 +220,14 @@ function personal_details_submit() {
   } else if (year == "") {
     appending("Kripaya Apne Janam Ka Saal Chuniye!");
     return false;
+  } else if (2021 - year > 28) {
+    appending("28 saal se oopar ke students test nahin de sakate");
+    return false;
   } else if (gender == "NONE") {
     appending("Apna gender select kijye!");
+    return false;
+  } else if (gender === "male") {
+    appending("Ladko ke liya abhi admissions open nahin hai");
     return false;
   }
 
@@ -536,15 +542,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
