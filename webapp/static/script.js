@@ -158,7 +158,6 @@ function fetchPartnersDistricts() {
       select.appendChild(otherOpt);
     }
   ).fail(function (response) {
-    console.log(response);
     var select = document.getElementById("city_or_village");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
@@ -174,7 +173,6 @@ function personal_details_submit() {
   var year = $("#year").val();
   var mobile = $("#mobile").val();
   var gender = $("#gender").val();
-
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -191,37 +189,43 @@ function personal_details_submit() {
   // network_speed.value  = navigator.connection.downlink;
 
   if (!mobile) {
-    appending("Kripaya mobile number dijye!");
+    appending("<h4> Kripaya mobile number dijye! </h4>");
     return false;
   }
   if (mobile.length < 10 || mobile.length > 10) {
-    appending("10 digit ka mobile number daliye!");
+    appending("<h4> 10 digit ka mobile number daliye! </h4>");
     return false;
   }
 
   if (!name) {
-    appending("Kripaya apna naam batayie!");
+    appending("<h4> Kripaya apna naam batayie! </h4>");
     return false;
   } else if (name.length < 4) {
-    appending("Aapka naam at least 4 characters se lamba hona chahiye!");
+    appending("<h4> Aapka naam at least 4 characters se lamba hona chahiye!</h4>");
     return false;
   }
   if (/^[a-zA-Z]$/i.test(name)) {
-    appending('Naam wale section me (1,.,!,#,@,") ka istamal na kare!');
+    appending('<h4> Naam wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
     return false;
   }
   // to check that date field isn't empty
   if (date == "") {
-    appending("Kripaya Apne Janam Ka Din Chuniye!");
+    appending("<h4> Kripaya Apne Janam Ka Din Chuniye! </h4>");
     return false;
   } else if (month == "") {
-    appending("Kripaya Apne Janam Ka Mahina Chuniye!");
+    appending("<h4> Kripaya Apne Janam Ka Mahina Chuniye! </h4>");
     return false;
   } else if (year == "") {
-    appending("Kripaya Apne Janam Ka Saal Chuniye!");
+    appending("<h4> Kripaya Apne Janam Ka Saal Chuniye! </h4>");
+    return false;
+  } else if ((2021 - year) > 28) {
+    appending("<h4>28 saal se oopar ke students test nahin de sakate </h4>");
     return false;
   } else if (gender == "NONE") {
-    appending("Apna gender select kijye!");
+    appending("<h4>Apna gender select kijye! </h4>");
+    return false;
+  } else if (gender == "male") {
+    appending("<h4> Ladko ke liya abhi admissions open nahin hai </h4>");
     return false;
   }
 
@@ -536,15 +540,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
