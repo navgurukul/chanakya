@@ -308,15 +308,25 @@
                 <span class="hi lang">Aapki Kuch Details</span>
               </h2>
               <span class='errors text text-center text-danger ml-3'></span>
-              <div class="clearfix">
+              <div class="clearfix container">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
-                <input type="text" id='name' name="name" placeholder="Your Name" required
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                <div class="row">
+                  <input type="text" id='firstName' name='firstName' placeholder="First Name" required
+                    class="col-4 col-md-3 border border-warning rounded section-1" />
+                  <input type="text" id='middleName' name='middleName' placeholder="Middle Name"
+                    class="col-4 col-md-3 border border-warning rounded section-1" />
+                  <input type="text" id='lastName' name='lastName' placeholder="Last Name" required
+                    class="col-4 col-md-3 border border-warning rounded section-1" />
+                </div>
               </div>
-              <div class="clearfix">
+              <div class="clearfix container">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Mobile Number</div>
-                <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number"
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
+                <div class="row">
+                  <input type="number" id='mobile1' name="mobile1" placeholder="Aapka Whatsapp Number"
+                    class="col-4 col-md-3 border border-warning rounded section-1" required />
+                  <input type="number" id='mobile2' name="mobile2" placeholder="Koi aur number"
+                    class="col-4 col-md-3 border border-warning rounded section-1" />
+                </div>
               </div>
               <div class="clearfix container">
                 <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>
@@ -517,8 +527,10 @@
                   </select>
                 </div>
                 <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
-                  <input type="text" name="city_or_village_2" id="city_or_village_2" placeholder="Agar aapke city / village ka naam upar list me na ho"
+                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)
+                  </div>
+                  <input type="text" name="city_or_village_2" id="city_or_village_2"
+                    placeholder="Agar aapke city / village ka naam upar list me na ho"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
                 </div>
                 <div class="clearfix">
@@ -545,8 +557,9 @@
                 </div>
                 <div class="clearfix min-10 hide pass10">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                  <input type="number" name="class_10_percentage" id="percentage_in10th" placeholder="Percentage in 10th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_10_percentage" id="percentage_in10th"
+                    placeholder="Percentage in 10th" min='0' step='any'
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-10 hide pass10">
@@ -557,8 +570,9 @@
 
                 <div class="clearfix min-12 hide pass12">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                  <input type="number" name="class_12_percentage" id="percentage_in12th" placeholder="Percentage in 12th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_12_percentage" id="percentage_in12th"
+                    placeholder="Percentage in 12th" min='0' step='any'
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-12 hide pass12">

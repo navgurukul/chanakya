@@ -167,11 +167,14 @@ function fetchPartnersDistricts() {
 }
 
 function personal_details_submit() {
-  var name = $("#name").val();
+  var firstName = $("#firstName").val();
+  var middleName = $("#middleName").val();
+  var lastName = $("#lastName").val();
   var date = $("#date").val();
   var month = $("#month").val();
   var year = $("#year").val();
-  var mobile = $("#mobile").val();
+  var mobile1 = $("#mobile1").val();
+  var mobile2 = $("#mobile2").val()
   var gender = $("#gender").val();
   // if (DEBUG) {
   //     name = "abhishek";
@@ -231,16 +234,20 @@ function personal_details_submit() {
 
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
+  var name = `${firstName} ${middleName} ${lastName}`;
+  console.log(name,"name")
+  console.log(mobile2, mobile1, "mobile")
 
   var obj = {
     name: name,
-    whatsapp: mobile,
+    whatsapp: mobile1,
     gender: gender,
     dob: dob,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
 
+  console.log(obj,"obj")
   mixpanel.identify(mobile);
 
   mixpanel.people.set({
