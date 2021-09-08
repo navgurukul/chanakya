@@ -356,6 +356,69 @@
                   <option value="trans">Trans</option>
                 </select>
               </div>
+
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
+                <select id="state" name="state"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                  <option value="NONE">Select State</option>
+                  <option value='AN'>Andaman and Nicobar Islands</option>
+                  <option value='AP'>Andhra Pradesh</option>
+                  <option value='AR'>Arunachal Pradesh</option>
+                  <option value='AS'>Assam</option>
+                  <option value='BR'>Bihar</option>
+                  <option value='CH'>Chandigarh</option>
+                  <option value='CT'>Chhattisgarh</option>
+                  <option value='DH'>Dadra and Nagar Haveli</option>
+                  <option value='DD'>Daman and Diu</option>
+                  <option value='DL'>Delhi</option>
+                  <option value='GA'>Goa</option>
+                  <option value='GJ'>Gujarat</option>
+                  <option value='HR'>Haryana</option>
+                  <option value='HP'>Himachal Pradesh</option>
+                  <option value='JK'>Jammu and Kashmir</option>
+                  <option value='JH'>Jharkhand</option>
+                  <option value='KA'>Karnataka</option>
+                  <option value='KL'>Kerala</option>
+                  <option value='LD'>Lakshadweep</option>
+                  <option value='MP'>Madhya Pradesh</option>
+                  <option value='MH'>Maharashtra</option>
+                  <option value='MN'>Manipur</option>
+                  <option value='ML'>Meghalaya</option>
+                  <option value='MZ'>Mizoram</option>
+                  <option value='NL'>Nagaland</option>
+                  <option value='OR'>Odisha</option>
+                  <option value='PY'>Puducherry</option>
+                  <option value='PB'>Punjab</option>
+                  <option value='RJ'>Rajasthan</option>
+                  <option value='SK'>Sikkim</option>
+                  <option value='TN'>Tamil Nadu</option>
+                  <option value='TG'>Telangana</option>
+                  <option value='TR'>Tripura</option>
+                  <option value='UP'>Uttar Pradesh</option>
+                  <option value='UK'>Uttarakhand</option>
+                  <option value='WB'>West Bengal</option>
+                </select>
+              </div>
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">District</div>
+                <input type="text" name="district"  id="district" placeholder="District"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              </div>
+
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam</div>
+                <select name="city_or_village" id="city_or_village"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                </select>
+              </div>
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
+                <input type="text" name="city_or_village_2" id="city_or_village_2"
+                  placeholder="Agar aapke city / village ka naam upar list me na ho"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              </div>
+
               <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
                 <button class="btn btn-lg btn-danger col-xs-12
                       col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
@@ -477,7 +540,7 @@
                           <input type="text" name="district" placeholder="District"
                               class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
                       </div> -->
-                <div class="clearfix">
+                <!-- <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
                   <select id="state" name="state"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
@@ -519,20 +582,18 @@
                     <option value='UK'>Uttarakhand</option>
                     <option value='WB'>West Bengal</option>
                   </select>
-                </div>
-                <div class="clearfix">
+                </div> -->
+                <!-- <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam</div>
                   <select name="city_or_village" id="city_or_village"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                   </select>
-                </div>
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)
-                  </div>
-                  <input type="text" name="city_or_village_2" id="city_or_village_2"
-                    placeholder="Agar aapke city / village ka naam upar list me na ho"
+                </div> -->
+                <!-- <div class="clearfix">
+                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
+                  <input type="text" name="city_or_village_2" id="city_or_village_2" placeholder="Agar aapke city / village ka naam upar list me na ho"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
-                </div>
+                </div> -->
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Current Status</div>
                   <select name="current_status" id="current_status"

@@ -176,7 +176,14 @@ function personal_details_submit() {
   var mobile1 = $("#mobile1").val();
   var mobile2 = $("#mobile2").val()
   var gender = $("#gender").val();
-  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender)
+  var state = $("#state").val();
+  var district = $("#district").val();
+  var city = $("#city_or_village").val();
+  if (city === "other") {
+    city = $("#city_or_village_2").val();
+  }
+  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender)
+  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender,state,city,district)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -254,8 +261,13 @@ function personal_details_submit() {
     whatsapp: mobile1,
     gender: gender,
     dob: dob,
+    state:state,
+    district:district,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
+    
+
+  
   };
 
   console.log(obj, "obj")
@@ -299,11 +311,11 @@ function submitApp() {
 
   var pin_code = $("#pin_code").val();
   var qualification = $("#qualification").val();
-  var state = $("#state").val();
-  var city = $("#city_or_village").val();
-  if (city === "other") {
-    city = $("#city_or_village_2").val();
-  }
+  // var state = $("#state").val();
+  // var city = $("#city_or_village").val();
+  // if (city === "other") {
+  //   city = $("#city_or_village_2").val();
+  // }
   var current_status = $("#current_status").val();
   var school_medium = $("#school_medium").val();
   var caste = $("#caste").val();
