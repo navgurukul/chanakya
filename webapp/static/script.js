@@ -176,7 +176,7 @@ function personal_details_submit() {
   var mobile1 = $("#mobile1").val();
   var mobile2 = $("#mobile2").val()
   var gender = $("#gender").val();
-  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender)
+  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -201,15 +201,25 @@ function personal_details_submit() {
     return false;
   }
 
-  if (!name) {
-    appending("<h4> Kripaya apna naam batayie! </h4>");
+  if (!firstName) {
+    appending("<h4> Kripaya apna firstName batayie! </h4>");
     return false;
-  } else if (name.length < 4) {
-    appending("<h4> Aapka naam at least 4 characters se lamba hona chahiye!</h4>");
+  } else if (firstName.length < 4) {
+    appending("<h4> Aapka firstName at least 4 characters se lamba hona chahiye!</h4>");
     return false;
   }
-  if (/^[a-zA-Z]$/i.test(name)) {
-    appending('<h4> Naam wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
+  if (/^[a-zA-Z]$/i.test(firstName)) {
+    appending('<h4> firstName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
+    return false;
+  }
+  if (!lastName) {
+    appending("<h4> Kripaya apna lastName batayie! </h4>");
+    return false;
+  } else if (lastName.length < 4) {
+    appending("<h4> Aapka lastName at least 4 characters se lamba hona chahiye!</h4>");
+    return false;
+  } if (/^[a-zA-Z]$/i.test(lastName)) {
+    appending('<h4> lastName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
     return false;
   }
   // to check that date field isn't empty
@@ -236,7 +246,7 @@ function personal_details_submit() {
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
   var name = `${firstName} ${middleName} ${lastName}`;
-  console.log(name,"name")
+  console.log(name, "name")
   console.log(mobile2, mobile1, "mobile")
 
   var obj = {
@@ -248,7 +258,7 @@ function personal_details_submit() {
     gps_long: positions ? positions.longitude : -1,
   };
 
-  console.log(obj,"obj")
+  console.log(obj, "obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
