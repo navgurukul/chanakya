@@ -176,6 +176,7 @@ function personal_details_submit() {
   var mobile1 = $("#mobile1").val();
   var mobile2 = $("#mobile2").val()
   var gender = $("#gender").val();
+  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -191,11 +192,11 @@ function personal_details_submit() {
 
   // network_speed.value  = navigator.connection.downlink;
 
-  if (!mobile) {
+  if (!mobile1) {
     appending("<h4> Kripaya mobile number dijye! </h4>");
     return false;
   }
-  if (mobile.length < 10 || mobile.length > 10) {
+  if (mobile1.length < 10 || mobile1.length > 10) {
     appending("<h4> 10 digit ka mobile number daliye! </h4>");
     return false;
   }
@@ -248,11 +249,11 @@ function personal_details_submit() {
   };
 
   console.log(obj,"obj")
-  mixpanel.identify(mobile);
+  mixpanel.identify(mobile1);
 
   mixpanel.people.set({
     $name: name,
-    $phone: mobile,
+    $phone: mobile1,
     $gender: gender,
     $dob: mdob,
   });
