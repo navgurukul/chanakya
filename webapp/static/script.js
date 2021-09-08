@@ -167,12 +167,16 @@ function fetchPartnersDistricts() {
 }
 
 function personal_details_submit() {
-  var name = $("#name").val();
+  var firstName = $("#firstName").val();
+  var middleName = $("#middleName").val();
+  var lastName = $("#lastName").val();
   var date = $("#date").val();
   var month = $("#month").val();
   var year = $("#year").val();
-  var mobile = $("#mobile").val();
+  var mobile1 = $("#mobile1").val();
+  var mobile2 = $("#mobile2").val()
   var gender = $("#gender").val();
+  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -188,11 +192,11 @@ function personal_details_submit() {
 
   // network_speed.value  = navigator.connection.downlink;
 
-  if (!mobile) {
+  if (!mobile1) {
     appending("<h4> Kripaya mobile number dijye! </h4>");
     return false;
   }
-  if (mobile.length < 10 || mobile.length > 10) {
+  if (mobile1.length < 10 || mobile1.length > 10) {
     appending("<h4> 10 digit ka mobile number daliye! </h4>");
     return false;
   }
@@ -231,21 +235,25 @@ function personal_details_submit() {
 
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
+  var name = `${firstName} ${middleName} ${lastName}`;
+  console.log(name,"name")
+  console.log(mobile2, mobile1, "mobile")
 
   var obj = {
     name: name,
-    whatsapp: mobile,
+    whatsapp: mobile1,
     gender: gender,
     dob: dob,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
 
-  mixpanel.identify(mobile);
+  console.log(obj,"obj")
+  mixpanel.identify(mobile1);
 
   mixpanel.people.set({
     $name: name,
-    $phone: mobile,
+    $phone: mobile1,
     $gender: gender,
     $dob: mdob,
   });
