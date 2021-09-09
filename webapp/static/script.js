@@ -76,7 +76,7 @@ function no_cheating_promise_submit() {
   $("#no_cheating_promise").slideUp(slide_up_time);
   $("#personal_details").slideDown(slide_down_time);
   setupDatePicker();
- 
+
 }
 function setupDatePicker() {
   var monthdict = {
@@ -139,56 +139,66 @@ function fetchQuestionsAndOptions() {
 }
 
 // ######################################################################################
-  function fetchState() {
-    $.ajax({
-      url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
-      type: "GET", // GET OR POST,
-      headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
-      beforeSend: function () {
-          // This function calls before ajax API Hits
-      },
-      success: function (response, status) {
-          console.log(response)
-          for (var i = 0; i < response.length; i++) {
-              $("#state").append("<option id='" + response[i]["id"] + "' value='" + response[i]["iso2"] + "'>" + response[i]["name"] + "</option>");
-          }
-      },
-      error: function (error, status) {
-          console.log(error)
-      },
+function fetchState() {
+  $.ajax({
+    url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
+    type: "GET", // GET OR POST,
+    headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
+    beforeSend: function () {
+      // This function calls before ajax API Hits
+    },
+    success: function (response, status) {
+      console.log(response)
+      for (var i = 0; i < response.length; i++) {
+        $("#state").append("<option id='" + response[i]["id"] + "' value='" + response[i]["iso2"] + "'>" + response[i]["name"] + "</option>");
+      }
+    },
+    error: function (error, status) {
+      console.log(error)
+    },
   });
-}
 
-
-var select = document.getElementById('state');
-var input = document.getElementById('city');
-select.onchange = function (value) {
-  getCityFromState(value.target.value)
+  var select = document.getElementById('state');
+  var input = document.getElementById('city');
+  select.onchange = function (value) {
+    getCityFromState(value.target.value)
     console.log(value.target.value)
     input.value = select.value;
     console.log(select)
+  }
+
 }
+
+
+// var select = document.getElementById('state');
+// var input = document.getElementById('city');
+// select.onchange = function (value) {
+//   getCityFromState(value.target.value)
+//     console.log(value.target.value)
+//     input.value = select.value;
+//     console.log(select)
+// }
 
 
 function getCityFromState(state) {
   $("#city").empty()
   $("#city").append("<option> Select city </option>")
   $.ajax({
-      url: `https://api.countrystatecity.in/v1/countries/IN/states/${state}/cities`, //API URL
-      type: "GET", 
-      headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
-      beforeSend: function () {
-      },
-      success: function (response, status) {
-          console.log(response)
-          for (var i = 0; i < response.length; i++) {
-              $("#city").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
-          }
-      },
-      error: function (error, status) {
-          console.log(error)
+    url: `https://api.countrystatecity.in/v1/countries/IN/states/${state}/cities`, //API URL
+    type: "GET",
+    headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
+    beforeSend: function () {
+    },
+    success: function (response, status) {
+      console.log(response)
+      for (var i = 0; i < response.length; i++) {
+        $("#city").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
+      }
+    },
+    error: function (error, status) {
+      console.log(error)
 
-      },
+    },
   });
 
 }
@@ -718,7 +728,7 @@ function show_thanksPage() {
   $("#thank_you_page").show();
 }
 function show_TestResult() {
- 
+
   $.get(
     base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
