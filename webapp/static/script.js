@@ -76,7 +76,7 @@ function no_cheating_promise_submit() {
   $("#no_cheating_promise").slideUp(slide_up_time);
   $("#personal_details").slideDown(slide_down_time);
   setupDatePicker();
-  fetchState();
+ 
 }
 function setupDatePicker() {
   var monthdict = {
@@ -682,6 +682,7 @@ function show_thanksPage() {
   $("#thank_you_page").show();
 }
 function show_TestResult() {
+ 
   $.get(
     base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
@@ -726,7 +727,6 @@ function submitTest() {
   }
   updateAnswer(current_question);
   fetchPartnersDistricts();
-  // fetchState();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
@@ -748,6 +748,7 @@ function submitTest() {
 }
 
 $(document).ready(function () {
+  fetchState()
   if (!DEBUG) {
     // landing_page_submit();
     // personal_details_submit();
