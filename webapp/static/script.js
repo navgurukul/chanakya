@@ -71,10 +71,12 @@ function landing_page_submit() {
 }
 
 function no_cheating_promise_submit() {
+
   mixpanel.track("No Cheating Promise");
   $("#no_cheating_promise").slideUp(slide_up_time);
   $("#personal_details").slideDown(slide_down_time);
   setupDatePicker();
+  fetchState();
 }
 function setupDatePicker() {
   var monthdict = {
@@ -136,9 +138,9 @@ function fetchQuestionsAndOptions() {
   });
 }
 
-$(document).ready(function () {
-
-  $.ajax({
+// $(document).ready(function () {
+  function fetchState() {
+    $.ajax({
     url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
     type: "GET",
     headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
@@ -154,7 +156,7 @@ $(document).ready(function () {
       console.log(error)
     },
   });
-});
+}
 
 function fetchPartnersDistricts() {
   $.get(
@@ -714,6 +716,7 @@ function submitTest() {
   }
   updateAnswer(current_question);
   fetchPartnersDistricts();
+  // fetchState();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
