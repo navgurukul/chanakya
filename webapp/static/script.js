@@ -253,8 +253,6 @@ function personal_details_submit() {
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
   var name = `${firstName} ${middleName} ${lastName}`;
-  console.log(name, "name")
-  console.log(mobile2, mobile1, "mobile")
 
   var obj = {
     name: name,
@@ -263,6 +261,7 @@ function personal_details_submit() {
     dob: dob,
     state:state,
     district:district,
+    alt_mobile:mobile2 ? mobile2 : null,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
     
@@ -276,6 +275,7 @@ function personal_details_submit() {
   mixpanel.people.set({
     $name: name,
     $phone: mobile1,
+    $alt_mobile:mobile2,
     $gender: gender,
     $dob: mdob,
   });
