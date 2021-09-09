@@ -672,7 +672,7 @@ function show_thanksPage() {
   $("#thank_you_page").show();
 }
 function show_TestResult() {
-  fetchState()
+ 
   $.get(
     base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
@@ -717,7 +717,6 @@ function submitTest() {
   }
   updateAnswer(current_question);
   fetchPartnersDistricts();
-  // fetchState();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
