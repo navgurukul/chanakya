@@ -181,7 +181,7 @@ function getCityFromState(state) {
     success: function (response, status) {
       console.log(response)
       for (var i = 0; i < response.length; i++) {
-        $("#district").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
+        $("#district").append("<option value='" + response[i]["name"] + "'>" + response[i]["name"] + "</option>");
       }
     },
     error: function (error, status) {
@@ -235,7 +235,6 @@ function personal_details_submit() {
   var gender = $("#gender").val();
   var state = $("#state").val();
   var district = $("#district").val();
-  
   var city = $("#city_or_village").val();
   if (city === "other") {
     city = $("#city_or_village_2").val();
