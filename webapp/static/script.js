@@ -159,7 +159,7 @@ function fetchState() {
   });
 
   var select = document.getElementById('state');
-  var input = document.getElementById('city');
+  var input = document.getElementById('district');
   select.onchange = function (value) {
     getCityFromState(value.target.value)
     console.log(value.target.value)
@@ -170,8 +170,8 @@ function fetchState() {
 }
 
 function getCityFromState(state) {
-  $("#city").empty()
-  $("#city").append("<option> Select city </option>")
+  $("#district").empty()
+  $("#district").append("<option> Select District </option>")
   $.ajax({
     url: `https://api.countrystatecity.in/v1/countries/IN/states/${state}/cities`, //API URL
     type: "GET",
@@ -181,7 +181,7 @@ function getCityFromState(state) {
     success: function (response, status) {
       console.log(response)
       for (var i = 0; i < response.length; i++) {
-        $("#city").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
+        $("#district").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
       }
     },
     error: function (error, status) {
@@ -235,6 +235,7 @@ function personal_details_submit() {
   var gender = $("#gender").val();
   var state = $("#state").val();
   var district = $("#district").val();
+  
   var city = $("#city_or_village").val();
   if (city === "other") {
     city = $("#city_or_village_2").val();
