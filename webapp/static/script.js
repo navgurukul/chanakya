@@ -142,7 +142,7 @@ function fetchQuestionsAndOptions() {
 function fetchState() {
   $.ajax({
     url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
-    type: "GET", // GET OR POST,
+    type: "GET", 
     headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
     beforeSend: function () {
       // This function calls before ajax API Hits
@@ -168,17 +168,6 @@ function fetchState() {
   }
 
 }
-
-
-// var select = document.getElementById('state');
-// var input = document.getElementById('city');
-// select.onchange = function (value) {
-//   getCityFromState(value.target.value)
-//     console.log(value.target.value)
-//     input.value = select.value;
-//     console.log(select)
-// }
-
 
 function getCityFromState(state) {
   $("#city").empty()
@@ -329,6 +318,7 @@ function personal_details_submit() {
     dob: dob,
     state:state,
     district:district,
+    city:city,
     alt_mobile:mobile2 ? mobile2 : null,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
@@ -346,6 +336,9 @@ function personal_details_submit() {
     $alt_mobile:mobile2,
     $gender: gender,
     $dob: mdob,
+    $state:state,
+    $district:district,
+    $city:city,
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -488,8 +481,6 @@ function submitApp() {
   var obj = {
     pin_code: pin_code,
     qualification: qualification,
-    state: state,
-    city: city,
     current_status: current_status,
     school_medium: school_medium,
     caste: caste,
