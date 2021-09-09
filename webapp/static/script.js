@@ -136,6 +136,26 @@ function fetchQuestionsAndOptions() {
   });
 }
 
+$(document).ready(function () {
+
+  $.ajax({
+    url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
+    type: "GET",
+    headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
+    beforeSend: function () {},
+    success: function (response, status) {
+      console.log(response)
+      for (var i = 0; i < response.length; i++) {
+        $("#state").append("<option value='" + response[i]["id"] + "'>" + response[i]["name"] + "</option>");
+
+      }
+    },
+    error: function (error, status) {
+      console.log(error)
+    },
+  });
+});
+
 function fetchPartnersDistricts() {
   $.get(
     `${base_url}/partners/enrolmentKey/${window.location.href
@@ -182,8 +202,8 @@ function personal_details_submit() {
   if (city === "other") {
     city = $("#city_or_village_2").val();
   }
-  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender)
-  console.log(firstName,middleName,lastName,date,month,year,mobile1,mobile2,gender,state,city,district)
+  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender)
+  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender, state, city, district)
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -261,13 +281,13 @@ function personal_details_submit() {
     whatsapp: mobile1,
     gender: gender,
     dob: dob,
-    state:state,
-    district:district,
+    state: state,
+    district: district,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
-    
 
-  
+
+
   };
 
   console.log(obj, "obj")
@@ -305,6 +325,8 @@ function personal_details_submit() {
     // } catch (e) {}
   });
 }
+
+
 
 function submitApp() {
   appending("");
