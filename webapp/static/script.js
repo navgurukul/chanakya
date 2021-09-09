@@ -319,7 +319,7 @@ function personal_details_submit() {
     state:state,
     district:district,
     city:city,
-    alt_mobile:mobile2 ? mobile2 : null,
+    alt_mobile:mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
 
