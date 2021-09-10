@@ -144,7 +144,6 @@ function fetchState() {
     type: "GET",
     headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
     beforeSend: function () {
-      // This function calls before ajax API Hits
     },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
