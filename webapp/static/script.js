@@ -152,16 +152,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-          response[i]["id"] +
-          "' value='" +
-          response[i]["iso2"] +
-          "'>" +
-          response[i]["name"] +
-          "</option>"
+            response[i]["id"] +
+            "' value='" +
+            response[i]["iso2"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
         );
       }
     },
-    error: function (error, status) { },
+    error: function (error, status) {},
   });
 
   var select = document.getElementById("state");
@@ -183,19 +183,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () { },
+    beforeSend: function () {},
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-          response[i]["name"] +
-          "'>" +
-          response[i]["name"] +
-          "</option>"
+            response[i]["name"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
         );
       }
     },
-    error: function (error, status) { },
+    error: function (error, status) {},
   });
 }
 
@@ -351,7 +351,6 @@ function personal_details_submit() {
     state: state,
     district: district,
     city: city,
-    pin_code = pin_code,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
@@ -659,15 +658,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-    (index + 1) +
-    "</b> (out of <b>" +
-    questions.length +
-    "</b> questions)"
+      (index + 1) +
+      "</b> (out of <b>" +
+      questions.length +
+      "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-    kitne_kar_liye(answers) +
-    "</b> questions already attempt kar liye hai!"
+      kitne_kar_liye(answers) +
+      "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
