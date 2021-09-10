@@ -138,7 +138,6 @@ function fetchQuestionsAndOptions() {
   });
 }
 
-
 function fetchState() {
   $.ajax({
     url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
@@ -232,6 +231,7 @@ function personal_details_submit() {
   var state = $("#state").val();
   var district = $("#district").val();
   var city = $("#city_or_village").val();
+  var pin_code = $("#pin_code").val();
   if (city === "other") {
     city = $("#city_or_village_2").val();
   }
@@ -291,9 +291,6 @@ function personal_details_submit() {
   } else if (year == "") {
     appending("<h4> Kripaya Apne Janam Ka Saal Chuniye! </h4>");
     return false;
-  } else if ((2021 - year) > 28) {
-    appending("<h4>28 saal se oopar ke students test nahin de sakate </h4>");
-    return false;
   } else if (gender == "NONE") {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
@@ -316,6 +313,11 @@ function personal_details_submit() {
     return false;
   }
 
+  if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
+    appending("Sahi Pin Code enter kijiye!");
+    return false;
+  }
+
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
   var name = `${firstName} ${middleName} ${lastName}`;
@@ -328,6 +330,7 @@ function personal_details_submit() {
     state: state,
     district: district,
     city: city,
+    pin_code:pin_code,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
@@ -348,6 +351,7 @@ function personal_details_submit() {
     $state: state,
     $district: district,
     $city: city,
+    $pin_code:pin_code
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -381,7 +385,7 @@ function personal_details_submit() {
 function submitApp() {
   appending("");
 
-  var pin_code = $("#pin_code").val();
+  // var pin_code = $("#pin_code").val();
   var qualification = $("#qualification").val();
   // var state = $("#state").val();
   // var city = $("#city_or_village").val();
@@ -409,10 +413,10 @@ function submitApp() {
     religion = "hindu";
   }
 
-  if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
-    appending("Sahi Pin Code enter kijiye!");
-    return false;
-  }
+  // if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
+  //   appending("Sahi Pin Code enter kijiye!");
+  //   return false;
+  // }
 
   // if (!state || state == "NONE") {
   //   appending("Apna State Select karo!");
@@ -488,7 +492,6 @@ function submitApp() {
   }
 
   var obj = {
-    pin_code: pin_code,
     qualification: qualification,
     current_status: current_status,
     school_medium: school_medium,
@@ -640,15 +643,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-    (index + 1) +
-    "</b> (out of <b>" +
-    questions.length +
-    "</b> questions)"
+      (index + 1) +
+      "</b> (out of <b>" +
+      questions.length +
+      "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-    kitne_kar_liye(answers) +
-    "</b> questions already attempt kar liye hai!"
+      kitne_kar_liye(answers) +
+      "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
