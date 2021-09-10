@@ -241,6 +241,7 @@ function personal_details_submit() {
   var gender = $("#gender").val();
   var state = $("#state").val();
   var district = $("#district").val();
+  var pin_code = $("#pin_code").val();
   var city = $("#city_or_village_2").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
@@ -332,6 +333,12 @@ function personal_details_submit() {
     return false;
   }
 
+  if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
+    appending("Sahi Pin Code enter kijiye!");
+    return false;
+  }
+
+
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
   var name = `${firstName} ${middleName} ${lastName}`;
@@ -361,6 +368,7 @@ function personal_details_submit() {
     $state: state,
     $district: district,
     $city: city,
+    $pin_code: pin_code,
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -392,13 +400,13 @@ function personal_details_submit() {
 function submitApp() {
   appending("");
 
-  var pin_code = $("#pin_code").val();
-  var qualification = $("#qualification").val();
+  // var pin_code = $("#pin_code").val();
   // var state = $("#state").val();
   // var city = $("#city_or_village").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
+  var qualification = $("#qualification").val();
   var current_status = $("#current_status").val();
   var school_medium = $("#school_medium").val();
   var caste = $("#caste").val();
@@ -420,10 +428,10 @@ function submitApp() {
     religion = "hindu";
   }
 
-  if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
-    appending("Sahi Pin Code enter kijiye!");
-    return false;
-  }
+  // if (!pin_code || pin_code.length < 6 || pin_code.length > 6) {
+  //   appending("Sahi Pin Code enter kijiye!");
+  //   return false;
+  // }
 
   // if (!state || state == "NONE") {
   //   appending("Apna State Select karo!");
@@ -499,7 +507,6 @@ function submitApp() {
   }
 
   var obj = {
-    pin_code: pin_code,
     qualification: qualification,
     current_status: current_status,
     school_medium: school_medium,
