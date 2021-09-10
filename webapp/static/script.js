@@ -301,6 +301,20 @@ function personal_details_submit() {
     appending("<h4> Ladko ke liya abhi admissions open nahin hai </h4>");
     return false;
   }
+   if (!state || state == "NONE") {
+    appending("Apna State Select karo!");
+    return false;
+  }
+
+  if (!district) {
+    appending("Apni District ya Village ka naam enter karo!");
+    return false;
+  }
+
+  if (/^[a-zA-Z]$/i.test(city)) {
+    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+    return false;
+  }
 
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
@@ -400,20 +414,20 @@ function submitApp() {
     return false;
   }
 
-  if (!state || state == "NONE") {
-    appending("Apna State Select karo!");
-    return false;
-  }
+  // if (!state || state == "NONE") {
+  //   appending("Apna State Select karo!");
+  //   return false;
+  // }
 
-  if (!city) {
-    appending("Apni City ya Village ka naam enter karo!");
-    return false;
-  }
+  // if (!city) {
+  //   appending("Apni City ya Village ka naam enter karo!");
+  //   return false;
+  // }
 
-  if (/^[a-zA-Z]$/i.test(city)) {
-    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
-    return false;
-  }
+  // if (/^[a-zA-Z]$/i.test(city)) {
+  //   appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+  //   return false;
+  // }
 
   if (!current_status || current_status == "NONE") {
     appending("Apne current status ko select karo!");
