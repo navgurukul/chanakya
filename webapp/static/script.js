@@ -357,7 +357,6 @@ function personal_details_submit() {
     gps_long: positions ? positions.longitude : -1,
   };
 
-  console.log(obj, "obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
