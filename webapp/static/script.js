@@ -71,12 +71,10 @@ function landing_page_submit() {
 }
 
 function no_cheating_promise_submit() {
-
   mixpanel.track("No Cheating Promise");
   $("#no_cheating_promise").slideUp(slide_up_time);
   $("#personal_details").slideDown(slide_down_time);
   setupDatePicker();
-
 }
 function setupDatePicker() {
   var monthdict = {
@@ -138,56 +136,68 @@ function fetchQuestionsAndOptions() {
   });
 }
 
-
 function fetchState() {
   $.ajax({
     url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
     type: "GET",
-    headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
+    headers: {
+      accept: "application/json",
+      "X-CSCAPI-KEY":
+        "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
+    },
     beforeSend: function () {
       // This function calls before ajax API Hits
     },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
-        $("#state").append("<option id='" + response[i]["id"] + "' value='" + response[i]["iso2"] + "'>" + response[i]["name"] + "</option>");
+        $("#state").append(
+          "<option id='" +
+            response[i]["id"] +
+            "' value='" +
+            response[i]["iso2"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
+        );
       }
     },
-    error: function (error, status) {
-
-    },
+    error: function (error, status) {},
   });
 
-  var select = document.getElementById('state');
-  var input = document.getElementById('district');
+  var select = document.getElementById("state");
+  var input = document.getElementById("district");
   select.onchange = function (value) {
-    getCityFromState(value.target.value)
+    getCityFromState(value.target.value);
     input.value = select.value;
-  }
-
+  };
 }
 
 function getCityFromState(state) {
-  $("#district").empty()
-  $("#district").append("<option> Select District </option>")
+  $("#district").empty();
+  $("#district").append("<option> Select District </option>");
   $.ajax({
     url: `https://api.countrystatecity.in/v1/countries/IN/states/${state}/cities`, //API URL
     type: "GET",
-    headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
-    beforeSend: function () {
+    headers: {
+      accept: "application/json",
+      "X-CSCAPI-KEY":
+        "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
+    beforeSend: function () {},
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
-        $("#district").append("<option value='" + response[i]["name"] + "'>" + response[i]["name"] + "</option>");
+        $("#district").append(
+          "<option value='" +
+            response[i]["name"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
+        );
       }
     },
-    error: function (error, status) {
-
-
-    },
+    error: function (error, status) {},
   });
-
 }
-
 
 function fetchPartnersDistricts() {
   $.get(
@@ -227,15 +237,15 @@ function personal_details_submit() {
   var month = $("#month").val();
   var year = $("#year").val();
   var mobile1 = $("#mobile1").val();
-  var mobile2 = $("#mobile2").val()
+  var mobile2 = $("#mobile2").val();
   var gender = $("#gender").val();
   var state = $("#state").val();
   var district = $("#district").val();
-  var city = $("#city_or_village").val();
-  if (city === "other") {
-    city = $("#city_or_village_2").val();
-  }
- 
+  var city = $("#city_or_village_2").val();
+  // if (city === "other") {
+  //   city = $("#city_or_village_2").val();
+  // }
+
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -264,21 +274,30 @@ function personal_details_submit() {
     appending("<h4> Kripaya apna firstName batayie! </h4>");
     return false;
   } else if (firstName.length < 4) {
-    appending("<h4> Aapka firstName at least 4 characters se lamba hona chahiye!</h4>");
+    appending(
+      "<h4> Aapka firstName at least 4 characters se lamba hona chahiye!</h4>"
+    );
     return false;
   }
   if (/^[a-zA-Z]$/i.test(firstName)) {
-    appending('<h4> firstName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
+    appending(
+      '<h4> firstName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>'
+    );
     return false;
   }
   if (!lastName) {
     appending("<h4> Kripaya apna lastName batayie! </h4>");
     return false;
   } else if (lastName.length < 4) {
-    appending("<h4> Aapka lastName at least 4 characters se lamba hona chahiye!</h4>");
+    appending(
+      "<h4> Aapka lastName at least 4 characters se lamba hona chahiye!</h4>"
+    );
     return false;
-  } if (/^[a-zA-Z]$/i.test(lastName)) {
-    appending('<h4> lastName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>');
+  }
+  if (/^[a-zA-Z]$/i.test(lastName)) {
+    appending(
+      '<h4> lastName wale section me (1,.,!,#,@,") ka istamal na kare! </h4>'
+    );
     return false;
   }
   // to check that date field isn't empty
@@ -291,7 +310,7 @@ function personal_details_submit() {
   } else if (year == "") {
     appending("<h4> Kripaya Apne Janam Ka Saal Chuniye! </h4>");
     return false;
-  } else if ((2021 - year) > 28) {
+  } else if (2021 - year > 28) {
     appending("<h4>28 saal se oopar ke students test nahin de sakate </h4>");
     return false;
   } else if (gender == "NONE") {
@@ -301,7 +320,7 @@ function personal_details_submit() {
     appending("<h4> Ladko ke liya abhi admissions open nahin hai </h4>");
     return false;
   }
-   if (!state || state == "NONE") {
+  if (!state || state == "NONE") {
     appending("Apna State Select karo!");
     return false;
   }
@@ -331,9 +350,6 @@ function personal_details_submit() {
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
-
-
-
   };
 
   // console.log(obj, "obj")
@@ -375,8 +391,6 @@ function personal_details_submit() {
     // } catch (e) {}
   });
 }
-
-
 
 function submitApp() {
   appending("");
@@ -640,15 +654,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-    (index + 1) +
-    "</b> (out of <b>" +
-    questions.length +
-    "</b> questions)"
+      (index + 1) +
+      "</b> (out of <b>" +
+      questions.length +
+      "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-    kitne_kar_liye(answers) +
-    "</b> questions already attempt kar liye hai!"
+      kitne_kar_liye(answers) +
+      "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
@@ -728,7 +742,6 @@ function show_thanksPage() {
   $("#thank_you_page").show();
 }
 function show_TestResult() {
-
   $.get(
     base_url + "/on_assessment/Show_testResult/" + enrolment_key,
     {},
@@ -794,7 +807,7 @@ function submitTest() {
 }
 
 $(document).ready(function () {
-  fetchState()
+  fetchState();
   if (!DEBUG) {
     // landing_page_submit();
     // personal_details_submit();
