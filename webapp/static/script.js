@@ -261,9 +261,6 @@ function personal_details_submit() {
   } else if (year == "") {
     appending("<h4> Kripaya Apne Janam Ka Saal Chuniye! </h4>");
     return false;
-  } else if ((2021 - year) > 28) {
-    appending("<h4>28 saal se oopar ke students test nahin de sakate </h4>");
-    return false;
   } else if (gender == "NONE") {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
