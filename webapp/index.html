@@ -310,13 +310,24 @@
               <span class='errors text text-center text-danger ml-3'></span>
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
-                <input type="text" id='name' name="name" placeholder="Your Name" required
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+                <div class="row">
+                  <input type="text" id='firstName' name='firstName' placeholder="First Name" required
+                    class="col-4 col-md-3 mr-2 border border-warning rounded section-1" />
+                  <input type="text" id='middleName' name='middleName' placeholder="Middle Name"
+                    class="col-4 col-md-3 mr-2 border border-warning rounded section-1" />
+                  <input type="text" id='lastName' name='lastName' placeholder="Last Name" required
+                    class="col-4 col-md-3 border border-warning rounded section-1" />
+                </div>
               </div>
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Mobile Number</div>
-                <input type="number" id='mobile' name="mobile" placeholder="Aapka Whatsapp Number"
-                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Whatsapp Number</div>
+                  <input type="number" id='mobile1' name="mobile1" placeholder="Aapka Whatsapp Number"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
+              </div>
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Koi Aur Number</div>
+                  <input type="number" id='mobile2' name="mobile2" placeholder="Koi aur number"
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
               </div>
               <div class="clearfix container">
                 <div class="row col-xs-12 col-sm-6 col-md-6 mt-3">Date of Birth</div>
@@ -346,6 +357,41 @@
                   <option value="trans">Trans</option>
                 </select>
               </div>
+
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
+                <select id="state" name="state"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                  <option value="NONE">Select State</option>
+                
+                </select>
+              </div>
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis District me rehte hai</div>
+                <select id="district" name="district"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                  <option value="NONE">Select District</option>
+                </select>
+              </div>
+              <!-- <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">District</div>
+                <input type="text" name="district"  id="district" placeholder="District"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              </div> -->
+
+              <!-- <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam</div>
+                <select name="city_or_village" id="city_or_village"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                </select>
+              </div> -->
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
+                <input type="text" name="city_or_village_2" id="city_or_village_2"
+                  placeholder="Agar aapke city / village ka naam upar list me na ho"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              </div>
+
               <div class="clearfix" style='margin-top:2rem;margin-bottom:4rem;'>
                 <button class="btn btn-lg btn-danger col-xs-12
                       col-sm-12 col-md-6 offset-md-3" id="button" onclick="personal_details_submit();" type="button">
@@ -457,70 +503,18 @@
                   <input type="number" name="pin_code" id="pin_code" placeholder="pin_code"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
                 </div>
+             
                 <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Tehsil</div>
-                          <input type="text" name="tehsil" placeholder="Tehsil"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
-                      </div> -->
-                <!-- <div class="clearfix">
-                          <div class="col-xs-12 col-sm-6 col-md-6 mt-3">District</div>
-                          <input type="text" name="district" placeholder="District"
-                              class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1"/>
-                      </div> -->
-                <div class="clearfix">
-                  <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
-                  <select id="state" name="state"
-                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
-                    <option value="NONE">Select State</option>
-                    <option value='AN'>Andaman and Nicobar Islands</option>
-                    <option value='AP'>Andhra Pradesh</option>
-                    <option value='AR'>Arunachal Pradesh</option>
-                    <option value='AS'>Assam</option>
-                    <option value='BR'>Bihar</option>
-                    <option value='CH'>Chandigarh</option>
-                    <option value='CT'>Chhattisgarh</option>
-                    <option value='DH'>Dadra and Nagar Haveli</option>
-                    <option value='DD'>Daman and Diu</option>
-                    <option value='DL'>Delhi</option>
-                    <option value='GA'>Goa</option>
-                    <option value='GJ'>Gujarat</option>
-                    <option value='HR'>Haryana</option>
-                    <option value='HP'>Himachal Pradesh</option>
-                    <option value='JK'>Jammu and Kashmir</option>
-                    <option value='JH'>Jharkhand</option>
-                    <option value='KA'>Karnataka</option>
-                    <option value='KL'>Kerala</option>
-                    <option value='LD'>Lakshadweep</option>
-                    <option value='MP'>Madhya Pradesh</option>
-                    <option value='MH'>Maharashtra</option>
-                    <option value='MN'>Manipur</option>
-                    <option value='ML'>Meghalaya</option>
-                    <option value='MZ'>Mizoram</option>
-                    <option value='NL'>Nagaland</option>
-                    <option value='OR'>Odisha</option>
-                    <option value='PY'>Puducherry</option>
-                    <option value='PB'>Punjab</option>
-                    <option value='RJ'>Rajasthan</option>
-                    <option value='SK'>Sikkim</option>
-                    <option value='TN'>Tamil Nadu</option>
-                    <option value='TG'>Telangana</option>
-                    <option value='TR'>Tripura</option>
-                    <option value='UP'>Uttar Pradesh</option>
-                    <option value='UK'>Uttarakhand</option>
-                    <option value='WB'>West Bengal</option>
-                  </select>
-                </div>
-                <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam</div>
                   <select name="city_or_village" id="city_or_village"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                   </select>
-                </div>
-                <div class="clearfix">
+                </div> -->
+                <!-- <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
                   <input type="text" name="city_or_village_2" id="city_or_village_2" placeholder="Agar aapke city / village ka naam upar list me na ho"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
-                </div>
+                </div> -->
                 <div class="clearfix">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Current Status</div>
                   <select name="current_status" id="current_status"
@@ -545,8 +539,9 @@
                 </div>
                 <div class="clearfix min-10 hide pass10">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 10th</div>
-                  <input type="number" name="class_10_percentage" id="percentage_in10th" placeholder="Percentage in 10th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_10_percentage" id="percentage_in10th"
+                    placeholder="Percentage in 10th" min='0' step='any'
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-10 hide pass10">
@@ -557,8 +552,9 @@
 
                 <div class="clearfix min-12 hide pass12">
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Percentage in 12th</div>
-                  <input type="number" name="class_12_percentage" id="percentage_in12th" placeholder="Percentage in 12th"
-                    min='0' step='any' class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
+                  <input type="number" name="class_12_percentage" id="percentage_in12th"
+                    placeholder="Percentage in 12th" min='0' step='any'
+                    class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded" />
                 </div>
 
                 <div class="clearfix min-12 hide pass12">
