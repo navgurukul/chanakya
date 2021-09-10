@@ -242,7 +242,7 @@ function personal_details_submit() {
   var state = $("#state").val();
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
-  var city = $("#city_or_village_2").val();
+  var city = $("#city").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
