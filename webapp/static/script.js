@@ -350,7 +350,7 @@ function personal_details_submit() {
     dob: dob,
     state: state,
     district: district,
-    city: city,
+    city: city ? city : undefined,
     pin_code: pin_code,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
