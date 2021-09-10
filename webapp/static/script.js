@@ -138,23 +138,22 @@ function fetchQuestionsAndOptions() {
   });
 }
 
-// ######################################################################################
+
 function fetchState() {
   $.ajax({
     url: "https://api.countrystatecity.in/v1/countries/IN/states", //API URL
-    type: "GET", 
+    type: "GET",
     headers: { 'accept': 'application/json', 'X-CSCAPI-KEY': 'TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==' },
     beforeSend: function () {
       // This function calls before ajax API Hits
     },
     success: function (response, status) {
-      console.log(response)
       for (var i = 0; i < response.length; i++) {
         $("#state").append("<option id='" + response[i]["id"] + "' value='" + response[i]["iso2"] + "'>" + response[i]["name"] + "</option>");
       }
     },
     error: function (error, status) {
-      console.log(error)
+
     },
   });
 
@@ -162,9 +161,7 @@ function fetchState() {
   var input = document.getElementById('district');
   select.onchange = function (value) {
     getCityFromState(value.target.value)
-    console.log(value.target.value)
     input.value = select.value;
-    console.log(select)
   }
 
 }
@@ -179,19 +176,18 @@ function getCityFromState(state) {
     beforeSend: function () {
     },
     success: function (response, status) {
-      console.log(response)
       for (var i = 0; i < response.length; i++) {
         $("#district").append("<option value='" + response[i]["name"] + "'>" + response[i]["name"] + "</option>");
       }
     },
     error: function (error, status) {
-      console.log(error)
+
 
     },
   });
 
 }
-// ##########################################################################################
+
 
 function fetchPartnersDistricts() {
   $.get(
@@ -239,8 +235,7 @@ function personal_details_submit() {
   if (city === "other") {
     city = $("#city_or_village_2").val();
   }
-  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender)
-  console.log(firstName, middleName, lastName, date, month, year, mobile1, mobile2, gender, state, city, district)
+ 
   // if (DEBUG) {
   //     name = "abhishek";
   //     date = "28";
@@ -306,6 +301,20 @@ function personal_details_submit() {
     appending("<h4> Ladko ke liya abhi admissions open nahin hai </h4>");
     return false;
   }
+   if (!state || state == "NONE") {
+    appending("Apna State Select karo!");
+    return false;
+  }
+
+  if (!district) {
+    appending("Apni District ya Village ka naam enter karo!");
+    return false;
+  }
+
+  if (/^[a-zA-Z]$/i.test(city)) {
+    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+    return false;
+  }
 
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
@@ -316,10 +325,10 @@ function personal_details_submit() {
     whatsapp: mobile1,
     gender: gender,
     dob: dob,
-    state:state,
-    district:district,
-    city:city,
-    alt_mobile:mobile2 ? mobile2 : undefined,
+    state: state,
+    district: district,
+    city: city,
+    alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
 
@@ -327,18 +336,18 @@ function personal_details_submit() {
 
   };
 
-  console.log(obj, "obj")
+  // console.log(obj, "obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
     $name: name,
     $phone: mobile1,
-    $alt_mobile:mobile2,
+    $alt_mobile: mobile2,
     $gender: gender,
     $dob: mdob,
-    $state:state,
-    $district:district,
-    $city:city,
+    $state: state,
+    $district: district,
+    $city: city,
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -405,20 +414,20 @@ function submitApp() {
     return false;
   }
 
-  if (!state || state == "NONE") {
-    appending("Apna State Select karo!");
-    return false;
-  }
+  // if (!state || state == "NONE") {
+  //   appending("Apna State Select karo!");
+  //   return false;
+  // }
 
-  if (!city) {
-    appending("Apni City ya Village ka naam enter karo!");
-    return false;
-  }
+  // if (!city) {
+  //   appending("Apni City ya Village ka naam enter karo!");
+  //   return false;
+  // }
 
-  if (/^[a-zA-Z]$/i.test(city)) {
-    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
-    return false;
-  }
+  // if (/^[a-zA-Z]$/i.test(city)) {
+  //   appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+  //   return false;
+  // }
 
   if (!current_status || current_status == "NONE") {
     appending("Apne current status ko select karo!");
