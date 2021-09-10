@@ -351,12 +351,13 @@ function personal_details_submit() {
     state: state,
     district: district,
     city: city,
+    pin_code: pin_code,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
 
-  // console.log(obj, "obj")
+  console.log(obj, "obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
