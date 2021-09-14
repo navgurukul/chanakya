@@ -208,7 +208,7 @@ function fetchPartnersDistricts() {
     {},
     (data) => {
       let updateField =
-        '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">';
+        '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">'+'<option value="">Select City</option>';
       if (data && data.data.districts !== null) {
         data.data.districts.map(
           (district) =>
@@ -354,7 +354,6 @@ function personal_details_submit() {
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
-  console.log(obj, "obj");
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
