@@ -173,6 +173,7 @@ function fetchState() {
 }
 
 function getCityFromState(state) {
+  fetchPartnersDistricts();
   $("#district").empty();
   $("#district").append("<option> Select District </option>");
   $.ajax({
@@ -790,7 +791,6 @@ function submitTest() {
     }
   }
   updateAnswer(current_question);
-  fetchPartnersDistricts();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
