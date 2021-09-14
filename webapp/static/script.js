@@ -217,10 +217,6 @@ function fetchPartnersDistricts() {
           select.appendChild(opt);
         });
       }
-      var otherOpt = document.createElement("option");
-      otherOpt.value = "other";
-      otherOpt.textContent = "Other";
-      select.appendChild(otherOpt);
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
