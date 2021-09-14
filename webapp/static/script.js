@@ -206,7 +206,7 @@ function fetchPartnersDistricts() {
       .pop()}`,
     {},
     (data) => {
-      var select = document.getElementById("city_or_village");
+      var select = document.getElementById("city");
       if (data && data.data.districts !== null) {
         data.data.districts.map((district) => {
           var opt = document.createElement("option");
