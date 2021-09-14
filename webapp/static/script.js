@@ -209,6 +209,7 @@ function fetchPartnersDistricts() {
       var select = document.getElementById("city");
       if (data && data.data.districts !== null) {
         data.data.districts.map((district) => {
+          console.log(district,"district")
           var opt = document.createElement("option");
           opt.value = district;
           opt.textContent = district;
@@ -221,7 +222,7 @@ function fetchPartnersDistricts() {
       select.appendChild(otherOpt);
     }
   ).fail(function (response) {
-    var select = document.getElementById("city_or_village");
+    var select = document.getElementById("city");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
@@ -356,7 +357,7 @@ function personal_details_submit() {
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
-
+console.log(obj,"obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
