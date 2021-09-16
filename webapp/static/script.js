@@ -173,7 +173,6 @@ function fetchState() {
 }
 
 function getCityFromState(state) {
-  fetchPartnersDistricts();
   $("#district").empty();
   $("#district").append("<option> Select District </option>");
   $.ajax({
@@ -216,8 +215,9 @@ function fetchPartnersDistricts() {
             updateField + `<option value=${district}>${district}</option>`)
         );
         updateField = updateField + "</select>";
+        $("#city").replaceWith(updateField);
       }
-      $("#city").replaceWith(updateField);
+     
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -808,6 +808,7 @@ function submitTest() {
 
 $(document).ready(function () {
   fetchState();
+  fetchPartnersDistricts();
   if (!DEBUG) {
     // landing_page_submit();
     // personal_details_submit();
