@@ -216,8 +216,9 @@ function fetchPartnersDistricts() {
             updateField + `<option value=${district}>${district}</option>`)
         );
         updateField = updateField + "</select>";
+        $("#city").replaceWith(updateField);
       }
-      $("#city").replaceWith(updateField);
+     
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
