@@ -152,16 +152,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-            response[i]["id"] +
-            "' value='" +
-            response[i]["iso2"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["id"] +
+          "' value='" +
+          response[i]["iso2"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 
   var select = document.getElementById("state");
@@ -173,6 +173,7 @@ function fetchState() {
 }
 
 function getCityFromState(state) {
+  fetchPartnersDistricts();
   $("#district").empty();
   $("#district").append("<option> Select District </option>");
   $.ajax({
@@ -183,19 +184,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () {},
+    beforeSend: function () { },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-            response[i]["name"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["name"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 }
 
@@ -206,22 +207,20 @@ function fetchPartnersDistricts() {
       .pop()}`,
     {},
     (data) => {
-      var select = document.getElementById("city_or_village");
+      let updateField =
+        '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">'+'<option value="">Select City</option>';
       if (data && data.data.districts !== null) {
-        data.data.districts.map((district) => {
-          var opt = document.createElement("option");
-          opt.value = district;
-          opt.textContent = district;
-          select.appendChild(opt);
-        });
+        data.data.districts.map(
+          (district) =>
+          (updateField =
+            updateField + `<option value=${district}>${district}</option>`)
+        );
+        updateField = updateField + "</select>";
       }
-      var otherOpt = document.createElement("option");
-      otherOpt.value = "other";
-      otherOpt.textContent = "Other";
-      select.appendChild(otherOpt);
+      $("#city").replaceWith(updateField);
     }
   ).fail(function (response) {
-    var select = document.getElementById("city_or_village");
+    var select = document.getElementById("city");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
@@ -338,7 +337,6 @@ function personal_details_submit() {
     return false;
   }
 
-
   var dob = year + "-" + month + "-" + date;
   var mdob = year + "-" + month + "-" + date + "T00:00:00";
   var name = `${firstName} ${middleName} ${lastName}`;
@@ -356,7 +354,6 @@ function personal_details_submit() {
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
-
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
@@ -658,15 +655,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
@@ -789,7 +786,6 @@ function submitTest() {
     }
   }
   updateAnswer(current_question);
-  fetchPartnersDistricts();
   $.ajax({
     url: base_url + "/on_assessment/questions/" + enrolment_key + "/answers",
     type: "POST",
