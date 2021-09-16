@@ -173,7 +173,6 @@ function fetchState() {
 }
 
 function getCityFromState(state) {
-  fetchPartnersDistricts();
   $("#district").empty();
   $("#district").append("<option> Select District </option>");
   $.ajax({
@@ -809,6 +808,7 @@ function submitTest() {
 
 $(document).ready(function () {
   fetchState();
+  fetchPartnersDistricts();
   if (!DEBUG) {
     // landing_page_submit();
     // personal_details_submit();
