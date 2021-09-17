@@ -273,9 +273,9 @@ function personal_details_submit() {
   if (!firstName) {
     appending("<h4> Kripaya apna firstName batayie! </h4>");
     return false;
-  } else if (firstName.length < 4) {
+  } else if (firstName.length < 3) {
     appending(
-      "<h4> Aapka firstName at least 4 characters se lamba hona chahiye!</h4>"
+      "<h4> Aapka firstName at least 3 characters se lamba hona chahiye!</h4>"
     );
     return false;
   }
