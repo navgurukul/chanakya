@@ -210,11 +210,21 @@ function fetchPartnersDistricts() {
         '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">' +
         '<option value="">Select City</option>';
       if (data && data.data.districts !== null) {
-        data.data.districts.map(
-          (district) =>
-          (updateField =
-            updateField + "<option value="+district+">"+district+"</option>")
-        );
+        data.data.districts.map((district) => {
+          console.log(district,"district")
+          updateField =
+            updateField +
+            "<option value=" +
+            district +
+            ">" +
+            district +
+            "</option>";
+        });
+        // data.data.districts.map(
+        //   (district) =>
+        //   (updateField =
+        //     updateField + "<option value="+district+">"+district+"</option>")
+        // );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
@@ -242,7 +252,7 @@ function personal_details_submit() {
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
-  console.log(city,"city1")
+  console.log(city, "city1");
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -329,7 +339,7 @@ function personal_details_submit() {
   }
 
   if (/^[a-zA-Z]$/i.test(city)) {
-    console.log(city,"city2")
+    console.log(city, "city2");
     appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
     return false;
   }
@@ -374,7 +384,7 @@ function personal_details_submit() {
   //     scope.setUser({ username: mobile });
   //   });
   // } catch (e) {}
-console.log(city,"city3")
+  console.log(city, "city3");
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
     obj,
