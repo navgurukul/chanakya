@@ -152,16 +152,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-          response[i]["id"] +
-          "' value='" +
-          response[i]["iso2"] +
-          "'>" +
-          response[i]["name"] +
-          "</option>"
+            response[i]["id"] +
+            "' value='" +
+            response[i]["iso2"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
         );
       }
     },
-    error: function (error, status) { },
+    error: function (error, status) {},
   });
 
   var select = document.getElementById("state");
@@ -183,19 +183,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () { },
+    beforeSend: function () {},
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-          response[i]["name"] +
-          "'>" +
-          response[i]["name"] +
-          "</option>"
+            response[i]["name"] +
+            "'>" +
+            response[i]["name"] +
+            "</option>"
         );
       }
     },
-    error: function (error, status) { },
+    error: function (error, status) {},
   });
 }
 
@@ -207,7 +207,8 @@ function fetchPartnersDistricts() {
     {},
     (data) => {
       let updateField =
-        '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">'+'<option value="">Select City</option>';
+        '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">' +
+        '<option value="">Select City</option>';
       if (data && data.data.districts !== null) {
         data.data.districts.map(
           (district) =>
@@ -217,7 +218,6 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
-     
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -274,9 +274,9 @@ function personal_details_submit() {
   if (!firstName) {
     appending("<h4> Kripaya apna firstName batayie! </h4>");
     return false;
-  } else if (firstName.length < 4) {
+  } else if (firstName.length < 3) {
     appending(
-      "<h4> Aapka firstName at least 4 characters se lamba hona chahiye!</h4>"
+      "<h4> Aapka firstName at least 3 characters se lamba hona chahiye!</h4>"
     );
     return false;
   }
@@ -289,9 +289,9 @@ function personal_details_submit() {
   if (!lastName) {
     appending("<h4> Kripaya apna lastName batayie! </h4>");
     return false;
-  } else if (lastName.length < 4) {
+  } else if (lastName.length < 3) {
     appending(
-      "<h4> Aapka lastName at least 4 characters se lamba hona chahiye!</h4>"
+      "<h4> Aapka lastName at least 3 characters se lamba hona chahiye!</h4>"
     );
     return false;
   }
@@ -657,15 +657,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-    (index + 1) +
-    "</b> (out of <b>" +
-    questions.length +
-    "</b> questions)"
+      (index + 1) +
+      "</b> (out of <b>" +
+      questions.length +
+      "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-    kitne_kar_liye(answers) +
-    "</b> questions already attempt kar liye hai!"
+      kitne_kar_liye(answers) +
+      "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
