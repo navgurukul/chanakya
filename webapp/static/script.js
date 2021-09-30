@@ -213,11 +213,10 @@ function fetchPartnersDistricts() {
         data.data.districts.map(
           (district) =>
           (updateField =
-            updateField  +
+            updateField + updateField +
             "<option value='"+ district + "'>" + district + "</option>")
         );
         updateField = updateField + "</select>";
-        console.log(updateField,"updateField")
         $("#city").replaceWith(updateField);
       }
     }
