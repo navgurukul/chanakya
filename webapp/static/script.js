@@ -329,9 +329,15 @@ function personal_details_submit() {
     return false;
   }
 
+<<<<<<< HEAD
   if (/^([a-zA-Z0-9]|\s)+$/i.test(city)) {
     console.log(city, "city2");
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
+=======
+  if (/^[a-zA-Z]$/i.test(city)) {
+    console.log(city, "city2");
+    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+>>>>>>> 37a1abec108b5cfd39178d831f7dbe724ff7df63
     return false;
   }
 
