@@ -210,21 +210,12 @@ function fetchPartnersDistricts() {
         '<select name="city" id="city" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">' +
         '<option value="">Select City</option>';
       if (data && data.data.districts !== null) {
-        data.data.districts.map((district) => {
-          console.log(district,"district")
-          updateField =
-            updateField +
-            "<option value=" +
-            district +
-            ">" +
-            district +
-            "</option>";
-        });
-        // data.data.districts.map(
-        //   (district) =>
-        //   (updateField =
-        //     updateField + "<option value="+district+">"+district+"</option>")
-        // );
+        data.data.districts.map(
+          (district) =>
+          (updateField =
+            updateField + updateField +
+            "<option value='"+ district + "'>" + district + "</option>")
+        );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
@@ -338,9 +329,9 @@ function personal_details_submit() {
     return false;
   }
 
-  if (/^[a-zA-Z]$/i.test(city)) {
+  if (/^([a-zA-Z0-9]|\s)+$/i.test(city)) {
     console.log(city, "city2");
-    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+    appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
 
