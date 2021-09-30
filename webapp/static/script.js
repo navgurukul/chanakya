@@ -244,7 +244,6 @@ function personal_details_submit() {
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
-  console.log(city, "city1");
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -330,8 +329,7 @@ function personal_details_submit() {
     return false;
   }
 
-  if (/^([a-zA-Z0-9]|\s)+$/i.test(city)) {
-    console.log(city, "city2");
+  if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
@@ -376,7 +374,6 @@ function personal_details_submit() {
   //     scope.setUser({ username: mobile });
   //   });
   // } catch (e) {}
-  console.log(city, "city3");
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
     obj,
