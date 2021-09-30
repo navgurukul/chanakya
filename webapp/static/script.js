@@ -212,7 +212,7 @@ function fetchPartnersDistricts() {
         data.data.districts.map(
           (district) =>
           (updateField =
-            updateField + `<option value=${district}>${district}</option>`)
+            updateField + "<option value="+district+">"+district+"</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
