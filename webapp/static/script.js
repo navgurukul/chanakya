@@ -212,8 +212,9 @@ function fetchPartnersDistricts() {
       if (data && data.data.districts !== null) {
         data.data.districts.map(
           (district) =>
-            (updateField =
-              updateField + `<option value=${district}>${district}</option>`)
+          (updateField =
+            updateField  +
+            "<option value='"+ district + "'>" + district + "</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
@@ -327,8 +328,8 @@ function personal_details_submit() {
     return false;
   }
 
-  if (/^[a-zA-Z]$/i.test(city)) {
-    appending('City ya Village ke naam mein (1,.,!,#,@,") ka use na kare!');
+  if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
+    appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
 
@@ -372,7 +373,6 @@ function personal_details_submit() {
   //     scope.setUser({ username: mobile });
   //   });
   // } catch (e) {}
-
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
     obj,
