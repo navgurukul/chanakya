@@ -327,7 +327,10 @@ function personal_details_submit() {
     appending("Apni District ya Village ka naam enter karo!");
     return false;
   }
-
+  if(!city){
+    appending('Kripaya city  dijye!');
+    return false;
+  }
   if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
