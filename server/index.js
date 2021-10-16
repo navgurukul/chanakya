@@ -93,7 +93,7 @@ exports.deployment = async (start) => {
   return server;
 };
 
-if (!module.main) {
+if (!module.parent) {
   try {
     if (process.env.NODE_ENV) {
       exports.deployment(true);
