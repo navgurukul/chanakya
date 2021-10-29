@@ -243,6 +243,7 @@ function personal_details_submit() {
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
+  var email = $("#email").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -354,10 +355,12 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
+    email:email,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
+  console.log(obj,"obj")
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
@@ -370,6 +373,7 @@ function personal_details_submit() {
     $district: district,
     $city: city,
     $pin_code: pin_code,
+    $email:email,
   });
   // try {
   //   Sentry.configureScope((scope) => {
