@@ -244,6 +244,7 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
+
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
