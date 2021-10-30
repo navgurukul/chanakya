@@ -212,9 +212,13 @@ function fetchPartnersDistricts() {
       if (data && data.data.districts !== null) {
         data.data.districts.map(
           (district) =>
-          (updateField =
-            updateField  +
-            "<option value='"+ district + "'>" + district + "</option>")
+            (updateField =
+              updateField +
+              "<option value='" +
+              district +
+              "'>" +
+              district +
+              "</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
@@ -244,7 +248,6 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
-
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -325,15 +328,21 @@ function personal_details_submit() {
     return false;
   }
 
+  const isValidEmail =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email && isValidEmail.test(email) === false) {
+    appending("Email sahi nahi hai");
+    return false;
+  }
   if (!district) {
     appending("Apni District ya Village ka naam enter karo!");
     return false;
   }
-  if(!city){
-    appending('Kripaya city  dijye!');
+  if (!city) {
+    appending("Kripaya city  dijye!");
     return false;
   }
-  if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
+  if (/^([a-zA-Z0-9]|\s)+$/i.test(city) === false) {
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
@@ -356,12 +365,12 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
-    email:email,
+    email: email ? email : null,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
-  console.log(obj,"obj")
+  console.log(obj, "obj");
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
@@ -374,7 +383,7 @@ function personal_details_submit() {
     $district: district,
     $city: city,
     $pin_code: pin_code,
-    $email:email,
+    $email: email,
   });
   // try {
   //   Sentry.configureScope((scope) => {
