@@ -1,3 +1,4 @@
+const { partner_refer } = require("../../lib/config/index");
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
@@ -223,6 +224,22 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
+      if (data && data.data.id === 435) {
+        const valuesPartnerRefer = Object.values(partner_refer);
+        for (var i = 0; i < valuesPartnerRefer.length; i++) {
+          $("#partner_refer").append(
+            "<option id='" +
+              valuesPartnerRefer[i] +
+              "' value='" +
+              valuesPartnerRefer[i] +
+              "'>" +
+              valuesPartnerRefer[i] +
+              "</option>"
+          );
+        }
+      } else {
+        document.getElementById("partner").style.display = "none";
+      }
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -231,6 +248,10 @@ function fetchPartnersDistricts() {
     otherOpt.textContent = "Other";
     select.appendChild(otherOpt);
   });
+}
+
+function getKeyByValue(value) {
+  return Object.keys(partner_refer).find((key) => object[key] === value);
 }
 
 function personal_details_submit() {
@@ -248,6 +269,7 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
+  var refer = $("#partner_refer").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -365,7 +387,8 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
-    email: email ? email : null,
+    email: email ? email : undefined,
+    partner_refer: refer ? getKeyByValue(refer) : undefined,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
