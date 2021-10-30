@@ -323,7 +323,11 @@ function personal_details_submit() {
     appending("Apna State Select karo!");
     return false;
   }
-
+  const isValidEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(email && isValidEmail.test(email) === false){
+    appending("Email sahi nahi hai");
+    return false;
+  }
   if (!district) {
     appending("Apni District ya Village ka naam enter karo!");
     return false;
@@ -355,7 +359,7 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
-    email:email,
+    email:email ? email : null,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
