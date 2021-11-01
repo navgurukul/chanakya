@@ -1,5 +1,3 @@
-const {partner_refer} = require("../../lib/config/index");
-console.log(partner_refer,"partner_refer")
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
@@ -225,24 +223,6 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
-      if (data && data.data.id === 435) {
-        const valuesPartnerRefer = Object.values(partner_refer);
-        console.log(valuesPartnerRefer,"valuesPartnerRefer")
-        for (var i = 0; i < valuesPartnerRefer.length; i++) {
-          $("#partner_refer").append(
-            "<option id='" +
-              valuesPartnerRefer[i] +
-              "' value='" +
-              valuesPartnerRefer[i] +
-              "'>" +
-              valuesPartnerRefer[i] +
-              "</option>"
-          );
-        }
-      } else {
-        console.log("else condition true")
-        $("#refer").hide();
-      }
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -351,7 +331,7 @@ function personal_details_submit() {
   const isValidEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (email && isValidEmail.test(email) === false) {
-    appending("<h4>Email sahi nahi hai</h4>");
+    appending("Email sahi nahi hai");
     return false;
   }
   if (!district) {
@@ -385,7 +365,7 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
-    email: email ? email : undefined,
+    email: email ? email : null,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
