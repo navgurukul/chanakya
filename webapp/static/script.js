@@ -1,7 +1,22 @@
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
-
+const partner_refer = {
+  1: "Shikhar School",
+  2: "Lend a Hand India (LAHI)",
+  3: "Charter for Compassionate",
+  4: "Naz Foundation",
+  5: "Youth for Seva",
+  6: "CSEI",
+  7: "Bharti Foundation",
+  8: "Etasha",
+  9: "Teach for India",
+  10: "Sahyogini",
+  11: "Social Media",
+  12: "Website",
+  13: "Friend/Family",
+  14: "Others (Keep a manual entry option if the candidate chooses Others)",
+};
 // Sentry.init({
 //   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
 //   environment: DEBUG ? "staging" : "production",
@@ -224,7 +239,18 @@ function fetchPartnersDistricts() {
         $("#city").replaceWith(updateField);
       }
       console.log("checki")
-      if (data && data.data.id === 435) {
+      if (data && data.data.id === 435 || data && data.data.id === 92) {
+        for (var i = 0; i < partner_refer.length; i++) {
+          $("#partner_refer").append(
+            "<option id='" +
+              valuesPartnerRefer[i] +
+              "' value='" +
+              valuesPartnerRefer[i] +
+              "'>" +
+              valuesPartnerRefer[i] +
+              "</option>"
+          );
+        }
        console.log("yes data is there")
       }
     }
@@ -253,6 +279,8 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
+  var partner_refer = $("#partner_refer").value();
+  console.log(partner_refer,"par")
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
