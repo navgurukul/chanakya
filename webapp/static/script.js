@@ -238,8 +238,7 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
-      console.log("checki")
-      if (data && data.data.id === 435 || data && data.data.id === 92) {
+      if (data && data.data.id === 435) {
         const valuesPartnerRefer = Object.values(partner_refer);
         for (let i = 0; i < valuesPartnerRefer.length; i++) {
           $("#partner_refer").append(
@@ -252,7 +251,6 @@ function fetchPartnersDistricts() {
               "</option>"
           );
         }
-       console.log("yes data is there")
       }
     }
   ).fail(function (response) {
@@ -286,7 +284,6 @@ function personal_details_submit() {
   var city = $("#city").val();
   var email = $("#email").val();
   var partner_refer = $("#partner_refer").val();
-  console.log(partner_refer,"par")
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -410,7 +407,6 @@ function personal_details_submit() {
     gps_long: positions ? positions.longitude : -1,
     partner_refer:getKeyByValue(partner_refer),
   };
-  console.log(obj, "obj");
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
