@@ -152,16 +152,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-            response[i]["id"] +
-            "' value='" +
-            response[i]["iso2"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["id"] +
+          "' value='" +
+          response[i]["iso2"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 
   var select = document.getElementById("state");
@@ -183,19 +183,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () {},
+    beforeSend: function () { },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-            response[i]["name"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["name"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 }
 
@@ -213,11 +213,23 @@ function fetchPartnersDistricts() {
         data.data.districts.map(
           (district) =>
           (updateField =
-            updateField  +
-            "<option value='"+ district + "'>" + district + "</option>")
+            updateField +
+            "<option value='" +
+            district +
+            "'>" +
+            district +
+            "</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
+      }
+      console.log("checki")
+      if (data && data.data.id === 435) {
+       console.log("yes data is there")
+      }
+      else {
+        console.log("else condition true")
+        document.getElementById("partner").style.display = "none";
       }
     }
   ).fail(function (response) {
@@ -243,6 +255,7 @@ function personal_details_submit() {
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
+  var email = $("#email").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -323,15 +336,21 @@ function personal_details_submit() {
     return false;
   }
 
+  const isValidEmail =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email && isValidEmail.test(email) === false) {
+    appending("Email sahi nahi hai");
+    return false;
+  }
   if (!district) {
     appending("Apni District ya Village ka naam enter karo!");
     return false;
   }
-  if(!city){
-    appending('Kripaya city  dijye!');
+  if (!city) {
+    appending("Kripaya city  dijye!");
     return false;
   }
-  if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
+  if (/^([a-zA-Z0-9]|\s)+$/i.test(city) === false) {
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
@@ -354,10 +373,12 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
+    email: email ? email : undefined,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
   };
+  console.log(obj, "obj");
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
@@ -370,6 +391,7 @@ function personal_details_submit() {
     $district: district,
     $city: city,
     $pin_code: pin_code,
+    $email: email,
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -658,15 +680,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
