@@ -265,6 +265,11 @@ function fetchPartnersDistricts() {
   });
 }
 
+
+function getKeyByValue(value) {
+  return Object.keys(partner_refer).find(key => partner_refer[key] === value);
+}
+
 function personal_details_submit() {
   var firstName = $("#firstName").val();
   var middleName = $("#middleName").val();
@@ -280,7 +285,7 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
-  var partner_refer = $("#partner_refer").value();
+  var partner_refer = $("#partner_refer").val();
   console.log(partner_refer,"par")
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
@@ -403,6 +408,7 @@ function personal_details_submit() {
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
+    partner_refer:getKeyByValue(partner_refer),
   };
   console.log(obj, "obj");
   mixpanel.identify(mobile1);
