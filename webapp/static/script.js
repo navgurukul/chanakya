@@ -1,7 +1,22 @@
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
-
+const partner_refer = {
+  1: "Shikhar School",
+  2: "Lend a Hand India (LAHI)",
+  3: "Charter for Compassionate",
+  4: "Naz Foundation",
+  5: "Youth for Seva",
+  6: "CSEI",
+  7: "Bharti Foundation",
+  8: "Etasha",
+  9: "Teach for India",
+  10: "Sahyogini",
+  11: "Social Media",
+  12: "Website",
+  13: "Friend/Family",
+  14: "Others (Keep a manual entry option if the candidate chooses Others)",
+};
 // Sentry.init({
 //   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
 //   environment: DEBUG ? "staging" : "production",
@@ -152,16 +167,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-            response[i]["id"] +
-            "' value='" +
-            response[i]["iso2"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["id"] +
+          "' value='" +
+          response[i]["iso2"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 
   var select = document.getElementById("state");
@@ -183,19 +198,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () {},
+    beforeSend: function () { },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-            response[i]["name"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["name"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 }
 
@@ -213,11 +228,29 @@ function fetchPartnersDistricts() {
         data.data.districts.map(
           (district) =>
           (updateField =
-            updateField  +
-            "<option value='"+ district + "'>" + district + "</option>")
+            updateField +
+            "<option value='" +
+            district +
+            "'>" +
+            district +
+            "</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
+      }
+      if (data && data.data.id === 435) {
+        const valuesPartnerRefer = Object.values(partner_refer);
+        for (let i = 0; i < valuesPartnerRefer.length; i++) {
+          $("#partner_refer").append(
+            "<option id='" +
+              valuesPartnerRefer[i] +
+              "' value='" +
+              valuesPartnerRefer[i] +
+              "'>" +
+              valuesPartnerRefer[i] +
+              "</option>"
+          );
+        }
       }
     }
   ).fail(function (response) {
@@ -226,7 +259,13 @@ function fetchPartnersDistricts() {
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
     select.appendChild(otherOpt);
+    document.getElementById("partner").style.display = "none";
   });
+}
+
+
+function getKeyByValue(value) {
+  return Object.keys(partner_refer).find(key => partner_refer[key] === value);
 }
 
 function personal_details_submit() {
@@ -243,6 +282,8 @@ function personal_details_submit() {
   var district = $("#district").val();
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
+  var email = $("#email").val();
+  var partner_refer = $("#partner_refer").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -323,15 +364,21 @@ function personal_details_submit() {
     return false;
   }
 
+  const isValidEmail =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email && isValidEmail.test(email) === false) {
+    appending("Email sahi nahi hai");
+    return false;
+  }
   if (!district) {
     appending("Apni District ya Village ka naam enter karo!");
     return false;
   }
-  if(!city){
-    appending('Kripaya city  dijye!');
+  if (!city) {
+    appending("Kripaya city  dijye!");
     return false;
   }
-  if ((/^([a-zA-Z0-9]|\s)+$/i.test(city)) === false) {
+  if (/^([a-zA-Z0-9]|\s)+$/i.test(city) === false) {
     appending('City ya Village ke naam mein (.,!,#,@,") ka use na kare!');
     return false;
   }
@@ -354,9 +401,11 @@ function personal_details_submit() {
     district: district,
     city: city ? city : undefined,
     pin_code: pin_code,
+    email: email ? email : undefined,
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
+    partner_refer:getKeyByValue(partner_refer),
   };
   mixpanel.identify(mobile1);
 
@@ -370,6 +419,7 @@ function personal_details_submit() {
     $district: district,
     $city: city,
     $pin_code: pin_code,
+    $email: email,
   });
   // try {
   //   Sentry.configureScope((scope) => {
@@ -658,15 +708,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {

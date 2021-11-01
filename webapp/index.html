@@ -309,7 +309,10 @@
               </h2>
               <span class='errors text text-center text-danger ml-3'></span>
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Naam</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+                  <p class="hi lang mb-0">Aapka Naam</p>
+                  <p class="en lang mb-0">Your Full Name</p>
+                </div>
                 <div class="row">
                   <input type="text" id='firstName' name='firstName' placeholder="First Name" required
                     class="col-4 col-md-3 mr-2 border border-warning rounded section-1" />
@@ -320,13 +323,20 @@
                 </div>
               </div>
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Whatsapp Number</div>
-                <input type="number" id='mobile1' name="mobile1" placeholder="Aapka Whatsapp Number"
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+                  <p class="hi lang mb-0">Aapka Whatsapp Number</p>
+                  <p class="en lang mb-0">Your Whatsapp Number</p>
+                </div>
+                <input type="number" id='mobile1' name="mobile1" placeholder="Whatsapp Number"
                   class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
               </div>
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapka Koi Aur Number</div>
-                  <input type="number" id='mobile2' name="mobile2" placeholder="Koi aur number"
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+
+                  <p class="hi lang mb-0">Aapka Koi Aur Number</p>
+                  <p class="en lang mb-0">Your Alternative Number</p>
+                </div>
+                  <input type="number" id='mobile2' name="mobile2" placeholder="Phone number"
                     class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
               </div>
             
@@ -347,7 +357,11 @@
                   </select>
                 </div>
               </div>
-
+              <div class="clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Email</div>
+                <input type="email" id='email' name="email" placeholder="email"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" required />
+              </div>
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Gender/ लिंग</div>
                 <select name="gender" id='gender'
@@ -360,7 +374,9 @@
               </div>
 
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis State me rehte hai</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+                  State
+                </div>
                 <select id="state" name="state"
                   class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                   <option value="NONE">Select State</option>
@@ -368,7 +384,7 @@
                 </select>
               </div>
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aap kis District me rehte hai</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">District</div>
                 <select id="district" name="district"
                   class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
                   <option value="NONE">Select District</option>
@@ -387,10 +403,23 @@
                 </select>
               </div> -->
               <div class="clearfix">
-                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">Aapki City/Village ka Naam (agar upar list me nahi)</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+                  <p class="hi lang mb-0">Aapki City/Village ka Naam (agar upar list me nahi)</p>
+                  <p class="en lang mb-0">Your city/village name(if not present in above list)</p>
+                </div>
                 <input type="text" name="city" id="city"
-                  placeholder="Agar aapke city / village ka naam upar list me na ho"
+                  placeholder="City"
                   class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />
+              </div>
+              <div class="clearfix" id = "partner">
+                <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
+                  <p class="hi lang mb-0">Aapko course ke baare mai kaha se pata chala ?</p>
+                  <p class="en lang mb-0">How did you get to know about the course ?</p>
+                </div>
+                <select id="partner_refer" name="partner_refer"
+                  class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1">
+                  <option value="NONE">Select Partner</option>
+                </select>
               </div>
               <div class="clearfix">
                 <div class="col-xs-12 col-sm-6 col-md-6 mt-3">pin_code</div>
