@@ -1,6 +1,6 @@
 // var DEBUG = false;
-var { partner_refer } = require("../../lib/config/index");
-console.loh(partner_refer,"partner_refer")
+// var { partner_refer } = require("../../lib/config/index");
+// console.loh(partner_refer,"partner_refer")
 var DEBUG = false;
 var current_language = "hi";
 
