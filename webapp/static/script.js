@@ -240,7 +240,6 @@ function fetchPartnersDistricts() {
       }
       if (data && data.data.id === 435) {
         const valuesPartnerRefer = Object.values(partner_refer);
-        console.log(valuesPartnerRefer,"value")
         for (let i = 0; i < valuesPartnerRefer.length; i++) {
           $("#partner_refer").append(
             "<option id='" +
@@ -254,12 +253,10 @@ function fetchPartnersDistricts() {
         }
       }
       else {
-        console.log("remove data")
         document.getElementById("partner").style.display = "none";
       }
     }
   ).fail(function (response) {
-    console.log("check fail")
     var select = document.getElementById("city");
     var otherOpt = document.createElement("option");
     otherOpt.value = "other";
