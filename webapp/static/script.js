@@ -1,6 +1,4 @@
 // var DEBUG = false;
-// var { partner_refer } = require("../../lib/config/index");
-// console.loh(partner_refer,"partner_refer")
 var DEBUG = false;
 var current_language = "hi";
 
@@ -224,6 +222,12 @@ function fetchPartnersDistricts() {
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
+      }
+      if (data && data.data.id === 435) {
+       console.log("yes data is there")
+      }
+      else {
+        $("#partner").hide();
       }
     }
   ).fail(function (response) {
