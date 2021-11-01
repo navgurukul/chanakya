@@ -240,7 +240,8 @@ function fetchPartnersDistricts() {
       }
       console.log("checki")
       if (data && data.data.id === 435 || data && data.data.id === 92) {
-        for (var i = 0; i < partner_refer.length; i++) {
+        const valuesPartnerRefer = Object.values(partner_refer);
+        for (let i = 0; i < valuesPartnerRefer.length; i++) {
           $("#partner_refer").append(
             "<option id='" +
               valuesPartnerRefer[i] +
