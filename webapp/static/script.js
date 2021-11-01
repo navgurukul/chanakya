@@ -223,11 +223,13 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
+      console.log("checki")
       if (data && data.data.id === 435) {
        console.log("yes data is there")
       }
       else {
-        $("#partner").hide();
+        console.log("else condition true")
+        document.getElementById("partner").style.display = "none";
       }
     }
   ).fail(function (response) {
