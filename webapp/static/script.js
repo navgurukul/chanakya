@@ -252,6 +252,9 @@ function fetchPartnersDistricts() {
           );
         }
       }
+      else {
+        document.getElementById("partner").style.display = "none";
+      }
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -860,7 +863,6 @@ function submitTest() {
 }
 
 $(document).ready(function () {
-  document.getElementById("partner").style.display = "none";
   fetchState();
   fetchPartnersDistricts();
   if (!DEBUG) {
