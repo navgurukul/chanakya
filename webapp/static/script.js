@@ -227,10 +227,6 @@ function fetchPartnersDistricts() {
       if (data && data.data.id === 435) {
        console.log("yes data is there")
       }
-      else {
-        console.log("else condition true")
-        document.getElementById("partner").style.display = "none";
-      }
     }
   ).fail(function (response) {
     var select = document.getElementById("city");
@@ -238,6 +234,7 @@ function fetchPartnersDistricts() {
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
     select.appendChild(otherOpt);
+    document.getElementById("partner").style.display = "none";
   });
 }
 
