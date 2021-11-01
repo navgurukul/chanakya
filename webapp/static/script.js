@@ -860,6 +860,7 @@ function submitTest() {
 }
 
 $(document).ready(function () {
+  document.getElementById("partner").style.display = "none";
   fetchState();
   fetchPartnersDistricts();
   if (!DEBUG) {
