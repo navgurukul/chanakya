@@ -1,22 +1,22 @@
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
-const partner_refer = {
-  1: "Shikhar School",
-  2: "Lend a Hand India (LAHI)",
-  3: "Charter for Compassionate",
-  4: "Naz Foundation",
-  5: "Youth for Seva",
-  6: "CSEI",
-  7: "Bharti Foundation",
-  8: "Etasha",
-  9: "Teach for India",
-  10: "Sahyogini",
-  11: "Social Media",
-  12: "Website",
-  13: "Friend/Family",
-  14: "Others",
-};
+const partner_refer = [
+  "Shikhar School",
+  "Lend a Hand India (LAHI)",
+  "Charter for Compassionate",
+  "Naz Foundation",
+  "Youth for Seva",
+  "CSEI",
+  "Bharti Foundation",
+  "Etasha",
+  "Teach for India",
+  "Sahyogini",
+  "Social Media",
+  "Website",
+  "Friend/Family",
+  "Others",
+];
 // Sentry.init({
 //   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
 //   environment: DEBUG ? "staging" : "production",
@@ -239,15 +239,14 @@ function fetchPartnersDistricts() {
         $("#city").replaceWith(updateField);
       }
       if (data && data.data.id === 435) {
-        const valuesPartnerRefer = Object.values(partner_refer);
-        for (let i = 0; i < valuesPartnerRefer.length; i++) {
+        for (let i = 0; i < partner_refer.length; i++) {
           $("#partner_refer").append(
             "<option id='" +
-            valuesPartnerRefer[i] +
+            partner_refer[i] +
             "' value='" +
-            valuesPartnerRefer[i] +
+            partner_refer[i] +
             "'>" +
-            valuesPartnerRefer[i] +
+            partner_refer[i] +
             "</option>"
           );
         }
@@ -266,10 +265,6 @@ function fetchPartnersDistricts() {
   });
 }
 
-
-function getKeyByValue(value) {
-  return Object.keys(partner_refer).find(key => partner_refer[key] === value);
-}
 
 function personal_details_submit() {
   var firstName = $("#firstName").val();
@@ -408,7 +403,7 @@ function personal_details_submit() {
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
-    partner_refer: getKeyByValue(partner_refer),
+    partner_refer: partner_refer ? partner_refer : undefined,
   };
   mixpanel.identify(mobile1);
 
@@ -948,6 +943,6 @@ function languageSelector() {
 function selectOther() {
   var partner_refer = $("#partner_refer").val();
   if (partner_refer === "Others") {
-    $("#partner_refer").replaceWith('<input type="text" name="city" id="city" placeholder="City" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />');
+    $("#partner_refer").replaceWith('<input type="text" name="city" id="city" placeholder="Partner Name" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />');
   }
 }
