@@ -948,8 +948,6 @@ function languageSelector() {
 function selectOther() {
   var partner_refer = $("#partner_refer").val();
   if (partner_refer === "Others") {
-    $("#partner_refer").replaceWith(<input type="text" name="city" id="city"
-      placeholder="City"
-      class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />);
+    $("#partner_refer").replaceWith('<input type="text" name="city" id="city" placeholder="City" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />');
   }
 }
