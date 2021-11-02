@@ -15,7 +15,7 @@ const partner_refer = {
   11: "Social Media",
   12: "Website",
   13: "Friend/Family",
-  14: "Others (Keep a manual entry option if the candidate chooses Others)",
+  14: "Others",
 };
 // Sentry.init({
 //   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
@@ -243,12 +243,12 @@ function fetchPartnersDistricts() {
         for (let i = 0; i < valuesPartnerRefer.length; i++) {
           $("#partner_refer").append(
             "<option id='" +
-              valuesPartnerRefer[i] +
-              "' value='" +
-              valuesPartnerRefer[i] +
-              "'>" +
-              valuesPartnerRefer[i] +
-              "</option>"
+            valuesPartnerRefer[i] +
+            "' value='" +
+            valuesPartnerRefer[i] +
+            "'>" +
+            valuesPartnerRefer[i] +
+            "</option>"
           );
         }
       }
@@ -408,7 +408,7 @@ function personal_details_submit() {
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
-    partner_refer:getKeyByValue(partner_refer),
+    partner_refer: getKeyByValue(partner_refer),
   };
   mixpanel.identify(mobile1);
 
@@ -943,4 +943,13 @@ function languageSelector() {
   $(".lang").hide();
   $(".lang." + current_language).show();
   displayQuestion(current_question);
+}
+
+function selectOther() {
+  var partner_refer = $("#partner_refer").val();
+  if (partner_refer === "Others") {
+    $("#partner_refer").replaceWith(<input type="text" name="city" id="city"
+      placeholder="City"
+      class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />);
+  }
 }
