@@ -1,7 +1,22 @@
 // var DEBUG = false;
 var DEBUG = false;
 var current_language = "hi";
-
+const partner_refer = [
+  "Shikhar School",
+  "Lend a Hand India (LAHI)",
+  "Charter for Compassionate",
+  "Naz Foundation",
+  "Youth for Seva",
+  "CSEI",
+  "Bharti Foundation",
+  "Etasha",
+  "Teach for India",
+  "Sahyogini",
+  "Social Media",
+  "Website",
+  "Friend/Family",
+  "Others",
+];
 // Sentry.init({
 //   dsn: "https://15afe9937fcb4b32b902ab2795ae6d07@sentry.io/1421126",
 //   environment: DEBUG ? "staging" : "production",
@@ -223,12 +238,20 @@ function fetchPartnersDistricts() {
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
       }
-      console.log("checki")
       if (data && data.data.id === 435) {
-       console.log("yes data is there")
+        for (let i = 0; i < partner_refer.length; i++) {
+          $("#partner_refer").append(
+            "<option id='" +
+            partner_refer[i] +
+            "' value='" +
+            partner_refer[i] +
+            "'>" +
+            partner_refer[i] +
+            "</option>"
+          );
+        }
       }
       else {
-        console.log("else condition true")
         document.getElementById("partner").style.display = "none";
       }
     }
@@ -238,8 +261,10 @@ function fetchPartnersDistricts() {
     otherOpt.value = "other";
     otherOpt.textContent = "Other";
     select.appendChild(otherOpt);
+    document.getElementById("partner").style.display = "none";
   });
 }
+
 
 function personal_details_submit() {
   var firstName = $("#firstName").val();
@@ -256,6 +281,7 @@ function personal_details_submit() {
   var pin_code = $("#pin_code").val();
   var city = $("#city").val();
   var email = $("#email").val();
+  var partner_refer = $("#partner_refer").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -377,8 +403,8 @@ function personal_details_submit() {
     alt_mobile: mobile2 ? mobile2 : undefined,
     gps_lat: positions ? positions.latitude : -1,
     gps_long: positions ? positions.longitude : -1,
+    partner_refer: partner_refer ? partner_refer : undefined,
   };
-  console.log(obj, "obj");
   mixpanel.identify(mobile1);
 
   mixpanel.people.set({
@@ -912,4 +938,11 @@ function languageSelector() {
   $(".lang").hide();
   $(".lang." + current_language).show();
   displayQuestion(current_question);
+}
+
+function selectOther() {
+  var partner_refer = $("#partner_refer").val();
+  if (partner_refer === "Others") {
+    $("#partner_refer").replaceWith('<input type="text" name="city" id="city" placeholder="Partner Name" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />');
+  }
 }
