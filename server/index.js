@@ -9,7 +9,6 @@ const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
 Dotenv.config({ path: `${__dirname}/../.env` });
-
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
   const server = await Glue.compose(manifest, { relativeTo: __dirname });
@@ -26,7 +25,6 @@ exports.deployment = async (start) => {
         request.response.statusCode
     );
   });
-
   await server.initialize();
 
   if (!start) {
@@ -89,6 +87,13 @@ exports.deployment = async (start) => {
     const { studentService } = server.services();
     studentService.informToCompleteTheTest();
   });
+  const { emailReportService } = server.services();
+  const data = await emailReportService.getPartners();
+
+  data.forEach((e) => {
+    console.log(e.emails);
+  });
+  // email sedhuler for partners
 
   return server;
 };
