@@ -8,6 +8,8 @@ const knexfile = require("../knexfile");
 const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
+const { SESEmail } = require("../lib/helpers/sendEmail");
+
 Dotenv.config({ path: `${__dirname}/../.env` });
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
@@ -90,11 +92,27 @@ exports.deployment = async (start) => {
   const { emailReportService } = server.services();
   const data = await emailReportService.getPartners();
 
-  data.forEach((e) => {
-    console.log(e.emails);
-  });
   // email sedhuler for partners
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  cron.schedule("0 8 * * *", () => {
+    var d = new Date(dateString);
+    var dayName = days[d.getDay()];
+    data.forEach((e) => {
+      if (e.repeat == dayName) {
+        // send mail
 
+        SESEmail();
+      }
+    });
+  });
   return server;
 };
 
