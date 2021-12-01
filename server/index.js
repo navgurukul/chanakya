@@ -9,7 +9,7 @@ const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
 const { SESEmail } = require("../lib/helpers/sendEmail");
-
+const {getTemplateData}=require("../lib/helpers/partnersEmailReport");
 Dotenv.config({ path: `${__dirname}/../.env` });
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
@@ -89,9 +89,17 @@ exports.deployment = async (start) => {
     const { studentService } = server.services();
     studentService.informToCompleteTheTest();
   });
-  const { emailReportService } = server.services();
-  const data = await emailReportService.getPartners();
 
+   const { partnerService } = server.services();
+  
+  const data =await partnerService.progressMade(435);
+
+  const res = getTemplateData(data);
+  console.log(res);
+
+
+  // const { emailReportService } = server.services();
+  // const data = await emailReportService.getPartners();
   // email sedhuler for partners
   const days = [
     "Sunday",
@@ -102,19 +110,19 @@ exports.deployment = async (start) => {
     "Friday",
     "Saturday",
   ];
-  cron.schedule("0 8 * * *", () => {
-    var d = new Date(dateString);
-    var dayName = days[d.getDay()];
-    data.forEach((e) => {
-      if (e.repeat == dayName) {
-        // send mail
+  // cron.schedule("0 8 * * *", () => {
+  //   var d = new Date(dateString);
+  //   var dayName = days[d.getDay()];
+  //   data.forEach((e) => {
+  //     if (e.repeat == dayName) {
+  //       // send mail
 
-        SESEmail();
-      }
-    });
-  });
-  return server;
-};
+  //       SESEmail();
+  //     }
+  //   });
+  // });
+  // return server;
+};;
 
 if (!module.parent) {
   try {
