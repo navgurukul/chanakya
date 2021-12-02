@@ -17,6 +17,30 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
 
+   <!---- Script for adding name field values -->
+   <script>
+   //making input field readonly
+   document.getElementById("fullName").readOnly = true;
+    document.getElementById("middleName").readOnly = true;
+    document.getElementById("lastName").readOnly = true;
+
+    const studentid = window.location.search.split('=')[1];
+    fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Full Name is : ",data.name);
+        const full_name  = data.name.split(' ');
+        document.getElementById("firstName").value = full_name[0];
+      
+        if(name.length > 2) {
+          document.getElementById("middleName").value = full_name[1];
+          }
+        document.getElementById("lastName").value = full_name[full_name.length - 1];
+      
+      })
+
+  </script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
 
