@@ -17,33 +17,126 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
 
+
    <!---- Script for adding name field values -->
    <script>
-   //making input field readonly
     
-    
+    const differentstates = {
+      AN: "Andaman and Nicobar Islands",
+      AP: "Andhra Pradesh",
+      AR: "Arunachal Pradesh",
+      AS: "Assam",
+      BR: "Bihar",
+      CH: "Chandigarh",
+      CT: "Chhattisgarh",
+      DN: "Dadra and Nagar Haveli",
+      DD: "Daman and Diu",
+      DL: "Delhi",
+      GA: "Goa",
+      GJ: "Gujarat",
+      HR: "Haryana",
+      HP: "Himachal Pradesh",
+      JK: "Jammu and Kashmir",
+      JH: "Jharkhand",
+      KA: "Karnataka",
+      KL: "Kerala",
+      LD: "Lakshadweep",
+      MP: "Madhya Pradesh",
+      MH: "Maharashtra",
+      MN: "Manipur",
+      ML: "Meghalaya",
+      MZ: "Mizoram",
+      NL: "Nagaland",
+      OR: "Odisha",
+      PY: "Puducherry",
+      PB: "Punjab",
+      RJ: "Rajasthan",
+      SK: "Sikkim",
+      TN: "Tamil Nadu",
+      TG: "Telangana",
+      TR: "Tripura",
+      UT: "Uttarakhand",
+      UP: "Uttar Pradesh",
+      WB: "West Bengal",
+    }
+    const differentGender = {
+      female: 1,
+      male: 2,
+      trans: 3,
+    }
+
+    //studentid from param
     const studentid = window.location.search.split('=')[1];
-    console.log(studentid, "I am studentId");
-    fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
+   
+    if(studentid){
+      fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
       .then(response => response.json())
       .then(data => {
-        console.log("Full Name is : ",data.data[0].name);
+        
+        //for name field
         const full_name  = data.data[0].name.split(' ');
         if(full_name){
-          document.getElementById("firstName").readOnly = "readonly";
-          document.getElementById("lastName").readOnly = true;
-          document.getElementById('middleName').setAttribute('readonly', true);
-        }
-        document.getElementById("firstName").value = full_name[0];
-        console.log(full_name[0], "First name");
-      
-        if(name.length > 2) {
+          document.getElementById("firstName", "lastName", "middleName").readOnly = true;
+          document.getElementById("firstName").value = full_name[0];
+          if(name.length > 2) {
           document.getElementById("middleName").value = full_name[1];
-          console.log(full_name[1], "Middle name");
           }
-        document.getElementById("lastName").value = full_name[full_name.length - 1];
-        console.log(full_name[full_name.length - 1], "Last name");
+          document.getElementById("lastName").value = full_name[full_name.length - 1];
+        }
+     
+        //for whatsapp number field
+        if(data.data[0].contacts[0].mobile){
+          document.getElementById("mobile1").value = data.data[0].contacts[0].mobile;
+        }
+
+      
+        //for aapka koi aur mobile number
+        if(data.data[0].contacts[0].alt_mobile){
+          document.getElementById("alt_mobile").value = data.data[0].contacts[0].alt_mobile;
+        }
+        
+
+        //for date of birth 
+        if(data.data[0].dob){
+          const dobDate = data.data[0].dob.split('T')[0].split('-');
+          document.getElementById("date").value = dobDate[2];
+          document.getElementById("month").value = dobDate[1];
+          document.getElementById("year").value = dobDate[0];
+        }
+         
+        //for email
+        if(data.data[0].email){
+          document.getElementById("email").value = data.data[0].email;
+        }
+    
+        //for gender
+        if(data.data[0].gender){
+          document.getElementById("gender").value = differentGender[data.data[0].gender];
+        }
+        
+        //for state
+        if(data.date[0].state){
+          document.getElementById("state").value = differentstates[data.data[0].state];
+        }
+
+        //for district
+        if(data.data[0].district){
+          document.getElementById("district").value = data.data[0].district;
+        }
+
+        //for city
+        if(data.data[0].city){
+          document.getElementById("city").value = data.data[0].city;
+        }
+
+        //for pin code
+        if(data.data[0].pin_code){
+          document.getElementById("pin_code").value = data.data[0].pin_code;
+        }
+      
+
       })
+    }
 
   </script>
 
