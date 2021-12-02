@@ -353,9 +353,6 @@ function personal_details_submit() {
   } else if (gender == "NONE") {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
-  } else if (gender == "male") {
-    appending("<h4> Ladko ke liya abhi admissions open nahin hai </h4>");
-    return false;
   }
   if (!state || state == "NONE") {
     appending("Apna State Select karo!");
