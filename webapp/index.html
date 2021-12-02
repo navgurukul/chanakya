@@ -20,23 +20,23 @@
    <!---- Script for adding name field values -->
    <script>
    //making input field readonly
-   document.getElementById("fullName").readOnly = true;
-    document.getElementById("middleName").readOnly = true;
-    document.getElementById("lastName").readOnly = true;
 
     const studentid = window.location.search.split('=')[1];
+    console.log(studentid, "I am studentId");
     fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
       .then(response => response.json())
       .then(data => {
         console.log("Full Name is : ",data.name);
         const full_name  = data.name.split(' ');
         document.getElementById("firstName").value = full_name[0];
+        console.log(full_name[0], "First name");
       
         if(name.length > 2) {
           document.getElementById("middleName").value = full_name[1];
+          console.log(full_name[1], "Middle name");
           }
         document.getElementById("lastName").value = full_name[full_name.length - 1];
-      
+        console.log(full_name[full_name.length - 1], "Last name");
       })
 
   </script>
