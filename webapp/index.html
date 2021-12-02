@@ -26,7 +26,7 @@
     fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
       .then(response => response.json())
       .then(data => {
-        console.log("Full Name is : ",data.name);
+        console.log("Full Name is : ",data[0].name);
         const full_name  = data.name.split(' ');
         document.getElementById("firstName").value = full_name[0];
         console.log(full_name[0], "First name");
