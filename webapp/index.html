@@ -17,32 +17,65 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115187076-1"></script>
 
+
    <!---- Script for adding name field values -->
    <script>
    //making input field readonly
     
-    
+    const constantsData = require('lib\constants.js');
+    document.getElementById('state').value = states.studentDetails.states.state;
+    console.log(states, "states");
     const studentid = window.location.search.split('=')[1];
-    console.log(studentid, "I am studentId");
+   
     fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
       .then(response => response.json())
       .then(data => {
-        console.log("Full Name is : ",data.data[0].name);
+        
+        //for name field
         const full_name  = data.data[0].name.split(' ');
         if(full_name){
-          document.getElementById("firstName").readOnly = "readonly";
-          document.getElementById("lastName").readOnly = true;
-          document.getElementById('middleName').setAttribute('readonly', true);
-        }
-        document.getElementById("firstName").value = full_name[0];
-        console.log(full_name[0], "First name");
-      
-        if(name.length > 2) {
+          document.getElementById("firstName", "lastName", "middleName").readOnly = true;
+          document.getElementById("firstName").value = full_name[0];
+          if(name.length > 2) {
           document.getElementById("middleName").value = full_name[1];
-          console.log(full_name[1], "Middle name");
           }
-        document.getElementById("lastName").value = full_name[full_name.length - 1];
-        console.log(full_name[full_name.length - 1], "Last name");
+          document.getElementById("lastName").value = full_name[full_name.length - 1];
+        }
+     
+        //for whatsapp number field
+        document.getElementById("mobile1").value = data.data[0].contacts[0].mobile;
+
+      
+        //for aapka koi aur mobile number
+          document.getElementById("alt_mobile").value = data.data[0].contacts[0].alt_mobile;
+        
+
+        //for date of birth 
+          const dobDate = data.data[0].dob.split('T')[0].split('-');
+          document.getElementById("date").value = dobDate[2];
+          document.getElementById("month").value = dobDate[1];
+          document.getElementById("year").value = dobDate[0];
+        
+        
+        //for email
+          document.getElementById("email").value = data.data[0].email;
+    
+        //for gender
+          document.getElementById("gender").value = constantsData.studentDetails.gender.data.data[0].gender;
+        
+        //for state
+        document.getElementById("state").value = constantsData.studentDetails.states.data.date[0].state;
+
+        //for district
+        document.getElementById("district").value = data.data[0].district;
+
+        //for city
+        document.getElementById("city").value = data.data[0].city;
+
+        //for pin code
+        document.getElementById("pin_code").value = data.data[0].pin_code;
+      
+
       })
 
   </script>
