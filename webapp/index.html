@@ -67,7 +67,7 @@
 
     var url_string = window.location.href; 
     var url = new URL(url_string);
-    
+
     var studentid = url.searchParams.get("student_id");
     var firstNameParam = url.searchParams.get("firstname");
     var middleNameParam = url.searchParams.get("middlename");
@@ -158,7 +158,7 @@
     else{
           
           if(firstNameParam){
-            document.getElementById("firstName").readOnly = true;
+            document.getElementById("firstName").readOnly = "readonly";
             document.getElementById("firstName").value = firstNameParam;
           }
           if(middleNameParam) {
