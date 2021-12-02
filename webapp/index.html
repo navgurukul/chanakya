@@ -98,7 +98,7 @@
 
         //for date of birth 
         if(data.data[0].dob){
-          const dobDate = data.data[0].dob.split('T')[0].split('-');
+          var dobDate = data.data[0].dob.split('T')[0].split('-');
           document.getElementById("date").value = dobDate[2];
           document.getElementById("month").value = dobDate[1];
           document.getElementById("year").value = dobDate[0];
