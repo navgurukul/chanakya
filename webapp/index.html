@@ -27,7 +27,7 @@
       .then(response => response.json())
       .then(data => {
         console.log("Full Name is : ",data[0].name);
-        const full_name  = data.name.split(' ');
+        const full_name  = data[0].name.split(' ');
         document.getElementById("firstName").value = full_name[0];
         console.log(full_name[0], "First name");
       
