@@ -65,8 +65,14 @@
       3:"trans",
     }
 
-    //studentid from param
-    const studentid = window.location.search.split('=')[1];
+    var url_string = window.location.href; 
+    var url = new URL(url_string);
+    
+    var studentid = url.searchParams.get("student_id");
+    var firstNameParam = url.searchParams.get("firstname");
+    var middleNameParam = url.searchParams.get("middlename");
+    var lastNameParam = url.searchParams.get("lastname");
+    var phoneNoParam = url.searchParams.get("phoneno");
    
     if(studentid){
       fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
@@ -112,7 +118,7 @@
     
         //for gender
         if(data.data[0].gender){
-          document.getElementById("gender").value = differentGender[data.data[0].gender];
+          document.getElementById("gender").options.value = differentGender[data.data[0].gender];
         }
         
         //for state
@@ -149,6 +155,25 @@
 
       })
     }
+    else{
+          
+          if(firstNameParam){
+            document.getElementById("firstName").readOnly = true;
+            document.getElementById("firstName").value = firstNameParam;
+          }
+          if(middleNameParam) {
+            document.getElementById("middleName").readOnly = true;
+            document.getElementById("middleName").value = middleNameParam;
+          }
+          if(lastNameParam){
+            document.getElementById("lastName").readOnly = true;
+            document.getElementById("lastName").value = lastNameParam;
+          }
+        }
+     
+    
+
+    
 
   </script>
 
