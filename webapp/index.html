@@ -20,7 +20,8 @@
    <!---- Script for adding name field values -->
    <script>
    //making input field readonly
-
+    
+    
     const studentid = window.location.search.split('=')[1];
     console.log(studentid, "I am studentId");
     fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
@@ -28,6 +29,11 @@
       .then(data => {
         console.log("Full Name is : ",data.data[0].name);
         const full_name  = data.data[0].name.split(' ');
+        if(full_name){
+          document.getElementById("firstName").readOnly = "readonly";
+          document.getElementById("lastName").readOnly = true;
+          document.getElementById('middleName').setAttribute('readonly', true);
+        }
         document.getElementById("firstName").value = full_name[0];
         console.log(full_name[0], "First name");
       
@@ -340,11 +346,11 @@
                   <p class="en lang mb-0">Your Full Name <span class="star">*</span> </p>
                 </div>
                 <div class="row">
-                  <input type="text" id='firstName' name='firstName' readonly placeholder="First Name" required
+                  <input type="text" id='firstName' name='firstName' placeholder="First Name" required
                     class="col-4 col-md-3 mr-2 border border-warning rounded section-1" />  
-                  <input type="text" id='middleName' name='middleName' readonly placeholder="Middle Name"
+                  <input type="text" id='middleName' name='middleName' placeholder="Middle Name"
                     class="col-4 col-md-3 mr-2 border border-warning rounded section-1" />
-                  <input type="text" id='lastName' name='lastName' readonly placeholder="Last Name" required
+                  <input type="text" id='lastName' name='lastName' placeholder="Last Name" required
                     class="col-4 col-md-3 border border-warning rounded section-1" />
                 </div>
               </div>
