@@ -60,9 +60,9 @@
       WB: "West Bengal",
     }
     var differentGender = {
-      female: 1,
-      male: 2,
-      trans: 3,
+      1:"female",
+      2:"male",
+      3:"trans",
     }
 
     //studentid from param
@@ -113,7 +113,6 @@
         //for gender
         if(data.data[0].gender){
           document.getElementById("gender").value = differentGender[data.data[0].gender];
-          
         }
         
         //for state
