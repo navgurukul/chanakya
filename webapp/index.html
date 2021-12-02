@@ -21,7 +21,7 @@
    <!---- Script for adding name field values -->
    <script>
     
-    const differentstates = {
+    var differentstates = {
       AN: "Andaman and Nicobar Islands",
       AP: "Andhra Pradesh",
       AR: "Arunachal Pradesh",
@@ -59,7 +59,7 @@
       UP: "Uttar Pradesh",
       WB: "West Bengal",
     }
-    const differentGender = {
+    var differentGender = {
       female: 1,
       male: 2,
       trans: 3,
@@ -102,6 +102,7 @@
           document.getElementById("date").value = dobDate[2];
           document.getElementById("month").value = dobDate[1];
           document.getElementById("year").value = dobDate[0];
+
         }
          
         //for email
@@ -112,11 +113,13 @@
         //for gender
         if(data.data[0].gender){
           document.getElementById("gender").value = differentGender[data.data[0].gender];
+          
         }
         
         //for state
         if(data.date[0].state){
           document.getElementById("state").value = differentstates[data.data[0].state];
+          
         }
 
         //for district
@@ -133,7 +136,17 @@
         if(data.data[0].pin_code){
           document.getElementById("pin_code").value = data.data[0].pin_code;
         }
-      
+        
+        console.log(dobDate[2], "date");
+        console.log(dobDate[1], "month");
+        console.log(dobDate[0], "year");
+        console.log(data.data[0].gender, "gender 1st half");
+        console.log(differentGender[data.data[0].gender], "genderr");
+        console.log(data.data[0].state, "state 1");
+        console.log(differentstates[data.data[0].state], "state 2");
+        console.log(data.data[0].district, "district")
+        console.log(data.date[0].pin_code, "pin code");
+        
 
       })
     }
