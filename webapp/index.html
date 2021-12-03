@@ -167,18 +167,22 @@
       console.log("middle name from param is : ", middleNameParam);
       console.log("last name from param is : ", lastNameParam);
 
+      var firstNameInput = document.getElementById("firstName");
+      var middleNameInput = document.getElementById("middleName");
+      var lastNameInput = document.getElementById("lastName");
+      if(firstNameInput){
+        firstNameInput.value = firstNameParam;
+        firstNameInput.readOnly = true;
+      }
+      if(middleNameInput){
+        middleNameInput.value = middleNameParam;
+        firstNameInput.readOnly = true;
+      }
+      if(lastNameInput){
+        lastNameInput.value = lastNameParam;
+        firstNameInput.readOnly = true;
+      }
       
-      document.getElementById("firstName").value = firstNameParam;
-      document.getElementById("lastName").value = lastNameParam;
-      document.getElementById("mobile1").value = mobileNumberParam;
-      if(firstNameParam && lastNameParam){
-        document.getElementById('firstName').setAttribute('readonly', true);
-        document.getElementById('lastName').setAttribute('readonly', true);
-      }
-      if(middleNameParam){
-        document.getElementById("middleName").value = middleNameParam;
-        document.getElementById('middleName').setAttribute('readonly', true);
-      }
     }
      
     
