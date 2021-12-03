@@ -74,7 +74,7 @@
     var lastNameParam = url.searchParams.get("lastName");
     var mobileNumberParam = url.searchParams.get("mobileNumber");
 
-    
+
     console.log("first name from param is : ", firstNameParam);
     console.log("middle name from param is : ", middleNameParam);
     console.log("last name from param is : ", lastNameParam);
@@ -162,12 +162,17 @@
       })
     }
     else if(firstNameParam && lastNameParam && mobileNumberParam){
-      document.getElementById("firstName", "lastName", "middleName").readOnly = true;
+      console.log("Enterring else if condition for name and mobile number");
       document.getElementById("firstName").value = firstNameParam;
       document.getElementById("lastName").value = lastNameParam;
       document.getElementById("mobile1").value = mobileNumberParam;
+      if(firstNameParam && lastNameParam){
+        document.getElementById('firstName').setAttribute('readonly', true);
+        document.getElementById('lastName').setAttribute('readonly', true);
+      }
       if(middleNameParam){
         document.getElementById("middleName").value = middleNameParam;
+        document.getElementById('middleName').setAttribute('readonly', true);
       }
     }
      
