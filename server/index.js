@@ -94,7 +94,7 @@ exports.deployment = async (start) => {
   const partnersReports = await emailReportService.getPartners();
   const { partnerService } = server.services();
 
-  cron.schedule("14 20 * * *", () => {
+  cron.schedule("0 8 * * *", () => {
     var today = new Date().toLocaleDateString(undefined, {
       day: "2-digit",
       month: "2-digit",
