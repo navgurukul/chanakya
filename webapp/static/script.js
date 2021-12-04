@@ -255,12 +255,18 @@ function getInfo() {
       //for name field
       const full_name  = data.data[0].name.split(' ');
       if(full_name){
-        document.getElementById("firstName", "lastName", "middleName").readOnly = true;
-        document.getElementById("firstName").value = full_name[0];
-        if(name.length > 2) {
-        document.getElementById("middleName").value = full_name[1];
+        if (full_name[0]) {
+          document.getElementById("firstName").value = full_name[0];
+          document.getElementById("firstName").readOnly = true;
         }
-        document.getElementById("lastName").value = full_name[full_name.length - 1];
+        if(full_name.length > 2) {
+          document.getElementById("middleName").value = full_name[1];
+          document.getElementById("middleName").readOnly = true; 
+        }
+        if(full_name[full_name.length - 1]) {
+          document.getElementById("lastName").value = full_name[full_name.length - 1];
+          document.getElementById("lastName").readOnly = true;
+        }
       }
    
       //for whatsapp number field
@@ -343,11 +349,11 @@ function getInfo() {
     }
     if(middleNameInput){
       middleNameInput.value = middleNameParam;
-      firstNameInput.readOnly = true;
+      middleNameInput.readOnly = true;
     }
     if(lastNameInput){
       lastNameInput.value = lastNameParam;
-      firstNameInput.readOnly = true;
+      lastNameInput.readOnly = true;
     }
   }
 }
