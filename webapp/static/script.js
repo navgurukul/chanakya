@@ -24,7 +24,7 @@ const partner_refer = [
 
 if (!DEBUG) {
   var base_url = "/api";
-  var enrolment_key = window.location.href.split("k/").slice(-1)[0];
+  var enrolment_key = window.location.href.split("k/").slice(-1)[0].split("?")[0]
 } else {
   var enrolment_key = "IOKMC9";
   var base_url = "http://localhost:3000";
