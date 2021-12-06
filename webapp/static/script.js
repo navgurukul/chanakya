@@ -187,6 +187,73 @@ function fetchState() {
   };
 }
 
+function getInfo() {
+  var url_string = window.location.href; 
+  var url = new URL(url_string);
+
+  var studentid = url.searchParams.get("student_id");
+  var firstNameParam = url.searchParams.get("firstName");
+  var middleNameParam = url.searchParams.get("middleName");
+  var lastNameParam = url.searchParams.get("lastName");
+  var mobileNumberParam = url.searchParams.get("mobileNumber");
+ 
+  if(studentid){
+    fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
+    .then(response => response.json())
+    .then(data => {
+      
+      //for name field
+      const full_name  = data.data[0].name.split(' ');
+      if(full_name){
+        if (full_name[0]) {
+          document.getElementById("firstName").value = full_name[0];
+          document.getElementById("firstName").readOnly = true;
+        }
+        if(full_name.length > 2) {
+          document.getElementById("middleName").value = full_name[1];
+          document.getElementById("middleName").readOnly = true; 
+        }
+        if(full_name[full_name.length - 1]) {
+          document.getElementById("lastName").value = full_name[full_name.length - 1];
+          document.getElementById("lastName").readOnly = true;
+        }
+      }
+   
+      //for whatsapp number field
+      if(data.data[0].contacts[0].mobile){
+        document.getElementById("mobile1").value = data.data[0].contacts[0].mobile;
+      }
+    
+      //for aapka koi aur mobile number
+      if(data.data[0].contacts[0].alt_mobile){
+        document.getElementById("alt_mobile").value = data.data[0].contacts[0].alt_mobile;
+      }
+    })
+  }
+  
+  else if(firstNameParam && lastNameParam && mobileNumberParam){
+    var firstNameInput = document.getElementById("firstName");
+    var middleNameInput = document.getElementById("middleName");
+    var lastNameInput = document.getElementById("lastName");
+    var mobileNumberInput = document.getElementById("mobile1");
+    if(firstNameInput){
+      firstNameInput.value = firstNameParam;
+      firstNameInput.readOnly = true;
+    }
+    if(middleNameInput){
+      middleNameInput.value = middleNameParam;
+      middleNameInput.readOnly = true;
+    }
+    if(lastNameInput){
+      lastNameInput.value = lastNameParam;
+      lastNameInput.readOnly = true;
+    }
+    if (mobileNumberInput) {
+      mobileNumberInput.value = mobileNumberParam;
+    }
+  }
+}
+
 function getCityFromState(state) {
   $("#district").empty();
   $("#district").append("<option> Select District </option>");
@@ -854,8 +921,11 @@ function submitTest() {
   });
 }
 
+
+
 $(document).ready(function () {
   fetchState();
+  getInfo();
   fetchPartnersDistricts();
   if (!DEBUG) {
     // landing_page_submit();
