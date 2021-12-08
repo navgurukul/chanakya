@@ -467,43 +467,56 @@
                 <span class="errors text text-center text-danger ml-3"></span>
                 <div class="clearfix">
                   <div
-                    class="profile-pic-div"
                     style="
-                      height: 100px;
-                      width: 100px;
-                      position: relative;
-                      border-radius: 50%;
-                      overflow: hidden;
-                      border: 1px solid grey;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 68%;
+                      flex-direction: column;
                     "
                   >
-                    <img
-                      src="profileImage.jpg"
-                      id="photo"
-                      style="height: 100%; width: 100%"
-                    />
-                    <input type="file" id="file" style="display: none" />
-                    <label
-                      for="file"
-                      id="uploadBtn"
+                    <div
+                      class="profile-pic-div"
                       style="
-                        height: 40px;
-                        width: 100%;
-                        position: absolute;
-                        bottom: 0;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        text-align: center;
-                        background: rgba(0, 0, 0, 0.7);
-                        color: wheat;
-                        line-height: 30px;
-                        font-family: sans-serif;
-                        font-size: 12px;
-                        cursor: pointer;
-                        display: none;
+                        height: 100px;
+                        width: 100px;
+                        position: relative;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        border: 1px solid grey;
                       "
-                      >Choose Photo</label
                     >
+                      <img
+                        src="profileImage.jpg"
+                        id="photo"
+                        style="height: 100%; width: 100%"
+                      />
+                      <input type="file" id="file" style="display: none" />
+                      <label
+                        for="file"
+                        id="uploadBtn"
+                        style="
+                          height: 40px;
+                          width: 100%;
+                          position: absolute;
+                          bottom: 0;
+                          left: 50%;
+                          transform: translateX(-50%);
+                          text-align: center;
+                          background: rgba(0, 0, 0, 0.7);
+                          color: wheat;
+                          line-height: 30px;
+                          font-family: sans-serif;
+                          font-size: 12px;
+                          cursor: pointer;
+                          display: none;
+                        "
+                        >Choose Photo</label
+                      >
+                    </div>
+                    <div>
+                      <p class="hi lang mb-0">Upload Your Photo</p>
+                    </div>
                   </div>
                   <div class="col-xs-12 col-sm-6 col-md-6 mt-3">
                     <p class="hi lang mb-0">
