@@ -24,10 +24,7 @@ const partner_refer = [
 
 if (!DEBUG) {
   var base_url = "/api";
-  var enrolment_key = window.location.href
-    .split("k/")
-    .slice(-1)[0]
-    .split("?")[0];
+  var enrolment_key = window.location.href.split("k/").slice(-1)[0].split("?")[0]
 } else {
   var enrolment_key = "IOKMC9";
   var base_url = "http://localhost:3000";
@@ -170,16 +167,16 @@ function fetchState() {
       for (var i = 0; i < response.length; i++) {
         $("#state").append(
           "<option id='" +
-            response[i]["id"] +
-            "' value='" +
-            response[i]["iso2"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["id"] +
+          "' value='" +
+          response[i]["iso2"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 
   var select = document.getElementById("state");
@@ -191,45 +188,7 @@ function fetchState() {
 }
 
 function getInfo() {
-  //declearing html elements
-
-  const imgDiv = document.querySelector(".profile-pic-div");
-  const img = document.querySelector("#photo");
-  const file = document.querySelector("#file");
-  const uploadBtn = document.querySelector("#uploadBtn");
-
-  //if user hover on img div
-
-  imgDiv.addEventListener("mouseenter", function () {
-    uploadBtn.style.display = "block";
-  });
-
-  //if we hover out from img div
-
-  imgDiv.addEventListener("mouseleave", function () {
-    uploadBtn.style.display = "none";
-  });
-
-  //image showing functionality when we choose an image to upload
-
-  //when we choose a photo to upload
-
-  file.addEventListener("change", function () {
-    //this refers to file
-    const choosedFile = this.files[0];
-
-    if (choosedFile) {
-      const reader = new FileReader(); //FileReader is a predefined function of JS
-
-      reader.addEventListener("load", function () {
-        img.setAttribute("src", reader.result);
-      });
-
-      reader.readAsDataURL(choosedFile);
-    }
-  });
-
-  var url_string = window.location.href;
+  var url_string = window.location.href; 
   var url = new URL(url_string);
 
   var studentid = url.searchParams.get("student_id");
@@ -237,55 +196,55 @@ function getInfo() {
   var middleNameParam = url.searchParams.get("middleName");
   var lastNameParam = url.searchParams.get("lastName");
   var mobileNumberParam = url.searchParams.get("mobileNumber");
-
-  if (studentid) {
+ 
+  if(studentid){
     fetch(`http://dev-join.navgurukul.org/api/students/${studentid}`)
-      .then((response) => response.json())
-      .then((data) => {
-        //for name field
-        const full_name = data.data[0].name.split(" ");
-        if (full_name) {
-          if (full_name[0]) {
-            document.getElementById("firstName").value = full_name[0];
-            document.getElementById("firstName").readOnly = true;
-          }
-          if (full_name.length > 2) {
-            document.getElementById("middleName").value = full_name[1];
-            document.getElementById("middleName").readOnly = true;
-          }
-          if (full_name[full_name.length - 1]) {
-            document.getElementById("lastName").value =
-              full_name[full_name.length - 1];
-            document.getElementById("lastName").readOnly = true;
-          }
+    .then(response => response.json())
+    .then(data => {
+      
+      //for name field
+      const full_name  = data.data[0].name.split(' ');
+      if(full_name){
+        if (full_name[0]) {
+          document.getElementById("firstName").value = full_name[0];
+          document.getElementById("firstName").readOnly = true;
         }
-
-        //for whatsapp number field
-        if (data.data[0].contacts[0].mobile) {
-          document.getElementById("mobile1").value =
-            data.data[0].contacts[0].mobile;
+        if(full_name.length > 2) {
+          document.getElementById("middleName").value = full_name[1];
+          document.getElementById("middleName").readOnly = true; 
         }
-
-        //for aapka koi aur mobile number
-        if (data.data[0].contacts[0].alt_mobile) {
-          document.getElementById("alt_mobile").value =
-            data.data[0].contacts[0].alt_mobile;
+        if(full_name[full_name.length - 1]) {
+          document.getElementById("lastName").value = full_name[full_name.length - 1];
+          document.getElementById("lastName").readOnly = true;
         }
-      });
-  } else if (firstNameParam && lastNameParam && mobileNumberParam) {
+      }
+   
+      //for whatsapp number field
+      if(data.data[0].contacts[0].mobile){
+        document.getElementById("mobile1").value = data.data[0].contacts[0].mobile;
+      }
+    
+      //for aapka koi aur mobile number
+      if(data.data[0].contacts[0].alt_mobile){
+        document.getElementById("alt_mobile").value = data.data[0].contacts[0].alt_mobile;
+      }
+    })
+  }
+  
+  else if(firstNameParam && lastNameParam && mobileNumberParam){
     var firstNameInput = document.getElementById("firstName");
     var middleNameInput = document.getElementById("middleName");
     var lastNameInput = document.getElementById("lastName");
     var mobileNumberInput = document.getElementById("mobile1");
-    if (firstNameInput) {
+    if(firstNameInput){
       firstNameInput.value = firstNameParam;
       firstNameInput.readOnly = true;
     }
-    if (middleNameInput) {
+    if(middleNameInput){
       middleNameInput.value = middleNameParam;
       middleNameInput.readOnly = true;
     }
-    if (lastNameInput) {
+    if(lastNameInput){
       lastNameInput.value = lastNameParam;
       lastNameInput.readOnly = true;
     }
@@ -306,19 +265,19 @@ function getCityFromState(state) {
       "X-CSCAPI-KEY":
         "TzZrb2p0emtqa29BOW0zTnpLZHdzOVdjNmlubnRDMmtqOEgxRXpFdw==",
     },
-    beforeSend: function () {},
+    beforeSend: function () { },
     success: function (response, status) {
       for (var i = 0; i < response.length; i++) {
         $("#district").append(
           "<option value='" +
-            response[i]["name"] +
-            "'>" +
-            response[i]["name"] +
-            "</option>"
+          response[i]["name"] +
+          "'>" +
+          response[i]["name"] +
+          "</option>"
         );
       }
     },
-    error: function (error, status) {},
+    error: function (error, status) { },
   });
 }
 
@@ -335,13 +294,13 @@ function fetchPartnersDistricts() {
       if (data && data.data.districts !== null) {
         data.data.districts.map(
           (district) =>
-            (updateField =
-              updateField +
-              "<option value='" +
-              district +
-              "'>" +
-              district +
-              "</option>")
+          (updateField =
+            updateField +
+            "<option value='" +
+            district +
+            "'>" +
+            district +
+            "</option>")
         );
         updateField = updateField + "</select>";
         $("#city").replaceWith(updateField);
@@ -350,15 +309,16 @@ function fetchPartnersDistricts() {
         for (let i = 0; i < partner_refer.length; i++) {
           $("#partner_refer").append(
             "<option id='" +
-              partner_refer[i] +
-              "' value='" +
-              partner_refer[i] +
-              "'>" +
-              partner_refer[i] +
-              "</option>"
+            partner_refer[i] +
+            "' value='" +
+            partner_refer[i] +
+            "'>" +
+            partner_refer[i] +
+            "</option>"
           );
         }
-      } else {
+      }
+      else {
         document.getElementById("partner").style.display = "none";
       }
     }
@@ -371,6 +331,7 @@ function fetchPartnersDistricts() {
     document.getElementById("partner").style.display = "none";
   });
 }
+
 
 function personal_details_submit() {
   var firstName = $("#firstName").val();
@@ -813,15 +774,15 @@ function kitne_kar_liye(answers) {
 function displayQuestion(index) {
   $("#on_question").html(
     "Yeh Question no. <b>" +
-      (index + 1) +
-      "</b> (out of <b>" +
-      questions.length +
-      "</b> questions)"
+    (index + 1) +
+    "</b> (out of <b>" +
+    questions.length +
+    "</b> questions)"
   );
   $("#kitne_questions").html(
     "Aapne <b>" +
-      kitne_kar_liye(answers) +
-      "</b> questions already attempt kar liye hai!"
+    kitne_kar_liye(answers) +
+    "</b> questions already attempt kar liye hai!"
   );
 
   if (index == 1) {
@@ -964,6 +925,8 @@ function submitTest() {
   });
 }
 
+
+
 $(document).ready(function () {
   fetchState();
   getInfo();
@@ -1051,8 +1014,6 @@ function languageSelector() {
 function selectOther() {
   var partner_refer = $("#partner_refer").val();
   if (partner_refer === "Others") {
-    $("#partner_refer").replaceWith(
-      '<input type="text" name="city" id="city" placeholder="Partner Name" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />'
-    );
+    $("#partner_refer").replaceWith('<input type="text" name="city" id="city" placeholder="Partner Name" class="col-xs-12 col-sm-6 col-md-6 border border-warning rounded section-1" />');
   }
 }

@@ -1,37 +1,39 @@
-.form-container {
-  padding: 2.5%;
+.form-container{
+    padding: 2.5%;
 }
-.hide {
-  display: none;
+.hide{
+    display:none;
 }
-.extra {
-  margin-left: 1%;
+.extra{
+    margin-left: 1%;
 }
 .option {
 }
 .option button {
-  min-width: 120px !important;
-  max-width: 100%;
-  white-space: normal;
+    min-width: 120px !important;
+    max-width: 100%;
+    white-space: normal;
 }
 .option button p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 .input_box {
-  width: 80%;
-  padding: 6px;
+    width:80%;
+    padding: 6px;
 }
 img {
-  max-width: 100% !important;
+    max-width: 100% !important;
 }
 
 .qtext img {
-  padding: 10px;
+    padding: 10px;
 }
 
 @media only screen and (max-device-width: 600px) {
+
 }
 
-.star {
-  color: red;
-}
+
+.star{
+    color: red
+  }
