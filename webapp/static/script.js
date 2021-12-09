@@ -226,6 +226,13 @@ function getInfo() {
       });
 
       reader.readAsDataURL(choosedFile);
+
+      //alert when we upload a photo
+      Swal.fire(
+        "Success",
+        "Profile photo has been uploaded successfully.",
+        "success"
+      );
     }
   });
 
