@@ -197,8 +197,9 @@ function getInfo() {
   const img = document.querySelector("#photo");
   const file = document.querySelector("#file");
   const uploadBtn = document.querySelector("#uploadBtn");
+  const uploadText = document.querySelector("#uploadText");
 
-  //if user hover on img div
+  //if we hover on img div
 
   imgDiv.addEventListener("mouseenter", function () {
     uploadBtn.style.display = "block";
@@ -207,6 +208,16 @@ function getInfo() {
   //if we hover out from img div
 
   imgDiv.addEventListener("mouseleave", function () {
+    uploadBtn.style.display = "none";
+  });
+
+  //if we hover on upload your photo text
+  uploadText.addEventListener("mouseenter", function () {
+    uploadBtn.style.display = "block";
+  });
+
+  //if we hover out from upload your photo text
+  uploadText.addEventListener("mouseleave", function () {
     uploadBtn.style.display = "none";
   });
 
@@ -234,6 +245,11 @@ function getInfo() {
         "success"
       );
     }
+
+    //additional functionality of clicking on uplaod your photo text
+    uploadText.addEventListener("click", function () {
+      file.click();
+    });
   });
 
   var url_string = window.location.href;
