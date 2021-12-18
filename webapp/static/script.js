@@ -388,6 +388,7 @@ function personal_details_submit() {
   var city = $("#city").val();
   var email = $("#email").val();
   var partner_refer = $("#partner_refer").val();
+  var photo = $("#file").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -531,6 +532,24 @@ function personal_details_submit() {
   //     scope.setUser({ username: mobile });
   //   });
   // } catch (e) {}
+
+  var file = { photo: photo };
+
+  console.log("Poonam");
+
+  $.post(
+    base_url + "/on_assessment/details/photo/" + enrolment_key,
+    file,
+    (data, resp) => {
+      console.log("resp", resp);
+      mixpanel.track("Okay");
+    },
+    "json"
+  ).fail(function (response) {
+    console.log("response", response);
+    mixpanel.track("Not Okay");
+  });
+
   $.post(
     base_url + "/on_assessment/details/" + enrolment_key,
     obj,
@@ -550,6 +569,19 @@ function personal_details_submit() {
     //   Sentry.captureException(response);
     // } catch (e) {}
   });
+
+  // var file = { photo: photo };
+
+  // $.post(
+  //   base_url + "/on_assessment/details/photo/" + enrolment_key,
+  //   file,
+  //   (data, resp) => {
+  //     mixpanel.track("Okay");
+  //   },
+  //   "json"
+  // ).fail(function (response) {
+  //   mixpanel.track("Not Okay");
+  // });
 }
 
 function submitApp() {
