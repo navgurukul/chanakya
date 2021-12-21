@@ -460,10 +460,10 @@ function personal_details_submit() {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
   }
-  if (gender == "male") {
-    appending("<h4>Boys ke liye admission open nahi hai </h4>");
-    return false;
-  }
+//   if (gender == "male") {
+//     appending("<h4>Boys ke liye admission open nahi hai </h4>");
+//     return false;
+//   }
   if (!state || state == "NONE") {
     appending("Apna State Select karo!");
     return false;
