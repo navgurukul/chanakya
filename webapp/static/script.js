@@ -238,6 +238,21 @@ function getInfo() {
 
       reader.readAsDataURL(choosedFile);
 
+      console.log(base_url + "i am base url" + enrolment_key + "enrolment key");
+
+      fetch(`${base_url}/on_assessment/details/photo/${enrolment_key}`, {
+        method: "POST",
+        body: {
+          file: choosedFile,
+        },
+        headers: {
+          uploadType: "profileimage",
+        },
+      }).then((response) => {
+        console.log("got error in uploading photo");
+        return response.json();
+      });
+
       //alert when we upload a photo
       Swal.fire(
         "Success",
@@ -396,9 +411,11 @@ function fetchPartnersDistricts() {
 }
 
 function personal_details_submit() {
+  var profilePicUpload = document.getElementById("file").files[0];
   var firstName = $("#firstName").val();
   var middleName = $("#middleName").val();
   var lastName = $("#lastName").val();
+  var profile;
   var date = $("#date").val();
   var month = $("#month").val();
   var year = $("#year").val();
@@ -429,6 +446,11 @@ function personal_details_submit() {
   // }
 
   // network_speed.value  = navigator.connection.downlink;
+
+  if (!profilePicUpload) {
+    appending("<h4> Kripaya Aapna profile photo uplaod karein </h4>");
+    return false;
+  }
 
   if (!mobile1) {
     appending("<h4> Kripaya mobile number dijye! </h4>");
@@ -483,10 +505,10 @@ function personal_details_submit() {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
   }
-//   if (gender == "male") {
-//     appending("<h4>Boys ke liye admission open nahi hai </h4>");
-//     return false;
-//   }
+  //   if (gender == "male") {
+  //     appending("<h4>Boys ke liye admission open nahi hai </h4>");
+  //     return false;
+  //   }
   if (!state || state == "NONE") {
     appending("Apna State Select karo!");
     return false;
