@@ -9,7 +9,6 @@ const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
 Dotenv.config({ path: `${__dirname}/../.env` });
-const { markRedFlag } = require("../lib/helpers/redflags");
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
   const server = await Glue.compose(manifest, { relativeTo: __dirname });
@@ -89,24 +88,11 @@ exports.deployment = async (start) => {
     const { studentService } = server.services();
     studentService.informToCompleteTheTest();
   });
-  //TODO red flags
 
-  const { campusService, studentCampusService } = server.services();
-  //getting all the students  data from each campus and calling the redflag validate function
-
-  const campusData = await campusService.findall();
-
-  campusData.map(async (campus) => {
-    const data = await studentCampusService.progressMade(campus.id);
-    data.map((student) => {
-      const redflag = markRedFlag(student);
-      console.log("Red flag === [ ", redflag, "]");
-      //Upadte the student db with red flag
-    });
+  const { studentService } = server.services();
+  cron.schedule("0 9 * * *", () => {
+    studentService.checkForRedflag();
   });
-
-  // cron.schedule("0 8 * * *", () => {
-  // });
 
   return server;
 };
