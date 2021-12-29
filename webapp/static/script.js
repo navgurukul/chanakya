@@ -197,6 +197,7 @@ function getInfo() {
   const img = document.querySelector("#photo");
   const file = document.querySelector("#file");
   const uploadBtn = document.querySelector("#uploadBtn");
+  const uploadText = document.querySelector("#uploadText");
 
   //if user hover on img div
 
@@ -207,6 +208,16 @@ function getInfo() {
   //if we hover out from img div
 
   imgDiv.addEventListener("mouseleave", function () {
+    uploadBtn.style.display = "none";
+  });
+
+  //if we hover on upload your photo text
+  uploadText.addEventListener("mouseenter", function () {
+    uploadBtn.style.display = "block";
+  });
+
+  //if we hover out from upload your photo text
+  uploadText.addEventListener("mouseleave", function () {
     uploadBtn.style.display = "none";
   });
 
@@ -226,7 +237,34 @@ function getInfo() {
       });
 
       reader.readAsDataURL(choosedFile);
+      console.log(base_url + "i am base url" + enrolment_key + "enrolment key");
+
+      var formdata = new FormData();
+      formdata.append("file", choosedFile);
+
+      fetch(`${base_url}/on_assessment/details/photo/${enrolment_key}`, {
+        method: "POST",
+        body: formdata,
+        headers: {
+          uploadType: "profileimage",
+        },
+      }).then((response) => {
+        console.log("got error in uploading photo");
+        return response.json();
+      });
+
+      //alert when we upload a photo
+      Swal.fire(
+        "Success",
+        "Profile photo has been uploaded successfully.",
+        "success"
+      );
     }
+
+    //additional functionality of clicking on uplaod your photo text
+    uploadText.addEventListener("click", function () {
+      file.click();
+    });
   });
 
   var url_string = window.location.href;
@@ -460,10 +498,10 @@ function personal_details_submit() {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
   }
-//   if (gender == "male") {
-//     appending("<h4>Boys ke liye admission open nahi hai </h4>");
-//     return false;
-//   }
+  //   if (gender == "male") {
+  //     appending("<h4>Boys ke liye admission open nahi hai </h4>");
+  //     return false;
+  //   }
   if (!state || state == "NONE") {
     appending("Apna State Select karo!");
     return false;
