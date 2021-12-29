@@ -240,11 +240,12 @@ function getInfo() {
 
       console.log(base_url + "base url" + enrolment_key + "enrolment key");
 
+      var formdata = new FormData();
+      formdata.append("file", choosedFile);
+
       fetch(`${base_url}/on_assessment/details/photo/${enrolment_key}`, {
         method: "POST",
-        body: {
-          file: choosedFile,
-        },
+        body: formdata,
         headers: {
           uploadType: "profileimage",
         },
