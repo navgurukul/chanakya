@@ -8,6 +8,8 @@ const knexfile = require("../knexfile");
 const knex = require("knex")(knexfile);
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
+const { sendPartnersReports } = require("../lib/helpers/sendEmail");
+const { getTemplateData } = require("../lib/helpers/partnersEmailReport");
 Dotenv.config({ path: `${__dirname}/../.env` });
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
