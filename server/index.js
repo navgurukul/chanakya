@@ -152,7 +152,11 @@ exports.deployment = async (start) => {
   });
 
   // email sedhuler for partners
-
+  const { studentService } = server.services();
+  cron.schedule("0 9 * * *", () => {
+    studentService.checkForRedflag();
+  });
+  
   return server;
 };
 
