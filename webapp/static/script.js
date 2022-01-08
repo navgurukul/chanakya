@@ -238,7 +238,9 @@ function getInfo() {
 
       reader.readAsDataURL(choosedFile);
 
+
       console.log(base_url + "base url" + enrolment_key + "enrolment key");
+
 
       var formdata = new FormData();
       formdata.append("file", choosedFile);
@@ -250,7 +252,9 @@ function getInfo() {
           uploadType: "profileimage",
         },
       }).then((response) => {
-        console.log("got response");
+
+        console.log("got error in uploading photo");
+
         return response.json();
       });
 
@@ -499,10 +503,15 @@ function personal_details_submit() {
     appending("<h4>Apna gender select kijye! </h4>");
     return false;
   }
+
   //   if (gender == "male") {
   //     appending("<h4>Boys ke liye admission open nahi hai </h4>");
   //     return false;
   //   }
+  if (gender == "male") {
+    appending("<h4>Boys ke liye admission open nahi hai </h4>");
+    return false;
+  }
   if (!state || state == "NONE") {
     appending("Apna State Select karo!");
     return false;
