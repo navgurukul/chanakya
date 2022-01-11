@@ -94,61 +94,62 @@ exports.deployment = async (start) => {
   const partnersReports = await emailReportService.getPartners();
   const { partnerService } = server.services();
 
-  cron.schedule("0 8 * * *", () => {
-  var today = new Date().toLocaleDateString(undefined, {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    weekday: "long",
-  });
-  //[day,"12/10/21"]
-  partnersReports.map(async (report) => {
-    console.log(report);
-    const data = await partnerService.progressMade(report.partner_id);
-    const res = getTemplateData(data);
-    const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
-    console.log("Repeat ...................", report.emails);
-    //if lenght of the array is 1
-    //sending mails daily
-    if (repeat.length == 1 && repeat[0] == "daily") {
-      sendPartnersReports(res, report.emails);
-    }
-    // if the length of the array is 2
-    //[daily or weekly, day or date]
-    else if (repeat.length == 2) {
-      if (
-        repeat[0] == "weekly" &&
-        repeat[1] == today.split(",")[0].toLocaleLowerCase()
-      ) {
+  cron.schedule("0 17 16 * * *", () => {
+    console.log("sending ......");
+    var today = new Date().toLocaleDateString(undefined, {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      weekday: "long",
+    });
+    //[day,"12/10/21"]
+    partnersReports.map(async (report) => {
+      console.log(report);
+      const data = await partnerService.progressMade(report.partner_id);
+      const res = getTemplateData(data);
+      const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
+      // console.log("Repeat ...................", report.emails);
+      //if lenght of the array is 1
+      //sending mails daily
+      if (repeat.length == 1 && repeat[0] == "daily") {
         sendPartnersReports(res, report.emails);
       }
-      if (
-        repeat[0] == "monthly" &&
-        repeat[1] == today.split(",")[1].split("/")[1].trim()
-      ) {
-        sendPartnersReports(res, report.emails);
+      // if the length of the array is 2
+      //[daily or weekly, day or date]
+      else if (repeat.length == 2) {
+        if (
+          repeat[0] == "weekly" &&
+          repeat[1] == today.split(",")[0].toLocaleLowerCase()
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
+        if (
+          repeat[0] == "monthly" &&
+          repeat[1] == today.split(",")[1].split("/")[1].trim()
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
       }
-    }
-    //if the length of the array is 3
-    //[name of month or week,day or date,day or date]
-    //bi-weekly(sending mails)
-    else if (repeat.length == 3) {
-      if (
-        repeat[0] == "bi-weekly" &&
-        (repeat[1] == today.split(",")[0].toLocaleLowerCase() ||
-          repeat[2] == today.split(",")[0].toLocaleLowerCase())
-      ) {
-        sendPartnersReports(res, report.emails);
+      //if the length of the array is 3
+      //[name of month or week,day or date,day or date]
+      //bi-weekly(sending mails)
+      else if (repeat.length == 3) {
+        if (
+          repeat[0] == "bi-weekly" &&
+          (repeat[1] == today.split(",")[0].toLocaleLowerCase() ||
+            repeat[2] == today.split(",")[0].toLocaleLowerCase())
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
+        if (
+          repeat[0] == "bi-monthly" &&
+          (repeat[1] == today.split(",")[1].split("/")[1].trim() ||
+            repeat[2] == today.split(",")[1].split("/")[1].trim())
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
       }
-      if (
-        repeat[0] == "bi-monthly" &&
-        (repeat[1] == today.split(",")[1].split("/")[1].trim() ||
-          repeat[2] == today.split(",")[1].split("/")[1].trim())
-      ) {
-        sendPartnersReports(res, report.emails);
-      }
-    }
-  });
+    });
   });
 
   // email sedhuler for partners
