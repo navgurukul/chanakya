@@ -426,6 +426,8 @@ function personal_details_submit() {
   var city = $("#city").val();
   var email = $("#email").val();
   var partner_refer = $("#partner_refer").val();
+  //profile pic
+  var profile_pic = $("#file").val();
   // if (city === "other") {
   //   city = $("#city_or_village_2").val();
   // }
@@ -444,6 +446,11 @@ function personal_details_submit() {
   // }
 
   // network_speed.value  = navigator.connection.downlink;
+
+  if (!profile_pic) {
+    appending("<h4> Kripaya profile photo dijye! </h4>");
+    return false;
+  }
 
   if (!mobile1) {
     appending("<h4> Kripaya mobile number dijye! </h4>");
