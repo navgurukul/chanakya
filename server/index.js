@@ -109,10 +109,11 @@ exports.deployment = async (start) => {
     const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
 
     //adding some extra data link and name and timeline
+    const { partner_id, repeat } = report;
+    let name = await partnerService.findById(partner_id);
 
-    res.link = `https://admissions.navgurukul.org/partner/${report.partner_id}`;
-    res.timeLine = report.repeat;
-    let name = await partnerService.findById(report.partner_id);
+    res.link = `https://admissions.navgurukul.org/partner/${partner_id}`;
+    res.timeLine = repeat;
     res.partnerName = name.name;
     // console.log("Repeat ...................", res);
 
