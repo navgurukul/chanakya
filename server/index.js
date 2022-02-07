@@ -83,7 +83,6 @@ exports.deployment = async (start) => {
   //   const { feedbackService } = server.services();
   //   feedbackService.informPendingMobilizationWorkto_assignUser();
   // });
-
   // Inform student to complete the pending online test after 3 hours
   cron.schedule(CONSTANTS.informToCompleteTheTestCron, () => {
     const { studentService } = server.services();
@@ -95,68 +94,68 @@ exports.deployment = async (start) => {
   const { partnerService } = server.services();
 
   cron.schedule("0 00 8 * * *", () => {
-  console.log("sending ......");
-  var today = new Date().toLocaleDateString(undefined, {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    weekday: "long",
-  });
-  //[day,"12/10/21"]
-  partnersReports.map(async (report) => {
-    const data = await partnerService.progressMade(report.partner_id);
-    const res = getTemplateData(data);
-    const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
+    console.log("sending ......");
+    var today = new Date().toLocaleDateString(undefined, {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      weekday: "long",
+    });
+    //[day,"12/10/21"]
+    partnersReports.map(async (report) => {
+      const data = await partnerService.progressMade(report.partner_id);
+      const res = getTemplateData(data);
+      const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
 
-    //adding some extra data link and name and timeline
+      //adding some extra data link and name and timeline
 
-    res.link = `https://admissions.navgurukul.org/partner/${report.partner_id}`;
-    res.timeLine = report.repeat;
-    let name = await partnerService.findById(report.partner_id);
-    res.partnerName = name.name;
-    // console.log("Repeat ...................", res);
+      res.link = `https://admissions.navgurukul.org/partner/${report.partner_id}`;
+      res.timeLine = report.repeat;
+      let name = await partnerService.findById(report.partner_id);
+      res.partnerName = name.name;
+      // console.log("Repeat ...................", res);
 
-    //if lenght of the array is 1
-    //sending mails daily
-    if (repeat.length == 1 && repeat[0] == "daily") {
-      sendPartnersReports(res, report.emails);
-    }
-    // if the length of the array is 2
-    //[daily or weekly, day or date]
-    else if (repeat.length == 2) {
-      if (
-        repeat[0] == "weekly" &&
-        repeat[1] == today.split(",")[0].toLocaleLowerCase()
-      ) {
+      //if lenght of the array is 1
+      //sending mails daily
+      if (repeat.length == 1 && repeat[0] == "daily") {
         sendPartnersReports(res, report.emails);
       }
-      if (
-        repeat[0] == "monthly" &&
-        repeat[1] == today.split(",")[1].split("/")[1].trim()
-      ) {
-        sendPartnersReports(res, report.emails);
+      // if the length of the array is 2
+      //[daily or weekly, day or date]
+      else if (repeat.length == 2) {
+        if (
+          repeat[0] == "weekly" &&
+          repeat[1] == today.split(",")[0].toLocaleLowerCase()
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
+        if (
+          repeat[0] == "monthly" &&
+          repeat[1] == today.split(",")[1].split("/")[1].trim()
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
       }
-    }
-    //if the length of the array is 3
-    //[name of month or week,day or date,day or date]
-    //bi-weekly(sending mails)
-    else if (repeat.length == 3) {
-      if (
-        repeat[0] == "bi-weekly" &&
-        (repeat[1] == today.split(",")[0].toLocaleLowerCase() ||
-          repeat[2] == today.split(",")[0].toLocaleLowerCase())
-      ) {
-        sendPartnersReports(res, report.emails);
+      //if the length of the array is 3
+      //[name of month or week,day or date,day or date]
+      //bi-weekly(sending mails)
+      else if (repeat.length == 3) {
+        if (
+          repeat[0] == "bi-weekly" &&
+          (repeat[1] == today.split(",")[0].toLocaleLowerCase() ||
+            repeat[2] == today.split(",")[0].toLocaleLowerCase())
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
+        if (
+          repeat[0] == "bi-monthly" &&
+          (repeat[1] == today.split(",")[1].split("/")[1].trim() ||
+            repeat[2] == today.split(",")[1].split("/")[1].trim())
+        ) {
+          sendPartnersReports(res, report.emails);
+        }
       }
-      if (
-        repeat[0] == "bi-monthly" &&
-        (repeat[1] == today.split(",")[1].split("/")[1].trim() ||
-          repeat[2] == today.split(",")[1].split("/")[1].trim())
-      ) {
-        sendPartnersReports(res, report.emails);
-      }
-    }
-  });
+    });
   });
 
   // email sedhuler for partners
