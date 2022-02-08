@@ -109,13 +109,13 @@ exports.deployment = async (start) => {
     const repeat = report.repeat.trim().toLocaleLowerCase().split(" ");
 
     //adding some extra data link and name and timeline
-    const { partner_id, repeat } = report;
+    const { partner_id } = report;
     let name = await partnerService.findById(partner_id);
 
     res.link = `https://admissions.navgurukul.org/partner/${partner_id}`;
     res.timeLine = repeat;
     res.partnerName = name.name;
-    // console.log("Repeat ...................", res);
+    console.log("Repeat ...................", res);
 
     //if lenght of the array is 1
     //sending mails daily
