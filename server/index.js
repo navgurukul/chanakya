@@ -43,7 +43,6 @@ exports.deployment = async (start) => {
   //     const { metricsService } = server.services();
   //     metricsService.recordPendingMetrics();
   // });
-
   cron.schedule(`2 * * * * *`, () => {
     knex.raw(`WITH inactive_connections AS (
       SELECT
