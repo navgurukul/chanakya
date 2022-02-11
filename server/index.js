@@ -109,7 +109,7 @@ exports.deployment = async (start) => {
       //adding some extra data link and name and timeline
 
       res.link = `https://admissions.navgurukul.org/partner/${report.partner_id}`;
-      res.timeLine = report.repeat;
+      res.timeLine = repeat;
       let name = await partnerService.findById(report.partner_id);
       res.partnerName = name.name;
       // console.log("Repeat ...................", res);
