@@ -6,6 +6,7 @@ const cron = require("node-cron");
 const CONSTANTS = require("../lib/constants");
 const knexfile = require("../knexfile");
 const knex = require("knex")(knexfile);
+const validate = require("@hapi/validate");
 // taking mode of node environment from .env file.
 const Dotenv = require("dotenv");
 const { sendPartnersReports } = require("../lib/helpers/sendEmail");
@@ -167,7 +168,7 @@ if (!module.parent) {
     if (process.env.NODE_ENV) {
       exports.deployment(true);
       process.on("unhandledRejection", (err) => {
-        throw err;
+        console.log("error ::::::", err);
       });
     } else {
       throw Error("An environment variable needs to be defined.");
