@@ -16,7 +16,7 @@ module.exports = {
         options: {
           validatorUrl: null,
           info: {
-            title: "NG Sansaar API Docs",
+            title: "NG Chanakya API Docs",
             version: Package.version,
           },
           securityDefinitions: {
