@@ -4,7 +4,6 @@ const Vision = require("@hapi/vision");
 const HapiSwagger = require("hapi-swagger");
 const Package = require("../../../package.json");
 const CONSTANTS = require("../../../lib/constants");
-
 module.exports = {
   name: "app-swagger",
   async register(server) {
@@ -26,6 +25,7 @@ module.exports = {
               in: "header",
             },
           },
+          schemes: ["http", "https"],
           security: [{ jwt: [] }],
           swaggerUIPath: CONSTANTS.swagger.uiPath,
           jsonPath: CONSTANTS.swagger.jsonPath,
