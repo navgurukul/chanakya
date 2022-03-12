@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "engines": {
-    "node": "12.x.x"
+    "node": "14.x.x"
   },
   "directories": {
     "lib": "lib",
@@ -54,6 +54,7 @@
     "joi": "17.x.x",
     "jsonwebtoken": "8.x.x",
     "knex": "^1.0.3",
+    "localtunnel": "^2.0.2",
     "marked": "^4.0.12",
     "moment": "^2.29.1",
     "mustache": "^4.2.0",

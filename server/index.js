@@ -1,5 +1,4 @@
 "use strict";
-
 const Glue = require("@hapi/glue");
 const Manifest = require("./manifest");
 const cron = require("node-cron");
@@ -12,6 +11,7 @@ const Dotenv = require("dotenv");
 const { sendPartnersReports } = require("../lib/helpers/sendEmail");
 const { getTemplateData } = require("../lib/helpers/partnersEmailReport");
 Dotenv.config({ path: `${__dirname}/../.env` });
+console.log("starting ", __dirname);
 exports.deployment = async (start) => {
   const manifest = Manifest.get("/");
   const server = await Glue.compose(manifest, { relativeTo: __dirname });
