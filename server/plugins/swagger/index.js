@@ -1,11 +1,11 @@
-"use strict";
-const Inert = require("@hapi/inert");
-const Vision = require("@hapi/vision");
-const HapiSwagger = require("hapi-swagger");
-const Package = require("../../../package.json");
-const CONSTANTS = require("../../../lib/constants");
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const HapiSwagger = require('hapi-swagger');
+const Package = require('../../../package.json');
+const CONSTANTS = require('../../../lib/constants');
+
 module.exports = {
-  name: "app-swagger",
+  name: 'app-swagger',
   async register(server) {
     await server.register([
       Inert,
@@ -15,17 +15,17 @@ module.exports = {
         options: {
           validatorUrl: null,
           info: {
-            title: "NG Chanakya API Docs",
+            title: 'NG Chanakya API Docs',
             version: Package.version,
           },
           securityDefinitions: {
             jwt: {
-              type: "apiKey",
-              name: "Authorization",
-              in: "header",
+              type: 'apiKey',
+              name: 'Authorization',
+              in: 'header',
             },
           },
-          schemes: ["http", "https"],
+          schemes: ['http', 'https'],
           security: [{ jwt: [] }],
           swaggerUIPath: CONSTANTS.swagger.uiPath,
           jsonPath: CONSTANTS.swagger.jsonPath,
