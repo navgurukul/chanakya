@@ -1,16 +1,18 @@
+/* eslint-disable import/order */
 const Dotenv = require('dotenv');
 const cron = require('node-cron');
 const Glue = require('@hapi/glue');
 const knexfile = require('../knexfile');
 const knex = require('knex')(knexfile);
 const Manifest = require('./manifest');
+const logger = require('./logger');
 const CONSTANTS = require('../lib/constants');
+
 // taking mode of node environment from .env file.
 const { sendPartnersReports } = require('../lib/helpers/sendEmail');
 const { getTemplateData } = require('../lib/helpers/partnersEmailReport');
 
 Dotenv.config({ path: `${__dirname}/../.env` });
-console.log('starting ', __dirname);
 exports.deployment = async (start) => {
   const manifest = Manifest.get('/');
   const server = await Glue.compose(manifest, { relativeTo: __dirname });
@@ -18,13 +20,9 @@ exports.deployment = async (start) => {
   // Printing a request log
   server.events.on('response', (request) => {
     request.log(
-      `${request.info.remoteAddress
-      }: ${
-        request.method.toUpperCase()
-      } ${
-        request.url.path
-      } --> ${
-        request.response.statusCode}`,
+      `${request.info.remoteAddress}: ${request.method.toUpperCase()} ${request.url.path} --> ${
+        request.response.statusCode
+      }`
     );
   });
   await server.initialize();
@@ -35,7 +33,7 @@ exports.deployment = async (start) => {
 
   await server.start();
 
-  console.log(`Server started at ${server.info.uri}`);
+  logger.info(`Server started at ${server.info.uri}`);
 
   // cron is throwing error I dont know why after talking with Abhishek bhaiya I commented this.
   // schedule the metric calculation cron
@@ -93,7 +91,6 @@ exports.deployment = async (start) => {
   const { partnerService } = server.services();
 
   cron.schedule('0 00 8 * * *', () => {
-    console.log('sending ......');
     const today = new Date().toLocaleDateString(undefined, {
       day: '2-digit',
       month: '2-digit',
@@ -122,16 +119,10 @@ exports.deployment = async (start) => {
       // if the length of the array is 2
       // [daily or weekly, day or date]
       else if (repeat.length === 2) {
-        if (
-          repeat[0] === 'weekly'
-          && repeat[1] === today.split(',')[0].toLocaleLowerCase()
-        ) {
+        if (repeat[0] === 'weekly' && repeat[1] === today.split(',')[0].toLocaleLowerCase()) {
           sendPartnersReports(res, report.emails);
         }
-        if (
-          repeat[0] === 'monthly'
-          && repeat[1] === today.split(',')[1].split('/')[1].trim()
-        ) {
+        if (repeat[0] === 'monthly' && repeat[1] === today.split(',')[1].split('/')[1].trim()) {
           sendPartnersReports(res, report.emails);
         }
       }
@@ -140,16 +131,16 @@ exports.deployment = async (start) => {
       // bi-weekly(sending mails)
       else if (repeat.length === 3) {
         if (
-          repeat[0] === 'bi-weekly'
-          && (repeat[1] === today.split(',')[0].toLocaleLowerCase()
-            || repeat[2] === today.split(',')[0].toLocaleLowerCase())
+          repeat[0] === 'bi-weekly' &&
+          (repeat[1] === today.split(',')[0].toLocaleLowerCase() ||
+            repeat[2] === today.split(',')[0].toLocaleLowerCase())
         ) {
           sendPartnersReports(res, report.emails);
         }
         if (
-          repeat[0] === 'bi-monthly'
-          && (repeat[1] === today.split(',')[1].split('/')[1].trim()
-            || repeat[2] === today.split(',')[1].split('/')[1].trim())
+          repeat[0] === 'bi-monthly' &&
+          (repeat[1] === today.split(',')[1].split('/')[1].trim() ||
+            repeat[2] === today.split(',')[1].split('/')[1].trim())
         ) {
           sendPartnersReports(res, report.emails);
         }
@@ -167,15 +158,15 @@ if (!module.parent) {
     if (process.env.NODE_ENV) {
       exports.deployment(true);
       process.on('unhandledRejection', (err) => {
-        console.log('error ::::::', err);
+        logger.error(err);
       });
     } else {
       throw Error('An environment variable needs to be defined.');
     }
   } catch (err) {
     // if mode is not defiend then inform to user defined mode.
-    console.log(
-      'Please defined Node Environment mode either development or production in .env file',
+    logger.warn(
+      'Please defined Node Environment mode either development or production in .env file'
     );
     throw err;
   }

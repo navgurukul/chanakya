@@ -11,7 +11,8 @@
         "no-underscore-dangle": ["error", {"allow": ["_data", "_value"]}],
         "implicit-arrow-linebreak":"off",
       	"no-restricted-syntax": "error",
-        "object-curly-newline":"off"
+        "object-curly-newline":"off",
+        "operator-linebreak":"off"
     },
     "overrides": [
       {
