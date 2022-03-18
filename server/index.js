@@ -158,6 +158,7 @@ if (!module.parent) {
     if (process.env.NODE_ENV) {
       exports.deployment(true);
       process.on('unhandledRejection', (err) => {
+        console.log(err);
         logger.error(err);
       });
     } else {
