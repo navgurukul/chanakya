@@ -159,11 +159,13 @@ if (!module.parent) {
       exports.deployment(true);
       process.on('unhandledRejection', (err) => {
         logger.error(err);
+        console.log(err)
       });
     } else {
       throw Error('An environment variable needs to be defined.');
     }
   } catch (err) {
+    console.log(err)
     // if mode is not defiend then inform to user defined mode.
     logger.warn(
       'Please defined Node Environment mode either development or production in .env file'
