@@ -25,6 +25,10 @@ And price 1m silk is 50₹.
 You have 8m cotton and 6m silk.
 What is the price of the clothes that you have?
 
+### Marathi
+१ मी (एक मीटर) सुती कापडाची किंमत ७० रुपये आहे व १ मी. सिल्क कापडाची
+किंमत ५० रुपये आहे. तुमच्याजवळ ८ मी. सुती व ६ मी. सिल्क कापड आहे. तर
+तुमच्याजवळ किती रुपयाचे कापड आहे?
 
 ## Options
 | Option | Values | ID |
@@ -66,6 +70,15 @@ You have clothes with a cost of 4000₹.
 Which of the following combinations
 has 4000₹ price?
 
+### Marathi
+हा प्रश्न सोडविण्यासाठी असा विचार करा – तुमच्याजवळ जी माहिती नाही
+त्यासाठी x आणि y हे चल (variable) गृहीत धरावे लागेल. त्यानंतर या गृहीतकाचे
+समीकरण तयार करा जसे ३x+२y = १००जर तुम्ही गणिताला घाबरत असाल तरी
+भिऊ नका, थोडे लक्ष देऊन पहा म्हणजे काही प्रश्न तरी नक्की सोडवू शकाल.
+
+१मी सुती कापडाची किंमत ६० रु. आहे . १मी सिल्क कापडाची किंमत ५५ आहे.
+तुमच्याजवळ ४०००रुपयाचे कापड आहे. कोणत्या प्रकारचे कापड किती असेल तर
+एकत्रित त्याची किंमत ४००० रु. होईल?
 
 ## Options
 | Option | Values | ID |
@@ -104,6 +117,10 @@ You have clothes with a cost of 5780₹.
 You have same length of cotton and silk.
 How is the length of your cotton?
 
+### Marathi
+१ मी सुती कापडाची किंमत ११० रु आहे. आणि १ मी सिल्क कापडाची किंमत
+६० रु आहे.तुमच्याकडे ५७८० रुपयाचे कापड आहे.तुमच्याकडे सुती व सिल्क
+कापड सारख्याच लांबीचे आहे तर तुमच्याकडे किती मी. सुती कापड आहे?
 
 ## Options
 | Option | Values | ID |
@@ -142,6 +159,12 @@ Is double the length of silk.
 (If 5m silk then it means 10m cotton)
 What length of cotton do you have?
 
+### Marathi
+१ मी. सुती कापडाची किंमत ४० रु. आहे व १ मी सिल्क कापडाची किंमत ७० रु.
+आहे. तुमच्याजवळ ५४०० रुपयाचे कापड आहे. तुमच्याकडे जितक्या लांबीचे
+सिल्क कापड आहे त्याच्या दुप्पट लांबीचे सुती कापड आहे. ( म्हणजे जर
+तुमच्याकडे ५ मी. सिल्क कापड असेल तर तुमच्याकडे १० मी सुती कापड
+आहे)सांगा तुमच्या जवळ किती लांबीचे सुती कापड आहे ?
 
 ## Options
 | Option | Values | ID |
@@ -179,6 +202,11 @@ The length of the silk that you have is
 You have clothes with a cost of 7000₹.
 What length of cotton do you have?
 
+### Marathi
+१ मी. सुती कापडाची किंमत १०५ रू. आहे. १ मी. सुती कापडाची किंमत सिल्क
+कापडाच्या किमतीच्या तिप्पट (३ पट) आहे. तुमाच्या जवळ जितके सुती कापड
+आहे त्याच्या ७ पट लांब सिल्क कापड आहे. तुमच्याजवळ एकूण ७००० रु. चे
+कापड आहे. तर सांगा तुमच्याजवळ किती लांबीचे सुती कापड आहे ?
 
 ## Options
 | Option | Values | ID |
@@ -209,14 +237,20 @@ Batayie aapke paas kitni length ki cotton hai?
 
 
 ### English
-Price of 1m cotton is 20₹.
+Price of 1m cotton is 40₹.
 And price of 1m silk is 30₹.
 For every 2m of silk, you have 3m cotton.
 (If 2m silk then you have 3m cotton)
 (If 4m silk then you have 6m cotton and so on)
-You have clothes with a cost of 4320₹.
+You have clothes with a cost of 5400₹.
 What length of cotton do you have?
 
+### Marathi
+१ मी सुती कापडाची किंमत ४० रु आहे. १ मी सिल्क कापडाची किंमत ३० रु
+आहे. तुमच्याकडे प्रत्येक २ मी सिल्क कापडासाठी ३ मी सुती कापड आहे. (म्हणजे
+जर २ मी सिल्क कापड असेल तर ३ मी सुती कापड आहे, जर ४ मी सिल्क कापड
+असेल तर ६ मी सुती कापड आहे इ.) तुमच्याजवळ एकूण ५४०० रुपयाचे कापड
+आहे तर तुमच्याजवळ किती लांबीचे सुती कापड आहे ते सांगा?
 
 ## Options
 | Option | Values | ID |
