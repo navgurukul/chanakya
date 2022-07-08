@@ -62,6 +62,25 @@ If there are 180 boys, out of which
 Then how many percent boys are unhealthy?
 Please think and answer carefully.
 
+### Marathi
+गणिता मध्ये टक्केवारी ही अत्यंत महत्वाची संकल्पना आहे. तुम्ही असा विचार करा
+कि ५० मुले आहत , आणि ४० मुले निरोगी आहत.बाकी मुले आजारी आहेत , तर
+किती टक्के मुले आजारी आहेत ?
+किती मुले आजारी आहेत =५०-४०=१०
+आजारी मुलांची टक्केवारी =( किती मुले आजारी आहेत /एकूण मुलांची
+संख्या)*१००
+म्हणजे
+आजारी मुलांची टक्केवारी = (१०/५०)*१०० =२०%
+आता या संकल्पनेचा वापर करून , हे प्रश्न सोडवण्याचा प्रयत्न करा. किती मुले
+निरोगी आहेत ,किती मुले आजारी आहेत आणि एकूण किती मुले आहेत हे नेहेमी
+लक्षात ठेवा.
+
+
+**एकूण मुले**
+
+जर १८० मुले आहेत , त्यातील ४५ मुले आजारी आहेत तर किती टक्के मुले आजारी
+आहेत ? नीट लक्ष्य देऊन विचार करा व उत्तर लिहा .
+
 
 ## Options
 | Option | Values | ID |
@@ -95,6 +114,10 @@ and 10 boys are unhealthy.
 If 20 more unhealthy boys join the school,
 then what is the % of unhealthy boys?
 
+### Marathi
+जर एका शाळेत १३० मुले आहेत ज्या मध्ये १० मुले आजारी आहेत. आता २०
+आजारी मुलांनी तिथे प्रवेश घेतला आहे तर आजारी मुलांची टक्केवारी किती ?
+
 
 ## Options
 | Option | Values | ID |
@@ -126,7 +149,9 @@ There are 160 healthy boys in a school.
 On admission of how many new unhealthy boys
 the % of unhealthy boys will be 20%?
 
-
+### Marathi
+जर एका शाळेत १६० निरोगी मुले आहेत. त्या शाळेत अजून किती आजारी
+मुलांचा प्रवेश घेतल्याने आजारी मुलांची टक्केवारी २० % होईल ?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
@@ -160,6 +185,11 @@ Adding how many unhealthy boys,
 would the percentage of unhealthy boys be 20%?
 
 
+### Marathi
+एका शाळेत २२४ निरोगी मुले व २६ आजारी मुले आहेत. अजून किती आजारी
+मुलांनी शाळेत प्रवेश घेतल्यावर आजारी मुलांची टक्केवारी २० % होईल ?
+
+
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
@@ -191,6 +221,11 @@ In a school, there are 800 boys,
 out of which 20% are unhealthy.
 By adding how many unhealthy boys,
 the school will have 36% unhealthy boys?
+
+
+### Marathi
+एका शाळेत ८०० मुले आहेत. त्यातील २० % मुले आजारी आहेत. त्या शाळेत
+अजून किती आजारी मुलांना प्रवेश दिल्याने आजारी मुलांचे प्रमाण ३६% होईल ?
 
 
 ## Options
