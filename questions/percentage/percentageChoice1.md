@@ -185,6 +185,8 @@ We want to create lemon water such that
 20% of the solution is lemon.
 How many ml of lemon would you add?
 
+### Marathi
+एका ग्लासमध्ये आपल्याकडे 180 मिली पाणी आणि 20 मिली लिंबू आहे. आणि आम्हाला लिंबू पाणी तयार करायचे आहे ज्यामध्ये आमच्याकडे 20% लिंबू पाणी आहे. मग तुम्ही किती मिली लिंबू घालाल?
 
 ## Options
 | Option | Values | ID |
@@ -219,6 +221,9 @@ How much ml of lemon should we add
 in the new solution such that 20%
 of the new solution is lemon.
 
+
+### Marathi
+आपल्याकडे लिंबू पाण्याचे 400 मिली द्रावण आहे ज्यामध्ये 10% द्रावणामध्ये लिंबू आहे. तर 20% नवीन लिंबू द्रावण तयार करण्यासाठी आपल्याला किती मिली लिंबू घालावे लागेल?
 
 ## Options
 | Option | Values | ID |
