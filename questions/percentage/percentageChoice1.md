@@ -61,6 +61,21 @@ and 30 ml lemon, then
 what is the percentage of lemon?
 Please think and answer carefully.
 
+### Marathi
+गणिता मध्ये टक्केवारी ही अत्यंत महत्वाची संकल्पना आहे. या संकल्पनेला खालील
+उदाहरणाद्वारे समजून घेऊ :
+जर एका ग्लासात ५० मिली लिंबू पाणी आहे. ज्या पैकी ४० मिली पाणी आहे व
+उरलेले लिंबू आहे तर लिंबू चे प्रमाण किती टक्के आहे ?
+लिंबू किती आहे = ५० मिली – ४० मिली = १० मिली
+लिंबू ची टक्केवारी = (लिंबू पाण्यात किती लिंबू आहे / पाणी आणि लिंबू मिळून
+एकूण किती लिंबू पाणी आहे)*१००
+म्हणजे लिंबाची टक्केवारी = ( १०/५० )* १०० = २० %
+हे लक्षात ठेऊन पुढील प्रश्न सोडवा.
+
+
+जर एका ग्लासात १२० मिली पाणी आहे. आणि ३० मिली लिंबू आहे. तर लिंबू चे
+प्रमाण किती टक्के आहे? लक्षात घेऊन विचार करा व उत्तर द्या.
+
 
 ## Options
 | Option | Values | ID |
@@ -92,6 +107,10 @@ If there is 105 ml water in one glass
 and 20 ml lemon. Now,
 if we add 25 ml lemon more
 then what is the % of lemon?
+
+### Marathi
+जर एका ग्लासात १०५ मिली पाणी आहे आणि २० मिली लिंबू आहे, त्यात आम्ही
+२५ मिली लिंबू अजून टाकले तर आता लिंबूचे प्रमाण किती टक्के आहें ?
 
 
 ## Options
@@ -127,6 +146,11 @@ to create lemon water solution such that
 there is 20% lemon in it.
 How many ml of lemon would you add?
 
+### Marathi
+जर एका ग्लासात १४० मिली पाणी आहे आणि त्यात थोडे लिंबू टाकून असे लिंबू
+पाणी बनवायचे आहे कि ज्यात २० % लिंबू आहे. तर किती मिली लिंबू टाकावे
+लागेल ?
+
 
 ## Options
 | Option | Values | ID |
@@ -161,6 +185,8 @@ We want to create lemon water such that
 20% of the solution is lemon.
 How many ml of lemon would you add?
 
+### Marathi
+एका ग्लासमध्ये आपल्याकडे 180 मिली पाणी आणि 20 मिली लिंबू आहे. आणि आम्हाला लिंबू पाणी तयार करायचे आहे ज्यामध्ये आमच्याकडे 20% लिंबू पाणी आहे. मग तुम्ही किती मिली लिंबू घालाल?
 
 ## Options
 | Option | Values | ID |
@@ -195,6 +221,9 @@ How much ml of lemon should we add
 in the new solution such that 20%
 of the new solution is lemon.
 
+
+### Marathi
+आपल्याकडे लिंबू पाण्याचे 400 मिली द्रावण आहे ज्यामध्ये 10% द्रावणामध्ये लिंबू आहे. तर 20% नवीन लिंबू द्रावण तयार करण्यासाठी आपल्याला किती मिली लिंबू घालावे लागेल?
 
 ## Options
 | Option | Values | ID |

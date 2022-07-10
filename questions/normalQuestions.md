@@ -21,6 +21,8 @@ Neeche diye hue pattern mein next kaunsa term aayega?
 ### English
 What will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -49,6 +51,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -77,6 +81,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -105,6 +111,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -133,6 +141,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -161,6 +171,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -189,6 +201,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |
@@ -217,6 +231,8 @@ What will be the next term in the below pattern?
 ### English
 *What* will be the next term in the below pattern?
 
+### Marathi
+खालील दिलेल्या क्रमामध्ये पुढील संख्या कोणती असेल ?
 
 ## Options
 | Option | Values | ID |

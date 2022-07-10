@@ -30,6 +30,15 @@ Then in how much time 20 people
 can prepare 200 glasses of lemonade?
 
 
+### Marathi
+पुढील ३ प्रश्न सोडवण्या साठी थोडा दैनंदिन जीवनातील उदाहरणांचा विचार
+करावा लागेल. जसे कि समजा तुम्ही एका तासात १०० झाडे लावू शकता तर ४
+तासात किती लावू शकाल ? १०० ला ४ने गुणा, तितके.
+कारण जितके काम एका तासात करू शकाल त्याच्या ४ पट काम ४ तासात करू
+शकता. अशा प्रकारे विचार करून हे तीन प्रश्न सोडवा.
+
+जर २०० ग्लास लिंबू पाणी बनवण्या साठी १० लोकांना २० मिनिटे लागतात, तर
+२० लोक किती वेळात २०० ग्लास लिंबू पाणी बनवू शकतील ?
 ## Options
 | Option | Values | ID |
 |:---|:---|:---:|
@@ -60,6 +69,11 @@ To prepare 200 glasses of lemonade
 10 people take 20 mins in total.
 Then to prepare 600 glasses of lemonade in 20 
 mins how many people would be needed?
+
+
+### Marathi
+जर २०० ग्लास लिंबू पाणी बनवण्यासाठी १० लोकांना २० मिनिटे लागतात तर,
+२० मिनिटात ६०० ग्लास लिंबू पाणी बनवण्यासाठी किती लोकांची गरज पडेल ?
 
 
 ## Options
@@ -94,6 +108,11 @@ To prepare 200 glasses of lemonade,
 To prepare 600 glasses of 
 lemonade with 40 people
 how much time would be needed?
+
+
+### Marathi
+जर २०० ग्लास लिंबू पाणी बनवण्यासाठी १० लोकांना २० मिनिटे लागतात. तर
+४० लोकांना ६०० ग्लास लिंबू पाणी बनवण्यासाठी किती मिनिटे लागतील ?
 
 
 ## Options
