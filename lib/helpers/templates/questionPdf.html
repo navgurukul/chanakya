@@ -191,6 +191,16 @@
                     {{/if}}
                   {{/if}}
 
+                  {{!-- Marathi text --}}
+                  {{#if this.ma_text}}
+                    {{#if (hasParaTag this.ma_text) }}
+                      {{{this.ma_text}}}
+                    {{else}}
+                      <p>
+                        {{{this.ma_text}}}
+                      </p>
+                    {{/if}}
+                  {{/if}}
 
                   {{#if (eq this.type 2)}}
                     <p>Iska answer likho answers wale page pe.</p>
