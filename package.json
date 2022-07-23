@@ -52,6 +52,7 @@
     "hapi-swagger": "^14.2.5",
     "haute-couture": "^3",
     "hoek": "^6.1.3",
+    "html-pdf-node": "^1.0.8",
     "inert": "^5.1.3",
     "joi": "17.x.x",
     "js-logger": "^1.6.1",
