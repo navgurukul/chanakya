@@ -35,6 +35,12 @@ exports.deployment = async (start) => {
 
   logger.info(`Server started at ${server.info.uri}`);
 
+  const logs = require('../lib/helpers/log');
+  // clear log file every midnight ( if file is 10 days old)
+  cron.schedule('* * * * *', async () => {
+    await logs();
+  });
+
   // cron is throwing error I dont know why after talking with Abhishek bhaiya I commented this.
   // schedule the metric calculation cron
   // cron.schedule(CONSTANTS.metricCalcCron, () => {
@@ -159,13 +165,13 @@ if (!module.parent) {
       exports.deployment(true);
       process.on('unhandledRejection', (err) => {
         logger.error(err);
-        console.log(err)
+        console.log(err);
       });
     } else {
       throw Error('An environment variable needs to be defined.');
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     // if mode is not defiend then inform to user defined mode.
     logger.warn(
       'Please defined Node Environment mode either development or production in .env file'
