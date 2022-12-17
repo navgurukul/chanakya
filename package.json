@@ -36,6 +36,7 @@
     "boom": "^7.3.0",
     "bounce": "1.x.x",
     "confidence": "5.x.x",
+    "config": "^3.3.8",
     "csv-parser": "^3.0.0",
     "date-and-time": "^2.2.1",
     "dot": "^1.1.3",
