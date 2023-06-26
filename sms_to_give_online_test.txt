@@ -1,0 +1,5 @@
+Dear <Student Name>
+Thank you for applying to NavGurukul Software engineering residential course. 
+Please proceed to give online test at https://admissions.navgurukul.org/
+Best of Luck,
+Team NavGurukul.
