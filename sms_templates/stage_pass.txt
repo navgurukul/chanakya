@@ -1,0 +1,6 @@
+Dear <Student Name>
+Congratulations! You have cleared <Admission Stage Name>.
+Next Admission Stage - <Next Stage Name>
+NavGurukul Team will connect with you shortly.
+
+
