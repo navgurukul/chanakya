@@ -1,3 +1,4 @@
-Dear <Student Name>, Sorry to inform you that you have failed the online test. 
+Dear <Student Name>, 
+Sorry to inform you that you have failed the online test. 
 Don't get disheartened. 
-Please prepare and give the test again - All the best, NavGurukul Admissions Team
+Please prepare and give the test again - All the best, NavGurukul Admissions Team.
