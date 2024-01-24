@@ -67,7 +67,6 @@
     "mysql": "^2.18.1",
     "node-cron": "^3.0.0",
     "node-phantom": "^0.2.5",
-    "nodemailer": "^6.9.8",
     "objection": "^3.0.1",
     "objection-db-errors": "^1.1.2",
     "papaparse": "^5.3.1",
