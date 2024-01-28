@@ -1,0 +1,11 @@
+Dear <Student Name>
+Your admission progress -
+
+School: <School Name>
+Stage: <Stage Name>
+Current status: <status>
+
+Thank you for applying to NavGurukul. 
+
+Best Regards
+NavGurukul Admissions Team
