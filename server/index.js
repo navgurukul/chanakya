@@ -7,15 +7,54 @@ const knex = require('knex')(knexfile);
 const Manifest = require('./manifest');
 const logger = require('./logger');
 const CONSTANTS = require('../lib/constants');
+const { Server } = require('socket.io');
+const http = require('http');
+const cors = require('cors');
+const Hapi = require('@hapi/hapi');
 
 // taking mode of node environment from .env file.
 const { sendPartnersReports } = require('../lib/helpers/sendEmail');
 const { getTemplateData } = require('../lib/helpers/partnersEmailReport');
 
 Dotenv.config({ path: `${__dirname}/../.env` });
+
 exports.deployment = async (start) => {
   const manifest = Manifest.get('/');
+
   const server = await Glue.compose(manifest, { relativeTo: __dirname });
+
+  // var io = require('socket.io')(server.listener);
+
+  // io.on('connection', function (socket) {
+  //   socket.emit('Oh hii!');
+
+  //   socket.on('burp', function () {
+  //     socket.emit('Excuse you!');
+  //   });
+  // });
+
+  // const httpServer = http.createServer(server);
+  const httpServer = http.createServer(server.listener);
+  console.log('server.listener', server.listener);
+
+  console.log('server', server);
+  console.log('httpServer', httpServer);
+
+  const io = new Server(httpServer, {
+    cors: {
+      origin: '*',
+      // 'http://localhost:8080',
+      methods: ['GET', 'POST'],
+    },
+  });
+
+  // io.on('connection', (socket) => {
+  //   console.log('a user connected', socket.id);
+  //   socket.on('send_feedback', (data) => {
+  //     console.log('data', data);
+  //     // socket.to(data.room).emit("receive_message", data);
+  //   });
+  // });
 
   // Printing a request log
   server.events.on('response', (request) => {
@@ -34,6 +73,17 @@ exports.deployment = async (start) => {
   await server.start();
 
   logger.info(`Server started at ${server.info.uri}`);
+
+  io.on('connection', (socket) => {
+    console.log('a user connected', socket.id);
+    console.log('Crazy');
+    socket.on('send_feedback', (data) => {
+      console.log('RRRRR', data);
+      // socket.to(data.room).emit("receive_message", data);
+    });
+  });
+
+  console.log('Started at:', server.info.uri);
 
   const logs = require('../lib/helpers/log');
   // clear log file every midnight ( if file is 10 days old)
