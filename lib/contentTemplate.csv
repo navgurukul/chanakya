@@ -1,0 +1,12 @@
+TEMPLATE_ID,TEMPLATE_NAME,TEMPLATE_CONTENT,STAGE
+1207171169959688956,online_test_pass,"Dear <Student Name>,
+Congratulations. You have passed NavGurukul online test.
+We will get in touch with you shortly.
+NavGurukul Admission Team.",pendingEnglishInterview 
+1207170134145063070,sent_offer_letter_sms,"Dear <Student Name>,
+Congratulations! You got selected to NavGurukul.
+We sent email with joining information.
+For queries, call us.",offerLetterSent 
+1207170134592718824,online_test_fail,"Dear <Student Name>,
+You have failed NavGurukul online test.
+Try again. All the best, NavGurukul Admissions Team.",testFailed
