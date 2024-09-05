@@ -1,0 +1,9 @@
+services:
+  chanakya:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image : chanakya-prod
+    container_name: chanakya-prod-container
+    ports:
+      - "3111:3111" 

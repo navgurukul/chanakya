@@ -1,0 +1,10 @@
+services:
+  dev-chanakya:
+    build:
+      dockerfile: Dev-DockerFile
+      context: .
+    image : dev-chanakya
+    container_name: dev-chanakya-container
+    ports:
+      - "3112:3112"
+   
