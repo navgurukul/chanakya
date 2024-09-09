@@ -1,9 +1,12 @@
+version: '3.7'
 services:
-  chanakya:
+  dev-chanakya:
     build:
-      dockerfile: Dockerfile
+      dockerfile: DockerFile
       context: .
-    image : chanakya-prod
+    image : chanakya
     container_name: chanakya-prod-container
-    ports:
-      - "3111:3111" 
+    env_file:
+      - .env
+
+    network_mode: host
