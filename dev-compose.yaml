@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  dev-chanakya:
+    build:
+      dockerfile: Dev-DockerFile
+      context: .
+    image : dev-chanakya
+    container_name: dev-chanakya-container
+    env_file:
+      - .env
+
+    network_mode: host
