@@ -1,101 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>NavGurukul Scholarship Test</title>
   <style>
-
-    body{
-      font-family: 'Open Sans';
+    body {
+      font-family: 'Open Sans', sans-serif;
       margin: 10px;
       font-size: 10px;
     }
-    .main{
+    .main {
       margin: 20px 0;
     }
-    tr.inline-block{
-      display: inline-block;
-    }
-    table.question-display, .question-table{
-      page-break-inside:avoid !important;
-      width:95% !important;
+    .question-table {
+      page-break-inside: avoid;
+      width: 95%;
       margin-bottom: 10px;
-      margin-top:0;
-      padding-top: 0;
     }
     .question-text, .question-table tr, .question-table td, .question-table tbody {
       margin: 0;
       padding: 0;
     }
-    .question-text p, .question-text p p{
+    .question-text p {
       margin-top: 0px;
       margin-bottom: 5px;
     }
-    .question-text p:first-child, .question-text p p:first-child {
-      margin-top:-1px;
+    .question-text p:first-child {
+      margin-top: -1px;
     }
-    #answer-sheet {
+    #answer-sheet, #student-detail {
       page-break-before: always;
+      width: 90%;
+      margin: 0 auto;
     }
-    #student-detail {
-      page-break-before: always;
-    }
-    .inline-block img{
-      display:inline-block;
+    .inline-block img {
+      display: inline-block;
       vertical-align: text-top;
-      margin:auto;
-      height: 70px !important;
+      margin: auto;
+      height: 70px;
     }
-
-    /** Image size fixing for question*/
-    .commen-text img{
+    .common-text img {
       display: block;
       margin: 0 auto;
       max-height: 120px;
     }
-    /** Image size fixing for options*/
-    .options-cell img{
+    .options-cell img {
       height: 50px;
     }
-
-    /*css for studet detail form secction...*/
-    .student-info{
+    .student-info {
       width: 90%;
       margin: 0 auto;
     }
-    /*css for all answer submmit section..*/
-    #answer-sheet, #student-detail {
-      width: 90%;
-      margin: 0 auto;
-    }
-
-    .answer-section td, .answer-section th, .student-info td , .student-info th{
+    .answer-section td, .answer-section th, .student-basic-detail td, .student-basic-detail th {
       border: 1px solid #dddddd;
       text-align: center;
     }
-
-    .question-table{
-      margin: 20px;
-    }
-    /*answer form inner table css...*/
-    .inner-table{
+    .inner-table {
       width: 100%;
     }
-    .inner-table tr td{
-      border:none;
+    .inner-table tr td {
+      border: none;
     }
-    .th-width{
+    .th-width {
       width: 5%;
     }
-    /*css for zero padding in inner table..*/
-    .padding-zero{
-      padding: 0px !important;
-    }
-    .padding{
-      padding-top: 20px;
-      padding-bottom: 5px;
+    .padding-zero {
+      padding: 0 !important;
     }
     .set-heading {
       margin-top: 20px;
@@ -108,25 +79,23 @@
     }
     .student-basic-detail td {
       border: 2px solid #dddddd;
-      padding-top: 5px;
-      padding-right: 1%;
-      padding-left: 1%;
+      padding: 5px 1%;
     }
-    .answer-choices-table{
-      width:100%;
+    .answer-choices-table {
+      width: 100%;
       border-collapse: collapse;
     }
     .sub-heading {
-      color:gray;
+      color: gray;
       font-weight: bold;
     }
-    .answer-choices-table td{
+    .answer-choices-table td {
       padding-top: 5px;
     }
-    .empty-cell{
+    .empty-cell {
       width: 100px;
     }
-    .student-detail-table-head p{
+    .student-detail-table-head p {
       margin-top: 5px;
     }
   </style>
@@ -137,135 +106,106 @@
     <div class="heading">
       <center>
         <h2>
-          <b>NavGurukul Scholarship Test - {{ setName }}</b> </br>
-          <b>Partner : {{ partnerName }}</b>
+          <b>NavGurukul Scholarship Test - {{ setName }}</b><br>
+          <b>Partner: {{ partnerName }}</b>
         </h2>
         <h3>Question Paper</h3>
       </center>
     </div>
-    <!-- question set display -->
+
     <div class="main">
       {{#each questions}}
       <table class="question-table padding-zero">
         <tr>
-          <td width="4%" valign='top'><b> {{inc @index}}. </b></td>
-          <td valign='top' class="padding-zero">
+          <td width="4%" valign="top"><b>{{inc @index}}.</b></td>
+          <td valign="top" class="padding-zero">
             <table class="question-display padding-zero">
               <tr>
-                <td valign='top' class="question-text">
-                  {{!--
-                    commen text between the questions like
-                    images, mathematical equation.
-                  --}}
+                <td valign="top" class="question-text">
                   {{#if this.common_text}}
-                    <div class="commen-text">
-                      {{#if (hasParaTag this.common_text) }}
-                        {{{this.common_text}}}
-                      {{else}}
-                        <p>
-                          {{{this.common_text}}}
-                        </p>
-                      {{/if}}
-                    </div>
+                  <div class="common-text">
+                    {{#if (hasParaTag this.common_text)}}
+                      {{{this.common_text}}}
+                    {{else}}
+                      <p>{{{this.common_text}}}</p>
+                    {{/if}}
+                  </div>
                   {{/if}}
 
-                  {{!-- English text --}}
                   {{#if this.en_text}}
-                    {{#if (hasParaTag this.en_text) }}
+                    {{#if (hasParaTag this.en_text)}}
                       {{{this.en_text}}}
                     {{else}}
-                      <p>
-                        {{{this.en_text}}}
-                      </p>
+                      <p>{{{this.en_text}}}</p>
                     {{/if}}
                   {{/if}}
 
-                  {{!-- Hindi text --}}
                   {{#if this.hi_text}}
-                    {{#if (hasParaTag this.hi_text) }}
+                    {{#if (hasParaTag this.hi_text)}}
                       {{{this.hi_text}}}
                     {{else}}
-                      <p>
-                        {{{this.hi_text}}}
-                      </p>
+                      <p>{{{this.hi_text}}}</p>
                     {{/if}}
                   {{/if}}
 
-                  {{!-- Marathi text --}}
                   {{#if this.ma_text}}
-                    {{#if (hasParaTag this.ma_text) }}
+                    {{#if (hasParaTag this.ma_text)}}
                       {{{this.ma_text}}}
                     {{else}}
-                      <p>
-                        {{{this.ma_text}}}
-                      </p>
+                      <p>{{{this.ma_text}}}</p>
                     {{/if}}
                   {{/if}}
 
                   {{#if (eq this.type 2)}}
-                    <p>Iska answer likho answers wale page pe.</p>
+                  <p>Iska answer likho answers wale page pe.</p>
                   {{/if}}
                 </td>
               </tr>
 
               {{#if (eq this.type 1)}}
-                  <tr class="inline-block">
-                    {{#each this.options}}
-                    <tr style="display:inline-block; min-width:45%;">
-                      <td style="width:20px" colspan="2">{{string_lower @index}}).</td>
-                      <td class="options-cell">
-                        {{#if (hasParaTag this.text) }}
-                          {{{this.text}}}
-                        {{else}}
-                          <p>
+              <tr>
+                <td>
+                  <table class="inner-table">
+                    <tr>
+                      {{#each this.options}}
+                      <td style="width: 45%;">
+                        <b>{{string_lower @index}})</b> 
+                        <span class="options-cell">
+                          {{#if (hasParaTag this.text)}}
                             {{{this.text}}}
-                          </p>
-                        {{/if}}
+                          {{else}}
+                            <p>{{{this.text}}}</p>
+                          {{/if}}
+                        </span>
                       </td>
+                      {{/each}}
                     </tr>
-                    {{/each}}
-                  </tr>
+                  </table>
+                </td>
+              </tr>
               {{/if}}
             </table>
           </td>
         </tr>
       </table>
       {{/each}}
-
     </div>
   </div>
 
   <div id="answer-sheet">
     <div class="set-heading heading">
-      <center>
-        <h1>
-          {{ setName }}
-        </h1>
-      </center>
+      <center><h1>{{ setName }}</h1></center>
     </div>
 
-    <div id="student-basic-detail">
+    <div class="student-info">
       <table class="student-basic-detail">
         <tr>
-          <td>
-            <b><i>Name</i></b> / आपका नाम
-          </td>
-          <td>
-            _________________
-          </td>
-          <td>
-            <b><i>WhatsApp</i></b> / व्हाट्सप्प 
-          </td>
-          <td>
-            _________________
-          </td>
-          <td>
-            <b><i>Mobile</i></b> / मोबाइल 
-          </td>
-          <td>
-            _________________
-          </td>
-          </td>
+          <td><b><i>Name</i></b> / आपका नाम</td>
+          <td>_________________</td>
+          <td><b><i>WhatsApp</i></b> / व्हाट्सप्प</td>
+          <td>_________________</td>
+          <td><b><i>Mobile</i></b> / मोबाइल</td>
+          <td>_________________</td>
         </tr>
       </table>
     </div>
@@ -277,34 +217,22 @@
       <table class="answer-choices-table">
         {{#each questions}}
         <tr>
-          <td class="th-width">
-            <b>
-              {{inc @index}})
-            </b>
-          </td>
+          <td class="th-width"><b>{{inc @index}})</b></td>
           {{#if (eq this.type 1)}}
           <td class="padding-zero">
             <table class="inner-table">
               <tr>
                 {{#each this.options}}
-                <td class="choices">
-                  ❏ {{string_upper @index}}
-                </td>
+                <td>❏ {{string_upper @index}}</td>
                 {{/each}}
               </tr>
             </table>
           </td>
           {{else}}
-          <td>
-
-          </td>
+          <td></td>
           {{/if}}
-          <td class="empty-cell">
-
-          </td>
-          <td class="empty-cell">
-
-          </td>
+          <td class="empty-cell"></td>
+          <td class="empty-cell"></td>
         </tr>
         {{/each}}
       </table>
@@ -313,142 +241,47 @@
 
   <div id="student-detail">
     <div class="set-heading heading">
-      <center>
-        <h1>
-          {{ setName }}
-        </h1>
-      </center>
+      <center><h1>{{ setName }}</h1></center>
     </div>
 
-    <div id="student-basic-detail">
-      <p>
-        Write your name and mobile number here :</br>
-        यहां अपना नाम और मोबाइल नंबर लिखें :
-      </p>
-      </p>
+    <div class="student-info">
+      <p>Write your name and mobile number here:<br>यहां अपना नाम और मोबाइल नंबर लिखें:</p>
       <table class="student-basic-detail">
         <tr>
-          <td>
-            <b>Name</b> / आपका नाम
-          </td>
-          <td>
-            _________________
-          </td>
-          <td>
-            <b>Mobile</b> / मोबाइल
-          </td>
-          <td>
-            _________________
-          </td>
+          <td><b>Name</b> / आपका नाम</td>
+          <td>_________________</td>
+          <td><b>Mobile</b> / मोबाइल</td>
+          <td>_________________</td>
         </tr>
       </table>
-    </div>
 
-    <div id="student-basic-detail">
-      <p>
-        We need few more details of you. Please fill in the following details after the test.</br>
-        हमें आपकी कुछ और जानकारी चाहिए। कृपया परीक्षण के बाद निम्नलिखित विवरण भरें.
-      </p>
-      </p>
+      <p>We need a few more details. Please fill them after the test.<br>हमें आपकी कुछ और जानकारी चाहिए। कृपया परीक्षण के बाद निम्नलिखित विवरण भरें।</p>
       <table class="student-basic-detail">
         <tr>
-          <td class="student-detail-table-head">
-            <b>WhatsApp Number</b>
-          </td>
-          <td>
-            ______________
-          </td>
-          <td class="student-detail-table-head">
-            <b>E-mail Id</b>
-          </td>
-          <td>
-            ______________
-          </td>
-        </tr>
-
-        <tr>
-          <td class="student-detail-table-head">
-            <b>Gender/</b> ​लंग
-          </td>
-          <td>
-            ❏ Male / पुरुष </br>
-            ❏ Female / ​महिला </br>
-            ❏ Transgender / ​अन्य </br>
-          </td>
-          <td class="student-detail-table-head">
-            <b>Pin Code</b></br>
-            आपका पिन कोड क्या है?
-          </td>
-          <td>
-            ______________
-          </td>
-        </tr>
-
-        <tr>
-          <td class="student-detail-table-head">
-            <b>State /</b> राज्य
-          </td>
-          <td>
-            _______________
-          </td>
-          <td class="student-detail-table-head">
-            <b>City or Village & District /</b> अपने शहर या गांव और ज़िले का नाम लिखें।
-          </td>
-          <td>
-            _______________
-          </td>
-        </tr>
-
-        <tr>
-          <td class="student-detail-table-head">
-            <b>Town / Village</b> </br>
-            गाँव / शहर का नाम
-          </td>
-          <td>
-            _______________
-          </td>
-          <td class="student-detail-table-head">
-            <b>Religion​ /</b> धर्म
-          </td>
-          <td>
-              ❏ Hindu   ❏ Islam </br>
-              ❏ Sikh    ❏ Jain</br>
-              ❏ Cristian </br>
-              ❏ Other (___________) </br>
-          </td>
+          <td><b>WhatsApp Number</b></td>
+          <td>_________________</td>
+          <td><b>Email Id</b></td>
+          <td>_________________</td>
         </tr>
         <tr>
-          <td class="student-detail-table-head">
-            <b>Caste ​ /</b> जाती
-          </td>
+          <td><b>Gender</b> / लिंग</td>
           <td>
-            ❏ General ❏ OBC </br>
-            ❏ SC ❏ ST </br>
+            ❏ Male / पुरुष <br>
+            ❏ Female / महिला <br>
+            ❏ Transgender / अन्य
           </td>
-          <td class="student-detail-table-head">
-            <b>What is your qualification? Select the option till where you have studied.</b><br>
-            आप कहाँ तक पढ़े हो?
-          </td>
-          <td>
-            ❏ Less than class 10th   ❏ Class 10th </br>
-            ❏ Class 12th   ❏ Graduate </br>
-          </td>
+          <td><b>Pin Code</b> / पिन कोड</td>
+          <td>_________________</td>
         </tr>
         <tr>
-            <td class="student-detail-table-head">
-                <b> What are you doing currently? (Select one option) </b> <br>
-                आप अभी क्या कर रहे हो?
-            </td>
-            <td>
-                ❏ Nothing (कुछ नहीं) ❏ Job (नौकरी)
-                ❏ Studying (पढाई) ❏ Other (कुछ और)
-            </td>
+          <td><b>State</b> / राज्य</td>
+          <td>_________________</td>
+          <td><b>City or Village & District</b> / शहर या गांव और जिला</td>
+          <td>_________________</td>
         </tr>
       </table>
     </div>
   </div>
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </body>
-
 </html>
