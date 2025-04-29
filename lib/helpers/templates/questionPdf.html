@@ -106,7 +106,7 @@
     <div class="heading">
       <center>
         <h2>
-          <b>NavGurukul Scholarship Test - {{ setName }}</b><br>
+          <b>NavGurukul Scholarship Test checking - {{ setName }}</b><br>
           <b>Partner: {{ partnerName }}</b>
         </h2>
         <h3>Question Paper</h3>
@@ -116,80 +116,86 @@
     <div class="main">
       {{#each questions}}
       <table class="question-table padding-zero">
-        <tr>
-          <td width="4%" valign="top"><b>{{inc @index}}.</b></td>
-          <td valign="top" class="padding-zero">
-            <table class="question-display padding-zero">
-              <tr>
-                <td valign="top" class="question-text">
-                  {{#if this.common_text}}
-                  <div class="common-text">
-                    {{#if (hasParaTag this.common_text)}}
-                      {{{this.common_text}}}
-                    {{else}}
-                      <p>{{{this.common_text}}}</p>
-                    {{/if}}
-                  </div>
+        <tbody>
+          <tr>
+            <td width="40px" valign="top"><b>{{inc @index}}.</b></td>
+            <td valign="top" class="padding-zero">
+              <table class="question-display padding-zero">
+                <tbody>
+                  <tr>
+                    <td valign="top" class="question-text">
+                      {{#if this.common_text}}
+                      <div class="common-text">
+                        {{#if (hasParaTag this.common_text)}}
+                          {{{this.common_text}}}
+                        {{else}}
+                          <p>{{{this.common_text}}}</p>
+                        {{/if}}
+                      </div>
+                      {{/if}}
+    
+                      {{#if this.en_text}}
+                        {{#if (hasParaTag this.en_text)}}
+                          {{{this.en_text}}}
+                        {{else}}
+                          <p>{{{this.en_text}}}</p>
+                        {{/if}}
+                      {{/if}}
+    
+                      {{#if this.hi_text}}
+                        {{#if (hasParaTag this.hi_text)}}
+                          {{{this.hi_text}}}
+                        {{else}}
+                          <p>{{{this.hi_text}}}</p>
+                        {{/if}}
+                      {{/if}}
+    
+                      {{#if this.ma_text}}
+                        {{#if (hasParaTag this.ma_text)}}
+                          {{{this.ma_text}}}
+                        {{else}}
+                          <p>{{{this.ma_text}}}</p>
+                        {{/if}}
+                      {{/if}}
+    
+                      {{#if (eq this.type 2)}}
+                      <p>Iska answer likho answers wale page pe.</p>
+                      {{/if}}
+                    </td>
+                  </tr>
+    
+                  {{#if (eq this.type 1)}}
+                  <tr>
+                    <td>
+                      <table class="inner-table">
+                        <tbody>
+                          <tr>
+                            {{#each this.options}}
+                            <td style="width: 45%;">
+                              <b>{{string_lower @index}})</b> 
+                              <span class="options-cell">
+                                {{#if (hasParaTag this.text)}}
+                                  {{{this.text}}}
+                                {{else}}
+                                  <p>{{{this.text}}}</p>
+                                {{/if}}
+                              </span>
+                            </td>
+                            {{/each}}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
                   {{/if}}
-
-                  {{#if this.en_text}}
-                    {{#if (hasParaTag this.en_text)}}
-                      {{{this.en_text}}}
-                    {{else}}
-                      <p>{{{this.en_text}}}</p>
-                    {{/if}}
-                  {{/if}}
-
-                  {{#if this.hi_text}}
-                    {{#if (hasParaTag this.hi_text)}}
-                      {{{this.hi_text}}}
-                    {{else}}
-                      <p>{{{this.hi_text}}}</p>
-                    {{/if}}
-                  {{/if}}
-
-                  {{#if this.ma_text}}
-                    {{#if (hasParaTag this.ma_text)}}
-                      {{{this.ma_text}}}
-                    {{else}}
-                      <p>{{{this.ma_text}}}</p>
-                    {{/if}}
-                  {{/if}}
-
-                  {{#if (eq this.type 2)}}
-                  <p>Iska answer likho answers wale page pe.</p>
-                  {{/if}}
-                </td>
-              </tr>
-
-              {{#if (eq this.type 1)}}
-              <tr>
-                <td>
-                  <table class="inner-table">
-                    <tr>
-                      {{#each this.options}}
-                      <td style="width: 45%;">
-                        <b>{{string_lower @index}})</b> 
-                        <span class="options-cell">
-                          {{#if (hasParaTag this.text)}}
-                            {{{this.text}}}
-                          {{else}}
-                            <p>{{{this.text}}}</p>
-                          {{/if}}
-                        </span>
-                      </td>
-                      {{/each}}
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              {{/if}}
-            </table>
-          </td>
-        </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
       </table>
       {{/each}}
-    </div>
+    </div>    
   </div>
 
   <div id="answer-sheet">
