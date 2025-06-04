@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Offer Letter - NavGurukul</title>
   <style>
     @page {
       size: A4;
-      margin: 60px 80px;
+      margin: 30px 40px;
     }
 
     body {
@@ -20,12 +21,17 @@
 
     .page {
       page-break-after: always;
-      padding: 60px 80px;
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      /* Ensures full A4 page height */
+      box-sizing: border-box;
     }
 
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     header img {
@@ -36,7 +42,9 @@
 
     .content {
       max-width: 800px;
-      margin: auto;
+      margin: 0 auto;
+      flex-grow: 1;
+      /* Pushes footer to bottom */
     }
 
     h1 {
@@ -53,7 +61,6 @@
     .footer {
       font-size: 12px;
       text-align: center;
-      margin-top: 60px;
       border-top: 1px solid #999;
       padding-top: 10px;
     }
@@ -63,6 +70,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- English Page -->
@@ -76,17 +84,29 @@
       <h1>Offer Letter</h1>
       <p><strong>Dear {{CandidateName}},</strong></p>
 
-      <p>We are pleased to inform you that you have been selected to join the School of Programming at our <strong>{{CampusName}}</strong> Campus. This 24-month program is designed to equip you with essential digital skills and support you in building a meaningful and impactful career.</p>
+      <p>We are pleased to inform you that you have been selected to join the School of Programming at our
+        <strong>{{CampusNameEnglish}}</strong> Campus. This 24-month program is designed to equip you with essential
+        digital skills and support you in building a meaningful and impactful career.
+      </p>
 
-      <p>NavGurukul was founded on the belief that everyone deserves access to quality education and a sustainable and meaningful career, regardless of their social or economic background. We believe that every individual has the potential to grow and succeed. Our mission is to empower students to take control of their future for themselves, their families, and their communities.</p>
+      <p>NavGurukul was founded on the belief that everyone deserves access to quality education and a sustainable and
+        meaningful career, regardless of their social or economic background. We believe that every individual has the
+        potential to grow and succeed. Our mission is to empower students to take control of their future for
+        themselves, their families, and their communities.</p>
 
-      <p>This scholarship expects exceptional hard work, commitment, and a willingness to contribute to the community. The program will not only prepare you to get a good job and thrive in it but also help you understand yourself better and live a balanced life.</p>
+      <p>This scholarship expects exceptional hard work, commitment, and a willingness to contribute to the community.
+        The program will not only prepare you to get a good job and thrive in it but also help you understand yourself
+        better and live a balanced life.</p>
 
       <p>You are required to confirm your joining date within a week of receiving this admission letter.</p>
 
-      <p>To ensure a fair and transparent admission process, you will be required to take a retest upon your arrival at the campus, featuring questions similar in pattern to those in your original assessment. If the test is not cleared in two attempts, your admission will be canceled and you will need to reapply.</p>
+      <p>To ensure a fair and transparent admission process, you will be required to take a retest upon your arrival at
+        the campus, featuring questions similar in pattern to those in your original assessment. If the test is not
+        cleared in two attempts, your admission will be canceled and you will need to reapply.</p>
 
-      <p>Along with this letter, you will find a consent form to confirm your family's economic status. Please submit soft copies of the required documents as soon as possible. Physical verification of these documents will occur on campus. Incomplete or missing documentation may result in your admission being reconsidered.</p>
+      <p>Along with this letter, you will find a consent form to confirm your family's economic status. Please submit
+        soft copies of the required documents as soon as possible. Physical verification of these documents will occur
+        on campus. Incomplete or missing documentation may result in your admission being reconsidered.</p>
 
       <p class="signature">
         Warmly,<br><br>
@@ -112,17 +132,24 @@
       <h1>प्रस्ताव पत्र</h1>
       <p><strong>प्रिय {{CandidateName}},</strong></p>
 
-      <p>हमें यह बताते हुए खुशी हो रही है कि आप स्कूल ऑफ बिजनेस, <strong>{{CampusName}}</strong> कैंपस के लिए चयनित हो गए हैं। यह 24 महीने का प्रोग्राम आपको ज़रूरी डिजिटल स्किल्स सिखाने और एक सार्थक और असरदार करियर बनाने में मदद करने के लिए डिज़ाइन किया गया है।</p>
+      <p>हमें यह बताते हुए खुशी हो रही है कि आप स्कूल ऑफ बिजनेस, <strong>{{CampusNameHindi}}</strong> कैंपस के लिए चयनित
+        हो गए हैं। यह 24 महीने का प्रोग्राम आपको ज़रूरी डिजिटल स्किल्स सिखाने और एक सार्थक और असरदार करियर बनाने में मदद
+        करने के लिए डिज़ाइन किया गया है।</p>
 
-      <p>नवगुरुकुल की स्थापना इस विश्वास के साथ की गई थी कि हर व्यक्ति, चाहे उसका सामाजिक या आर्थिक बैकग्राउंड कुछ भी हो, एक गुणवत्तापूर्ण शिक्षा और एक स्थायी और अर्थपूर्ण करियर पाने का हकदार है।</p>
+      <p>नवगुरुकुल की स्थापना इस विश्वास के साथ की गई थी कि हर व्यक्ति, चाहे उसका सामाजिक या आर्थिक बैकग्राउंड कुछ भी
+        हो, एक गुणवत्तापूर्ण शिक्षा और एक स्थायी और अर्थपूर्ण करियर पाने का हकदार है।</p>
 
-      <p>यह स्कॉलरशिप आपसे कड़ी मेहनत, प्रतिबद्धता और समुदाय में योगदान देने की भावना की अपेक्षा करती है। यह प्रोग्राम आपको न केवल एक अच्छी नौकरी पाने और उसमें आगे बढ़ने के लिए तैयार करेगा, बल्कि आपको खुद को बेहतर समझने और एक संतुलित जीवन जीने में भी मदद करेगा।</p>
+      <p>यह स्कॉलरशिप आपसे कड़ी मेहनत, प्रतिबद्धता और समुदाय में योगदान देने की भावना की अपेक्षा करती है। यह प्रोग्राम
+        आपको न केवल एक अच्छी नौकरी पाने और उसमें आगे बढ़ने के लिए तैयार करेगा, बल्कि आपको खुद को बेहतर समझने और एक
+        संतुलित जीवन जीने में भी मदद करेगा।</p>
 
       <p>आपसे अनुरोध है कि इस एडमिशन लेटर को प्राप्त करने के एक सप्ताह के भीतर अपनी जॉइनिंग डेट की पुष्टि करें।</p>
 
-      <p>कैंपस पर पहुँचने के बाद आपको एक बार फिर से टेस्ट देना होगा। यदि आप दो प्रयासों में टेस्ट पास नहीं कर पाते, तो आपका एडमिशन रद्द कर दिया जाएगा और आपको फिर से आवेदन करना होगा।</p>
+      <p>कैंपस पर पहुँचने के बाद आपको एक बार फिर से टेस्ट देना होगा। यदि आप दो प्रयासों में टेस्ट पास नहीं कर पाते, तो
+        आपका एडमिशन रद्द कर दिया जाएगा और आपको फिर से आवेदन करना होगा।</p>
 
-      <p>कृपया ज़रूरी दस्तावेजों की सॉफ्ट कॉपी जल्द से जल्द ईमेल द्वारा भेजें। कैंपस पर फिज़िकल वेरिफिकेशन भी किया जाएगा। यदि दस्तावेज अधूरे पाए गए तो आपका एडमिशन रद्द हो सकता है।</p>
+      <p>कृपया ज़रूरी दस्तावेजों की सॉफ्ट कॉपी जल्द से जल्द ईमेल द्वारा भेजें। कैंपस पर फिज़िकल वेरिफिकेशन भी किया
+        जाएगा। यदि दस्तावेज अधूरे पाए गए तो आपका एडमिशन रद्द हो सकता है।</p>
 
       <p class="signature">
         सादर,<br><br>
@@ -137,4 +164,5 @@
   </div>
 
 </body>
+
 </html>
