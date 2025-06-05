@@ -5,7 +5,7 @@
   "type": "mcq",
   "difficulty": "easy",
   "topic": "Unitary Method",
-  "correctOption": 2
+  "correctOption": 1
 }
 ```
 
@@ -13,42 +13,39 @@
 
 ### Hindi
 
-अगले तीन प्रश्नों को करने के लिए, थोड़ा सा प्रैक्टिकल लाइफ के उदाहरण ले कर सोचिए कि कैसे होंगे। जैसे अगर आप मान लो कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो आप 4 घंटे में कितने लगा पाओगे? 100 को 4 से गुणा कर दोगे, उतने। क्योंकि जितना काम आप एक घंटे में करोगे, उसका 4 गुना काम आप 4 घंटे में कर सकते हो।
-इसी तरह से सोचते हुए, ये तीन प्रश्नों के उत्तर दीजिए।
-
-अगर 200 गिलास पानी भरने के लिए 10 नल को कुल 30 मिनट लगते हैं, तो 20 नल के साथ 200 गिलास पानी भरने में कितना समय लगेगा?
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+अगर 120 गिलास पानी भरने के लिए 6 नल 12 मिनट लेते हैं, तो 12 नल से वही पानी भरने में कितना समय लगेगा?
 
 ### English
 
-For the next three questions, think practically on how you can solve these questions. For example, if you can plant 100 trees in an hour, then how many can you plant in 4 hours? Answer will be 100 multiplied by 4. Since the amount of work you can do in one hour, four times of that you can do in four hours.
-By thinking on similar practical lines, answer following four questions.
-
-If to fill 200 glasses of water, 10 taps require 30 mins in total. Then with 20 taps, how much time would be needed to fill 200 glasses of water?
+For the next three questions, think practically on how you can solve these questions. For example, if you can plant 100 trees in an hour, then how many can you plant in 4 hours? Answer will be 100 multiplied by 4. Since the amount of work you can do in one hour, four times of that you can do in four hours. By thinking on similar practical lines, answer following four questions.
+If to fill 120 glasses of water, 6 taps require 12 mins in total. Then with 12 taps, how much time would be needed to fill 120 glasses of water?
 
 ### Hinglish
 
 Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte
-hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi tarah se sochte hue, yeh teen questions answer karo.
-
-Agar 200 glasses paani se bharne ke liye, 10 taps (nal) 30 mins lete hai. Toh 20 taps se, 200 glasses paani bharne mein kitna samay lagega?
+hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi
+tarah se sochte hue, yeh teen questions answer karo.
+Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 12 taps se, 120 glasses bharne mein kitna samay lagega?
 
 ### Marathi
 
-पुढील ३ प्रश्न सोडवण्या साठी थोडा दैनंदिन जीवनातील उदाहरणांचा विचार करावा लागेल. जसे कि समजा तुम्ही एका तासात १०० झाडे लावू शकता तर ४ तासात किती लावू शकाल ? १०० ला ४ने गुणा, तितके . कारण जितके काम एका तासात करू शकाल त्याच्या ४ पट काम ४ तासात करू शकता.
-अशा प्रकारे विचार करून हे तीन प्रश्न सोडवा.
-
-जर २०० ग्लास पाणी भरण्यासाठी १० नळ चालू असताना ३० मिनिट लागतात, तर २० नळांनी २०० ग्लास पाणी भरण्यासाठी किती वेळ लागेल?
+पुढील ३ प्रश्न सोडवण्या साठी थोडा दैनंदिन जीवनातील उदाहरणांचा विचार करावा लागेल. जसे कि समजा तुम्ही एका तासात १०० झाडे लावू शकता तर ४ तासात किती लावू शकाल ? १०० ला
+४ने गुणा, तितके . कारण जितके काम एका तासात करू शकाल त्याच्या ४ पट काम ४ तासात करू शकता. अशा प्रकारे विचार करून हे तीन प्रश्न सोडवा.
+जर १२० ग्लास पाणी भरण्यासाठी ६ नळ १२ मिनिटे घेतात, तर १२ नळांनी किती वेळ लागेल?
 
 ## Options
 
-| Option | Values     | ID  |
-| ------ | ---------- | --- |
-| 1      | 10 minutes |     |
-| 2      | 15 minutes |     |
-| 3      | 20 minutes |     |
-| 4      | 25 minutes |     |
-
----
+| Option | Values  | ID  |
+| :----- | :-----: | :-: |
+| 1      | 6 mins  |     |
+| 2      | 8 mins  |     |
+| 3      | 10 mins |     |
+| 4      | 12 mins |     |
 
 # Question Choice 2
 
@@ -63,6 +60,179 @@ Agar 200 glasses paani se bharne ke liye, 10 taps (nal) 30 mins lete hai. Toh 20
 
 ## Common Text
 
+### Hindi
+
+अगर 6 नल 120 गिलास पानी भरने में 15 मिनट लेते हैं, तो 5 मिनट में 240 गिलास भरने के लिए कितने नल चाहिए?
+
+### English
+
+If to fill 120 glasses of water, 6 taps require 12 mins in total. Then to fill 240 glasses in 6 mins how many taps would you need?
+
+### Hinglish
+
+Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 15 mins lete hai. Toh 5 mins mei 240 glasses bharne ke liye kitne taps chahiye?
+
+### Marathi
+
+जर ६ नळ १२० ग्लास पाणी भरण्यासाठी १५ मिनिटे घेतात, तर ५ मिनिटांत २४० ग्लास भरायला किती नळ लागतील?
+
+## Options
+
+| Option | Values | ID  |
+| :----- | :----: | :-: |
+| 1      |   30   |     |
+| 2      |   32   |     |
+| 3      |   36   |     |
+| 4      |   40   |     |
+
+# Question Choice 3
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "medium",
+  "topic": "Unitary Method",
+  "correctOption": 2
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगर 5 नल 100 गिलास भरने में 10 मिनट लेते हैं, तो 50 नल 500 गिलास भरने में कितना समय लेंगे?
+
+### English
+
+If to fill 100 glasses of water, 5 taps require 10 mins in total. Then with 50 taps to fill 500 glasses, how much time would be required?
+
+### Hinglish
+
+Agar 100 glasses paani bharne ke liye, 5 taps 10 mins lete hai. Toh 50 taps se 500 glasses bharne mein kitna samay lagega?
+
+### Marathi
+
+जर ५ नळ १०० ग्लास पाणी भरण्यासाठी १० मिनिटे घेतात, तर ५० नळांनी ५०० ग्लास भरण्यासाठी किती वेळ लागेल?
+
+## Options
+
+| Option | Values | ID  |
+| :----- | :----: | :-: |
+| 1      | 1 mins |     |
+| 2      | 5 mins |     |
+| 3      | 3 mins |     |
+| 4      | 4 mins |     |
+
+# Question Choice 4
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 3
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+एक सेब का वज़न 90 ग्राम है और एक संतरे का वज़न 50 ग्राम है। आपके पास 7 सेब और 5 संतरे हैं। आपके पास कुल कितने ग्राम फल हैं?
+
+### English
+
+Weight of one apple is 90 grams. And weight of one orange is 50 grams. You have 7 apples and 5 oranges. How many grams of fruits do you have?
+
+### Hinglish
+
+Ek apple ka weight 90 grams hai. Aur ek orange ka weight 50 grams hai. Aapke paas 7 apples aur 5 oranges hai. Toh aap ke paas kitne grams fruits hai?
+
+### Marathi
+
+एका सफरचंदाचे वजन ९० ग्राम आहे आणि एका संत्र्याचे वजन ५० ग्राम आहे. तुमच्याकडे ७ सफरचंदं आणि ५ संत्री आहेत. तुमच्याकडे किती ग्राम फळं आहेत?
+
+## Options
+
+| Option |  Values   | ID  |
+| :----- | :-------: | :-: |
+| 1      | 900 grams |     |
+| 2      | 950 grams |     |
+| 3      | 880 grams |     |
+| 4      | 930 grams |     |
+
+# Question Choice 5
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 2
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+अगर 200 गिलास पानी भरने के लिए 10 नल को कुल 30 मिनट लगते हैं, तो 20 नल के साथ 200 गिलास पानी भरने में कितना समय लगेगा?
+
+### English
+
+For the next three questions, think practically on how you can solve these questions. For example, if you can plant 100 trees in an hour, then how many can you plant in 4
+hours? Answer will be 100 multiplied by 4. Since the amount of work you can do in one hour, four times of that you can do in four hours. By thinking on similar
+practical lines, answer following four questions.
+If to fill 200 glasses of water, 10 taps require 30 mins in total. Then with 20 taps, how much time would be needed to fill 200 glasses of water?
+
+### Hinglish
+
+Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte
+hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi
+tarah se sochte hue, yeh teen questions answer karo.
+Agar 200 glasses paani se bharne ke liye, 10 taps (nal) 30 mins lete hai. Toh 20 taps se, 200 glasses paani bharne mein kitna samay lagega?
+
+### Marathi
+
+पुढील ३ प्रश्न सोडवण्या साठी थोडा दैनंदिन जीवनातील उदाहरणांचा विचार करावा लागेल. जसे कि समजा तुम्ही एका तासात १०० झाडे लावू शकता तर ४ तासात किती लावू शकाल ? १०० ला
+४ने गुणा, तितके . कारण जितके काम एका तासात करू शकाल त्याच्या ४ पट काम ४ तासात करू शकता. अशा प्रकारे विचार करून हे तीन प्रश्न सोडवा.
+जर २०० ग्लास पाणी भरण्यासाठी १० नळ चालू असताना ३० मिनिट लागतात, तर २० नळांनी २०० ग्लास पाणी भरण्यासाठी किती वेळ लागेल?
+
+## Options
+
+| Option | Values     | ID  |
+| ------ | ---------- | --- |
+| 1      | 10 minutes |     |
+| 2      | 15 minutes |     |
+| 3      | 20 minutes |     |
+| 4      | 25 minutes |     |
+
+---
+
+# Question Choice 6
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "medium",
+  "topic": "Unitary Method",
+  "correctOption": 3
+}
+```
+
+## Common Text
 
 ### Hindi
 
@@ -91,14 +261,14 @@ Agar 100 glasses paani se bharne ke liye, 5 taps (nal) 20 mins lete hai. Toh 5 m
 
 ---
 
-# Question Choice 3
+# Question Choice 7
 
 ```json
 {
   "type": "mcq",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "correctOption": 3
+  "correctOption": 2
 }
 ```
 
@@ -129,7 +299,53 @@ Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 60 
 | 3      | 4 minutes |     |
 | 4      | 5 minutes |     |
 
-# Question Choice 4
+---
+
+# Question Choice 8
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 4
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+एक सेब का वजन 75 ग्राम है और एक संतरे का वजन 65 ग्राम है। आपके पास 11 सेब और 9 संतरे हैं। कुल फलों का वजन कितने ग्राम है?
+
+### English
+
+Weight of one apple is 75 grams. And weight of one orange is 65 grams. You have 11 apples and 9 oranges. How many grams of fruits do you have?
+
+### Hinglish
+
+Ek apple ka weight 75 grams hai. Aur ek orange ka weight 65 grams hai. Aapke paas 11 apples aur 9 oranges hai. Toh aap ke paas kitne grams fruits hai?
+
+### Marathi
+
+एक सफरचंदाचे वजन ७५ ग्राम आहे आणि एका संत्र्याचे वजन ६५ ग्राम आहे. तुमच्याजवळ ११ सफरचंद व ९ संत्री आहेत तर तुमच्याजवळ किती ग्राम फळे आहेत?
+
+## Options
+
+| Option | Values     | ID  |
+| ------ | ---------- | --- |
+| 1      | 1330 grams |     |
+| 2      | 1310 grams |     |
+| 3      | 1290 grams |     |
+| 4      | 1410 grams |     |
+
+# Question Choice 9
 
 ```json
 {
@@ -144,8 +360,11 @@ Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 60 
 
 ### Hindi
 
-अगले तीन प्रश्नों को करने के लिए, थोड़ा सा प्रैक्टिकल लाइफ के उदाहरण ले कर सोचिए कि कैसे होंगे। जैसे अगर आप मान लो कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो आप 4 घंटे में कितने लगा पाओगे? 100 को 4 से गुणा कर दोगे, उतने। क्योंकि जितना काम आप एक घंटे में करोगे, उसका 4 गुना काम आप 4 घंटे में कर सकते हो।
-इसी तरह से सोचते हुए, ये तीन प्रश्नों के उत्तर दीजिए।
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
 
 अगर 100 गिलास पानी भरने के लिए 5 नल को 20 मिनट का समय लगता है, तो 15 नल के साथ 100 गिलास पानी भरने में कितना समय लगेगा?
 
@@ -179,48 +398,7 @@ Agar 100 glasses paani se bharne ke liye, 5 taps (nal) 20 mins lete hai. Toh 15 
 | 3      |   7    |     |
 | 4      |   15   |     |
 
-# Question Choice 5
-
-```json
-{
-  "type": "mcq",
-  "difficulty": "medium",
-  "topic": "Unitary Method",
-  "correctOption": 2
-}
-```
-
-## Common Text
-
-
-### Hindi
-
-अगर 150 गिलास पानी भरने के लिए 7 नल को 21 मिनट का समय लगता है, तो 350 गिलास पानी भरने के लिए 7 मिनट में कितने नल की आवश्यकता होगी?
-
-### English
-
-If 150 glasses of water need 7 taps and 21 minutes, then to fill 350 glasses in 7 minutes, how many taps would you need?
-
-### Hinglish
-
-Agar 150 glasses paani se bharne ke liye, 7 taps (nal) 21 mins lete hai. Toh 7 mins mei 350 glasses bharne ke liye kitne taps ki zarurat padegi?
-
-### Marathi
-
-जर १५० ग्लास पाणी भरण्यासाठी ७ नळ चालू असताना २१ मिनिट लागतात, तर ७ मिनिटात ३५० ग्लास भरण्यासाठी किती नळांची गरज आहे?
-
-## Options
-
-| Option | Values | ID  |
-| :----- | :----: | :-: |
-| 1      |   21   |     |
-| 2      |   28   |     |
-| 3      |   35   |     |
-| 4      |   49   |     |
-
----
-
-# Question Choice 6
+# Question Choice 10
 
 ```json
 {
@@ -233,6 +411,45 @@ Agar 150 glasses paani se bharne ke liye, 7 taps (nal) 21 mins lete hai. Toh 7 m
 
 ## Common Text
 
+### Hindi
+
+अगर 160 गिलास पानी भरने के लिए 8 नल कुल 20 मिनट में लगते हैं, तो 10 मिनट में 360 गिलास पानी भरने के लिए कितने नल चाहिए होंगे?
+
+### English
+
+If 150 glasses of water need 7 taps and 21 minutes, then to fill 350 glasses in 7 minutes, how many taps would you need?
+
+### Hinglish
+
+Agar 160 glasses paani se bharne ke liye, 8 taps (nal) 20 mins lete hai. Toh 10 mins mein 360 glasses bharne ke liye kitne taps ki zarurat padegi?
+
+### Marathi
+
+जर १६० ग्लास पाणी भरण्यासाठी ८ नळ चालू असताना २० मिनिट लागतात, तर १० मिनिटात ३६० ग्लास भरण्यासाठी किती नळांची गरज आहे?
+
+## Options
+
+| Option | Values | ID  |
+| :----- | :----: | :-: |
+| 1      |   36   |     |
+| 2      |   30   |     |
+| 3      |   32   |     |
+| 4      |   28   |     |
+
+---
+
+# Question Choice 11
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "medium",
+  "topic": "Unitary Method",
+  "correctOption": 3
+}
+```
+
+## Common Text
 
 ### Hindi
 
@@ -259,7 +476,9 @@ Agar 100 glasses paani se bharne ke liye, 5 taps (nal) 20 mins lete hai. Toh 25 
 | 3      |   20   |     |
 | 4      |   25   |     |
 
-# Question Choice 7
+---
+
+# Question Choice 12
 
 ```json
 {
@@ -267,6 +486,50 @@ Agar 100 glasses paani se bharne ke liye, 5 taps (nal) 20 mins lete hai. Toh 25 
   "difficulty": "easy",
   "topic": "Unitary Method",
   "correctOption": 2
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+एक सेब का वजन 65 ग्राम है। और एक संत्रे का वजन 55 ग्राम है। आपके पास 12 सेब और 10 संत्रे हैं। कुल फलों का वजन कितना होगा?
+
+### English
+
+The weight of one apple is 65 grams. And the weight of one orange is 55 grams. You have 12 apples and 10 oranges. How many grams of fruits do you have?
+
+### Hinglish
+
+Ek apple ka weight 65 grams hai. Aur ek orange ka weight 55 grams hai. Aapke paas 12 apples aur 10 oranges hai. Toh aap ke paas kitne grams fruits hai?
+
+### Marathi
+
+एका सफरचंदाचे वजन ६५ ग्राम आहे आणि एका संत्र्याचे वजन ५५ ग्राम आहे. तुमच्याजवळ १२ सफरचंद व १० संत्री आहेत तर तुमच्याजवळ किती ग्राम फळे आहेत?
+
+## Options
+
+| Option | Values | ID  |
+| :----- | :----: | :-: |
+| 1      |  1270  |     |
+| 2      |  1330  |     |
+| 3      |  1370  |     |
+| 4      |  1390  |     |
+
+# Question Choice 13
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 3
 }
 ```
 
@@ -309,7 +572,7 @@ Agar 150 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 12 
 | 3      | 6 minutes |     |
 | 4      | 8 minutes |     |
 
-# Question Choice 8
+# Question Choice 14
 
 ```json
 {
@@ -340,26 +603,25 @@ Agar 200 glasses paani se bharne ke liye 10 taps (nal) 25 mins lete hai, toh 10 
 
 ## Options
 
-| Option |  Values   | ID  |
-| :----- | :-------: | :-: |
-| 1      |  70 taps  |     |
-| 2      |  75 taps  |     |
-| 3      |  60 taps  |     |
-| 4      | 62.5 taps |     |
+| Option | Values  | ID  |
+| :----- | :-----: | :-: |
+| 1      | 70 taps |     |
+| 2      | 75 taps |     |
+| 3      | 60 taps |     |
+| 4      | 62 taps |     |
 
-# Question Choice 9
+# Question Choice 15
 
 ```json
 {
   "type": "mcq",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "correctOption": 2
+  "correctOption": 3
 }
 ```
 
 ## Common Text
-
 
 ### Hindi
 
@@ -367,7 +629,7 @@ Agar 200 glasses paani se bharne ke liye 10 taps (nal) 25 mins lete hai, toh 10 
 
 ### English
 
-If 4 taps can fill 80 glasses in 12 minutes, how much time will 40 taps take to fill 400 glasses? how much time would be required?
+If 4 taps can fill 80 glasses in 12 minutes, how much time will 40 taps take to fill 400 glasses?
 
 ### Hinglish
 
@@ -386,7 +648,51 @@ Agar 80 glasses paani se bharne ke liye, 4 taps (nal) 12 mins lete hai, toh 40 t
 | 3      | 6 minutes |     |
 | 4      | 8 minutes |     |
 
-# Question Choice 10
+# Question Choice 16
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 4
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+एक सेब का वजन 55 ग्राम है। और एक संत्रे का वजन 45 ग्राम है। आपके पास 15 सेब और 13 संत्रे हैं। आपके पास कुल कितने ग्राम फल हैं?
+
+### English
+
+Weight of one apple is 55 grams. Weight of one orange is 45 grams. If you have 15 apples and 13 oranges, what is the total weight of fruits?
+
+### Hinglish
+
+Ek apple ka weight 55 grams hai. Aur ek orange ka weight 45 grams hai. Aapke paas 15 apples aur 13 oranges hai. Toh aap ke paas kitne grams fruits hai?
+
+### Marathi
+
+एक सफरचंदाचे वजन ५५ ग्राम आहे आणि एका संत्र्याचे वजन ४५ ग्राम आहे. तुमच्याजवळ १५ सफरचंद व १३ संत्री आहेत तर तुमच्याजवळ किती ग्राम फळे आहेत?
+
+## Options
+
+| Option |   Values   | ID  |
+| :----: | :--------: | :-: |
+|   1    | 1320 grams |     |
+|   2    | 1350 grams |     |
+|   3    | 1370 grams |     |
+|   4    | 1410 grams |     |
+
+# Question Choice 17
 
 ```json
 {
@@ -411,24 +717,9 @@ Agar 80 glasses paani se bharne ke liye, 4 taps (nal) 12 mins lete hai, toh 40 t
 
 ### English
 
-For the next three questions, think practically on how you can solve these questions. For example, if you can plant 100 trees in an hour, then how many can you plant in 4
-hours? Answer will be 100 multiplied by 4. Since the amount of work you can do in one hour, four times of that you can do in four hours. By thinking on similar
-practical lines, answer following four questions.
-
 If to fill 120 glasses of water, 6 taps require 18 mins in total. Then with 12 taps, how much time would be needed to fill 120 glasses of water?
 
-### Hinglish
-
-Agle teen questions ko karne ke liye, thoda sa practical life ke examples le kar sochiye ki kaise honge. Jaise agar aap maan lo ki aap ek ghante mei 100 paudhe laga sakte
-hai, toh aap 4 mei kitne laga paoge? 100 ko 4 se guna kar doge, utne. Kyuki jitna kaam aap ek ghante mei karoge, uska 4 guna kaam aap 4 ghante mei kar sakte ho. Issi
-tarah se sochte hue, yeh teen questions answer karo.
-
-Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 18 mins lete hai. Toh 12 taps se, 120 glasses paani bharne mein kitna samay lagega?
-
 ### Marathi
-
-पुढील ३ प्रश्न सोडवण्या साठी थोडा दैनंदिन जीवनातील उदाहरणांचा विचार करावा लागेल. जसे कि समजा तुम्ही एका तासात १०० झाडे लावू शकता तर ४ तासात किती लावू शकाल ? १०० ला
-४ने गुणा, तितके . कारण जितके काम एका तासात करू शकाल त्याच्या ४ पट काम ४ तासात करू शकता. अशा प्रकारे विचार करून हे तीन प्रश्न सोडवा.
 
 जर १२० ग्लास पाणी भरण्यासाठी ६ नळ चालू असताना १८ मिनिट लागतात, तर १२ नळांनी १२० ग्लास पाणी भरण्यासाठी किती वेळ लागेल?
 
@@ -441,19 +732,18 @@ Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 18 mins lete hai. Toh 12 
 | 3      | 9 mins  |     |
 | 4      | 18 mins |     |
 
-# Question Choice 11
+# Question Choice 18
 
 ```json
 {
   "type": "mcq",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "correctOption": 3
+  "correctOption": 4
 }
 ```
 
 ## Common Text
-
 
 ### Hindi
 
@@ -462,10 +752,6 @@ Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 18 mins lete hai. Toh 12 
 ### English
 
 If to fill 120 glasses of water, 6 taps require 12 mins in total. Then to fill 240 glasses in 6 mins how many taps would you need?
-
-### Hinglish
-
-Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 6 mins mei 240 glasses bharne ke liye kitne taps ki zarurat padegi?
 
 ### Marathi
 
@@ -480,35 +766,30 @@ Agar 120 glasses paani se bharne ke liye, 6 taps (nal) 12 mins lete hai. Toh 6 m
 | 3      | 8 taps  |     |
 | 4      | 24 taps |     |
 
-# Question Choice 12
+# Question Choice 19
 
 ```json
 {
   "type": "mcq",
   "difficulty": "medium",
   "topic": "Unitary Method",
-  "correctOption": 4
+  "correctOption": 3
 }
 ```
 
 ## Common Text
 
-
 ### Hindi
 
-अगर 150 गिलास पानी भरने के लिए, 7 नल को कुल 15 मिनट की आवश्यकता होती है, तो 35 नल से, 700 गिलास भरने में कितना समय लगेगा?
+यदि 150 गिलास पानी भरने के लिए 3 नल को कुल 25 मिनट की आवश्यकता होती है, तो 700 गिलास पानी भरने के लिए 35 नल के साथ कितना समय लगेगा?
 
 ### English
 
-If to fill 150 glasses of water, 7 taps require 15 mins in total. Then with 35 taps to fill 700 glasses, how much time would be required?
-
-### Hinglish
-
-Agar 150 glasses paani se bharne ke liye, 7 taps (nal) 15 mins lete hai. Toh 35 taps se, 700 glasses bharne mein kitna samay lagega?
+If to fill 150 glasses of water, 3 taps require 25 mins in total. Then with 35 taps to fill 700 glasses, how much time would be required?
 
 ### Marathi
 
-जर १५० ग्लास पाणी भरण्यासाठी ७ नळ चालू असताना १५ मिनिट लागतात, तर ३५ नळांनी ७०० ग्लास भरण्यासाठी किती वेळ लागेल?
+जर १५० ग्लास पाणी भरण्यासाठी ३ नळ चालू असताना २५ मिनिट लागतात, तर ३५ नळांनी ७०० ग्लास भरण्यासाठी किती वेळ लागेल?
 
 ## Options
 
@@ -518,3 +799,43 @@ Agar 150 glasses paani se bharne ke liye, 7 taps (nal) 15 mins lete hai. Toh 35 
 | 2      | 14 mins |     |
 | 3      | 10 mins |     |
 | 4      | 7 mins  |     |
+
+# Question Choice 20
+
+```json
+{
+  "type": "mcq",
+  "difficulty": "easy",
+  "topic": "Unitary Method",
+  "correctOption": 4
+}
+```
+
+## Common Text
+
+### Hindi
+
+अगले तीन प्रश्नों को हल करने के लिए, ज़रा व्यावहारिक तरीके से सोचिए कि आप उन्हें कैसे हल कर सकते हैं।
+उदाहरण के लिए, मान लीजिए कि आप एक घंटे में 100 पौधे लगा सकते हैं, तो 4 घंटे में कितने पौधे लगा पाएंगे?
+उत्तर होगा — 100 को 4 से गुणा करें।
+क्योंकि जितना काम आप एक घंटे में कर सकते हैं, उसका चार गुना आप चार घंटे में कर सकते हैं।
+इसी तरह से व्यावहारिक सोच के साथ आगे दिए गए तीन प्रश्नों का उत्तर दीजिए।
+
+एक सेब का वजन 50 ग्राम है। और एक संतरे का वजन 40 ग्राम है। आपके पास 18 सेब और 16 संतरे हैं। आपके पास कुल कितने ग्राम फल हैं?
+
+### English
+
+Weight of one apple is 50 grams. And weight of one orange is 40 grams. You have 18 apples and 16 oranges. How many grams of fruits do you have?
+
+### Marathi
+
+एक सफरचंदाचे वजन ५० ग्राम आहे आणि एका संत्र्याचे वजन ४० ग्राम आहे. तुमच्याजवळ १८ सफरचंद व १६ संत्री आहेत तर तुमच्याजवळ किती ग्राम फळे आहेत?
+
+## Options
+
+| Option |   Values   | ID  |
+| :----- | :--------: | :-: |
+| 1      | 1600 grams |     |
+| 2      | 1700 grams |     |
+| 3      | 1720 grams |     |
+| 4      | 1540 grams |     |
