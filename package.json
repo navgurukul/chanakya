@@ -75,6 +75,7 @@
     "pg": "^8.7.3",
     "phantom": "^6.0.3",
     "phantomjs": "^2.1.7",
+    "playwright": "^1.52.0",
     "puppeteer": "^24.9.0",
     "randomstring": "^1.2.2",
     "readline-sync": "^1.4.10",
