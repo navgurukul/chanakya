@@ -59,7 +59,7 @@
     "joi": "17.x.x",
     "js-logger": "^1.6.1",
     "jsonwebtoken": "8.x.x",
-    "knex": "^0.21.21",
+    "knex": "^3.1.0",
     "localtunnel": "^2.0.2",
     "lodash": "^4.17.21",
     "marked": "^4.0.12",
