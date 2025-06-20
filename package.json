@@ -26,7 +26,7 @@
     "@hapi/hoek": "^9.2.1",
     "@hapi/inert": "^6.0.5",
     "@hapi/vision": "^6.1.0",
-    "@sentry/browser": "^6.18.1",
+    "@sentry/browser": "^7.119.1",
     "@sentry/node": "^6.18.1",
     "@sentry/tracing": "^6.18.1",
     "avocat": "2.x.x",
