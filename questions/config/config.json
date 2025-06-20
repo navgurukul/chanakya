@@ -8,10 +8,6 @@
               {
                   "file": "percentage/percentageChoice1.md",
                   "id": 1
-              },
-              {
-                  "file": "percentage/percentageChoice2.md",
-                  "id": 13
               }
           ]
       },
@@ -23,25 +19,17 @@
               {
                   "file": "unitaryMethod/unitMethodChoice1.md",
                   "id": 2
-              },
-              {
-                  "file": "unitaryMethod/unitMethodChoice2.md",
-                  "id": 14
               }
           ]
       },
       {
           "name": "Algebra",
           "id": 3,
-          "num_questions": 6,
+          "num_questions": 24,
           "choices": [
               {
                   "file": "algebra/algebraChoice1.md",
                   "id": 3
-              },
-              {
-                  "file": "algebra/algebraChoice2.md",
-                  "id": 15
               }
           ]
       }
