@@ -121,6 +121,9 @@ module.exports = new Confidence.Store({
                 password: {
                   $env: "DB_PASS",
                 },
+                ssl: {
+                  rejectUnauthorized: false,
+                },
                 requestTimeout: 90000,
                 connectionTimeout: 30000,
                 acquireConnectionTimeout: 30000,
