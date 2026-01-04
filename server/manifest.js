@@ -124,6 +124,9 @@ module.exports = new Confidence.Store({
                 requestTimeout: 90000,
                 connectionTimeout: 30000,
                 acquireConnectionTimeout: 30000,
+          	ssl: {
+    		rejectUnauthorized: false
+  		},
                 typeCast: function (field, next) {
                   // Convert 1 to true, 0 to false, and leave null alone
                   if (field.type === "TINY" && field.length === 1) {
