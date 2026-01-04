@@ -12,6 +12,17 @@
           ]
       },
       {
+          "name": "Profit and Loss",
+          "id": 11,
+          "num_questions": 7,
+          "choices": [
+              {
+                  "file": "Profit_Loss_md.md",
+                  "id": 1
+              }
+          ]
+      },
+      {
           "name": "Unitary Method",
           "id": 1,
           "num_questions": 3,
