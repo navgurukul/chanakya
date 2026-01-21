@@ -61,7 +61,7 @@
     "jsonwebtoken": "8.x.x",
     "knex": "^0.21.21",
     "localtunnel": "^2.0.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "marked": "^4.0.12",
     "moment": "^2.29.1",
     "mustache": "^4.2.0",
